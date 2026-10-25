@@ -1,0 +1,56 @@
+# Español desde el ruso · contexto para Claude Code
+
+Curso de español para rusohablantes desde cero, un año, 30 minutos al día,
+A0 → A2 (DELE A2). Lo mantiene un profesor con máster en lenguas (español
+nativo, inglés). Las lecciones están en ruso con el español como lengua meta;
+la documentación del programa, en español.
+
+## Dónde está cada cosa
+
+- `programa/calendario.yaml` — **la única fuente de verdad** de días, semanas,
+  unidades y temas. 365 días, 24 unidades + fase final + día 365 de reserva.
+  Cualquier cuenta de turnos, horas o temas sale de aquí, nunca de un .md.
+- `programa/plan-anual.md` — lectura en prosa; su tabla la genera
+  `scripts/plan.py --actualizar` y `tests/` exige que esté al día.
+- `programa/metodologia.md` — la sesión de 30 minutos, los diez principios, la
+  retirada progresiva del ruso, el plan de fonética.
+- `programa/contrastiva-ru-es.md` — qué le ayuda y qué le estorba al
+  rusohablante; la «lista negra» de 20 errores que alimenta los distractores
+  de las pruebas.
+- `programa/alineacion-mcer-pcic.md` — PCIC A1-A2, DELE A2, horas. Escrito de
+  memoria porque las páginas del Cervantes no se pudieron descargar: cotejar.
+- `programa/evaluacion.md` — instrumentos, reglas de decisión, rúbrica.
+- `referencias/` — análisis estructural de los libros de referencia. No se
+  copia contenido ajeno; los PDF no se versionan.
+- `curso/plantilla-leccion.md` — la forma de toda lección. `curso/semana-XX/dia-N.md`.
+- `scripts/` — `plan.py` (modelo), `validar.py` (forma de las lecciones),
+  `escribir_leccion.py` (borrador con Claude), `exportar_anki.py` (léxico →
+  TSV), `construir_sitio.py` (Markdown → `docs/`).
+- `tests/test_curso.py` — `.venv/bin/python -m unittest tests.test_curso`.
+
+## Reglas
+
+1. **Una lección = 30 minutos exactos.** Los títulos de apartado llevan la
+   franja («## 3. Новое (6–16 мин)»); `validar.py` exige 0 → 30 contiguo.
+2. **Una lección = un punto nuevo y 6-10 palabras.** Si no cabe, son dos días
+   y se cambia el calendario, no la duración.
+3. **Toda lección de tipo `leccion` lleva «⚠️ Контраст с русским»** con el
+   error predecible. Es lo que hace que el curso sea «desde el ruso».
+4. **El tema de la lección es el del calendario** (`tema_es` igual, carácter
+   por carácter). Si hay que cambiarlo, se cambia primero el YAML.
+5. **Las claves (Ответы) son obligatorias** si hay ejercicios.
+6. **Nada generado con Claude se publica sin revisión del profesor.** El
+   generador escribe en `curso/` con `revisado: false` en el frontmatter;
+   el profesor lo pone en `true` al revisar.
+7. No se inventan datos (precios, fechas históricas, cifras) en las lecciones
+   de cultura: si no se sabe, se pone un marcador `[VERIFICAR]`.
+8. Variación España / América: se enseña lo más extendido y se señala la
+   variante con 🌎, nunca se impone una.
+
+## Estado (2026-10-25)
+
+- Programa anual completo (365 días) y documentación del método.
+- Lecciones escritas y revisadas: semanas 1 y 2 (unidad 1).
+- Generador listo para las semanas 3-52; cada borrador pasa por el profesor.
+- Pendiente: audio de los diálogos (TTS), más libros de referencia, lecciones
+  3-52.

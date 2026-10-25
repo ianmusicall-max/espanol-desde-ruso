@@ -1,0 +1,166 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>evaluacion</title><style>
+:root{--fondo:#fffdf8;--tinta:#1f2328;--acento:#b5452b;--suave:#f1ebdd;--borde:#d9d2c0}
+@media(prefers-color-scheme:dark){:root{--fondo:#15171a;--tinta:#e6e2d8;--acento:#f08a5d;--suave:#23262b;--borde:#3a3e45}}
+*{box-sizing:border-box}body{margin:0;background:var(--fondo);color:var(--tinta);font:17px/1.55 Georgia,"Times New Roman",serif}
+main{max-width:46rem;margin:0 auto;padding:1rem 1rem 4rem}nav.barra{display:flex;justify-content:space-between;gap:1rem;font-family:system-ui,sans-serif;font-size:.9rem;padding:.6rem 0;border-bottom:1px solid var(--borde)}
+nav.barra a{color:var(--acento);text-decoration:none}h1{font-size:1.5rem;line-height:1.25;margin:1.2rem 0 .2rem}h1+h1{font-size:1.15rem;color:var(--acento);margin-top:0}
+h2{font-family:system-ui,sans-serif;font-size:1.05rem;margin-top:2rem;padding-top:.6rem;border-top:1px solid var(--borde)}h3{font-family:system-ui,sans-serif;font-size:.95rem;margin-top:1.3rem}
+table{border-collapse:collapse;width:100%;font-size:.93rem;margin:.6rem 0;display:block;overflow-x:auto}th,td{border:1px solid var(--borde);padding:.3rem .5rem;text-align:left;vertical-align:top}th{background:var(--suave);font-family:system-ui,sans-serif}
+blockquote{margin:1rem 0;padding:.6rem 1rem;background:var(--suave);border-left:4px solid var(--acento)}code{font-size:.9em}ul.dias{list-style:none;padding:0}ul.dias li{padding:.25rem 0;border-bottom:1px dotted var(--borde)}
+.tipo{font-family:system-ui,sans-serif;font-size:.75rem;color:var(--acento);text-transform:uppercase;letter-spacing:.04em}.falta{opacity:.55}details{margin:.4rem 0}summary{cursor:pointer;font-family:system-ui,sans-serif}
+input[type=checkbox]{margin-right:.4rem}
+</style></head><body><main>
+<nav class="barra"><a href="../index.html">← Español desde el ruso</a></nav>
+<h1 id="evaluacion-como-sabe-el-alumno-y-el-profesor-que-avanza">Evaluación: cómo sabe el alumno (y el profesor) que avanza</h1>
+<h2 id="1-los-instrumentos-y-su-ritmo">1. Los instrumentos y su ritmo</h2>
+<table>
+<thead>
+<tr>
+<th>Cuándo</th>
+<th>Instrumento</th>
+<th>Formato</th>
+<th>Dónde está</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cada día</td>
+<td><strong>Итог</strong>: tres preguntas de autoevaluación (sí / no)</td>
+<td>Al final de cada lección</td>
+<td><code>curso/semana-XX/dia-N.md</code>, apartado 6</td>
+</tr>
+<tr>
+<td>Cada día</td>
+<td><strong>Salida</strong>: la producción del día</td>
+<td>Texto, audio o vídeo que el alumno guarda en su carpeta de progreso</td>
+<td>columna <code>salida</code> del calendario</td>
+</tr>
+<tr>
+<td>Sábado</td>
+<td><strong>Mini-test</strong> de la semana</td>
+<td>10-15 ítems con clave</td>
+<td>lección del sábado, apartado 3</td>
+</tr>
+<tr>
+<td>Sábado de la 2.ª semana de la unidad</td>
+<td><strong>Prueba de la unidad</strong></td>
+<td>15 ítems de opción múltiple: léxico 6 · gramática 6 · ortografía y pronunciación 3 (desde la unidad 14 el tercer bloque es «expresiones»)</td>
+<td>lección <code>tipo: prueba</code></td>
+</tr>
+<tr>
+<td>Semana 21-22</td>
+<td><strong>Simulacro y examen de A1</strong></td>
+<td>Lectura + audio, escrita, oral (simulacros) y examen de 40 ítems</td>
+<td>unidad 11</td>
+</tr>
+<tr>
+<td>Semana 47-48</td>
+<td><strong>Prueba integral de A2</strong></td>
+<td>40 ítems de gramática y léxico</td>
+<td>unidad 24</td>
+</tr>
+<tr>
+<td>Semanas 49 y 51</td>
+<td><strong>Simulacros completos del DELE A2</strong></td>
+<td>Las 4 pruebas, repartidas en 7 sesiones de 30 minutos</td>
+<td>fase final</td>
+</tr>
+<tr>
+<td>Semana 52</td>
+<td><strong>Examen final del curso</strong> y <strong>proyecto «Un año en español»</strong></td>
+<td>60 ítems + presentación de 3 min + texto de 150-200 palabras</td>
+<td>fase final</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-reglas-de-decision">2. Reglas de decisión</h2>
+<ul>
+<li><strong>Prueba de unidad &lt; 10/15</strong>: antes de empezar la unidad siguiente se
+  repite el sábado de repaso de la unidad (la lección <code>repaso</code> de su primera
+  semana) y se vuelve a hacer la prueba. Dos días, no más: el calendario tiene
+  el día 365 de reserva y los domingos pueden absorber un retraso de un día.</li>
+<li><strong>Examen A1 &lt; 60 %</strong>: una semana de repaso con las lecciones de la unidad
+  11 antes de empezar A2.</li>
+<li><strong>Simulacro DELE A2</strong>: se aprueba cada grupo por separado al 60 % (grupo 1
+  = lectura + audio; grupo 2 = escrita + oral). El grupo que no llegue decide
+  los cuatro días de refuerzo de la semana 50.</li>
+<li><strong>Examen final &lt; 60 %</strong>: el alumno termina el curso en A2.1 y se le propone
+  el plan de 3 meses de repaso de la semana 52 antes del DELE real.</li>
+</ul>
+<h2 id="3-rubrica-para-las-producciones-escrita-y-oral">3. Rúbrica para las producciones (escrita y oral)</h2>
+<p>Adaptada de los criterios del DELE A2. Cuatro criterios, cada uno de 0 a 3;
+se aprueba con 7/12 y ningún criterio a 0.</p>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>3</th>
+<th>2</th>
+<th>1</th>
+<th>0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Adecuación</strong> (cumple la tarea: tema, extensión, registro, formato)</td>
+<td>Hace todo lo que pide la tarea, con la extensión y el registro adecuados</td>
+<td>Cumple la tarea con alguna omisión</td>
+<td>Cumple a medias o con el registro equivocado</td>
+<td>No cumple la tarea</td>
+</tr>
+<tr>
+<td><strong>Coherencia</strong> (orden, conectores, se entiende)</td>
+<td>Ideas ordenadas, conectores sencillos bien usados</td>
+<td>Se entiende con esfuerzo mínimo</td>
+<td>Frases sueltas, se entiende a trozos</td>
+<td>No se entiende</td>
+</tr>
+<tr>
+<td><strong>Corrección</strong> (gramática y ortografía / pronunciación del nivel)</td>
+<td>Errores escasos que no impiden entender</td>
+<td>Errores frecuentes pero el sentido llega</td>
+<td>Errores sistemáticos en estructuras del nivel (ser / estar, artículo, pasados)</td>
+<td>Errores que impiden entender</td>
+</tr>
+<tr>
+<td><strong>Alcance</strong> (léxico y estructuras del nivel)</td>
+<td>Usa el léxico y las estructuras de la unidad con variedad</td>
+<td>Usa lo básico de la unidad</td>
+<td>Léxico muy limitado, repite</td>
+<td>No usa lo del nivel</td>
+</tr>
+</tbody>
+</table>
+<p>Para la oral se añade <strong>pronunciación</strong> (de 0 a 3, con la lista de
+interferencias de <code>contrastiva-ru-es.md</code>, §1) y se aprueba con 9/15.</p>
+<h2 id="4-formato-de-la-prueba-de-unidad-15-items">4. Formato de la prueba de unidad (15 ítems)</h2>
+<p>Copiado del Тест del cuaderno de referencia. Cada ítem es una frase con un
+hueco y cuatro opciones (tres en el tercer bloque).</p>
+<pre><code>1. Лексика (6 ítems, 1 punto cada uno)
+   Прочитайте предложения и выберите правильный ответ.
+2. Грамматика (6 ítems, 1 punto cada uno)
+   Прочитайте предложения и выберите правильный ответ.
+3. Орфография и произношение (3 ítems, 1 punto cada uno)   [desde la U14: Выражения]
+   Выберите слово, написанное правильно. / Выберите слово с другим звуком.
+Всего: ___ / 15
+</code></pre>
+<p>Los distractores se construyen <strong>con los errores de la lista negra</strong> del
+rusohablante (<code>contrastiva-ru-es.md</code>, §8): la opción equivocada es la que el
+alumno ruso diría, no una forma al azar.</p>
+<h2 id="5-listas-can-do">5. Listas can-do</h2>
+<p>Al cerrar A1 (semana 22) y A2 (semana 52) el alumno marca una lista de 20
+descriptores «Я умею…» tomados de los objetivos de las unidades del nivel
+(columna <code>objetivos</code> del calendario). Se guarda con la fecha; la de A1 se
+vuelve a mirar en la semana 48 para ver el camino recorrido.</p>
+<h2 id="6-registro-de-progreso">6. Registro de progreso</h2>
+<p>Cada alumno lleva una carpeta <code>progreso/</code> propia (fuera del repositorio) con:</p>
+<ul>
+<li><code>salidas/</code> — la producción de cada día, con el nombre <code>S01-D1.md</code> o <code>.m4a</code>.</li>
+<li><code>pruebas.csv</code> — <code>fecha, unidad, puntos, de, observaciones</code>.</li>
+<li><code>errores.md</code> — la lista personal de errores, con la regla al lado, que se
+  actualiza en las semanas 22 y 48.</li>
+</ul>
+<p>No hay plataforma: un alumno autónomo que escribe su puntuación en una tabla
+ve su progreso con más claridad que con una barra de colores. Si algún día
+hay bot o web con cuentas, estos tres archivos son el modelo de datos.</p></main></body></html>

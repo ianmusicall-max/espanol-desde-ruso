@@ -1,0 +1,358 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>metodologia</title><style>
+:root{--fondo:#fffdf8;--tinta:#1f2328;--acento:#b5452b;--suave:#f1ebdd;--borde:#d9d2c0}
+@media(prefers-color-scheme:dark){:root{--fondo:#15171a;--tinta:#e6e2d8;--acento:#f08a5d;--suave:#23262b;--borde:#3a3e45}}
+*{box-sizing:border-box}body{margin:0;background:var(--fondo);color:var(--tinta);font:17px/1.55 Georgia,"Times New Roman",serif}
+main{max-width:46rem;margin:0 auto;padding:1rem 1rem 4rem}nav.barra{display:flex;justify-content:space-between;gap:1rem;font-family:system-ui,sans-serif;font-size:.9rem;padding:.6rem 0;border-bottom:1px solid var(--borde)}
+nav.barra a{color:var(--acento);text-decoration:none}h1{font-size:1.5rem;line-height:1.25;margin:1.2rem 0 .2rem}h1+h1{font-size:1.15rem;color:var(--acento);margin-top:0}
+h2{font-family:system-ui,sans-serif;font-size:1.05rem;margin-top:2rem;padding-top:.6rem;border-top:1px solid var(--borde)}h3{font-family:system-ui,sans-serif;font-size:.95rem;margin-top:1.3rem}
+table{border-collapse:collapse;width:100%;font-size:.93rem;margin:.6rem 0;display:block;overflow-x:auto}th,td{border:1px solid var(--borde);padding:.3rem .5rem;text-align:left;vertical-align:top}th{background:var(--suave);font-family:system-ui,sans-serif}
+blockquote{margin:1rem 0;padding:.6rem 1rem;background:var(--suave);border-left:4px solid var(--acento)}code{font-size:.9em}ul.dias{list-style:none;padding:0}ul.dias li{padding:.25rem 0;border-bottom:1px dotted var(--borde)}
+.tipo{font-family:system-ui,sans-serif;font-size:.75rem;color:var(--acento);text-transform:uppercase;letter-spacing:.04em}.falta{opacity:.55}details{margin:.4rem 0}summary{cursor:pointer;font-family:system-ui,sans-serif}
+input[type=checkbox]{margin-right:.4rem}
+</style></head><body><main>
+<nav class="barra"><a href="../index.html">← Español desde el ruso</a></nav>
+<h1 id="metodologia-como-esta-hecho-el-curso-y-como-es-una-sesion-de-30-minutos">Metodología: cómo está hecho el curso y cómo es una sesión de 30 minutos</h1>
+<p>Para el profesor. Las lecciones (en <code>curso/</code>) están escritas para el alumno,
+en ruso con el español como lengua meta. Este documento explica las decisiones
+que hay detrás, para que quien escriba o revise una lección las respete.</p>
+<h2 id="1-quien-es-el-alumno-y-que-se-le-promete">1. Quién es el alumno y qué se le promete</h2>
+<ul>
+<li>Adulto rusohablante, sin español previo, que estudia <strong>solo</strong> (sin profesor
+  presente) o con tutoría ligera, <strong>30 minutos al día, 365 días</strong>.</li>
+<li>Promesa: al terminar el año <strong>se desenvuelve en A2</strong> (MCER) y está preparado
+  para presentarse al <strong>DELE A2</strong>. No se promete B1: 182 horas no dan para más
+  con honestidad (ver <code>alineacion-mcer-pcic.md</code>, §4).</li>
+<li>El ruso es la lengua de las instrucciones y de las explicaciones en A1 y se
+  retira progresivamente en A2 (§6).</li>
+</ul>
+<h2 id="2-diez-principios">2. Diez principios</h2>
+<ol>
+<li><strong>Un punto nuevo por día.</strong> Cada lección presenta UNA estructura gramatical
+   o UN campo léxico. Si hacen falta dos, son dos días. Es lo que cabe en 30
+   minutos y lo que se recuerda al día siguiente.</li>
+<li><strong>De 6 a 10 palabras nuevas por lección</strong>, elegidas por frecuencia y por
+   utilidad para la tarea del día, nunca por completar una lista temática. Las
+   demás palabras del tema se recogen en los domingos de cultura y en los
+   repasos. Objetivo: ~900 palabras en A1, ~1 900 acumuladas en A2.</li>
+<li><strong>Gramática explícita y contrastiva.</strong> El alumno ruso viene de una
+   tradición escolar analítica: espera la regla, la tabla y el porqué. Se le
+   da, pero <strong>después</strong> de ver la estructura en un ejemplo y <strong>siempre</strong> con
+   el contraste con el ruso («⚠️ Контраст с русским»). El contraste no es un
+   adorno: es lo que convierte un curso genérico en un curso «desde el ruso».</li>
+<li><strong>Input antes de output.</strong> Cada lección abre con un diálogo o texto breve
+   que contiene la estructura nueva, se lee (y se escucha, si hay audio) antes
+   de explicar nada.</li>
+<li><strong>Práctica en escalera</strong>: formas aisladas → frases con banco de palabras →
+   diálogo con huecos → producción guiada. Tres ejercicios por lección, nunca
+   un ejercicio libre antes de dos controlados (tomado del cuaderno de
+   referencia, ver <code>referencias/tochka-ru-a2-tetrad-2.md</code>, §3).</li>
+<li><strong>Salida diaria</strong>: la lección termina con algo que el alumno PRODUCE (6-10
+   frases escritas, un audio de 1 minuto, un diálogo grabado). Está en la
+   columna <code>salida</code> del calendario y es obligatoria.</li>
+<li><strong>Repetición espaciada.</strong> Las palabras de cada lección van a un mazo
+   (<code>scripts/exportar_anki.py</code> las extrae de las lecciones) y la razminka de
+   cada día empieza con 10 tarjetas. Sin esto, el 60 % del léxico se pierde en
+   un mes.</li>
+<li><strong>Pronunciación desde el día 1 y ortografía desde el día 4.</strong> La tilde es
+   una regla, no un adorno; un rusohablante que escribe sin tildes escribe mal
+   en el DELE. Tres minutos de fonética al día durante las primeras ocho
+   semanas; después, un minuto dentro de la razminka.</li>
+<li><strong>Español neutro con la variación señalada.</strong> Se enseña la forma más
+   extendida (coger/tomar, vosotros/ustedes, perfecto/indefinido) con una nota
+   «🌎» cuando España y América difieren. No se enseña una variante «pura».</li>
+<li><strong>Autoevaluación constante</strong>: tres preguntas al cierre de cada lección,
+    mini-test cada sábado, prueba de 15 ítems cada dos semanas, listas can-do
+    al final de cada nivel (ver <code>evaluacion.md</code>).</li>
+</ol>
+<h2 id="3-la-sesion-de-30-minutos-dia-de-leccion">3. La sesión de 30 minutos (día de lección)</h2>
+<table>
+<thead>
+<tr>
+<th>Minutos</th>
+<th>Sección (en la lección)</th>
+<th>Qué pasa</th>
+<th>Por qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0-3</td>
+<td><strong>1. Разминка</strong></td>
+<td>10 tarjetas del mazo (ayer + hace una semana) y una pregunta de lo de ayer</td>
+<td>Activar la memoria antes de meter nada nuevo</td>
+</tr>
+<tr>
+<td>3-6</td>
+<td><strong>2. Фонетика</strong> (A1, semanas 1-8) / <strong>2. Аудирование</strong> (después)</td>
+<td>Un sonido o contraste con 6-8 palabras, leídas en voz alta y grabadas; o 1 minuto de audio con 2 preguntas</td>
+<td>La interferencia fonética rusa se fija en las primeras semanas o no se quita nunca</td>
+</tr>
+<tr>
+<td>6-16</td>
+<td><strong>3. Новое</strong></td>
+<td>Пример (diálogo/texto de 6-10 líneas) → Объяснение (regla + tabla) → ⚠️ Контраст с русским</td>
+<td>Input, regla, contraste. Diez minutos es el máximo de atención para explicación</td>
+</tr>
+<tr>
+<td>16-26</td>
+<td><strong>4. Практика</strong></td>
+<td>Упражнение А (controlado), Б (semicontrolado), В (traducción ru→es o diálogo con huecos)</td>
+<td>La escalera. Las claves van al final de la lección</td>
+</tr>
+<tr>
+<td>26-29</td>
+<td><strong>5. Выход</strong></td>
+<td>La producción del día (la <code>salida</code> del calendario)</td>
+<td>Sin producir no hay adquisición</td>
+</tr>
+<tr>
+<td>29-30</td>
+<td><strong>6. Итог</strong></td>
+<td>Tres preguntas de autoevaluación (sí/no) y «añade las palabras de hoy al mazo»</td>
+<td>Cierre y enganche con mañana</td>
+</tr>
+</tbody>
+</table>
+<p>Los números de los apartados y las franjas de minutos <strong>van en los títulos</strong>
+(<code>## 3. Новое (6–16 мин)</code>), y <code>scripts/validar.py</code> comprueba que empiecen en
+0, sean contiguas y terminen en 30. No se puede escribir una lección de 45
+minutos sin que el validador se ponga en rojo.</p>
+<h3 id="sabado-repaso">Sábado (repaso)</h3>
+<table>
+<thead>
+<tr>
+<th>Minutos</th>
+<th>Sección</th>
+<th>Qué pasa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0-3</td>
+<td>1. Разминка</td>
+<td>20 tarjetas (toda la semana)</td>
+</tr>
+<tr>
+<td>3-13</td>
+<td>2. Повторение</td>
+<td>Resumen de la semana en una tabla; 2 ejercicios mezclados</td>
+</tr>
+<tr>
+<td>13-23</td>
+<td>3. Мини-тест</td>
+<td>10-15 ítems con clave y puntuación</td>
+</tr>
+<tr>
+<td>23-28</td>
+<td>4. Разбор ошибок</td>
+<td>Cada error → la regla → una frase nueva correcta</td>
+</tr>
+<tr>
+<td>28-30</td>
+<td>5. Итог</td>
+<td>Lista de control de la semana (5 «puedo…»)</td>
+</tr>
+</tbody>
+</table>
+<p>El sábado de la segunda semana de cada unidad es la <strong>Prueba de la unidad</strong>
+(<code>tipo: prueba</code>): 15 ítems de opción múltiple (léxico 6, gramática 6,
+ortografía/pronunciación 3), copiando la forma del Тест del cuaderno de
+referencia. Menos de 10/15 → se repite la semana de repaso antes de seguir.</p>
+<h3 id="domingo-cultura">Domingo (cultura)</h3>
+<table>
+<thead>
+<tr>
+<th>Minutos</th>
+<th>Sección</th>
+<th>Qué pasa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0-3</td>
+<td>1. Разминка</td>
+<td>10 tarjetas</td>
+</tr>
+<tr>
+<td>3-15</td>
+<td>2. Материал</td>
+<td>Un texto, canción, vídeo o mapa sobre el mundo hispano (en español, con glosas)</td>
+</tr>
+<tr>
+<td>15-20</td>
+<td>3. Слова</td>
+<td>10-20 palabras del material, con el ruso al lado</td>
+</tr>
+<tr>
+<td>20-28</td>
+<td>4. Задание</td>
+<td>Verdadero/falso + transferencia («y en tu país…»), 5 frases</td>
+</tr>
+<tr>
+<td>28-30</td>
+<td>5. Итог</td>
+<td>Qué me sorprendió (una frase)</td>
+</tr>
+</tbody>
+</table>
+<p>El domingo es ligero a propósito: un día de descanso real al séptimo día haría
+que el alumno rompiera la cadena; un día de carga completa haría que la
+abandonara. Treinta minutos agradables mantienen el hábito.</p>
+<h2 id="4-tipologia-de-ejercicios">4. Tipología de ejercicios</h2>
+<p>Los 40 tipos del cuaderno de referencia están catalogados y asignados a
+unidades en <code>referencias/tochka-ru-a2-tetrad-2.md</code>, §2. Reglas de uso:</p>
+<ul>
+<li><strong>Banco de palabras antes de los huecos</strong> en A1 y hasta la unidad 18.</li>
+<li><strong>Modelo resuelto (Модель:)</strong> antes de cualquier transformación.</li>
+<li><strong>Pista de tiempo entre paréntesis</strong> —(наст.), (прош.), (буд.)— cuando la
+  forma no se deduce del contexto.</li>
+<li><strong>Traducción ruso→español</strong> como ejercicio В desde la unidad 3: es el que
+  destapa la interferencia (artículo, ser/estar, posición del adjetivo). Lleva
+  clave comentada: no solo la frase correcta, sino «aquí el ruso te empuja
+  a…».</li>
+<li><strong>Las fórmulas de instrucción son fijas</strong> (lista en §5 del análisis):
+  Прочитайте, Дополните, Соедините, Выберите, Проспрягайте, Поставьте в
+  правильном порядке, Исправьте ошибки, Переведите, Ответьте на вопросы,
+  Расскажите, Опишите, Напишите. El alumno no tiene que descifrar qué se le
+  pide.</li>
+</ul>
+<h2 id="5-el-contraste-con-el-ruso">5. El contraste con el ruso</h2>
+<p>El análisis completo está en <code>contrastiva-ru-es.md</code>. En cada lección el
+apartado «⚠️ Контраст с русским» hace tres cosas, en este orden:</p>
+<ol>
+<li>Dice qué hace el ruso en ese punto (en una frase).</li>
+<li>Dice qué hace el español y en qué se diferencia.</li>
+<li>Da el <strong>error predecible</strong> («Вы захотите сказать…») y la forma correcta.</li>
+</ol>
+<p>Y cuando el ruso AYUDA (gustar = «мне нравится», reflexivos = -ся, el
+imperfecto = несовершенный вид), se dice con la misma claridad: el paralelo es
+un atajo y hay que usarlo.</p>
+<h2 id="6-el-ruso-se-retira-poco-a-poco">6. El ruso se retira poco a poco</h2>
+<table>
+<thead>
+<tr>
+<th>Unidades</th>
+<th>Instrucciones</th>
+<th>Explicación gramatical</th>
+<th>Títulos de ejercicio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1-6</td>
+<td>ruso</td>
+<td>ruso</td>
+<td>ruso</td>
+</tr>
+<tr>
+<td>7-11</td>
+<td>ruso</td>
+<td>ruso</td>
+<td>español + ruso</td>
+</tr>
+<tr>
+<td>12-18</td>
+<td>español + glosa en ruso</td>
+<td>ruso</td>
+<td>español</td>
+</tr>
+<tr>
+<td>19-24</td>
+<td>español</td>
+<td>español con el contraste en ruso</td>
+<td>español</td>
+</tr>
+</tbody>
+</table>
+<p>Al final del año el alumno lee instrucciones en español, que es lo que se va a
+encontrar en el DELE. El contraste con el ruso no desaparece nunca: es el
+valor del curso.</p>
+<h2 id="7-pronunciacion-el-plan-de-ocho-semanas">7. Pronunciación: el plan de ocho semanas</h2>
+<table>
+<thead>
+<tr>
+<th>Semana</th>
+<th>Foco</th>
+<th>Interferencia rusa que se corrige</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Vocales, b=v, h muda</td>
+<td>Reducción de o/a átonas (аканье); б≠в</td>
+</tr>
+<tr>
+<td>2</td>
+<td>c/z/qu, g/j, ñ, ll/y, r/rr, ch, x</td>
+<td>j no es [ʒ]; ñ no es [nj] estricto; rr vibrante</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Sílaba tónica y tilde</td>
+<td>«Acento móvil» ruso ≠ acento escrito con reglas</td>
+</tr>
+<tr>
+<td>4</td>
+<td>d y t dentales; d intervocálica suave</td>
+<td>d/t alveolares y duras del ruso</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Sin palatalización ante e/i</td>
+<td>te, de, ni, li palatalizados (тэ/те)</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Diptongos ie/ue; hiatos</td>
+<td>Rupturas y reducciones</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Entonación: pregunta, exclamación, enumeración</td>
+<td>Curva descendente rusa en preguntas</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Enlace y ritmo silábico</td>
+<td>Ritmo acentual ruso; consonantes finales ensordecidas</td>
+</tr>
+</tbody>
+</table>
+<p>Después de la semana 8 la fonética vive dentro de la razminka (un minuto) y
+en los días de repaso.</p>
+<h2 id="8-audio">8. Audio</h2>
+<p>El curso es texto. Cada diálogo y cada ejercicio de fonética <strong>indica</strong> qué hay
+que leer en voz alta y grabar. Opciones para tener audio:</p>
+<ul>
+<li>El profesor graba los diálogos (ideal: dos voces).</li>
+<li>Texto a voz: cualquier TTS en español de calidad sirve para los diálogos de
+  A1; en <code>escribir_leccion.py</code> queda un marcador <code>[AUDIO]</code> donde iría el
+  archivo. Generar audio con TTS automáticamente es trabajo pendiente
+  (ver <code>README.md</code>, «Lo que falta»).</li>
+</ul>
+<h2 id="9-como-se-escribe-una-leccion-nueva">9. Cómo se escribe una lección nueva</h2>
+<ol>
+<li><code>scripts/plan.py --dia N</code> dice qué toca ese día (tema, foco, salida).</li>
+<li>Se copia <code>curso/plantilla-leccion.md</code> o se llama a
+   <code>scripts/escribir_leccion.py --semana S --dia D</code>, que redacta un borrador
+   con Claude a partir del calendario, la plantilla, esta metodología y las
+   lecciones ya escritas de la unidad.</li>
+<li><strong>El profesor revisa</strong>: el borrador no se publica sin leerlo. Lo que hay que
+   mirar primero: el contraste con el ruso (¿es verdad?), las claves (¿están
+   bien?), el léxico (¿6-10?), la salida (¿coincide con el calendario?).</li>
+<li><code>scripts/validar.py</code> comprueba la forma; las pruebas (<code>tests/</code>) comprueban
+   que todo el curso siga coherente.</li>
+<li><code>scripts/construir_sitio.py</code> regenera <code>docs/</code> para leer la lección en el
+   móvil.</li>
+</ol>
+<h2 id="10-lo-que-este-curso-no-hace-a-proposito">10. Lo que este curso no hace, a propósito</h2>
+<ul>
+<li>No enseña el subjuntivo salvo en fórmulas fijas (¡Que aproveche!): es B1.</li>
+<li>No separa «español de España» y «español de América»: señala la variación.</li>
+<li>No usa transliteración cirílica de las palabras españolas después de la
+  semana 1: el alumno aprende a leer con las reglas, que son regulares.</li>
+<li>No incluye ilustraciones propias: donde el cuaderno de referencia usa
+  viñetas, aquí la escena se describe en una línea.</li>
+</ul></main></body></html>

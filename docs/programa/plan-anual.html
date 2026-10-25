@@ -1,0 +1,300 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>plan-anual</title><style>
+:root{--fondo:#fffdf8;--tinta:#1f2328;--acento:#b5452b;--suave:#f1ebdd;--borde:#d9d2c0}
+@media(prefers-color-scheme:dark){:root{--fondo:#15171a;--tinta:#e6e2d8;--acento:#f08a5d;--suave:#23262b;--borde:#3a3e45}}
+*{box-sizing:border-box}body{margin:0;background:var(--fondo);color:var(--tinta);font:17px/1.55 Georgia,"Times New Roman",serif}
+main{max-width:46rem;margin:0 auto;padding:1rem 1rem 4rem}nav.barra{display:flex;justify-content:space-between;gap:1rem;font-family:system-ui,sans-serif;font-size:.9rem;padding:.6rem 0;border-bottom:1px solid var(--borde)}
+nav.barra a{color:var(--acento);text-decoration:none}h1{font-size:1.5rem;line-height:1.25;margin:1.2rem 0 .2rem}h1+h1{font-size:1.15rem;color:var(--acento);margin-top:0}
+h2{font-family:system-ui,sans-serif;font-size:1.05rem;margin-top:2rem;padding-top:.6rem;border-top:1px solid var(--borde)}h3{font-family:system-ui,sans-serif;font-size:.95rem;margin-top:1.3rem}
+table{border-collapse:collapse;width:100%;font-size:.93rem;margin:.6rem 0;display:block;overflow-x:auto}th,td{border:1px solid var(--borde);padding:.3rem .5rem;text-align:left;vertical-align:top}th{background:var(--suave);font-family:system-ui,sans-serif}
+blockquote{margin:1rem 0;padding:.6rem 1rem;background:var(--suave);border-left:4px solid var(--acento)}code{font-size:.9em}ul.dias{list-style:none;padding:0}ul.dias li{padding:.25rem 0;border-bottom:1px dotted var(--borde)}
+.tipo{font-family:system-ui,sans-serif;font-size:.75rem;color:var(--acento);text-transform:uppercase;letter-spacing:.04em}.falta{opacity:.55}details{margin:.4rem 0}summary{cursor:pointer;font-family:system-ui,sans-serif}
+input[type=checkbox]{margin-right:.4rem}
+</style></head><body><main>
+<nav class="barra"><a href="../index.html">← Español desde el ruso</a></nav>
+<h1 id="plan-anual-52-semanas-24-unidades-365-dias-de-30-minutos">Plan anual: 52 semanas, 24 unidades, 365 días de 30 minutos</h1>
+<p>La fuente de verdad del plan es <code>programa/calendario.yaml</code>; este documento es
+su lectura en prosa. La tabla de unidades de abajo se genera desde el YAML
+con <code>scripts/plan.py --actualizar</code> y una prueba comprueba que esté al día.</p>
+<h2 id="la-forma-del-ano">La forma del año</h2>
+<pre><code>Semanas  1-22   A1   Unidades 1-11    77 h   (U11 = repaso y examen de A1)
+Semanas 23-48   A2   Unidades 12-24   91 h   (U24 = repaso integral de A2)
+Semanas 49-52   Final                 14 h   (dos simulacros DELE A2, proyecto, examen)
+Día 365         Reserva
+</code></pre>
+<ul>
+<li><strong>Una unidad = dos semanas = 14 sesiones</strong>: 10 lecciones nuevas (lunes a
+  viernes), 2 repasos (sábados; el segundo es la prueba de la unidad) y 2
+  domingos de cultura.</li>
+<li><strong>Un día = 30 minutos</strong>, siempre. Las franjas de cada sesión están en
+  <code>metodologia.md</code>, §3.</li>
+<li><strong>Las 220 lecciones nuevas</strong> presentan un punto cada una; las 145 sesiones
+  restantes consolidan, evalúan y abren ventanas a la cultura hispana.</li>
+</ul>
+<h2 id="que-se-puede-hacer-al-final-de-cada-tramo">Qué se puede hacer al final de cada tramo</h2>
+<table>
+<thead>
+<tr>
+<th>Al final de…</th>
+<th>El alumno puede…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Semana 2</td>
+<td>Leer en voz alta cualquier palabra, saludar, presentarse, contar hasta 20</td>
+</tr>
+<tr>
+<td>Semana 10</td>
+<td>Describir a su familia, su casa y su ciudad; contar su rutina con la hora</td>
+</tr>
+<tr>
+<td>Semana 16</td>
+<td>Pedir en un restaurante, comprar ropa, hacer planes e invitar</td>
+</tr>
+<tr>
+<td>Semana 22 (<strong>A1</strong>)</td>
+<td>Viajar, ir al médico, dar consejos; aprobar un examen tipo DELE A1</td>
+</tr>
+<tr>
+<td>Semana 28</td>
+<td>Contar su biografía y una anécdota con los tres pasados</td>
+</tr>
+<tr>
+<td>Semana 36</td>
+<td>Buscar trabajo, dar instrucciones, hablar del futuro, opinar y discutir</td>
+</tr>
+<tr>
+<td>Semana 44</td>
+<td>Comparar, aconsejar, convivir, celebrar; expresar sentimientos</td>
+</tr>
+<tr>
+<td>Semana 48 (<strong>A2</strong>)</td>
+<td>Leer y escribir textos reales; superar una prueba integral de A2</td>
+</tr>
+<tr>
+<td>Semana 52</td>
+<td>Superar un simulacro completo del DELE A2 y presentar «Un año en español»</td>
+</tr>
+</tbody>
+</table>
+<h2 id="las-24-unidades">Las 24 unidades</h2>
+<!-- tabla generada: no editar a mano, correr scripts/plan.py --actualizar -->
+<table>
+<thead>
+<tr>
+<th>Unidad</th>
+<th>Semanas</th>
+<th>Nivel</th>
+<th>Título</th>
+<th>Gramática central</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1-2</td>
+<td>A1</td>
+<td>¡Hola! Sonidos y saludos · ¡Hola! Звуки и приветствия</td>
+<td>alfabeto y correspondencia letra-sonido; sílaba tónica y tilde; ser (singular y plural)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>3-4</td>
+<td>A1</td>
+<td>Mi mundo: cosas, personas y profesiones · Мой мир: вещи, люди и профессии</td>
+<td>género y número del sustantivo; artículo determinado e indeterminado; demostrativo este / esta / estos / estas; ese / esa</td>
+</tr>
+<tr>
+<td>3</td>
+<td>5-6</td>
+<td>A1</td>
+<td>La familia y las personas · Семья и люди</td>
+<td>tener (completo); posesivos átonos mi / tu / su / nuestro / vuestro / su; ser + adjetivo (carácter y físico)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>7-8</td>
+<td>A1</td>
+<td>Mi casa y mi ciudad · Мой дом и мой город</td>
+<td>hay frente a estar; preposiciones de lugar; vivir (regular -ir)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>9-10</td>
+<td>A1</td>
+<td>Mi día a día · Мой день</td>
+<td>presente regular -ar / -er / -ir completo; verbos reflexivos; irregulares: hacer, salir, ir, ver, poner</td>
+</tr>
+<tr>
+<td>6</td>
+<td>11-12</td>
+<td>A1</td>
+<td>Comer y beber · Еда и напитки</td>
+<td>gustar / encantar con me / te / le / nos / os / les; a mí también / a mí tampoco; querer y preferir (e→ie)</td>
+</tr>
+<tr>
+<td>7</td>
+<td>13-14</td>
+<td>A1</td>
+<td>De compras · Покупки</td>
+<td>demostrativos completos este / ese / aquel; pronombres de objeto directo lo / la / los / las; quedar bien / mal (tipo gustar)</td>
+</tr>
+<tr>
+<td>8</td>
+<td>15-16</td>
+<td>A1</td>
+<td>Tiempo libre, tiempo atmosférico y planes · Свободное время, погода и планы</td>
+<td>gustar + infinitivo; jugar a / tocar / hacer / practicar; verbos impersonales del tiempo (hace, hay, llueve, nieva)</td>
+</tr>
+<tr>
+<td>9</td>
+<td>17-18</td>
+<td>A1</td>
+<td>Viajes y transporte · Путешествия и транспорт</td>
+<td>ir / viajar en + medio; a pie; estar + gerundio; pretérito perfecto: formas regulares e irregulares</td>
+</tr>
+<tr>
+<td>10</td>
+<td>19-20</td>
+<td>A1</td>
+<td>Salud y cuerpo · Здоровье и тело</td>
+<td>doler (tipo gustar); tener + síntoma (fiebre, tos, hambre, sed, sueño, frío); estar + enfermo / bien / mal / mejor</td>
+</tr>
+<tr>
+<td>11</td>
+<td>21-22</td>
+<td>A1</td>
+<td>Repaso y evaluación del nivel A1 · Повторение и оценка уровня A1</td>
+<td>mapa comparativo ser / estar / hay / tener; presente regular, reflexivo e irregular; artículos, género, demostrativos, posesivos, OD</td>
+</tr>
+<tr>
+<td>12</td>
+<td>23-24</td>
+<td>A2</td>
+<td>Biografías: el pasado · Биографии: прошедшее время</td>
+<td>pretérito indefinido regular -ar / -er / -ir; irregulares ser / ir, tener, estar, hacer, poder, poner, querer, venir, decir, dar, ver; marcadores: ayer, anoche, la semana pasada, hace…, en + año</td>
+</tr>
+<tr>
+<td>13</td>
+<td>25-26</td>
+<td>A2</td>
+<td>Antes y ahora: recuerdos · Раньше и сейчас: воспоминания</td>
+<td>pretérito imperfecto regular; irregulares ser, ir, ver; antes / ahora; ya no / todavía</td>
+</tr>
+<tr>
+<td>14</td>
+<td>27-28</td>
+<td>A2</td>
+<td>Cuéntame qué pasó: anécdotas · Расскажи, что случилось: истории</td>
+<td>estaba + gerundio cuando + indefinido; conectores: primero, luego, entonces, de repente, al final, mientras, así que, porque; indefinidos irregulares (3): leyó, oyó, durmió, pidió, prefirió, trajo, condujo</td>
+</tr>
+<tr>
+<td>15</td>
+<td>29-30</td>
+<td>A2</td>
+<td>Estudios y trabajo · Учёба и работа</td>
+<td>saber / conocer / poder; llevar + tiempo; desde / desde hace; perfecto para la experiencia laboral</td>
+</tr>
+<tr>
+<td>16</td>
+<td>31-32</td>
+<td>A2</td>
+<td>Instrucciones, ciudad y servicios · Инструкции, город и услуги</td>
+<td>imperativo afirmativo (vosotros / ustedes); imperativo negativo (formas del subjuntivo); pronombres OI me / te / le / nos / os / les</td>
+</tr>
+<tr>
+<td>17</td>
+<td>33-34</td>
+<td>A2</td>
+<td>El futuro y las predicciones · Будущее и прогнозы</td>
+<td>futuro simple regular e irregular; ir a + infinitivo frente a futuro; si + presente, futuro / presente / imperativo</td>
+</tr>
+<tr>
+<td>18</td>
+<td>35-36</td>
+<td>A2</td>
+<td>Comunicarse: opiniones y mensajes · Общение: мнения и сообщения</td>
+<td>creo / pienso / me parece que + indicativo; estoy de acuerdo / no estoy de acuerdo; yo sí / yo no / yo también / yo tampoco; conectores: además, sin embargo, por eso, aunque</td>
+</tr>
+<tr>
+<td>19</td>
+<td>37-38</td>
+<td>A2</td>
+<td>Comparar y elegir · Сравнивать и выбирать</td>
+<td>más / menos … que; tan … como; tanto … como; mejor / peor / mayor / menor; superlativo relativo (el más … de) y absoluto (-ísimo)</td>
+</tr>
+<tr>
+<td>20</td>
+<td>39-40</td>
+<td>A2</td>
+<td>Cuerpo, salud y bienestar (ampliación) · Тело, здоровье и самочувствие (расширение)</td>
+<td>condicional simple regular e irregular; deberías / podrías / yo que tú / lo mejor es; sentirse / encontrarse + adjetivo</td>
+</tr>
+<tr>
+<td>21</td>
+<td>41-42</td>
+<td>A2</td>
+<td>Casa, convivencia y vida cotidiana · Дом, совместная жизнь и быт</td>
+<td>estar + participio (está roto, está abierta); participios irregulares; se impersonal y pasiva refleja (se alquila, se venden)</td>
+</tr>
+<tr>
+<td>22</td>
+<td>43-44</td>
+<td>A2</td>
+<td>Fiestas, cultura y sentimientos · Праздники, культура и чувства</td>
+<td>empezar a / dejar de / volver a / acabar de + infinitivo; seguir + gerundio; estar a punto de; tener ganas de; me da miedo / pena / vergüenza; me pone nervioso / triste; me hace feliz / reír; estar harto de</td>
+</tr>
+<tr>
+<td>23</td>
+<td>45-46</td>
+<td>A2</td>
+<td>Leer y escribir: textos de la vida real · Чтение и письмо: тексты из реальной жизни</td>
+<td>consolidación de pasados y futuro; conectores de texto: en primer lugar, por último, por un lado… por otro; pronombres para evitar repeticiones</td>
+</tr>
+<tr>
+<td>24</td>
+<td>47-48</td>
+<td>A2</td>
+<td>Repaso integral del nivel A2 · Итоговое повторение уровня A2</td>
+<td>presente e irregulares; reflexivos; verbos tipo gustar; pasados: tabla de decisión (aspecto + hoy / ayer); futuro, condicional, ir a, perífrasis</td>
+</tr>
+<tr>
+<td>—</td>
+<td>49-52</td>
+<td>A2</td>
+<td>Fase final: simulacros del DELE A2, proyecto y examen · Заключительный этап: пробные экзамены DELE A2, проект и экзамен</td>
+<td>simulacros DELE A2, proyecto, examen final</td>
+</tr>
+</tbody>
+</table>
+<!-- fin de la tabla generada -->
+
+<h2 id="como-leer-el-calendario">Cómo leer el calendario</h2>
+<pre><code>.venv/bin/python scripts/plan.py              # esta misma tabla
+.venv/bin/python scripts/plan.py --semana 12  # los 7 días de una semana
+.venv/bin/python scripts/plan.py --dia 200    # un día por su número
+</code></pre>
+<p>Cada día tiene siete campos: semana, día, tipo, tema (español y ruso),
+<strong>foco</strong> (lo nuevo) y <strong>salida</strong> (lo que el alumno produce). Si un día no cabe
+en 30 minutos, se parte en dos días; nunca se alarga la sesión.</p>
+<h2 id="decisiones-que-explican-la-forma-del-plan">Decisiones que explican la forma del plan</h2>
+<ol>
+<li><strong>El artículo, ser/estar y el adjetivo se trabajan en las unidades 2-4 y se
+   recuerdan en todas las demás.</strong> Son los tres errores que un rusohablante
+   arrastra hasta B2 si no se atacan al principio (<code>contrastiva-ru-es.md</code>).</li>
+<li><strong>Gustar entra en la unidad 6, antes que en muchos manuales</strong>, porque para
+   un rusohablante es la estructura más fácil del español (es la suya) y da
+   mucha expresividad temprana.</li>
+<li><strong>El pretérito perfecto se introduce en A1 (unidad 9)</strong> con marcadores de
+   «hoy», como hace el PCIC, para que el pasado no llegue de golpe en A2.</li>
+<li><strong>Los tres pasados ocupan tres unidades seguidas (12-14)</strong> y se enseñan a
+   través del aspecto ruso. Es el bloque más largo del curso y el que decide
+   el nivel A2.</li>
+<li><strong>El subjuntivo no entra</strong> salvo en fórmulas: con 182 horas, meterlo sería
+   quitarle al alumno la consolidación de los pasados.</li>
+<li><strong>Dos simulacros completos del DELE A2</strong> al final, no uno: el primero
+   diagnostica y el segundo mide la mejora tras cuatro días de refuerzo.</li>
+<li><strong>El día 365 es de reserva</strong>: todo plan de un año necesita un día de
+   margen.</li>
+</ol></main></body></html>

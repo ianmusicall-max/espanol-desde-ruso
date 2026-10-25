@@ -1,0 +1,351 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>alineacion-mcer-pcic</title><style>
+:root{--fondo:#fffdf8;--tinta:#1f2328;--acento:#b5452b;--suave:#f1ebdd;--borde:#d9d2c0}
+@media(prefers-color-scheme:dark){:root{--fondo:#15171a;--tinta:#e6e2d8;--acento:#f08a5d;--suave:#23262b;--borde:#3a3e45}}
+*{box-sizing:border-box}body{margin:0;background:var(--fondo);color:var(--tinta);font:17px/1.55 Georgia,"Times New Roman",serif}
+main{max-width:46rem;margin:0 auto;padding:1rem 1rem 4rem}nav.barra{display:flex;justify-content:space-between;gap:1rem;font-family:system-ui,sans-serif;font-size:.9rem;padding:.6rem 0;border-bottom:1px solid var(--borde)}
+nav.barra a{color:var(--acento);text-decoration:none}h1{font-size:1.5rem;line-height:1.25;margin:1.2rem 0 .2rem}h1+h1{font-size:1.15rem;color:var(--acento);margin-top:0}
+h2{font-family:system-ui,sans-serif;font-size:1.05rem;margin-top:2rem;padding-top:.6rem;border-top:1px solid var(--borde)}h3{font-family:system-ui,sans-serif;font-size:.95rem;margin-top:1.3rem}
+table{border-collapse:collapse;width:100%;font-size:.93rem;margin:.6rem 0;display:block;overflow-x:auto}th,td{border:1px solid var(--borde);padding:.3rem .5rem;text-align:left;vertical-align:top}th{background:var(--suave);font-family:system-ui,sans-serif}
+blockquote{margin:1rem 0;padding:.6rem 1rem;background:var(--suave);border-left:4px solid var(--acento)}code{font-size:.9em}ul.dias{list-style:none;padding:0}ul.dias li{padding:.25rem 0;border-bottom:1px dotted var(--borde)}
+.tipo{font-family:system-ui,sans-serif;font-size:.75rem;color:var(--acento);text-transform:uppercase;letter-spacing:.04em}.falta{opacity:.55}details{margin:.4rem 0}summary{cursor:pointer;font-family:system-ui,sans-serif}
+input[type=checkbox]{margin-right:.4rem}
+</style></head><body><main>
+<nav class="barra"><a href="../index.html">← Español desde el ruso</a></nav>
+<h1 id="alineacion-con-el-mcer-el-plan-curricular-del-instituto-cervantes-y-el-dele-a2">Alineación con el MCER, el Plan Curricular del Instituto Cervantes y el DELE A2</h1>
+<h2 id="0-aviso-sobre-las-fuentes">0. Aviso sobre las fuentes</h2>
+<p>Los inventarios del PCIC (cvc.cervantes.es) y la guía oficial del DELE A2
+(examenes.cervantes.es) <strong>no se pudieron descargar</strong> desde el entorno en que
+se escribió este documento (red restringida). Lo que sigue está escrito de
+memoria profesional del PCIC <em>Niveles de referencia para el español, A1-A2</em>
+(Instituto Cervantes, 2006) y de la guía del DELE A2 (versión 2020). Antes de
+usarlo para una acreditación oficial, cotejar con:</p>
+<ul>
+<li>PCIC, inventario de gramática A1-A2: <code>cvc.cervantes.es/ensenanza/biblioteca_ele/plan_curricular/niveles/02_gramatica_inventario_a1-a2.htm</code></li>
+<li>PCIC, inventario de funciones A1-A2: <code>.../05_funciones_inventario_a1-a2.htm</code></li>
+<li>Guía del examen DELE A2: <code>examenes.cervantes.es/sites/default/files/DELE_A2_v2020_Guia_de_examen.pdf</code></li>
+</ul>
+<p>Donde haya diferencia, manda el documento oficial y hay que corregir aquí.</p>
+<h2 id="1-los-niveles-del-mcer-que-cubre-el-curso">1. Los niveles del MCER que cubre el curso</h2>
+<p><strong>A1 (acceso).</strong> Comprende y usa expresiones cotidianas y frases sencillas
+para necesidades inmediatas; se presenta y presenta a otros; pide y da
+información personal (dónde vive, qué tiene, a quién conoce); interactúa de
+forma sencilla si el interlocutor habla despacio y ayuda.</p>
+<p><strong>A2 (plataforma).</strong> Comprende frases y expresiones frecuentes sobre áreas de
+experiencia inmediata (información personal y familiar, compras, lugares de
+interés, trabajo); se comunica en tareas simples y cotidianas que exigen un
+intercambio sencillo y directo de información; describe en términos sencillos
+su pasado, su entorno y sus necesidades inmediatas.</p>
+<p>Las columnas <code>objetivos</code> de cada unidad en <code>calendario.yaml</code> están escritas
+como descriptores «puedo…» de este tipo.</p>
+<h2 id="2-gramatica-inventario-pcic-a1-a2-y-donde-se-trata">2. Gramática: inventario PCIC A1-A2 y dónde se trata</h2>
+<table>
+<thead>
+<tr>
+<th>Apartado PCIC</th>
+<th>A1</th>
+<th>A2</th>
+<th>Unidades</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sustantivo: género y número</td>
+<td>-o/-a, -s/-es, excepciones frecuentes</td>
+<td>-e, consonante, -ción/-dad, -ma; plurales -es, -ces</td>
+<td>2, 3</td>
+</tr>
+<tr>
+<td>Adjetivo</td>
+<td>concordancia, posición pospuesta, <em>muy</em></td>
+<td>grado comparativo y superlativo; -ísimo; apócope (buen, gran, primer)</td>
+<td>2, 19</td>
+</tr>
+<tr>
+<td>Artículo</td>
+<td>determinado / indeterminado; al, del; ausencia con profesión</td>
+<td>presencia / ausencia en genéricos; artículo con partes del cuerpo; lo + adj (fórmulas)</td>
+<td>2, 6, 10</td>
+</tr>
+<tr>
+<td>Demostrativos</td>
+<td>este / ese y formas</td>
+<td>aquel; neutros esto / eso / aquello</td>
+<td>2, 7</td>
+</tr>
+<tr>
+<td>Posesivos</td>
+<td>átonos (mi, tu, su, nuestro…)</td>
+<td>tónicos (mío, tuyo…) en respuestas (<em>es mío</em>)</td>
+<td>3, 21</td>
+</tr>
+<tr>
+<td>Cuantificadores</td>
+<td>cardinales hasta 100; mucho / poco; todo</td>
+<td>cardinales hasta millones; ordinales 1.º-10.º; algo / nada, alguien / nadie, algún / ningún; bastante, demasiado</td>
+<td>2, 4, 19, 20</td>
+</tr>
+<tr>
+<td>Pronombres personales</td>
+<td>sujeto; OD lo / la / los / las; OI con gustar; reflexivos; con preposición (mí, ti, conmigo)</td>
+<td>OD + OI combinados (se lo); tónicos de complemento</td>
+<td>1, 5, 7, 16</td>
+</tr>
+<tr>
+<td>Interrogativos</td>
+<td>qué, quién, dónde, cómo, cuándo, cuánto, cuál</td>
+<td>por qué, para qué, adónde, de dónde</td>
+<td>1, 2</td>
+</tr>
+<tr>
+<td>Relativos</td>
+<td>—</td>
+<td>que, donde, el que</td>
+<td>19</td>
+</tr>
+<tr>
+<td>Adverbios</td>
+<td>lugar (aquí, allí), tiempo (hoy, mañana, ahora), modo (bien, mal), cantidad (muy, mucho, poco), afirmación / negación (sí, no, también, tampoco)</td>
+<td>frecuencia ampliada, ya / todavía, nunca; de repente, entonces; probablemente, quizás</td>
+<td>5, 10, 14, 17</td>
+</tr>
+<tr>
+<td>Verbo: presente</td>
+<td>regulares; ser, estar, tener, ir, hacer; e→ie, o→ue; reflexivos</td>
+<td>e→i (pedir), c→zc (conocer), -uir, yo irregular (salgo, pongo, digo, traigo)</td>
+<td>1-5, 15</td>
+</tr>
+<tr>
+<td>Pretérito perfecto</td>
+<td>introducción con <em>hoy, esta semana</em>; participios regulares y los irregulares más frecuentes</td>
+<td>uso para experiencias (ya, todavía no, alguna vez); contraste con indefinido</td>
+<td>9, 12</td>
+</tr>
+<tr>
+<td>Pretérito indefinido</td>
+<td>—</td>
+<td>regular; irregulares frecuentes; marcadores</td>
+<td>12, 14</td>
+</tr>
+<tr>
+<td>Pretérito imperfecto</td>
+<td>—</td>
+<td>regular; ser, ir, ver; descripción, hábito; contraste con indefinido</td>
+<td>13, 14</td>
+</tr>
+<tr>
+<td>Futuro</td>
+<td>ir a + infinitivo</td>
+<td>futuro simple regular e irregular; si + presente + futuro</td>
+<td>8, 17</td>
+</tr>
+<tr>
+<td>Condicional</td>
+<td>—</td>
+<td>formas; cortesía (me gustaría, podría); consejo (deberías)</td>
+<td>15, 20</td>
+</tr>
+<tr>
+<td>Imperativo</td>
+<td>afirmativo tú / usted regular y los irregulares frecuentes; con pronombres</td>
+<td>negativo tú / usted; vosotros / ustedes; con dos pronombres</td>
+<td>10, 16</td>
+</tr>
+<tr>
+<td>Subjuntivo</td>
+<td>—</td>
+<td>solo en fórmulas (¡Que aproveche!) y en el imperativo negativo</td>
+<td>16, 22</td>
+</tr>
+<tr>
+<td>Gerundio</td>
+<td>estar + gerundio</td>
+<td>seguir + gerundio; llevar + gerundio</td>
+<td>9, 14, 22</td>
+</tr>
+<tr>
+<td>Perífrasis</td>
+<td>ir a; tener que / hay que; poder, querer + inf</td>
+<td>deber; empezar a; dejar de; volver a; acabar de; estar a punto de; soler</td>
+<td>8, 10, 13, 22</td>
+</tr>
+<tr>
+<td>Ser / estar / hay</td>
+<td>usos básicos</td>
+<td>estar + participio; ser / estar + adjetivo de estado / carácter</td>
+<td>1-4, 21</td>
+</tr>
+<tr>
+<td>Preposiciones</td>
+<td>a, de, en, con, por (hora), para (destinatario), desde / hasta</td>
+<td>por / para (causa, finalidad, duración, medio); entre, sobre, hacia, según</td>
+<td>4, 9, 20</td>
+</tr>
+<tr>
+<td>Oración compuesta</td>
+<td>y, o, pero; porque; para + inf; cuando + presente</td>
+<td>sino, ni; cuando + indicativo (pasado); si + presente; que completivo (creo que, dice que); relativas</td>
+<td>2, 17, 18, 19</td>
+</tr>
+<tr>
+<td>Estilo indirecto</td>
+<td>—</td>
+<td>dice que + presente; pregunta si / qué; cambios de persona</td>
+<td>18</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-funciones-pcic-por-unidad">3. Funciones (PCIC) por unidad</h2>
+<table>
+<thead>
+<tr>
+<th>Grupo de funciones PCIC</th>
+<th>A1 (unidades)</th>
+<th>A2 (unidades)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Dar y pedir información (identificar, describir, narrar, preguntar por datos)</td>
+<td>1, 2, 3, 4, 5</td>
+<td>12, 13, 14, 15, 19</td>
+</tr>
+<tr>
+<td>2. Expresar opiniones, actitudes y conocimientos (opinar, acuerdo, certeza, saber / no saber)</td>
+<td>6 (gustos como opinión básica)</td>
+<td>17, 18, 19</td>
+</tr>
+<tr>
+<td>3. Expresar gustos, deseos y sentimientos (gustar, querer, preferir, sentirse, dolor)</td>
+<td>6, 8, 10</td>
+<td>20, 22</td>
+</tr>
+<tr>
+<td>4. Influir en el interlocutor (pedir, dar instrucciones, aconsejar, invitar, prohibir, pedir permiso)</td>
+<td>6, 8, 10</td>
+<td>16, 20, 21</td>
+</tr>
+<tr>
+<td>5. Relacionarse socialmente (saludar, presentar, agradecer, disculparse, felicitar, brindar)</td>
+<td>1, 3</td>
+<td>21, 22</td>
+</tr>
+<tr>
+<td>6. Estructurar el discurso (abrir y cerrar, turnos, conectores, teléfono, correo)</td>
+<td>2 (aula), 5 (orden)</td>
+<td>14, 18, 23</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-horas-y-nivel-por-que-a2-y-no-b1">4. Horas y nivel: por qué A2 y no B1</h2>
+<table>
+<thead>
+<tr>
+<th>Fase</th>
+<th>Semanas</th>
+<th>Días × 30 min</th>
+<th>Horas</th>
+<th>Referencia Instituto Cervantes (horas lectivas orientativas)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A1</td>
+<td>1-22</td>
+<td>154</td>
+<td>77</td>
+<td>A1: 60-90</td>
+</tr>
+<tr>
+<td>A2</td>
+<td>23-48</td>
+<td>182</td>
+<td>91</td>
+<td>A2: 60-90 adicionales</td>
+</tr>
+<tr>
+<td>Final</td>
+<td>49-52 (+1)</td>
+<td>29</td>
+<td>14,5</td>
+<td>preparación específica de examen</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td>52</td>
+<td><strong>365</strong></td>
+<td><strong>182,5</strong></td>
+<td>A1 + A2 ≈ 120-180</td>
+</tr>
+</tbody>
+</table>
+<p>El año da para A1 y A2 con margen de consolidación (que un alumno autónomo
+necesita) y para dos simulacros completos del DELE A2. B1 pide otras 150-180
+horas: sería prometer lo que no se puede cumplir.</p>
+<h2 id="5-el-dele-a2-modelo-2020-estructura-que-guia-las-semanas-45-52">5. El DELE A2 (modelo 2020): estructura que guía las semanas 45-52</h2>
+<table>
+<thead>
+<tr>
+<th>Prueba</th>
+<th>Tareas</th>
+<th>Ítems</th>
+<th>Duración</th>
+<th>Qué se hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Comprensión de lectura</td>
+<td>4</td>
+<td>25 (5 + 8 + 6 + 6)</td>
+<td>60 min</td>
+<td>1: correos / textos breves, opción múltiple; 2: anuncios / avisos, relacionar; 3: textos informativos breves, relacionar; 4: texto largo, opción múltiple</td>
+</tr>
+<tr>
+<td>2. Comprensión auditiva</td>
+<td>4</td>
+<td>25 (6 + 6 + 6 + 7)</td>
+<td>40 min</td>
+<td>1: diálogos cortos, opción múltiple con imágenes; 2: monólogos breves (anuncios, mensajes); 3: conversación larga, verdadero / falso o asignar; 4: mensajes / noticias, relacionar</td>
+</tr>
+<tr>
+<td>3. Expresión e interacción escritas</td>
+<td>2</td>
+<td>—</td>
+<td>45 min</td>
+<td>1: responder a un correo / mensaje (60-70 palabras); 2: texto descriptivo o narrativo a partir de una guía (70-80 palabras)</td>
+</tr>
+<tr>
+<td>4. Expresión e interacción orales</td>
+<td>3</td>
+<td>—</td>
+<td>12 min (+ 12 de preparación)</td>
+<td>1: monólogo sobre un tema de una lámina (2-3 min); 2: descripción de una fotografía (2-3 min); 3: diálogo simulado con el examinador sobre la foto (3-4 min)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Puntuación</strong>: dos grupos. Grupo 1 = lectura + auditiva (50 puntos);
+  grupo 2 = escrita + oral (50 puntos). Se aprueba con <strong>30/50 en cada
+  grupo</strong> (60 %), no con la suma.</li>
+<li><strong>Consecuencia para el curso</strong>: no basta con ser bueno en gramática; la
+  oral y la escrita valen la mitad. Por eso cada lección termina en una
+  producción y los simulacros (semanas 49 y 51) se hacen enteros, repartidos
+  en sesiones de 30 minutos, con rúbrica de autoevaluación.</li>
+<li>Las cifras de ítems y tiempos de esta tabla deben cotejarse con la guía
+  oficial (§0).</li>
+</ul>
+<h2 id="6-vocabulario-nociones-especificas-del-pcic-cubiertas">6. Vocabulario: nociones específicas del PCIC cubiertas</h2>
+<p>Identificación personal · vivienda · familia · trabajo y estudios · ocio ·
+viajes y transporte · relaciones sociales · salud e higiene · compras y
+tiendas · alimentación · educación · ciencia y tecnología (básico) · clima y
+geografía · actividades económicas (básico) · medios de comunicación ·
+cultura y fiestas. Cada campo tiene al menos una unidad; las lecciones listan
+sus palabras en «Словарь дня» y <code>scripts/exportar_anki.py</code> las reúne.</p>
+<h2 id="7-referentes-culturales-y-saberes-socioculturales-pcic">7. Referentes culturales y saberes socioculturales (PCIC)</h2>
+<p>El domingo de cada semana cubre un referente: geografía del mundo hispano,
+saludos y tratamiento, horarios, familia, vivienda, comidas, compras, fiestas,
+deporte, transporte, salud, trabajo, historia reciente (1492, independencias,
+Transición), figuras (García Márquez, Frida Kahlo, Picasso, Neruda, Lorca,
+Messi, Shakira), música y baile, cine, internet. La lista completa está en la
+columna <code>cultura</code> de cada unidad del calendario.</p></main></body></html>

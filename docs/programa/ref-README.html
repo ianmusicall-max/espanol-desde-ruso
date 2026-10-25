@@ -1,0 +1,57 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>README</title><style>
+:root{--fondo:#fffdf8;--tinta:#1f2328;--acento:#b5452b;--suave:#f1ebdd;--borde:#d9d2c0}
+@media(prefers-color-scheme:dark){:root{--fondo:#15171a;--tinta:#e6e2d8;--acento:#f08a5d;--suave:#23262b;--borde:#3a3e45}}
+*{box-sizing:border-box}body{margin:0;background:var(--fondo);color:var(--tinta);font:17px/1.55 Georgia,"Times New Roman",serif}
+main{max-width:46rem;margin:0 auto;padding:1rem 1rem 4rem}nav.barra{display:flex;justify-content:space-between;gap:1rem;font-family:system-ui,sans-serif;font-size:.9rem;padding:.6rem 0;border-bottom:1px solid var(--borde)}
+nav.barra a{color:var(--acento);text-decoration:none}h1{font-size:1.5rem;line-height:1.25;margin:1.2rem 0 .2rem}h1+h1{font-size:1.15rem;color:var(--acento);margin-top:0}
+h2{font-family:system-ui,sans-serif;font-size:1.05rem;margin-top:2rem;padding-top:.6rem;border-top:1px solid var(--borde)}h3{font-family:system-ui,sans-serif;font-size:.95rem;margin-top:1.3rem}
+table{border-collapse:collapse;width:100%;font-size:.93rem;margin:.6rem 0;display:block;overflow-x:auto}th,td{border:1px solid var(--borde);padding:.3rem .5rem;text-align:left;vertical-align:top}th{background:var(--suave);font-family:system-ui,sans-serif}
+blockquote{margin:1rem 0;padding:.6rem 1rem;background:var(--suave);border-left:4px solid var(--acento)}code{font-size:.9em}ul.dias{list-style:none;padding:0}ul.dias li{padding:.25rem 0;border-bottom:1px dotted var(--borde)}
+.tipo{font-family:system-ui,sans-serif;font-size:.75rem;color:var(--acento);text-transform:uppercase;letter-spacing:.04em}.falta{opacity:.55}details{margin:.4rem 0}summary{cursor:pointer;font-family:system-ui,sans-serif}
+input[type=checkbox]{margin-right:.4rem}
+</style></head><body><main>
+<nav class="barra"><a href="../index.html">← Español desde el ruso</a></nav>
+<h1 id="referencias">Referencias</h1>
+<p>Libros y materiales que sirven de modelo al curso. <strong>Ninguno se copia</strong>: de cada
+uno se extrae la estructura, la tipología de ejercicios y las decisiones
+pedagógicas, y se anota aquí cómo se aplican. Los PDF originales no se
+versionan (derechos de autor): quedan fuera del repositorio.</p>
+<table>
+<thead>
+<tr>
+<th>Referencia</th>
+<th>Qué es</th>
+<th>Para qué se usa</th>
+<th>Análisis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Точка Ру · Tochka Ru A2, Рабочая тетрадь, часть 2 (Долматова, Новачац, 2020)</td>
+<td>Cuaderno de ejercicios de <strong>ruso</strong> como lengua extranjera, nivel A2, unidad 4 (verbos de movimiento, transporte, viajes)</td>
+<td>Modelo de cuaderno A2 escrito para un público que aprende por ejercicios: estructura de la lección, 40 tipos de ejercicio, test de unidad y clave</td>
+<td><a href="tochka-ru-a2-tetrad-2.md">tochka-ru-a2-tetrad-2.md</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="como-anadir-una-referencia">Cómo añadir una referencia</h2>
+<ol>
+<li>Leer el material entero antes de escribir nada.</li>
+<li>Crear <code>referencias/&lt;nombre&gt;.md</code> con: ficha, estructura, tipología de
+   ejercicios, qué se toma y qué NO se toma, y a qué unidades del curso se aplica.</li>
+<li>Añadir la fila a la tabla de arriba.</li>
+<li>Si cambia la plantilla de lección o la metodología, anotarlo en
+   <code>programa/metodologia.md</code> con la fecha.</li>
+</ol>
+<h2 id="marco-de-referencia-no-son-libros-son-los-estandares">Marco de referencia (no son libros, son los estándares)</h2>
+<ul>
+<li><strong>MCER / CEFR</strong> (Marco Común Europeo de Referencia): niveles A1 y A2 y sus
+  descriptores «puedo…».</li>
+<li><strong>PCIC</strong> (Plan Curricular del Instituto Cervantes, <em>Niveles de referencia
+  para el español</em>, tomo A1-A2): inventarios de gramática, funciones, nociones,
+  pronunciación, ortografía y cultura. El curso se alinea con él en
+  <code>programa/alineacion-mcer-pcic.md</code>.</li>
+<li><strong>DELE A2</strong> (Instituto Cervantes, modelo 2020): la meta de salida; su
+  estructura está resumida en el mismo documento y guía las semanas 45-52.</li>
+</ul></main></body></html>
