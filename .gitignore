@@ -4,3 +4,6 @@ __pycache__/
 .env
 data/tmp/
 .DS_Store
+
+# Lo que generan los exportadores: se rehace con un comando.
+salida/

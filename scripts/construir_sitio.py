@@ -714,6 +714,29 @@ def construir_estaticas(cfg, t, idiomas, idioma, destino, cal, raiz) -> None:
                descripcion=pr["propio_texto"], pagina_id="privacy.html", raiz=raiz), encoding="utf-8")
 
 
+def _anuncios_en_la_leccion(html_cuerpo: str, cfg: dict) -> str:
+    """Los dos bloques de dentro de la lección, en un corte de sección.
+
+    El de cabecera NO va antes del título. Ahí ocupaba la primera pantalla
+    entera del móvil y empujaba la lección fuera de la vista, que es
+    exactamente lo que las políticas de AdSense llaman un diseño engañoso: el
+    lector abre un enlace a una lección y lo primero y único que ve es un
+    anuncio. Va después de los títulos y de los objetivos del día, en el primer
+    <h2>, donde además ya se vio de qué va la página.
+
+    Si el corte no aparece, el bloque no se dibuja: es mejor perder un hueco
+    que meterlo en medio de una frase."""
+    for ranura, patron in (("dentro", r"<h2[^>]*>4\.\s*(?:Практика|Задание)"),
+                           ("cabecera", r"<h2[^>]*>")):
+        trozo = anuncio(cfg, ranura)
+        if not trozo:
+            continue
+        marca = re.search(patron, html_cuerpo)
+        if marca:
+            html_cuerpo = html_cuerpo[:marca.start()] + trozo + html_cuerpo[marca.start():]
+    return html_cuerpo
+
+
 def construir_leccion(d, cfg, t, idiomas, destino, cal, todos) -> None:
     """Las lecciones solo existen en ruso: son el curso."""
     datos, cuerpo = validar.frontmatter(d.ruta.read_text(encoding="utf-8"))
@@ -722,12 +745,7 @@ def construir_leccion(d, cfg, t, idiomas, destino, cal, todos) -> None:
     siguiente = next((x for x in todos[i + 1:] if x.ruta.exists()), None)
     L = t["leccion"]
 
-    html_cuerpo = _marcar_contraste(_tablas_envueltas(md(cuerpo)))
-    dentro = anuncio(cfg, "dentro")
-    if dentro:
-        marca = re.search(r"<h2[^>]*>4\.\s*(Практика|Задание)", html_cuerpo)
-        if marca:
-            html_cuerpo = html_cuerpo[:marca.start()] + dentro + html_cuerpo[marca.start():]
+    html_cuerpo = _anuncios_en_la_leccion(_marcar_contraste(_tablas_envueltas(md(cuerpo))), cfg)
 
     titulo = f"{L['urok']} {d.numero}: {d.tema_ru} — {t['titulo_sitio']}"
     descripcion = f"{L['urok']} {d.numero}: {d.tema_ru}. {d.foco[:110]}"
@@ -745,7 +763,7 @@ def construir_leccion(d, cfg, t, idiomas, destino, cal, todos) -> None:
            f'<span>{L["semana"]} {d.semana} · {L["nivel"]} {html.escape(d.nivel)}</span></div>')
     # El botón de marcar lo pone el navegador y no el generador: sin JavaScript
     # no haría nada, y un botón muerto es peor que ninguno.
-    cuerpo_final = (f'<article data-leccion="{d.numero}">' + cab + anuncio(cfg, "cabecera") + aviso
+    cuerpo_final = (f'<article data-leccion="{d.numero}">' + cab + aviso
                     + html_cuerpo + anuncio(cfg, "pie") + '<div id="marcar-caja"></div>'
                     + f'<nav class="pasos">{"".join(pasos)}</nav></article>')
 
@@ -769,6 +787,35 @@ def construir_programa(cfg, t, idiomas, destino) -> None:
                        descripcion="Documentación del programa del curso.",
                        pagina_id=f"programa/{prefijo}{ruta.stem}.html", raiz=".."),
                 encoding="utf-8")
+
+
+def construir_ads_txt(cfg, destino) -> None:
+    """ads.txt, que AdSense exige para pagar el inventario del sitio.
+
+    Tiene que estar en la RAÍZ del dominio: google.com/ads.txt, no
+    google.com/algo/ads.txt. Por eso en GitHub Pages solo sirve con dominio
+    propio: en ianmusicall-max.github.io/espanol-desde-ruso/ este archivo cae en
+    /espanol-desde-ruso/ads.txt, donde AdSense no lo mira nunca. Sin cliente no
+    se escribe: un ads.txt vacío es peor que ninguno."""
+    cliente = (cfg.get("adsense") or {}).get("cliente") or ""
+    numero = cliente.replace("ca-pub-", "").strip()
+    if not numero:
+        return
+    destino.joinpath("ads.txt").write_text(
+        f"google.com, pub-{numero}, DIRECT, f08c47fec0942fa0\n", encoding="utf-8")
+
+
+def construir_cname(cfg, destino) -> None:
+    """El dominio propio para GitHub Pages, si lo hay.
+
+    GitHub lo lee de este archivo y le saca el certificado de HTTPS solo. Sin
+    dominio propio no se escribe, porque un CNAME con el dominio de github.io
+    dentro deja el sitio sin servir."""
+    dominio = (cfg.get("dominio") or "")
+    host = dominio.split("//")[-1].split("/")[0]
+    if not host or host.endswith("github.io"):
+        return
+    destino.joinpath("CNAME").write_text(host + "\n", encoding="utf-8")
 
 
 def construir_sitemap(cfg, idiomas, destino, cal) -> None:
@@ -814,6 +861,8 @@ def construir(destino: pathlib.Path = DOCS, cfg: dict | None = None, textos: dic
         construir_leccion(d, cfg, textos["ru"], idiomas, destino, cal, todos)
     construir_programa(cfg, textos["es"], idiomas, destino)
     construir_sitemap(cfg, idiomas, destino, cal)
+    construir_ads_txt(cfg, destino)
+    construir_cname(cfg, destino)
     escribir_progreso_js(destino)
     destino.joinpath(".nojekyll").write_text("", encoding="utf-8")
     return len(hechas)
@@ -829,8 +878,18 @@ def main(argv=None) -> int:
     print(f"  anuncios: {'sí' if hay_anuncios(cfg) else 'no configurados'} · "
           f"analítica: {'sí' if hay_analitica(cfg) else 'no'} · "
           f"cookies: {'sí' if necesita_cookies(cfg) else 'no hacen falta'}")
+    host = (cfg.get("dominio") or "").split("//")[-1].split("/")[0]
+    pendiente = []
     if not cfg.get("autor", {}).get("email"):
-        print("  aviso: sin correo de contacto en web/sitio.yaml; AdSense suele pedirlo")
+        pendiente.append("sin correo de contacto en web/sitio.yaml; AdSense pide una forma de contacto")
+    if host.endswith("github.io"):
+        pendiente.append(f"el dominio es {host}, que no es tuyo: AdSense pide un dominio propio "
+                         "y ads.txt tiene que estar en su raíz")
+    if hay_anuncios(cfg):
+        pendiente.append("con anuncios en la UE hace falta un CMP certificado por Google "
+                         "(Privacidad y mensajes, dentro de AdSense): la banda de cookies de aquí no lo es")
+    for x in pendiente:
+        print(f"  aviso: {x}")
     return 0
 
 

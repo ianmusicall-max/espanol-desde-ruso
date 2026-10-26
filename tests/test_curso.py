@@ -4,18 +4,21 @@
 """
 from __future__ import annotations
 
+import copy
 import html
 import json
 import pathlib
 import sys
 import tempfile
 import unittest
+import xml.etree.ElementTree as ET
 from collections import Counter
 
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(RAIZ / "scripts"))
 
 import construir_sitio  # noqa: E402
+import exportar_wordpress  # noqa: E402
 import escribir_leccion  # noqa: E402
 import exportar_anki  # noqa: E402
 import plan  # noqa: E402
@@ -561,6 +564,131 @@ class TestElTachado(unittest.TestCase):
                                   construir_sitio.cargar_textos())
         for ruta in destino.glob("semana-*/dia-*.html"):
             self.assertNotIn("~~", ruta.read_text(encoding="utf-8"), ruta.name)
+
+
+class TestLaPublicidad(unittest.TestCase):
+    """Lo que AdSense pide y el generador tiene que poner solo."""
+
+    def setUp(self):
+        self.textos = construir_sitio.cargar_textos()
+        self.cfg = construir_sitio.cargar_config()
+
+    def _con(self, **cambios):
+        cfg = copy.deepcopy(self.cfg)
+        cfg.update(cambios)
+        destino = pathlib.Path(tempfile.mkdtemp())
+        construir_sitio.construir(destino, cfg, self.textos)
+        return destino
+
+    def test_sin_cliente_no_se_carga_nada_de_terceros(self):
+        """El sitio se publica hoy sin anuncios y sin aviso de cookies: eso es lo
+        que deja que la política de privacidad diga la verdad."""
+        destino = self._con()
+        portada = (destino / "index.html").read_text(encoding="utf-8")
+        for rastro in ("googlesyndication", "adsbygoogle", "googletagmanager", 'id="cookies"'):
+            self.assertNotIn(rastro, portada, rastro)
+        self.assertFalse((destino / "ads.txt").exists(), "un ads.txt sin cliente es peor que ninguno")
+
+    def test_con_cliente_salen_los_bloques_el_aviso_y_el_ads_txt(self):
+        destino = self._con(adsense={"cliente": "ca-pub-1234567890123456",
+                                     "bloques": {"cabecera": "111", "dentro": "222", "pie": "333"}})
+        leccion = (destino / "semana-01" / "dia-1.html").read_text(encoding="utf-8")
+        self.assertEqual(leccion.count('class="adsbygoogle"'), 3, "cabecera, dentro y pie")
+        self.assertIn("googlesyndication.com", leccion)
+        self.assertIn('id="cookies"', leccion, "con anuncios hace falta el aviso")
+        self.assertIn("google.com, pub-1234567890123456, DIRECT, f08c47fec0942fa0",
+                      (destino / "ads.txt").read_text(encoding="utf-8"))
+
+    def test_la_politica_de_privacidad_cuenta_los_anuncios_solo_si_los_hay(self):
+        """Decir que hay anuncios cuando no los hay, o callarlos cuando los hay,
+        son las dos formas de que la política mienta."""
+        sin = (self._con() / "es" / "privacy.html").read_text(encoding="utf-8")
+        con = (self._con(adsense={"cliente": "ca-pub-1", "bloques": {"pie": "9"}})
+               / "es" / "privacy.html").read_text(encoding="utf-8")
+        self.assertNotIn("google.com/settings/ads", sin)
+        self.assertIn("google.com/settings/ads", con)
+
+    def test_el_ads_txt_y_el_cname_solo_con_dominio_propio(self):
+        """ads.txt tiene que estar en la RAÍZ del dominio. En
+        usuario.github.io/proyecto/ cae en /proyecto/ads.txt, donde AdSense no
+        mira: por eso el dominio propio no es un lujo, es el requisito."""
+        anuncios = {"cliente": "ca-pub-1234567890123456", "bloques": {"pie": "333"}}
+        en_github = self._con(adsense=anuncios, dominio="https://ianmusicall-max.github.io/espanol-desde-ruso")
+        self.assertFalse((en_github / "CNAME").exists(), "un CNAME de github.io deja el sitio sin servir")
+
+        propio = self._con(adsense=anuncios, dominio="https://espanoldesderuso.com")
+        self.assertEqual((propio / "CNAME").read_text(encoding="utf-8").strip(), "espanoldesderuso.com")
+        self.assertTrue((propio / "ads.txt").exists())
+
+
+class TestLaExportacionAWordPress(unittest.TestCase):
+    """El XML que importa WordPress de un clic."""
+
+    def setUp(self):
+        self.cal = plan.cargar()
+        self.destino = pathlib.Path(tempfile.mkdtemp())
+        self.resumen = exportar_wordpress.exportar(
+            self.cal, construir_sitio.cargar_config(), self.destino)
+        self.arbol = ET.parse(self.destino / "curso-wordpress.xml").getroot()
+        self.ns = {"wp": "http://wordpress.org/export/1.2/",
+                   "content": "http://purl.org/rss/1.0/modules/content/"}
+
+    def _items(self, tipo):
+        return [i for i in self.arbol.findall(".//item")
+                if i.find("wp:post_type", self.ns).text == tipo]
+
+    def test_estan_todas_las_lecciones_escritas_y_el_indice(self):
+        self.assertEqual(len(self._items("post")), len(construir_sitio.escritas(self.cal)))
+        self.assertEqual(len(self._items("page")), 1, "la página del índice")
+
+    def test_las_lecciones_sin_revisar_entran_como_borrador(self):
+        """La regla 6 del proyecto tiene que sobrevivir al cambio de plataforma:
+        si entraran publicadas, mudarse a WordPress sería la forma de saltársela
+        sin querer."""
+        estados = {}
+        for d, item in zip(construir_sitio.escritas(self.cal), self._items("post")):
+            datos, _ = validar.frontmatter(d.ruta.read_text(encoding="utf-8"))
+            estados[item.find("wp:status", self.ns).text] = True
+            self.assertEqual(item.find("wp:status", self.ns).text,
+                             "publish" if datos.get("revisado") else "draft",
+                             f"lección {d.numero}")
+        self.assertEqual(set(estados), {"publish", "draft"}, "hay de las dos")
+
+    def test_el_contraste_con_el_ruso_no_depende_del_css_del_sitio(self):
+        """Es la firma del curso y lo único que un tema ajeno se llevaría por
+        delante del todo, así que va con el estilo dentro."""
+        for item in self._items("post")[:5]:
+            cuerpo = item.find("content:encoded", self.ns).text
+            if "contraste" in cuerpo:
+                self.assertIn('class="contraste" style=', cuerpo)
+                break
+        else:
+            self.fail("ninguna de las cinco primeras lecciones trae el bloque de contraste")
+
+    def test_cada_leccion_lleva_su_unidad_como_categoria(self):
+        for d, item in zip(construir_sitio.escritas(self.cal), self._items("post")):
+            cats = [c.text for c in item.findall("category") if c.get("domain") == "category"]
+            self.assertEqual(cats, [exportar_wordpress.categoria_de(self.cal, d)[0]], f"lección {d.numero}")
+
+    def test_las_direcciones_son_legibles_fuera_del_cirilico(self):
+        """WordPress acepta un slug en cirílico, pero la URL viaja codificada
+        como %D0%A3… y se vuelve ilegible al compartirla por WhatsApp."""
+        for item in self._items("post"):
+            nombre = item.find("wp:post_name", self.ns).text
+            self.assertRegex(nombre, r"^urok-\d+$")
+
+    def test_el_orden_del_curso_y_el_del_blog_coinciden(self):
+        """Un blog ordena por fecha descendente y un curso se lee del 1 al 100:
+        la lección 1 tiene que ser la MÁS ANTIGUA o la portada abre por la 100."""
+        fechas = [i.find("wp:post_date", self.ns).text for i in self._items("post")]
+        self.assertEqual(fechas, sorted(fechas))
+
+    def test_ningun_cdata_se_corta_a_la_mitad(self):
+        """Un «]]>» dentro del contenido cierra la sección antes de tiempo y el
+        importador rechaza el archivo entero. El XML parsea, que es la prueba."""
+        bruto = (self.destino / "curso-wordpress.xml").read_text(encoding="utf-8")
+        self.assertNotIn("]]>]]>", bruto)
+        ET.fromstring(bruto)
 
 
 if __name__ == "__main__":

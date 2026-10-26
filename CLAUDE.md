@@ -111,6 +111,65 @@ porque es donde el sentido depende de que se vea tachado: la letra muda y la
 forma incorrecta. Una prueba recorre las cien lecciones publicadas y falla si
 queda una tilde doble.
 
+## Publicidad y plataforma (2026-10-26)
+
+El usuario pidió «subirlo a WordPress o algo parecido» y meterle Google AdSense.
+Lo que se encontró al ir a hacerlo cambia cuál de las dos cosas hace falta.
+
+**AdSense no pide WordPress. Pide un dominio propio.** Los requisitos son
+contenido original (100 lecciones), una forma de contacto, una política de
+privacidad, y un sitio que sea tuyo. `ianmusicall-max.github.io/espanol-desde-ruso`
+es una ruta dentro del dominio de GitHub. Y hay una prueba técnica, no una
+opinión: **`ads.txt` tiene que estar en la RAÍZ del dominio**, y ahí cae en
+`/espanol-desde-ruso/ads.txt`, donde AdSense no mira nunca. Mudarse a un
+`algo.wordpress.com` gratis no arregla nada: cambia un subdominio ajeno por
+otro.
+
+**WordPress además cuesta y sigue necesitando el dominio.** Las redes de
+terceros como AdSense están limitadas al plan Business (la cuenta del usuario
+factura en rublos: ₽17.988/año), mientras que el dominio propio sobre GitHub
+Pages son unos 10-15 USD al año con el alojamiento y el HTTPS gratis. No se
+pudo abrir `wordpress.com/support/monetize-your-site/` ni las páginas de ayuda
+de AdSense desde este contenedor (el proxy devuelve 403), así que la regla del
+plan viene de foros y de la documentación citada en ellos: **cotejar antes de
+pagar**, igual que `alineacion-mcer-pcic.md`.
+
+**El límite que decide los ingresos no es técnico.** AdSense no sirve anuncios
+a usuarios dentro de Rusia desde marzo de 2022 y desactivó las cuentas de
+editores rusos en agosto de 2024. El curso está en ruso, así que lo que se
+puede monetizar es el público rusohablante FUERA de Rusia: Alemania, España,
+Israel, Kazajistán, Estados Unidos. Eso ya se había decidido al elegir público,
+pero es lo que hay que mirar antes de contar con una cifra.
+
+**Lo que falta para cobrar, y no es código**: un CMP certificado por Google
+para el tráfico de la UE y el Reino Unido (obligatorio desde el 16/1/2024, y
+Suiza desde el 31/7/2024). La banda de cookies de aquí **no** lo es: es un
+aviso. El CMP gratis de Google está dentro de AdSense, en «Privacidad y
+mensajes». Sin él no se sirven anuncios personalizados.
+
+**Lo que el generador ya hace solo**, con solo rellenar `web/sitio.yaml`:
+
+- `ads.txt` en la raíz, pero **solo si hay cliente**: un ads.txt vacío es peor
+  que ninguno. Y `CNAME` solo si el dominio no es de github.io, porque un CNAME
+  con github.io dentro deja el sitio sin servir.
+- Los tres bloques, la banda de cookies y los párrafos de la política de
+  privacidad se encienden juntos. Vacío = cero scripts de terceros, que es lo
+  que deja que la política diga la verdad.
+- **El bloque de cabecera NO va antes del título.** Ahí ocupaba la primera
+  pantalla entera del móvil y empujaba la lección fuera de la vista, que es lo
+  que las políticas de AdSense llaman diseño engañoso. Va en el primer `<h2>`,
+  después de los objetivos del día. Se vio en una captura, no razonándolo.
+- `main()` avisa de lo que falta para cobrar: correo, dominio propio y CMP.
+
+**`scripts/exportar_wordpress.py`** existe para que la decisión no cueste
+trabajo: deja un XML que WordPress importa en Herramientas → Importar. Una
+entrada por lección, una categoría por unidad y una página con el índice
+—hace falta porque un blog ordena por fecha descendente y un curso se lee del 1
+al 100—. Dos cosas que no son de forma: **las lecciones sin revisar entran como
+BORRADOR**, porque la regla 6 tiene que sobrevivir al cambio de plataforma, y
+el bloque de contraste lleva el estilo dentro, porque es la firma del curso y
+es lo único que un tema ajeno se llevaría por delante del todo.
+
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.
@@ -122,5 +181,8 @@ queda una tilde doble.
   lector guardado en su navegador sin registro. La publicidad se configura en `web/sitio.yaml` y está
   apagada; sin identificador de AdSense no se carga nada de terceros.
 - Falta activar GitHub Pages (Settings → Pages → rama main, carpeta /docs).
+- Para AdSense falta un dominio propio, un correo de contacto en
+  `web/sitio.yaml` y el CMP de Google. El código ya está: ver la nota de
+  arriba.
 - Pendiente: lecciones 101-365, audio de los diálogos (TTS), más libros de
   referencia, y lo de «Pendiente de revision del profesor» de arriba.
