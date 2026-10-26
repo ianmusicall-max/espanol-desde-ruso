@@ -11,3 +11,6 @@ salida/
 # El audio se genera con scripts/generar_audio.py y pesa unos MB. Se versiona
 # a propósito cuando esté hecho de verdad: quitar esta línea entonces.
 docs/audio/
+
+# Capturas de pantalla para enseñar algo, no son del sitio
+capturas/
