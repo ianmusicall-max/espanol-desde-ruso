@@ -62,11 +62,20 @@ la documentación del programa, en español.
 - **Las 69 lecciones de las semanas 4 en adelante son borradores**
   (`revisado: false`) y el sitio las marca como tales. Las 21 primeras estan
   revisadas.
-- **El orden de los pasados** (de `referencias/espanol-en-vivo.md`). Este curso
-  da el perfecto en la semana 18 y el indefinido despues; Nuzhdin defiende lo
-  contrario porque en casi toda Hispanoamerica el indefinido ocupa el lugar del
-  perfecto. Eso tira de la **regla 8** (ensenar lo mas extendido). Es la
-  decision de mas peso que queda abierta: mover dos unidades del calendario.
+- **El orden de los pasados: se recomendo NO cambiarlo** (2026-10-26, de
+  `referencias/espanol-en-vivo.md`). Nuzhdin pone el indefinido antes que el
+  perfecto porque en casi toda Hispanoamerica el indefinido ocupa su lugar.
+  Pero la **tabla de `alineacion-mcer-pcic.md` §2 pone el perfecto en A1 y el
+  indefinido en A2**: es la secuencia del Instituto Cervantes, y la salida de
+  este curso es el DELE A2, que es de Cervantes y peninsular. Ademas el
+  perfecto es morfologicamente mas barato (haber + participio) que dos
+  paradigmas con una docena de raices irregulares, que es lo que importa a
+  30 minutos diarios desde cero.
+  **Lo que la regla 8 pedia no era reordenar sino marcar**, y eso faltaba: el
+  `contraste_ru` de la unidad 9 senalaba coger/tomar pero no la variacion del
+  propio tiempo. Se anadio la marca 🌎 («hoy comi» / «hoy he comido»). Las
+  lecciones de la semana 18 aun no estaban escritas, asi que no costo nada.
+  Queda abierto solo si el profesor discrepa del PCIC.
 - **Las tablas de conjugacion**: 19 lecciones las llevan completas. Nuzhdin las
   evita y usa oposiciones minimas (1.ª/2.ª sg., 1.ª/3.ª sg., 3.ª sg./3.ª pl.).
   Se puede dejar la tabla como consulta y practicar por oposiciones.

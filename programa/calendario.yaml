@@ -310,7 +310,7 @@ unidades:
     gramatica: ["ir / viajar en + medio; a pie", "estar + gerundio", "pretérito perfecto: formas regulares e irregulares", "ya / todavía no / nunca / alguna vez", "preposiciones de movimiento a, de, en, por, hasta, desde", "hay que + infinitivo"]
     lexico: ["medios de transporte", "la estación y el aeropuerto", "el hotel", "actividades turísticas", "países y ciudades"]
     fonetica: ["participios -ado / -ido: la d intervocálica suave", "la h muda en he / has / ha"]
-    contraste_ru: ["el perfecto no existe en ruso: «сегодня я побывал» = hoy he estado", "ya / todavía no = уже / ещё не", "coger (España) = tomar (América)", "en + medio sin caso instrumental"]
+    contraste_ru: ["el perfecto no existe en ruso: «сегодня я побывал» = hoy he estado", "ya / todavía no = уже / ещё не", "coger (España) = tomar (América)", "en + medio sin caso instrumental", "🌎 en gran parte de América se dice «hoy comí» donde en España «hoy he comido»: el perfecto se oye menos"]
     cultura: ["el Camino de Santiago", "Machu Picchu", "el colectivo y la guagua: transporte en Latinoamérica", "destinos hispanos para rusos"]
     tarea_final: "Postal de un viaje (100 palabras) con lo que se ha visto y hecho."
     dias:
