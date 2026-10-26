@@ -21,6 +21,7 @@ sys.path.insert(0, str(RAIZ / "scripts"))
 import yaml  # noqa: E402
 
 import construir_sitio  # noqa: E402
+import generar_audio  # noqa: E402
 import poner_dominio  # noqa: E402
 import revisar_adsense  # noqa: E402
 import exportar_wordpress  # noqa: E402
@@ -935,6 +936,88 @@ class TestLaFormaDeContacto(unittest.TestCase):
         marco = leccion[:leccion.index("<main")] + leccion[leccion.index("</main>"):]
         self.assertNotIn("@gmail", marco)
         self.assertNotIn("@correo", marco)
+
+
+class TestElAudioDeLasLecciones(unittest.TestCase):
+    """Las frases españolas se pueden oír. Cuesta ~1,30 USD una sola vez."""
+
+    def setUp(self):
+        self.cal = plan.cargar()
+
+    def test_no_se_locuta_la_columna_rusa(self):
+        """Es el fallo que haría el audio inútil y costaría el doble: una voz
+        española leyendo «Спокойной ночи»."""
+        for f in generar_audio.todas_las_frases(self.cal):
+            self.assertNotRegex(f, r"[а-яА-ЯёЁ]", f"se colaría ruso: {f!r}")
+
+    def test_ni_las_cabeceras_ni_la_transcripcion_fonetica(self):
+        """«Español» encabeza casi todas las tablas (199 veces) y «[a]» es un
+        símbolo para leer con los ojos: una voz diría «corchete a corchete»."""
+        self.assertFalse(generar_audio.vale_la_pena("Español"))
+        self.assertFalse(generar_audio.vale_la_pena("[a]"))
+        self.assertFalse(generar_audio.vale_la_pena("/kasa/"))
+        self.assertFalse(generar_audio.vale_la_pena("— Спокойной ночи."))
+        self.assertFalse(generar_audio.vale_la_pena("123"))
+        for buena in ("casa", "— ¡Hola! ¿Qué tal?", "a", "Me llamo Ana"):
+            self.assertTrue(generar_audio.vale_la_pena(buena), buena)
+
+    def test_se_locuta_la_palabra_de_ejemplo_y_no_solo_la_letra(self):
+        """En las tablas de fonética la letra está en la 1ª columna y la
+        palabra («casa») en la 4ª, que es la que hay que oír. Mirar solo la
+        primera columna dejaba fuera justo lo útil."""
+        frases = generar_audio.frases_de(plan.dias(self.cal)[0].ruta)
+        for palabra in ("casa", "mesa", "moto", "uno"):
+            self.assertIn(palabra, frases)
+
+    def test_la_misma_frase_se_locuta_y_se_paga_una_vez(self):
+        """«Buenos días» sale en varias lecciones. El nombre es un hash del
+        pedido entero, así que es el mismo archivo."""
+        self.assertEqual(generar_audio.nombre_de("Buenos días"),
+                         generar_audio.nombre_de("Buenos días"))
+        self.assertNotEqual(generar_audio.nombre_de("Buenos días"),
+                            generar_audio.nombre_de("Buenas noches"))
+        self.assertNotEqual(generar_audio.nombre_de("Buenos días"),
+                            generar_audio.nombre_de("Buenos días", voz="alloy"))
+        self.assertEqual(len(generar_audio.todas_las_frases(self.cal)),
+                         len(set(generar_audio.todas_las_frases(self.cal))))
+
+    def test_un_archivo_vacio_no_cuenta_como_locutado(self):
+        """Una descarga cortada dejaría un MP3 de cero bytes que el sitio
+        serviría como bueno: el lector pulsa ▶ y no suena nada."""
+        carpeta = pathlib.Path(tempfile.mkdtemp())
+        (carpeta / generar_audio.nombre_de("casa")).write_bytes(b"")
+        (carpeta / generar_audio.nombre_de("mesa")).write_bytes(b"ID3datos")
+        pendientes = generar_audio.faltan(["casa", "mesa"], carpeta)
+        self.assertEqual(pendientes, ["casa"])
+        self.assertEqual(generar_audio.escribir_indice(["casa", "mesa"], carpeta), 1)
+
+    def test_sin_audio_el_sitio_se_construye_igual_y_sin_botones(self):
+        """El audio se genera por tandas: el estado normal durante un tiempo es
+        «algunas frases sí y otras no», y ninguna página puede romperse."""
+        destino = pathlib.Path(tempfile.mkdtemp())
+        construir_sitio.construir(destino, construir_sitio.cargar_config(),
+                                  construir_sitio.cargar_textos())
+        leccion = (destino / "semana-01" / "dia-1.html").read_text(encoding="utf-8")
+        self.assertNotIn('class="suena"', leccion)
+        self.assertNotIn("sonando", leccion, "ni se carga el reproductor")
+
+    def test_con_audio_salen_los_botones_y_el_reproductor(self):
+        destino = pathlib.Path(tempfile.mkdtemp())
+        carpeta = destino / "audio"
+        carpeta.mkdir(parents=True)
+        for frase in ("casa", "— ¡Hola!"):
+            (carpeta / generar_audio.nombre_de(frase)).write_bytes(b"ID3datos")
+        generar_audio.escribir_indice(["casa", "— ¡Hola!"], carpeta)
+        construir_sitio.construir(destino, construir_sitio.cargar_config(),
+                                  construir_sitio.cargar_textos())
+
+        leccion = (destino / "semana-01" / "dia-1.html").read_text(encoding="utf-8")
+        self.assertIn('class="suena"', leccion)
+        self.assertIn(f'data-audio="../audio/{generar_audio.nombre_de("casa")}"', leccion)
+        self.assertIn("sonando", leccion, "el reproductor tiene que ir en la página")
+        # y una lección sin ninguna de esas dos frases no carga el reproductor
+        otra = (destino / "semana-09" / "dia-3.html").read_text(encoding="utf-8")
+        self.assertNotIn("sonando", otra)
 
 
 if __name__ == "__main__":

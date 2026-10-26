@@ -7,3 +7,7 @@ data/tmp/
 
 # Lo que generan los exportadores: se rehace con un comando.
 salida/
+
+# El audio se genera con scripts/generar_audio.py y pesa unos MB. Se versiona
+# a propósito cuando esté hecho de verdad: quitar esta línea entonces.
+docs/audio/

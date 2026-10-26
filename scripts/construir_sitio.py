@@ -124,6 +124,13 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* audio: un ▶ al lado de cada frase española que esté locutada */
+.suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
+  font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
+.suena:hover,.suena:focus-visible{opacity:1}
+.suena[aria-pressed="true"]{opacity:1;color:var(--acento)}
+@media(hover:none){.suena{opacity:.9}}
+
 /* progreso del lector */
 /* El [hidden] del navegador pierde contra .boton{display:inline-block}, así que
    «continuar» se vería como un botón naranja vacío en la primera visita. */
@@ -366,6 +373,28 @@ PROGRESO_JS = r"""(function(){
 })();"""
 
 
+# Un solo <audio> para toda la página: con uno por frase, el navegador abre
+# 2.600 conexiones y en móvil se nota. Y al empezar una se para la anterior,
+# que es lo que se quiere al ir comparando frases.
+AUDIO_JS = r"""(function(){
+  var sonando=null, reproductor=new Audio();
+  reproductor.addEventListener('ended',function(){if(sonando){sonando.setAttribute('aria-pressed','false');sonando=null}});
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.suena');
+    if(!b)return;
+    e.preventDefault();
+    if(sonando===b){reproductor.pause();b.setAttribute('aria-pressed','false');sonando=null;return}
+    if(sonando)sonando.setAttribute('aria-pressed','false');
+    reproductor.src=b.getAttribute('data-audio');
+    reproductor.currentTime=0;
+    // Si el archivo no está, no se avisa con una alerta: el botón vuelve a su
+    // sitio y la lección se sigue leyendo igual.
+    reproductor.play().then(function(){b.setAttribute('aria-pressed','true');sonando=b})
+                      .catch(function(){b.setAttribute('aria-pressed','false');sonando=null});
+  });
+})();"""
+
+
 # ---------------------------------------------------------------- configuración
 def cargar_config(ruta: pathlib.Path = CONFIG) -> dict:
     with open(ruta, encoding="utf-8") as f:
@@ -441,7 +470,7 @@ def _marcar_contraste(cuerpo: str) -> str:
 
 # ------------------------------------------------------------------------ shell
 def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id="", raiz=".",
-           jsonld="", publicadas=0, mapa_dias="{}", traducida=True) -> str:
+           jsonld="", publicadas=0, mapa_dias="{}", traducida=True, con_audio=False) -> str:
     """El armazón de toda página: cabecera con menú y cambio de idioma, cuerpo, pie."""
     dominio = cfg["dominio"]
     actual = next(i for i in idiomas if i["codigo"] == idioma)
@@ -511,6 +540,7 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
 {TEMA_SCRIPT}
 <script>window.CURSO_TEXTOS={json.dumps(t['progreso'], ensure_ascii=False)};window.CURSO_RAIZ="{raiz}";window.CURSO_PUBLICADAS={publicadas};window.CURSO_DIAS={mapa_dias};</script>
 <script src="{raiz}/progreso.js" defer></script>
+{f'<script>{AUDIO_JS}</script>' if con_audio else ""}
 </body>
 </html>"""
 
@@ -747,7 +777,7 @@ def _anuncios_en_la_leccion(html_cuerpo: str, cfg: dict) -> str:
     return html_cuerpo
 
 
-def construir_leccion(d, cfg, t, idiomas, destino, cal, todos) -> None:
+def construir_leccion(d, cfg, t, idiomas, destino, cal, todos, audio=None) -> None:
     """Las lecciones solo existen en ruso: son el curso."""
     datos, cuerpo = validar.frontmatter(d.ruta.read_text(encoding="utf-8"))
     i = todos.index(d)
@@ -755,7 +785,8 @@ def construir_leccion(d, cfg, t, idiomas, destino, cal, todos) -> None:
     siguiente = next((x for x in todos[i + 1:] if x.ruta.exists()), None)
     L = t["leccion"]
 
-    html_cuerpo = _anuncios_en_la_leccion(_marcar_contraste(_tablas_envueltas(md(cuerpo))), cfg)
+    html_cuerpo = _botones_de_audio(md(cuerpo), audio or {}, "..")
+    html_cuerpo = _anuncios_en_la_leccion(_marcar_contraste(_tablas_envueltas(html_cuerpo)), cfg)
 
     titulo = f"{L['urok']} {d.numero}: {d.tema_ru} — {t['titulo_sitio']}"
     descripcion = f"{L['urok']} {d.numero}: {d.tema_ru}. {d.foco[:110]}"
@@ -782,8 +813,50 @@ def construir_leccion(d, cfg, t, idiomas, destino, cal, todos) -> None:
     salida.write_text(
         pagina(cfg, t, idiomas, "ru", titulo, cuerpo_final, descripcion=descripcion,
                pagina_id=f"semana-{d.semana:02d}/dia-{d.dia}.html", raiz="..",
-               publicadas=len(escritas(cal)), mapa_dias=mapa_de_dias(cal), traducida=False),
+               publicadas=len(escritas(cal)), mapa_dias=mapa_de_dias(cal), traducida=False,
+               con_audio='class="suena"' in cuerpo_final),
         encoding="utf-8")
+
+
+def indice_de_audio(destino: pathlib.Path) -> dict:
+    """Texto → archivo. Vacío si todavía no se ha locutado nada.
+
+    Se lee de `docs/audio/`, que es donde lo deja `scripts/generar_audio.py`, y
+    no de una lista en el código: así el sitio se construye igual con audio y
+    sin él, y encender el audio no es tocar el generador."""
+    ruta = destino / "audio" / "indice.json"
+    try:
+        return json.loads(ruta.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+
+
+def _botones_de_audio(html_: str, indice: dict, raiz: str) -> str:
+    """Un ▶ delante de cada frase española que esté locutada.
+
+    En cualquier celda, no solo la primera: en las tablas de fonética la
+    palabra de ejemplo («casa») está en la cuarta columna y es justo la que
+    hay que oír. La columna rusa nunca sale marcada porque su texto no está en
+    el índice: `generar_audio` descarta todo lo que trae cirílico.
+
+    Una frase sin audio se queda como está, sin botón y sin hueco: el audio se
+    genera por tandas, así que el estado normal durante un tiempo es «algunas
+    sí y otras no»."""
+    if not indice:
+        return html_
+
+    def celda(m):
+        dentro = m.group(2)
+        texto = html.unescape(re.sub(r"<[^>]+>", "", dentro)).strip()
+        archivo = indice.get(texto)
+        if not archivo:
+            return m.group(0)
+        boton = (f'<button type="button" class="suena" aria-pressed="false" '
+                 f'data-audio="{raiz}/audio/{html.escape(archivo)}" '
+                 f'title="Прослушать" aria-label="Прослушать: {html.escape(texto)}">▶</button>')
+        return f"{m.group(1)}{boton}{dentro}</td>"
+
+    return re.sub(r"(<td[^>]*>)(.*?)</td>", celda, html_, flags=re.S)
 
 
 def _enlaces_entre_documentos(html_: str) -> str:
@@ -881,8 +954,9 @@ def construir(destino: pathlib.Path = DOCS, cfg: dict | None = None, textos: dic
 
     todos = plan.dias(cal)
     hechas = escritas(cal)
+    audio = indice_de_audio(destino)
     for d in hechas:
-        construir_leccion(d, cfg, textos["ru"], idiomas, destino, cal, todos)
+        construir_leccion(d, cfg, textos["ru"], idiomas, destino, cal, todos, audio)
     construir_programa(cfg, textos["es"], idiomas, destino)
     construir_sitemap(cfg, idiomas, destino, cal)
     construir_ads_txt(cfg, destino)

@@ -326,6 +326,55 @@ con un correo de la lección 3-5. El fallo era de la prueba y no del sitio, y
 vale anotarlo: una regla de seguridad demasiado ancha acaba desactivándose, que
 es peor que no tenerla.
 
+## El audio de las lecciones (2026-10-26)
+
+El usuario preguntó si añadir audios. **Sí, y cuesta 1,30 USD una sola vez**
+para las 100 lecciones, no una suscripción: medido con `--ver`, son 3.543
+frases distintas y 81.505 caracteres a ~16 USD el millón. Proyectado a las 365
+lecciones, menos de 5 USD. El curso ya traía 82 marcas `[AUDIO]` en 72
+lecciones esperando esto desde el principio.
+
+`scripts/generar_audio.py` deja un MP3 por frase en `docs/audio/` y un índice
+`indice.json`. `construir_sitio.py` lo lee y pone un ▶ delante de cada frase
+que esté locutada.
+
+Lo que hay que saber si alguien lo toca:
+
+- **El nombre del archivo es un hash del pedido entero** (texto + voz + modelo
+  + instrucciones), no un número de lección. Así «Buenos días» se locuta y se
+  paga UNA vez aunque salga en diez lecciones, volver a correr el guion no
+  vuelve a pagar nada, y cambiar de voz es otro archivo en vez de una mezcla
+  silenciosa de dos voces. Es la cache de imágenes del proyecto de salud.
+- **Se miran TODAS las columnas de la tabla, no la primera.** La primera
+  versión miraba solo la primera y en las tablas de fonética eso es la LETRA
+  («a»): la palabra de ejemplo («casa») está en la cuarta y es justo la que
+  hay que oír. Se vio en una captura del reproductor ya montado, no
+  razonándolo. Son 0,49 USD más y vale cada céntimo.
+- **La columna rusa se cae sola por el cirílico**, y hay una prueba que recorre
+  las 3.543 frases y falla si una trae una letra rusa: una voz española
+  leyendo «Спокойной ночи» sería el audio inútil y el doble de caro.
+- **Fuera la transcripción fonética** (`[a]`, `/kasa/`): es un símbolo para
+  leer con los ojos y una voz diría «corchete a corchete».
+- **Se escribe en `.parcial` y se renombra**, y un MP3 de cero bytes no cuenta
+  como locutado: una descarga cortada dejaría un archivo que el sitio serviría
+  como bueno y el lector pulsaría ▶ sin que sonara nada.
+- **Un solo `<audio>` para toda la página**, creado en JS y reutilizado: con
+  uno por frase el navegador abriría decenas de conexiones. Al empezar una se
+  para la anterior, que es lo que se quiere al ir comparando frases.
+- **El reproductor solo se carga en las lecciones que tienen algún botón**, y
+  sin `docs/audio/` el sitio se construye igual y sin un solo ▶. El audio se
+  genera por tandas, así que «algunas frases sí y otras no» es el estado normal
+  durante un tiempo y ninguna página puede romperse por eso.
+- **`docs/audio/` está en `.gitignore` por ahora.** Cuando el audio esté hecho
+  de verdad hay que quitar esa línea para que se publique. Se probó el
+  reproductor con tonos generados con ffmpeg —no hay TTS ni clave en este
+  contenedor— y **esos tonos se borraron antes de subir nada**: publicar un
+  pitido donde el lector espera una voz es peor que no tener audio.
+
+**Lo que falta**: `OPENAI_API_KEY` y correr el guion. La voz elegida es `nova`
+con instrucciones de hablar despacio y en español de España; cambiarla es
+cambiar `VOZ` y vuelve a costar 1,30 USD, porque es otro hash.
+
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.
@@ -340,5 +389,6 @@ es peor que no tenerla.
 - Para AdSense **solo falta el dominio propio** (y el CMP de Google al
   encender los anuncios). El correo de contacto ya está puesto y el resto de
   la lista la da por buena `scripts/revisar_adsense.py`.
-- Pendiente: lecciones 101-365, audio de los diálogos (TTS), más libros de
+- Pendiente: lecciones 101-365, generar el audio (el camino ya está:
+  `scripts/generar_audio.py`, 1,30 USD y una clave de OpenAI), más libros de
   referencia, y lo de «Pendiente de revision del profesor» de arriba.
