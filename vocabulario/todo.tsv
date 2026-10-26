@@ -731,6 +731,47 @@ otro / otra	ещё один / ещё одна	¿Me pone otra cerveza?	S12 U6 A1 
 el vaso	стакан (✗ не «ваза»!)	Un vaso de agua, por favor.	S12 U6 A1 leccion
 la servilleta · el tenedor	салфетка · вилка	¿Me trae una servilleta?	S12 U6 A1 leccion
 los servicios	туалет (в баре, в ресторане)	¿Dónde están los servicios?	S12 U6 A1 leccion
+llevar (о блюде)	содержать, быть в составе	El borsch lleva remolacha.	S12 U6 A1 leccion
+se come con… · se toma con…	едят с… · пьют с…	Se come con nata ácida.	S12 U6 A1 leccion
+la remolacha	свёкла	una sopa de remolacha	S12 U6 A1 leccion
+la masa	тесто	Los pelmeni son masa rellena.	S12 U6 A1 leccion
+relleno / rellena (de)	с начинкой (из)	masa rellena de carne	S12 U6 A1 leccion
+la carne picada	фарш	relleno de carne picada	S12 U6 A1 leccion
+la nata ácida 🌎 la crema agria	сметана	Se come con nata ácida.	S12 U6 A1 leccion
+la sal · la pimienta	соль · перец (приправа)	con sal y pimienta	S12 U6 A1 leccion
+caliente	горячий	La sopa se come caliente.	S12 U6 A1 leccion
+parecido / parecida a	похожий на	Es parecido a los ravioli.	S12 U6 A1 leccion
+estar bueno / buena	быть вкусным	La sopa está muy buena.	S12 U6 A1 leccion
+rico / rica	вкусный	La tortilla está rica.	S12 U6 A1 leccion
+salado / salada	солёный, пересоленный	La sopa está salada.	S12 U6 A1 leccion
+soso / sosa	недосоленный, безвкусный	Está un poco soso.	S12 U6 A1 leccion
+picante	острый	Los tacos están picantes.	S12 U6 A1 leccion
+¡Qué rico! · ¡Qué pena!	Как вкусно! · Какая жалость!	¡Qué rica está la tortilla!	S12 U6 A1 leccion
+sano / sana	полезный (для здоровья)	La verdura es sana.	S12 U6 A1 leccion
+el sabor	вкус	El sabor del borsch.	S12 U6 A1 leccion
+lo que más me gusta es…	больше всего мне нравится…	Lo que más me gusta es la cebolla.	S12 U6 A1 leccion
+la propina	чаевые		S12 U6 A1 cultura
+el brindis	тост		S12 U6 A1 cultura
+¡Salud!	За здоровье!		S12 U6 A1 cultura
+¡Chinchín!	Чин-чин! (звон бокалов)		S12 U6 A1 cultura
+brindar (por)	поднимать тост (за)		S12 U6 A1 cultura
+durar	длиться		S12 U6 A1 cultura
+invitar	угощать; приглашать		S12 U6 A1 cultura
+pagar a medias	платить пополам		S12 U6 A1 cultura
+a escote	скинувшись, каждый за своё		S12 U6 A1 cultura
+el ticket	чек		S12 U6 A1 cultura
+el servicio	обслуживание		S12 U6 A1 cultura
+el IVA	НДС		S12 U6 A1 cultura
+redondear	округлять (сумму)		S12 U6 A1 cultura
+obligatorio / obligatoria	обязательный		S12 U6 A1 cultura
+el cortado	кофе с капелькой молока		S12 U6 A1 cultura
+el carajillo	кофе с ликёром		S12 U6 A1 cultura
+el cubierto	столовый прибор; сбор за прибор (Арг.)		S12 U6 A1 cultura
+el discurso	речь		S12 U6 A1 cultura
+la cuenta	la cuenta · la nota		S12 U6 A1 cultura
+pagar a escote	pagar cada uno lo suyo		S12 U6 A1 cultura
+¡Que aproveche!	¡Buen provecho!		S12 U6 A1 cultura
+la propina pequeña o nada	la propina del 10 %		S12 U6 A1 cultura
 la ropa	одежда	¿Qué ropa te gusta?	S13 U7 A1 leccion
 la camisa	рубашка	Una camisa azul.	S13 U7 A1 leccion
 la camiseta	футболка	La camiseta es blanca.	S13 U7 A1 leccion
@@ -774,8 +815,21 @@ menos caro que	менее дорогой, чем	Esta falda es menos cara que aq
 estar rebajado / rebajada	быть со скидкой	La camisa está rebajada.	S13 U7 A1 leccion
 las rebajas	распродажа, сезон скидок	En enero hay rebajas.	S13 U7 A1 leccion
 el descuento	скидка	Hay descuento en los abrigos.	S13 U7 A1 leccion
+la oferta	акция, спецпредложение	Los jerséis están de oferta.	S13 U7 A1 leccion
 la etiqueta	этикетка, ценник	El precio está en la etiqueta.	S13 U7 A1 leccion
+por ciento	процент	Un descuento del treinta por ciento.	S13 U7 A1 leccion
 gastar	тратить	No quiero gastar más de cincuenta euros.	S13 U7 A1 leccion
+el cartel	вывеска, объявление		S13 U7 A1 cultura
+el mercadillo	рынок, барахолка		S13 U7 A1 cultura
+el puesto	прилавок, палатка		S13 U7 A1 cultura
+de segunda mano	б/у, подержанный		S13 U7 A1 cultura
+las antigüedades	антиквариат		S13 U7 A1 cultura
+abrir / cerrar	открывать / закрывать		S13 U7 A1 cultura
+el centro comercial	торговый центр		S13 U7 A1 cultura
+el tique	чек		S13 U7 A1 cultura
+la caja	касса		S13 U7 A1 cultura
+la devolución	возврат		S13 U7 A1 cultura
+regatear	торговаться		S13 U7 A1 cultura
 la panadería	булочная	El pan se compra en la panadería.	S14 U7 A1 leccion
 la frutería	фруктовая лавка	La fruta es más barata en la frutería.	S14 U7 A1 leccion
 la carnicería	мясной магазин	La carne, en la carnicería.	S14 U7 A1 leccion
@@ -784,7 +838,6 @@ la librería	книжный магазин (не библиотека!)	Voy a la
 el estanco	табачный киоск (табак и марки)	Los sellos se venden en el estanco.	S14 U7 A1 leccion
 el sello	почтовая марка	Quiero comprar sellos para una carta.	S14 U7 A1 leccion
 la sección	отдел	La sección de pescadería.	S14 U7 A1 leccion
-la caja	касса	¿Dónde está la caja? Al final, a la derecha.	S14 U7 A1 leccion
 ¿Dónde se compra…?	Где покупают…?	¿Dónde se compra el pan?	S14 U7 A1 leccion
 regalar	дарить	Regalo un libro a mi madre.	S14 U7 A1 leccion
 ¿Para quién es?	Для кого это?	— ¿Para quién es? — Para mi hermana.	S14 U7 A1 leccion
@@ -805,6 +858,25 @@ la entrega	доставка (дата получения)	Entrega: del 14 al 16 
 tardar	идти, занимать время	El pedido tarda tres días.	S14 U7 A1 leccion
 devolver / la devolución	вернуть / возврат	Puedo devolverlo en treinta días.	S14 U7 A1 leccion
 la referencia (ref.)	артикул	Abrigo azul, ref. 4821.	S14 U7 A1 leccion
+el tique 🌎 el recibo	чек	¿Tiene el tique?	S14 U7 A1 leccion
+no funciona	не работает	Esta lámpara no funciona.	S14 U7 A1 leccion
+roto / rota	сломанный / разбитый	El reloj está roto.	S14 U7 A1 leccion
+es demasiado pequeño	слишком маленький	Este jersey es demasiado pequeño.	S14 U7 A1 leccion
+cambiar	обменять, поменять	¿Me lo puede cambiar por una talla M?	S14 U7 A1 leccion
+reclamar / la reclamación	предъявлять претензию / претензия	Quiero hacer una reclamación.	S14 U7 A1 leccion
+la hoja de reclamaciones	бланк жалобы, «книга жалоб»	¿Me da una hoja de reclamaciones?	S14 U7 A1 leccion
+la garantía	гарантия	Tiene dos años de garantía.	S14 U7 A1 leccion
+el plazo	срок	¿Cuál es el plazo para cambiarlo?	S14 U7 A1 leccion
+disculpe	извините (к одному, на «Вы»)	Disculpe, ¿puede cambiarlo?	S14 U7 A1 leccion
+el asunto	тема письма	Asunto: abrigo azul, ref. 4821.	S14 U7 A1 leccion
+Buenos días: / Señores:	Добрый день, / Уважаемые господа,	Buenos días: Tengo dos preguntas.	S14 U7 A1 leccion
+un saludo	с уважением (нейтрально)	Un saludo, Andréi Sokolov.	S14 U7 A1 leccion
+atentamente	с уважением (официально)	Atentamente, Andréi Sokolov.	S14 U7 A1 leccion
+gracias de antemano	заранее спасибо	Gracias de antemano.	S14 U7 A1 leccion
+¿Pueden…?	Вы можете…? (к магазину, к фирме)	¿Pueden enviarlo a Rusia?	S14 U7 A1 leccion
+enviar	отправлять, присылать	¿Pueden enviarlo a Ekaterimburgo?	S14 U7 A1 leccion
+aceptar	принимать	¿Aceptan tarjeta?	S14 U7 A1 leccion
+la duda	вопрос, сомнение	Tengo una duda sobre la talla.	S14 U7 A1 leccion
 el tiempo libre	свободное время	¿Qué haces en tu tiempo libre?	S15 U8 A1 leccion
 la afición	увлечение, хобби	Mi afición favorita es leer.	S15 U8 A1 leccion
 tocar	играть (на инструменте)	Toco la guitarra.	S15 U8 A1 leccion

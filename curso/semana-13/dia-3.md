@@ -73,7 +73,7 @@ revisado: false
 
 > — ¿Quieres **el jersey**? — Sí, **lo** quiero. (а не *quiero el jersey*)
 > — ¿Ves **la camisa**? — Sí, **la** veo.
-> — ¿Compras **las botas**? — Sí, **las** compro.
+> — ¿Compras **las zapatillas**? — Sí, **las** compro.
 
 Вещь назвали один раз; дальше её заменяет местоимение. Это **прямое
 дополнение** (complemento directo) — то, что отвечает на вопрос «кого? что?»,
@@ -87,7 +87,7 @@ revisado: false
 | **el** jersey, **el** abrigo | **lo** | **Lo** quiero. |
 | **la** camisa, **la** falda | **la** | **La** compro. |
 | **los** zapatos, **los** pantalones | **los** | **Los** llevo. |
-| **las** zapatillas, **las** camisetas | **las** | **Las** veo. |
+| **las** faldas, **las** camisetas | **las** | **Las** veo. |
 
 **el → lo**, **la → la**, **los → los**, **las → las**. Если вы помните
 существительное вместе с артиклем (а мы учим их только так с третьей недели),
@@ -137,7 +137,7 @@ revisado: false
 
 ## 4. Практика (16–26 мин)
 
-### Упражнение А. Замените выделенное на lo, la, los или las.
+### Упражнение А. Напишите фразу с lo, la, los или las вместо выделенного.
 
 Модель: Quiero **el jersey**. → **Lo** quiero.
 
@@ -174,7 +174,7 @@ revisado: false
 
 ## 5. Выход (26–29 мин)
 
-**Превратите пятнадцать фраз**: замените выделенное прямое дополнение на
+**Напишите заново пятнадцать фраз**: вместо выделенного прямого дополнения —
 **lo / la / los / las**. Там, где стоит «(два варианта)», напишите оба.
 
 1. Quiero **el jersey azul**.
@@ -215,7 +215,6 @@ revisado: false
 | necesi**tar** | нуждаться, быть нужным | No la necesito. |
 | mi**rar** | смотреть (на) | Miro los escaparates. |
 | **So**lo **mi**ro, **gra**cias | Я только смотрю, спасибо | — ¿Qué busca? — Solo miro, gracias. |
-| **o**tro / **o**tra | другой / другая | ¿Lo tiene en otro color? |
 | en a**zul** / en **o**tro co**lor** | синего цвета / другого цвета | Lo quiero en azul. |
 
 ## Ответы

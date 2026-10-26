@@ -69,7 +69,7 @@ e / i (ни в коем случае не «ц»):
 | **Camarero:** ¿Y para beber? | А пить что будете? |
 | **Paula:** Para mí, agua sin gas. Y una copa de vino tinto para él. | Мне воду без газа. А ему бокал красного вина. |
 | **Camarero:** Muy bien. El postre, después. ¡Que aproveche! | Хорошо. Десерт — потом. Приятного аппетита! |
-| **Serguéi:** Gracias. Perdón, ¿nos trae la cuenta cuando pueda? | Спасибо. Простите, принесёте счёт, когда сможете? |
+| **Serguéi:** Gracias. (al final) Perdón, ¿nos trae la cuenta, por favor? | Спасибо. (в конце) Простите, принесёте нам счёт, пожалуйста? |
 
 Прочитайте диалог вслух за трёх человек. Посчитайте, сколько раз звучит **de**
 перед названием блюда.

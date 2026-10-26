@@ -27,8 +27,8 @@ revisado: false
 
 ## 2. Повторение (3–13 мин)
 
-**1. Одежда недели.** Всё с артиклем, потому что артикль подсказывает и цвет, и
-местоимение:
+**1. Одежда и слова магазина.** Всё с артиклем, потому что артикль подсказывает
+и цвет, и местоимение:
 
 | Ед. ч. | Мн. ч. | Всегда во мн. ч. |
 |---|---|---|
@@ -107,7 +107,7 @@ lo / la / los / las, queda / quedan):
 
 Выберите правильный ответ. По одному баллу.
 
-1. — ¿Quieres el jersey? — Sí, ___ quiero. → а) lo · б) le · в) quiero lo
+1. — ¿Quieres el jersey? — Sí, ___ quiero. → а) lo · б) le · в) la
 2. — ¿Compras las zapatillas? — No, no ___ compro. → а) la · б) las · в) los
 3. Quiero probar la camisa. = → а) La quiero probar. · б) Quiero la probar. ·
    в) Quiero probar la.
@@ -118,8 +118,7 @@ lo / la / los / las, queda / quedan):
 7. ___ camisa que tengo en la mano. → а) Esta · б) Esa · в) Aquella
 8. ___ chaquetas de allí. → а) Estas · б) Esas · в) Aquellas
 9. Me ___ bien los pantalones. → а) queda · б) quedan · в) gusto
-10. Antes de la fiesta ___ la camisa blanca. → а) pongo · б) me pongo ·
-    в) llevo
+10. Por la mañana ___ la camiseta. → а) pongo · б) me pongo · в) ponemos
 11. Hoy ___ una camiseta gris. (быть одетым) → а) me pongo · б) llevo ·
     в) pongo
 12. ¿Cuánto ___ los zapatos? → а) cuesta · б) cuestan · в) cuesto

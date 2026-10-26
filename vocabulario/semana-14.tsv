@@ -7,7 +7,6 @@ la librería	книжный магазин (не библиотека!)	Voy a la
 el estanco	табачный киоск (табак и марки)	Los sellos se venden en el estanco.	S14 U7 A1 leccion
 el sello	почтовая марка	Quiero comprar sellos para una carta.	S14 U7 A1 leccion
 la sección	отдел	La sección de pescadería.	S14 U7 A1 leccion
-la caja	касса	¿Dónde está la caja? Al final, a la derecha.	S14 U7 A1 leccion
 ¿Dónde se compra…?	Где покупают…?	¿Dónde se compra el pan?	S14 U7 A1 leccion
 regalar	дарить	Regalo un libro a mi madre.	S14 U7 A1 leccion
 ¿Para quién es?	Для кого это?	— ¿Para quién es? — Para mi hermana.	S14 U7 A1 leccion
@@ -28,3 +27,22 @@ la entrega	доставка (дата получения)	Entrega: del 14 al 16 
 tardar	идти, занимать время	El pedido tarda tres días.	S14 U7 A1 leccion
 devolver / la devolución	вернуть / возврат	Puedo devolverlo en treinta días.	S14 U7 A1 leccion
 la referencia (ref.)	артикул	Abrigo azul, ref. 4821.	S14 U7 A1 leccion
+el tique 🌎 el recibo	чек	¿Tiene el tique?	S14 U7 A1 leccion
+no funciona	не работает	Esta lámpara no funciona.	S14 U7 A1 leccion
+roto / rota	сломанный / разбитый	El reloj está roto.	S14 U7 A1 leccion
+es demasiado pequeño	слишком маленький	Este jersey es demasiado pequeño.	S14 U7 A1 leccion
+cambiar	обменять, поменять	¿Me lo puede cambiar por una talla M?	S14 U7 A1 leccion
+reclamar / la reclamación	предъявлять претензию / претензия	Quiero hacer una reclamación.	S14 U7 A1 leccion
+la hoja de reclamaciones	бланк жалобы, «книга жалоб»	¿Me da una hoja de reclamaciones?	S14 U7 A1 leccion
+la garantía	гарантия	Tiene dos años de garantía.	S14 U7 A1 leccion
+el plazo	срок	¿Cuál es el plazo para cambiarlo?	S14 U7 A1 leccion
+disculpe	извините (к одному, на «Вы»)	Disculpe, ¿puede cambiarlo?	S14 U7 A1 leccion
+el asunto	тема письма	Asunto: abrigo azul, ref. 4821.	S14 U7 A1 leccion
+Buenos días: / Señores:	Добрый день, / Уважаемые господа,	Buenos días: Tengo dos preguntas.	S14 U7 A1 leccion
+un saludo	с уважением (нейтрально)	Un saludo, Andréi Sokolov.	S14 U7 A1 leccion
+atentamente	с уважением (официально)	Atentamente, Andréi Sokolov.	S14 U7 A1 leccion
+gracias de antemano	заранее спасибо	Gracias de antemano.	S14 U7 A1 leccion
+¿Pueden…?	Вы можете…? (к магазину, к фирме)	¿Pueden enviarlo a Rusia?	S14 U7 A1 leccion
+enviar	отправлять, присылать	¿Pueden enviarlo a Ekaterimburgo?	S14 U7 A1 leccion
+aceptar	принимать	¿Aceptan tarjeta?	S14 U7 A1 leccion
+la duda	вопрос, сомнение	Tengo una duda sobre la talla.	S14 U7 A1 leccion

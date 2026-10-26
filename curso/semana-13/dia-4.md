@@ -100,8 +100,8 @@ falda te queda cort**a***.
 | **llevar** | носить, быть одетым (состояние) | Hoy **llevo** una camiseta gris. |
 | **ponerse** | надевать (действие, один раз) | Por la mañana **me pongo** la camiseta. |
 
-**ponerse** — возвратный, как *llamarse* (неделя 5), и в форме «я» неправильный
-(как *tengo*):
+**ponerse** — возвратный, как *levantarse* и *ducharse* (неделя 9): местоимение
+стоит ПЕРЕД глаголом. И в форме «я» он неправильный, как *tengo*:
 
 | | ponerse |
 |---|---|
@@ -135,7 +135,7 @@ perros*), и возвращается она потому, что по-русс�
 
 ## 4. Практика (16–26 мин)
 
-### Упражнение А. Queda или quedan?
+### Упражнение А. Дополните: queda или quedan?
 
 Модель: Me ______ bien el vestido. → **queda**
 

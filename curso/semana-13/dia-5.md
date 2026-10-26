@@ -58,7 +58,7 @@ revisado: false
 | **Andréi:** ¿Y aquellos pantalones del escaparate? | А вон те брюки с витрины? |
 | **Dependienta:** Aquellos **cuestan** cuarenta y cinco euros. No **están rebajados**. | Вон те стоят сорок пять евро. Они без скидки. |
 | **Andréi:** **Son caros**. | Они дорогие. |
-| **Elena:** En la tienda de al lado los pantalones cuestan treinta y ocho euros: son **más baratos**. | В магазине рядом брюки стоят тридцать восемь евро: они дешевле. |
+| **Elena:** En la tienda de al lado los pantalones **están de oferta**: cuestan treinta y ocho euros, son **más baratos**. | В магазине рядом брюки по акции: стоят тридцать восемь евро, они дешевле. |
 | **Andréi:** Entonces este jersey es **más barato que** aquellos pantalones. | Значит, этот свитер дешевле, чем вон те брюки. |
 | **Elena:** Sí. Y la camiseta blanca cuesta nueve euros: es muy **barata**. | Да. А белая футболка стоит девять евро: очень дешёвая. |
 | **Andréi:** Me llevo el jersey y la camiseta. ¿Cuánto es en total? | Беру свитер и футболку. Сколько всего? |
@@ -79,16 +79,22 @@ revisado: false
 |---|---|
 | ¿Cuánto **cuesta** el jersey? — **Cuesta** treinta euros. | ¿Cuánto **cuestan** los zapatos? — **Cuestan** sesenta euros. |
 
-**2. Ser caro или estar rebajado.** Старое различие недели 3, новая пара слов:
+**2. Ser caro или estar rebajado.** Старое различие шестой недели, новая пара
+слов:
 
 | Español | Что значит | Пример |
 |---|---|---|
 | **ser** caro / barato | какой товар **вообще** | Esta tienda es cara. Los calcetines son baratos. |
 | **estar** rebajado / rebajada | в каком он **состоянии сейчас** | La camisa está rebajada esta semana. |
+| **estar de oferta** | по акции (почти то же, что *rebajado*) | Los jerséis están de oferta. |
 
 **Rebajado** согласуется с товаром: *el jersey está rebajad**o***, *la camisa
 está rebajad**a***, *los zapatos están rebajad**os***, *las faldas están
-rebajad**as***.
+rebajad**as***. А **de oferta** не меняется никогда: *está de oferta*, *están
+de oferta*.
+
+Размер скидки на витрине пишут в процентах, и читают его так: **-30 %** →
+*treinta **por ciento** de descuento*; **-50 %** → *cincuenta por ciento*.
 
 **3. Сравнение: más / menos + прилагательное + que.**
 
@@ -152,7 +158,7 @@ car**os***. А **más** и **que** не меняются никогда.
 ### Упражнение В. Переведите на испанский.
 
 1. Сколько стоят эти туфли? — Сорок пять евро.
-2. Этот свитер дороже, чем та рубашка.
+2. Этот свитер дороже, чем вон та рубашка.
 3. Футболка дешевле брюк.
 4. Пальто со скидкой.
 5. Эти кроссовки дороже, чем вон те.
@@ -200,9 +206,9 @@ car**os***. А **más** и **que** не меняются никогда.
 | es**tar** reba**ja**do / reba**ja**da | быть со скидкой | La camisa está rebajada. |
 | las reba**jas** | распродажа, сезон скидок | En enero hay rebajas. |
 | el des**cuen**to | скидка | Hay descuento en los abrigos. |
-| el **pre**cio | цена | Los precios de esta tienda son altos. |
+| la o**fer**ta | акция, спецпредложение | Los jerséis están de oferta. |
 | la eti**que**ta | этикетка, ценник | El precio está en la etiqueta. |
-| en efec**ti**vo | наличными | ¿Paga en efectivo? |
+| por **cien**to | процент | Un descuento del treinta por ciento. |
 | gas**tar** | тратить | No quiero gastar más de cincuenta euros. |
 
 ## Ответы
