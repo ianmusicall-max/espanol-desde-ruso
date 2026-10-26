@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>historia — documentación</title>
+<meta name="description" content="Documentación del programa del curso."><link rel="canonical" href="https://ianmusicall-max.github.io/espanol-desde-ruso/es/programa/historia.html"><meta property="og:type" content="website"><meta property="og:locale" content="es"><meta property="og:title" content="historia — documentación"><meta property="og:description" content="Documentación del programa del curso."><meta property="og:url" content="https://ianmusicall-max.github.io/espanol-desde-ruso/es/programa/historia.html">
+<style>
+/* Tres estados: lo que diga el sistema, o lo que el lector elija con el botón
+   de la luna. El atributo data-tema del <html> gana siempre sobre el sistema;
+   lo escribe un script de dos líneas en <head> para que no haya parpadeo. */
+:root{
+  color-scheme:light;
+  --papel:#fdfbf6; --tinta:#1b1e23; --tenue:#646c78; --linea:#e2dacb;
+  --acento:#b03f26; --acento-suave:#fbeee9; --celeste:#2f6b8f; --celeste-suave:#eaf2f7;
+  --realce:#fdf3d8; --tarjeta:#f7f2e6; --sombra:0 1px 2px rgba(27,30,35,.05);
+  --ancho:44rem;
+}
+@media(prefers-color-scheme:dark){:root:not([data-tema="light"]){
+  color-scheme:dark;
+  --papel:#14161a; --tinta:#e8e4da; --tenue:#9aa2ae; --linea:#333941;
+  --acento:#f0896a; --acento-suave:#2a1d19; --celeste:#7fb6d6; --celeste-suave:#162229;
+  --realce:#2a2718; --tarjeta:#1d2026; --sombra:none;
+}}
+:root[data-tema="dark"]{
+  color-scheme:dark;
+  --papel:#14161a; --tinta:#e8e4da; --tenue:#9aa2ae; --linea:#333941;
+  --acento:#f0896a; --acento-suave:#2a1d19; --celeste:#7fb6d6; --celeste-suave:#162229;
+  --realce:#2a2718; --tarjeta:#1d2026; --sombra:none;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--papel);color:var(--tinta);
+  font:400 17px/1.65 ui-serif,Georgia,"Times New Roman",serif;
+  -webkit-font-smoothing:antialiased;overflow-wrap:break-word}
+.sans{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.envoltorio{max-width:var(--ancho);margin:0 auto;padding:0 20px}
+
+/* ---- cabecera ---- */
+/* En el móvil la cabecera NO se queda pegada: ocupa dos filas y una lección es
+   una lectura larga, así que robaría una sexta parte de la pantalla todo el
+   rato. A partir de 40rem cabe en una fila y ahí sí se queda. */
+header.sitio{background:var(--papel);border-bottom:1px solid var(--linea)}
+@media(min-width:40rem){header.sitio{position:sticky;top:0;z-index:20;
+  background:color-mix(in srgb,var(--papel) 92%,transparent);backdrop-filter:saturate(1.6) blur(8px)}
+  html{scroll-padding-top:4rem}}
+header.sitio .envoltorio{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .9rem;padding-block:.5rem;
+  font-family:ui-sans-serif,system-ui,-apple-system,sans-serif;font-size:.86rem}
+header.sitio a{color:var(--tenue);text-decoration:none;white-space:nowrap}
+header.sitio a:hover,header.sitio nav.paginas a[aria-current]{color:var(--acento)}
+/* El título cede espacio antes que el selector de idioma: en un móvil
+   estrecho se recorta con puntos suspensivos, pero el selector no se sale. */
+header.sitio .marca{font-weight:650;color:var(--tinta);font-size:.95rem;letter-spacing:-.01em;
+  flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
+header.sitio nav.paginas{display:flex;gap:.9rem;order:3;flex:1 0 100%;overflow-x:auto;
+  scrollbar-width:none;padding-bottom:.1rem}
+header.sitio nav.paginas::-webkit-scrollbar{display:none}
+.idiomas{display:flex;gap:.2rem;flex:0 0 auto;border:1px solid var(--linea);border-radius:999px;padding:2px}
+.idiomas a{padding:.12rem .5rem;border-radius:999px;font-size:.75rem;font-weight:600;
+  text-transform:uppercase;letter-spacing:.05em;line-height:1.5}
+.idiomas a[aria-current]{background:var(--acento);color:#fff}
+.tema{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;
+  width:30px;height:30px;padding:0;border:1px solid var(--linea);border-radius:999px;
+  background:transparent;color:var(--tenue);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.tema:hover{color:var(--acento);border-color:var(--acento)}
+.tema svg{display:block}
+/* De día se ve la luna (pulsa y se hace de noche); de noche, el sol. */
+.tema .sol{display:none}
+@media(prefers-color-scheme:dark){
+  :root:not([data-tema="light"]) .tema .luna{display:none}
+  :root:not([data-tema="light"]) .tema .sol{display:block}}
+:root[data-tema="dark"] .tema .luna{display:none}
+:root[data-tema="dark"] .tema .sol{display:block}
+:root[data-tema="light"] .tema .luna{display:block}
+:root[data-tema="light"] .tema .sol{display:none}
+
+/* audio: un ▶ al lado de cada frase española que esté locutada */
+.suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
+  font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
+.suena:hover,.suena:focus-visible{opacity:1}
+.suena[aria-pressed="true"]{opacity:1;color:var(--acento)}
+@media(hover:none){.suena{opacity:.9}}
+
+/* progreso del lector */
+/* El [hidden] del navegador pierde contra .boton{display:inline-block}, así que
+   «continuar» se vería como un botón naranja vacío en la primera visita. */
+[hidden]{display:none!important}
+.boton.marcar{margin:1.6rem 0 0}
+.boton.destacado{box-shadow:0 0 0 3px var(--acento-suave)}
+ul.dias li.hecha .num::after{content:"✓";color:var(--acento);font-weight:700;margin-inline-start:.25rem}
+ul.dias li.hecha a{color:var(--tenue)}
+#mio{margin-top:.9rem;padding-top:.9rem;border-top:1px dashed var(--linea)}
+.progreso-nota{font-size:.84rem;color:var(--tenue);font-family:ui-sans-serif,system-ui,sans-serif;margin-top:.5rem}
+#borrar-progreso{background:none;border:0;padding:0;color:var(--tenue);text-decoration:underline;
+  cursor:pointer;font:inherit;font-size:.84rem}
+@media(min-width:40rem){
+  header.sitio nav.paginas{order:0;flex:0 1 auto;margin-inline-start:auto}
+  header.sitio .marca{flex:0 1 auto}
+}
+
+main{padding-bottom:3.5rem}
+
+/* ---- tipografía ---- */
+h1{font-size:clamp(1.65rem,5.2vw,2.3rem);line-height:1.15;letter-spacing:-.022em;margin:1.6rem 0 .25rem;font-weight:650}
+h1 .segunda{display:block;color:var(--acento);font-weight:400}
+h2{font-size:clamp(1.08rem,3.2vw,1.22rem);margin:2.6rem 0 .7rem;padding-top:.9rem;
+  border-top:1px solid var(--linea);font-weight:650;letter-spacing:-.012em}
+h3{font-size:1rem;margin:1.6rem 0 .45rem;font-weight:650}
+h2,h3{font-family:ui-sans-serif,system-ui,-apple-system,sans-serif}
+p{margin:.75rem 0}
+a{color:var(--acento);text-underline-offset:2px}
+strong{font-weight:650}
+
+/* ---- portada ---- */
+.heroe{padding:2rem 0 .5rem}
+.heroe .lema{font-size:clamp(1.02rem,3.4vw,1.2rem);color:var(--tenue);margin:.5rem 0 1.1rem;font-style:italic}
+.botones{display:flex;flex-wrap:wrap;gap:.65rem;margin:1.4rem 0}
+.boton{display:inline-block;background:var(--acento);color:#fff;padding:.7rem 1.35rem;border-radius:8px;
+  text-decoration:none;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.97rem;font-weight:550;
+  box-shadow:var(--sombra);transition:transform .12s ease}
+.boton:hover{transform:translateY(-1px)}
+.boton.secundario{background:transparent;color:var(--acento);border:1.5px solid var(--acento);box-shadow:none}
+
+.progreso{margin:1.5rem 0;font-family:ui-sans-serif,system-ui,sans-serif}
+.progreso .cifras{display:flex;align-items:baseline;gap:.45rem;font-size:.88rem;color:var(--tenue)}
+.progreso .n{font-size:1.5rem;font-weight:700;color:var(--tinta);font-feature-settings:"tnum"}
+.barra{height:7px;border-radius:999px;background:var(--linea);overflow:hidden;margin-top:.45rem}
+.barra i{display:block;height:100%;background:linear-gradient(90deg,var(--acento),var(--celeste));border-radius:999px}
+
+/* ---- bloque de contraste: la firma del curso ---- */
+.contraste{background:var(--acento-suave);border:1px solid color-mix(in srgb,var(--acento) 22%,transparent);
+  border-radius:10px;padding:1rem 1.1rem;margin:1.3rem 0}
+.contraste>h3:first-child{margin-top:0;color:var(--acento)}
+.contraste p:last-child{margin-bottom:0}
+del{text-decoration-line:line-through;text-decoration-color:var(--acento);
+  text-decoration-thickness:2px;opacity:.75}
+.mal{color:var(--acento)}
+.bien{color:#1d7a4f}
+@media(prefers-color-scheme:dark){:root:not([data-tema="light"]) .bien{color:#5fc48f}}
+:root[data-tema="dark"] .bien{color:#5fc48f}
+
+blockquote{margin:1.2rem 0;padding:.85rem 1.1rem;background:var(--tarjeta);
+  border-inline-start:3px solid var(--celeste);border-radius:0 8px 8px 0}
+blockquote p:first-child{margin-top:0}blockquote p:last-child{margin-bottom:0}
+
+/* ---- tablas ---- */
+.tabla-env{overflow-x:auto;margin:.9rem 0;border:1px solid var(--linea);border-radius:9px;background:var(--papel)}
+table{border-collapse:collapse;width:100%;font-size:.92rem;font-family:ui-sans-serif,system-ui,sans-serif}
+th,td{padding:.45rem .65rem;text-align:start;vertical-align:top;border-bottom:1px solid var(--linea)}
+tr:last-child td{border-bottom:none}
+th{background:var(--tarjeta);font-weight:600;position:sticky;top:0}
+code{font-size:.88em;background:var(--tarjeta);padding:.1em .32em;border-radius:4px;
+  font-family:ui-monospace,"SF Mono",Menlo,monospace}
+
+/* ---- tarjetas y listas ---- */
+.rejilla{display:grid;gap:.85rem;grid-template-columns:1fr;margin:1rem 0}
+@media(min-width:36rem){.rejilla{grid-template-columns:1fr 1fr}}
+.tarjeta{border:1px solid var(--linea);border-radius:10px;padding:.95rem 1.1rem;background:var(--tarjeta);box-shadow:var(--sombra)}
+.tarjeta h3{margin:0 0 .3rem;font-size:.88rem;text-transform:uppercase;letter-spacing:.05em;color:var(--acento)}
+.tarjeta p{margin:0;font-size:.95rem}
+
+ul.dias{list-style:none;padding:0;margin:.5rem 0}
+ul.dias li{display:flex;gap:.6rem;align-items:baseline;padding:.4rem .2rem;border-bottom:1px solid var(--linea)}
+ul.dias li:last-child{border-bottom:none}
+ul.dias .num{font-family:ui-sans-serif,system-ui,sans-serif;font-size:.78rem;color:var(--tenue);
+  min-width:2.6rem;font-feature-settings:"tnum"}
+ul.dias a{text-decoration:none}ul.dias a:hover{text-decoration:underline}
+ul.dias .falta{color:var(--tenue)}
+.tipo{font-family:ui-sans-serif,system-ui,sans-serif;font-size:.67rem;color:var(--celeste);
+  text-transform:uppercase;letter-spacing:.07em;border:1px solid var(--linea);border-radius:999px;
+  padding:.05rem .4rem;white-space:nowrap}
+.unidad-cab{display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;margin-top:2.4rem}
+details{margin:.5rem 0;font-size:.93rem}
+summary{cursor:pointer;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.86rem;color:var(--tenue)}
+details ul{margin:.5rem 0}
+
+/* ---- lección ---- */
+.leccion-cab{display:flex;flex-wrap:wrap;gap:.45rem;align-items:center;margin:1.3rem 0 .2rem;
+  font-family:ui-sans-serif,system-ui,sans-serif;font-size:.78rem;color:var(--tenue)}
+.leccion-cab .n{background:var(--acento);color:#fff;border-radius:999px;padding:.12rem .6rem;font-weight:600}
+.aviso{background:var(--realce);border:1px solid var(--linea);border-radius:8px;padding:.6rem .85rem;
+  font-size:.88rem;font-family:ui-sans-serif,system-ui,sans-serif;margin:1rem 0}
+nav.pasos{display:flex;justify-content:space-between;gap:.8rem;margin:2.5rem 0 0;padding-top:1rem;
+  border-top:1px solid var(--linea);font-family:ui-sans-serif,system-ui,sans-serif;font-size:.86rem}
+nav.pasos a{text-decoration:none;padding:.4rem .7rem;border:1px solid var(--linea);border-radius:7px}
+nav.pasos a:hover{border-color:var(--acento)}
+input[type=checkbox]{margin-inline-end:.45rem}
+
+/* ---- anuncios, pie, cookies ---- */
+.anuncio{margin:2rem 0;text-align:center;min-height:1px}
+.anuncio::before{content:attr(data-etiqueta);display:block;font-family:ui-sans-serif,system-ui,sans-serif;
+  font-size:.64rem;color:var(--tenue);text-transform:uppercase;letter-spacing:.09em;margin-bottom:.3rem}
+footer.sitio{border-top:1px solid var(--linea);padding:1.6rem 0 3rem;
+  font-family:ui-sans-serif,system-ui,sans-serif;font-size:.83rem;color:var(--tenue)}
+footer.sitio a{color:var(--tenue)}
+footer.sitio p{margin:.35rem 0}
+#cookies{position:fixed;inset-inline:0;bottom:0;background:var(--tarjeta);border-top:1px solid var(--linea);
+  padding:.85rem 20px;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.85rem;display:flex;
+  flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:center;z-index:30}
+</style>
+<script>try{var t=localStorage.getItem('tema');if(t)document.documentElement.dataset.tema=t}catch(e){}</script>
+
+</head>
+<body>
+<header class="sitio"><div class="envoltorio">
+<a class="marca" href="../index.html">Español desde el ruso</a>
+<nav class="paginas"><a href="../kurs.html">Las lecciones</a><a href="../o-kurse.html">El curso</a><a href="../kontakt.html">Contacto</a></nav>
+<div class="idiomas" title="Idioma"><a href="../index.html" lang="ru">ru</a><a href="../es/index.html" lang="es" aria-current="true">es</a><a href="../en/index.html" lang="en">en</a></div>
+<button class="tema" id="tema" type="button" title="Tema claro u oscuro" aria-label="Tema claro u oscuro"><svg class="luna" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sol" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.5 1.5M17.9 17.9l1.5 1.5M2.5 12h2M19.5 12h2M4.6 19.4l1.5-1.5M17.9 6.1l1.5-1.5"/></svg></button>
+</div></header>
+<main><div class="envoltorio">
+<h1 id="la-historia-ana-e-ivan">La historia: Ana e Iván</h1>
+<blockquote>
+<p>El hilo narrativo del curso. Un episodio por unidad, 24 en total, en el día
+<code>cultura</code> de la segunda semana de cada unidad.</p>
+<p>Por qué existe: un alumno que abre la lección 200 no vuelve por el pretérito.
+Vuelve porque quiere saber qué le pasa a Iván. Es lo único de todo el curso
+que cambia si alguien lo abandona en la semana 12 o lo termina.</p>
+</blockquote>
+<h2 id="el-hallazgo-que-lo-hizo-posible">El hallazgo que lo hizo posible</h2>
+<p>Las 24 unidades del calendario, leídas en orden, <strong>ya son la historia de
+alguien que se muda a España</strong>: llega y saluda (1), nombra lo que le rodea (2),
+habla de su familia (3), busca casa (4), coge un ritmo (5), aprende a comer
+(6) y a comprar (7), hace planes (8), viaja (9), enferma (10)… y en A2 empieza
+a contar su propia vida (12-14), busca trabajo (15), pelea con la burocracia
+(16), piensa en el futuro (17), discute (18), decide (19), se agota (20),
+firma un alquiler (21), celebra (22), rellena papeles (23) y se examina.</p>
+<p>No hubo que inventar un arco y encajarlo: <strong>estaba dentro del temario</strong>. La
+historia solo lo hace visible.</p>
+<h2 id="los-dos">Los dos</h2>
+<p><strong>Iván</strong>, de Moscú. Llega a España con un trabajo que se cae a las dos
+semanas. No es tímido ni torpe: es un adulto competente al que le han quitado
+el idioma, que es otra cosa. Sabe hacer su oficio y no sabe pedir una cita en
+el médico, y eso le humilla de un modo que no esperaba.</p>
+<p><strong>Ana</strong>, de Madrid. No es profesora de Iván ni su pareja: las dos cosas
+convertirían al alumno en espectador. Es su vecina, y tiene sus propios
+problemas. <strong>Le corrige poco y le entiende mucho</strong>, que es lo que de verdad
+hace alguien cuando te oye hablar mal su idioma.</p>
+<p>La relación no es romántica. Es más rara y más real: dos personas que se caen
+bien a través de un idioma que uno de los dos apenas tiene.</p>
+<h2 id="el-arco-unidad-por-unidad">El arco, unidad por unidad</h2>
+<div class="tabla-env"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Semanas</th>
+<th>Tema de la unidad</th>
+<th>Episodio</th>
+<th>Qué pasa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1-2</td>
+<td>Saludos</td>
+<td><strong>Un portal, dos nombres</strong></td>
+<td>Iván aterriza. Puede decir su nombre y poco más. Ana es la vecina que le abre el portal</td>
+</tr>
+<tr>
+<td>2</td>
+<td>3-4</td>
+<td>Cosas y profesiones</td>
+<td><strong>La maleta</strong></td>
+<td>Deshace la maleta. Explica a qué se dedica con cuatro palabras y un gesto</td>
+</tr>
+<tr>
+<td>3</td>
+<td>5-6</td>
+<td>La familia</td>
+<td><strong>Las fotos</strong></td>
+<td>Enseña fotos. Es la primera vez que cuenta algo suyo y le entienden</td>
+</tr>
+<tr>
+<td>4</td>
+<td>7-8</td>
+<td>Casa y ciudad</td>
+<td><strong>Perdido a tres calles</strong></td>
+<td>Se pierde. Pregunta mal, le responden rápido, no entiende nada. Vuelve andando</td>
+</tr>
+<tr>
+<td>5</td>
+<td>9-10</td>
+<td>El día a día</td>
+<td><strong>Cenar a las diez</strong></td>
+<td>Los horarios españoles le descolocan: cenar a las diez, la ciudad cerrada a las tres</td>
+</tr>
+<tr>
+<td>6</td>
+<td>11-12</td>
+<td>Comer y beber</td>
+<td><strong>Nadie tiene prisa</strong></td>
+<td>El bar. Aprende que pedir es un ritual y que nadie tiene prisa</td>
+</tr>
+<tr>
+<td>7</td>
+<td>13-14</td>
+<td>De compras</td>
+<td><strong>Una camisa para una entrevista</strong></td>
+<td><strong>Se cae el trabajo.</strong> Tiene que comprarse ropa para entrevistas que aún no sabe pedir</td>
+</tr>
+<tr>
+<td>8</td>
+<td>15-16</td>
+<td>Tiempo libre y planes</td>
+<td><strong>Dice que sí</strong></td>
+<td>Primera invitación. Dice que sí sin entender del todo a qué</td>
+</tr>
+<tr>
+<td>9</td>
+<td>17-18</td>
+<td>Viajes</td>
+<td><strong>Un tramo del Camino</strong></td>
+<td>Un tramo del Camino con Ana y dos desconocidos. Camina más de lo que habla</td>
+</tr>
+<tr>
+<td>10</td>
+<td>19-20</td>
+<td>Salud</td>
+<td><strong>Me duele y no sé decirlo</strong></td>
+<td><strong>El punto bajo.</strong> Enferma solo, en un país que no es el suyo, sin saber explicar qué le duele</td>
+</tr>
+<tr>
+<td>11</td>
+<td>21-22</td>
+<td>Repaso A1</td>
+<td><strong>Lo ha resuelto él</strong></td>
+<td>Se recupera. Resuelve algo pequeño él solo, sin ayuda, y cae en la cuenta de que puede</td>
+</tr>
+<tr>
+<td>12</td>
+<td>23-24</td>
+<td>El pasado</td>
+<td><strong>Quién era yo antes</strong></td>
+<td>Por fin puede contar quién era antes de llegar</td>
+</tr>
+<tr>
+<td>13</td>
+<td>25-26</td>
+<td>Antes y ahora</td>
+<td><strong>Lo que echo de menos</strong></td>
+<td>Echa de menos. No la comida: la versión de sí mismo que era elocuente</td>
+</tr>
+<tr>
+<td>14</td>
+<td>27-28</td>
+<td>Anécdotas</td>
+<td><strong>La primera risa</strong></td>
+<td><strong>Hace reír a alguien en español.</strong> La primera vez. No se le olvida</td>
+</tr>
+<tr>
+<td>15</td>
+<td>29-30</td>
+<td>Estudios y trabajo</td>
+<td><strong>Una pregunta que no esperaba</strong></td>
+<td>Currículum, entrevista. Le hacen una pregunta que no esperaba</td>
+</tr>
+<tr>
+<td>16</td>
+<td>31-32</td>
+<td>Trámites y servicios</td>
+<td><strong>Falta un papel</strong></td>
+<td>El banco, el NIE, una cola y un papel que falta. La burocracia como deporte</td>
+</tr>
+<tr>
+<td>17</td>
+<td>33-34</td>
+<td>El futuro</td>
+<td><strong>¿Te quedas?</strong></td>
+<td>¿Se queda? Lo habla con Ana sin decidir nada</td>
+</tr>
+<tr>
+<td>18</td>
+<td>35-36</td>
+<td>Opiniones</td>
+<td><strong>Pierde la discusión</strong></td>
+<td><strong>Primera discusión de verdad en español.</strong> Pierde, pero la tiene</td>
+</tr>
+<tr>
+<td>19</td>
+<td>37-38</td>
+<td>Comparar y elegir</td>
+<td><strong>Dos ciudades</strong></td>
+<td>Dos ofertas, dos ciudades. Compara en voz alta y elige</td>
+</tr>
+<tr>
+<td>20</td>
+<td>39-40</td>
+<td>Bienestar</td>
+<td><strong>Se le acabó la cuerda</strong></td>
+<td>Se quema. Demasiado idioma, demasiadas horas, poco descanso</td>
+</tr>
+<tr>
+<td>21</td>
+<td>41-42</td>
+<td>Alquiler y convivencia</td>
+<td><strong>Un año de contrato</strong></td>
+<td>Firma un contrato de un año. <strong>Es el momento en que decide quedarse</strong></td>
+</tr>
+<tr>
+<td>22</td>
+<td>43-44</td>
+<td>Fiestas y sentimientos</td>
+<td><strong>Uno más</strong></td>
+<td>Una fiesta del barrio. Ya no es el que mira: es uno más</td>
+</tr>
+<tr>
+<td>23</td>
+<td>45-46</td>
+<td>Textos de la vida real</td>
+<td><strong>El correo difícil</strong></td>
+<td>Los papeles para quedarse. Escribe un correo difícil y le sale bien</td>
+</tr>
+<tr>
+<td>24</td>
+<td>47-48</td>
+<td>Repaso A2</td>
+<td><strong>Se apunta</strong></td>
+<td>Se apunta al DELE A2. Está muerto de miedo</td>
+</tr>
+<tr>
+<td>—</td>
+<td>49-52</td>
+<td>Fase final</td>
+<td><strong>Iván hace el examen. El alumno también.</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="por-que-el-final-es-el-final">Por qué el final es el final</h2>
+<p>La fase final del curso son simulacros del DELE A2 y el examen. Para el alumno
+eso podría ser el trámite aburrido con el que se cierra un año de trabajo.</p>
+<p>Con la historia <strong>deja de ser un trámite</strong>: Iván necesita ese papel para
+quedarse, y el alumno lo hace a la vez que él, el mismo día, con el mismo
+miedo. No es que el curso termine en un examen; es que los dos lo aprueban
+juntos.</p>
+<p>Es la pieza que más empuja a terminar, y no cuesta ni una lección más.</p>
+<h2 id="las-reglas-del-formato">Las reglas del formato</h2>
+<p>Lo que hace que esto no rompa nada:</p>
+<ol>
+<li><strong>Un episodio por unidad, en el día <code>cultura</code> de la segunda semana.</strong> Esos
+   días ya existen (50 en el curso, uno por semana) y ya no son de gramática
+   nueva. El episodio no añade un día ni un minuto.</li>
+<li><strong>El episodio NO sustituye el contenido cultural: lo encarna.</strong> La semana 18
+   habla del Camino de Santiago; el episodio es Iván haciendo un tramo del
+   Camino. Se refuerzan.</li>
+<li><strong>Cero vocabulario nuevo.</strong> El episodio usa solo el léxico y la gramática
+   que la unidad ya ha dado. Es la prueba de fuego de la unidad: si la escena
+   se entiende, el alumno aprendió. La regla 2 (6-10 palabras por lección) no
+   se toca.</li>
+<li><strong>80-150 palabras.</strong> Cabe en una franja, se lee en dos minutos y se puede
+   escuchar.</li>
+<li><strong>Termina en un gancho</strong>, no en una moraleja.</li>
+<li><strong>Va grabado.</strong> El audio ya está construido (<code>scripts/generar_audio.py</code>), y
+   una escena con dos voces es justo lo que ese formato pedía.</li>
+<li><strong>Se puede saltar.</strong> Quien solo quiera gramática no pierde nada: el episodio
+   no introduce materia evaluable. Eso es lo que permite que exista sin
+   obligar a nadie.</li>
+</ol>
+<h2 id="un-episodio-escrito-para-juzgar-el-tono">Un episodio escrito, para juzgar el tono</h2>
+<p>Episodio <strong>8 · «Dice que sí»</strong> — unidad 8 (<em>Tiempo libre, tiempo atmosférico y
+planes</em>), semana 16, día 7, cuyo tema cultural son las fiestas populares del
+calendario. Es el primero que cae en semana aún no escrita, así que entra sin
+retrofit.</p>
+<hr />
+<p><strong>Ana:</strong> ¡Hola, Iván! El sábado es la fiesta del barrio. ¿Quieres venir conmigo?</p>
+<p><strong>Iván:</strong> ¡Hola! Sí, quiero. ¿A qué hora?</p>
+<p><strong>Ana:</strong> A las ocho. Vamos a cenar en la plaza y después hay música.</p>
+<p><strong>Iván:</strong> Vale. ¿Hace frío por la noche?</p>
+<p><strong>Ana:</strong> En mayo no hace frío. Pero yo voy a llevar una chaqueta.</p>
+<p><strong>Iván:</strong> Yo también. Hasta el sábado.</p>
+<p>Iván lee el mensaje otra vez. «La fiesta del barrio.»</p>
+<p>No sabe qué es una fiesta del barrio. No sabe si es grande o pequeña. No sabe
+si va a bailar o solo a mirar, si va a hablar con diez personas o con cien.</p>
+<p>Pero dice que sí.</p>
+<p>Y el sábado va a llevar una chaqueta.</p>
+<hr />
+<p><strong>111 palabras, y ni una fuera de la unidad.</strong> Lo que usa, todo ya dado:
+<code>querer + infinitivo</code>, <code>ir a + infinitivo</code>, <code>conmigo</code>, el impersonal
+<code>hace frío</code>, los meses, la hora, el léxico de planes y de mensajes, la plaza
+(unidad 4) y la chaqueta (unidad 7).</p>
+<p><strong>Lo que deliberadamente NO usa</strong>, porque la unidad 8 todavía no lo ha dado:
+ni un pretérito perfecto (unidad 9), ni un imperativo (unidad 10), ni un
+pasado. Por eso Ana escribe «yo voy a llevar una chaqueta» y no «lleva una
+chaqueta»: el imperativo llega dos unidades más tarde.</p>
+<p>Ese es el ejercicio en cada episodio, y es lo que lo vuelve útil además de
+agradable: <strong>si la escena se entiende sin diccionario, la unidad funcionó.</strong></p>
+<h2 id="que-esta-hecho-y-que-no">Qué está hecho y qué no</h2>
+<p>Los episodios <strong>1 a 7</strong> caen en semanas ya escritas y revisadas (1-14). No se
+han tocado: meterlos ahí es reescribir lecciones que el profesor ya dio por
+buenas, y eso lo decide él. Están aquí descritos por si los quiere.</p>
+<p>Del <strong>8 en adelante</strong> (semana 15 en adelante) el curso aún no está escrito, así
+que el episodio entra con la lección, sin retrofit y sin coste.</p>
+<h2 id="lo-que-esto-no-arregla">Lo que esto no arregla</h2>
+<p>Una historia hace volver a quien ya empezó. <strong>No hace entrar a nadie</strong>: eso es
+la portada, la primera lección y que la web cargue rápido. Y no sustituye lo
+que ya sostiene la constancia —el progreso guardado, el botón de continuar, el
+contador— sino que le da una razón.</p>
+</div></main>
+<footer class="sitio"><div class="envoltorio">
+<p><a href="../o-kurse.html">El curso</a> · <a href="../kontakt.html">Contacto</a> · <a href="../privacy.html">Política de privacidad</a></p>
+<p>El material del curso puede usarse libremente para estudiar.</p>
+</div></footer>
+
+<script>(function(){var b=document.getElementById('tema');if(!b)return;function actual(){var r=document.documentElement;return r.dataset.tema||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}b.addEventListener('click',function(){var n=actual()==='dark'?'light':'dark';document.documentElement.dataset.tema=n;try{localStorage.setItem('tema',n)}catch(e){}});})();</script>
+<script>window.CURSO_TEXTOS={"continuar": "Continuar: lección", "empezar": "Empezar de cero", "marcar": "Marcar la lección como hecha", "hecho": "Lección hecha", "siguiente": "Siguiente lección", "tuyo": "hechas por usted", "titulo": "Su progreso", "aviso": "El progreso se guarda solo en este navegador y en este aparato. No hay registro y no se envía a ninguna parte. Si borra los datos del navegador o abre el curso en otro teléfono, las marcas no viajan con usted.", "borrar": "Borrar el progreso", "confirmar": "¿Borrar todas las marcas?"};window.CURSO_RAIZ="..";window.CURSO_PUBLICADAS=0;window.CURSO_DIAS={};</script>
+<script src="../progreso.js" defer></script>
+
+</body>
+</html>

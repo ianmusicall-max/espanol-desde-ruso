@@ -20,6 +20,9 @@ la documentación del programa, en español.
 - `programa/alineacion-mcer-pcic.md` — PCIC A1-A2, DELE A2, horas. Escrito de
   memoria porque las páginas del Cervantes no se pudieron descargar: cotejar.
 - `programa/evaluacion.md` — instrumentos, reglas de decisión, rúbrica.
+- `programa/historia.md` — el arco de Ana e Iván: 24 episodios, uno por unidad.
+  Los títulos y sinopsis viven en `calendario.yaml` (campo `episodio` de cada
+  unidad); el .md los explica. Hay pruebas que exigen que coincidan.
 - `referencias/` — análisis estructural de los libros de referencia. No se
   copia contenido ajeno; los PDF no se versionan.
 - `curso/plantilla-leccion.md` — la forma de toda lección. `curso/semana-XX/dia-N.md`.
@@ -79,10 +82,10 @@ la documentación del programa, en español.
 - **Las tablas de conjugacion**: 19 lecciones las llevan completas. Nuzhdin las
   evita y usa oposiciones minimas (1.ª/2.ª sg., 1.ª/3.ª sg., 3.ª sg./3.ª pl.).
   Se puede dejar la tabla como consulta y practicar por oposiciones.
-- **La audionovela**: atraviesa los dos libros de la serie. Aqui Ana e Ivan ya
-  existen desde la leccion 1, pero como nombres y no como trama. Convertirlos
-  en una historia seriada es el cambio con mas recorrido, y el audio ya esta
-  construido.
+- **La audionovela: hecha** (`programa/historia.md`, 2026-10-26). Queda que el
+  profesor decida si quiere los episodios 1-7, que caen en semanas ya
+  revisadas y pedirian reescribir lecciones dadas por buenas. Del 8 en
+  adelante entran con la leccion, sin retrofit.
 
 ## Progreso del lector, sin registro (2026-10-26)
 
@@ -490,6 +493,51 @@ y el **bloque de traducción ru↔es** al cerrar los ejercicios. Lo que no se to
 la modularidad horizontal/vertical, que presupone un profesor y un grupo que
 eligen, y este curso es un camino fijo de 30 minutos donde no hay que decidir
 nada.
+
+## La historia de Ana e Iván (2026-10-26)
+
+El usuario lo pidió así: «haz que las personas entren y terminen el curso».
+
+**El hallazgo es que el arco no hubo que inventarlo: estaba en el temario.**
+Las 24 unidades leídas en orden ya son la historia de alguien que se muda a
+España —llega, se orienta, come, compra, viaja, enferma; y en A2 cuenta su
+vida, busca trabajo, pelea con la burocracia, decide, alquila, celebra y se
+examina—. La historia solo lo hace visible.
+
+**Y por eso el final del curso deja de ser un trámite**: la fase final son
+simulacros del DELE A2, e Iván necesita ese papel para quedarse. El alumno se
+examina a la vez que él. Es la pieza que más empuja a terminar y no cuesta ni
+una lección más.
+
+Cómo encaja sin romper nada:
+
+- **Un episodio por unidad, en el día `cultura` de la segunda semana.** Esos
+  días ya existen (50, uno por semana) y ya no son de gramática nueva: el
+  episodio no añade un día ni un minuto. **No sustituye el contenido cultural:
+  lo encarna** —la semana 18 habla del Camino y el episodio es Iván haciendo un
+  tramo—.
+- **Cero vocabulario nuevo.** El episodio usa solo lo que la unidad ya dio, así
+  que la regla 2 no se toca y además el episodio **mide la unidad**: si la
+  escena se entiende sin diccionario, funcionó. En el ejemplo escrito (el 8)
+  Ana dice «yo voy a llevar una chaqueta» y no «lleva una chaqueta» porque el
+  imperativo llega dos unidades más tarde.
+- **Ana no es profesora ni pareja de Iván**, que son los dos clichés que
+  convierten al alumno en espectador: es su vecina, con sus propios problemas,
+  que le corrige poco y le entiende mucho.
+- **Se puede saltar**: no introduce materia evaluable. Eso es lo que permite
+  que exista sin obligar a nadie.
+
+**Los títulos y las sinopsis viven en el YAML**, no en el .md, porque el
+calendario es la única fuente de verdad. El .md explica el arco y una prueba
+exige que nombre los mismos episodios. **Esa prueba se puso en rojo en su
+primera ejecución** y tenía razón: el documento describía lo que pasa en cada
+unidad pero no nombraba los episodios del YAML. Es exactamente la deriva que
+este proyecto sufre una y otra vez —lo escrito y lo que corre dejan de
+coincidir— cazada esta vez el mismo día.
+
+**Lo que la historia NO hace, y conviene no confundirlo**: hace volver a quien
+ya empezó. No hace entrar a nadie. Entrar es la portada, la primera lección y
+que la web cargue: otro problema, y el siguiente.
 
 ## Estado (2026-10-26)
 

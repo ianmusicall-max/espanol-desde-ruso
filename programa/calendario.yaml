@@ -57,6 +57,7 @@ unidades:
     contraste_ru: ["sin reducción vocálica (аканье)", "б/в son un solo sonido", "ты/вы = tú/usted, pero usted lleva verbo en 3.ª persona", "sin patronímico; dos apellidos", "¿? y ¡! al principio"]
     cultura: ["dónde se habla español", "saludos con beso y apretón de manos", "nombres y apellidos hispanos"]
     tarea_final: "Grabar una presentación de 30 segundos (nombre, origen, edad, idiomas) y escribirla."
+    episodio: {titulo: "Un portal, dos nombres", sinopsis: "Iván aterriza y solo puede decir su nombre. Ana le abre el portal."}
     dias:
       - [1, 1, leccion, "El alfabeto y las cinco vocales", "Алфавит и пять гласных", "Nombres de las letras; a-e-i-o-u siempre claras (sin reducción); ¡Hola! / Adiós", "Leer 20 palabras transparentes en voz alta y grabarse"]
       - [1, 2, leccion, "Consonantes fáciles y los saludos del día", "Простые согласные и приветствия по времени суток", "p, t, k, m, n, l, s, f; d/t dentales; b = v; h muda; buenos días / tardes / noches; ¿Qué tal?", "Mini-diálogo de saludo de 4 réplicas"]
@@ -89,6 +90,7 @@ unidades:
     contraste_ru: ["EL ARTÍCULO: la categoría que el ruso no tiene", "tres géneros rusos → dos españoles; el neutro desaparece", "el adjetivo va DESPUÉS del sustantivo", "'есть' existencial = hay"]
     cultura: ["horarios laborales en España y Latinoamérica", "el euro y el peso", "marcas y objetos de cada día"]
     tarea_final: "«Mi mochila»: foto o dibujo con seis frases (hay / es / está + artículo + color)."
+    episodio: {titulo: "La maleta", sinopsis: "Deshace la maleta y explica a qué se dedica con cuatro palabras y un gesto."}
     dias:
       - [3, 1, leccion, "El género del sustantivo y el artículo el / la", "Род существительного и артикль el / la", "-o / -a y las excepciones (la mano, el día, el problema, la foto); -ción, -dad = femenino; qué es un artículo y por qué el ruso no lo tiene", "Clasificar 30 sustantivos por género con su artículo"]
       - [3, 2, leccion, "El plural y los / las; ¿Qué es esto?", "Множественное число и los / las; ¿Qué es esto?", "-s / -es; objetos de la clase y de la mochila; ¿Qué es esto? Es un / una…", "Nombrar 15 objetos en singular y plural"]
@@ -121,6 +123,7 @@ unidades:
     contraste_ru: ["'su' cubre его / её / их / Ваш; no existe 'свой'", "nuestro / vuestro concuerdan en género", "«у меня есть брат» → tengo un hermano (sujeto + verbo)", "ser / estar: «он весёлый» / «он сейчас весел»"]
     cultura: ["la familia extensa y la sobremesa", "Día de la Madre y del Padre", "nombres de pila frecuentes"]
     tarea_final: "Árbol genealógico comentado: 8 personas con relación, edad, profesión y un rasgo."
+    episodio: {titulo: "Las fotos", sinopsis: "Enseña fotos de los suyos. Primera vez que cuenta algo propio y le entienden."}
     dias:
       - [5, 1, leccion, "La familia y el verbo tener", "Семья и глагол tener", "padre / madre, hijo / hija, hermano / a, abuelo / a, tío / a, primo / a; tener completo; ¿Tienes hermanos? Tengo un hermano", "Presentar a la familia propia en 8 frases con tener"]
       - [5, 2, leccion, "Los posesivos: mi, tu, su", "Притяжательные: mi, tu, su", "mi / mis, tu / tus, su / sus; 'su' = его / её / их / Ваш; nunca «свой»; mi madre se llama…", "Describir la familia de un compañero con su / sus"]
@@ -153,6 +156,7 @@ unidades:
     contraste_ru: ["hay = есть (existencia) / está = находится (localización)", "sin casos: la preposición hace todo el trabajo (на столе = en la mesa)", "al / del: contracciones obligatorias", "los pisos se cuentan desde la planta baja"]
     cultura: ["piso frente a casa", "la plaza mayor y el barrio", "el metro de Madrid y de Ciudad de México"]
     tarea_final: "Mapa del propio barrio con 8 frases (hay / está / se va por…)."
+    episodio: {titulo: "Perdido a tres calles", sinopsis: "Pregunta mal, le responden rápido, no entiende nada. Vuelve andando."}
     dias:
       - [7, 1, leccion, "La casa: habitaciones y el verbo vivir", "Дом: комнаты и глагол vivir", "salón, cocina, dormitorio, baño, pasillo, balcón; vivir en (regular -ir completo); ¿Dónde vives? Vivo en un piso en…", "Describir la propia casa: habitaciones y en qué calle está"]
       - [7, 2, leccion, "Muebles: hay o está", "Мебель: hay или está", "mesa, silla, cama, armario, sofá, lámpara; hay (есть) frente a está (находится); preposiciones: encima de, debajo de, al lado de, entre, delante de, detrás de", "Describir una habitación de una foto en 10 frases"]
@@ -185,6 +189,7 @@ unidades:
     contraste_ru: ["reflexivos = -ся (умываться = lavarse), pero el pronombre va delante", "la hora con ser y artículo (son las dos)", "el cambio vocálico recuerda al е/ё ruso", "los días llevan artículo: los lunes = по понедельникам"]
     cultura: ["horarios españoles de comida", "la siesta: mito y realidad", "el ritmo de vida en las ciudades hispanas"]
     tarea_final: "Agenda semanal propia en español (7 días, 3 actividades por día con hora)."
+    episodio: {titulo: "Cenar a las diez", sinopsis: "Los horarios le descolocan: la ciudad cerrada a las tres, la cena de noche."}
     dias:
       - [9, 1, leccion, "¿Qué hora es?", "Который час?", "Es la una / Son las dos y media / menos cuarto / en punto; a las…; de la mañana / tarde / noche; reloj de 24 h", "Decir la hora de 12 relojes y 6 horarios de trenes"]
       - [9, 2, leccion, "El presente regular: -ar, -er, -ir", "Настоящее время правильных глаголов: -ar, -er, -ir", "Tabla completa; trabajar, estudiar, comer, leer, vivir, escribir; ¿Qué haces por la mañana? (hacer solo como pregunta)", "Conjugar 9 verbos y escribir 10 frases sobre la rutina"]
@@ -217,6 +222,7 @@ unidades:
     contraste_ru: ["me gusta = мне нравится: misma estructura de experimentador en dativo", "gustan con sujeto plural (мне нравятся)", "muy (очень) / mucho (много, очень сильно)", "tomar = «пить / есть / брать» en el bar"]
     cultura: ["tapas, paella, tacos, arepas, ceviche", "horarios de comida", "la sobremesa, la propina y el brindis"]
     tarea_final: "Menú bilingüe de 6 platos (3 rusos explicados en español, 3 hispanos) con precios."
+    episodio: {titulo: "Nadie tiene prisa", sinopsis: "El bar. Descubre que pedir es un ritual y que la prisa es cosa suya."}
     dias:
       - [11, 1, leccion, "El desayuno: alimentos y bebidas", "Завтрак: еда и напитки", "pan, leche, café, té, zumo, fruta, huevos, queso, jamón; tomar / desayunar; ¿Qué desayunas?", "Describir el desayuno propio y el de un hispano (8 frases)"]
       - [11, 2, leccion, "Gustar (1): me gusta = мне нравится", "Gustar (1): me gusta = мне нравится", "me / te / le gusta + singular o infinitivo; la estructura es IDÉNTICA al ruso; ¿Te gusta el café?", "20 frases de gustos propios y ajenos"]
@@ -249,6 +255,7 @@ unidades:
     contraste_ru: ["tres demostrativos = этот / тот / вон тот", "el OD es un clítico delante del verbo, no un caso", "quedar bien funciona como gustar (мне идёт)", "'llevar' = носить / быть одетым"]
     cultura: ["rebajas y mercadillos (El Rastro)", "horarios comerciales", "Zara e Inditex", "el regateo en mercados latinoamericanos"]
     tarea_final: "Catálogo de 5 productos: foto, nombre, color, material, precio y una frase de venta."
+    episodio: {titulo: "Una camisa para una entrevista", sinopsis: "Se cae el trabajo. Compra ropa para entrevistas que aún no sabe pedir."}
     dias:
       - [13, 1, leccion, "La ropa y los colores", "Одежда и цвета", "camisa, camiseta, pantalón, vestido, falda, abrigo, zapatos, zapatillas; colores completos con concordancia (la camisa blanca, los zapatos negros)", "Describir la ropa de 4 personas con color"]
       - [13, 2, leccion, "En la tienda: tallas, probador y este / ese / aquel", "В магазине: размеры, примерочная и este / ese / aquel", "¿Qué talla usas?; ¿Puedo probármelo?; el probador; este / ese / aquel (этот / тот / вон тот)", "Role-play en la tienda de ropa (8 réplicas)"]
@@ -281,6 +288,7 @@ unidades:
     contraste_ru: ["ir a + inf ≈ собираться + inf", "hace frío = холодно (impersonal con hacer)", "la fecha: el 5 de mayo, sin ordinal", "conmigo / contigo: formas únicas"]
     cultura: ["el fútbol y los clubes", "el domingo en familia", "fiestas populares del calendario (San Fermín, Día de Muertos)"]
     tarea_final: "Calendario del año con 12 fiestas hispanas y 3 rusas explicadas en español."
+    episodio: {titulo: "Dice que sí", sinopsis: "Primera invitación. Acepta sin entender del todo a qué."}
     dias:
       - [15, 1, leccion, "Aficiones y deportes", "Увлечения и спорт", "jugar al fútbol / tenis, tocar la guitarra, hacer yoga, practicar natación, leer, cocinar, viajar; ¿Qué haces en tu tiempo libre?", "Describir 6 aficiones propias con el verbo correcto"]
       - [15, 2, leccion, "Me gusta bailar: gustar + infinitivo", "Мне нравится танцевать: gustar + инфинитив", "me gusta (mucho) + infinitivo; me interesa; prefiero; ¿Te gusta bailar?; cuestionario de aficiones", "Entrevista de aficiones (10 preguntas) y resumen en 3.ª persona"]
@@ -313,6 +321,7 @@ unidades:
     contraste_ru: ["el perfecto no existe en ruso: «сегодня я побывал» = hoy he estado", "ya / todavía no = уже / ещё не", "coger (España) = tomar (América)", "en + medio sin caso instrumental", "🌎 en gran parte de América se dice «hoy comí» donde en España «hoy he comido»: el perfecto se oye menos"]
     cultura: ["el Camino de Santiago", "Machu Picchu", "el colectivo y la guagua: transporte en Latinoamérica", "destinos hispanos para rusos"]
     tarea_final: "Postal de un viaje (100 palabras) con lo que se ha visto y hecho."
+    episodio: {titulo: "Un tramo del Camino", sinopsis: "Camina con Ana y dos desconocidos. Habla menos de lo que anda."}
     dias:
       - [17, 1, leccion, "Medios de transporte: ¿cómo vas al trabajo?", "Транспорт: как ты добираешься на работу?", "en coche / tren / autobús / metro / avión / bici, a pie; coger (ES) / tomar (LA) el autobús; tardar + tiempo; ¿Cómo vas al trabajo?", "Describir cómo va al trabajo la gente de 6 ciudades"]
       - [17, 2, leccion, "En la estación: billetes y horarios", "На вокзале: билеты и расписание", "un billete de ida y vuelta, ¿a qué hora sale / llega?, el andén, el próximo tren, con retraso; horario de 24 h", "Role-play en la taquilla (8 réplicas) y leer un horario"]
@@ -345,6 +354,7 @@ unidades:
     contraste_ru: ["me duele la cabeza: artículo, no posesivo (у меня болит голова)", "tengo fiebre / hambre / sueño = у меня жар / я хочу есть / спать: con tener", "tener que ≈ должен; hay que ≈ надо (impersonal)", "el imperativo de usted se forma «al revés» (-ar → -e, -er / -ir → -a)"]
     cultura: ["el sistema de salud y la farmacia de guardia", "remedios caseros", "la dieta mediterránea y el mate"]
     tarea_final: "Decálogo de vida sana: 10 consejos en imperativo con una razón cada uno."
+    episodio: {titulo: "Me duele y no sé decirlo", sinopsis: "Enferma solo, en un país que no es el suyo, sin poder explicar qué le pasa."}
     dias:
       - [19, 1, leccion, "Las partes del cuerpo", "Части тела", "cabeza, ojos, nariz, boca, oreja, cuello, espalda, brazo, mano, pierna, pie, estómago, garganta; con el artículo, no con el posesivo", "Etiquetar un dibujo (20 partes) y decir 8 con el artículo"]
       - [19, 2, leccion, "Me duele: ¿qué te pasa?", "У меня болит: что с тобой?", "me duele / me duelen (como gustar); ¿Qué te duele? ¿Qué te pasa?; estar enfermo / resfriado; tener dolor de…", "Diálogo de 8 réplicas sobre dolores y malestar"]
@@ -377,6 +387,7 @@ unidades:
     contraste_ru: ["los diez errores típicos del rusohablante en A1 (ver programa/contrastiva-ru-es.md)"]
     cultura: ["un cortometraje en español con subtítulos"]
     tarea_final: "Proyecto «Mi vida»: presentación oral de 2 minutos y texto de 120 palabras, autoevaluados con rúbrica."
+    episodio: {titulo: "Lo ha resuelto él", sinopsis: "Arregla algo pequeño sin ayuda y cae en la cuenta de que ya puede."}
     dias:
       - [21, 1, repaso, "Repaso 1: ser, estar, hay, tener", "Повторение 1: ser, estar, hay, tener", "Mapa comparativo con el ruso (быть / находиться / есть / иметь); 30 frases de decisión", "Mapa propio de los cuatro verbos con 2 ejemplos cada uno"]
       - [21, 2, repaso, "Repaso 2: el presente", "Повторение 2: настоящее время", "Regulares, reflexivos, cambio vocálico, yo irregular; tabla de los 25 verbos más frecuentes", "Conjugar 25 verbos en 2 minutos (prueba cronometrada)"]
@@ -409,6 +420,7 @@ unidades:
     contraste_ru: ["un solo pasado ruso frente a dos (o tres) españoles: la clave es «сегодня / вчера» y el aspecto", "fui = ser e ir: el contexto decide", "en + año sin preposición rusa equivalente («в 1990 году»)", "el perfecto se usa más en España; en América domina el indefinido"]
     cultura: ["Gabriel García Márquez, Frida Kahlo, Picasso, Messi, Shakira", "1492 y las independencias"]
     tarea_final: "Línea de tiempo de la propia vida: 10 hechos con año y una frase en indefinido."
+    episodio: {titulo: "Quién era yo antes", sinopsis: "Por fin puede contar su vida anterior."}
     dias:
       - [23, 1, leccion, "Indefinido regular -ar: ayer hablé", "Pretérito indefinido -ar: вчера я говорил", "hablé, hablaste, habló, hablamos, hablasteis, hablaron; ayer, anoche, el lunes pasado; la tilde que distingue hablo / habló", "Contar lo que se hizo ayer con 10 verbos en -ar"]
       - [23, 2, leccion, "Indefinido regular -er / -ir: comí, viví", "Pretérito indefinido -er / -ir: comí, viví", "comí, comiste, comió…; la semana pasada, hace dos días, el año pasado; ¿Qué hiciste ayer? (hacer como fórmula)", "Diario de la semana pasada (10 frases)"]
@@ -441,6 +453,7 @@ unidades:
     contraste_ru: ["imperfecto ≈ несовершенный вид в прошедшем (я жил, я ходил)", "indefinido ≈ совершенный вид (я сходил, я прожил)", "había = было (existencia en pasado)", "soler = «обычно» como verbo"]
     cultura: ["la infancia en los 80 y 90 en España y en Rusia", "la Transición y la Movida"]
     tarea_final: "Entrevista a un familiar mayor: 8 preguntas y respuestas en imperfecto (traducidas al español)."
+    episodio: {titulo: "Lo que echo de menos", sinopsis: "No la comida: al que era él cuando sabía hablar."}
     dias:
       - [25, 1, leccion, "El imperfecto: de pequeño vivía en…", "Pretérito imperfecto: в детстве я жил в…", "-aba / -ía; de pequeño / a, cuando era niño / a; «я жил» (несов.) = vivía", "Describir dónde y cómo se vivía de pequeño (10 frases)"]
       - [25, 2, leccion, "Era, iba, veía: describir en pasado", "Era, iba, veía: описание в прошлом", "ser, ir, ver irregulares; era alto, tenía el pelo largo, había un parque, estaba al lado de", "Describir la casa de la infancia (10 frases)"]
@@ -473,6 +486,7 @@ unidades:
     contraste_ru: ["estaba durmiendo cuando llamaron = я спал, когда позвонили", "hace dos años = два года назад (hace va delante)", "llevo dos años estudiando = я учу уже два года (sin perfecto ruso)"]
     cultura: ["leyendas: La Llorona, el Cid", "el humor hispano: chistes cortos"]
     tarea_final: "«Mi mejor anécdota»: vídeo de 2 minutos y texto de 150 palabras."
+    episodio: {titulo: "La primera risa", sinopsis: "Hace reír a alguien en español. No se le va a olvidar."}
     dias:
       - [27, 1, leccion, "Estaba durmiendo cuando sonó el teléfono", "Я спал, когда зазвонил телефон", "estaba + gerundio (acción en curso) + cuando + indefinido (interrupción); mientras", "Escribir 10 interrupciones a partir de viñetas"]
       - [27, 2, leccion, "Conectores del relato: primero, entonces, de repente, al final", "Связки рассказа: сначала, тогда, вдруг, в конце", "ordenar una historia desordenada; conectores de secuencia y de causa (así que, porque, por eso)", "Reordenar y conectar una historia de 10 frases"]
@@ -505,6 +519,7 @@ unidades:
     contraste_ru: ["знать = saber (datos) / conocer (personas, lugares); уметь = saber + infinitivo; мочь = poder", "llevo tres años aquí = я здесь уже три года (presente, no pasado)", "el correo formal: Estimado / a y Atentamente; sin «Уважаемый + patronímico»"]
     cultura: ["jornada, vacaciones y paga extra", "el «enchufe»", "las becas Erasmus", "emprendedores hispanos"]
     tarea_final: "Currículum propio en español (una página) y correo de solicitud (120 palabras)."
+    episodio: {titulo: "Una pregunta que no esperaba", sinopsis: "Currículum y entrevista. Le preguntan algo para lo que no venía preparado."}
     dias:
       - [29, 1, leccion, "¿A qué te dedicas? Profesiones y sectores", "Чем ты занимаешься? Профессии и отрасли", "profesiones ampliadas; sectores (la sanidad, la educación, la informática); trabajar de / en / para; estar en paro; ser autónomo", "Describir el trabajo de 6 personas con de / en / para"]
       - [29, 2, leccion, "Saber, conocer, poder: знать, уметь, мочь", "Saber, conocer, poder: знать, уметь, мочь", "sé conducir / conozco Madrid / puedo venir; mapa de los tres frente a los tres rusos", "Completar 20 frases y escribir 6 sobre uno mismo"]
@@ -537,6 +552,7 @@ unidades:
     contraste_ru: ["el imperativo negativo cambia de forma (no hables), no basta con «не»", "le + lo = se lo: la regla que no tiene equivalente ruso", "se impersonal ≈ «здесь говорят по-испански» / «продаётся»"]
     cultura: ["la burocracia y el NIE", "el ayuntamiento", "carteles y señales del mundo hispano"]
     tarea_final: "Guía «Cómo moverse en mi ciudad» para un hispanohablante: 10 instrucciones."
+    episodio: {titulo: "Falta un papel", sinopsis: "El banco, el NIE, la cola. La burocracia como deporte de resistencia."}
     dias:
       - [31, 1, leccion, "Imperativo afirmativo: hablad, hablen; dímelo", "Повелительное: hablad, hablen; dímelo", "vosotros (-ad / -ed / -id) y ustedes (-en / -an); pronombres pegados: dímelo, siéntese, levantaos", "Convertir 12 instrucciones a las cuatro personas"]
       - [31, 2, leccion, "Imperativo negativo: no hables, no comas", "Отрицательный императив: no hables, no comas", "formas del subjuntivo: no hables / no coma / no vivan; irregulares (no hagas, no vengas, no vayas, no seas, no pongas); pronombres delante (no lo hagas)", "Escribir 10 prohibiciones y 10 consejos negativos"]
@@ -569,6 +585,7 @@ unidades:
     contraste_ru: ["dos futuros para el «буду + inf» / forma simple perfectiva del ruso", "si + presente, nunca si + futuro (≠ «если будет»)", "habrá = будет (existencia)", "«через 10 лет» = dentro de 10 años"]
     cultura: ["el horóscopo y las supersticiones (martes 13)", "las doce uvas de Nochevieja", "la ciencia ficción hispana"]
     tarea_final: "Pronóstico del tiempo en vídeo (1 minuto) para tres ciudades hispanas."
+    episodio: {titulo: "¿Te quedas?", sinopsis: "Lo hablan sin decidir nada. Queda flotando."}
     dias:
       - [33, 1, leccion, "El futuro simple: mañana lloverá", "Простое будущее: завтра будет дождь", "-é, -ás, -á, -emos, -éis, -án sobre el infinitivo; frente a ir a + infinitivo (plan cercano / intención)", "Convertir 10 planes a futuro y escribir 10 predicciones"]
       - [33, 2, leccion, "Futuro irregular: tendré, haré, podré, habrá", "Неправильное будущее: tendré, haré, podré, habrá", "tener, hacer, poder, salir, poner, venir, decir, querer, saber, haber (habrá); raíces", "Contar un día futuro con los 10 irregulares"]
@@ -601,6 +618,7 @@ unidades:
     contraste_ru: ["creo que + indicativo siempre (no como «я думаю, что бы…»)", "yo sí / yo no: respuestas cortas sin repetir el verbo", "pregunta si = спрашивает, ли; sin «ли» no hay si", "las fórmulas del teléfono varían por país"]
     cultura: ["la tertulia y el debate en la sobremesa", "el español en internet: abreviaturas y memes"]
     tarea_final: "Hilo de opinión de 8 mensajes sobre un tema cotidiano (con acuerdo y desacuerdo)."
+    episodio: {titulo: "Pierde la discusión", sinopsis: "Primera discusión de verdad en español. La pierde, pero la tiene."}
     dias:
       - [35, 1, leccion, "Creo que, me parece que: dar la opinión", "Я думаю, мне кажется: выразить мнение", "creo / pienso / me parece que + indicativo; para mí; en mi opinión; sobre + tema; temas cotidianos", "Opinar sobre 8 temas con tres fórmulas distintas"]
       - [35, 2, leccion, "Estoy de acuerdo, tienes razón, yo sí / yo no", "Согласен, ты прав, а я да / а я нет", "estoy (totalmente) de acuerdo, no estoy de acuerdo, depende, tienes razón; yo sí / yo no / yo también / yo tampoco", "Diálogo de 12 réplicas con acuerdo y desacuerdo"]
@@ -633,6 +651,7 @@ unidades:
     contraste_ru: ["más … que = «чем»; el comparativo es analítico, no con sufijo", "la doble negación es obligatoria, como en ruso (no hay nadie = никого нет)", "que relativo = который sin declinar", "mayor / menor también para la edad"]
     cultura: ["los «más» del mundo hispano (el país más grande, la ciudad más alta)", "rivalidades amistosas: Madrid / Barcelona, Buenos Aires / Montevideo"]
     tarea_final: "Reseña de un producto o servicio (150 palabras) con comparación y recomendación."
+    episodio: {titulo: "Dos ciudades", sinopsis: "Dos ofertas. Compara en voz alta y elige."}
     dias:
       - [37, 1, leccion, "Más que, menos que", "Больше чем, меньше чем", "más / menos + adjetivo / sustantivo / adverbio + que; «чем»; comparar con datos y números", "Comparar 2 ciudades en 10 frases con datos"]
       - [37, 2, leccion, "Tan … como, tanto … como; mejor, peor, mayor, menor", "Такой же … как, столько же … сколько; лучше, хуже, старше, младше", "igualdad: tan + adj + como, tanto / a / os / as + sust + como; irregulares mejor / peor / mayor / menor", "Escribir 12 comparaciones de igualdad y 6 con irregulares"]
@@ -665,6 +684,7 @@ unidades:
     contraste_ru: ["por ≈ из-за / ради / через / по; para ≈ для / чтобы / к (plazo)", "me da miedo = мне страшно (dativo otra vez)", "deberías = тебе следовало бы; yo que tú = я бы на твоём месте", "demasiado = слишком (no «очень»)"]
     cultura: ["el paseo, la siesta y la «vida tranquila»", "la medicina tradicional: mate, coca, manzanilla"]
     tarea_final: "Plan semanal de bienestar (7 días) con consejos en condicional e imperativo."
+    episodio: {titulo: "Se le acabó la cuerda", sinopsis: "Demasiado idioma, demasiadas horas, poco descanso."}
     dias:
       - [39, 1, leccion, "El condicional: me gustaría, podría", "Условное наклонение: мне хотелось бы, мог бы", "-ía sobre el infinitivo; irregulares como el futuro (tendría, haría, podría); cortesía: ¿podría…?, me gustaría…", "Formular 10 peticiones y 6 deseos corteses"]
       - [39, 2, leccion, "Deberías, yo que tú, lo mejor es", "Тебе следовало бы, я бы на твоём месте, лучше всего", "consejos con condicional; ¿por qué no…?; responder: tienes razón, lo intentaré, no puedo porque…", "Dar 3 consejos a 4 personas con problemas y responder"]
@@ -697,6 +717,7 @@ unidades:
     contraste_ru: ["está roto (estado) ≠ se ha roto (suceso): «сломан» / «сломался»", "¿te importa si…? no tiene equivalente directo: «ты не против, если…»", "se alquila = сдаётся: la pasiva refleja como el -ся ruso", "pedir favores sin imperativo seco: ¿puedes…? en vez de «сделай»"]
     cultura: ["compartir piso", "vivir con los padres hasta los 30", "la comunidad de vecinos", "el patio y la hamaca"]
     tarea_final: "Anuncio del propio piso para alquilar (100 palabras) con 6 normas de la casa."
+    episodio: {titulo: "Un año de contrato", sinopsis: "Firma el alquiler. Es el momento en que decide quedarse."}
     dias:
       - [41, 1, leccion, "Alquilar un piso: contrato, fianza, gastos", "Снять квартиру: договор, залог, коммунальные", "el contrato, la fianza, los gastos incluidos, el casero / la casera, amueblado; llamar por un anuncio", "Llamada para preguntar por un piso (10 réplicas)"]
       - [41, 2, leccion, "Está roto, está abierta: estar + participio", "Сломан, открыта: estar + причастие", "estar + participio con concordancia; irregulares: abierto, roto, hecho, escrito, puesto, visto, muerto, vuelto", "Describir el estado de 12 cosas de una casa"]
@@ -729,6 +750,7 @@ unidades:
     contraste_ru: ["acabar de = только что (no existe como verbo en ruso)", "seguir + gerundio = продолжать + inf", "me pone nervioso = меня нервирует (el español usa dativo)", "las fórmulas con que + subjuntivo se aprenden como palabras, no como gramática"]
     cultura: ["Navidad, Reyes, Semana Santa, Día de Muertos, Carnaval", "la Navidad hispana frente al Новый год", "flamenco, tango, salsa, cumbia"]
     tarea_final: "Lista de reproducción comentada: 5 canciones en español con 3 frases cada una."
+    episodio: {titulo: "Uno más", sinopsis: "La fiesta del barrio. Ya no es el que mira desde el borde."}
     dias:
       - [43, 1, leccion, "Empezar a, dejar de, volver a, acabar de", "Начать, перестать, снова, только что", "perífrasis de fase; acabar de = только что; tener ganas de; cambios de hábito", "Contar 10 cambios de la propia vida con perífrasis"]
       - [43, 2, leccion, "Seguir + gerundio, estar a punto de", "Продолжать + герундий, вот-вот", "sigo estudiando (продолжаю учить); estar a punto de; llevar + gerundio (repaso); ya no (contraste)", "Describir qué sigue haciendo y qué ha dejado (8 frases)"]
@@ -761,6 +783,7 @@ unidades:
     contraste_ru: ["los días y los meses van en minúscula", "los signos ¿ ¡ se abren", "la coma no separa «что» (no hay coma antes de que)", "la tilde no es el acento ruso: es una marca escrita con reglas"]
     cultura: ["microcuentos (Monterroso)", "poemas cortos (Neruda, Lorca) adaptados", "lecturas graduadas"]
     tarea_final: "Diario de una semana en español (7 entradas de 50 palabras)."
+    episodio: {titulo: "El correo difícil", sinopsis: "Los papeles para quedarse. Lo escribe y le sale bien."}
     dias:
       - [45, 1, leccion, "Estrategias de lectura: anuncios, carteles, programas", "Стратегии чтения: объявления, вывески, программы", "tipos de texto; lectura rápida (skimming) y de detalle (scanning); tareas tipo DELE A2 de lectura 1 y 2", "Resolver 2 tareas de lectura en 15 minutos"]
       - [45, 2, leccion, "Noticias y textos informativos: la idea principal", "Новости и информационные тексты: главная мысль", "identificar la idea principal; preguntas de opción múltiple; tareas tipo DELE A2 de lectura 3 y 4", "Resolver 2 tareas y justificar las respuestas"]
@@ -793,6 +816,7 @@ unidades:
     contraste_ru: ["la lista negra completa del rusohablante (programa/contrastiva-ru-es.md)"]
     cultura: ["una película en español (fragmentos)", "recursos para seguir: podcasts, series, lecturas B1"]
     tarea_final: "Prueba integral de A2 (40 ítems) y lista personal de errores actualizada."
+    episodio: {titulo: "Se apunta", sinopsis: "Se inscribe en el DELE A2. Está muerto de miedo."}
     dias:
       - [47, 1, repaso, "Repaso 1: presente, reflexivos y verbos tipo gustar", "Повторение 1: настоящее время, возвратные и глаголы типа gustar", "Mapa completo de gustar, encantar, doler, quedar, interesar, dar miedo, poner nervioso, parecer", "Escribir 2 frases con cada uno de los 8 verbos"]
       - [47, 2, repaso, "Repaso 2: los pasados, tabla de decisión", "Повторение 2: прошедшие времена, таблица решений", "perfecto / indefinido / imperfecto: aspecto (вид) + marcador (hoy / ayer); relato guiado", "Completar un relato de 25 huecos y justificar"]

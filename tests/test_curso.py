@@ -1020,5 +1020,54 @@ class TestElAudioDeLasLecciones(unittest.TestCase):
         self.assertNotIn("sonando", otra)
 
 
+class TestLaHistoria(unittest.TestCase):
+    """Ana e Iván: un episodio por unidad, en el día `cultura` de la 2.ª semana.
+
+    Lo que se vigila aquí es que el arco y el calendario no se separen. Es el
+    fallo que más se repite en este proyecto: lo escrito en un .md y lo que de
+    verdad corre dejan de coincidir, y nadie se entera porque nada se pone en
+    rojo."""
+
+    def setUp(self):
+        self.cal = plan.cargar()
+        self.unidades = self.cal["unidades"]
+        self.arco = (RAIZ / "programa" / "historia.md").read_text(encoding="utf-8")
+
+    def test_cada_unidad_tiene_su_episodio(self):
+        for u in self.unidades:
+            ep = u.get("episodio")
+            self.assertIsNotNone(ep, f"unidad {u['numero']} sin episodio")
+            self.assertTrue(ep.get("titulo"), u["numero"])
+            self.assertTrue(ep.get("sinopsis"), u["numero"])
+
+    def test_ningun_episodio_repite_titulo(self):
+        titulos = [u["episodio"]["titulo"] for u in self.unidades]
+        self.assertEqual(len(titulos), len(set(titulos)))
+
+    def test_el_arco_escrito_nombra_los_mismos_episodios_que_el_calendario(self):
+        """Si alguien renombra un episodio en el YAML y no en historia.md, el
+        documento pasa a describir una historia que el curso no cuenta."""
+        for u in self.unidades:
+            self.assertIn(u["episodio"]["titulo"].split(":")[0][:18], self.arco,
+                          f"unidad {u['numero']}: el arco no menciona «{u['episodio']['titulo']}»")
+
+    def test_hay_un_dia_cultura_donde_cabe_el_episodio(self):
+        """El episodio no añade un día ni un minuto: vive en un día que ya
+        existe y que ya no es de gramática nueva."""
+        dias = plan.dias(self.cal)
+        for u in self.unidades:
+            segunda = u["semanas"][1]
+            culturales = [d for d in dias if d.semana == segunda and d.tipo == "cultura"]
+            self.assertEqual(len(culturales), 1,
+                             f"unidad {u['numero']}: la semana {segunda} no tiene un día de cultura")
+
+    def test_el_arco_llega_hasta_el_examen(self):
+        """El final del curso es el DELE A2, y la historia tiene que terminar
+        ahí: es lo que convierte el examen en el desenlace y no en un trámite."""
+        self.assertIn("DELE A2", self.arco)
+        ultimo = self.unidades[-1]["episodio"]["sinopsis"]
+        self.assertIn("DELE", ultimo, "el último episodio tiene que dejar a Iván en el examen")
+
+
 if __name__ == "__main__":
     unittest.main()
