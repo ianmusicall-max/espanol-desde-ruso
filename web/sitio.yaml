@@ -27,9 +27,9 @@ autor:
   descripcion: >-
     Преподаватель с магистратурой по языкам. Испанский — родной, владеет тремя
     языками. Курс написан специально для русскоговорящих.
-  # Correo de contacto. Se publica en la web, así que déjalo vacío si no
-  # quieres que aparezca: AdSense pide una forma de contacto para aprobar.
-  email: ""
+  # Correo de contacto. Se publica en la web. Es una cuenta aparte, hecha
+  # para el curso, para que el spam de publicarlo no caiga en la personal.
+  email: "espanoldesderuso@gmail.com"
 
 # Google AdSense. Vacío = sin anuncios y sin aviso de cookies.
 # El alta se pide en adsense.google.com; dan el identificador ca-pub-… y

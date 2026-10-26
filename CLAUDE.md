@@ -303,6 +303,29 @@ dos primeros e imprime el tercero. `--ver` enseña sin tocar.
   only»). Con el proxy naranja puesto, GitHub no puede validar el dominio, no
   emite el certificado y «Enforce HTTPS» se queda apagado para siempre.
 
+### El correo de contacto (2026-10-26)
+
+`espanoldesderuso@gmail.com`, una cuenta **aparte y hecha para el curso**, que
+es lo que se le recomendó al usuario: publicar una dirección en una web abierta
+atrae spam, y así no cae en la personal. La suya no aparece en ninguna parte del
+repositorio ni del sitio, y no debe aparecer.
+
+Con esto `scripts/revisar_adsense.py` pasa a **8 listo y 2 falta**, y los dos
+que faltan son el mismo: el dominio propio.
+
+**Las lecciones llevan cinco correos inventados** (`ivan.petrov@gmail.com` y
+compañía) y eso es material didáctico, no una fuga: la lección 3-5 enseña a
+dictar una dirección en español («arroba», «punto»). La prueba que vigila esto
+excluye el CUERPO de las lecciones por esa razón, y hay una segunda que
+comprueba que la cabecera y el pie que el generador pone alrededor **no** traen
+ninguno: la excepción vale para lo que escribe el profesor, no para lo que
+genera el código.
+
+La primera versión de esa prueba no distinguía las dos cosas y se puso en rojo
+con un correo de la lección 3-5. El fallo era de la prueba y no del sitio, y
+vale anotarlo: una regla de seguridad demasiado ancha acaba desactivándose, que
+es peor que no tenerla.
+
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.
@@ -314,8 +337,8 @@ dos primeros e imprime el tercero. `--ver` enseña sin tocar.
   lector guardado en su navegador sin registro. La publicidad se configura en `web/sitio.yaml` y está
   apagada; sin identificador de AdSense no se carga nada de terceros.
 - Falta activar GitHub Pages (Settings → Pages → rama main, carpeta /docs).
-- Para AdSense falta un dominio propio, un correo de contacto en
-  `web/sitio.yaml` y el CMP de Google. El código ya está: ver la nota de
-  arriba.
+- Para AdSense **solo falta el dominio propio** (y el CMP de Google al
+  encender los anuncios). El correo de contacto ya está puesto y el resto de
+  la lista la da por buena `scripts/revisar_adsense.py`.
 - Pendiente: lecciones 101-365, audio de los diálogos (TTS), más libros de
   referencia, y lo de «Pendiente de revision del profesor» de arriba.

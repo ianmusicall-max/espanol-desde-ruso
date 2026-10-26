@@ -865,5 +865,77 @@ class TestPonerElDominio(unittest.TestCase):
         self.assertIn("DNS only", texto, "el proxy de Cloudflare impide el certificado")
 
 
+class TestLaFormaDeContacto(unittest.TestCase):
+    """AdSense pide una forma de contactar, y el sitio la publica de verdad."""
+
+    def setUp(self):
+        self.cfg = construir_sitio.cargar_config()
+        self.textos = construir_sitio.cargar_textos()
+
+    def _construir(self, cfg):
+        destino = pathlib.Path(tempfile.mkdtemp())
+        construir_sitio.construir(destino, cfg, self.textos)
+        return destino
+
+    def test_el_correo_sale_en_los_tres_idiomas(self):
+        correo = self.cfg["autor"]["email"]
+        self.assertTrue(correo, "sin correo, AdSense marca la página de contacto")
+        destino = self._construir(self.cfg)
+        for i in self.textos["idiomas"]:
+            carpeta = destino / i["carpeta"] if i["carpeta"] else destino
+            pagina = carpeta.joinpath("kontakt.html").read_text(encoding="utf-8")
+            self.assertIn(f"mailto:{correo}", pagina, i["codigo"])
+
+    def test_el_correo_publicado_es_el_de_la_configuracion_y_no_otro(self):
+        """Un correo escrito a mano en una plantilla se queda viejo el día que
+        se cambia el de verdad, y nadie se entera hasta que alguien escribe a
+        una dirección muerta."""
+        cfg = copy.deepcopy(self.cfg)
+        cfg["autor"] = dict(cfg["autor"], email="otro@ejemplo.com")
+        destino = self._construir(cfg)
+        pagina = (destino / "kontakt.html").read_text(encoding="utf-8")
+        self.assertIn("mailto:otro@ejemplo.com", pagina)
+        self.assertNotIn(self.cfg["autor"]["email"], pagina)
+
+    def test_sin_correo_la_pagina_lo_dice_en_vez_de_quedarse_muda(self):
+        """Una página de contacto sin nada es peor que no tenerla: el lector no
+        sabe si falta un dato o si es que no quieres que te escriban."""
+        cfg = copy.deepcopy(self.cfg)
+        cfg["autor"] = dict(cfg["autor"], email="")
+        pagina = (self._construir(cfg) / "kontakt.html").read_text(encoding="utf-8")
+        self.assertNotIn("mailto:", pagina)
+        self.assertIn(html.escape(self.textos["ru"]["contacto"]["sin_correo"]), pagina)
+
+    def test_las_paginas_del_sitio_no_publican_ningun_otro_correo(self):
+        """El sitio es público: de lo que escribe el generador, el único correo
+        que sale es el que el profesor puso a propósito para el curso.
+
+        Las lecciones quedan fuera a propósito y no es una excusa: la 3-5
+        enseña a dictar una dirección en español («arroba», «punto») y lleva
+        cinco inventadas (ivan.petrov@gmail.com y compañía). Son material
+        didáctico, no una fuga. Lo que esta prueba cuida es la otra cosa: que
+        una dirección personal no se cuele por la cabecera, el pie, la página
+        de contacto o los datos estructurados."""
+        destino = self._construir(self.cfg)
+        permitido = self.cfg["autor"]["email"]
+        revisadas = 0
+        for pagina in destino.rglob("*.html"):
+            if pagina.parent.name.startswith("semana-"):
+                continue
+            revisadas += 1
+            for correo in re.findall(r"[\w.+-]+@[\w-]+\.[\w.]+", pagina.read_text(encoding="utf-8")):
+                self.assertEqual(correo, permitido, f"{pagina.relative_to(destino)}: {correo}")
+        self.assertGreater(revisadas, 20, "se saltearon casi todas: el filtro está mal")
+
+    def test_la_cabecera_y_el_pie_de_una_leccion_tampoco_traen_correos(self):
+        """La excepción de arriba vale para el CUERPO de la lección, que lo
+        escribe el profesor. Lo que el generador pone alrededor no."""
+        destino = self._construir(self.cfg)
+        leccion = (destino / "semana-03" / "dia-5.html").read_text(encoding="utf-8")
+        marco = leccion[:leccion.index("<main")] + leccion[leccion.index("</main>"):]
+        self.assertNotIn("@gmail", marco)
+        self.assertNotIn("@correo", marco)
+
+
 if __name__ == "__main__":
     unittest.main()
