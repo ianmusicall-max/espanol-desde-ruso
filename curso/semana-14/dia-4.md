@@ -104,8 +104,9 @@ revisado: false
 | ¿**Me lo puede cambiar**? | Вы можете мне его обменять? |
 | ¿**Me devuelven el dinero**? | Мне вернут деньги? |
 
-Слово **el cambio** вы знаете с 4-й недели в значении «сдача»; то же слово
-значит и «обмен»: *el cambio es de treinta días*.
+Два слова вы уже знаете: **el tique** и **el cambio** — с воскресенья. И
+обратите внимание, что **el cambio** значит и «сдача», и «обмен»: *el cambio es
+de treinta días*.
 
 **usted в магазине: глагол в форме «он».**
 
@@ -221,7 +222,7 @@ de reclamaciones** — бланки жалоб; попросить их може
 
 | Español | Русский | Пример |
 |---|---|---|
-| el **ti**que 🌎 el re**ci**bo | чек | ¿Tiene el tique? |
+| el cris**tal** | стекло | El cristal del reloj está roto. |
 | no fun**cio**na | не работает | Esta lámpara no funciona. |
 | **ro**to / **ro**ta | сломанный / разбитый | El reloj está roto. |
 | es dema**sia**do pe**que**ño | слишком маленький | Este jersey es demasiado pequeño. |

@@ -63,10 +63,15 @@ la documentación del programa, en español.
   (`revisado: false`) y el sitio las marca como tales. Las 21 primeras estan
   revisadas.
 
-## Estado (2026-10-25)
+## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.
-- Lecciones escritas y revisadas: semanas 1 y 2 (unidad 1).
-- Generador listo para las semanas 3-52; cada borrador pasa por el profesor.
-- Pendiente: audio de los diálogos (TTS), más libros de referencia, lecciones
-  3-52.
+- **100 lecciones escritas** (semanas 1-14 enteras y los dos primeros días de
+  la 15): unidades 1 a 7 completas, 908 tarjetas de vocabulario. Las 21
+  primeras revisadas; el resto son borradores.
+- Sitio público en `docs/` con portada, índice, «О курсе», contacto y política
+  de privacidad. La publicidad se configura en `web/sitio.yaml` y está
+  apagada; sin identificador de AdSense no se carga nada de terceros.
+- Falta activar GitHub Pages (Settings → Pages → rama main, carpeta /docs).
+- Pendiente: lecciones 101-365, audio de los diálogos (TTS), más libros de
+  referencia, y lo de «Pendiente de revision del profesor» de arriba.

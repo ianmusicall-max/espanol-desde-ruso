@@ -122,7 +122,8 @@ biblioteca**. Ошибка стоит дорого: «я беру книги в 
 **Отделы супермаркета.** Внутри супермаркета те же названия работают как
 **secciones**: la sección de panadería, la sección de carnicería, la sección de
 pescadería, la sección de frutas y verduras, la sección de bebidas. А на выходе
-— **la caja**.
+— **la caja** (это слово вы знаете с воскресенья), где спросят: *¿Quiere una
+**bolsa**?*
 
 ### ⚠️ Контраст с русским
 
@@ -217,7 +218,7 @@ panadería* (куда) и ✅ *Compro el pan **en** la panadería* (где).
 | el es**tan**co | табачный киоск (табак и марки) | Los sellos se venden en el estanco. |
 | el **se**llo | почтовая марка | Quiero comprar sellos para una carta. |
 | la sec**ción** | отдел | La sección de pescadería. |
-| la **ca**ja | касса | ¿Dónde está la caja? Al final, a la derecha. |
+| la **bol**sa | пакет, сумка | — ¿Quiere una bolsa? — Sí, por favor. |
 | ¿**Dón**de se **com**pra…? | Где покупают…? | ¿Dónde se compra el pan? |
 
 ## Ответы
