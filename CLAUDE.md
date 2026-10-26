@@ -403,9 +403,31 @@ Lo que hay que saber si alguien lo toca:
   contenedor— y **esos tonos se borraron antes de subir nada**: publicar un
   pitido donde el lector espera una voz es peor que no tener audio.
 
-**Lo que falta**: `OPENAI_API_KEY` y correr el guion. La voz elegida es `nova`
-con instrucciones de hablar despacio y en español de España; cambiarla es
-cambiar `VOZ` y vuelve a costar 1,30 USD, porque es otro hash.
+**Lo que falta, y son DOS cosas** (comprobado el 2026-10-26, al ir a
+generarlo):
+
+1. **`OPENAI_API_KEY`**, que no está en el entorno de este contenedor. Va como
+   secreto del entorno, nunca pegada en el chat ni en el repo.
+2. **`api.openai.com` está bloqueado** por la política de red de este
+   contenedor (`connect_rejected`: el host no está permitido). Hay que
+   añadirlo en los dominios permitidos del entorno. Sin esto la clave no
+   sirve de nada, y es el escalón que no se ve hasta que se intenta.
+
+Anthropic **no tiene servicio de voz**, así que el audio no lo puede poner
+Claude: tiene que venir de un TTS de fuera. OpenAI es el que está programado
+(1,30 USD, sin cuenta de nube) pero no es el único: Azure, Polly y Google
+tienen capa gratis que cubriría los 81.505 caracteres, y la voz del propio
+profesor —nativo y profesor de lenguas— sería mejor que cualquiera de las
+tres. Cambiar de proveedor es tocar una función; el hash, el ▶ y el
+reproductor valen igual.
+
+**`--muestra N` y `--voz`** (2026-10-26). Cambiar de voz es otro hash, o sea
+1,30 USD otra vez, así que hay que poder oírla ANTES: `--muestra 5` locuta
+cinco frases por céntimos. Coge las más **largas** y no las primeras, porque
+por orden de lección la primera es la letra «a», que no dice nada de cómo
+suena. Y la voz entra en el nombre del archivo, así que dos voces conviven en
+disco y se pueden comparar sin que la segunda pise a la primera —y el índice
+nunca mezcla dos—. Hay prueba de las dos cosas.
 
 ## Los PDF del profesor: tres de cuatro son escaneos (2026-10-26)
 

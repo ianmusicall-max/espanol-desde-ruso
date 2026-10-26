@@ -1042,6 +1042,43 @@ class TestElAudioDeLasLecciones(unittest.TestCase):
         self.assertNotIn("sonando", otra)
 
 
+    def test_otra_voz_es_otro_archivo_y_no_pisa_la_primera(self):
+        """Cambiar de voz cuesta los 1,30 USD otra vez, asi que hay que poder
+        comparar dos sin que la segunda borre la primera. Y sobre todo: el
+        indice no puede acabar mezclando dos voces en la misma pagina."""
+        carpeta = pathlib.Path(tempfile.mkdtemp())
+        frase = "Buenos dias"
+        uno = generar_audio.nombre_de(frase, "nova")
+        otro = generar_audio.nombre_de(frase, "sage")
+        self.assertNotEqual(uno, otro)
+        (carpeta / uno).write_bytes(b"x")
+        self.assertEqual(generar_audio.faltan([frase], carpeta, "nova"), [])
+        self.assertEqual(generar_audio.faltan([frase], carpeta, "sage"), [frase])
+        generar_audio.escribir_indice([frase], carpeta, "nova")
+        indice = json.loads((carpeta / generar_audio.INDICE).read_text(encoding="utf-8"))
+        self.assertEqual(indice, {frase: uno})
+
+    def test_la_muestra_coge_las_frases_mas_largas(self):
+        """Una voz se juzga en una frase entera. Por orden de leccion la
+        primera seria la letra «a», que no dice nada de como suena."""
+        frases = ["a", "Buenos dias", "Me llamo Ana y vivo en Madrid", "casa"]
+        self.assertEqual(generar_audio.muestra_de(frases, 2),
+                         ["Me llamo Ana y vivo en Madrid", "Buenos dias"])
+        self.assertEqual(len(generar_audio.muestra_de(frases, 99)), 4)
+
+        # Y sobre las de verdad: ninguna de las tres primeras puede ser una letra
+        reales = generar_audio.muestra_de(
+            generar_audio.todas_las_frases(plan.cargar()), 3)
+        self.assertTrue(all(len(f) > 10 for f in reales), reales)
+
+    def test_sin_clave_no_se_inventa_nada(self):
+        """Sin OPENAI_API_KEY devuelve 1 y no escribe un solo archivo: un MP3
+        falso donde el lector espera una voz es peor que no tener audio."""
+        carpeta = pathlib.Path(tempfile.mkdtemp())
+        self.assertEqual(generar_audio.main(["--carpeta", str(carpeta)]), 1)
+        self.assertEqual(list(carpeta.glob("*.mp3")), [])
+
+
 class TestLaHistoria(unittest.TestCase):
     """Ana e Iván: un episodio por unidad, en el día `cultura` de la 2.ª semana.
 

@@ -102,6 +102,12 @@ def todas_las_frases(cal: dict) -> list[str]:
     return list(vistas)
 
 
+# Las cinco de OpenAI que valen para dictar despacio. `nova` es la elegida;
+# las otras estan aqui para poder oirlas con --muestra antes de pagar las
+# 3.543, porque cambiar de voz despues es otro hash y se paga entero.
+VOCES = ("nova", "alloy", "shimmer", "coral", "sage")
+
+
 def nombre_de(texto: str, voz: str = VOZ, modelo: str = MODELO) -> str:
     """El pedido ENTERO es la llave: cambiar la voz o el modelo es otro audio."""
     crudo = json.dumps([texto, voz, modelo, INSTRUCCIONES], ensure_ascii=False)
@@ -112,33 +118,47 @@ def coste(frases: list[str]) -> float:
     return sum(len(f) for f in frases) * PRECIO_POR_MILLON / 1_000_000
 
 
-def faltan(frases: list[str], carpeta: pathlib.Path) -> list[str]:
+def muestra_de(frases: list[str], n: int) -> list[str]:
+    """Las N más largas, para oír la voz antes de pagar las 3.543.
+
+    Las más LARGAS y no las primeras: una voz se juzga en una frase entera, y
+    por orden de lección la primera sería la letra «a», que no dice nada de
+    cómo suena. Cuesta céntimos y contesta lo único que no se puede contestar
+    leyendo: si esa voz sirve para que un principiante repita."""
+    return sorted(frases, key=len, reverse=True)[:n]
+
+
+def faltan(frases: list[str], carpeta: pathlib.Path, voz: str = VOZ) -> list[str]:
     """Lo que ya está en disco no se vuelve a pagar. Un archivo vacío no cuenta:
-    es una descarga que se cortó."""
+    es una descarga que se cortó.
+
+    La voz entra en el nombre, así que probar otra no borra ni pisa la primera:
+    son dos juegos de archivos y se puede comparar."""
     return [f for f in frases
-            if not (carpeta / nombre_de(f)).exists()
-            or (carpeta / nombre_de(f)).stat().st_size == 0]
+            if not (carpeta / nombre_de(f, voz)).exists()
+            or (carpeta / nombre_de(f, voz)).stat().st_size == 0]
 
 
-def escribir_indice(frases: list[str], carpeta: pathlib.Path) -> int:
+def escribir_indice(frases: list[str], carpeta: pathlib.Path, voz: str = VOZ) -> int:
     """Texto → archivo, pero solo de lo que de verdad se puede oír."""
-    indice = {f: nombre_de(f) for f in frases
-              if (carpeta / nombre_de(f)).exists() and (carpeta / nombre_de(f)).stat().st_size}
+    indice = {f: nombre_de(f, voz) for f in frases
+              if (carpeta / nombre_de(f, voz)).exists()
+              and (carpeta / nombre_de(f, voz)).stat().st_size}
     carpeta.mkdir(parents=True, exist_ok=True)
     carpeta.joinpath(INDICE).write_text(
         json.dumps(indice, ensure_ascii=False, sort_keys=True, indent=0), encoding="utf-8")
     return len(indice)
 
 
-def generar(frases: list[str], carpeta: pathlib.Path, cliente) -> int:
+def generar(frases: list[str], carpeta: pathlib.Path, cliente, voz: str = VOZ) -> int:
     carpeta.mkdir(parents=True, exist_ok=True)
     hechos = 0
     for i, texto in enumerate(frases, 1):
-        destino = carpeta / nombre_de(texto)
+        destino = carpeta / nombre_de(texto, voz)
         parcial = destino.with_suffix(".parcial")
         try:
             with cliente.audio.speech.with_streaming_response.create(
-                    model=MODELO, voice=VOZ, input=texto,
+                    model=MODELO, voice=voz, input=texto,
                     instructions=INSTRUCCIONES, response_format="mp3") as r:
                 r.stream_to_file(parcial)
             parcial.replace(destino)
@@ -155,11 +175,15 @@ def generar(frases: list[str], carpeta: pathlib.Path, cliente) -> int:
 def main(argv=None) -> int:
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--ver", action="store_true", help="dice qué haría y qué costaría, sin gastar")
+    p.add_argument("--muestra", type=int, metavar="N",
+                   help="locuta solo N frases, para oír la voz antes de pagarlas todas")
+    p.add_argument("--voz", default=VOZ, choices=VOCES,
+                   help=f"la voz de OpenAI (por defecto {VOZ})")
     p.add_argument("--carpeta", type=pathlib.Path, default=AUDIO)
     a = p.parse_args(argv)
 
     frases = todas_las_frases(plan.cargar())
-    pendientes = faltan(frases, a.carpeta)
+    pendientes = faltan(frases, a.carpeta, a.voz)
     print(f"{len(frases)} frases distintas · {sum(len(f) for f in frases):,} caracteres"
           .replace(",", " "))
     print(f"ya locutadas: {len(frases) - len(pendientes)} · faltan: {len(pendientes)}")
@@ -174,8 +198,12 @@ def main(argv=None) -> int:
         return 0
 
     if not pendientes:
-        print(f"nada que hacer · índice con {escribir_indice(frases, a.carpeta)} frases")
+        print(f"nada que hacer · índice con {escribir_indice(frases, a.carpeta, a.voz)} frases")
         return 0
+
+    if a.muestra:
+        pendientes = muestra_de(pendientes, a.muestra)
+        print(f"\nmuestra de {len(pendientes)} frases · {coste(pendientes):.4f} USD")
 
     if not os.environ.get("OPENAI_API_KEY"):
         print("\nfalta OPENAI_API_KEY en el entorno (o en .env).")
@@ -186,10 +214,13 @@ def main(argv=None) -> int:
         print("\nfalta el paquete: .venv/bin/pip install openai")
         return 1
 
-    hechos = generar(pendientes, a.carpeta, OpenAI())
-    total = escribir_indice(frases, a.carpeta)
+    hechos = generar(pendientes, a.carpeta, OpenAI(), a.voz)
+    total = escribir_indice(frases, a.carpeta, a.voz)
     print(f"\n{hechos} audios nuevos · índice con {total} frases")
-    print("Ahora: .venv/bin/python scripts/construir_sitio.py")
+    if a.muestra:
+        print(f"Escúchalas en {a.carpeta} y, si la voz te vale, córrelo sin --muestra.")
+    else:
+        print("Ahora: .venv/bin/python scripts/construir_sitio.py")
     return 0
 
 
