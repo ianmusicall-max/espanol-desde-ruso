@@ -21,9 +21,13 @@
   el día 365 de reserva y los domingos pueden absorber un retraso de un día.
 - **Examen A1 < 60 %**: una semana de repaso con las lecciones de la unidad
   11 antes de empezar A2.
-- **Simulacro DELE A2**: se aprueba cada grupo por separado al 60 % (grupo 1
-  = lectura + audio; grupo 2 = escrita + oral). El grupo que no llegue decide
-  los cuatro días de refuerzo de la semana 50.
+- **Simulacro DELE A2**: se aprueba cada grupo por separado al 60 %, y los
+  grupos **no** son «lo receptivo» frente a «lo productivo»: **grupo 1 =
+  comprensión de lectura + expresión escrita**; **grupo 2 = comprensión
+  auditiva + expresión oral**. Cada prueba vale 25 puntos y cada grupo, 50; se
+  necesitan 30 en cada uno. El grupo que no llegue decide los cuatro días de
+  refuerzo de la semana 50. Consecuencia práctica: la escritura floja hunde a
+  la lectura buena, y el oral flojo hunde al audio bueno.
 - **Examen final < 60 %**: el alumno termina el curso en A2.1 y se le propone
   el plan de 3 meses de repaso de la semana 52 antes del DELE real.
 

@@ -825,7 +825,7 @@ fase_final:
     - [49, 5, simulacro, "Simulacro 1 · Escritura, tarea 1 (correo)", "Пробный экзамен 1 · Письмо, задание 1 (письмо)", "DELE A2 expresión escrita: tarea 1 (20 min) + rúbrica", "Correo evaluado"]
     - [49, 6, simulacro, "Simulacro 1 · Escritura, tarea 2 (texto)", "Пробный экзамен 1 · Письмо, задание 2 (текст)", "DELE A2 expresión escrita: tarea 2 (25 min) + rúbrica", "Texto evaluado"]
     - [49, 7, simulacro, "Simulacro 1 · Oral (preparación y ejecución)", "Пробный экзамен 1 · Устная часть (подготовка и выполнение)", "DELE A2 expresión oral: 12 min de preparación + 12 min de ejecución grabada", "Grabación evaluada con rúbrica"]
-    - [50, 1, repaso, "Corrección del simulacro 1 y plan de refuerzo", "Разбор пробного экзамена 1 и план работы над слабыми местами", "Resultados por prueba (grupo 1: lectura + audio; grupo 2: escritura + oral); elegir 4 refuerzos", "Plan de refuerzo de 4 días"]
+    - [50, 1, repaso, "Corrección del simulacro 1 y plan de refuerzo", "Разбор пробного экзамена 1 и план работы над слабыми местами", "Resultados por prueba (grupo 1: lectura + escritura; grupo 2: audio + oral); elegir 4 refuerzos", "Plan de refuerzo de 4 días"]
     - [50, 2, repaso, "Refuerzo 1: gramática", "Работа над ошибками 1: грамматика", "El punto gramatical más débil del simulacro (según resultados)", "20 ítems de práctica"]
     - [50, 3, repaso, "Refuerzo 2: léxico y audio", "Работа над ошибками 2: лексика и аудирование", "Campos léxicos débiles; práctica de audio con transcripción", "Lista de 30 palabras y 1 tarea de audio"]
     - [50, 4, repaso, "Refuerzo 3: escritura", "Работа над ошибками 3: письмо", "Reescribir los dos textos del simulacro con la rúbrica", "Dos textos reescritos"]

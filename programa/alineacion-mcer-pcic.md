@@ -93,15 +93,28 @@ horas: sería prometer lo que no se puede cumplir.
 | 3. Expresión e interacción escritas | 2 | — | 45 min | 1: responder a un correo / mensaje (60-70 palabras); 2: texto descriptivo o narrativo a partir de una guía (70-80 palabras) |
 | 4. Expresión e interacción orales | 3 | — | 12 min (+ 12 de preparación) | 1: monólogo sobre un tema de una lámina (2-3 min); 2: descripción de una fotografía (2-3 min); 3: diálogo simulado con el examinador sobre la foto (3-4 min) |
 
-- **Puntuación**: dos grupos. Grupo 1 = lectura + auditiva (50 puntos);
-  grupo 2 = escrita + oral (50 puntos). Se aprueba con **30/50 en cada
-  grupo** (60 %), no con la suma.
-- **Consecuencia para el curso**: no basta con ser bueno en gramática; la
-  oral y la escrita valen la mitad. Por eso cada lección termina en una
-  producción y los simulacros (semanas 49 y 51) se hacen enteros, repartidos
-  en sesiones de 30 minutos, con rúbrica de autoevaluación.
-- Las cifras de ítems y tiempos de esta tabla deben cotejarse con la guía
-  oficial (§0).
+- **Puntuación**: dos grupos, y **cada grupo mezcla una destreza receptiva con
+  una productiva**, que es lo que hace que no se pueda compensar una con otra:
+  - **Grupo 1** = Comprensión de lectura + Expresión e interacción **escritas**
+    (25 + 25 = 50 puntos).
+  - **Grupo 2** = Comprensión auditiva + Expresión e interacción **orales**
+    (25 + 25 = 50 puntos).
+  Se aprueba con **30/50 en cada grupo** (60 %), no con la suma de los cuatro.
+- **Consecuencia para el curso**: no basta con ser bueno en gramática; la oral
+  y la escrita valen la mitad, y además **arrastran a su grupo**: un alumno con
+  buena lectura y mala escritura suspende el grupo 1 aunque el grupo 2 vaya
+  sobrado. Por eso cada lección termina en una producción y los simulacros
+  (semanas 49 y 51) se hacen enteros, repartidos en sesiones de 30 minutos, con
+  rúbrica de autoevaluación.
+- **Verificado el 2026-10-26** contra la guía oficial de la versión 2020
+  (examenes.cervantes.es): 4 tareas y 25 ítems en lectura (5 + 8 + 6 + 6) en
+  60 minutos; 4 tareas y 25 ítems en auditiva en 40 minutos; 2 tareas escritas
+  en 45 minutos; 3 tareas orales en 12 minutos (más 12 de preparación); 1 punto
+  por acierto y **sin penalización por error**; «Apto» con 30,00 en cada grupo.
+  La agrupación de arriba es la de la guía: hasta esa fecha este documento decía
+  «grupo 1 = lectura + auditiva», y era incorrecto. El PDF oficial no se puede
+  descargar desde este entorno (§0), así que la comprobación se hizo sobre
+  fuentes que lo citan; vuelve a cotejarlo antes de inscribir a nadie.
 
 ## 6. Vocabulario: nociones específicas del PCIC cubiertas
 
