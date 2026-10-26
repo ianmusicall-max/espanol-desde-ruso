@@ -277,7 +277,7 @@ unidades:
     funciones: ["hablar de aficiones", "hablar del tiempo atmosférico", "preguntar y decir la fecha", "hacer planes", "invitar, aceptar y rechazar", "quedar"]
     gramatica: ["gustar + infinitivo", "jugar a / tocar / hacer / practicar", "verbos impersonales del tiempo (hace, hay, llueve, nieva)", "la fecha", "ir a + infinitivo", "conmigo / contigo", "querer + infinitivo", "poder para excusas"]
     lexico: ["aficiones y deportes", "meses y estaciones", "el tiempo atmosférico", "citas y planes", "mensajes de texto"]
-    fonetica: ["la entonación de la invitación y de la excusa", "la y de hoy / ayer"]
+    fonetica: ["g / j en el léxico del ocio (jugar, ajedrez, gimnasio, guitarra)", "el enlace vocálico de me gusta ir, me gusta escuchar", "la y de hoy / ayer", "la entonación de la invitación y de la excusa"]
     contraste_ru: ["ir a + inf ≈ собираться + inf", "hace frío = холодно (impersonal con hacer)", "la fecha: el 5 de mayo, sin ordinal", "conmigo / contigo: formas únicas"]
     cultura: ["el fútbol y los clubes", "el domingo en familia", "fiestas populares del calendario (San Fermín, Día de Muertos)"]
     tarea_final: "Calendario del año con 12 fiestas hispanas y 3 rusas explicadas en español."

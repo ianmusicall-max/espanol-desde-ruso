@@ -55,7 +55,11 @@ la documentación del programa, en español.
   catorce sesiones.
 - **Once entradas de vocabulario se ensenan dos veces** en semanas distintas, de
   528. `scripts/revisar_lexico.py` las lista con el dia de cada aparicion.
-- **Las 57 lecciones de las semanas 4 en adelante son borradores**
+- **Los titulos de ejercicio siguen en ruso en la unidad 7**, pero
+  `metodologia.md` §6 pide «espanol + ruso» desde ahi. O se retocan las
+  semanas 13-14 (dos lineas por leccion) o se corre la tabla de §6 hasta la
+  unidad 12, que es el salto de nivel y una frontera mas natural.
+- **Las 69 lecciones de las semanas 4 en adelante son borradores**
   (`revisado: false`) y el sitio las marca como tales. Las 21 primeras estan
   revisadas.
 
