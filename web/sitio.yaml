@@ -1,0 +1,46 @@
+# Configuración del sitio público (docs/).
+#
+# Todo lo que está vacío queda APAGADO: el sitio se construye y funciona igual,
+# solo que sin anuncios, sin analítica y sin aviso de cookies. Eso es a
+# propósito: así se puede publicar hoy, pedir el alta en AdSense cuando haya
+# contenido suficiente, y encender la publicidad cambiando una línea de aquí
+# sin tocar una sola línea de código.
+
+# La URL pública, sin barra final. Hace falta para las etiquetas canónicas, el
+# sitemap y las tarjetas de redes sociales. Con GitHub Pages:
+#   https://ianmusicall-max.github.io/espanol-desde-ruso
+# Con dominio propio, el dominio.
+dominio: "https://ianmusicall-max.github.io/espanol-desde-ruso"
+
+# Lo que se ve en el navegador y en los buscadores.
+titulo: "Испанский с нуля для русскоговорящих"
+lema: "30 минут в день — за год от нуля до A2"
+descripcion: >-
+  Бесплатный курс испанского языка для русскоговорящих с нуля: 365 уроков по
+  30 минут, от алфавита до уровня A2 и экзамена DELE. Каждый урок объясняет,
+  где русский язык подсказывает, а где подводит.
+idioma: "ru"
+
+# Autor del curso. Sale en la página «О курсе» y en los datos estructurados.
+autor:
+  nombre: "Jose Del Carpio"
+  descripcion: >-
+    Преподаватель с магистратурой по языкам. Испанский — родной, владеет тремя
+    языками. Курс написан специально для русскоговорящих.
+  # Correo de contacto. Se publica en la web, así que déjalo vacío si no
+  # quieres que aparezca: AdSense pide una forma de contacto para aprobar.
+  email: ""
+
+# Google AdSense. Vacío = sin anuncios y sin aviso de cookies.
+# El alta se pide en adsense.google.com; dan el identificador ca-pub-… y
+# después los identificadores de cada bloque.
+adsense:
+  cliente: ""          # ca-pub-0000000000000000
+  bloques:
+    cabecera: ""       # el bloque de arriba, debajo del título
+    dentro: ""         # entre la teoría y los ejercicios
+    pie: ""            # al final del texto
+
+# Google Analytics. Vacío = sin analítica y sin cookies.
+analitica:
+  google: ""           # G-XXXXXXXXXX

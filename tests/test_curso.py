@@ -209,10 +209,27 @@ class TestElGeneradorCuidaLaCache(unittest.TestCase):
         self.assertIn("La familia y las personas", a[1]["text"])
 
     def test_una_unidad_sin_lecciones_toma_un_modelo_del_mismo_tipo_de_la_unidad_1(self):
-        sistema, _ = escribir_leccion.armar_prompt(CAL, plan.dia(CAL, 3, 6))  # repaso
-        self.assertIn("curso/semana-01/dia-6.md", sistema[1]["text"])
-        sistema, _ = escribir_leccion.armar_prompt(CAL, plan.dia(CAL, 4, 6))  # prueba
-        self.assertIn("curso/semana-02/dia-6.md", sistema[1]["text"])
+        """Sin un modelo propio de ese tipo, el prompt presta el de la unidad 1.
+
+        La unidad se busca en el momento, no se fija: a medida que se escriben
+        semanas, la primera unidad vacía se mueve, y un número escrito a mano
+        dejaría la prueba verde sin comprobar nada."""
+        vacia = next(
+            u for u in CAL["unidades"]
+            if not any(d.ruta.exists() for d in DIAS if d.unidad == u["numero"])
+        )
+        primera_semana = vacia["semanas"][0]
+        for dia_n, modelo in ((6, "curso/semana-01/dia-6.md"), (7, "curso/semana-01/dia-7.md")):
+            d = plan.dia(CAL, primera_semana, dia_n)
+            sistema, _ = escribir_leccion.armar_prompt(CAL, d)
+            self.assertIn(modelo, sistema[1]["text"], f"{d.etiqueta} ({d.tipo})")
+
+    def test_el_dia_que_se_reescribe_sigue_en_el_bloque_cacheado(self):
+        """Excluirlo haría que el bloque cambiara de un día a otro de la misma
+        unidad, que es justo lo que la caché no puede permitirse."""
+        d = plan.dia(CAL, 1, 1)
+        sistema, _ = escribir_leccion.armar_prompt(CAL, d)
+        self.assertIn("curso/semana-01/dia-1.md", sistema[1]["text"])
 
     def test_lo_guardado_lleva_revisado_false_aunque_el_modelo_diga_otra_cosa(self):
         texto = (plan.CURSO / "semana-01" / "dia-1.md").read_text(encoding="utf-8")
@@ -235,25 +252,118 @@ class TestElGeneradorCuidaLaCache(unittest.TestCase):
 
 
 class TestElSitio(unittest.TestCase):
-    def test_el_sitio_se_construye_con_indice_y_lecciones_enlazadas(self):
+    """El sitio público: estructura, enlaces y las páginas que pide AdSense."""
+
+    def setUp(self):
+        self.cfg = construir_sitio.cargar_config()
+
+    def test_el_sitio_se_construye_con_portada_indice_y_lecciones_enlazadas(self):
         destino = pathlib.Path(tempfile.mkdtemp())
-        n = construir_sitio.construir(destino)
+        n = construir_sitio.construir(destino, self.cfg)
         self.assertEqual(n, len(validar.lecciones()))
-        indice = (destino / "index.html").read_text(encoding="utf-8")
+
+        # La portada es para quien llega de Google; el índice del curso vive aparte.
+        portada = (destino / "index.html").read_text(encoding="utf-8")
+        self.assertIn("kurs.html", portada)
+        self.assertIn(f"{n} уроков из 365", portada)
+        self.assertIn('lang="ru"', portada)
+
+        indice = (destino / "kurs.html").read_text(encoding="utf-8")
         for ruta in validar.lecciones():
             datos, _ = validar.frontmatter(ruta.read_text(encoding="utf-8"))
             self.assertIn(f"semana-{int(datos['semana']):02d}/dia-{datos['dia']}.html", indice)
-        self.assertIn("Unidad 24", indice)
-        self.assertIn(CAL["fase_final"]["titulo_es"], indice)
+        self.assertIn("Тема 24", indice)
+        self.assertIn(CAL["fase_final"]["titulo_ru"], indice)
+
+    def test_cada_leccion_enlaza_con_la_anterior_y_la_siguiente(self):
+        destino = pathlib.Path(tempfile.mkdtemp())
+        construir_sitio.construir(destino, self.cfg)
         pagina = (destino / "semana-01" / "dia-2.html").read_text(encoding="utf-8")
         self.assertIn("dia-1.html", pagina)
         self.assertIn("dia-3.html", pagina)
+        self.assertIn("Урок 2 из 365", pagina)
+
+    def test_las_paginas_que_adsense_pide_existen(self):
+        destino = pathlib.Path(tempfile.mkdtemp())
+        construir_sitio.construir(destino, self.cfg)
+        for nombre in ("index.html", "kurs.html", "o-kurse.html", "kontakt.html", "privacy.html", "robots.txt"):
+            self.assertTrue((destino / nombre).exists(), nombre)
         self.assertTrue((destino / "programa" / "metodologia.html").exists())
+        # Todas las páginas se enlazan entre sí desde el menú.
+        portada = (destino / "index.html").read_text(encoding="utf-8")
+        for destino_menu, _ in construir_sitio.MENU:
+            self.assertIn(destino_menu, portada)
+
+    def test_sin_anuncios_configurados_no_se_carga_nada_de_terceros(self):
+        """Lo que no está en la configuración no aparece en el HTML: ni script
+        de Google, ni hueco vacío, ni aviso de cookies que no hacen falta."""
+        cfg = construir_sitio.cargar_config()
+        cfg["adsense"]["cliente"] = ""
+        cfg["analitica"]["google"] = ""
+        destino = pathlib.Path(tempfile.mkdtemp())
+        construir_sitio.construir(destino, cfg)
+        for nombre in ("index.html", "kurs.html", "semana-01/dia-1.html"):
+            pagina = (destino / nombre).read_text(encoding="utf-8")
+            self.assertNotIn("adsbygoogle", pagina, nombre)
+            self.assertNotIn("googlesyndication", pagina, nombre)
+            self.assertNotIn("googletagmanager", pagina, nombre)
+            self.assertNotIn('id="cookies"', pagina, nombre)
+        privacidad = (destino / "privacy.html").read_text(encoding="utf-8")
+        self.assertIn("не использует ни рекламные", privacidad)
+
+    def test_con_anuncios_configurados_aparecen_y_el_aviso_de_cookies_tambien(self):
+        cfg = construir_sitio.cargar_config()
+        cfg["adsense"]["cliente"] = "ca-pub-0000000000000000"
+        cfg["adsense"]["bloques"] = {"cabecera": "111", "dentro": "222", "pie": "333"}
+        destino = pathlib.Path(tempfile.mkdtemp())
+        construir_sitio.construir(destino, cfg)
+        leccion = (destino / "semana-01" / "dia-1.html").read_text(encoding="utf-8")
+        self.assertIn("ca-pub-0000000000000000", leccion)
+        self.assertEqual(leccion.count('class="adsbygoogle"'), 3, "cabecera, dentro y pie")
+        self.assertIn('id="cookies"', leccion)
+        # El anuncio de dentro se coloca antes de los ejercicios, no en mitad de una frase.
+        self.assertLess(leccion.index('data-ad-slot="222"'), leccion.index("4. Практика"))
+        privacidad = (destino / "privacy.html").read_text(encoding="utf-8")
+        self.assertIn("AdSense", privacidad)
+        self.assertNotIn("не использует ни рекламные", privacidad)
+
+    def test_un_bloque_sin_identificador_no_deja_hueco(self):
+        cfg = construir_sitio.cargar_config()
+        cfg["adsense"]["cliente"] = "ca-pub-0000000000000000"
+        cfg["adsense"]["bloques"] = {"cabecera": "111", "dentro": "", "pie": ""}
+        destino = pathlib.Path(tempfile.mkdtemp())
+        construir_sitio.construir(destino, cfg)
+        leccion = (destino / "semana-01" / "dia-1.html").read_text(encoding="utf-8")
+        self.assertEqual(leccion.count('class="adsbygoogle"'), 1)
+
+    def test_el_sitemap_lista_las_paginas_y_las_lecciones_escritas(self):
+        destino = pathlib.Path(tempfile.mkdtemp())
+        construir_sitio.construir(destino, self.cfg)
+        mapa = (destino / "sitemap.xml").read_text(encoding="utf-8")
+        for nombre in ("index.html", "kurs.html", "o-kurse.html", "privacy.html"):
+            self.assertIn(nombre, mapa)
+        for ruta in validar.lecciones():
+            datos, _ = validar.frontmatter(ruta.read_text(encoding="utf-8"))
+            self.assertIn(f"semana-{int(datos['semana']):02d}/dia-{datos['dia']}.html", mapa)
+        self.assertIn("sitemap.xml", (destino / "robots.txt").read_text(encoding="utf-8"))
+
+    def test_un_borrador_se_anuncia_como_borrador(self):
+        destino = pathlib.Path(tempfile.mkdtemp())
+        construir_sitio.construir(destino, self.cfg)
+        for ruta in validar.lecciones():
+            datos, _ = validar.frontmatter(ruta.read_text(encoding="utf-8"))
+            pagina = (destino / f"semana-{int(datos['semana']):02d}" / f"dia-{datos['dia']}.html").read_text(encoding="utf-8")
+            if datos["revisado"]:
+                self.assertNotIn("Черновик", pagina, str(ruta))
+            else:
+                self.assertIn("Черновик", pagina, str(ruta))
 
     def test_docs_esta_al_dia(self):
         destino = pathlib.Path(tempfile.mkdtemp())
-        construir_sitio.construir(destino)
-        for generado in destino.rglob("*.html"):
+        construir_sitio.construir(destino, self.cfg)
+        for generado in destino.rglob("*"):
+            if not generado.is_file():
+                continue
             rel = generado.relative_to(destino)
             versionado = RAIZ / "docs" / rel
             self.assertTrue(versionado.exists(), f"falta docs/{rel}: corre scripts/construir_sitio.py")

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ianmusicall-max.github.io/espanol-desde-ruso/sitemap.xml

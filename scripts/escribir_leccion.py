@@ -116,8 +116,15 @@ def _ficha_de_unidad(u: dict) -> str:
 
 def _lecciones_de_ejemplo(cal: dict, d: plan.Dia) -> list[pathlib.Path]:
     """Las lecciones ya escritas de la misma unidad (en orden) y, si falta un
-    modelo del mismo tipo, una lección de ese tipo de la unidad 1."""
-    rutas = [x.ruta for x in plan.dias(cal) if x.unidad == d.unidad and x.ruta.exists() and x.numero != d.numero]
+    modelo del mismo tipo, una lección de ese tipo de la unidad 1.
+
+    Incluye TODAS las de la unidad, también la del día que se va a escribir si
+    ya existe. Excluirla parece más limpio, pero rompe lo único que hace útil
+    este bloque: que sea idéntico para los catorce días de la unidad y la caché
+    lo cobre una vez. Con la exclusión, cada día pagaba su propio prefijo. Y
+    cuando el archivo existe es porque se está reescribiendo con --forzar, así
+    que tener delante la versión anterior ayuda en vez de estorbar."""
+    rutas = [x.ruta for x in plan.dias(cal) if x.unidad == d.unidad and x.ruta.exists()]
     if not any(validar.frontmatter(r.read_text(encoding="utf-8"))[0].get("tipo") == d.tipo for r in rutas):
         for x in plan.dias(cal):
             if x.unidad == 1 and x.tipo == d.tipo and x.ruta.exists():
