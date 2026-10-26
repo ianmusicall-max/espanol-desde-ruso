@@ -1,0 +1,51 @@
+# Para desplegar en Netlify, si algún día se decide. Hoy el sitio vive en
+# GitHub Pages y esto no estorba: Netlify solo lee este archivo si conectas el
+# repositorio, y GitHub Pages lo ignora.
+#
+# Netlify NO resuelve lo que bloquea AdSense. Su propio soporte lo dice: con
+# un dominio xxx.netlify.app «no tienes acceso ni control del dominio
+# netlify.app», que es el mismo problema de github.io. Hace falta un dominio
+# propio igual, y con él GitHub Pages ya sirve en la raíz.
+#
+# Lo que Netlify SÍ añade sobre GitHub Pages: formularios sin servidor (un
+# formulario de contacto sin publicar el correo, que es justo lo que AdSense
+# pide y hoy falta), funciones, y control de cabeceras y redirecciones.
+# Lo que quita, en las cuentas nuevas de 2026: el plan gratis es un bote de
+# créditos y el sitio SE PAUSA al agotarlo. Un pico de visitas con anuncios
+# puestos deja la web caída, que es cuando más caro sale.
+
+[build]
+  # El sitio se genera desde el Markdown; no se sirve el repositorio tal cual.
+  command = "pip install -r requirements.txt && python scripts/construir_sitio.py"
+  publish = "docs"
+
+[build.environment]
+  PYTHON_VERSION = "3.11"
+
+# Un despliegue por rama principal. Con el plan de créditos, cada despliegue de
+# producción cuesta, así que las ramas de prueba no construyen solas.
+[context.production]
+  command = "pip install -r requirements.txt && python scripts/construir_sitio.py"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "SAMEORIGIN"
+
+# El guion del progreso y el CSS van dentro del HTML o al lado: se revalidan
+# solos porque el nombre no lleva huella. Una hora es el equilibrio entre no
+# servir una versión vieja y no pedir el archivo en cada página.
+[[headers]]
+  for = "/progreso.js"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+# ads.txt tiene que poder leerse siempre y sin caché larga: AdSense lo
+# consulta solo y una copia vieja le hace creer que el sitio no lo declara.
+[[headers]]
+  for = "/ads.txt"
+  [headers.values]
+    Cache-Control = "public, max-age=300"
+    Content-Type = "text/plain; charset=utf-8"

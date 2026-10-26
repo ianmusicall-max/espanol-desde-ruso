@@ -170,6 +170,35 @@ BORRADOR**, porque la regla 6 tiene que sobrevivir al cambio de plataforma, y
 el bloque de contraste lleva el estilo dentro, porque es la firma del curso y
 es lo único que un tema ajeno se llevaría por delante del todo.
 
+### Netlify, preguntado el mismo día
+
+**No resuelve lo que bloquea AdSense, y lo dice su propio soporte**: con
+`xxx.netlify.app` «no tienes acceso ni control del dominio netlify.app», que es
+exactamente el problema de `github.io`. La respuesta de Netlify a quien
+preguntó por AdSense fue registrar un dominio propio y enlazarlo. O sea que el
+dominio hay que comprarlo igual, y con él GitHub Pages ya sirve en la raíz.
+
+**Lo que Netlify sí añade** sobre GitHub Pages: formularios sin servidor —un
+contacto sin publicar el correo, que es justo lo que AdSense pide y hoy
+falta—, funciones (el camino a las cuentas de verdad del apartado anterior), y
+control de cabeceras y redirecciones.
+
+**Lo que quita, y es lo que decide**: las cuentas nuevas desde septiembre de
+2025 tienen un bote de 300 créditos al mes —unos 15 GB y unos 20 despliegues
+de producción— y **el sitio SE PAUSA al agotarlo**. Con anuncios puestos, un
+pico de visitas deja la web caída justo cuando más vale. GitHub Pages tiene
+100 GB al mes de límite blando y no apaga nada. No se pudo abrir
+`netlify.com/pricing` desde aquí (proxy, 403), así que los números vienen de
+blogs de terceros: **cotejar antes de mover nada**.
+
+`netlify.toml` está en el repo por si algún día se decide, con el comando de
+construcción y las cabeceras. GitHub Pages lo ignora. Tres pruebas lo leen y
+lo comprueban contra el repo —que el guion exista, que la carpeta publicada sea
+la que el generador escribe y que `ads.txt` no se cachee de más—, porque un
+archivo de despliegue que no se usa es el primero que se queda viejo, y el día
+que se conecte el fallo sería un sitio vacío con un «Page not found» que no
+apunta aquí.
+
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.

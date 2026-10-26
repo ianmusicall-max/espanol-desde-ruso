@@ -8,6 +8,7 @@ import copy
 import html
 import json
 import pathlib
+import re
 import sys
 import tempfile
 import unittest
@@ -689,6 +690,38 @@ class TestLaExportacionAWordPress(unittest.TestCase):
         bruto = (self.destino / "curso-wordpress.xml").read_text(encoding="utf-8")
         self.assertNotIn("]]>]]>", bruto)
         ET.fromstring(bruto)
+
+
+class TestElDespliegueEnNetlify(unittest.TestCase):
+    """netlify.toml no se usa hoy, y por eso es justo el que se queda viejo.
+
+    Un archivo de despliegue que nombra un script que ya no existe no rompe
+    nada aquí: rompe el día que alguien conecta el repositorio y el sitio sale
+    vacío. Estas pruebas leen el archivo y comprueban contra el repo real."""
+
+    def setUp(self):
+        import tomllib
+        self.cfg = tomllib.loads((RAIZ / "netlify.toml").read_text(encoding="utf-8"))
+
+    def test_el_comando_de_construccion_es_el_generador_de_verdad(self):
+        comando = self.cfg["build"]["command"]
+        self.assertIn("requirements.txt", comando, "sin dependencias el build falla")
+        guion = re.search(r"python\s+(\S+\.py)", comando)
+        self.assertIsNotNone(guion, f"no se reconoce el guion en: {comando}")
+        self.assertTrue((RAIZ / guion.group(1)).exists(), guion.group(1))
+
+    def test_publica_la_carpeta_que_el_generador_escribe(self):
+        """Si no coinciden, Netlify sirve un directorio vacío y el error que se
+        ve es «Page not found», que no apunta a este archivo."""
+        self.assertEqual(RAIZ / self.cfg["build"]["publish"], construir_sitio.DOCS)
+
+    def test_el_ads_txt_no_se_cachea_mucho(self):
+        """AdSense lo consulta solo; una copia vieja le hace creer que el sitio
+        no declara su editor y deja de pagar el inventario."""
+        cabeceras = {h["for"]: h["values"] for h in self.cfg.get("headers", [])}
+        self.assertIn("/ads.txt", cabeceras)
+        edad = re.search(r"max-age=(\d+)", cabeceras["/ads.txt"]["Cache-Control"])
+        self.assertLessEqual(int(edad.group(1)), 3600)
 
 
 if __name__ == "__main__":
