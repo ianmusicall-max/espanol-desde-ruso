@@ -539,6 +539,35 @@ coincidir— cazada esta vez el mismo día.
 ya empezó. No hace entrar a nadie. Entrar es la portada, la primera lección y
 que la web cargue: otro problema, y el siguiente.
 
+## Entrar: «100 de 365» decía lo que no era (2026-10-26)
+
+La historia hace volver a quien ya empezó; **entrar es otro problema**, y al
+mirarlo en el movil aparecio uno concreto.
+
+Lo tercero que ve quien llega, justo debajo del boton principal, era
+**«100 / 365 уроков открыто»**. Es verdad y hay que decirlo, pero en ese sitio
+contesta la pregunta equivocada: se lee como «el curso esta a medias», que es
+una razon para irse y volver otro dia.
+
+La pregunta que el visitante si se hace es **«¿me voy a quedar sin curso?»**, y
+la respuesta es que no: 100 lecciones a una por dia son **mas de tres meses**.
+Mismo dato, dicho de forma que invita en vez de avisar. Debajo del contador va
+ahora esa linea.
+
+- **El numero de meses se calcula**, no se escribe: «mas de tres meses»
+  envejeceria el dia que se escriba la leccion 101 y nadie volveria a mirarlo.
+- **El ruso declina** (2-4 «месяца», 5+ «месяцев», con la excepcion de 12-14).
+  Un «3 месяцев» en la portada delata que el sitio no lo escribio nadie. Hay
+  una prueba con seis casos.
+- **Por debajo de 60 lecciones el aviso no sale**, porque ahi la respuesta
+  honrada a «¿me quedare sin curso?» seria que si.
+
+De paso, medido: `kurs.html` pesa **96 KB** —es la pagina mas pesada y esta en
+el menu principal— y el CSS va en linea, 11 KB que son la mitad de cada pagina
+y se repiten en las 125. En linea es lo correcto para la PRIMERA pintada (una
+peticion menos) y caro al navegar leccion a leccion. No se toco: es un cambio
+con dos lados y hace falta medir trafico real para decidirlo.
+
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.

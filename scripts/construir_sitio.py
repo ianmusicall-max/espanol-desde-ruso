@@ -553,6 +553,21 @@ def escritas(cal: dict) -> list[plan.Dia]:
     return [d for d in plan.dias(cal) if d.ruta.exists()]
 
 
+def meses_de(hechas: int, formas: list) -> tuple[int, str]:
+    """Cuántos meses de estudio diario son las lecciones publicadas.
+
+    Se calcula, no se escribe a mano: «más de tres meses» envejecería el día
+    que se escriba la lección 101 y nadie volvería a mirarlo.
+
+    El ruso pide tres formas según el número (1 месяц, 2-4 месяца, 5+ месяцев)
+    y aquí hacen falta las dos últimas, porque por debajo de 60 lecciones este
+    aviso no se enseña: decir «más de un mes» no tranquiliza a nadie."""
+    n = max(hechas // 30, 2)
+    ultimos_dos = n % 100
+    pocos = 2 <= n % 10 <= 4 and not 12 <= ultimos_dos <= 14
+    return n, formas[0] if pocos else formas[1]
+
+
 def mapa_de_dias(cal: dict) -> str:
     """{número de lección: ruta}, para que «continuar» sepa adónde ir.
 
@@ -584,6 +599,16 @@ def construir_portada(cfg, t, idiomas, idioma, destino, cal, raiz) -> None:
         "isAccessibleForFree": True,
     }, ensure_ascii=False)
 
+    # «100 de 365» se lee como «el curso está a medias» y es lo tercero que ve
+    # quien llega. El mismo dato dicho en meses contesta la pregunta que de
+    # verdad se hace: ¿me voy a quedar sin curso? Por debajo de 60 lecciones no
+    # se enseña, porque entonces la respuesta honrada sería que sí.
+    nota_meses = ""
+    if len(hechas) >= 60 and p.get("progreso_nota"):
+        n, forma = meses_de(len(hechas), p["meses"])
+        nota_meses = (f'<p class="progreso-nota">'
+                      f'{html.escape(p["progreso_nota"].format(n=n, meses=forma))}</p>')
+
     filas = "".join(f"<tr><td>{html.escape(a)}</td><td>{html.escape(b)}</td></tr>" for a, b in p["dia_filas"])
     tarjetas = "".join(f'<div class="tarjeta"><h3>{html.escape(a)}</h3><p>{b}</p></div>' for a, b in p["ano_tarjetas"])
 
@@ -600,6 +625,7 @@ def construir_portada(cfg, t, idiomas, idioma, destino, cal, raiz) -> None:
 <div class="progreso">
 <div class="cifras"><span class="n">{len(hechas)}</span><span>/ {total} {html.escape(p['progreso'])}</span></div>
 <div class="barra"><i style="width:{max(pct, 1)}%"></i></div>
+{nota_meses}
 <div id="mio" hidden>
 <div class="cifras"><span class="n">0</span><span class="texto"></span></div>
 <div class="barra"><i style="width:1%"></i></div>

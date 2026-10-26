@@ -1069,5 +1069,56 @@ class TestLaHistoria(unittest.TestCase):
         self.assertIn("DELE", ultimo, "el último episodio tiene que dejar a Iván en el examen")
 
 
+class TestLaEntrada(unittest.TestCase):
+    """Lo que ve quien llega por primera vez.
+
+    «100 / 365 уроков открыто» es cierto y es lo tercero que se ve, pero se lee
+    como «el curso está a medias». El mismo dato en meses contesta la pregunta
+    que el visitante sí se hace: ¿me voy a quedar sin curso?"""
+
+    def setUp(self):
+        self.cfg = construir_sitio.cargar_config()
+        self.textos = construir_sitio.cargar_textos()
+
+    def test_el_ruso_declina_los_meses(self):
+        """2-4 piden «месяца» y 5+ «месяцев», con la excepción de 12-14. Un
+        «3 месяцев» en la portada delata que el sitio no lo escribió nadie."""
+        formas = self.textos["ru"]["portada"]["meses"]
+        casos = {100: (3, "месяца"), 120: (4, "месяца"), 150: (5, "месяцев"),
+                 365: (12, "месяцев"), 390: (13, "месяцев"), 660: (22, "месяца")}
+        for lecciones, espera in casos.items():
+            self.assertEqual(construir_sitio.meses_de(lecciones, formas), espera, lecciones)
+
+    def test_el_numero_de_meses_se_calcula_y_no_se_escribe(self):
+        """«Más de tres meses» envejecería el día que se escriba la 101."""
+        formas = self.textos["es"]["portada"]["meses"]
+        self.assertEqual(construir_sitio.meses_de(100, formas)[0], 3)
+        self.assertEqual(construir_sitio.meses_de(200, formas)[0], 6)
+
+    def test_con_poco_curso_el_aviso_no_sale(self):
+        """Por debajo de 60 lecciones la respuesta honrada a «¿me quedaré sin
+        curso?» es que sí, así que no se dice lo contrario."""
+        formas = self.textos["ru"]["portada"]["meses"]
+        self.assertEqual(construir_sitio.meses_de(30, formas)[0], 2, "nunca baja de 2")
+
+    def test_la_portada_lo_enseña_en_los_tres_idiomas(self):
+        destino = pathlib.Path(tempfile.mkdtemp())
+        construir_sitio.construir(destino, self.cfg, self.textos)
+        for i in self.textos["idiomas"]:
+            carpeta = destino / i["carpeta"] if i["carpeta"] else destino
+            portada = carpeta.joinpath("index.html").read_text(encoding="utf-8")
+            self.assertIn('class="progreso-nota"', portada, i["codigo"])
+            self.assertNotIn("{n}", portada, f'{i["codigo"]}: quedó el hueco sin rellenar')
+            self.assertNotIn("{meses}", portada, i["codigo"])
+
+    def test_el_boton_principal_lleva_a_la_primera_leccion(self):
+        """La entrada tiene UN camino obvio, y no puede llevar a un 404."""
+        destino = pathlib.Path(tempfile.mkdtemp())
+        construir_sitio.construir(destino, self.cfg, self.textos)
+        portada = (destino / "index.html").read_text(encoding="utf-8")
+        destino_boton = re.search(r'id="empezar" href="([^"]+)"', portada).group(1)
+        self.assertTrue((destino / destino_boton.lstrip("./")).exists(), destino_boton)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -33,6 +33,8 @@ ru:
     boton: "Начать с первого урока"
     boton2: "Посмотреть программу"
     progreso: "уроков открыто"
+    progreso_nota: "это больше {n} {meses} ежедневных занятий — хватит надолго"
+    meses: ["месяца", "месяцев"]
     dif_titulo: "Чем этот курс отличается"
     dif_texto: "Обычный учебник объясняет испанское правило. Этот объясняет ещё и то, <strong>где вас подводит родной язык</strong>. В каждом уроке есть раздел «Контраст с русским», который называет ошибку до того, как вы её сделаете:"
     dif_error: "Вы захотите сказать:"
@@ -139,6 +141,8 @@ es:
     boton: "Ver la primera lección"
     boton2: "Ver el programa"
     progreso: "lecciones publicadas"
+    progreso_nota: "son más de {n} {meses} de estudio diario: hay de sobra para empezar"
+    meses: ["meses", "meses"]
     dif_titulo: "Qué lo hace distinto"
     dif_texto: "Un manual corriente explica la regla española. Este explica además <strong>dónde le traiciona su propia lengua</strong> al alumno. Cada lección lleva un apartado, «Contraste con el ruso», que nombra el error antes de que ocurra:"
     dif_error: "Vas a querer decir:"
@@ -245,6 +249,8 @@ en:
     boton: "See the first lesson"
     boton2: "See the syllabus"
     progreso: "lessons published"
+    progreso_nota: "that is over {n} {meses} of daily study — plenty to start with"
+    meses: ["months", "months"]
     dif_titulo: "What makes it different"
     dif_texto: "An ordinary textbook explains the Spanish rule. This one also explains <strong>where the learner's own language betrays them</strong>. Every lesson has a section, «Contrast with Russian», that names the mistake before it happens:"
     dif_error: "You will want to say:"
