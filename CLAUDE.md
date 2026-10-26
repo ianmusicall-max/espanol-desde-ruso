@@ -769,7 +769,14 @@ ensena.
   ruso, como las lecciones—, tema claro y oscuro, y progreso del lector
   guardado en su navegador sin registro. La publicidad se configura en `web/sitio.yaml` y está
   apagada; sin identificador de AdSense no se carga nada de terceros.
-- Falta activar GitHub Pages (Settings → Pages → rama main, carpeta /docs).
+- **GitHub Pages YA está activado** (comprobado el 2026-10-26 contra la API:
+  `has_pages: true`, repositorio público, rama por defecto `main`). La nota que
+  decía «falta activar» llevaba desfasada quién sabe cuánto. **Lo que no se
+  puede comprobar desde aquí** es que la página de verdad cargue: el proxy del
+  contenedor niega el endpoint `/pages` —así que no se lee qué rama y qué
+  carpeta sirve— y `ianmusicall-max.github.io` ni siquiera resuelve, porque
+  aquí no hay DNS. Eso lo contesta el profesor abriendo la dirección en el
+  móvil, y es lo primero que hay que mirar si algo no se ve.
 - Para AdSense **solo falta el dominio propio** (y el CMP de Google al
   encender los anuncios). El correo de contacto ya está puesto y el resto de
   la lista la da por buena `scripts/revisar_adsense.py`.
