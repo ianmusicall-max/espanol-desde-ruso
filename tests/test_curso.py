@@ -18,7 +18,10 @@ from collections import Counter
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(RAIZ / "scripts"))
 
+import yaml  # noqa: E402
+
 import construir_sitio  # noqa: E402
+import poner_dominio  # noqa: E402
 import revisar_adsense  # noqa: E402
 import exportar_wordpress  # noqa: E402
 import escribir_leccion  # noqa: E402
@@ -797,6 +800,69 @@ class TestElRevisorDeAdsense(unittest.TestCase):
         construir_sitio.construir(destino, cfg, construir_sitio.cargar_textos())
         filas = revisar_adsense.revisar(destino, cfg, plan.cargar())
         self.assertFalse([t for e, t, _ in filas if e == "FALTA" and "no es tuyo" in t])
+
+
+class TestPonerElDominio(unittest.TestCase):
+    """El guion del día de la compra. Lo que se prueba es lo que se rompe."""
+
+    def test_acepta_el_dominio_escrito_de_las_formas_normales(self):
+        """Nadie teclea el dominio dos veces igual."""
+        for entrada in ("espanoldesderuso.com", "ESPANOLDESDERUSO.COM",
+                        "https://espanoldesderuso.com", "https://espanoldesderuso.com/",
+                        "  espanoldesderuso.com  "):
+            self.assertEqual(poner_dominio.comprobar(entrada), "espanoldesderuso.com", entrada)
+
+    def test_rechaza_lo_que_dejaria_el_sitio_sin_servir(self):
+        """Un CNAME con «https://» o con «www» dentro no sirve nada, y GitHub
+        Pages no dice por qué: la página simplemente no carga."""
+        for malo in ("www.midominio.com", "no es un dominio", "", "midominio",
+                     "curso.github.io", "curso.netlify.app", "curso.wordpress.com"):
+            with self.assertRaises(SystemExit, msg=malo):
+                poner_dominio.comprobar(malo)
+
+    def test_escribe_el_dominio_sin_llevarse_los_comentarios(self):
+        """web/sitio.yaml es medio archivo de comentarios que explican cada
+        ajuste. Un yaml.dump los borraría todos y nadie lo notaría hasta
+        necesitarlos."""
+        copia = pathlib.Path(tempfile.mkdtemp()) / "sitio.yaml"
+        original = construir_sitio.CONFIG.read_text(encoding="utf-8")
+        copia.write_text(original, encoding="utf-8")
+
+        poner_dominio.escribir("espanoldesderuso.com", copia)
+        nuevo = copia.read_text(encoding="utf-8")
+
+        self.assertIn('dominio: "https://espanoldesderuso.com"', nuevo)
+        self.assertEqual(nuevo.count("#"), original.count("#"), "se perdieron comentarios")
+        self.assertEqual(len(nuevo.splitlines()), len(original.splitlines()))
+        self.assertEqual(yaml.safe_load(nuevo)["dominio"], "https://espanoldesderuso.com")
+
+    def test_con_dominio_propio_aparecen_el_cname_y_la_url_canonica(self):
+        """Es lo que de verdad desbloquea AdSense, y se comprueba construyendo."""
+        cfg = copy.deepcopy(construir_sitio.cargar_config())
+        cfg["dominio"] = "https://espanoldesderuso.com"
+        cfg["adsense"] = {"cliente": "ca-pub-1234567890123456", "bloques": {"pie": "333"}}
+        destino = pathlib.Path(tempfile.mkdtemp())
+        construir_sitio.construir(destino, cfg, construir_sitio.cargar_textos())
+
+        self.assertEqual((destino / "CNAME").read_text(encoding="utf-8").strip(),
+                         "espanoldesderuso.com")
+        self.assertTrue((destino / "ads.txt").exists())
+        leccion = (destino / "semana-01" / "dia-1.html").read_text(encoding="utf-8")
+        self.assertIn('rel="canonical" href="https://espanoldesderuso.com/semana-01/dia-1.html"',
+                      leccion)
+        self.assertNotIn("github.io", (destino / "sitemap.xml").read_text(encoding="utf-8"))
+
+    def test_las_direcciones_de_github_pages_son_cuatro_y_cuatro(self):
+        """Si alguien recorta la lista, el dominio resuelve a veces sí y a veces
+        no, según a qué IP caiga: el fallo más difícil de leer que hay."""
+        self.assertEqual(len(poner_dominio.A_GITHUB), 4)
+        self.assertEqual(len(poner_dominio.AAAA_GITHUB), 4)
+        for ip in poner_dominio.A_GITHUB:
+            self.assertRegex(ip, r"^185\.199\.10[89]\.153$|^185\.199\.11[01]\.153$")
+        texto = poner_dominio.instrucciones("ejemplo.com")
+        for ip in poner_dominio.A_GITHUB + poner_dominio.AAAA_GITHUB:
+            self.assertIn(ip, texto)
+        self.assertIn("DNS only", texto, "el proxy de Cloudflare impide el certificado")
 
 
 if __name__ == "__main__":

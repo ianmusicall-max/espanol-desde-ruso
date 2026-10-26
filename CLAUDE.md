@@ -249,6 +249,60 @@ partir de 100 USD acumulados. Un rechazo no penaliza y se puede volver a pedir.
 O sea que **solicitar el alta hoy es gratis**, y lo único de toda esta lista que
 cuesta dinero es el dominio.
 
+### El dominio: precios buscados el 2026-10-26
+
+El usuario pidió «el más barato de todos». La respuesta corta es que **el
+precio del primer año no es el precio**: lo que se paga todos los años es la
+renovación, y ahí el orden cambia del todo.
+
+- **La trampa**: `.store` cuesta ~1 USD el primer año y **~67 la renovación**;
+  `.online` ~2 y **~35**. Son los que salen primero al buscar «dominio barato».
+- **Lo más barato de verdad**: `.top`, con renovación ~1-4 USD. `.xyz` es
+  barato al registrar pero renueva por ~11-13.
+- **`.com` al coste**: Cloudflare Registrar lo vende sin margen, ~10,44 USD/año
+  y la renovación igual, con WHOIS privado incluido. Spaceship anda por ~9,98 y
+  Porkbun ~10,67-11,08. Namecheap renueva bastante más caro (~14-18).
+
+**Se recomendó `.com` y no `.top`**, aunque la pregunta era por el más barato:
+la diferencia es de unos 8 USD al año y el dominio es la cara del curso. `.top`
+y `.click` cargan con fama de spam, y este sitio tiene que pasar por un revisor
+de AdSense y que un lector se fíe al compartirlo por WhatsApp. Es el único sitio
+de todo el proyecto donde ahorrar ocho dólares cuesta credibilidad.
+
+**El GitHub Teacher Toolbox da un dominio gratis un año** (vía Name.com, 25
+extensiones elegibles) a profesores verificados, y el usuario lo es. Pide
+verificación como docente de una institución, y la renovación ya es a precio
+normal. Queda anotado como la vía gratis del primer año.
+
+**Nada de esto se pudo verificar en su fuente oficial**: el proxy de este
+contenedor bloquea `education.github.com`, `name.com`, `netlify.com`,
+`wordpress.com` y las páginas de ayuda de Google. Los números vienen de
+comparadores de terceros, varios con enlaces de afiliado, y **se contradicen
+entre sí**: cotejar en la web del registrador antes de pagar, igual que
+`alineacion-mcer-pcic.md`. Tampoco hay DNS aquí —ni `google.com` resuelve—, así
+que la disponibilidad de un nombre no se puede comprobar desde el repositorio.
+
+### `scripts/poner_dominio.py`
+
+El día de la compra hay tres pasos y es fácil dejarse uno: escribir el dominio
+en `web/sitio.yaml`, reconstruir, y crear los registros DNS. El guion hace los
+dos primeros e imprime el tercero. `--ver` enseña sin tocar.
+
+- **Edita solo la línea del dominio**, con una expresión regular y no con
+  `yaml.dump`: medio `sitio.yaml` son comentarios que explican cada ajuste, y
+  un volcado los borraría sin que nadie lo notara hasta necesitarlos. Hay una
+  prueba que cuenta los comentarios y las líneas.
+- **Rechaza lo que dejaría el sitio sin servir**: `www.` delante, `https://`
+  dentro, y los subdominios gratis de las cinco plataformas. Un `CNAME` mal
+  escrito no sirve nada y GitHub Pages no dice por qué: la página no carga y ya.
+- **Las cuatro A y las cuatro AAAA de GitHub Pages** van en una constante con
+  una prueba que cuenta que sean cuatro y cuatro: recortada la lista, el
+  dominio resuelve unas veces sí y otras no según a qué IP caiga, que es el
+  fallo más difícil de leer que hay.
+- **Avisa de lo de Cloudflare**: los registros tienen que ir en gris («DNS
+  only»). Con el proxy naranja puesto, GitHub no puede validar el dominio, no
+  emite el certificado y «Enforce HTTPS» se queda apagado para siempre.
+
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.
