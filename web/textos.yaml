@@ -115,6 +115,7 @@ ru:
   cookies_ok: "Понятно"
   pie: "Материалы курса можно свободно использовать для учёбы."
   idioma: "Язык"
+  tema: "Светлая или тёмная тема"
 
 es:
   menu: {inicio: "Inicio", curso: "Las lecciones", sobre: "El curso", contacto: "Contacto"}
@@ -209,6 +210,7 @@ es:
   cookies_ok: "De acuerdo"
   pie: "El material del curso puede usarse libremente para estudiar."
   idioma: "Idioma"
+  tema: "Tema claro u oscuro"
 
 en:
   menu: {inicio: "Home", curso: "Lessons", sobre: "About", contacto: "Contact"}
@@ -303,3 +305,4 @@ en:
   cookies_ok: "Got it"
   pie: "Course material may be used freely for study."
   idioma: "Language"
+  tema: "Light or dark theme"

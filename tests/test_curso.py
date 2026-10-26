@@ -353,6 +353,36 @@ class TestElSitio(unittest.TestCase):
         pagina = (destino / "semana-01" / "dia-1.html").read_text(encoding="utf-8")
         self.assertEqual(pagina.count("<table>"), pagina.count('<div class="tabla-env">'))
 
+    def test_el_boton_de_dia_y_noche_esta_en_todas_las_paginas(self):
+        destino = self._construir()
+        paginas = ["index.html", "kurs.html", "privacy.html", "es/index.html",
+                   "en/kurs.html", "semana-01/dia-1.html"]
+        for nombre in paginas:
+            pagina = (destino / nombre).read_text(encoding="utf-8")
+            self.assertIn('id="tema"', pagina, nombre)
+            self.assertIn('class="luna"', pagina, nombre)
+            self.assertIn('class="sol"', pagina, nombre)
+        # La etiqueta sale en el idioma de la página.
+        for i in self.idiomas:
+            carpeta = destino / i if i != "ru" else destino
+            self.assertIn(self.textos[i]["tema"], (carpeta / "index.html").read_text(encoding="utf-8"), i)
+
+    def test_la_eleccion_del_lector_gana_sobre_el_sistema(self):
+        """Sin las tres piezas, el botón pinta pero no manda: el selector de
+        `prefers-color-scheme` tiene que ceder ante data-tema."""
+        destino = self._construir()
+        pagina = (destino / "index.html").read_text(encoding="utf-8")
+        self.assertIn(':root:not([data-tema="light"])', pagina)
+        self.assertIn(':root[data-tema="dark"]', pagina)
+        self.assertIn("localStorage.getItem('tema')", pagina)
+
+    def test_el_tema_se_aplica_antes_de_pintar(self):
+        """Si el script fuera al final, quien eligió noche vería un fogonazo
+        blanco en cada carga."""
+        destino = self._construir()
+        pagina = (destino / "semana-01" / "dia-1.html").read_text(encoding="utf-8")
+        self.assertLess(pagina.index("localStorage.getItem('tema')"), pagina.index("</head>"))
+
     def test_sin_anuncios_configurados_no_se_carga_nada_de_terceros(self):
         cfg = construir_sitio.cargar_config()
         cfg["adsense"]["cliente"] = ""

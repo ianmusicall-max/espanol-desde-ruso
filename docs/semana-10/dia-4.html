@@ -6,17 +6,28 @@
 <title>Урок 67: Выходные: что ты делаешь по субботам? — Испанский с нуля для русскоговорящих</title>
 <meta name="description" content="Урок 67: Выходные: что ты делаешь по субботам?. ir al cine, quedar con amigos, hacer la compra, ir de compras, descansar, dormir hasta tarde; ¿Qué haces los s"><link rel="canonical" href="https://ianmusicall-max.github.io/espanol-desde-ruso/semana-10/dia-4.html"><link rel="alternate" hreflang="ru" href="https://ianmusicall-max.github.io/espanol-desde-ruso/semana-10/dia-4.html"><link rel="alternate" hreflang="es" href="https://ianmusicall-max.github.io/espanol-desde-ruso/es/semana-10/dia-4.html"><link rel="alternate" hreflang="en" href="https://ianmusicall-max.github.io/espanol-desde-ruso/en/semana-10/dia-4.html"><meta property="og:type" content="website"><meta property="og:locale" content="ru"><meta property="og:title" content="Урок 67: Выходные: что ты делаешь по субботам? — Испанский с нуля для русскоговорящих"><meta property="og:description" content="Урок 67: Выходные: что ты делаешь по субботам?. ir al cine, quedar con amigos, hacer la compra, ir de compras, descansar, dormir hasta tarde; ¿Qué haces los s"><meta property="og:url" content="https://ianmusicall-max.github.io/espanol-desde-ruso/semana-10/dia-4.html">
 <style>
+/* Tres estados: lo que diga el sistema, o lo que el lector elija con el botón
+   de la luna. El atributo data-tema del <html> gana siempre sobre el sistema;
+   lo escribe un script de dos líneas en <head> para que no haya parpadeo. */
 :root{
+  color-scheme:light;
   --papel:#fdfbf6; --tinta:#1b1e23; --tenue:#646c78; --linea:#e2dacb;
   --acento:#b03f26; --acento-suave:#fbeee9; --celeste:#2f6b8f; --celeste-suave:#eaf2f7;
   --realce:#fdf3d8; --tarjeta:#f7f2e6; --sombra:0 1px 2px rgba(27,30,35,.05);
   --ancho:44rem;
 }
-@media(prefers-color-scheme:dark){:root{
+@media(prefers-color-scheme:dark){:root:not([data-tema="light"]){
+  color-scheme:dark;
   --papel:#14161a; --tinta:#e8e4da; --tenue:#9aa2ae; --linea:#333941;
   --acento:#f0896a; --acento-suave:#2a1d19; --celeste:#7fb6d6; --celeste-suave:#162229;
   --realce:#2a2718; --tarjeta:#1d2026; --sombra:none;
 }}
+:root[data-tema="dark"]{
+  color-scheme:dark;
+  --papel:#14161a; --tinta:#e8e4da; --tenue:#9aa2ae; --linea:#333941;
+  --acento:#f0896a; --acento-suave:#2a1d19; --celeste:#7fb6d6; --celeste-suave:#162229;
+  --realce:#2a2718; --tarjeta:#1d2026; --sombra:none;
+}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{margin:0;background:var(--papel);color:var(--tinta);
@@ -48,6 +59,20 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 .idiomas a{padding:.12rem .5rem;border-radius:999px;font-size:.75rem;font-weight:600;
   text-transform:uppercase;letter-spacing:.05em;line-height:1.5}
 .idiomas a[aria-current]{background:var(--acento);color:#fff}
+.tema{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;
+  width:30px;height:30px;padding:0;border:1px solid var(--linea);border-radius:999px;
+  background:transparent;color:var(--tenue);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.tema:hover{color:var(--acento);border-color:var(--acento)}
+.tema svg{display:block}
+/* De día se ve la luna (pulsa y se hace de noche); de noche, el sol. */
+.tema .sol{display:none}
+@media(prefers-color-scheme:dark){
+  :root:not([data-tema="light"]) .tema .luna{display:none}
+  :root:not([data-tema="light"]) .tema .sol{display:block}}
+:root[data-tema="dark"] .tema .luna{display:none}
+:root[data-tema="dark"] .tema .sol{display:block}
+:root[data-tema="light"] .tema .luna{display:block}
+:root[data-tema="light"] .tema .sol{display:none}
 @media(min-width:40rem){
   header.sitio nav.paginas{order:0;flex:0 1 auto;margin-inline-start:auto}
   header.sitio .marca{flex:0 1 auto}
@@ -89,7 +114,8 @@ strong{font-weight:650}
 .contraste p:last-child{margin-bottom:0}
 .mal{color:var(--acento)}
 .bien{color:#1d7a4f}
-@media(prefers-color-scheme:dark){.bien{color:#5fc48f}}
+@media(prefers-color-scheme:dark){:root:not([data-tema="light"]) .bien{color:#5fc48f}}
+:root[data-tema="dark"] .bien{color:#5fc48f}
 
 blockquote{margin:1.2rem 0;padding:.85rem 1.1rem;background:var(--tarjeta);
   border-inline-start:3px solid var(--celeste);border-radius:0 8px 8px 0}
@@ -150,6 +176,7 @@ footer.sitio p{margin:.35rem 0}
   padding:.85rem 20px;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.85rem;display:flex;
   flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:center;z-index:30}
 </style>
+<script>try{var t=localStorage.getItem('tema');if(t)document.documentElement.dataset.tema=t}catch(e){}</script>
 
 </head>
 <body>
@@ -157,6 +184,7 @@ footer.sitio p{margin:.35rem 0}
 <a class="marca" href="../index.html">Испанский с нуля для русскоговорящих</a>
 <nav class="paginas"><a href="../kurs.html">Все уроки</a><a href="../o-kurse.html">О курсе</a><a href="../kontakt.html">Контакты</a></nav>
 <div class="idiomas" title="Язык"><a href="../semana-10/dia-4.html" hreflang="ru" lang="ru" aria-current="true">ru</a><a href="../es/semana-10/dia-4.html" hreflang="es" lang="es">es</a><a href="../en/semana-10/dia-4.html" hreflang="en" lang="en">en</a></div>
+<button class="tema" id="tema" type="button" title="Светлая или тёмная тема" aria-label="Светлая или тёмная тема"><svg class="luna" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sol" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.5 1.5M17.9 17.9l1.5 1.5M2.5 12h2M19.5 12h2M4.6 19.4l1.5-1.5M17.9 6.1l1.5-1.5"/></svg></button>
 </div></header>
 <main><div class="envoltorio">
 <div class="leccion-cab"><span class="n">Урок 67</span><span>из 365</span><span class="tipo">урок</span><span>неделя 10 · уровень A1</span></div><p class="aviso">Черновик: урок написан, но преподаватель его ещё не вычитал.</p><h1 id="semana-10-dia-4-el-fin-de-semana-que-haces-los-sabados">Semana 10 · Día 4 — El fin de semana: ¿qué haces los sábados?</h1>
@@ -524,5 +552,6 @@ sábados</em> означало бы «каждую субботу».</p><nav cla
 <p>Материалы курса можно свободно использовать для учёбы.</p>
 </div></footer>
 
+<script>(function(){var b=document.getElementById('tema');if(!b)return;function actual(){var r=document.documentElement;return r.dataset.tema||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}b.addEventListener('click',function(){var n=actual()==='dark'?'light':'dark';document.documentElement.dataset.tema=n;try{localStorage.setItem('tema',n)}catch(e){}});})();</script>
 </body>
 </html>

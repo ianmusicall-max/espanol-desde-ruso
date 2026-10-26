@@ -42,17 +42,28 @@ TEXTOS = RAIZ / "web" / "textos.yaml"
 EXTENSIONES = ["tables", "fenced_code", "sane_lists", "toc", "attr_list"]
 
 CSS = """
+/* Tres estados: lo que diga el sistema, o lo que el lector elija con el botón
+   de la luna. El atributo data-tema del <html> gana siempre sobre el sistema;
+   lo escribe un script de dos líneas en <head> para que no haya parpadeo. */
 :root{
+  color-scheme:light;
   --papel:#fdfbf6; --tinta:#1b1e23; --tenue:#646c78; --linea:#e2dacb;
   --acento:#b03f26; --acento-suave:#fbeee9; --celeste:#2f6b8f; --celeste-suave:#eaf2f7;
   --realce:#fdf3d8; --tarjeta:#f7f2e6; --sombra:0 1px 2px rgba(27,30,35,.05);
   --ancho:44rem;
 }
-@media(prefers-color-scheme:dark){:root{
+@media(prefers-color-scheme:dark){:root:not([data-tema="light"]){
+  color-scheme:dark;
   --papel:#14161a; --tinta:#e8e4da; --tenue:#9aa2ae; --linea:#333941;
   --acento:#f0896a; --acento-suave:#2a1d19; --celeste:#7fb6d6; --celeste-suave:#162229;
   --realce:#2a2718; --tarjeta:#1d2026; --sombra:none;
 }}
+:root[data-tema="dark"]{
+  color-scheme:dark;
+  --papel:#14161a; --tinta:#e8e4da; --tenue:#9aa2ae; --linea:#333941;
+  --acento:#f0896a; --acento-suave:#2a1d19; --celeste:#7fb6d6; --celeste-suave:#162229;
+  --realce:#2a2718; --tarjeta:#1d2026; --sombra:none;
+}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{margin:0;background:var(--papel);color:var(--tinta);
@@ -84,6 +95,20 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 .idiomas a{padding:.12rem .5rem;border-radius:999px;font-size:.75rem;font-weight:600;
   text-transform:uppercase;letter-spacing:.05em;line-height:1.5}
 .idiomas a[aria-current]{background:var(--acento);color:#fff}
+.tema{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;
+  width:30px;height:30px;padding:0;border:1px solid var(--linea);border-radius:999px;
+  background:transparent;color:var(--tenue);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.tema:hover{color:var(--acento);border-color:var(--acento)}
+.tema svg{display:block}
+/* De día se ve la luna (pulsa y se hace de noche); de noche, el sol. */
+.tema .sol{display:none}
+@media(prefers-color-scheme:dark){
+  :root:not([data-tema="light"]) .tema .luna{display:none}
+  :root:not([data-tema="light"]) .tema .sol{display:block}}
+:root[data-tema="dark"] .tema .luna{display:none}
+:root[data-tema="dark"] .tema .sol{display:block}
+:root[data-tema="light"] .tema .luna{display:block}
+:root[data-tema="light"] .tema .sol{display:none}
 @media(min-width:40rem){
   header.sitio nav.paginas{order:0;flex:0 1 auto;margin-inline-start:auto}
   header.sitio .marca{flex:0 1 auto}
@@ -125,7 +150,8 @@ strong{font-weight:650}
 .contraste p:last-child{margin-bottom:0}
 .mal{color:var(--acento)}
 .bien{color:#1d7a4f}
-@media(prefers-color-scheme:dark){.bien{color:#5fc48f}}
+@media(prefers-color-scheme:dark){:root:not([data-tema="light"]) .bien{color:#5fc48f}}
+:root[data-tema="dark"] .bien{color:#5fc48f}
 
 blockquote{margin:1.2rem 0;padding:.85rem 1.1rem;background:var(--tarjeta);
   border-inline-start:3px solid var(--celeste);border-radius:0 8px 8px 0}
@@ -186,6 +212,32 @@ footer.sitio p{margin:.35rem 0}
   padding:.85rem 20px;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.85rem;display:flex;
   flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:center;z-index:30}
 """
+
+
+# El tema se aplica ANTES de pintar: si esto fuera al final de la página, el
+# lector que eligió noche vería un fogonazo blanco en cada carga.
+TEMA_CABEZA = (
+    "<script>try{var t=localStorage.getItem('tema');"
+    "if(t)document.documentElement.dataset.tema=t}catch(e){}</script>"
+)
+
+LUNA = ('<svg class="luna" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" '
+        'stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+        '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>')
+SOL = ('<svg class="sol" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" '
+       'stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/>'
+       '<path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.5 1.5M17.9 17.9l1.5 1.5M2.5 12h2M19.5 12h2'
+       'M4.6 19.4l1.5-1.5M17.9 6.1l1.5-1.5"/></svg>')
+
+# Sin data-tema manda el sistema, así que el estado real se consulta con
+# matchMedia y no se supone.
+TEMA_SCRIPT = (
+    "<script>(function(){var b=document.getElementById('tema');if(!b)return;"
+    "function actual(){var r=document.documentElement;return r.dataset.tema||"
+    "(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}"
+    "b.addEventListener('click',function(){var n=actual()==='dark'?'light':'dark';"
+    "document.documentElement.dataset.tema=n;try{localStorage.setItem('tema',n)}catch(e){}});})();</script>"
+)
 
 
 # ---------------------------------------------------------------- configuración
@@ -301,6 +353,7 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
 <title>{html.escape(titulo)}</title>
 {meta}{canon}{"".join(hreflangs)}{og}{estructura}
 <style>{CSS}</style>
+{TEMA_CABEZA}
 {cabeza_terceros(cfg)}
 </head>
 <body>
@@ -308,6 +361,7 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
 <a class="marca" href="{raiz}/index.html">{html.escape(t['titulo_sitio'])}</a>
 <nav class="paginas">{menu}</nav>
 <div class="idiomas" title="{html.escape(t['idioma'])}">{"".join(conmutador)}</div>
+<button class="tema" id="tema" type="button" title="{html.escape(t['tema'])}" aria-label="{html.escape(t['tema'])}">{LUNA}{SOL}</button>
 </div></header>
 <main><div class="envoltorio">
 {cuerpo}
@@ -317,6 +371,7 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
 <p>{html.escape(t['pie'])}</p>
 </div></footer>
 {banda_cookies(cfg, t, raiz)}
+{TEMA_SCRIPT}
 </body>
 </html>"""
 
