@@ -8,12 +8,18 @@
 
 | | |
 |---|---|
-| Título | *España en vivo* |
+| Título | *España en vivo* · «Курс современного испанского языка для продолжающих» |
 | Autores | Georgy Nuzhdin (idea original), Paloma Martín Lora-Tamayo (la audionovela), Carmen Marín Estremera (los talleres y buena parte de los debates) |
+| Edición | 3.ª ed., Айрис-пресс, 2009 (© 2006). **368 pp.** ISBN 978-5-8112-3600-8 |
 | Lengua vehicular | Ruso, con el español como lengua meta |
-| Extensión | 6 unidades + 3 pruebas finales + claves (~300 pp.) |
+| Extensión | 6 unidades + 3 pruebas finales + claves |
 | Material sonoro | CD con la audionovela, grabada por **diez** locutores españoles |
 | Nivel declarado | A partir de **180 horas** y ~1400 palabras, con pasados y las bases de subjuntivo y condicional; pero el libro dice estar pensado sobre todo para **300+ horas** |
+
+> **El título español y el ruso son del MISMO libro**, y eso costó una
+> confusión: en la carpeta del profesor hay dos escaneos distintos de él,
+> `Espana_en_vivo.pdf` y `624873791-…-Для-продолжающих.pdf`. No son dos obras.
+> Se vio al abrir la portada del segundo, no al leer los nombres de archivo.
 
 **Es el mismo equipo de autores que *Español en vivo***, y esto es lo que
 responde la pregunta de los niveles que quedó abierta el 2026-10-26: el autor
@@ -38,6 +44,34 @@ trabajar de dos maneras:
   en las seis unidades.
 
 ### Las secciones de cada unidad, en orden
+
+Medido sobre el índice de la Unidad I (*España y los españoles*, pp. 7-52), que
+es el reparto real y no el que uno supondría:
+
+| Sección | Páginas | Cuánto ocupa |
+|---|---|---|
+| Precalentamiento | 8-10 | 2 |
+| Texto | 10-12 | 2 |
+| Ejercicios de poslectura (+ **de traducción** como subapartado propio) | 12-15 | 3 |
+| Debate | 15-19 | 4 |
+| Gramática reflexiva | 19-24 | 5 |
+| **Audionovela** | 24-35 | **11** |
+| Pragmática | 35-43 | 8 |
+| Interculturalidad | 43-49 | 6 |
+| Taller | 49-52 | 3 |
+
+**La audionovela y la pragmática se llevan 19 de las 45 páginas: el 42% de la
+unidad.** Es lo que más sorprende al ver el índice, porque por la descripción
+uno esperaría que el texto y la gramática mandaran, y ocupan 7 páginas entre
+los dos. El libro invierte el reparto habitual de un manual: lo hablado pesa
+más que lo leído.
+
+Dos detalles que el prefacio no dice y el índice sí: la gramática se llama
+**«reflexiva»** (el prefacio en ruso la llamaba inductiva), y **la audionovela
+lleva título propio en cada unidad** —en la I, *Buscando un hueco*—, o sea que
+cada entrega es un capítulo con nombre, no un anexo.
+
+### Las secciones, una por una
 
 | Sección | Qué hace |
 |---|---|

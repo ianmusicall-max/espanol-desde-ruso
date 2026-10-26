@@ -62,6 +62,18 @@ la documentación del programa, en español.
 - **Las 69 lecciones de las semanas 4 en adelante son borradores**
   (`revisado: false`) y el sitio las marca como tales. Las 21 primeras estan
   revisadas.
+- **El orden de los pasados** (de `referencias/espanol-en-vivo.md`). Este curso
+  da el perfecto en la semana 18 y el indefinido despues; Nuzhdin defiende lo
+  contrario porque en casi toda Hispanoamerica el indefinido ocupa el lugar del
+  perfecto. Eso tira de la **regla 8** (ensenar lo mas extendido). Es la
+  decision de mas peso que queda abierta: mover dos unidades del calendario.
+- **Las tablas de conjugacion**: 19 lecciones las llevan completas. Nuzhdin las
+  evita y usa oposiciones minimas (1.ª/2.ª sg., 1.ª/3.ª sg., 3.ª sg./3.ª pl.).
+  Se puede dejar la tabla como consulta y practicar por oposiciones.
+- **La audionovela**: atraviesa los dos libros de la serie. Aqui Ana e Ivan ya
+  existen desde la leccion 1, pero como nombres y no como trama. Convertirlos
+  en una historia seriada es el cambio con mas recorrido, y el audio ya esta
+  construido.
 
 ## Progreso del lector, sin registro (2026-10-26)
 
@@ -410,12 +422,51 @@ leen.
 búsqueda, `fullText contains 'que'` sobre la carpeta: los que no salen son
 escaneos. Sale barato y evita descargas inútiles.
 
+### Los dos libros son uno, y el curso base es otro (corregido el 2026-10-26)
+
+El profesor pasó los dos escaneos por «Abrir con → Documentos de Google». El
+OCR **no corrió**: el .docx trae 16 páginas como IMÁGENES y cero texto. Pero
+16 páginas bastan, porque son las del prefacio y el índice, que es donde un
+manual explica su método. Las imágenes sí se leen.
+
+Al abrir la portada apareció el error: **`Espana_en_vivo.pdf` y
+`624873791-…-Для-продолжающих.pdf` son el MISMO libro**, dos escaneos de
+*España en vivo* / «Курс современного испанского языка для продолжающих»
+(3.ª ed., Айрис-пресс, 2009, 368 pp.). Antes se habían dado por dos obras
+distintas leyendo solo los nombres de archivo.
+
+O sea que la serie son **dos** libros y no tres: *Español en vivo* (base, desde
+cero) y *España en vivo* (continuación, B2).
+
+### `referencias/espanol-en-vivo.md` — el curso base
+
+Lo que vale de este libro es el método, y **tres de sus decisiones chocan con
+este curso**. Ninguna se tocó: son decisiones del profesor, y la regla 4 pide
+cambiar antes el YAML.
+
+- **El orden de los pasados.** Aquí el perfecto entra en la semana 18 y el
+  indefinido después; Nuzhdin defiende el orden contrario, y su argumento
+  principal es que en casi toda Hispanoamérica el indefinido ocupa el lugar
+  del perfecto. Eso **choca con la regla 8** —enseñar lo más extendido—, que
+  empujaría a su orden. Es la decisión de más peso que queda abierta.
+- **Las tablas de conjugación.** Nuzhdin las evita a propósito y usa
+  oposiciones mínimas (1.ª/2.ª sg., 1.ª/3.ª sg., 3.ª sg./3.ª pl.): dice que la
+  tabla hace que el alumno la reconstruya entera para encontrar una forma.
+  Este curso usa tabla completa en **19 lecciones**.
+- **Los átonos antes.** Él los mete desde el principio y por una razón
+  contrastiva explícita: evitar el orden ruso «я его вижу». Aquí los reflexivos
+  entran en la 9 y el objeto directo en la 13, ya con esa advertencia puesta;
+  o sea que el contraste existe, solo que más tarde.
+
+Y lo que se confirma mirando los dos libros juntos: **la audionovela atraviesa
+la serie entera**, no es un recurso del libro avanzado. En el base trabaja el
+léxico y la gramática de su propia lección.
+
 ### `referencias/espana-en-vivo.md`
 
-El único legible resultó ser **otro libro**: *España en vivo*, del mismo equipo
-(Nuzhdin, Martín Lora-Tamayo, Marín Estremera), un manual de **B2** sobre la
-España contemporánea. **Eso contesta la pregunta de niveles que quedó abierta**:
-el autor sí tiene material por encima de B1.
+La continuación de la serie: un manual de **B2** sobre la España contemporánea,
+del mismo equipo. **Eso contesta la pregunta de niveles que quedó abierta**: el
+autor sí tiene material por encima de B1.
 
 Y su nivel de entrada —180 horas, 1400 palabras, pasados y bases de subjuntivo—
 es casi exactamente la salida prevista de este curso (182,5 horas), así que
