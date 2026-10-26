@@ -177,6 +177,16 @@ class TestElVocabulario(unittest.TestCase):
             self.assertTrue(versionado.exists(), f"falta vocabulario/{generado.name}: corre scripts/exportar_anki.py")
             self.assertEqual(versionado.read_text(encoding="utf-8"), generado.read_text(encoding="utf-8"), f"vocabulario/{generado.name} desactualizado")
 
+    def test_ninguna_palabra_genera_dos_tarjetas(self):
+        """Once entradas se enseñan dos veces (lo lista revisar_lexico.py). Eso
+        lo decide el profesor; lo que el mazo no puede tener es la misma palabra
+        dos veces."""
+        import revisar_lexico
+        claves = [revisar_lexico.normalizar(l.split("\t")[0])
+                  for l in (RAIZ / "vocabulario" / "todo.tsv").read_text(encoding="utf-8").splitlines()[1:]]
+        repetidas = {k for k in claves if claves.count(k) > 1}
+        self.assertEqual(repetidas, set())
+
     def test_las_tarjetas_no_llevan_negritas_ni_estan_vacias(self):
         for linea in (RAIZ / "vocabulario" / "todo.tsv").read_text(encoding="utf-8").splitlines()[1:]:
             es, ru, _, etiquetas = linea.split("\t")

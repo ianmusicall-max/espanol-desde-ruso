@@ -102,7 +102,6 @@ lo siento	мне жаль, простите	Lo siento mucho.	S02 U1 A1 leccion
 claro	конечно; ясно	Sí, claro. ¡Ah, claro!	S02 U1 A1 leccion
 vale	ладно, хорошо (Испания)	Vale, gracias.	S02 U1 A1 leccion
 ¿Alguna pregunta?	Есть вопросы?	¿Alguna pregunta? — No.	S02 U1 A1 leccion
-el nombre	имя		S02 U1 A1 cultura
 el apellido	фамилия		S02 U1 A1 cultura
 el padre / la madre	отец / мать		S02 U1 A1 cultura
 casarse	выходить замуж, жениться		S02 U1 A1 cultura
@@ -206,7 +205,6 @@ amarillo / amarilla	жёлтый / жёлтая	Tres lápices amarillos.	S04 U2 
 negro / negra	чёрный / чёрная	Las gafas negras.	S04 U2 A1 leccion
 blanco / blanca	белый / белая	Una mesa blanca.	S04 U2 A1 leccion
 marrón	коричневый	Una mochila marrón.	S04 U2 A1 leccion
-muy	очень	Una mochila muy ligera.	S04 U2 A1 leccion
 ligero / ligera	лёгкий / лёгкая (по весу)	Esta mochila es ligera.	S04 U2 A1 leccion
 pesado / pesada	тяжёлый / тяжёлая	Dos libros pesados.	S04 U2 A1 leccion
 largo / larga	длинный / длинная (не «большой»!)	Una regla larga.	S04 U2 A1 leccion
@@ -217,7 +215,6 @@ fácil	простой, нетрудный	Un problema fácil.	S04 U2 A1 leccion
 difícil	трудный	El texto es muy difícil.	S04 U2 A1 leccion
 importante	важный	Unos papeles importantes.	S04 U2 A1 leccion
 ¿Cómo es? / ¿Cómo son?	Какой он? / Какие они?	¿Cómo es tu móvil?	S04 U2 A1 leccion
-grande	большой (одна форма в роде)	Un libro grande, una mesa grande.	S04 U2 A1 leccion
 pequeño / pequeña	маленький / маленькая	La mochila es pequeña.	S04 U2 A1 leccion
 viejo / vieja	старый / старая	Mi ordenador es viejo.	S04 U2 A1 leccion
 bonito / bonita	красивый / красивая	Una mochila bonita.	S04 U2 A1 leccion
@@ -239,12 +236,10 @@ en total	всего, итого	¿Cuánto es en total?	S04 U2 A1 leccion
 el dinero	деньги		S04 U2 A1 cultura
 la moneda	монета; валюта		S04 U2 A1 cultura
 el billete	банкнота; билет		S04 U2 A1 cultura
-el céntimo	цент		S04 U2 A1 cultura
 la tarjeta	карта (банковская)		S04 U2 A1 cultura
 en efectivo	наличными		S04 U2 A1 cultura
 con tarjeta	картой		S04 U2 A1 cultura
 el cambio	сдача; обмен		S04 U2 A1 cultura
-la cartera	кошелёк, бумажник		S04 U2 A1 cultura
 el monedero	кошелёк для монет		S04 U2 A1 cultura
 el bolsillo	карман		S04 U2 A1 cultura
 el precio	цена		S04 U2 A1 cultura
@@ -258,7 +253,6 @@ el supermercado	супермаркет		S04 U2 A1 cultura
 los grandes almacenes	универмаг		S04 U2 A1 cultura
 la familia	семья	En mi familia somos seis.	S05 U3 A1 leccion
 tener	иметь; «у меня есть»	Tengo dos hermanos.	S05 U3 A1 leccion
-el padre / la madre	отец / мать	Mi madre es profesora.	S05 U3 A1 leccion
 los padres	родители	Mis padres están en Rusia.	S05 U3 A1 leccion
 el hijo / la hija	сын / дочь	Carmen tiene dos hijos.	S05 U3 A1 leccion
 el hermano / la hermana	брат / сестра	¿Tienes hermanos?	S05 U3 A1 leccion
@@ -272,10 +266,8 @@ su / sus	его, её, их, Ваш / -и	su mujer, sus hijos	S05 U3 A1 leccion
 el marido	муж	Su marido es médico.	S05 U3 A1 leccion
 la mujer	жена; женщина	Marta es su mujer.	S05 U3 A1 leccion
 el sobrino / la sobrina	племянник / племянница	Estos son mis sobrinos.	S05 U3 A1 leccion
-mayor	старший	Mi hermano mayor se llama Javier.	S05 U3 A1 leccion
 menor	младший	Mi hermana menor es Lucía.	S05 U3 A1 leccion
 de él / de ella	его / её (уточнение)	Es el coche de ella.	S05 U3 A1 leccion
-el señor / la señora	господин / госпожа	Señor López, ¿son sus nietos?	S05 U3 A1 leccion
 nuestro / nuestra	наш / наша	nuestra familia, nuestro padre	S05 U3 A1 leccion
 vuestro / vuestra	ваш / ваша (в Испании)	¿Y vuestra casa?	S05 U3 A1 leccion
 casado / casada (con)	женат / замужем (на, за)	Está casada con Javier.	S05 U3 A1 leccion
@@ -305,23 +297,16 @@ trabajador / trabajadora	работящий	Es muy trabajadora.	S05 U3 A1 leccio
 amable	любезный, добрый	Mis tíos son muy amables.	S05 U3 A1 leccion
 muy / bastante / un poco	очень / довольно / немного	muy alegre, un poco serio	S05 U3 A1 leccion
 también	тоже	Yo también.	S05 U3 A1 leccion
-tampoco	тоже не	Yo tampoco.	S05 U3 A1 leccion
-la familia	семья		S05 U3 A1 cultura
 la parentela	родня		S05 U3 A1 cultura
 los parientes	родственники		S05 U3 A1 cultura
-el primo / la prima	двоюродный брат / сестра		S05 U3 A1 cultura
 los abuelos	дедушка с бабушкой		S05 U3 A1 cultura
 cuidar	заботиться, присматривать		S05 U3 A1 cultura
 los nietos	внуки		S05 U3 A1 cultura
 el colegio	школа		S05 U3 A1 cultura
-la sobremesa	разговор за столом после еды		S05 U3 A1 cultura
 comer juntos	есть вместе		S05 U3 A1 cultura
-el piso	квартира		S05 U3 A1 cultura
 caro	дорогой		S05 U3 A1 cultura
 el joven / los jóvenes	молодой человек / молодёжь		S05 U3 A1 cultura
 salir de casa	уйти из дома		S05 U3 A1 cultura
-el nombre	имя		S05 U3 A1 cultura
-el apellido	фамилия		S05 U3 A1 cultura
 los padrinos	крёстные		S05 U3 A1 cultura
 el bautizo	крестины		S05 U3 A1 cultura
 el compadre / la comadre	кум / кума		S05 U3 A1 cultura
@@ -370,7 +355,6 @@ el hijo único / la hija única	единственный ребёнок	Soy hijo
 sobre todo	особенно, прежде всего	Mi familia es tranquila, sobre todo mi padre.	S06 U3 A1 leccion
 además	кроме того, к тому же	Es enfermera y además estudia inglés.	S06 U3 A1 leccion
 por eso	поэтому	Vive en Moscú, por eso no está aquí.	S06 U3 A1 leccion
-en total	всего, в общей сложности	En total somos ocho.	S06 U3 A1 leccion
 estamos unidos	мы дружные, мы близки	Somos pocos, pero estamos muy unidos.	S06 U3 A1 leccion
 la familia numerosa	большая, многодетная семья	En España una familia numerosa tiene tres hijos o más.	S06 U3 A1 leccion
 el Día de la Madre	День матери		S06 U3 A1 cultura
@@ -379,7 +363,6 @@ la fecha	дата		S06 U3 A1 cultura
 el cumpleaños	день рождения		S06 U3 A1 cultura
 el regalo	подарок		S06 U3 A1 cultura
 las flores	цветы		S06 U3 A1 cultura
-la tarjeta	открытка		S06 U3 A1 cultura
 la carta	письмо		S06 U3 A1 cultura
 felicitar	поздравлять		S06 U3 A1 cultura
 ¡Felicidades!	Поздравляю!		S06 U3 A1 cultura
@@ -424,10 +407,8 @@ tranquilo	тихий, спокойный	Es una calle tranquila.	S07 U4 A1 lecci
 ruidoso	шумный	Mi piso es ruidoso: está en el centro.	S07 U4 A1 leccion
 el banco	банк	¿Dónde está el banco?	S07 U4 A1 leccion
 la farmacia	аптека	La farmacia está enfrente del hospital.	S07 U4 A1 leccion
-el supermercado	супермаркет	Voy al supermercado.	S07 U4 A1 leccion
 la estación	вокзал, станция	La estación está al final de la calle.	S07 U4 A1 leccion
 el parque	парк	El parque está detrás del hospital.	S07 U4 A1 leccion
-el hospital	больница	El hospital está cerca del centro.	S07 U4 A1 leccion
 correos	почта (отделение)	Correos está enfrente de la plaza.	S07 U4 A1 leccion
 la plaza	площадь	La plaza está en el centro.	S07 U4 A1 leccion
 enfrente de	напротив	Enfrente de mi casa hay un parque.	S07 U4 A1 leccion
@@ -443,21 +424,16 @@ lunes, martes, miércoles	понедельник, вторник, среда	Los
 jueves, viernes	четверг, пятница	Los viernes no trabajo.	S07 U4 A1 leccion
 sábado, domingo	суббота, воскресенье	Los domingos estoy en casa.	S07 U4 A1 leccion
 el barrio	район		S07 U4 A1 cultura
-el vecino / la vecina	сосед / соседка		S07 U4 A1 cultura
-el edificio	здание, дом		S07 U4 A1 cultura
 el portal	подъезд		S07 U4 A1 cultura
 la escalera	лестница		S07 U4 A1 cultura
-el ascensor	лифт		S07 U4 A1 cultura
 el patio	внутренний двор		S07 U4 A1 cultura
 la terraza	терраса; веранда кафе		S07 U4 A1 cultura
 la azotea	плоская крыша-терраса		S07 U4 A1 cultura
 el chalet	отдельный дом с садом		S07 U4 A1 cultura
 la casa adosada	дом в общей линии домов		S07 U4 A1 cultura
-el pueblo	посёлок, деревня		S07 U4 A1 cultura
 la plaza mayor	главная площадь		S07 U4 A1 cultura
 el ayuntamiento	мэрия		S07 U4 A1 cultura
 la iglesia	церковь		S07 U4 A1 cultura
-el mercado	рынок		S07 U4 A1 cultura
 la calefacción	отопление		S07 U4 A1 cultura
 la comunidad	товарищество жильцов		S07 U4 A1 cultura
 perdone / perdona	простите / извини	Perdone, ¿para ir a la plaza?	S08 U4 A1 leccion
@@ -617,7 +593,6 @@ jugar (juego)	играть	Juego al fútbol los sábados.	S10 U5 A1 leccion
 el partido	матч	El partido empieza a las nueve.	S10 U5 A1 leccion
 temprano	рано	Me levanto temprano.	S10 U5 A1 leccion
 tarde	поздно	Vuelvo tarde.	S10 U5 A1 leccion
-el gimnasio	спортзал	Juego al baloncesto en el gimnasio.	S10 U5 A1 leccion
 ¿Con qué frecuencia…?	Как часто…?	¿Con qué frecuencia vas al cine?	S10 U5 A1 leccion
 siempre	всегда	Siempre desayuno en casa.	S10 U5 A1 leccion
 casi siempre	почти всегда	Casi siempre duermo ocho horas.	S10 U5 A1 leccion
@@ -625,7 +600,6 @@ normalmente	обычно	Normalmente vuelvo a las siete.	S10 U5 A1 leccion
 a veces	иногда	A veces como en la oficina.	S10 U5 A1 leccion
 casi nunca	почти никогда	Casi nunca veo la tele.	S10 U5 A1 leccion
 nunca	никогда	Nunca fumo.	S10 U5 A1 leccion
-todos los días	каждый день	Todos los días voy a pie.	S10 U5 A1 leccion
 una vez a la semana	раз в неделю	Juego al tenis una vez a la semana.	S10 U5 A1 leccion
 dos veces al mes	два раза в месяц	Vamos al cine dos veces al mes.	S10 U5 A1 leccion
 ir al cine	ходить в кино	Los viernes vamos al cine.	S10 U5 A1 leccion
@@ -637,25 +611,13 @@ descansar	отдыхать	El domingo descanso.	S10 U5 A1 leccion
 dormir hasta tarde	спать до позднего утра	Los sábados duermo hasta tarde.	S10 U5 A1 leccion
 salir a cenar	идти ужинать в ресторан	Salimos a cenar una vez al mes.	S10 U5 A1 leccion
 pasear / dar un paseo	гулять / пройтись	Damos un paseo por el parque.	S10 U5 A1 leccion
-el fin de semana	выходные	¿Qué haces el fin de semana?	S10 U5 A1 leccion
 la entrevista	интервью	Son ocho preguntas: es una entrevista.	S10 U5 A1 leccion
 la pregunta	вопрос	La última pregunta es sobre el fin de semana.	S10 U5 A1 leccion
 la respuesta	ответ	Escribo las respuestas de Javier.	S10 U5 A1 leccion
 contestar	отвечать	Javier contesta a las ocho preguntas.	S10 U5 A1 leccion
 un día normal	обычный день	Escribo un texto: «Un día normal».	S10 U5 A1 leccion
 todo el día	весь день	Los domingos descanso todo el día.	S10 U5 A1 leccion
-por eso	поэтому	Vuelve tarde; por eso cena a las diez.	S10 U5 A1 leccion
-además	кроме того	Además, los sábados juega al fútbol.	S10 U5 A1 leccion
-sobre todo	главным образом	Descansa, sobre todo los domingos.	S10 U5 A1 leccion
-la ciudad	город		S10 U5 A1 cultura
-el barrio	район		S10 U5 A1 cultura
-cenar	ужинать		S10 U5 A1 cultura
-la cena	ужин		S10 U5 A1 cultura
-la terraza	терраса (столики на улице)		S10 U5 A1 cultura
 tomar algo	выпить или перекусить где-нибудь		S10 U5 A1 cultura
-la medianoche	полночь		S10 U5 A1 cultura
-tranquilo	спокойный, тихий		S10 U5 A1 cultura
-abrir	открывать(ся)		S10 U5 A1 cultura
 cerrar (cierra)	закрывать(ся)		S10 U5 A1 cultura
 el subte 🌎	метро (Аргентина)		S10 U5 A1 cultura
 el colectivo 🌎	автобус (Аргентина)		S10 U5 A1 cultura
@@ -683,7 +645,6 @@ gustar	нравиться	El verbo gustar.	S11 U6 A1 leccion
 me gusta	мне нравится	Me gusta el café.	S11 U6 A1 leccion
 te gusta · ¿Te gusta…?	тебе нравится · Тебе нравится…?	¿Te gusta el pescado?	S11 U6 A1 leccion
 le gusta · a Paula le gusta	ему / ей / Вам нравится	A Paula le gusta comer fuera.	S11 U6 A1 leccion
-cocinar	готовить	Me gusta mucho cocinar.	S11 U6 A1 leccion
 comer fuera	есть вне дома, ходить в кафе	A Paula le gusta comer fuera.	S11 U6 A1 leccion
 el pescado	рыба	No me gusta el pescado.	S11 U6 A1 leccion
 la carne · el pollo	мясо · курица	Me gusta la carne. Arroz con pollo.	S11 U6 A1 leccion
@@ -724,7 +685,6 @@ la parrilla	решётка для гриля		S11 U6 A1 cultura
 el arroz	рис		S11 U6 A1 cultura
 el maíz	кукуруза		S11 U6 A1 cultura
 el pollo	курица		S11 U6 A1 cultura
-el conejo	кролик		S11 U6 A1 cultura
 el marisco	морепродукты		S11 U6 A1 cultura
 las gambas	креветки		S11 U6 A1 cultura
 la carne de vaca	говядина		S11 U6 A1 cultura
@@ -735,7 +695,6 @@ frío / fría	холодный / холодная		S11 U6 A1 cultura
 crudo / cruda	сырой / сырая		S11 U6 A1 cultura
 ¿por qué?	почему?		S11 U6 A1 cultura
 porque	потому что		S11 U6 A1 cultura
-el mediodía	полдень		S11 U6 A1 cultura
 la merienda	перекус днём		S11 U6 A1 cultura
 España	América		S11 U6 A1 cultura
 el zumo	el jugo		S11 U6 A1 cultura
@@ -744,6 +703,35 @@ el aguacate	la palta (Арг., Чили, Перу)		S11 U6 A1 cultura
 la comida (главная еда дня)	el almuerzo		S11 U6 A1 cultura
 el camarero	el mesero (Мекс.) · el mozo (Арг.)		S11 U6 A1 cultura
 tomar = и пить, и есть	tomar = прежде всего пить		S11 U6 A1 cultura
+de primero · de segundo · de postre	на первое · на второе · на десерт	De primero, una sopa.	S12 U6 A1 leccion
+la cuenta 🌎 la nota	счёт	La cuenta, por favor.	S12 U6 A1 leccion
+la bebida	напиток	Pan y bebida incluidos.	S12 U6 A1 leccion
+incluido / incluida	включённый (в цену)	El postre está incluido.	S12 U6 A1 leccion
+la carta 🌎 el menú	меню (список блюд)	¿Nos trae la carta?	S12 U6 A1 leccion
+la ración	порция (в баре — больше, чем tapa)	Una ración de jamón.	S12 U6 A1 leccion
+el vino tinto / blanco · la copa	красное / белое вино · бокал	Una copa de vino tinto.	S12 U6 A1 leccion
+¿Qué van a tomar? · ¿Y para beber?	Что будете заказывать? · А пить что будете?	— ¿Y para beber? — Agua.	S12 U6 A1 leccion
+¡Que aproveche! 🌎 ¡Buen provecho!	Приятного аппетита!	— ¡Que aproveche! — Gracias.	S12 U6 A1 leccion
+la ropa	одежда	¿Qué ropa te gusta?	S13 U7 A1 leccion
+la camisa	рубашка	Una camisa azul.	S13 U7 A1 leccion
+la camiseta	футболка	La camiseta es blanca.	S13 U7 A1 leccion
+los pantalones	брюки	Unos pantalones negros.	S13 U7 A1 leccion
+el vestido	платье	Lleva un vestido rojo.	S13 U7 A1 leccion
+la falda (🌎 la pollera)	юбка	Me gustan las faldas largas.	S13 U7 A1 leccion
+el abrigo	пальто	Tengo un abrigo muy viejo.	S13 U7 A1 leccion
+los zapatos	туфли, ботинки	Unos zapatos marrones.	S13 U7 A1 leccion
+las zapatillas (🌎 los tenis)	кроссовки	Unas zapatillas blancas.	S13 U7 A1 leccion
+¿De qué color es?	Какого цвета?	¿De qué color es tu camisa?	S13 U7 A1 leccion
+la panadería	булочная	El pan se compra en la panadería.	S14 U7 A1 leccion
+la frutería	фруктовая лавка	La fruta es más barata en la frutería.	S14 U7 A1 leccion
+la carnicería	мясной магазин	La carne, en la carnicería.	S14 U7 A1 leccion
+la pescadería	рыбный магазин	El pescado se vende en la pescadería.	S14 U7 A1 leccion
+la librería	книжный магазин (не библиотека!)	Voy a la librería: quiero un libro.	S14 U7 A1 leccion
+el estanco	табачный киоск (табак и марки)	Los sellos se venden en el estanco.	S14 U7 A1 leccion
+el sello	почтовая марка	Quiero comprar sellos para una carta.	S14 U7 A1 leccion
+la sección	отдел	La sección de pescadería.	S14 U7 A1 leccion
+la caja	касса	¿Dónde está la caja? Al final, a la derecha.	S14 U7 A1 leccion
+¿Dónde se compra…?	Где покупают…?	¿Dónde se compra el pan?	S14 U7 A1 leccion
 el tiempo libre	свободное время	¿Qué haces en tu tiempo libre?	S15 U8 A1 leccion
 la afición	увлечение, хобби	Mi afición favorita es leer.	S15 U8 A1 leccion
 tocar	играть (на инструменте)	Toco la guitarra.	S15 U8 A1 leccion
@@ -754,3 +742,10 @@ la natación	плавание	Practico natación tres veces por semana.	S15 U8 A
 el baloncesto	баскетбол (🌎 el básquet)	¿Juegas al baloncesto?	S15 U8 A1 leccion
 el ajedrez	шахматы	Mi padre juega al ajedrez.	S15 U8 A1 leccion
 la piscina	бассейн (🌎 la alberca, la pileta)	Hago natación en la piscina.	S15 U8 A1 leccion
+bailar	танцевать	Me gusta mucho bailar.	S15 U8 A1 leccion
+cantar	петь	Me encanta cantar.	S15 U8 A1 leccion
+nadar	плавать	Prefiero nadar.	S15 U8 A1 leccion
+correr	бегать	No me gusta nada correr.	S15 U8 A1 leccion
+escuchar	слушать	Me gusta escuchar música.	S15 U8 A1 leccion
+me interesa (interesar)	меня интересует, мне интересно	¿Te interesa el fútbol?	S15 U8 A1 leccion
+el cuestionario	анкета, опросник	Tengo un cuestionario para la clase.	S15 U8 A1 leccion

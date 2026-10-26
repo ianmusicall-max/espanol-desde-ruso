@@ -47,6 +47,18 @@ la documentación del programa, en español.
 8. Variación España / América: se enseña lo más extendido y se señala la
    variante con 🌎, nunca se impone una.
 
+## Pendiente de revision del profesor
+
+- **La unidad 5 mezcla los dos titulos del apartado 2**: la semana 9 usa
+  Фонетика y la semana 10, Аудирование. La regla esta en `metodologia.md` §3 y
+  dice que dentro de una unidad no se mezclan. Hay que elegir uno para las
+  catorce sesiones.
+- **Once entradas de vocabulario se ensenan dos veces** en semanas distintas, de
+  528. `scripts/revisar_lexico.py` las lista con el dia de cada aparicion.
+- **Las 57 lecciones de las semanas 4 en adelante son borradores**
+  (`revisado: false`) y el sitio las marca como tales. Las 21 primeras estan
+  revisadas.
+
 ## Estado (2026-10-25)
 
 - Programa anual completo (365 días) y documentación del método.

@@ -129,7 +129,7 @@ que hay detrás, para que quien escriba o revise una lección las respete.</p>
 </tr>
 <tr>
 <td>3-6</td>
-<td><strong>2. Фонетика</strong> (A1, semanas 1-8) / <strong>2. Аудирование</strong> (después)</td>
+<td><strong>2. Фонетика</strong> o <strong>2. Аудирование</strong> (ver abajo)</td>
 <td>Un sonido o contraste con 6-8 palabras, leídas en voz alta y grabadas; o 1 minuto de audio con 2 preguntas</td>
 <td>La interferencia fonética rusa se fija en las primeras semanas o no se quita nunca</td>
 </tr>
@@ -159,6 +159,16 @@ que hay detrás, para que quien escriba o revise una lección las respete.</p>
 </tr>
 </tbody>
 </table>
+<p><strong>Cuál de los dos títulos lleva el apartado 2.</strong> Hasta la semana 8 es siempre
+<strong>Фонетика</strong>: el plan de ocho semanas (§7) ocupa ese hueco entero. A partir de
+la semana 9 lo decide <strong>la ficha de la unidad en <code>calendario.yaml</code></strong>: si trae
+campo <code>fonetica</code>, el apartado se llama Фонетика y trabaja esos sonidos; si no,
+se llama Аудирование. Varias unidades de A2 siguen trayendo focos fónicos,
+porque cada campo léxico nuevo trae sonidos nuevos (la <strong>ll</strong> de <em>paella</em>, la
+<strong>z</strong> de <em>cerveza</em>), y eso no se acaba en la semana 8.</p>
+<p>Dentro de una misma unidad los dos títulos no se mezclan: las catorce sesiones
+llevan el mismo. El validador acepta ambos, así que esto no se pone en rojo
+solo: hay que mirarlo al revisar la unidad.</p>
 <p>Los números de los apartados y las franjas de minutos <strong>van en los títulos</strong>
 (<code>## 3. Новое (6–16 мин)</code>), y <code>scripts/validar.py</code> comprueba que empiecen en
 0, sean contiguas y terminen en 30. No se puede escribir una lección de 45

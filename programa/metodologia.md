@@ -58,11 +58,23 @@ que hay detrás, para que quien escriba o revise una lección las respete.
 | Minutos | Sección (en la lección) | Qué pasa | Por qué |
 |---|---|---|---|
 | 0-3 | **1. Разминка** | 10 tarjetas del mazo (ayer + hace una semana) y una pregunta de lo de ayer | Activar la memoria antes de meter nada nuevo |
-| 3-6 | **2. Фонетика** (A1, semanas 1-8) / **2. Аудирование** (después) | Un sonido o contraste con 6-8 palabras, leídas en voz alta y grabadas; o 1 minuto de audio con 2 preguntas | La interferencia fonética rusa se fija en las primeras semanas o no se quita nunca |
+| 3-6 | **2. Фонетика** o **2. Аудирование** (ver abajo) | Un sonido o contraste con 6-8 palabras, leídas en voz alta y grabadas; o 1 minuto de audio con 2 preguntas | La interferencia fonética rusa se fija en las primeras semanas o no se quita nunca |
 | 6-16 | **3. Новое** | Пример (diálogo/texto de 6-10 líneas) → Объяснение (regla + tabla) → ⚠️ Контраст с русским | Input, regla, contraste. Diez minutos es el máximo de atención para explicación |
 | 16-26 | **4. Практика** | Упражнение А (controlado), Б (semicontrolado), В (traducción ru→es o diálogo con huecos) | La escalera. Las claves van al final de la lección |
 | 26-29 | **5. Выход** | La producción del día (la `salida` del calendario) | Sin producir no hay adquisición |
 | 29-30 | **6. Итог** | Tres preguntas de autoevaluación (sí/no) y «añade las palabras de hoy al mazo» | Cierre y enganche con mañana |
+
+**Cuál de los dos títulos lleva el apartado 2.** Hasta la semana 8 es siempre
+**Фонетика**: el plan de ocho semanas (§7) ocupa ese hueco entero. A partir de
+la semana 9 lo decide **la ficha de la unidad en `calendario.yaml`**: si trae
+campo `fonetica`, el apartado se llama Фонетика y trabaja esos sonidos; si no,
+se llama Аудирование. Varias unidades de A2 siguen trayendo focos fónicos,
+porque cada campo léxico nuevo trae sonidos nuevos (la **ll** de *paella*, la
+**z** de *cerveza*), y eso no se acaba en la semana 8.
+
+Dentro de una misma unidad los dos títulos no se mezclan: las catorce sesiones
+llevan el mismo. El validador acepta ambos, así que esto no se pone en rojo
+solo: hay que mirarlo al revisar la unidad.
 
 Los números de los apartados y las franjas de minutos **van en los títulos**
 (`## 3. Новое (6–16 мин)`), y `scripts/validar.py` comprueba que empiecen en

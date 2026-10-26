@@ -21,6 +21,7 @@ import sys
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(RAIZ / "scripts"))
 import plan  # noqa: E402
+import revisar_lexico  # noqa: E402
 import validar  # noqa: E402
 
 CARPETA = RAIZ / "vocabulario"
@@ -74,10 +75,25 @@ def _filas_de_cultura(cuerpo: str) -> list[list[str]]:
 
 
 def exportar(destino: pathlib.Path = CARPETA, escribir: bool = True) -> dict[str, int]:
+    """Una palabra, una tarjeta.
+
+    Si dos lecciones enseñan la misma entrada como nueva, el mazo se queda con
+    la PRIMERA: la repetición es una decisión pedagógica que revisa el profesor
+    (`scripts/revisar_lexico.py` las lista), pero mandar dos tarjetas idénticas
+    a Anki no es una decisión, es un defecto. La palabra sigue en las dos
+    lecciones; lo que no se duplica es la tarjeta."""
+    vistas: set[str] = set()
     por_semana: dict[str, list[tuple[str, str, str, str]]] = {}
     for ruta in validar.lecciones():
         semana = ruta.parent.name  # semana-01
-        por_semana.setdefault(semana, []).extend(tarjetas_de(ruta))
+        nuevas = []
+        for tarjeta in tarjetas_de(ruta):
+            clave = revisar_lexico.normalizar(tarjeta[0])
+            if clave in vistas:
+                continue
+            vistas.add(clave)
+            nuevas.append(tarjeta)
+        por_semana.setdefault(semana, []).extend(nuevas)
     cuentas = {}
     todas: list[tuple[str, str, str, str]] = []
     if escribir:
