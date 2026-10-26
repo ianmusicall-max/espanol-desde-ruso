@@ -39,6 +39,7 @@ import validar  # noqa: E402
 DOCS = RAIZ / "docs"
 CONFIG = RAIZ / "web" / "sitio.yaml"
 TEXTOS = RAIZ / "web" / "textos.yaml"
+TEST = RAIZ / "programa" / "test-nivel.yaml"
 EXTENSIONES = ["tables", "fenced_code", "sane_lists", "toc", "attr_list"]
 
 
@@ -131,6 +132,22 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 .suena[aria-pressed="true"]{opacity:1;color:var(--acento)}
 @media(hover:none){.suena{opacity:.9}}
 
+/* Test de nivel */
+.test-caja{background:var(--tarjeta);border:1px solid var(--linea);border-radius:12px;
+  padding:1.2rem 1.3rem;margin:1.4rem 0;font-family:ui-sans-serif,system-ui,sans-serif}
+.test-cuenta{font-size:.78rem;color:var(--tenue);letter-spacing:.04em;margin-bottom:.5rem}
+.test-pregunta{font-size:1.08rem;font-weight:600;color:var(--tinta);margin:0 0 1rem;line-height:1.45}
+.test-ops{display:flex;flex-direction:column;gap:.5rem}
+.test-ops button{text-align:start;font:inherit;font-size:.98rem;color:var(--tinta);
+  background:var(--papel);border:1.5px solid var(--linea);border-radius:9px;
+  padding:.6rem .8rem;cursor:pointer;transition:border-color .12s,background .12s}
+.test-ops button:hover{border-color:var(--acento)}
+.test-barra{height:4px;border-radius:999px;background:var(--linea);overflow:hidden;margin-top:1rem}
+.test-barra i{display:block;height:100%;background:var(--acento);transition:width .2s}
+.test-fallo{border-inline-start:3px solid var(--acento);padding:.1rem 0 .1rem .8rem;margin:.7rem 0}
+.test-fallo b{display:block;color:var(--tinta);font-size:.94rem}
+.test-fallo span{font-size:.88rem;color:var(--tenue)}
+
 /* El mapa de unidades: 24 tarjetas en vez de 365 filas.
    El indice crudo medía 21.482 px de alto, o sea 24 pantallas de scroll, y
    nadie navega eso. Las tarjetas dan una vista de todo el ano en una o dos. */
@@ -175,6 +192,8 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 ul.dias li.hecha .num::after{content:"✓";color:var(--acento);font-weight:700;margin-inline-start:.25rem}
 ul.dias li.hecha a{color:var(--tenue)}
 #mio{margin-top:.9rem;padding-top:.9rem;border-top:1px dashed var(--linea)}
+.puerta{font-size:.9rem;color:var(--tenue);margin:-.6rem 0 0}
+.puerta a{color:var(--acento);font-weight:600}
 .progreso-nota{font-size:.84rem;color:var(--tenue);font-family:ui-sans-serif,system-ui,sans-serif;margin-top:.5rem}
 #borrar-progreso{background:none;border:0;padding:0;color:var(--tenue);text-decoration:underline;
   cursor:pointer;font:inherit;font-size:.84rem}
@@ -189,7 +208,6 @@ ul.dias li.hecha a{color:var(--tenue)}
      boton del tema caia a una segunda fila con 700 px de pantalla libres al
      lado. Se vio midiendo los hijos, no mirando: fallaba por cuatro pixeles. */
   header.sitio .envoltorio{max-width:60rem}
-  header.sitio .marca{flex:0 1 auto}
 }
 
 main{padding-bottom:3.5rem}
@@ -439,6 +457,78 @@ AUDIO_JS = r"""(function(){
 })();"""
 
 
+TEST_JS = r"""(function(){
+  var D=window.CURSO_TEST; if(!D)return;
+  var caja=document.getElementById('test'); if(!caja)return;
+  var i=0, fallos=[], aciertos=0;
+
+  function esc(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML}
+
+  function pregunta(){
+    var q=D.preguntas[i];
+    caja.innerHTML='<div class="test-caja">'
+      +'<div class="test-cuenta">'+(i+1)+' '+esc(D.t.de)+' '+D.preguntas.length
+      +' · '+esc(D.t.instruccion)+'</div>'
+      +'<p class="test-pregunta">'+esc(q.pregunta)+'</p>'
+      +'<div class="test-ops">'+q.opciones.map(function(o,n){
+          return '<button type="button" data-n="'+n+'">'+esc(o)+'</button>'}).join('')+'</div>'
+      +'<div class="test-barra"><i style="width:'+(i*100/D.preguntas.length)+'%"></i></div></div>';
+    caja.querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click',function(){responder(parseInt(b.dataset.n,10))});
+    });
+  }
+
+  function responder(n){
+    var q=D.preguntas[i];
+    if(n===q.correcta){aciertos++}else{fallos.push(q)}
+    i++;
+    if(i<D.preguntas.length){pregunta()}else{resultado()}
+  }
+
+  function resultado(){
+    // Se empieza donde se acaba lo que ya se sabe: la unidad de la PRIMERA
+    // fallada. Y si esa unidad aun no esta escrita -el curso tiene 100
+    // lecciones de 365-, la ultima escrita, que no es un parche: si ya sabe
+    // todo lo que el curso cubre, ahi es exactamente donde empieza. Acertarlo
+    // todo lleva al mismo sitio. Sin ese `|| D.ultima` la pantalla de
+    // resultado se quedaba sin su boton.
+    var u=fallos.length?fallos[0].unidad:null;
+    var dest=(u&&D.inicios[u])||D.ultima;
+    var h='<div class="test-caja"><div class="test-cuenta">'+esc(D.t.resultado)+'</div>'
+      +'<p class="test-pregunta">'+aciertos+' / '+D.preguntas.length+' '+esc(D.t.aciertos)+'</p>';
+    if(dest){
+      h+='<p>'+esc(D.t.empieza_en)+' <b>'+dest.n+'</b>.</p>'
+        +'<p><a class="boton" href="'+dest.url+'">'+esc(D.t.ir)+'</a></p>';
+    }
+    if(!fallos.length){h+='<p>'+esc(D.t.todo_bien)+'</p>'}
+    else{
+      h+='<p class="test-cuenta" style="margin-top:1.2rem">'+esc(D.t.errores)+'</p>';
+      fallos.forEach(function(q){
+        h+='<div class="test-fallo"><b>'+esc(q.opciones[q.correcta])+'</b>'
+          +'<span>'+esc(q.error)+'</span></div>';
+      });
+    }
+    h+='<p style="margin-top:1.2rem"><button type="button" class="boton secundario" id="otra-vez">'
+      +esc(D.t.repetir)+'</button></p></div>';
+    caja.innerHTML=h;
+    var r=document.getElementById('otra-vez');
+    if(r)r.addEventListener('click',function(){i=0;fallos=[];aciertos=0;pregunta()});
+  }
+
+  // El boton nace oculto y lo enciende el navegador, como el resto del sitio:
+  // sin JavaScript seria un boton que no hace nada, y para ese caso esta el
+  // <noscript>, que manda a la leccion 1. Al empezar desaparece: volver a
+  // pulsarlo reiniciaria el test a mitad, y al lado del resultado no dice nada
+  // que «Пройти заново» no diga mejor.
+  var arranque=document.getElementById('test-arranque');
+  var boton=document.getElementById('test-empezar');
+  if(arranque&&boton){
+    arranque.hidden=false;
+    boton.addEventListener('click',function(){arranque.hidden=true;pregunta()});
+  }
+})();"""
+
+
 # ---------------------------------------------------------------- configuración
 def cargar_config(ruta: pathlib.Path = CONFIG) -> dict:
     with open(ruta, encoding="utf-8") as f:
@@ -453,6 +543,18 @@ def cargar_config(ruta: pathlib.Path = CONFIG) -> dict:
 def cargar_textos(ruta: pathlib.Path = TEXTOS) -> dict:
     with open(ruta, encoding="utf-8") as f:
         return yaml.safe_load(f)
+
+
+def cargar_test(ruta: pathlib.Path = TEST) -> dict:
+    """Las preguntas del test de nivel. Si el fichero no está, no hay test.
+
+    Devolver {} y no reventar es deliberado: el test es una puerta de más, no
+    el curso. Un sitio sin test se construye igual; un sitio que no se
+    construye por una puerta de más sería mucho peor."""
+    if not ruta.exists():
+        return {}
+    with open(ruta, encoding="utf-8") as f:
+        return yaml.safe_load(f) or {}
 
 
 def hay_anuncios(cfg): return bool((cfg.get("adsense") or {}).get("cliente"))
@@ -514,7 +616,7 @@ def _marcar_contraste(cuerpo: str) -> str:
 
 # ------------------------------------------------------------------------ shell
 def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id="", raiz=".",
-           jsonld="", publicadas=0, mapa_dias="{}", traducida=True, con_audio=False) -> str:
+           jsonld="", publicadas=0, mapa_dias="{}", traducida=True, con_audio=False, test=None) -> str:
     """El armazón de toda página: cabecera con menú y cambio de idioma, cuerpo, pie."""
     dominio = cfg["dominio"]
     actual = next(i for i in idiomas if i["codigo"] == idioma)
@@ -577,7 +679,7 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
 {cuerpo}
 </div></main>
 <footer class="sitio"><div class="envoltorio">
-<p><a href="{raiz}/o-kurse.html">{html.escape(t['menu']['sobre'])}</a> · <a href="{raiz}/kontakt.html">{html.escape(t['menu']['contacto'])}</a> · <a href="{raiz}/privacy.html">{html.escape(t['privacidad']['titulo'])}</a></p>
+<p><a href="{raiz}/test.html">{html.escape(t['test']['titulo'])}</a> · <a href="{raiz}/o-kurse.html">{html.escape(t['menu']['sobre'])}</a> · <a href="{raiz}/kontakt.html">{html.escape(t['menu']['contacto'])}</a> · <a href="{raiz}/privacy.html">{html.escape(t['privacidad']['titulo'])}</a></p>
 <p>{html.escape(t['pie'])}</p>
 </div></footer>
 {banda_cookies(cfg, t, raiz)}
@@ -585,6 +687,7 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
 <script>window.CURSO_TEXTOS={json.dumps(t['progreso'], ensure_ascii=False)};window.CURSO_RAIZ="{raiz}";window.CURSO_PUBLICADAS={publicadas};window.CURSO_DIAS={mapa_dias};</script>
 <script src="{raiz}/progreso.js" defer></script>
 {f'<script>{AUDIO_JS}</script>' if con_audio else ""}
+{f'<script>window.CURSO_TEST={json.dumps(test, ensure_ascii=False)};{TEST_JS}</script>' if test else ""}
 </body>
 </html>"""
 
@@ -619,6 +722,24 @@ def mapa_de_dias(cal: dict) -> str:
     tener el botón."""
     return json.dumps({d.numero: f"semana-{d.semana:02d}/dia-{d.dia}.html" for d in escritas(cal)},
                       ensure_ascii=False, separators=(",", ":"))
+
+
+def inicios_de_unidad(cal: dict, raiz: str = ".") -> dict:
+    """{unidad: {n, url}} de la PRIMERA lección escrita de cada unidad.
+
+    Es a lo que apunta el resultado del test de nivel. Se calcula al construir
+    y no en el navegador: el guion no puede saber qué lecciones existen, y
+    mandar a una que no está es el fallo que ya cazó dos veces la prueba de
+    enlaces rotos.
+
+    Solo las unidades con alguna lección escrita. Las demás no se rellenan a
+    propósito: el test cae entonces en la última escrita, que es la respuesta
+    honrada —si ya sabe todo lo que el curso cubre, ahí empieza—."""
+    inicios: dict[int, dict] = {}
+    for d in escritas(cal):
+        inicios.setdefault(d.unidad, {"n": d.numero,
+                                      "url": f"{raiz}/semana-{d.semana:02d}/dia-{d.dia}.html"})
+    return inicios
 
 
 def escribir_progreso_js(destino: pathlib.Path) -> None:
@@ -666,6 +787,7 @@ def construir_portada(cfg, t, idiomas, idioma, destino, cal, raiz) -> None:
 <a class="boton" id="empezar" href="{enlace}">{html.escape(p['boton'])}</a>
 <a class="boton secundario" href="{raiz}/kurs.html">{html.escape(p['boton2'])}</a>
 </div>
+<p class="puerta">{html.escape(p['ya_sabe'])} <a href="{raiz}/test.html">{html.escape(t['test']['titulo'])} →</a></p>
 <div class="progreso">
 <div class="cifras"><span class="n">{len(hechas)}</span><span>/ {total} {html.escape(p['progreso'])}</span></div>
 <div class="barra"><i style="width:{max(pct, 1)}%"></i></div>
@@ -761,6 +883,8 @@ def construir_indice_curso(cfg, t, idiomas, idioma, destino, cal, raiz) -> None:
               f'<div class="barra"><i style="width:1%"></i></div>'
               f'<p class="progreso-nota">{html.escape(pr["aviso"])} '
               f'<button type="button" id="borrar-progreso" hidden>{html.escape(pr["borrar"])}</button></p></div>',
+              f'<p class="puerta">{html.escape(t["portada"]["ya_sabe"])} '
+              f'<a href="{raiz}/test.html">{html.escape(t["test"]["titulo"])} →</a></p>',
               anuncio(cfg, "cabecera")]
     dias = plan.dias(cal)
     partes.append(_mapa_de_unidades(cal, dias, c, idioma, raiz))
@@ -799,6 +923,75 @@ def construir_indice_curso(cfg, t, idiomas, idioma, destino, cal, raiz) -> None:
         pagina(cfg, t, idiomas, idioma, f'{c["titulo"]} — {c["subtitulo"]}', "\n".join(partes),
                descripcion=c["entrada"], pagina_id="kurs.html", raiz=raiz,
                publicadas=len(escritas(cal)), mapa_dias=mapa_de_dias(cal)),
+        encoding="utf-8")
+
+
+def construir_test(cfg, t, idiomas, destino, cal, preguntas) -> None:
+    """La segunda puerta del sitio: por qué lección empezar si ya sabe algo.
+
+    Hasta ahora la web tenía una sola entrada, la lección 1. Quien llega
+    sabiendo algo de español lee «empieza por el alfabeto», decide que esto no
+    es para él y se va. El test lo deja en la semana que le toca.
+
+    La idea de tener una segunda puerta viene de la referencia que mandó el
+    profesor; las preguntas no: cada distractor es un error predecible del
+    rusohablante, sacado de `programa/contrastiva-ru-es.md`. Por eso el
+    resultado puede decir POR QUÉ se falló, y por eso el test enseña aunque se
+    suspenda.
+
+    La respuesta correcta viaja al navegador, y no hay forma de evitarlo en un
+    sitio estático. No importa: esto coloca a quien quiere estudiar, no
+    certifica nada. Quien mire el código fuente para hacer trampas se está
+    engañando sobre por dónde empezar un curso gratis.
+
+    **Hay UNA página y está en ruso**, igual que las lecciones y por la misma
+    razón: las catorce preguntas son frases rusas que hay que decir en español,
+    así que un lector que no lee ruso no puede contestarlas. Traducir la
+    interfaz alrededor dejaría un test que no se puede hacer, que es peor que
+    no ofrecerlo. Lo que sí se traduce es el ENLACE —en el pie y en la puerta de
+    la portada—, igual que la portada en español manda a una lección en ruso.
+    Por eso la página va con `traducida=False`: el conmutador de idioma lleva a
+    la portada de ese idioma y no declara un `hreflang` que sería falso."""
+    k = t["test"]
+    raiz = "."
+    hechas = escritas(cal)
+    primera = hechas[0] if hechas else None
+    enlace = f"{raiz}/semana-{primera.semana:02d}/dia-{primera.dia}.html" if primera else f"{raiz}/kurs.html"
+
+    aviso = (f'<p class="aviso">{html.escape(k["borrador"])}</p>'
+             if preguntas and not preguntas.get("revisado") else "")
+    lista = preguntas.get("preguntas") or []
+
+    cuerpo = f"""
+<h1>{html.escape(k['titulo'])}<span class="segunda">{html.escape(k['subtitulo'])}</span></h1>
+<p>{html.escape(k['entrada'])}</p>
+{aviso}
+<div class="botones" id="test-arranque" hidden><button type="button" class="boton" id="test-empezar">{html.escape(k['empezar'])}</button></div>
+<div id="test"></div>
+<noscript><p class="aviso">{html.escape(k['sin_js'])}</p>
+<div class="botones"><a class="boton" href="{enlace}">{html.escape(t['portada']['boton'])}</a></div></noscript>
+"""
+    datos = None
+    if lista:
+        ultima = hechas[-1]
+        datos = {
+            # Al navegador va `error_ru` y no `error_es`: lo lee un principiante
+            # ruso, y explicarle su propio error en el idioma que viene a
+            # aprender no le enseña nada. El español se queda en el YAML, que
+            # es donde el profesor revisa.
+            "preguntas": [{"pregunta": q["pregunta"], "opciones": q["opciones"],
+                           "correcta": q["correcta"], "unidad": q["unidad"],
+                           "error": q["error_ru"]}
+                          for q in lista],
+            "inicios": inicios_de_unidad(cal, raiz),
+            "ultima": {"n": ultima.numero,
+                       "url": f"{raiz}/semana-{ultima.semana:02d}/dia-{ultima.dia}.html"},
+            "t": k,
+        }
+    destino.joinpath("test.html").write_text(
+        pagina(cfg, t, idiomas, "ru", f"{k['titulo']} — {t['titulo_sitio']}", cuerpo,
+               descripcion=k["entrada"][:160], pagina_id="test.html", raiz=raiz,
+               traducida=False, test=datos),
         encoding="utf-8")
 
 
@@ -1032,6 +1225,7 @@ def construir_sitemap(cfg, idiomas, destino, cal) -> None:
         base = f"{i['carpeta']}/" if i["carpeta"] else ""
         urls += [(f"{base}index.html", "1.0"), (f"{base}kurs.html", "0.9"),
                  (f"{base}o-kurse.html", "0.5"), (f"{base}kontakt.html", "0.3"), (f"{base}privacy.html", "0.3")]
+    urls.append(("test.html", "0.7"))
     urls += [(f"semana-{d.semana:02d}/dia-{d.dia}.html", "0.8") for d in escritas(cal)]
     if dominio:
         filas = "".join(f"<url><loc>{html.escape(dominio)}/{u}</loc><lastmod>{hoy}</lastmod><priority>{p}</priority></url>"
@@ -1045,10 +1239,12 @@ def construir_sitemap(cfg, idiomas, destino, cal) -> None:
     destino.joinpath("robots.txt").write_text(robots, encoding="utf-8")
 
 
-def construir(destino: pathlib.Path = DOCS, cfg: dict | None = None, textos: dict | None = None) -> int:
+def construir(destino: pathlib.Path = DOCS, cfg: dict | None = None, textos: dict | None = None,
+              preguntas: dict | None = None) -> int:
     cal = plan.cargar()
     cfg = cfg or cargar_config()
     textos = textos or cargar_textos()
+    preguntas = cargar_test() if preguntas is None else preguntas
     idiomas = textos["idiomas"]
     destino.mkdir(parents=True, exist_ok=True)
 
@@ -1061,6 +1257,7 @@ def construir(destino: pathlib.Path = DOCS, cfg: dict | None = None, textos: dic
         construir_indice_curso(cfg, t, idiomas, i["codigo"], carpeta, cal, raiz)
         construir_estaticas(cfg, t, idiomas, i["codigo"], carpeta, cal, raiz)
 
+    construir_test(cfg, textos["ru"], idiomas, destino, cal, preguntas)
     todos = plan.dias(cal)
     hechas = escritas(cal)
     audio = indice_de_audio(destino)

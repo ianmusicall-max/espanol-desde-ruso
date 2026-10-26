@@ -803,6 +803,28 @@ class TestElRevisorDeAdsense(unittest.TestCase):
         self.assertFalse([t for e, t, _ in filas if e == "FALTA" and "no es tuyo" in t])
 
 
+    def test_un_href_dentro_de_un_script_no_es_un_enlace(self):
+        """El guion del test de nivel arma el enlace del resultado
+        concatenando `href="'+dest.url+'"`. Leido como marca, eso es un enlace
+        a un fichero que no existe, y el revisor cantaba un roto que ningun
+        lector puede pulsar."""
+        destino = pathlib.Path(tempfile.mkdtemp())
+        (destino / "p.html").write_text(
+            '<a href="existe.html">ok</a>'
+            '<script>var h=\'<a href="\'+x.url+\'">\'</script>',
+            encoding="utf-8")
+        (destino / "existe.html").write_text("ok", encoding="utf-8")
+        self.assertEqual(revisar_adsense.enlaces_rotos(destino), [])
+
+    def test_y_un_enlace_roto_de_verdad_sigue_saliendo(self):
+        """El arreglo no puede dejar ciego al revisor: es la prueba que ya cazo
+        215 rotos del conmutador de idioma y los enlaces del mapa."""
+        destino = pathlib.Path(tempfile.mkdtemp())
+        (destino / "p.html").write_text('<a href="no-existe.html">x</a>', encoding="utf-8")
+        self.assertEqual(revisar_adsense.enlaces_rotos(destino),
+                         [("p.html", "no-existe.html")])
+
+
 class TestPonerElDominio(unittest.TestCase):
     """El guion del día de la compra. Lo que se prueba es lo que se rompe."""
 
@@ -1221,6 +1243,144 @@ class TestElMapaDeUnidades(unittest.TestCase):
             html_ = self._indice(i["carpeta"])
             self.assertIn('class="mapa"', html_, i["codigo"])
             self.assertIn(html.escape(self.textos[i["codigo"]]["curso"]["mapa"]), html_)
+
+
+class TestElTestDeNivel(unittest.TestCase):
+    """La segunda puerta: por qué lección empezar si ya se sabe algo.
+
+    Hasta ahora el sitio tenía una sola entrada, la lección 1. Quien llega
+    sabiendo algo lee «empieza por el alfabeto», decide que esto no es para él
+    y se va.
+
+    Lo que estas pruebas vigilan no es el aspecto sino las dos cosas que lo
+    romperían en silencio: que la recomendación apunte a una lección que no
+    existe —el fallo que esta suite ya cazó dos veces— y que la explicación del
+    error le llegue al lector en un idioma que no lee."""
+
+    def setUp(self):
+        self.preguntas = construir_sitio.cargar_test()
+        self.lista = self.preguntas["preguntas"]
+        self.destino = pathlib.Path(tempfile.mkdtemp())
+        construir_sitio.construir(self.destino, construir_sitio.cargar_config(),
+                                  construir_sitio.cargar_textos())
+        self.pagina = (self.destino / "test.html").read_text(encoding="utf-8")
+
+    def _datos(self):
+        m = re.search(r"window\.CURSO_TEST=(\{.*?\});\(function", self.pagina, re.S)
+        self.assertIsNotNone(m, "la página no lleva los datos del test")
+        return json.loads(m.group(1))
+
+    # ---- las preguntas
+    def test_cada_pregunta_apunta_a_una_unidad_que_existe(self):
+        unidades = {u["numero"] for u in CAL["unidades"]}
+        for q in self.lista:
+            self.assertIn(q["unidad"], unidades, q["pregunta"])
+
+    def test_van_en_orden_de_unidad(self):
+        """De esto depende la recomendación entera: se empieza en la unidad de
+        la PRIMERA fallada, o sea donde se acaba lo que ya se sabe. Desordenadas,
+        fallar la última pregunta podría colocar a alguien antes que fallar la
+        primera."""
+        unidades = [q["unidad"] for q in self.lista]
+        self.assertEqual(unidades, sorted(unidades), unidades)
+
+    def test_la_respuesta_correcta_es_una_de_las_opciones_y_no_se_repite(self):
+        for q in self.lista:
+            self.assertGreaterEqual(len(q["opciones"]), 3, q["pregunta"])
+            self.assertIn(q["correcta"], range(len(q["opciones"])), q["pregunta"])
+            self.assertEqual(len(set(q["opciones"])), len(q["opciones"]),
+                             f"dos opciones iguales en «{q['pregunta']}»")
+
+    def test_el_error_esta_en_los_dos_idiomas_y_ninguno_vacio(self):
+        """`error_ru` lo lee el alumno; `error_es` es la regla que revisa el
+        profesor, que es quien aprueba (regla 6) y lee en español."""
+        for q in self.lista:
+            for clave in ("error_ru", "error_es"):
+                self.assertTrue((q.get(clave) or "").strip(), f"{clave} en «{q['pregunta']}»")
+
+    def test_al_navegador_va_el_ruso_y_no_el_espanol(self):
+        """La primera versión mandaba la explicación en español, que es justo el
+        idioma que el lector viene a aprender: explicarle su error ahí no le
+        enseña nada."""
+        for q in self.lista:
+            self.assertIn(q["error_ru"], self.pagina, q["pregunta"])
+            self.assertNotIn(q["error_es"], self.pagina, q["pregunta"])
+
+    # ---- la recomendación
+    def test_cada_inicio_de_unidad_es_una_leccion_que_existe(self):
+        datos = self._datos()
+        for unidad, d in datos["inicios"].items():
+            self.assertTrue((self.destino / d["url"]).exists(), f"unidad {unidad}: {d['url']}")
+        self.assertTrue((self.destino / datos["ultima"]["url"]).exists())
+
+    def test_solo_se_listan_las_unidades_que_tienen_leccion_escrita(self):
+        """Las demás caen en la última escrita, que es la respuesta honrada: si
+        ya sabe todo lo que el curso cubre, ahí es donde empieza."""
+        datos = self._datos()
+        escritas = {d.unidad for d in construir_sitio.escritas(CAL)}
+        self.assertEqual({int(u) for u in datos["inicios"]}, escritas)
+
+    def test_el_inicio_es_la_primera_leccion_de_la_unidad_y_no_una_del_medio(self):
+        inicios = construir_sitio.inicios_de_unidad(CAL)
+        for d in construir_sitio.escritas(CAL):
+            self.assertLessEqual(inicios[d.unidad]["n"], d.numero, d.numero)
+
+    def test_el_resultado_cae_en_la_ultima_escrita_cuando_la_unidad_no_existe(self):
+        """Sin el `|| D.ultima`, fallar en una unidad aún no escrita dejaba la
+        pantalla de resultado sin su botón."""
+        self.assertIn("(u&&D.inicios[u])||D.ultima", construir_sitio.TEST_JS)
+
+    # ---- la página
+    def test_hay_un_solo_test_y_esta_en_ruso(self):
+        """Las catorce preguntas son frases rusas que hay que decir en español:
+        un lector que no lee ruso no puede contestarlas. Traducir la interfaz
+        alrededor dejaría un test que no se puede hacer."""
+        self.assertFalse((self.destino / "es" / "test.html").exists())
+        self.assertFalse((self.destino / "en" / "test.html").exists())
+        self.assertNotIn('rel="alternate"', self.pagina)
+
+    def test_el_enlace_si_esta_en_los_tres_idiomas(self):
+        """Igual que la portada en español manda a una lección en ruso."""
+        for carpeta, raiz in (("", "."), ("es", ".."), ("en", "..")):
+            for hoja in ("index.html", "kurs.html"):
+                p = self.destino.joinpath(carpeta, hoja).read_text(encoding="utf-8")
+                self.assertIn(f'<a href="{raiz}/test.html">', p, f"{carpeta}/{hoja}")
+                self.assertIn('class="puerta"', p, f"{carpeta}/{hoja}")
+
+    def test_el_pie_de_todas_las_paginas_lleva_al_test(self):
+        leccion = (self.destino / "semana-01" / "dia-1.html").read_text(encoding="utf-8")
+        self.assertIn('<a href="../test.html">', leccion)
+
+    def test_mientras_no_este_revisado_la_pagina_lo_avisa(self):
+        """Regla 6: nada generado se publica como bueno sin el profesor."""
+        if not self.preguntas.get("revisado"):
+            textos = construir_sitio.cargar_textos()
+            self.assertIn(html.escape(textos["ru"]["test"]["borrador"]), self.pagina)
+
+    def test_el_boton_nace_oculto_y_lo_enciende_el_navegador(self):
+        """Sin JavaScript sería un botón que no hace nada; para ese caso está el
+        <noscript>, que manda a la lección 1."""
+        self.assertIn('id="test-arranque" hidden', self.pagina)
+        self.assertIn("arranque.hidden=false", construir_sitio.TEST_JS)
+        self.assertIn("<noscript>", self.pagina)
+
+    def test_sin_fichero_de_preguntas_el_sitio_se_construye_igual(self):
+        """El test es una puerta de más, no el curso. Un sitio que no se
+        construye por una puerta de más sería mucho peor."""
+        otro = pathlib.Path(tempfile.mkdtemp())
+        construir_sitio.construir(otro, construir_sitio.cargar_config(),
+                                  construir_sitio.cargar_textos(), preguntas={})
+        pagina = (otro / "test.html").read_text(encoding="utf-8")
+        self.assertNotIn("window.CURSO_TEST", pagina)
+        self.assertIn("<noscript>", pagina)
+        self.assertEqual(revisar_adsense.enlaces_rotos(otro), [])
+
+    def test_el_test_esta_en_el_sitemap_una_sola_vez(self):
+        cfg = dict(construir_sitio.cargar_config(), dominio="https://ejemplo.com")
+        destino = pathlib.Path(tempfile.mkdtemp())
+        construir_sitio.construir(destino, cfg, construir_sitio.cargar_textos())
+        mapa = (destino / "sitemap.xml").read_text(encoding="utf-8")
+        self.assertEqual(mapa.count("/test.html</loc>"), 1)
 
 
 if __name__ == "__main__":

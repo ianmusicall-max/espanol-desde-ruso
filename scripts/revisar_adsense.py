@@ -39,15 +39,25 @@ def _texto(html_: str) -> str:
     return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", cuerpo)).strip()
 
 
+SCRIPT = re.compile(r"<script\b[^>]*>.*?</script>", re.S | re.I)
+
+
 def enlaces_rotos(docs: pathlib.Path) -> list[tuple[str, str]]:
     """Un enlace interno que no lleva a ninguna parte.
 
     Importa más de lo que parece: el revisor de AdSense navega el sitio a mano,
     y una navegación que se rompe es «mala experiencia de usuario», que es una
-    de las causas de rechazo con nombre propio."""
+    de las causas de rechazo con nombre propio.
+
+    **Los <script> se quitan antes de mirar**, y no es cosmético: el guion del
+    test de nivel arma el enlace del resultado concatenando
+    `href="'+dest.url+'"`, y leído como marca eso es un enlace a un fichero
+    llamado `'+dest.url+'` que por supuesto no existe. El revisor cantaba un
+    roto que ningún lector puede pulsar. Lo que se comprueba son los enlaces
+    de la página, no las cadenas de JavaScript que los construyen."""
     rotos = []
     for pagina in sorted(docs.rglob("*.html")):
-        html_ = pagina.read_text(encoding="utf-8")
+        html_ = SCRIPT.sub("", pagina.read_text(encoding="utf-8"))
         for destino in re.findall(r'href="([^"]+)"', html_):
             destino = urldefrag(destino)[0]
             if not destino or destino.startswith(("http://", "https://", "mailto:", "#", "data:")):

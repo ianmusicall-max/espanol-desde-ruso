@@ -1,0 +1,134 @@
+# Test de nivel — catorce preguntas para entrar por la puerta correcta
+#
+# Quien ya sabe algo de español llega a la portada, ve «empieza por la lección 1»
+# y se va. Este test lo deja en la semana que le toca.
+#
+# CÓMO ESTÁ HECHO, que es lo que importa si alguien lo toca:
+#
+# - Cada pregunta lleva la UNIDAD que la enseña. De ahí sale la recomendación:
+#   se empieza en la unidad de la primera que se falla, o sea donde se acaba lo
+#   que ya se sabe. Una prueba exige que esas unidades existan y vayan en orden.
+# - Los distractores NO son al azar: cada uno es un error predecible del
+#   rusohablante, sacado de `programa/contrastiva-ru-es.md`. Por eso el
+#   resultado puede decir POR QUÉ se falló y no solo cuántas van bien, y por eso
+#   el test enseña aunque se suspenda.
+# - Catorce preguntas: bastantes para discriminar entre 24 unidades, pocas para
+#   que nadie lo abandone a la mitad. Cuesta unos dos minutos.
+#
+# EL ERROR SE DICE DOS VECES, Y NO ES REDUNDANCIA:
+#
+# - `error_ru` es lo que LEE el alumno, y por eso está en ruso. La primera
+#   versión lo tenía solo en español y ese es justo el lector que no lo
+#   entiende: un principiante ruso al que se le explica su propio error en el
+#   idioma que viene a aprender no aprende nada. Es lo único que viaja al
+#   navegador.
+# - `error_es` es la regla para el profesor, que es quien revisa (regla 6) y
+#   quien escribe la documentación de este curso en español (regla 4 del
+#   proyecto). Hay una prueba que exige las dos y que ninguna esté vacía.
+#
+# La frase «cómo se dice esto en español» NO va dentro de cada pregunta: la
+# pone la página una sola vez (`test.instruccion` en `web/textos.yaml`). Así
+# las catorce son la frase rusa y nada más, y traducirla no toca este fichero.
+#
+# revisado: lo pone el profesor en true cuando haya comprobado las catorce.
+# Mientras esté en false, la página lo avisa, igual que las lecciones borrador.
+revisado: false
+
+preguntas:
+  - unidad: 1
+    pregunta: "Ана — врач."
+    opciones: ["Ana médica.", "Ana es médica.", "Ana está médica."]
+    correcta: 1
+    error_ru: "В русском в настоящем времени связки нет, в испанском глагол не опускается никогда."
+    error_es: "En ruso la cópula no se dice en presente; en español el verbo nunca falta."
+
+  - unidad: 2
+    pregunta: "На столе книга."
+    opciones: ["Hay el libro en la mesa.", "Hay un libro en la mesa.", "Está un libro en la mesa."]
+    correcta: 1
+    error_ru: "После «hay» никогда не ставится el / la: что-то существует, но ещё не известно какое именно."
+    error_es: "«Hay» nunca va con el / la: existe algo, todavía no se sabe cuál."
+
+  - unidad: 3
+    pregunta: "Мне тридцать лет."
+    opciones: ["Soy treinta años.", "Tengo treinta años.", "Estoy treinta años."]
+    correcta: 1
+    error_ru: "Возраст по-испански «имеют», а не «являются». Русский здесь не подсказывает ничего."
+    error_es: "La edad se tiene, no se es. El ruso aquí no da ninguna pista."
+
+  - unidad: 4
+    pregunta: "Мой брат дома."
+    opciones: ["Mi hermano es en casa.", "Mi hermano está en casa.", "Mi hermano hay en casa."]
+    correcta: 1
+    error_ru: "Место — это «estar»: где кто-то находится сейчас, а не кто он такой."
+    error_es: "El lugar es «estar»: dónde está algo ahora, no qué es."
+
+  - unidad: 5
+    pregunta: "Я встаю в семь."
+    opciones: ["Me levanto a las siete.", "Levanto me a las siete.", "Yo levanto a las siete."]
+    correcta: 0
+    error_ru: "Русское -ся стоит в конце, а испанское местоимение — ПЕРЕД глаголом."
+    error_es: "El -ся ruso va detrás; el pronombre español va DELANTE del verbo."
+
+  - unidad: 6
+    pregunta: "Мне нравится кофе."
+    opciones: ["Yo gusto el café.", "Me gusta el café.", "Me gusto café."]
+    correcta: 1
+    error_ru: "При «gustar» подлежащее — то, что нравится, а не человек. Как в «мне нравится»."
+    error_es: "Con «gustar» el sujeto es lo que gusta, no la persona."
+
+  - unidad: 7
+    pregunta: "Я вижу своего брата."
+    opciones: ["Veo mi hermano.", "Veo a mi hermano.", "Veo el mi hermano."]
+    correcta: 1
+    error_ru: "Предлог «a» перед человеком в роли дополнения не имеет русского аналога, и его забывают."
+    error_es: "La «a personal» delante de persona no tiene equivalente ruso y se olvida."
+
+  - unidad: 8
+    pregunta: "Завтра я буду работать."
+    opciones: ["Mañana voy a trabajar.", "Mañana voy trabajar.", "Mañana voy a trabajo."]
+    correcta: 0
+    error_ru: "«ir a + инфинитив» всегда с предлогом, как «собираться + инфинитив»."
+    error_es: "«ir a + infinitivo» lleva la preposición siempre, como собираться + inf."
+
+  - unidad: 9
+    pregunta: "Сегодня я уже поел."
+    opciones: ["Hoy ya comí.", "Hoy ya he comido.", "Hoy ya como."]
+    correcta: 1
+    error_ru: "Со словами «сегодня, на этой неделе, уже» в Испании нужен perfecto. 🌎 В Латинской Америке говорят «hoy ya comí»."
+    error_es: "Con «hoy, esta semana, ya» España pide el perfecto. 🌎 En América se oye «hoy ya comí»."
+
+  - unidad: 11
+    pregunta: "Эта рубашка мне велика."
+    opciones: ["Esta camisa me queda grande.", "Esta camisa es grande para mí.", "Esta camisa me está grande."]
+    correcta: 0
+    error_ru: "«Quedar» работает как «gustar» и это обычный способ говорить о размере одежды."
+    error_es: "«Quedar» funciona como «gustar» y es la forma normal de hablar de tallas."
+
+  - unidad: 12
+    pregunta: "Вчера я ходил в кино."
+    opciones: ["Ayer he ido al cine.", "Ayer fui al cine.", "Ayer iba al cine."]
+    correcta: 1
+    error_ru: "«Ayer» закрывает прошедшее: нужен indefinido, а не perfecto."
+    error_es: "«Ayer» cierra el pasado: indefinido, no perfecto."
+
+  - unidad: 13
+    pregunta: "В детстве я много читал."
+    opciones: ["De pequeño leí mucho.", "De pequeño leía mucho.", "De pequeño he leído mucho."]
+    correcta: 1
+    error_ru: "Привычка в прошлом — imperfecto, как русский несовершенный вид."
+    error_es: "El hábito en el pasado es imperfecto, como el imperfectivo ruso."
+
+  - unidad: 17
+    pregunta: "Если будет дождь, я останусь дома."
+    opciones: ["Si lloverá, me quedo en casa.", "Si llueve, me quedaré en casa.", "Si llueva, me quedaré en casa."]
+    correcta: 1
+    error_ru: "После «si» в реальном условии не бывает ни будущего, ни subjuntivo: только présente."
+    error_es: "Tras «si» de condición real no va futuro ni subjuntivo: va presente."
+
+  - unidad: 19
+    pregunta: "Этот город больше, чем мой."
+    opciones: ["Esta ciudad es más grande que la mía.", "Esta ciudad es más grande como la mía.", "Esta ciudad es la más grande que mía."]
+    correcta: 0
+    error_ru: "Сравнение по-испански — «más… que»; «como» только для равенства."
+    error_es: "El comparativo español es «más… que»; «como» es solo para la igualdad."

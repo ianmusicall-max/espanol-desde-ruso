@@ -23,6 +23,10 @@ la documentación del programa, en español.
 - `programa/historia.md` — el arco de Ana e Iván: 24 episodios, uno por unidad.
   Los títulos y sinopsis viven en `calendario.yaml` (campo `episodio` de cada
   unidad); el .md los explica. Hay pruebas que exigen que coincidan.
+- `programa/test-nivel.yaml` — las 14 preguntas del test de nivel, cada una con
+  la unidad que la ensena y el error del rusohablante que encarna su
+  distractor. El error va en ruso (lo lee el alumno) y en español (lo revisa
+  el profesor).
 - `referencias/` — análisis estructural de los libros de referencia. No se
   copia contenido ajeno; los PDF no se versionan.
 - `curso/plantilla-leccion.md` — la forma de toda lección. `curso/semana-XX/dia-N.md`.
@@ -62,6 +66,10 @@ la documentación del programa, en español.
   `metodologia.md` §6 pide «espanol + ruso» desde ahi. O se retocan las
   semanas 13-14 (dos lineas por leccion) o se corre la tabla de §6 hasta la
   unidad 12, que es el salto de nivel y una frontera mas natural.
+- **Las catorce preguntas del test de nivel** (`programa/test-nivel.yaml`,
+  2026-10-26) estan en `revisado: false` y la pagina lo avisa. Hay que
+  comprobar que cada distractor sea de verdad el error que dice y que la unidad
+  asignada sea donde el curso lo ensena.
 - **Las 69 lecciones de las semanas 4 en adelante son borradores**
   (`revisado: false`) y el sitio las marca como tales. Las 21 primeras estan
   revisadas.
@@ -647,15 +655,97 @@ Tres cosas que costaron una vuelta:
   encontro los 404 del conmutador de idioma. Es la segunda vez que ese fallo
   aparece por el mismo motivo, y la segunda vez que esa prueba lo para.
 
+## El test de nivel: la segunda puerta (2026-10-26)
+
+El sitio tenia **una sola entrada, la leccion 1**. Quien llega sabiendo algo de
+espanol lee «Начать с первого урока», piensa «esto no es para mi» y se va. Es
+la otra mitad del problema de entrar: la historia de Ana e Ivan hace volver a
+quien ya empezo, pero no hace entrar a nadie.
+
+De la referencia del profesor (`curso-ingles.com`) se tomo **la idea** —un
+«test de nivel» junto a «primeros pasos»— y nada mas: las catorce preguntas
+salen de `programa/contrastiva-ru-es.md`, o sea de la lista negra de errores
+del rusohablante que ya alimenta los distractores de las pruebas del curso.
+Por eso el resultado puede decir POR QUE se fallo y no solo cuantas van bien, y
+por eso **el test ensena aunque se suspenda**.
+
+**La recomendacion es la unidad de la PRIMERA pregunta fallada**, o sea donde
+se acaba lo que ya se sabe —no un porcentaje, que no dice por donde empezar—.
+De ahi salen las tres cosas que lo romperian en silencio, y las tres tienen
+prueba:
+
+- **Las preguntas van en orden de unidad.** Desordenadas, fallar la ultima
+  podria colocar a alguien antes que fallar la primera, y nada avisaria.
+- **El destino se calcula al construir** (`inicios_de_unidad`), no en el
+  navegador: el guion no puede saber que lecciones existen. Mandar a una que no
+  esta es el fallo que esta suite ya caza dos veces —el conmutador de idioma y
+  las tarjetas del mapa—.
+- **Una unidad sin lecciones escritas cae en la ultima escrita.** No es un
+  parche: el curso tiene 100 de 365, asi que fallar en la unidad 17 significa
+  que ya sabe todo lo que el curso cubre, y ahi es exactamente donde empieza.
+  Sin ese `|| D.ultima` la pantalla de resultado se quedaba sin su boton.
+
+**El error se dice dos veces y no es redundancia.** La primera version mandaba
+al navegador la explicacion en espanol, que es justo el idioma que el lector
+viene a aprender: a un principiante ruso explicarle su propio error en espanol
+no le ensena nada. Ahora `error_ru` es lo que se lee y lo unico que viaja, y
+`error_es` es la regla para el profesor, que es quien revisa (regla 6) y lee la
+documentacion de este curso en espanol. Una prueba exige las dos y que ninguna
+este vacia, y otra exige que el espanol NO aparezca en la pagina.
+
+**Hay una sola pagina y esta en ruso**, igual que las lecciones y por la misma
+razon: las preguntas son frases rusas que hay que decir en espanol, asi que un
+lector que no lee ruso no puede contestarlas. Traducir la interfaz alrededor
+dejaria un test que no se puede hacer, que es peor que no ofrecerlo. Lo que si
+se traduce es **el enlace**, igual que la portada en espanol manda a una
+leccion en ruso. Por eso la pagina va con `traducida=False`: el conmutador
+lleva a la portada de ese idioma y no declara un `hreflang` que seria falso.
+
+**No esta en el menu de la cabecera, y es una decision.** Esa barra se acababa
+de arreglar el mismo dia: con tres enlaces fallaba por cuatro pixeles. Un
+cuarto la volveria a apretar justo en tableta. Y el test solo hace falta en el
+momento de entrar —dentro de una leccion ya no sirve de nada—, asi que va donde
+se toma la decision: una linea bajo los botones de la portada («Уже знаете
+немного испанского?») y otra en el indice, mas el pie, que envuelve sin
+pelearse con nada.
+
+Dos detalles menores que importan si alguien lo toca:
+
+- **La instruccion («como se dice esto en espanol») la pone la pagina una sola
+  vez**, no cada pregunta. Asi las catorce son la frase rusa y nada mas, y
+  traducirla no toca el YAML.
+- **El boton nace oculto y lo enciende el navegador**, como el resto del sitio.
+  Sin JavaScript seria un boton que no hace nada; para ese caso esta el
+  `<noscript>`, que manda a la leccion 1.
+
+**La respuesta correcta viaja al navegador** y en un sitio estatico no hay
+forma de evitarlo. No importa: esto coloca a quien quiere estudiar, no
+certifica nada.
+
+**De paso, el revisor de enlaces miraba dentro de los `<script>`.** El guion
+del test arma el enlace del resultado concatenando `href="'+dest.url+'"`, y
+leido como marca eso es un enlace a un fichero llamado `'+dest.url+'` que por
+supuesto no existe: `revisar_adsense.py` cantaba un roto que ningun lector
+puede pulsar. Ahora los `<script>` se quitan antes de mirar. Es la misma prueba
+que caza los 404 de verdad -215 del conmutador de idioma, y los del mapa de
+unidades-, asi que hay una segunda prueba que exige que un roto autentico siga
+saliendo: un revisor ciego seria peor que uno que se equivoca.
+
+**Pendiente**: las catorce preguntas estan en `revisado: false` y la pagina lo
+avisa. Lo que el profesor tiene que comprobar es que cada distractor sea de
+verdad el error que dice, y que la unidad asignada sea donde el curso lo
+ensena.
+
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.
 - **100 lecciones escritas** (semanas 1-14 enteras y los dos primeros días de
   la 15): unidades 1 a 7 completas, 908 tarjetas de vocabulario. Las 21
   primeras revisadas; el resto son borradores.
-- Sitio público en `docs/` con portada, índice, «О курсе», contacto y política
-  de privacidad. Tres idiomas (ru/es/en), tema claro y oscuro, y progreso del
-  lector guardado en su navegador sin registro. La publicidad se configura en `web/sitio.yaml` y está
+- Sitio público en `docs/` con portada, índice, test de nivel, «О курсе»,
+  contacto y política de privacidad. Tres idiomas (ru/es/en) —el test solo en
+  ruso, como las lecciones—, tema claro y oscuro, y progreso del lector
+  guardado en su navegador sin registro. La publicidad se configura en `web/sitio.yaml` y está
   apagada; sin identificador de AdSense no se carga nada de terceros.
 - Falta activar GitHub Pages (Settings → Pages → rama main, carpeta /docs).
 - Para AdSense **solo falta el dominio propio** (y el CMP de Google al

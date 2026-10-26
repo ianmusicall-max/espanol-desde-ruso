@@ -81,6 +81,22 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 .suena[aria-pressed="true"]{opacity:1;color:var(--acento)}
 @media(hover:none){.suena{opacity:.9}}
 
+/* Test de nivel */
+.test-caja{background:var(--tarjeta);border:1px solid var(--linea);border-radius:12px;
+  padding:1.2rem 1.3rem;margin:1.4rem 0;font-family:ui-sans-serif,system-ui,sans-serif}
+.test-cuenta{font-size:.78rem;color:var(--tenue);letter-spacing:.04em;margin-bottom:.5rem}
+.test-pregunta{font-size:1.08rem;font-weight:600;color:var(--tinta);margin:0 0 1rem;line-height:1.45}
+.test-ops{display:flex;flex-direction:column;gap:.5rem}
+.test-ops button{text-align:start;font:inherit;font-size:.98rem;color:var(--tinta);
+  background:var(--papel);border:1.5px solid var(--linea);border-radius:9px;
+  padding:.6rem .8rem;cursor:pointer;transition:border-color .12s,background .12s}
+.test-ops button:hover{border-color:var(--acento)}
+.test-barra{height:4px;border-radius:999px;background:var(--linea);overflow:hidden;margin-top:1rem}
+.test-barra i{display:block;height:100%;background:var(--acento);transition:width .2s}
+.test-fallo{border-inline-start:3px solid var(--acento);padding:.1rem 0 .1rem .8rem;margin:.7rem 0}
+.test-fallo b{display:block;color:var(--tinta);font-size:.94rem}
+.test-fallo span{font-size:.88rem;color:var(--tenue)}
+
 /* El mapa de unidades: 24 tarjetas en vez de 365 filas.
    El indice crudo medía 21.482 px de alto, o sea 24 pantallas de scroll, y
    nadie navega eso. Las tarjetas dan una vista de todo el ano en una o dos. */
@@ -125,6 +141,8 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 ul.dias li.hecha .num::after{content:"✓";color:var(--acento);font-weight:700;margin-inline-start:.25rem}
 ul.dias li.hecha a{color:var(--tenue)}
 #mio{margin-top:.9rem;padding-top:.9rem;border-top:1px dashed var(--linea)}
+.puerta{font-size:.9rem;color:var(--tenue);margin:-.6rem 0 0}
+.puerta a{color:var(--acento);font-weight:600}
 .progreso-nota{font-size:.84rem;color:var(--tenue);font-family:ui-sans-serif,system-ui,sans-serif;margin-top:.5rem}
 #borrar-progreso{background:none;border:0;padding:0;color:var(--tenue);text-decoration:underline;
   cursor:pointer;font:inherit;font-size:.84rem}
@@ -139,7 +157,6 @@ ul.dias li.hecha a{color:var(--tenue)}
      boton del tema caia a una segunda fila con 700 px de pantalla libres al
      lado. Se vio midiendo los hijos, no mirando: fallaba por cuatro pixeles. */
   header.sitio .envoltorio{max-width:60rem}
-  header.sitio .marca{flex:0 1 auto}
 }
 
 main{padding-bottom:3.5rem}
@@ -592,13 +609,14 @@ Dmitri está lejos de aquí, en Valencia.</em> — Проверьте по
 <em>de el</em>.</p><div id="marcar-caja"></div><nav class="pasos"><a href="../semana-06/dia-1.html">← Урок 36</a><a href="../kurs.html">Все уроки</a><a id="enlace-siguiente" href="../semana-06/dia-3.html">Урок 38 →</a></nav></article>
 </div></main>
 <footer class="sitio"><div class="envoltorio">
-<p><a href="../o-kurse.html">О курсе</a> · <a href="../kontakt.html">Контакты</a> · <a href="../privacy.html">Политика конфиденциальности</a></p>
+<p><a href="../test.html">Тест на уровень</a> · <a href="../o-kurse.html">О курсе</a> · <a href="../kontakt.html">Контакты</a> · <a href="../privacy.html">Политика конфиденциальности</a></p>
 <p>Материалы курса можно свободно использовать для учёбы.</p>
 </div></footer>
 
 <script>(function(){var b=document.getElementById('tema');if(!b)return;function actual(){var r=document.documentElement;return r.dataset.tema||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}b.addEventListener('click',function(){var n=actual()==='dark'?'light':'dark';document.documentElement.dataset.tema=n;try{localStorage.setItem('tema',n)}catch(e){}});})();</script>
 <script>window.CURSO_TEXTOS={"continuar": "Продолжить: урок", "empezar": "Начать сначала", "marcar": "Отметить урок пройденным", "hecho": "Урок пройден", "siguiente": "Следующий урок", "tuyo": "пройдено вами", "titulo": "Ваш прогресс", "aviso": "Прогресс хранится только в этом браузере, на этом устройстве. Регистрации нет, и никуда он не отправляется. Если вы очистите данные браузера или откроете курс на другом телефоне, отметки не перенесутся.", "borrar": "Сбросить прогресс", "confirmar": "Сбросить все отметки?"};window.CURSO_RAIZ="..";window.CURSO_PUBLICADAS=100;window.CURSO_DIAS={"1":"semana-01/dia-1.html","2":"semana-01/dia-2.html","3":"semana-01/dia-3.html","4":"semana-01/dia-4.html","5":"semana-01/dia-5.html","6":"semana-01/dia-6.html","7":"semana-01/dia-7.html","8":"semana-02/dia-1.html","9":"semana-02/dia-2.html","10":"semana-02/dia-3.html","11":"semana-02/dia-4.html","12":"semana-02/dia-5.html","13":"semana-02/dia-6.html","14":"semana-02/dia-7.html","15":"semana-03/dia-1.html","16":"semana-03/dia-2.html","17":"semana-03/dia-3.html","18":"semana-03/dia-4.html","19":"semana-03/dia-5.html","20":"semana-03/dia-6.html","21":"semana-03/dia-7.html","22":"semana-04/dia-1.html","23":"semana-04/dia-2.html","24":"semana-04/dia-3.html","25":"semana-04/dia-4.html","26":"semana-04/dia-5.html","27":"semana-04/dia-6.html","28":"semana-04/dia-7.html","29":"semana-05/dia-1.html","30":"semana-05/dia-2.html","31":"semana-05/dia-3.html","32":"semana-05/dia-4.html","33":"semana-05/dia-5.html","34":"semana-05/dia-6.html","35":"semana-05/dia-7.html","36":"semana-06/dia-1.html","37":"semana-06/dia-2.html","38":"semana-06/dia-3.html","39":"semana-06/dia-4.html","40":"semana-06/dia-5.html","41":"semana-06/dia-6.html","42":"semana-06/dia-7.html","43":"semana-07/dia-1.html","44":"semana-07/dia-2.html","45":"semana-07/dia-3.html","46":"semana-07/dia-4.html","47":"semana-07/dia-5.html","48":"semana-07/dia-6.html","49":"semana-07/dia-7.html","50":"semana-08/dia-1.html","51":"semana-08/dia-2.html","52":"semana-08/dia-3.html","53":"semana-08/dia-4.html","54":"semana-08/dia-5.html","55":"semana-08/dia-6.html","56":"semana-08/dia-7.html","57":"semana-09/dia-1.html","58":"semana-09/dia-2.html","59":"semana-09/dia-3.html","60":"semana-09/dia-4.html","61":"semana-09/dia-5.html","62":"semana-09/dia-6.html","63":"semana-09/dia-7.html","64":"semana-10/dia-1.html","65":"semana-10/dia-2.html","66":"semana-10/dia-3.html","67":"semana-10/dia-4.html","68":"semana-10/dia-5.html","69":"semana-10/dia-6.html","70":"semana-10/dia-7.html","71":"semana-11/dia-1.html","72":"semana-11/dia-2.html","73":"semana-11/dia-3.html","74":"semana-11/dia-4.html","75":"semana-11/dia-5.html","76":"semana-11/dia-6.html","77":"semana-11/dia-7.html","78":"semana-12/dia-1.html","79":"semana-12/dia-2.html","80":"semana-12/dia-3.html","81":"semana-12/dia-4.html","82":"semana-12/dia-5.html","83":"semana-12/dia-6.html","84":"semana-12/dia-7.html","85":"semana-13/dia-1.html","86":"semana-13/dia-2.html","87":"semana-13/dia-3.html","88":"semana-13/dia-4.html","89":"semana-13/dia-5.html","90":"semana-13/dia-6.html","91":"semana-13/dia-7.html","92":"semana-14/dia-1.html","93":"semana-14/dia-2.html","94":"semana-14/dia-3.html","95":"semana-14/dia-4.html","96":"semana-14/dia-5.html","97":"semana-14/dia-6.html","98":"semana-14/dia-7.html","99":"semana-15/dia-1.html","100":"semana-15/dia-2.html"};</script>
 <script src="../progreso.js" defer></script>
+
 
 </body>
 </html>
