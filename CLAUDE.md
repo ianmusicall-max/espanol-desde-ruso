@@ -403,15 +403,24 @@ Lo que hay que saber si alguien lo toca:
   contenedor— y **esos tonos se borraron antes de subir nada**: publicar un
   pitido donde el lector espera una voz es peor que no tener audio.
 
-**Lo que falta, y son DOS cosas** (comprobado el 2026-10-26, al ir a
-generarlo):
+**El camino quedó abierto el 2026-10-26**, y costó encontrar los dos
+escalones porque el segundo no se ve hasta que se tropieza con él:
 
-1. **`OPENAI_API_KEY`**, que no está en el entorno de este contenedor. Va como
-   secreto del entorno, nunca pegada en el chat ni en el repo.
-2. **`api.openai.com` está bloqueado** por la política de red de este
-   contenedor (`connect_rejected`: el host no está permitido). Hay que
-   añadirlo en los dominios permitidos del entorno. Sin esto la clave no
-   sirve de nada, y es el escalón que no se ve hasta que se intenta.
+1. **`OPENAI_API_KEY`**: va como secreto del entorno, nunca pegada en el chat
+   ni en el repo.
+2. **`api.openai.com` tiene que estar en los dominios permitidos** del
+   entorno. Con la clave puesta y el dominio cerrado no se llega a OpenAI
+   siquiera; la señal de que YA está abierto es que `curl` devuelva **401** y
+   no `000`: 401 significa que la petición llegó y solo faltaba la clave.
+   La caja de *Allowed domains* no aparece hasta elegir el nivel «Limited»,
+   que es donde se atascó el profesor dos veces.
+
+**Pesa 97 MB, no 50** (medido el 2026-10-26 sobre la muestra real, no
+estimado: 149 caracteres dan 11,6 s a 128 kbps, y son 81.505 caracteres, o sea
+unos 106 minutos). Cabe de sobra en el 1 GB de GitHub Pages y no cambia el
+precio. Si algún día estorba, `ffmpeg` a 64 kbps mono lo deja en ~35 MB sin
+que se note en voz y con la mitad de datos móviles para el lector —y se hace
+sobre los MP3 ya descargados, así que no se vuelve a pagar—.
 
 Anthropic **no tiene servicio de voz**, así que el audio no lo puede poner
 Claude: tiene que venir de un TTS de fuera. OpenAI es el que está programado
