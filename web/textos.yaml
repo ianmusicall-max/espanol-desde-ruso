@@ -1,0 +1,305 @@
+# Los textos de la web, en los tres idiomas.
+#
+# Las LECCIONES no están aquí y no se traducen: son el curso, y están en ruso
+# con el español como lengua meta. Lo que se traduce es la web que las rodea,
+# para que alguien que no lee ruso entienda qué es esto.
+#
+# El ruso es el idioma por defecto y vive en la raíz; español e inglés cuelgan
+# de /es/ y /en/. Si cambias un texto, se cambia solo donde está: el
+# constructor no interpreta nada, copia lo que lee.
+
+idiomas:
+  - codigo: ru
+    nombre: "Русский"
+    carpeta: ""
+    html: "ru"
+  - codigo: es
+    nombre: "Español"
+    carpeta: "es"
+    html: "es"
+  - codigo: en
+    nombre: "English"
+    carpeta: "en"
+    html: "en"
+
+ru:
+  menu: {inicio: "Главная", curso: "Все уроки", sobre: "О курсе", contacto: "Контакты"}
+  titulo_sitio: "Испанский с нуля для русскоговорящих"
+  portada:
+    titulo: "Испанский с нуля"
+    titulo2: "для русскоговорящих"
+    lema: "30 минут в день — за год от нуля до A2"
+    entrada: "Бесплатный курс из 365 уроков по 30 минут: от алфавита до уровня A2 и экзамена DELE. Без регистрации, без оплаты, прямо в браузере."
+    boton: "Начать с первого урока"
+    boton2: "Посмотреть программу"
+    progreso: "уроков открыто"
+    dif_titulo: "Чем этот курс отличается"
+    dif_texto: "Обычный учебник объясняет испанское правило. Этот объясняет ещё и то, <strong>где вас подводит родной язык</strong>. В каждом уроке есть раздел «Контраст с русским», который называет ошибку до того, как вы её сделаете:"
+    dif_error: "Вы захотите сказать:"
+    dif_bien: "Правильно:"
+    dif_nota: "В русском артикля нет совсем, поэтому вы не «забываете» его — вы не слышите, что чего-то не хватает. Первые три месяца курса артикль разбирается в каждом ключе к каждому упражнению."
+    dif_ayuda: "И наоборот: там, где русский <em>помогает</em>, курс говорит об этом прямо. <em>Me gusta el café</em> — это буквально «мне нравится кофе», та же конструкция. Возвратные глаголы — это <em>-ся</em>. Прошедшее время строится на том же виде, который у вас уже есть."
+    dia_titulo: "Как устроен день"
+    dia_min: "Минуты"
+    dia_que: "Что происходит"
+    dia_filas:
+      - ["0–3", "Разминка: карточки вчерашних слов"]
+      - ["3–6", "Фонетика или аудирование"]
+      - ["6–16", "Новое: пример, правило и контраст с русским"]
+      - ["16–26", "Три упражнения с ключами"]
+      - ["26–29", "Выход: вы что-то пишете или записываете вслух"]
+      - ["29–30", "Итог и новые карточки"]
+    dia_nota: "Ровно 30 минут. Не 45 и не «сколько получится»: день, который не помещается в полчаса, разбивается на два дня."
+    ano_titulo: "Что будет через год"
+    ano_tarjetas:
+      - ["Через 2 недели", "Читаете вслух любое испанское слово, здороваетесь, представляетесь и считаете до двадцати."]
+      - ["Через 3 месяца", "Рассказываете о семье, доме и своём дне, заказываете еду и покупаете одежду."]
+      - ["Через полгода · A1", "Путешествуете, идёте к врачу, даёте советы. Сдали бы экзамен уровня A1."]
+      - ["Через год · A2", "Говорите о прошлом и будущем, спорите, пишете письма. Готовы к <strong>DELE A2</strong>."]
+    final_titulo: "Сколько готово сейчас"
+    final_texto: "Программа всех 365 дней составлена целиком. Уроки выходят по мере готовности."
+    final_boton: "Начать сейчас"
+  curso:
+    titulo: "Все уроки"
+    subtitulo: "365 дней, 52 недели, 24 темы"
+    entrada: "Ссылками открываются уроки, которые уже написаны. У остальных показана тема дня: программа составлена на весь год вперёд."
+    tema: "Тема"
+    semana: "Неделя"
+    objetivos: "Чему вы научитесь"
+    niveles: "уровень"
+    semanas: "недели"
+  sobre:
+    titulo: "О курсе"
+    quien: "Кто это написал"
+    porque: "Почему «с русского», а не просто «испанский»"
+    porque_texto: "Курсы испанского пишут для всех сразу. Но ошибки у всех разные. Русскоговорящий пропускает артикль не потому, что невнимателен, а потому что в его языке этой категории нет вообще. Он ставит прилагательное перед существительным, потому что так устроен русский. Он говорит «мне тридцать» вместо <em>tengo treinta años</em>, потому что в русском возраст — в дательном падеже."
+    porque_texto2: "Курс построен вокруг этих двадцати типичных ошибок. Они перечислены заранее, разбираются по одной и возвращаются в ключах к упражнениям и в вариантах ответов тестов: неправильный вариант — это всегда то, что сказал бы русскоговорящий."
+    como: "Как заниматься"
+    como_texto: "Один урок в день, по порядку, 30 минут. Не больше: курс рассчитан на год, и пропущенная неделя вредит меньше, чем три урока подряд за один вечер. В конце каждого урока есть «Выход» — то, что нужно написать или записать вслух. Без этого урок не считается сделанным."
+    cuanto: "Сколько это стоит"
+    cuanto_texto: "Нисколько. Курс открыт целиком, без регистрации. Сайт существует за счёт рекламы."
+    abierto: "Сейчас открыто"
+  contacto:
+    titulo: "Контакты"
+    texto: "Пишите об ошибке в уроке, о том, что непонятно, или о занятиях с преподавателем."
+    error: "Нашли ошибку в уроке? Это самое полезное письмо, которое можно прислать: курс пишется последовательно, и опечатка в ключе портит упражнение всем."
+    sin_correo: "Адрес для связи пока не указан."
+    autor: "Об авторе"
+  privacidad:
+    titulo: "Политика конфиденциальности"
+    actualizado: "Обновлено"
+    propio: "Что собирает сам сайт"
+    propio_texto: "Ничего. На сайте нет регистрации, форм, комментариев и личных кабинетов. Мы не просим и не храним ваше имя, адрес или электронную почту."
+    anuncios: "Реклама"
+    anuncios_texto: "Сайт показывает рекламу через Google AdSense. Google и его партнёры используют файлы cookie, чтобы показывать объявления с учётом ваших прежних посещений этого и других сайтов."
+    anuncios_optar: "Персонализированную рекламу можно отключить в настройках рекламы Google, а сторонние поставщики — на aboutads.info."
+    estadistica: "Статистика"
+    estadistica_texto: "Мы считаем посещения через Google Analytics, чтобы понимать, какие уроки читают. Это обезличенная статистика: мы не видим, кто вы."
+    sin_cookies: "Файлы cookie"
+    sin_cookies_texto: "Сейчас сайт не использует ни рекламные, ни аналитические cookie и не загружает скрипты сторонних сервисов. Единственное, что может сохраняться в браузере, — ваши собственные настройки чтения."
+    derechos: "Ваши права"
+    derechos_texto: "Если вы в Европейском союзе, у вас есть право на доступ к своим данным, их исправление и удаление. Поскольку сайт сам никаких данных о вас не хранит, обращаться с такими запросами нужно напрямую к Google."
+    ninos: "Дети"
+    ninos_texto: "Сайт не предназначен для детей младше 13 лет и не собирает их данные сознательно."
+  leccion:
+    urok: "Урок"
+    de: "из"
+    semana: "неделя"
+    nivel: "уровень"
+    borrador: "Черновик: урок написан, но преподаватель его ещё не вычитал."
+    anterior: "Урок"
+    siguiente: "Урок"
+    todos: "Все уроки"
+  cookies: "Мы используем файлы cookie для показа рекламы и статистики посещений."
+  cookies_mas: "Подробнее"
+  cookies_ok: "Понятно"
+  pie: "Материалы курса можно свободно использовать для учёбы."
+  idioma: "Язык"
+
+es:
+  menu: {inicio: "Inicio", curso: "Las lecciones", sobre: "El curso", contacto: "Contacto"}
+  titulo_sitio: "Español desde el ruso"
+  portada:
+    titulo: "Español desde cero"
+    titulo2: "para rusohablantes"
+    lema: "30 minutos al día: en un año, de cero a A2"
+    entrada: "Curso gratuito de 365 lecciones de 30 minutos, del alfabeto al nivel A2 y al examen DELE. Sin registro, sin pago, en el navegador. Las lecciones están escritas en ruso, que es la lengua del alumno."
+    boton: "Ver la primera lección"
+    boton2: "Ver el programa"
+    progreso: "lecciones publicadas"
+    dif_titulo: "Qué lo hace distinto"
+    dif_texto: "Un manual corriente explica la regla española. Este explica además <strong>dónde le traiciona su propia lengua</strong> al alumno. Cada lección lleva un apartado, «Contraste con el ruso», que nombra el error antes de que ocurra:"
+    dif_error: "Vas a querer decir:"
+    dif_bien: "Correcto:"
+    dif_nota: "El ruso no tiene artículo. Por eso el alumno no lo «olvida»: no percibe que falte algo. Los tres primeros meses del curso el artículo vuelve en la clave de cada ejercicio."
+    dif_ayuda: "Y al revés: donde el ruso <em>ayuda</em>, el curso lo dice con todas las letras. <em>Me gusta el café</em> es literalmente «мне нравится кофе», la misma estructura. Los reflexivos son el <em>-ся</em> ruso. Los pasados se enseñan sobre el aspecto que el alumno ya tiene."
+    dia_titulo: "Cómo es una sesión"
+    dia_min: "Minutos"
+    dia_que: "Qué pasa"
+    dia_filas:
+      - ["0–3", "Calentamiento: las tarjetas de ayer"]
+      - ["3–6", "Fonética o comprensión oral"]
+      - ["6–16", "Lo nuevo: ejemplo, regla y contraste con el ruso"]
+      - ["16–26", "Tres ejercicios con sus claves"]
+      - ["26–29", "Salida: el alumno escribe o graba algo"]
+      - ["29–30", "Cierre y tarjetas nuevas"]
+    dia_nota: "Treinta minutos exactos. Ni 45 ni «lo que salga»: el día que no cabe en media hora se parte en dos días."
+    ano_titulo: "Qué se consigue"
+    ano_tarjetas:
+      - ["A las 2 semanas", "Lee en voz alta cualquier palabra española, saluda, se presenta y cuenta hasta veinte."]
+      - ["A los 3 meses", "Habla de su familia, su casa y su día, pide en un bar y compra ropa."]
+      - ["A los 6 meses · A1", "Viaja, va al médico, da consejos. Aprobaría un examen de nivel A1."]
+      - ["Al año · A2", "Habla del pasado y del futuro, opina, escribe correos. Listo para el <strong>DELE A2</strong>."]
+    final_titulo: "Cuánto hay publicado"
+    final_texto: "El programa de los 365 días está completo. Las lecciones se publican a medida que se escriben y se revisan."
+    final_boton: "Empezar"
+  curso:
+    titulo: "Las lecciones"
+    subtitulo: "365 días, 52 semanas, 24 unidades"
+    entrada: "Los enlaces abren las lecciones ya escritas. Del resto se muestra el tema del día: el programa está hecho para el año entero."
+    tema: "Unidad"
+    semana: "Semana"
+    objetivos: "Objetivos"
+    niveles: "nivel"
+    semanas: "semanas"
+  sobre:
+    titulo: "El curso"
+    quien: "Quién lo escribe"
+    porque: "Por qué «desde el ruso» y no «español» a secas"
+    porque_texto: "Los cursos de español se escriben para todos a la vez. Pero los errores no son de todos: son de cada lengua. Un rusohablante omite el artículo no por distracción, sino porque en su idioma esa categoría no existe. Antepone el adjetivo porque así funciona el ruso. Dice «мне тридцать» y traduce <em>soy treinta años</em>, porque en ruso la edad va en dativo."
+    porque_texto2: "El curso está construido alrededor de esos veinte errores típicos. Están listados de antemano, se trabajan uno a uno y vuelven en las claves y en los distractores de las pruebas: la opción incorrecta es siempre la que diría un rusohablante."
+    como: "Cómo se estudia"
+    como_texto: "Una lección al día, en orden, treinta minutos. No más: el curso está pensado para un año, y saltarse una semana hace menos daño que tres lecciones seguidas una noche. Cada lección termina en una «salida», algo que el alumno escribe o graba. Sin eso la lección no cuenta."
+    cuanto: "Cuánto cuesta"
+    cuanto_texto: "Nada. El curso está abierto entero, sin registro. La web se sostiene con publicidad."
+    abierto: "Publicadas"
+  contacto:
+    titulo: "Contacto"
+    texto: "Escriba por un error en una lección, por algo que no se entienda o por clases con profesor."
+    error: "¿Ha encontrado un error? Es el mensaje más útil que se puede mandar: el curso se escribe en orden, y una errata en una clave estropea el ejercicio para todos."
+    sin_correo: "Todavía no hay dirección de contacto publicada."
+    autor: "Sobre el autor"
+  privacidad:
+    titulo: "Política de privacidad"
+    actualizado: "Actualizada"
+    propio: "Qué recoge la web"
+    propio_texto: "Nada. No hay registro, ni formularios, ni comentarios, ni cuentas. No pedimos ni guardamos su nombre, su dirección ni su correo."
+    anuncios: "Publicidad"
+    anuncios_texto: "La web muestra publicidad de Google AdSense. Google y sus socios usan cookies para mostrar anuncios según sus visitas anteriores a esta y a otras webs."
+    anuncios_optar: "La publicidad personalizada se desactiva en la configuración de anuncios de Google, y la de terceros en aboutads.info."
+    estadistica: "Estadística"
+    estadistica_texto: "Contamos las visitas con Google Analytics para saber qué lecciones se leen. Es estadística anónima: no sabemos quién es usted."
+    sin_cookies: "Cookies"
+    sin_cookies_texto: "Ahora mismo la web no usa cookies publicitarias ni analíticas y no carga scripts de terceros. Lo único que puede quedar guardado en el navegador son sus propias preferencias de lectura."
+    derechos: "Sus derechos"
+    derechos_texto: "Si está en la Unión Europea tiene derecho a acceder a sus datos, rectificarlos y suprimirlos. Como la web no guarda ningún dato suyo, esas solicitudes van directamente a Google."
+    ninos: "Menores"
+    ninos_texto: "La web no está dirigida a menores de 13 años ni recoge sus datos a sabiendas."
+  leccion:
+    urok: "Lección"
+    de: "de"
+    semana: "semana"
+    nivel: "nivel"
+    borrador: "Borrador: la lección está escrita, pero el profesor todavía no la ha revisado."
+    anterior: "Lección"
+    siguiente: "Lección"
+    todos: "Todas las lecciones"
+  cookies: "Usamos cookies para la publicidad y la estadística de visitas."
+  cookies_mas: "Más información"
+  cookies_ok: "De acuerdo"
+  pie: "El material del curso puede usarse libremente para estudiar."
+  idioma: "Idioma"
+
+en:
+  menu: {inicio: "Home", curso: "Lessons", sobre: "About", contacto: "Contact"}
+  titulo_sitio: "Spanish from Russian"
+  portada:
+    titulo: "Spanish from scratch"
+    titulo2: "for Russian speakers"
+    lema: "30 minutes a day: zero to A2 in a year"
+    entrada: "A free course of 365 thirty-minute lessons, from the alphabet to level A2 and the DELE exam. No sign-up, no payment, in the browser. The lessons are written in Russian, the learner's language."
+    boton: "See the first lesson"
+    boton2: "See the syllabus"
+    progreso: "lessons published"
+    dif_titulo: "What makes it different"
+    dif_texto: "An ordinary textbook explains the Spanish rule. This one also explains <strong>where the learner's own language betrays them</strong>. Every lesson has a section, «Contrast with Russian», that names the mistake before it happens:"
+    dif_error: "You will want to say:"
+    dif_bien: "Correct:"
+    dif_nota: "Russian has no article at all. So the learner does not «forget» it: they cannot hear that anything is missing. For the first three months the article comes back in the answer key of every exercise."
+    dif_ayuda: "And the other way round: where Russian <em>helps</em>, the course says so plainly. <em>Me gusta el café</em> is literally «мне нравится кофе», the same structure. Reflexives are the Russian <em>-ся</em>. The past tenses are taught on the aspect the learner already has."
+    dia_titulo: "What a session looks like"
+    dia_min: "Minutes"
+    dia_que: "What happens"
+    dia_filas:
+      - ["0–3", "Warm-up: yesterday's flashcards"]
+      - ["3–6", "Pronunciation or listening"]
+      - ["6–16", "The new point: example, rule and contrast with Russian"]
+      - ["16–26", "Three exercises with answer keys"]
+      - ["26–29", "Output: the learner writes or records something"]
+      - ["29–30", "Wrap-up and new flashcards"]
+    dia_nota: "Thirty minutes exactly. Not 45, not «however long it takes»: a day that does not fit in half an hour is split into two days."
+    ano_titulo: "What you get"
+    ano_tarjetas:
+      - ["After 2 weeks", "Reads any Spanish word aloud, greets people, introduces themselves, counts to twenty."]
+      - ["After 3 months", "Talks about family, home and daily routine, orders food, buys clothes."]
+      - ["After 6 months · A1", "Travels, goes to the doctor, gives advice. Would pass an A1 exam."]
+      - ["After a year · A2", "Talks about past and future, gives opinions, writes emails. Ready for the <strong>DELE A2</strong>."]
+    final_titulo: "How much is published"
+    final_texto: "The syllabus for all 365 days is complete. Lessons go up as they are written and reviewed."
+    final_boton: "Start"
+  curso:
+    titulo: "Lessons"
+    subtitulo: "365 days, 52 weeks, 24 units"
+    entrada: "Links open the lessons already written. For the rest, the topic of the day is shown: the syllabus covers the whole year."
+    tema: "Unit"
+    semana: "Week"
+    objetivos: "Objectives"
+    niveles: "level"
+    semanas: "weeks"
+  sobre:
+    titulo: "About the course"
+    quien: "Who writes it"
+    porque: "Why «from Russian» and not just «Spanish»"
+    porque_texto: "Spanish courses are written for everyone at once. But mistakes are not everyone's: they belong to a language. A Russian speaker drops the article not out of carelessness, but because that category does not exist in their language. They put the adjective first because that is how Russian works. They say «мне тридцать» and translate <em>soy treinta años</em>, because in Russian age takes the dative."
+    porque_texto2: "The course is built around those twenty typical mistakes. They are listed in advance, worked through one by one, and they come back in the answer keys and in the distractors of the tests: the wrong option is always the one a Russian speaker would pick."
+    como: "How to study"
+    como_texto: "One lesson a day, in order, thirty minutes. No more: the course is designed for a year, and skipping a week does less harm than three lessons in one evening. Every lesson ends in an «output», something the learner writes or records. Without it the lesson does not count."
+    cuanto: "What it costs"
+    cuanto_texto: "Nothing. The whole course is open, with no sign-up. The site is supported by advertising."
+    abierto: "Published"
+  contacto:
+    titulo: "Contact"
+    texto: "Write about a mistake in a lesson, about something unclear, or about lessons with a teacher."
+    error: "Found a mistake? That is the most useful message you can send: the course is written in order, and a typo in an answer key spoils the exercise for everyone."
+    sin_correo: "No contact address has been published yet."
+    autor: "About the author"
+  privacidad:
+    titulo: "Privacy policy"
+    actualizado: "Updated"
+    propio: "What the site itself collects"
+    propio_texto: "Nothing. There is no sign-up, no forms, no comments, no accounts. We do not ask for or store your name, address or email."
+    anuncios: "Advertising"
+    anuncios_texto: "The site shows Google AdSense advertising. Google and its partners use cookies to serve ads based on your previous visits to this and other websites."
+    anuncios_optar: "Personalised advertising can be switched off in Google's ad settings, and third-party vendors at aboutads.info."
+    estadistica: "Analytics"
+    estadistica_texto: "We count visits with Google Analytics to know which lessons get read. It is anonymous statistics: we cannot see who you are."
+    sin_cookies: "Cookies"
+    sin_cookies_texto: "Right now the site uses no advertising or analytics cookies and loads no third-party scripts. The only thing that may be stored in your browser is your own reading preferences."
+    derechos: "Your rights"
+    derechos_texto: "If you are in the European Union you have the right to access, correct and erase your data. Since the site stores no data about you, such requests go directly to Google."
+    ninos: "Children"
+    ninos_texto: "The site is not aimed at children under 13 and does not knowingly collect their data."
+  leccion:
+    urok: "Lesson"
+    de: "of"
+    semana: "week"
+    nivel: "level"
+    borrador: "Draft: the lesson is written, but the teacher has not proofread it yet."
+    anterior: "Lesson"
+    siguiente: "Lesson"
+    todos: "All lessons"
+  cookies: "We use cookies for advertising and visit statistics."
+  cookies_mas: "More information"
+  cookies_ok: "Got it"
+  pie: "Course material may be used freely for study."
+  idioma: "Language"

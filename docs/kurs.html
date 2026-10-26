@@ -3,588 +3,690 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Все уроки курса испанского — 365 дней</title>
-<meta name="description" content="Программа курса испанского языка для русскоговорящих: 365 уроков по 30 минут, от алфавита до уровня A2."><link rel="canonical" href="https://ianmusicall-max.github.io/espanol-desde-ruso/kurs.html"><meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:title" content="Все уроки курса испанского — 365 дней"><meta property="og:description" content="Программа курса испанского языка для русскоговорящих: 365 уроков по 30 минут, от алфавита до уровня A2."><meta property="og:url" content="https://ianmusicall-max.github.io/espanol-desde-ruso/kurs.html">
+<title>Все уроки — 365 дней, 52 недели, 24 темы</title>
+<meta name="description" content="Ссылками открываются уроки, которые уже написаны. У остальных показана тема дня: программа составлена на весь год вперёд."><link rel="canonical" href="https://ianmusicall-max.github.io/espanol-desde-ruso/kurs.html"><link rel="alternate" hreflang="ru" href="https://ianmusicall-max.github.io/espanol-desde-ruso/kurs.html"><link rel="alternate" hreflang="es" href="https://ianmusicall-max.github.io/espanol-desde-ruso/es/kurs.html"><link rel="alternate" hreflang="en" href="https://ianmusicall-max.github.io/espanol-desde-ruso/en/kurs.html"><meta property="og:type" content="website"><meta property="og:locale" content="ru"><meta property="og:title" content="Все уроки — 365 дней, 52 недели, 24 темы"><meta property="og:description" content="Ссылками открываются уроки, которые уже написаны. У остальных показана тема дня: программа составлена на весь год вперёд."><meta property="og:url" content="https://ianmusicall-max.github.io/espanol-desde-ruso/kurs.html">
 <style>
-:root{--fondo:#fffdf8;--tinta:#1f2328;--tenue:#5c6470;--acento:#b5452b;--suave:#f4efe3;--borde:#ddd5c3;--realce:#fff6d9}
-@media(prefers-color-scheme:dark){:root{--fondo:#15171a;--tinta:#e7e3d9;--tenue:#a3a9b3;--acento:#f08a5d;--suave:#21242a;--borde:#383d45;--realce:#2b2a20}}
-*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--fondo);color:var(--tinta);font:17px/1.6 Georgia,"Times New Roman",serif}
-.envoltorio{max-width:46rem;margin:0 auto;padding:0 16px}
-header.sitio{border-bottom:1px solid var(--borde)}
-header.sitio .envoltorio{display:flex;flex-wrap:wrap;gap:.4rem 1.1rem;align-items:baseline;padding-top:.7rem;padding-bottom:.7rem}
-header.sitio a{font-family:system-ui,-apple-system,sans-serif;font-size:.88rem;color:var(--tenue);text-decoration:none}
-header.sitio a:hover{color:var(--acento)}
-header.sitio a.marca{font-size:1rem;font-weight:700;color:var(--acento);margin-inline-end:auto}
-main{padding-bottom:3rem}
-h1{font-size:1.6rem;line-height:1.25;margin:1.4rem 0 .3rem}
-h1.ru{font-size:1.15rem;color:var(--acento);margin-top:0;font-weight:400}
-h2{font-family:system-ui,-apple-system,sans-serif;font-size:1.08rem;margin:2rem 0 .6rem;padding-top:.7rem;border-top:1px solid var(--borde)}
-h3{font-family:system-ui,-apple-system,sans-serif;font-size:.97rem;margin:1.4rem 0 .4rem}
-a{color:var(--acento)}
-table{border-collapse:collapse;width:100%;font-size:.93rem;margin:.7rem 0;display:block;overflow-x:auto}
-th,td{border:1px solid var(--borde);padding:.35rem .5rem;text-align:start;vertical-align:top}
-th{background:var(--suave);font-family:system-ui,-apple-system,sans-serif}
-blockquote{margin:1.1rem 0;padding:.7rem 1rem;background:var(--suave);border-inline-start:4px solid var(--acento)}
+:root{
+  --papel:#fdfbf6; --tinta:#1b1e23; --tenue:#646c78; --linea:#e2dacb;
+  --acento:#b03f26; --acento-suave:#fbeee9; --celeste:#2f6b8f; --celeste-suave:#eaf2f7;
+  --realce:#fdf3d8; --tarjeta:#f7f2e6; --sombra:0 1px 2px rgba(27,30,35,.05);
+  --ancho:44rem;
+}
+@media(prefers-color-scheme:dark){:root{
+  --papel:#14161a; --tinta:#e8e4da; --tenue:#9aa2ae; --linea:#333941;
+  --acento:#f0896a; --acento-suave:#2a1d19; --celeste:#7fb6d6; --celeste-suave:#162229;
+  --realce:#2a2718; --tarjeta:#1d2026; --sombra:none;
+}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--papel);color:var(--tinta);
+  font:400 17px/1.65 ui-serif,Georgia,"Times New Roman",serif;
+  -webkit-font-smoothing:antialiased;overflow-wrap:break-word}
+.sans{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.envoltorio{max-width:var(--ancho);margin:0 auto;padding:0 20px}
+
+/* ---- cabecera ---- */
+/* En el móvil la cabecera NO se queda pegada: ocupa dos filas y una lección es
+   una lectura larga, así que robaría una sexta parte de la pantalla todo el
+   rato. A partir de 40rem cabe en una fila y ahí sí se queda. */
+header.sitio{background:var(--papel);border-bottom:1px solid var(--linea)}
+@media(min-width:40rem){header.sitio{position:sticky;top:0;z-index:20;
+  background:color-mix(in srgb,var(--papel) 92%,transparent);backdrop-filter:saturate(1.6) blur(8px)}
+  html{scroll-padding-top:4rem}}
+header.sitio .envoltorio{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .9rem;padding-block:.5rem;
+  font-family:ui-sans-serif,system-ui,-apple-system,sans-serif;font-size:.86rem}
+header.sitio a{color:var(--tenue);text-decoration:none;white-space:nowrap}
+header.sitio a:hover,header.sitio nav.paginas a[aria-current]{color:var(--acento)}
+/* El título cede espacio antes que el selector de idioma: en un móvil
+   estrecho se recorta con puntos suspensivos, pero el selector no se sale. */
+header.sitio .marca{font-weight:650;color:var(--tinta);font-size:.95rem;letter-spacing:-.01em;
+  flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
+header.sitio nav.paginas{display:flex;gap:.9rem;order:3;flex:1 0 100%;overflow-x:auto;
+  scrollbar-width:none;padding-bottom:.1rem}
+header.sitio nav.paginas::-webkit-scrollbar{display:none}
+.idiomas{display:flex;gap:.2rem;flex:0 0 auto;border:1px solid var(--linea);border-radius:999px;padding:2px}
+.idiomas a{padding:.12rem .5rem;border-radius:999px;font-size:.75rem;font-weight:600;
+  text-transform:uppercase;letter-spacing:.05em;line-height:1.5}
+.idiomas a[aria-current]{background:var(--acento);color:#fff}
+@media(min-width:40rem){
+  header.sitio nav.paginas{order:0;flex:0 1 auto;margin-inline-start:auto}
+  header.sitio .marca{flex:0 1 auto}
+}
+
+main{padding-bottom:3.5rem}
+
+/* ---- tipografía ---- */
+h1{font-size:clamp(1.65rem,5.2vw,2.3rem);line-height:1.15;letter-spacing:-.022em;margin:1.6rem 0 .25rem;font-weight:650}
+h1 .segunda{display:block;color:var(--acento);font-weight:400}
+h2{font-size:clamp(1.08rem,3.2vw,1.22rem);margin:2.6rem 0 .7rem;padding-top:.9rem;
+  border-top:1px solid var(--linea);font-weight:650;letter-spacing:-.012em}
+h3{font-size:1rem;margin:1.6rem 0 .45rem;font-weight:650}
+h2,h3{font-family:ui-sans-serif,system-ui,-apple-system,sans-serif}
+p{margin:.75rem 0}
+a{color:var(--acento);text-underline-offset:2px}
+strong{font-weight:650}
+
+/* ---- portada ---- */
+.heroe{padding:2rem 0 .5rem}
+.heroe .lema{font-size:clamp(1.02rem,3.4vw,1.2rem);color:var(--tenue);margin:.5rem 0 1.1rem;font-style:italic}
+.botones{display:flex;flex-wrap:wrap;gap:.65rem;margin:1.4rem 0}
+.boton{display:inline-block;background:var(--acento);color:#fff;padding:.7rem 1.35rem;border-radius:8px;
+  text-decoration:none;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.97rem;font-weight:550;
+  box-shadow:var(--sombra);transition:transform .12s ease}
+.boton:hover{transform:translateY(-1px)}
+.boton.secundario{background:transparent;color:var(--acento);border:1.5px solid var(--acento);box-shadow:none}
+
+.progreso{margin:1.5rem 0;font-family:ui-sans-serif,system-ui,sans-serif}
+.progreso .cifras{display:flex;align-items:baseline;gap:.45rem;font-size:.88rem;color:var(--tenue)}
+.progreso .n{font-size:1.5rem;font-weight:700;color:var(--tinta);font-feature-settings:"tnum"}
+.barra{height:7px;border-radius:999px;background:var(--linea);overflow:hidden;margin-top:.45rem}
+.barra i{display:block;height:100%;background:linear-gradient(90deg,var(--acento),var(--celeste));border-radius:999px}
+
+/* ---- bloque de contraste: la firma del curso ---- */
+.contraste{background:var(--acento-suave);border:1px solid color-mix(in srgb,var(--acento) 22%,transparent);
+  border-radius:10px;padding:1rem 1.1rem;margin:1.3rem 0}
+.contraste>h3:first-child{margin-top:0;color:var(--acento)}
+.contraste p:last-child{margin-bottom:0}
+.mal{color:var(--acento)}
+.bien{color:#1d7a4f}
+@media(prefers-color-scheme:dark){.bien{color:#5fc48f}}
+
+blockquote{margin:1.2rem 0;padding:.85rem 1.1rem;background:var(--tarjeta);
+  border-inline-start:3px solid var(--celeste);border-radius:0 8px 8px 0}
 blockquote p:first-child{margin-top:0}blockquote p:last-child{margin-bottom:0}
-code{font-size:.9em;background:var(--suave);padding:.1em .3em;border-radius:3px}
-ul.dias{list-style:none;padding:0;margin:.4rem 0}
-ul.dias li{padding:.3rem 0;border-bottom:1px dotted var(--borde)}
-.tipo{font-family:system-ui,-apple-system,sans-serif;font-size:.72rem;color:var(--acento);text-transform:uppercase;letter-spacing:.05em}
-.falta{color:var(--tenue)}.falta a{color:var(--tenue)}
-details{margin:.5rem 0}summary{cursor:pointer;font-family:system-ui,-apple-system,sans-serif;font-size:.92rem}
-input[type=checkbox]{margin-inline-end:.4rem}
-nav.pasos{display:flex;justify-content:space-between;gap:1rem;font-family:system-ui,-apple-system,sans-serif;font-size:.85rem;margin:2rem 0 0;padding-top:.8rem;border-top:1px solid var(--borde)}
-nav.pasos a{text-decoration:none}
-.aviso{background:var(--realce);border:1px solid var(--borde);padding:.6rem .8rem;font-size:.88rem;font-family:system-ui,-apple-system,sans-serif;margin:1rem 0}
-.heroe{padding:1.5rem 0 .5rem}
-.heroe p.lema{font-size:1.15rem;color:var(--tenue);margin:.3rem 0 1.2rem}
-.boton{display:inline-block;background:var(--acento);color:#fff;padding:.65rem 1.3rem;border-radius:6px;text-decoration:none;font-family:system-ui,-apple-system,sans-serif;font-size:1rem}
-.boton.secundario{background:transparent;color:var(--acento);border:1px solid var(--acento)}
-.botones{display:flex;flex-wrap:wrap;gap:.7rem;margin:1.2rem 0}
-.rejilla{display:grid;gap:1rem;grid-template-columns:1fr}
-@media(min-width:34rem){.rejilla{grid-template-columns:1fr 1fr}}
-.tarjeta{border:1px solid var(--borde);border-radius:8px;padding:.9rem 1rem;background:var(--suave)}
-.tarjeta h3{margin-top:0}
-.anuncio{margin:1.6rem 0;min-height:1px;text-align:center}
-.anuncio::before{content:attr(data-etiqueta);display:block;font-family:system-ui,-apple-system,sans-serif;font-size:.68rem;color:var(--tenue);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.25rem}
-footer.sitio{border-top:1px solid var(--borde);padding:1.2rem 0 2.5rem;font-family:system-ui,-apple-system,sans-serif;font-size:.84rem;color:var(--tenue)}
+
+/* ---- tablas ---- */
+.tabla-env{overflow-x:auto;margin:.9rem 0;border:1px solid var(--linea);border-radius:9px;background:var(--papel)}
+table{border-collapse:collapse;width:100%;font-size:.92rem;font-family:ui-sans-serif,system-ui,sans-serif}
+th,td{padding:.45rem .65rem;text-align:start;vertical-align:top;border-bottom:1px solid var(--linea)}
+tr:last-child td{border-bottom:none}
+th{background:var(--tarjeta);font-weight:600;position:sticky;top:0}
+code{font-size:.88em;background:var(--tarjeta);padding:.1em .32em;border-radius:4px;
+  font-family:ui-monospace,"SF Mono",Menlo,monospace}
+
+/* ---- tarjetas y listas ---- */
+.rejilla{display:grid;gap:.85rem;grid-template-columns:1fr;margin:1rem 0}
+@media(min-width:36rem){.rejilla{grid-template-columns:1fr 1fr}}
+.tarjeta{border:1px solid var(--linea);border-radius:10px;padding:.95rem 1.1rem;background:var(--tarjeta);box-shadow:var(--sombra)}
+.tarjeta h3{margin:0 0 .3rem;font-size:.88rem;text-transform:uppercase;letter-spacing:.05em;color:var(--acento)}
+.tarjeta p{margin:0;font-size:.95rem}
+
+ul.dias{list-style:none;padding:0;margin:.5rem 0}
+ul.dias li{display:flex;gap:.6rem;align-items:baseline;padding:.4rem .2rem;border-bottom:1px solid var(--linea)}
+ul.dias li:last-child{border-bottom:none}
+ul.dias .num{font-family:ui-sans-serif,system-ui,sans-serif;font-size:.78rem;color:var(--tenue);
+  min-width:2.6rem;font-feature-settings:"tnum"}
+ul.dias a{text-decoration:none}ul.dias a:hover{text-decoration:underline}
+ul.dias .falta{color:var(--tenue)}
+.tipo{font-family:ui-sans-serif,system-ui,sans-serif;font-size:.67rem;color:var(--celeste);
+  text-transform:uppercase;letter-spacing:.07em;border:1px solid var(--linea);border-radius:999px;
+  padding:.05rem .4rem;white-space:nowrap}
+.unidad-cab{display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;margin-top:2.4rem}
+details{margin:.5rem 0;font-size:.93rem}
+summary{cursor:pointer;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.86rem;color:var(--tenue)}
+details ul{margin:.5rem 0}
+
+/* ---- lección ---- */
+.leccion-cab{display:flex;flex-wrap:wrap;gap:.45rem;align-items:center;margin:1.3rem 0 .2rem;
+  font-family:ui-sans-serif,system-ui,sans-serif;font-size:.78rem;color:var(--tenue)}
+.leccion-cab .n{background:var(--acento);color:#fff;border-radius:999px;padding:.12rem .6rem;font-weight:600}
+.aviso{background:var(--realce);border:1px solid var(--linea);border-radius:8px;padding:.6rem .85rem;
+  font-size:.88rem;font-family:ui-sans-serif,system-ui,sans-serif;margin:1rem 0}
+nav.pasos{display:flex;justify-content:space-between;gap:.8rem;margin:2.5rem 0 0;padding-top:1rem;
+  border-top:1px solid var(--linea);font-family:ui-sans-serif,system-ui,sans-serif;font-size:.86rem}
+nav.pasos a{text-decoration:none;padding:.4rem .7rem;border:1px solid var(--linea);border-radius:7px}
+nav.pasos a:hover{border-color:var(--acento)}
+input[type=checkbox]{margin-inline-end:.45rem}
+
+/* ---- anuncios, pie, cookies ---- */
+.anuncio{margin:2rem 0;text-align:center;min-height:1px}
+.anuncio::before{content:attr(data-etiqueta);display:block;font-family:ui-sans-serif,system-ui,sans-serif;
+  font-size:.64rem;color:var(--tenue);text-transform:uppercase;letter-spacing:.09em;margin-bottom:.3rem}
+footer.sitio{border-top:1px solid var(--linea);padding:1.6rem 0 3rem;
+  font-family:ui-sans-serif,system-ui,sans-serif;font-size:.83rem;color:var(--tenue)}
 footer.sitio a{color:var(--tenue)}
-#cookies{position:fixed;inset-inline:0;bottom:0;background:var(--suave);border-top:1px solid var(--borde);padding:.8rem 16px;font-family:system-ui,-apple-system,sans-serif;font-size:.85rem;display:flex;flex-wrap:wrap;gap:.7rem;align-items:center;justify-content:center;z-index:9}
+footer.sitio p{margin:.35rem 0}
+#cookies{position:fixed;inset-inline:0;bottom:0;background:var(--tarjeta);border-top:1px solid var(--linea);
+  padding:.85rem 20px;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.85rem;display:flex;
+  flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:center;z-index:30}
 </style>
 
 </head>
 <body>
-<header class="sitio"><div class="envoltorio"><a href="./index.html" class="marca">Главная</a> <a href="./kurs.html">Все уроки</a> <a href="./o-kurse.html">О курсе</a> <a href="./kontakt.html">Контакты</a></div></header>
+<header class="sitio"><div class="envoltorio">
+<a class="marca" href="./index.html">Испанский с нуля для русскоговорящих</a>
+<nav class="paginas"><a href="./kurs.html" aria-current="page">Все уроки</a><a href="./o-kurse.html">О курсе</a><a href="./kontakt.html">Контакты</a></nav>
+<div class="idiomas" title="Язык"><a href="./kurs.html" hreflang="ru" lang="ru" aria-current="true">ru</a><a href="./es/kurs.html" hreflang="es" lang="es">es</a><a href="./en/kurs.html" hreflang="en" lang="en">en</a></div>
+</div></header>
 <main><div class="envoltorio">
-<h1>Все уроки</h1><h1 class='ru'>365 дней, 52 недели, 24 темы</h1>
-
+<h1>Все уроки<span class="segunda">365 дней, 52 недели, 24 темы</span></h1>
 <p>Ссылками открываются уроки, которые уже написаны. У остальных показана тема дня: программа составлена на весь год вперёд.</p>
-<h2>Тема 1: ¡Hola! Звуки и приветствия · ¡Hola! Sonidos y saludos</h2>
-<details><summary>Чему вы научитесь · уровень A1 · недели 1–2</summary><ul><li>Leer en voz alta cualquier palabra española con la pronunciación y el acento correctos.</li><li>Saludar, despedirse y presentarse (nombre, origen, edad) en tú y en usted.</li><li>Contar de 0 a 20 y deletrear el propio nombre.</li></ul></details>
-<h3>Неделя 1</h3><ul class='dias'>
-<li><span class='tipo'>урок</span> <a href='semana-01/dia-1.html'>Урок 1. Алфавит и пять гласных</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-01/dia-2.html'>Урок 2. Простые согласные и приветствия по времени суток</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-01/dia-3.html'>Урок 3. Трудные буквы: c, z, qu, g, j, ñ, ll, y, r, rr, ch, x</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-01/dia-4.html'>Урок 4. Ударение: ударный слог и знак тильды</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-01/dia-5.html'>Урок 5. Числа 0-10 и ты / Вы</a></li>
-<li><span class='tipo'>повторение</span> <a href='semana-01/dia-6.html'>Урок 6. Повторение недели 1: звуки и приветствия</a></li>
-<li><span class='tipo'>культура</span> <a href='semana-01/dia-7.html'>Урок 7. Испаноязычный мир: где говорят по-испански</a></li>
+
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Тема 1. ¡Hola! Звуки и приветствия</h2><span class="tipo">A1 · 14/14</span></div>
+<details><summary>Чему вы научитесь · недели 1–2</summary><ul><li>Leer en voz alta cualquier palabra española con la pronunciación y el acento correctos.</li><li>Saludar, despedirse y presentarse (nombre, origen, edad) en tú y en usted.</li><li>Contar de 0 a 20 y deletrear el propio nombre.</li></ul></details>
+<h3>Неделя 1</h3><ul class="dias">
+<li><span class="num">1</span><span><a href="./semana-01/dia-1.html">Алфавит и пять гласных</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">2</span><span><a href="./semana-01/dia-2.html">Простые согласные и приветствия по времени суток</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">3</span><span><a href="./semana-01/dia-3.html">Трудные буквы: c, z, qu, g, j, ñ, ll, y, r, rr, ch, x</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">4</span><span><a href="./semana-01/dia-4.html">Ударение: ударный слог и знак тильды</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">5</span><span><a href="./semana-01/dia-5.html">Числа 0-10 и ты / Вы</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">6</span><span><a href="./semana-01/dia-6.html">Повторение недели 1: звуки и приветствия</a> <span class="tipo">повторение</span></span></li>
+<li><span class="num">7</span><span><a href="./semana-01/dia-7.html">Испаноязычный мир: где говорят по-испански</a> <span class="tipo">культура</span></span></li>
 </ul>
-<h3>Неделя 2</h3><ul class='dias'>
-<li><span class='tipo'>урок</span> <a href='semana-02/dia-1.html'>Урок 8. Глагол ser и национальности</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-02/dia-2.html'>Урок 9. Мы, вы, они: множественное число</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-02/dia-3.html'>Урок 10. Числа 11-20 и возраст</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-02/dia-4.html'>Урок 11. Основные вопросы и интонация</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-02/dia-5.html'>Урок 12. Язык урока и язык выживания</a></li>
-<li><span class='tipo'>тест</span> <a href='semana-02/dia-6.html'>Урок 13. Тест по Уроку 1</a></li>
-<li><span class='tipo'>культура</span> <a href='semana-02/dia-7.html'>Урок 14. Имена, фамилии и формы обращения</a></li>
+<h3>Неделя 2</h3><ul class="dias">
+<li><span class="num">8</span><span><a href="./semana-02/dia-1.html">Глагол ser и национальности</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">9</span><span><a href="./semana-02/dia-2.html">Мы, вы, они: множественное число</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">10</span><span><a href="./semana-02/dia-3.html">Числа 11-20 и возраст</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">11</span><span><a href="./semana-02/dia-4.html">Основные вопросы и интонация</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">12</span><span><a href="./semana-02/dia-5.html">Язык урока и язык выживания</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">13</span><span><a href="./semana-02/dia-6.html">Тест по Уроку 1</a> <span class="tipo">тест</span></span></li>
+<li><span class="num">14</span><span><a href="./semana-02/dia-7.html">Имена, фамилии и формы обращения</a> <span class="tipo">культура</span></span></li>
 </ul>
-<h2>Тема 2: Мой мир: вещи, люди и профессии · Mi mundo: cosas, personas y profesiones</h2>
-<details><summary>Чему вы научитесь · уровень A1 · недели 3–4</summary><ul><li>Nombrar objetos cotidianos con su artículo y en plural.</li><li>Decir la profesión y el lugar de trabajo propios y de otros.</li><li>Preguntar y decir precios y números de teléfono (hasta 100).</li></ul></details>
-<h3>Неделя 3</h3><ul class='dias'>
-<li><span class='tipo'>урок</span> <a href='semana-03/dia-1.html'>Урок 15. Род существительного и артикль el / la</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-03/dia-2.html'>Урок 16. Множественное число и los / las; ¿Qué es esto?</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-03/dia-3.html'>Урок 17. El / la или un / una: определённый и неопределённый</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-03/dia-4.html'>Урок 18. Профессии и глагол ser</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-03/dia-5.html'>Урок 19. Числа 20-100: телефон, адрес, e-mail</a></li>
-<li><span class='tipo'>повторение</span> <a href='semana-03/dia-6.html'>Урок 20. Повторение недели 3: артикли и род</a></li>
-<li><span class='tipo'>культура</span> <a href='semana-03/dia-7.html'>Урок 21. Работа в испаноязычном мире</a></li>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Тема 2. Мой мир: вещи, люди и профессии</h2><span class="tipo">A1 · 14/14</span></div>
+<details><summary>Чему вы научитесь · недели 3–4</summary><ul><li>Nombrar objetos cotidianos con su artículo y en plural.</li><li>Decir la profesión y el lugar de trabajo propios y de otros.</li><li>Preguntar y decir precios y números de teléfono (hasta 100).</li></ul></details>
+<h3>Неделя 3</h3><ul class="dias">
+<li><span class="num">15</span><span><a href="./semana-03/dia-1.html">Род существительного и артикль el / la</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">16</span><span><a href="./semana-03/dia-2.html">Множественное число и los / las; ¿Qué es esto?</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">17</span><span><a href="./semana-03/dia-3.html">El / la или un / una: определённый и неопределённый</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">18</span><span><a href="./semana-03/dia-4.html">Профессии и глагол ser</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">19</span><span><a href="./semana-03/dia-5.html">Числа 20-100: телефон, адрес, e-mail</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">20</span><span><a href="./semana-03/dia-6.html">Повторение недели 3: артикли и род</a> <span class="tipo">повторение</span></span></li>
+<li><span class="num">21</span><span><a href="./semana-03/dia-7.html">Работа в испаноязычном мире</a> <span class="tipo">культура</span></span></li>
 </ul>
-<h3>Неделя 4</h3><ul class='dias'>
-<li><span class='tipo'>урок</span> <a href='semana-04/dia-1.html'>Урок 22. Hay: есть или нет</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-04/dia-2.html'>Урок 23. Этот, эта, эти; тот, та</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-04/dia-3.html'>Урок 24. Прилагательное: согласование и место</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-04/dia-4.html'>Урок 25. ¿Cómo es? Описание предметов</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-04/dia-5.html'>Урок 26. В магазине канцтоваров: ¿Tiene…? ¿Cuánto cuesta?</a></li>
-<li><span class='tipo'>тест</span> <a href='semana-04/dia-6.html'>Урок 27. Тест по Уроку 2</a></li>
-<li><span class='tipo'>культура</span> <a href='semana-04/dia-7.html'>Урок 28. Евро, песо и предметы быта</a></li>
+<h3>Неделя 4</h3><ul class="dias">
+<li><span class="num">22</span><span><a href="./semana-04/dia-1.html">Hay: есть или нет</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">23</span><span><a href="./semana-04/dia-2.html">Этот, эта, эти; тот, та</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">24</span><span><a href="./semana-04/dia-3.html">Прилагательное: согласование и место</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">25</span><span><a href="./semana-04/dia-4.html">¿Cómo es? Описание предметов</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">26</span><span><a href="./semana-04/dia-5.html">В магазине канцтоваров: ¿Tiene…? ¿Cuánto cuesta?</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">27</span><span><a href="./semana-04/dia-6.html">Тест по Уроку 2</a> <span class="tipo">тест</span></span></li>
+<li><span class="num">28</span><span><a href="./semana-04/dia-7.html">Евро, песо и предметы быта</a> <span class="tipo">культура</span></span></li>
 </ul>
-<h2>Тема 3: Семья и люди · La familia y las personas</h2>
-<details><summary>Чему вы научитесь · уровень A1 · недели 5–6</summary><ul><li>Presentar a la familia y decir qué relación tiene cada persona.</li><li>Describir el aspecto físico y el carácter de alguien.</li><li>Decir cómo se siente alguien y dónde está (primer contraste ser / estar).</li></ul></details>
-<h3>Неделя 5</h3><ul class='dias'>
-<li><span class='tipo'>урок</span> <a href='semana-05/dia-1.html'>Урок 29. Семья и глагол tener</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-05/dia-2.html'>Урок 30. Притяжательные: mi, tu, su</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-05/dia-3.html'>Урок 31. Nuestro, vuestro и семейное положение</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-05/dia-4.html'>Урок 32. ¿Cómo es? Внешность</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-05/dia-5.html'>Урок 33. Характер: какой твой брат?</a></li>
-<li><span class='tipo'>повторение</span> <a href='semana-05/dia-6.html'>Урок 34. Повторение недели 5: семья и описание</a></li>
-<li><span class='tipo'>культура</span> <a href='semana-05/dia-7.html'>Урок 35. Семья в Испании и Латинской Америке</a></li>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Тема 3. Семья и люди</h2><span class="tipo">A1 · 14/14</span></div>
+<details><summary>Чему вы научитесь · недели 5–6</summary><ul><li>Presentar a la familia y decir qué relación tiene cada persona.</li><li>Describir el aspecto físico y el carácter de alguien.</li><li>Decir cómo se siente alguien y dónde está (primer contraste ser / estar).</li></ul></details>
+<h3>Неделя 5</h3><ul class="dias">
+<li><span class="num">29</span><span><a href="./semana-05/dia-1.html">Семья и глагол tener</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">30</span><span><a href="./semana-05/dia-2.html">Притяжательные: mi, tu, su</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">31</span><span><a href="./semana-05/dia-3.html">Nuestro, vuestro и семейное положение</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">32</span><span><a href="./semana-05/dia-4.html">¿Cómo es? Внешность</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">33</span><span><a href="./semana-05/dia-5.html">Характер: какой твой брат?</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">34</span><span><a href="./semana-05/dia-6.html">Повторение недели 5: семья и описание</a> <span class="tipo">повторение</span></span></li>
+<li><span class="num">35</span><span><a href="./semana-05/dia-7.html">Семья в Испании и Латинской Америке</a> <span class="tipo">культура</span></span></li>
 </ul>
-<h3>Неделя 6</h3><ul class='dias'>
-<li><span class='tipo'>урок</span> <a href='semana-06/dia-1.html'>Урок 36. Ser или estar (1): характер и состояние</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-06/dia-2.html'>Урок 37. ¿Dónde está? Estar + место</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-06/dia-3.html'>Урок 38. Домашние животные и притяжательное &#x27;de&#x27;</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-06/dia-4.html'>Урок 39. Спрашивать и рассказывать о других</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-06/dia-5.html'>Урок 40. Моя семья: образец текста и презентация</a></li>
-<li><span class='tipo'>тест</span> <a href='semana-06/dia-6.html'>Урок 41. Тест по Уроку 3</a></li>
-<li><span class='tipo'>культура</span> <a href='semana-06/dia-7.html'>Урок 42. Семейные праздники и итоговое задание</a></li>
+<h3>Неделя 6</h3><ul class="dias">
+<li><span class="num">36</span><span><a href="./semana-06/dia-1.html">Ser или estar (1): характер и состояние</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">37</span><span><a href="./semana-06/dia-2.html">¿Dónde está? Estar + место</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">38</span><span><a href="./semana-06/dia-3.html">Домашние животные и притяжательное &#x27;de&#x27;</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">39</span><span><a href="./semana-06/dia-4.html">Спрашивать и рассказывать о других</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">40</span><span><a href="./semana-06/dia-5.html">Моя семья: образец текста и презентация</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">41</span><span><a href="./semana-06/dia-6.html">Тест по Уроку 3</a> <span class="tipo">тест</span></span></li>
+<li><span class="num">42</span><span><a href="./semana-06/dia-7.html">Семейные праздники и итоговое задание</a> <span class="tipo">культура</span></span></li>
 </ul>
-<h2>Тема 4: Мой дом и мой город · Mi casa y mi ciudad</h2>
-<details><summary>Чему вы научитесь · уровень A1 · недели 7–8</summary><ul><li>Describir la casa y situar objetos (hay / estar + preposiciones de lugar).</li><li>Preguntar por un lugar y entender y dar indicaciones sencillas.</li><li>Leer anuncios de pisos y entender precios y direcciones (números hasta 1000).</li></ul></details>
-<h3>Неделя 7</h3><ul class='dias'>
-<li><span class='tipo'>урок</span> <a href='semana-07/dia-1.html'>Урок 43. Дом: комнаты и глагол vivir</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-07/dia-2.html'>Урок 44. Мебель: hay или está</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-07/dia-3.html'>Урок 45. Моя квартира: какая, где, на каком этаже</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-07/dia-4.html'>Урок 46. Город: где банк?</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-07/dia-5.html'>Урок 47. Ir a: куда идёшь?</a></li>
-<li><span class='tipo'>повторение</span> <a href='semana-07/dia-6.html'>Урок 48. Повторение недели 7: hay / estar и предлоги</a></li>
-<li><span class='tipo'>культура</span> <a href='semana-07/dia-7.html'>Урок 49. Как живут: квартира, дом, район</a></li>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Тема 4. Мой дом и мой город</h2><span class="tipo">A1 · 14/14</span></div>
+<details><summary>Чему вы научитесь · недели 7–8</summary><ul><li>Describir la casa y situar objetos (hay / estar + preposiciones de lugar).</li><li>Preguntar por un lugar y entender y dar indicaciones sencillas.</li><li>Leer anuncios de pisos y entender precios y direcciones (números hasta 1000).</li></ul></details>
+<h3>Неделя 7</h3><ul class="dias">
+<li><span class="num">43</span><span><a href="./semana-07/dia-1.html">Дом: комнаты и глагол vivir</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">44</span><span><a href="./semana-07/dia-2.html">Мебель: hay или está</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">45</span><span><a href="./semana-07/dia-3.html">Моя квартира: какая, где, на каком этаже</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">46</span><span><a href="./semana-07/dia-4.html">Город: где банк?</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">47</span><span><a href="./semana-07/dia-5.html">Ir a: куда идёшь?</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">48</span><span><a href="./semana-07/dia-6.html">Повторение недели 7: hay / estar и предлоги</a> <span class="tipo">повторение</span></span></li>
+<li><span class="num">49</span><span><a href="./semana-07/dia-7.html">Как живут: квартира, дом, район</a> <span class="tipo">культура</span></span></li>
 </ul>
-<h3>Неделя 8</h3><ul class='dias'>
-<li><span class='tipo'>урок</span> <a href='semana-08/dia-1.html'>Урок 50. Спросить и объяснить дорогу</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-08/dia-2.html'>Урок 51. Числа 100-1000 и адреса</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-08/dia-3.html'>Урок 52. Объявления о квартирах</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-08/dia-4.html'>Урок 53. Мой город: что есть и чего нет</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-08/dia-5.html'>Урок 54. Мой район: от дороги домой к тексту</a></li>
-<li><span class='tipo'>тест</span> <a href='semana-08/dia-6.html'>Урок 55. Тест по Уроку 4</a></li>
-<li><span class='tipo'>культура</span> <a href='semana-08/dia-7.html'>Урок 56. Метро, улица и итоговое задание</a></li>
+<h3>Неделя 8</h3><ul class="dias">
+<li><span class="num">50</span><span><a href="./semana-08/dia-1.html">Спросить и объяснить дорогу</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">51</span><span><a href="./semana-08/dia-2.html">Числа 100-1000 и адреса</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">52</span><span><a href="./semana-08/dia-3.html">Объявления о квартирах</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">53</span><span><a href="./semana-08/dia-4.html">Мой город: что есть и чего нет</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">54</span><span><a href="./semana-08/dia-5.html">Мой район: от дороги домой к тексту</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">55</span><span><a href="./semana-08/dia-6.html">Тест по Уроку 4</a> <span class="tipo">тест</span></span></li>
+<li><span class="num">56</span><span><a href="./semana-08/dia-7.html">Метро, улица и итоговое задание</a> <span class="tipo">культура</span></span></li>
 </ul>
-<h2>Тема 5: Мой день · Mi día a día</h2>
-<details><summary>Чему вы научитесь · уровень A1 · недели 9–10</summary><ul><li>Decir la hora y hablar de la rutina diaria con verbos regulares, reflexivos e irregulares frecuentes.</li><li>Hablar de la frecuencia y de los días de la semana.</li><li>Contar un día normal por escrito (100 palabras).</li></ul></details>
-<h3>Неделя 9</h3><ul class='dias'>
-<li><span class='tipo'>урок</span> <a href='semana-09/dia-1.html'>Урок 57. Который час?</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-09/dia-2.html'>Урок 58. Настоящее время правильных глаголов: -ar, -er, -ir</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-09/dia-3.html'>Урок 59. Возвратные глаголы: me levanto, te duchas</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-09/dia-4.html'>Урок 60. Дни недели и части дня</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-09/dia-5.html'>Урок 61. Мой распорядок: сначала, потом, затем</a></li>
-<li><span class='tipo'>повторение</span> <a href='semana-09/dia-6.html'>Урок 62. Повторение недели 9: настоящее время и возвратные</a></li>
-<li><span class='tipo'>культура</span> <a href='semana-09/dia-7.html'>Урок 63. Испанское расписание: обед в три, ужин в десять</a></li>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Тема 5. Мой день</h2><span class="tipo">A1 · 14/14</span></div>
+<details><summary>Чему вы научитесь · недели 9–10</summary><ul><li>Decir la hora y hablar de la rutina diaria con verbos regulares, reflexivos e irregulares frecuentes.</li><li>Hablar de la frecuencia y de los días de la semana.</li><li>Contar un día normal por escrito (100 palabras).</li></ul></details>
+<h3>Неделя 9</h3><ul class="dias">
+<li><span class="num">57</span><span><a href="./semana-09/dia-1.html">Который час?</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">58</span><span><a href="./semana-09/dia-2.html">Настоящее время правильных глаголов: -ar, -er, -ir</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">59</span><span><a href="./semana-09/dia-3.html">Возвратные глаголы: me levanto, te duchas</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">60</span><span><a href="./semana-09/dia-4.html">Дни недели и части дня</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">61</span><span><a href="./semana-09/dia-5.html">Мой распорядок: сначала, потом, затем</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">62</span><span><a href="./semana-09/dia-6.html">Повторение недели 9: настоящее время и возвратные</a> <span class="tipo">повторение</span></span></li>
+<li><span class="num">63</span><span><a href="./semana-09/dia-7.html">Испанское расписание: обед в три, ужин в десять</a> <span class="tipo">культура</span></span></li>
 </ul>
-<h3>Неделя 10</h3><ul class='dias'>
-<li><span class='tipo'>урок</span> <a href='semana-10/dia-1.html'>Урок 64. Неправильные глаголы: hago, salgo, voy, veo, pongo</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-10/dia-2.html'>Урок 65. Чередование гласных: empiezo, vuelvo, duermo, juego</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-10/dia-3.html'>Урок 66. Как часто?</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-10/dia-4.html'>Урок 67. Выходные: что ты делаешь по субботам?</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-10/dia-5.html'>Урок 68. Обычный день: интервью и текст</a></li>
-<li><span class='tipo'>тест</span> <a href='semana-10/dia-6.html'>Урок 69. Тест по Уроку 5</a></li>
-<li><span class='tipo'>культура</span> <a href='semana-10/dia-7.html'>Урок 70. Ритм жизни и итоговое задание</a></li>
+<h3>Неделя 10</h3><ul class="dias">
+<li><span class="num">64</span><span><a href="./semana-10/dia-1.html">Неправильные глаголы: hago, salgo, voy, veo, pongo</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">65</span><span><a href="./semana-10/dia-2.html">Чередование гласных: empiezo, vuelvo, duermo, juego</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">66</span><span><a href="./semana-10/dia-3.html">Как часто?</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">67</span><span><a href="./semana-10/dia-4.html">Выходные: что ты делаешь по субботам?</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">68</span><span><a href="./semana-10/dia-5.html">Обычный день: интервью и текст</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">69</span><span><a href="./semana-10/dia-6.html">Тест по Уроку 5</a> <span class="tipo">тест</span></span></li>
+<li><span class="num">70</span><span><a href="./semana-10/dia-7.html">Ритм жизни и итоговое задание</a> <span class="tipo">культура</span></span></li>
 </ul>
-<h2>Тема 6: Еда и напитки · Comer y beber</h2>
-<details><summary>Чему вы научитесь · уровень A1 · недели 11–12</summary><ul><li>Expresar gustos y preferencias con gustar / encantar (la estructura de «мне нравится»).</li><li>Pedir en un bar o restaurante, preguntar el precio y pagar.</li><li>Comprar comida con cantidades y envases.</li></ul></details>
-<h3>Неделя 11</h3><ul class='dias'>
-<li><span class='tipo'>урок</span> <a href='semana-11/dia-1.html'>Урок 71. Завтрак: еда и напитки</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-11/dia-2.html'>Урок 72. Gustar (1): me gusta = мне нравится</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-11/dia-3.html'>Урок 73. Gustar (2): gustan, nos / os / les, a mí también</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-11/dia-4.html'>Урок 74. Encantar и градация вкусов</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-11/dia-5.html'>Урок 75. Querer и preferir: в баре</a></li>
-<li><span class='tipo'>повторение</span> <a href='semana-11/dia-6.html'>Урок 76. Повторение недели 11: gustar и еда</a></li>
-<li><span class='tipo'>культура</span> <a href='semana-11/dia-7.html'>Урок 77. Гастрономическое путешествие по испаноязычному миру</a></li>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Тема 6. Еда и напитки</h2><span class="tipo">A1 · 14/14</span></div>
+<details><summary>Чему вы научитесь · недели 11–12</summary><ul><li>Expresar gustos y preferencias con gustar / encantar (la estructura de «мне нравится»).</li><li>Pedir en un bar o restaurante, preguntar el precio y pagar.</li><li>Comprar comida con cantidades y envases.</li></ul></details>
+<h3>Неделя 11</h3><ul class="dias">
+<li><span class="num">71</span><span><a href="./semana-11/dia-1.html">Завтрак: еда и напитки</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">72</span><span><a href="./semana-11/dia-2.html">Gustar (1): me gusta = мне нравится</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">73</span><span><a href="./semana-11/dia-3.html">Gustar (2): gustan, nos / os / les, a mí también</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">74</span><span><a href="./semana-11/dia-4.html">Encantar и градация вкусов</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">75</span><span><a href="./semana-11/dia-5.html">Querer и preferir: в баре</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">76</span><span><a href="./semana-11/dia-6.html">Повторение недели 11: gustar и еда</a> <span class="tipo">повторение</span></span></li>
+<li><span class="num">77</span><span><a href="./semana-11/dia-7.html">Гастрономическое путешествие по испаноязычному миру</a> <span class="tipo">культура</span></span></li>
 </ul>
-<h3>Неделя 12</h3><ul class='dias'>
-<li><span class='tipo'>урок</span> <a href='semana-12/dia-1.html'>Урок 78. В ресторане: комплексный обед</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-12/dia-2.html'>Урок 79. На рынке: количество и упаковка</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-12/dia-3.html'>Урок 80. Poder: вежливые просьбы; muy или mucho</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-12/dia-4.html'>Урок 81. Русская кухня по-испански</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-12/dia-5.html'>Урок 82. Моя любимая еда: диалог и текст</a></li>
-<li><span class='tipo'>тест</span> <a href='semana-12/dia-6.html'>Урок 83. Тест по Уроку 6</a></li>
-<li><span class='tipo'>культура</span> <a href='semana-12/dia-7.html'>Урок 84. Застолье, чаевые и тосты; итоговое задание</a></li>
+<h3>Неделя 12</h3><ul class="dias">
+<li><span class="num">78</span><span><a href="./semana-12/dia-1.html">В ресторане: комплексный обед</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">79</span><span><a href="./semana-12/dia-2.html">На рынке: количество и упаковка</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">80</span><span><a href="./semana-12/dia-3.html">Poder: вежливые просьбы; muy или mucho</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">81</span><span><a href="./semana-12/dia-4.html">Русская кухня по-испански</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">82</span><span><a href="./semana-12/dia-5.html">Моя любимая еда: диалог и текст</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">83</span><span><a href="./semana-12/dia-6.html">Тест по Уроку 6</a> <span class="tipo">тест</span></span></li>
+<li><span class="num">84</span><span><a href="./semana-12/dia-7.html">Застолье, чаевые и тосты; итоговое задание</a> <span class="tipo">культура</span></span></li>
 </ul>
-<h2>Тема 7: Покупки · De compras</h2>
-<details><summary>Чему вы научитесь · уровень A1 · недели 13–14</summary><ul><li>Comprar ropa: describirla, preguntar por la talla, el color y el precio, y probársela.</li><li>Usar los pronombres de objeto directo (lo / la / los / las).</li><li>Comparar precios y hacer una reclamación sencilla.</li></ul></details>
-<h3>Неделя 13</h3><ul class='dias'>
-<li><span class='tipo'>урок</span> <a href='semana-13/dia-1.html'>Урок 85. Одежда и цвета</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-13/dia-2.html'>Урок 86. В магазине: размеры, примерочная и este / ese / aquel</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-13/dia-3.html'>Урок 87. Lo, la, los, las: прямое дополнение</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-13/dia-4.html'>Урок 88. Тебе идёт: llevar и ponerse</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-13/dia-5.html'>Урок 89. Цены: дорого, со скидкой, дешевле чем</a></li>
-<li><span class='tipo'>повторение</span> <a href='semana-13/dia-6.html'>Урок 90. Повторение недели 13: одежда и местоимения</a></li>
-<li><span class='tipo'>культура</span> <a href='semana-13/dia-7.html'>Урок 91. Распродажи, блошиные рынки и часы работы</a></li>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Тема 7. Покупки</h2><span class="tipo">A1 · 14/14</span></div>
+<details><summary>Чему вы научитесь · недели 13–14</summary><ul><li>Comprar ropa: describirla, preguntar por la talla, el color y el precio, y probársela.</li><li>Usar los pronombres de objeto directo (lo / la / los / las).</li><li>Comparar precios y hacer una reclamación sencilla.</li></ul></details>
+<h3>Неделя 13</h3><ul class="dias">
+<li><span class="num">85</span><span><a href="./semana-13/dia-1.html">Одежда и цвета</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">86</span><span><a href="./semana-13/dia-2.html">В магазине: размеры, примерочная и este / ese / aquel</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">87</span><span><a href="./semana-13/dia-3.html">Lo, la, los, las: прямое дополнение</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">88</span><span><a href="./semana-13/dia-4.html">Тебе идёт: llevar и ponerse</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">89</span><span><a href="./semana-13/dia-5.html">Цены: дорого, со скидкой, дешевле чем</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">90</span><span><a href="./semana-13/dia-6.html">Повторение недели 13: одежда и местоимения</a> <span class="tipo">повторение</span></span></li>
+<li><span class="num">91</span><span><a href="./semana-13/dia-7.html">Распродажи, блошиные рынки и часы работы</a> <span class="tipo">культура</span></span></li>
 </ul>
-<h3>Неделя 14</h3><ul class='dias'>
-<li><span class='tipo'>урок</span> <a href='semana-14/dia-1.html'>Урок 92. Магазины и товары: где покупают…?</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-14/dia-2.html'>Урок 93. Подарок: для кого?</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-14/dia-3.html'>Урок 94. Покупки в интернете</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-14/dia-4.html'>Урок 95. Претензия и возврат</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-14/dia-5.html'>Урок 96. Интеграция: от магазина к письму</a></li>
-<li><span class='tipo'>тест</span> <a href='semana-14/dia-6.html'>Урок 97. Тест по Уроку 7</a></li>
-<li><span class='tipo'>культура</span> <a href='semana-14/dia-7.html'>Урок 98. Испанская мода и торг; итоговое задание</a></li>
+<h3>Неделя 14</h3><ul class="dias">
+<li><span class="num">92</span><span><a href="./semana-14/dia-1.html">Магазины и товары: где покупают…?</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">93</span><span><a href="./semana-14/dia-2.html">Подарок: для кого?</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">94</span><span><a href="./semana-14/dia-3.html">Покупки в интернете</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">95</span><span><a href="./semana-14/dia-4.html">Претензия и возврат</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">96</span><span><a href="./semana-14/dia-5.html">Интеграция: от магазина к письму</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">97</span><span><a href="./semana-14/dia-6.html">Тест по Уроку 7</a> <span class="tipo">тест</span></span></li>
+<li><span class="num">98</span><span><a href="./semana-14/dia-7.html">Испанская мода и торг; итоговое задание</a> <span class="tipo">культура</span></span></li>
 </ul>
-<h2>Тема 8: Свободное время, погода и планы · Tiempo libre, tiempo atmosférico y planes</h2>
-<details><summary>Чему вы научитесь · уровень A1 · недели 15–16</summary><ul><li>Hablar de aficiones y deportes y de lo que gusta hacer.</li><li>Hablar del tiempo atmosférico, las estaciones y las fechas.</li><li>Hacer planes con ir a + infinitivo; invitar, aceptar y rechazar.</li></ul></details>
-<h3>Неделя 15</h3><ul class='dias'>
-<li><span class='tipo'>урок</span> <a href='semana-15/dia-1.html'>Урок 99. Увлечения и спорт</a></li>
-<li><span class='tipo'>урок</span> <a href='semana-15/dia-2.html'>Урок 100. Мне нравится танцевать: gustar + инфинитив</a></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 101. Месяцы, времена года и дата<br><small>enero-diciembre (minúscula); primavera, verano, otoño, invierno; ¿Qué día es hoy? Es 12 de marzo; ¿Cuándo es tu cumpleaños?; en primavera</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 102. Какая погода?<br><small>hace sol / frío / calor / viento / buen tiempo, hay niebla / nubes, llueve, nieva, está nublado; grados; ¿Qué tiempo hace en Moscú en enero?</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 103. Климат моей страны и испаноязычного мира<br><small>Describir el clima por estaciones; en Argentina es verano en diciembre; mucho / poco frío; temperaturas</small></li>
-<li class='falta'><span class='tipo'>повторение</span> Урок 104. Повторение недели 15: увлечения, дата и погода<br><small>Mini-test de 15 ítems; dictado de meses y fechas</small></li>
-<li class='falta'><span class='tipo'>культура</span> Урок 105. Футбол и воскресенье в кругу семьи<br><small>Real Madrid, Barça, Boca Juniors, River; el domingo: paseo, comida en familia, parque</small></li>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Тема 8. Свободное время, погода и планы</h2><span class="tipo">A1 · 2/14</span></div>
+<details><summary>Чему вы научитесь · недели 15–16</summary><ul><li>Hablar de aficiones y deportes y de lo que gusta hacer.</li><li>Hablar del tiempo atmosférico, las estaciones y las fechas.</li><li>Hacer planes con ir a + infinitivo; invitar, aceptar y rechazar.</li></ul></details>
+<h3>Неделя 15</h3><ul class="dias">
+<li><span class="num">99</span><span><a href="./semana-15/dia-1.html">Увлечения и спорт</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">100</span><span><a href="./semana-15/dia-2.html">Мне нравится танцевать: gustar + инфинитив</a> <span class="tipo">урок</span></span></li>
+<li><span class="num">101</span><span class="falta">Месяцы, времена года и дата <span class="tipo">урок</span></span></li>
+<li><span class="num">102</span><span class="falta">Какая погода? <span class="tipo">урок</span></span></li>
+<li><span class="num">103</span><span class="falta">Климат моей страны и испаноязычного мира <span class="tipo">урок</span></span></li>
+<li><span class="num">104</span><span class="falta">Повторение недели 15: увлечения, дата и погода <span class="tipo">повторение</span></span></li>
+<li><span class="num">105</span><span class="falta">Футбол и воскресенье в кругу семьи <span class="tipo">культура</span></span></li>
 </ul>
-<h3>Неделя 16</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>урок</span> Урок 106. Планы: voy a + инфинитив<br><small>ir a + infinitivo (≈ собираться); mañana, este fin de semana, la semana que viene, el mes que viene; ¿Qué vas a hacer el sábado?</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 107. Встретимся? Приглашение, согласие и отказ<br><small>¿Quieres ir al cine?; ¿Quedamos a las 8?; Vale / Genial / De acuerdo; Lo siento, no puedo, es que…; conmigo / contigo</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 108. Ежедневник: встречи, переносы и отмены<br><small>tener una cita, cambiar la cita, ¿puedes el martes?, mejor a las 7; lugares de encuentro</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 109. Текстовые сообщения: пригласить в WhatsApp<br><small>Registro informal; abreviaturas (q, xq, tb, mñn); emoticonos; responder a una invitación por mensaje</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 110. Выходные с другом: план и текст<br><small>Integración: diálogo para planificar; texto «Mis planes para el fin de semana» (100 palabras)</small></li>
-<li class='falta'><span class='tipo'>тест</span> Урок 111. Тест по Уроку 8<br><small>15 ítems: ir a, gustar + inf, tiempo, fecha</small></li>
-<li class='falta'><span class='tipo'>культура</span> Урок 112. Народные праздники календаря; итоговое задание<br><small>San Fermín, Las Fallas, Día de Muertos, Inti Raymi; cuándo son; tarea final: calendario del año</small></li>
+<h3>Неделя 16</h3><ul class="dias">
+<li><span class="num">106</span><span class="falta">Планы: voy a + инфинитив <span class="tipo">урок</span></span></li>
+<li><span class="num">107</span><span class="falta">Встретимся? Приглашение, согласие и отказ <span class="tipo">урок</span></span></li>
+<li><span class="num">108</span><span class="falta">Ежедневник: встречи, переносы и отмены <span class="tipo">урок</span></span></li>
+<li><span class="num">109</span><span class="falta">Текстовые сообщения: пригласить в WhatsApp <span class="tipo">урок</span></span></li>
+<li><span class="num">110</span><span class="falta">Выходные с другом: план и текст <span class="tipo">урок</span></span></li>
+<li><span class="num">111</span><span class="falta">Тест по Уроку 8 <span class="tipo">тест</span></span></li>
+<li><span class="num">112</span><span class="falta">Народные праздники календаря; итоговое задание <span class="tipo">культура</span></span></li>
 </ul>
-<h2>Тема 9: Путешествия и транспорт · Viajes y transporte</h2>
-<details><summary>Чему вы научитесь · уровень A1 · недели 17–18</summary><ul><li>Comprar billetes, entender horarios y reservar un hotel.</li><li>Decir qué está pasando ahora (estar + gerundio).</li><li>Contar lo que se ha hecho hoy y las experiencias de viaje (pretérito perfecto).</li></ul></details>
-<h3>Неделя 17</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>урок</span> Урок 113. Транспорт: как ты добираешься на работу?<br><small>en coche / tren / autobús / metro / avión / bici, a pie; coger (ES) / tomar (LA) el autobús; tardar + tiempo; ¿Cómo vas al trabajo?</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 114. На вокзале: билеты и расписание<br><small>un billete de ida y vuelta, ¿a qué hora sale / llega?, el andén, el próximo tren, con retraso; horario de 24 h</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 115. Что ты делаешь (сейчас)? Estar + герундий<br><small>estoy esperando, estás leyendo, está durmiendo; gerundio -ando / -iendo; irregulares (leyendo, durmiendo); frente al presente simple</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 116. В гостинице: забронировать номер<br><small>una habitación doble / individual con baño, ¿tiene wifi?, el desayuno incluido, la llave, la recepción, ¿para cuántas noches?</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 117. В аэропорту: нужно сдать багаж<br><small>facturar, la puerta de embarque, el pasaporte, la tarjeta de embarque, el equipaje de mano; hay que + infinitivo (нужно, impersonal)</small></li>
-<li class='falta'><span class='tipo'>повторение</span> Урок 118. Повторение недели 17: транспорт и герундий<br><small>Mini-test de 15 ítems; dictado de horarios</small></li>
-<li class='falta'><span class='tipo'>культура</span> Урок 119. Путь Сантьяго и Мачу-Пикчу<br><small>Dos viajes míticos; el colectivo, la guagua, el micro: palabras del transporte en Latinoamérica</small></li>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Тема 9. Путешествия и транспорт</h2><span class="tipo">A1 · 0/14</span></div>
+<details><summary>Чему вы научитесь · недели 17–18</summary><ul><li>Comprar billetes, entender horarios y reservar un hotel.</li><li>Decir qué está pasando ahora (estar + gerundio).</li><li>Contar lo que se ha hecho hoy y las experiencias de viaje (pretérito perfecto).</li></ul></details>
+<h3>Неделя 17</h3><ul class="dias">
+<li><span class="num">113</span><span class="falta">Транспорт: как ты добираешься на работу? <span class="tipo">урок</span></span></li>
+<li><span class="num">114</span><span class="falta">На вокзале: билеты и расписание <span class="tipo">урок</span></span></li>
+<li><span class="num">115</span><span class="falta">Что ты делаешь (сейчас)? Estar + герундий <span class="tipo">урок</span></span></li>
+<li><span class="num">116</span><span class="falta">В гостинице: забронировать номер <span class="tipo">урок</span></span></li>
+<li><span class="num">117</span><span class="falta">В аэропорту: нужно сдать багаж <span class="tipo">урок</span></span></li>
+<li><span class="num">118</span><span class="falta">Повторение недели 17: транспорт и герундий <span class="tipo">повторение</span></span></li>
+<li><span class="num">119</span><span class="falta">Путь Сантьяго и Мачу-Пикчу <span class="tipo">культура</span></span></li>
 </ul>
-<h3>Неделя 18</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>урок</span> Урок 120. Pretérito perfecto (1): сегодня я съездил<br><small>he / has / ha / hemos / habéis / han + -ado / -ido; hoy, esta mañana, esta semana, este año; irregulares hecho, visto, escrito, dicho, puesto, vuelto</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 121. Pretérito perfecto (2): ты бывал в…?<br><small>experiencias: ¿Has estado alguna vez en…?; ya / todavía no / nunca; ¿Has probado la paella?</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 122. Туризм: что ты сделал сегодня?<br><small>visitar un museo, hacer fotos, ir a la playa, dar un paseo, comprar recuerdos, perderse; el plano, la entrada, la guía</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 123. Предлоги движения: из Москвы в Мадрид<br><small>a, de, en, por, hasta, desde; ir de … a …, pasar por, llegar a, salir de; viajar en</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 124. Дневник путешествия и ресепшен: интеграция<br><small>Diario de un día de viaje en perfecto; diálogo en recepción con un problema (no funciona el wifi)</small></li>
-<li class='falta'><span class='tipo'>тест</span> Урок 125. Тест по Уроку 9<br><small>15 ítems: perfecto, gerundio, preposiciones, léxico de viaje</small></li>
-<li class='falta'><span class='tipo'>культура</span> Урок 126. Популярные у россиян испаноязычные направления; итоговое задание<br><small>Barcelona, Tenerife, Cancún, Punta Cana, Cuba: qué se visita; tarea final: postal de un viaje</small></li>
+<h3>Неделя 18</h3><ul class="dias">
+<li><span class="num">120</span><span class="falta">Pretérito perfecto (1): сегодня я съездил <span class="tipo">урок</span></span></li>
+<li><span class="num">121</span><span class="falta">Pretérito perfecto (2): ты бывал в…? <span class="tipo">урок</span></span></li>
+<li><span class="num">122</span><span class="falta">Туризм: что ты сделал сегодня? <span class="tipo">урок</span></span></li>
+<li><span class="num">123</span><span class="falta">Предлоги движения: из Москвы в Мадрид <span class="tipo">урок</span></span></li>
+<li><span class="num">124</span><span class="falta">Дневник путешествия и ресепшен: интеграция <span class="tipo">урок</span></span></li>
+<li><span class="num">125</span><span class="falta">Тест по Уроку 9 <span class="tipo">тест</span></span></li>
+<li><span class="num">126</span><span class="falta">Популярные у россиян испаноязычные направления; итоговое задание <span class="tipo">культура</span></span></li>
 </ul>
-<h2>Тема 10: Здоровье и тело · Salud y cuerpo</h2>
-<details><summary>Чему вы научитесь · уровень A1 · недели 19–20</summary><ul><li>Decir qué duele y qué síntomas se tienen; entender al médico y al farmacéutico.</li><li>Dar consejos y expresar obligación (tener que, hay que, deber, imperativo).</li><li>Hablar de hábitos saludables.</li></ul></details>
-<h3>Неделя 19</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>урок</span> Урок 127. Части тела<br><small>cabeza, ojos, nariz, boca, oreja, cuello, espalda, brazo, mano, pierna, pie, estómago, garganta; con el artículo, no con el posesivo</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 128. У меня болит: что с тобой?<br><small>me duele / me duelen (como gustar); ¿Qué te duele? ¿Qué te pasa?; estar enfermo / resfriado; tener dolor de…</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 129. Симптомы с tener и estar<br><small>tener fiebre / tos / frío / calor / hambre / sed / sueño; estar bien / mal / mejor / peor / cansado; «у меня жар» → tengo fiebre</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 130. На приёме у врача и в аптеке<br><small>¿Qué le pasa? ¿Desde cuándo?; tiene que tomar…; pastillas, jarabe, cada 8 horas, antes / después de comer; la receta</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 131. Tener que, hay que, deber: должен, надо<br><small>obligación y consejo: tienes que descansar, hay que beber agua, no debes fumar; matices de los tres</small></li>
-<li class='falta'><span class='tipo'>повторение</span> Урок 132. Повторение недели 19: тело и симптомы<br><small>Mini-test de doler y tener; dictado del cuerpo</small></li>
-<li class='falta'><span class='tipo'>культура</span> Урок 133. Здоровье, аптеки и домашние средства<br><small>La sanidad pública, la farmacia de guardia, la manzanilla y el caldo; «estar como una rosa»</small></li>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Тема 10. Здоровье и тело</h2><span class="tipo">A1 · 0/14</span></div>
+<details><summary>Чему вы научитесь · недели 19–20</summary><ul><li>Decir qué duele y qué síntomas se tienen; entender al médico y al farmacéutico.</li><li>Dar consejos y expresar obligación (tener que, hay que, deber, imperativo).</li><li>Hablar de hábitos saludables.</li></ul></details>
+<h3>Неделя 19</h3><ul class="dias">
+<li><span class="num">127</span><span class="falta">Части тела <span class="tipo">урок</span></span></li>
+<li><span class="num">128</span><span class="falta">У меня болит: что с тобой? <span class="tipo">урок</span></span></li>
+<li><span class="num">129</span><span class="falta">Симптомы с tener и estar <span class="tipo">урок</span></span></li>
+<li><span class="num">130</span><span class="falta">На приёме у врача и в аптеке <span class="tipo">урок</span></span></li>
+<li><span class="num">131</span><span class="falta">Tener que, hay que, deber: должен, надо <span class="tipo">урок</span></span></li>
+<li><span class="num">132</span><span class="falta">Повторение недели 19: тело и симптомы <span class="tipo">повторение</span></span></li>
+<li><span class="num">133</span><span class="falta">Здоровье, аптеки и домашние средства <span class="tipo">культура</span></span></li>
 </ul>
-<h3>Неделя 20</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>урок</span> Урок 134. Повелительное наклонение: toma, bebe, descansa<br><small>tú: toma, bebe, duerme; usted: tome, beba, duerma (la vocal «al revés»); consejos de salud</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 135. Неправильные императивы и с местоимениями<br><small>ten, ven, haz, pon, sal, di, ve, sé; tómalo, levántate, póntelo (tilde); ve al médico</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 136. Ты ведёшь здоровый образ жизни?<br><small>dormir 8 horas, hacer ejercicio, comer fruta y verdura, beber agua, no fumar; cuestionario; frecuencia + consejo</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 137. Экстренные случаи и службы<br><small>llamar al 112, la ambulancia, urgencias, el seguro médico, tener un accidente, hacerse daño; deportes y lesiones</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 138. Приём у врача и советы: интеграция<br><small>Role-play de consulta completa; consejos escritos a un amigo (8 imperativos con razón)</small></li>
-<li class='falta'><span class='tipo'>тест</span> Урок 139. Тест по Уроку 10<br><small>15 ítems: doler, imperativo, obligación, léxico</small></li>
-<li class='falta'><span class='tipo'>культура</span> Урок 140. Средиземноморская диета, мате и итоговое задание<br><small>La dieta mediterránea, el mate argentino, el café de media mañana; tarea final: decálogo de vida sana</small></li>
+<h3>Неделя 20</h3><ul class="dias">
+<li><span class="num">134</span><span class="falta">Повелительное наклонение: toma, bebe, descansa <span class="tipo">урок</span></span></li>
+<li><span class="num">135</span><span class="falta">Неправильные императивы и с местоимениями <span class="tipo">урок</span></span></li>
+<li><span class="num">136</span><span class="falta">Ты ведёшь здоровый образ жизни? <span class="tipo">урок</span></span></li>
+<li><span class="num">137</span><span class="falta">Экстренные случаи и службы <span class="tipo">урок</span></span></li>
+<li><span class="num">138</span><span class="falta">Приём у врача и советы: интеграция <span class="tipo">урок</span></span></li>
+<li><span class="num">139</span><span class="falta">Тест по Уроку 10 <span class="tipo">тест</span></span></li>
+<li><span class="num">140</span><span class="falta">Средиземноморская диета, мате и итоговое задание <span class="tipo">культура</span></span></li>
 </ul>
-<h2>Тема 11: Повторение и оценка уровня A1 · Repaso y evaluación del nivel A1</h2>
-<details><summary>Чему вы научитесь · уровень A1 · недели 21–22</summary><ul><li>Consolidar toda la gramática y el léxico de A1.</li><li>Hacer un simulacro completo de un examen de nivel A1 (tipo DELE A1).</li><li>Presentar «Mi vida» (2 minutos orales y 120 palabras escritas).</li></ul></details>
-<h3>Неделя 21</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>повторение</span> Урок 141. Повторение 1: ser, estar, hay, tener<br><small>Mapa comparativo con el ruso (быть / находиться / есть / иметь); 30 frases de decisión</small></li>
-<li class='falta'><span class='tipo'>повторение</span> Урок 142. Повторение 2: настоящее время<br><small>Regulares, reflexivos, cambio vocálico, yo irregular; tabla de los 25 verbos más frecuentes</small></li>
-<li class='falta'><span class='tipo'>повторение</span> Урок 143. Повторение 3: существительное и его спутники<br><small>Artículos, género y número, demostrativos, posesivos, adjetivos, OD</small></li>
-<li class='falta'><span class='tipo'>повторение</span> Урок 144. Повторение 4: gustar, ir a, perfecto, императив<br><small>Verbos tipo gustar (gustar, encantar, doler, quedar, interesar); planes; experiencias; consejos</small></li>
-<li class='falta'><span class='tipo'>повторение</span> Урок 145. Повторение 5: лексика A1<br><small>Los 10 campos léxicos; juego de categorías; falsos amigos (la carta, el compromiso, embarazada, la firma…)</small></li>
-<li class='falta'><span class='tipo'>пробный экзамен</span> Урок 146. Пробный экзамен A1: чтение и аудирование<br><small>Tareas tipo DELE A1 de lectura (anuncios, correos, textos breves) y de audio (diálogos cortos)</small></li>
-<li class='falta'><span class='tipo'>культура</span> Урок 147. Короткометражный фильм на испанском<br><small>Ver un corto de 10 minutos con subtítulos en español; 20 palabras nuevas; comprensión global</small></li>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Тема 11. Повторение и оценка уровня A1</h2><span class="tipo">A1 · 0/14</span></div>
+<details><summary>Чему вы научитесь · недели 21–22</summary><ul><li>Consolidar toda la gramática y el léxico de A1.</li><li>Hacer un simulacro completo de un examen de nivel A1 (tipo DELE A1).</li><li>Presentar «Mi vida» (2 minutos orales y 120 palabras escritas).</li></ul></details>
+<h3>Неделя 21</h3><ul class="dias">
+<li><span class="num">141</span><span class="falta">Повторение 1: ser, estar, hay, tener <span class="tipo">повторение</span></span></li>
+<li><span class="num">142</span><span class="falta">Повторение 2: настоящее время <span class="tipo">повторение</span></span></li>
+<li><span class="num">143</span><span class="falta">Повторение 3: существительное и его спутники <span class="tipo">повторение</span></span></li>
+<li><span class="num">144</span><span class="falta">Повторение 4: gustar, ir a, perfecto, императив <span class="tipo">повторение</span></span></li>
+<li><span class="num">145</span><span class="falta">Повторение 5: лексика A1 <span class="tipo">повторение</span></span></li>
+<li><span class="num">146</span><span class="falta">Пробный экзамен A1: чтение и аудирование <span class="tipo">пробный экзамен</span></span></li>
+<li><span class="num">147</span><span class="falta">Короткометражный фильм на испанском <span class="tipo">культура</span></span></li>
 </ul>
-<h3>Неделя 22</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>пробный экзамен</span> Урок 148. Пробный экзамен A1: письмо<br><small>Rellenar un formulario; escribir un texto breve (correo de presentación, 60 palabras)</small></li>
-<li class='falta'><span class='tipo'>пробный экзамен</span> Урок 149. Пробный экзамен A1: устная речь<br><small>Presentación personal (1 min), descripción de una foto, diálogo simulado; grabarse</small></li>
-<li class='falta'><span class='tipo'>повторение</span> Урок 150. Мои ошибки: разбор типичных ошибок русскоговорящего<br><small>Los 10 errores típicos (artículo, ser / estar, género, posición del adjetivo, muy / mucho, reflexivos…); ejercicios de corrección</small></li>
-<li class='falta'><span class='tipo'>проект</span> Урок 151. Проект «Моя жизнь» (1): подготовка<br><small>Guion de la presentación: quién soy, mi familia, mi casa, mi día, mis gustos, mis planes; texto de 120 palabras</small></li>
-<li class='falta'><span class='tipo'>проект</span> Урок 152. Проект «Моя жизнь» (2): запись и оценка<br><small>Grabar 2 minutos; autoevaluar con la rúbrica (adecuación, alcance, corrección, pronunciación); revisar el texto</small></li>
-<li class='falta'><span class='tipo'>экзамен</span> Урок 153. Итоговый экзамен уровня A1<br><small>Prueba larga: 40 ítems de gramática y léxico (20 min) + lectura (10 min); clave y puntuación</small></li>
-<li class='falta'><span class='tipo'>культура</span> Урок 154. Итоги уровня A1 и план на A2<br><small>Lista can-do de A1 (autoevaluación); qué cambia en A2 (el pasado); descanso cultural: una canción</small></li>
+<h3>Неделя 22</h3><ul class="dias">
+<li><span class="num">148</span><span class="falta">Пробный экзамен A1: письмо <span class="tipo">пробный экзамен</span></span></li>
+<li><span class="num">149</span><span class="falta">Пробный экзамен A1: устная речь <span class="tipo">пробный экзамен</span></span></li>
+<li><span class="num">150</span><span class="falta">Мои ошибки: разбор типичных ошибок русскоговорящего <span class="tipo">повторение</span></span></li>
+<li><span class="num">151</span><span class="falta">Проект «Моя жизнь» (1): подготовка <span class="tipo">проект</span></span></li>
+<li><span class="num">152</span><span class="falta">Проект «Моя жизнь» (2): запись и оценка <span class="tipo">проект</span></span></li>
+<li><span class="num">153</span><span class="falta">Итоговый экзамен уровня A1 <span class="tipo">экзамен</span></span></li>
+<li><span class="num">154</span><span class="falta">Итоги уровня A1 и план на A2 <span class="tipo">культура</span></span></li>
 </ul>
-<h2>Тема 12: Биографии: прошедшее время · Biografías: el pasado</h2>
-<details><summary>Чему вы научитесь · уровень A2 · недели 23–24</summary><ul><li>Contar hechos pasados con el pretérito indefinido (regular e irregular).</li><li>Entender y contar una biografía con fechas y etapas.</li><li>Distinguir perfecto (hoy) e indefinido (ayer).</li></ul></details>
-<h3>Неделя 23</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>урок</span> Урок 155. Pretérito indefinido -ar: вчера я говорил<br><small>hablé, hablaste, habló, hablamos, hablasteis, hablaron; ayer, anoche, el lunes pasado; la tilde que distingue hablo / habló</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 156. Pretérito indefinido -er / -ir: comí, viví<br><small>comí, comiste, comió…; la semana pasada, hace dos días, el año pasado; ¿Qué hiciste ayer? (hacer como fórmula)</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 157. Неправильные (1): fui, tuve, estuve, hice<br><small>ser / ir (fui), tener (tuve), estar (estuve), hacer (hice); sin tilde; la ambigüedad de fui</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 158. Годы и даты: я родился в 1995<br><small>mil novecientos noventa y cinco; en + año; el 3 de mayo de 2005; nacer: nací, naciste, nació; ¿Cuándo naciste?</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 159. Биография: родился, учился, женился, умер<br><small>Verbos de biografía; etapas; línea de vida de Gabriel García Márquez; preguntas sobre una biografía</small></li>
-<li class='falta'><span class='tipo'>повторение</span> Урок 160. Повторение недели 23: pretérito indefinido<br><small>Mini-test de 20 formas; dictado de fechas</small></li>
-<li class='falta'><span class='tipo'>культура</span> Урок 161. Жизни испаноязычных знаменитостей: Фрида, Пикассо, Месси<br><small>Leer tres biografías cortas; sacar fechas y hechos</small></li>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Тема 12. Биографии: прошедшее время</h2><span class="tipo">A2 · 0/14</span></div>
+<details><summary>Чему вы научитесь · недели 23–24</summary><ul><li>Contar hechos pasados con el pretérito indefinido (regular e irregular).</li><li>Entender y contar una biografía con fechas y etapas.</li><li>Distinguir perfecto (hoy) e indefinido (ayer).</li></ul></details>
+<h3>Неделя 23</h3><ul class="dias">
+<li><span class="num">155</span><span class="falta">Pretérito indefinido -ar: вчера я говорил <span class="tipo">урок</span></span></li>
+<li><span class="num">156</span><span class="falta">Pretérito indefinido -er / -ir: comí, viví <span class="tipo">урок</span></span></li>
+<li><span class="num">157</span><span class="falta">Неправильные (1): fui, tuve, estuve, hice <span class="tipo">урок</span></span></li>
+<li><span class="num">158</span><span class="falta">Годы и даты: я родился в 1995 <span class="tipo">урок</span></span></li>
+<li><span class="num">159</span><span class="falta">Биография: родился, учился, женился, умер <span class="tipo">урок</span></span></li>
+<li><span class="num">160</span><span class="falta">Повторение недели 23: pretérito indefinido <span class="tipo">повторение</span></span></li>
+<li><span class="num">161</span><span class="falta">Жизни испаноязычных знаменитостей: Фрида, Пикассо, Месси <span class="tipo">культура</span></span></li>
 </ul>
-<h3>Неделя 24</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>урок</span> Урок 162. Perfecto или indefinido: сегодня / вчера<br><small>hoy, esta semana, este año → perfecto; ayer, el año pasado, en 2010 → indefinido; España frente a Latinoamérica</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 163. Неправильные (2): pude, puse, quise, vine, dije, di, vi<br><small>poder, poner, querer, venir, decir, dar, ver; la raíz irregular sin tilde; dijeron</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 164. Моя биография: этапы жизни<br><small>la infancia, la escuela, la universidad, el primer trabajo, mudarse, casarse; primero, después, luego, al final</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 165. Как прошла поездка? Рассказ о путешествии<br><small>fui a…, visité, comí, me gustó mucho, lo pasé bien / mal; ¿Qué tal el viaje?; ¿Cuánto tiempo estuviste?</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 166. Интервью о прошлом: интеграция<br><small>Entrevista de 10 preguntas en indefinido; revisar y grabar la biografía</small></li>
-<li class='falta'><span class='tipo'>тест</span> Урок 167. Тест по Уроку 12<br><small>15 ítems: indefinido regular e irregular, perfecto / indefinido, fechas</small></li>
-<li class='falta'><span class='tipo'>культура</span> Урок 168. 1492, независимость и итоговое задание<br><small>Fechas clave de la historia hispana en indefinido; tarea final: línea de tiempo de la propia vida</small></li>
+<h3>Неделя 24</h3><ul class="dias">
+<li><span class="num">162</span><span class="falta">Perfecto или indefinido: сегодня / вчера <span class="tipo">урок</span></span></li>
+<li><span class="num">163</span><span class="falta">Неправильные (2): pude, puse, quise, vine, dije, di, vi <span class="tipo">урок</span></span></li>
+<li><span class="num">164</span><span class="falta">Моя биография: этапы жизни <span class="tipo">урок</span></span></li>
+<li><span class="num">165</span><span class="falta">Как прошла поездка? Рассказ о путешествии <span class="tipo">урок</span></span></li>
+<li><span class="num">166</span><span class="falta">Интервью о прошлом: интеграция <span class="tipo">урок</span></span></li>
+<li><span class="num">167</span><span class="falta">Тест по Уроку 12 <span class="tipo">тест</span></span></li>
+<li><span class="num">168</span><span class="falta">1492, независимость и итоговое задание <span class="tipo">культура</span></span></li>
 </ul>
-<h2>Тема 13: Раньше и сейчас: воспоминания · Antes y ahora: recuerdos</h2>
-<details><summary>Чему вы научитесь · уровень A2 · недели 25–26</summary><ul><li>Describir personas, lugares y hábitos del pasado con el pretérito imperfecto.</li><li>Comparar la vida de antes y la de ahora.</li><li>Combinar imperfecto e indefinido en un relato sencillo (acción y contexto).</li></ul></details>
-<h3>Неделя 25</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>урок</span> Урок 169. Pretérito imperfecto: в детстве я жил в…<br><small>-aba / -ía; de pequeño / a, cuando era niño / a; «я жил» (несов.) = vivía</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 170. Era, iba, veía: описание в прошлом<br><small>ser, ir, ver irregulares; era alto, tenía el pelo largo, había un parque, estaba al lado de</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 171. Раньше и сейчас: ya no, todavía, soler<br><small>antes fumaba, ahora no fumo; ya no / todavía; solía ir (soler + infinitivo); hábitos pasados</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 172. Детство и школа<br><small>juguetes, juegos, asignaturas, el recreo, el profesor; ¿Cómo era tu colegio? ¿A qué jugabas?</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 173. Мой город раньше и сейчас<br><small>había / hay, era / es, no existía / ahora hay; cambios: edificios, transporte, tiendas</small></li>
-<li class='falta'><span class='tipo'>повторение</span> Урок 174. Повторение недели 25: pretérito imperfecto<br><small>Mini-test de 20 formas; dictado de descripción</small></li>
-<li class='falta'><span class='tipo'>культура</span> Урок 175. Вырасти в 80-е и 90-е: Испания и Россия<br><small>Juguetes, series y música de la época; una canción de la infancia en español</small></li>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Тема 13. Раньше и сейчас: воспоминания</h2><span class="tipo">A2 · 0/14</span></div>
+<details><summary>Чему вы научитесь · недели 25–26</summary><ul><li>Describir personas, lugares y hábitos del pasado con el pretérito imperfecto.</li><li>Comparar la vida de antes y la de ahora.</li><li>Combinar imperfecto e indefinido en un relato sencillo (acción y contexto).</li></ul></details>
+<h3>Неделя 25</h3><ul class="dias">
+<li><span class="num">169</span><span class="falta">Pretérito imperfecto: в детстве я жил в… <span class="tipo">урок</span></span></li>
+<li><span class="num">170</span><span class="falta">Era, iba, veía: описание в прошлом <span class="tipo">урок</span></span></li>
+<li><span class="num">171</span><span class="falta">Раньше и сейчас: ya no, todavía, soler <span class="tipo">урок</span></span></li>
+<li><span class="num">172</span><span class="falta">Детство и школа <span class="tipo">урок</span></span></li>
+<li><span class="num">173</span><span class="falta">Мой город раньше и сейчас <span class="tipo">урок</span></span></li>
+<li><span class="num">174</span><span class="falta">Повторение недели 25: pretérito imperfecto <span class="tipo">повторение</span></span></li>
+<li><span class="num">175</span><span class="falta">Вырасти в 80-е и 90-е: Испания и Россия <span class="tipo">культура</span></span></li>
 </ul>
-<h3>Неделя 26</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>урок</span> Урок 176. Фон: было холодно, была ночь<br><small>imperfecto para el contexto (tiempo, hora, lugar, estado); estaba cansado, había mucha gente</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 177. Indefinido или imperfecto (1): действие и фон<br><small>совершенный / несовершенный: llamaron mientras cenaba; cuando llegué, llovía</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 178. Indefinido или imperfecto (2): привычка и однократное<br><small>todos los veranos íbamos frente a un verano fuimos; siempre / una vez / de repente</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 179. Люди из прошлого: мой дедушка был…<br><small>describir a alguien que ya no está: era, tenía, trabajaba de, le gustaba, solía</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 180. «Когда мне было десять лет»: текст и устная речь<br><small>Integración: texto de 120 palabras con imperfecto e indefinido; versión oral de 1 minuto</small></li>
-<li class='falta'><span class='tipo'>тест</span> Урок 181. Тест по Уроку 13<br><small>15 ítems: imperfecto, contraste con indefinido, léxico</small></li>
-<li class='falta'><span class='tipo'>культура</span> Урок 182. Переход к демократии и Мовида; итоговое задание<br><small>Historia reciente de España contada en imperfecto; tarea final: entrevista a un familiar mayor</small></li>
+<h3>Неделя 26</h3><ul class="dias">
+<li><span class="num">176</span><span class="falta">Фон: было холодно, была ночь <span class="tipo">урок</span></span></li>
+<li><span class="num">177</span><span class="falta">Indefinido или imperfecto (1): действие и фон <span class="tipo">урок</span></span></li>
+<li><span class="num">178</span><span class="falta">Indefinido или imperfecto (2): привычка и однократное <span class="tipo">урок</span></span></li>
+<li><span class="num">179</span><span class="falta">Люди из прошлого: мой дедушка был… <span class="tipo">урок</span></span></li>
+<li><span class="num">180</span><span class="falta">«Когда мне было десять лет»: текст и устная речь <span class="tipo">урок</span></span></li>
+<li><span class="num">181</span><span class="falta">Тест по Уроку 13 <span class="tipo">тест</span></span></li>
+<li><span class="num">182</span><span class="falta">Переход к демократии и Мовида; итоговое задание <span class="tipo">культура</span></span></li>
 </ul>
-<h2>Тема 14: Расскажи, что случилось: истории · Cuéntame qué pasó: anécdotas</h2>
-<details><summary>Чему вы научитесь · уровень A2 · недели 27–28</summary><ul><li>Contar una anécdota combinando perfecto, indefinido e imperfecto con conectores.</li><li>Reaccionar como oyente (¡No me digas! ¿Y qué pasó?).</li><li>Entender una noticia breve y resumirla.</li></ul></details>
-<h3>Неделя 27</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>урок</span> Урок 183. Я спал, когда зазвонил телефон<br><small>estaba + gerundio (acción en curso) + cuando + indefinido (interrupción); mientras</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 184. Связки рассказа: сначала, тогда, вдруг, в конце<br><small>ordenar una historia desordenada; conectores de secuencia y de causa (así que, porque, por eso)</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 185. Неправильные (3): leyó, oyó, durmió, pidió, trajo<br><small>cambios de 3.ª persona (i→y, e→i, o→u) y raíces en -j (traer, conducir, decir); verbos típicos de la anécdota</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 186. Рассказать историю и отреагировать<br><small>estructura situación-problema-solución; reacciones: ¡No me digas! ¿Y qué pasó? ¡Qué bien! ¡Qué mala suerte!</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 187. Короткие новости: кто, что, когда, где<br><small>leer 3 noticias breves; titulares; sacar los datos; resumir en 2 frases</small></li>
-<li class='falta'><span class='tipo'>повторение</span> Урок 188. Повторение недели 27: рассказ<br><small>Mini-test de tiempos del pasado (20 ítems); conectores</small></li>
-<li class='falta'><span class='tipo'>культура</span> Урок 189. Легенды: Ла Льорона и Сид<br><small>Dos leyendas en pasado simplificado; comprensión; vocabulario</small></li>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Тема 14. Расскажи, что случилось: истории</h2><span class="tipo">A2 · 0/14</span></div>
+<details><summary>Чему вы научитесь · недели 27–28</summary><ul><li>Contar una anécdota combinando perfecto, indefinido e imperfecto con conectores.</li><li>Reaccionar como oyente (¡No me digas! ¿Y qué pasó?).</li><li>Entender una noticia breve y resumirla.</li></ul></details>
+<h3>Неделя 27</h3><ul class="dias">
+<li><span class="num">183</span><span class="falta">Я спал, когда зазвонил телефон <span class="tipo">урок</span></span></li>
+<li><span class="num">184</span><span class="falta">Связки рассказа: сначала, тогда, вдруг, в конце <span class="tipo">урок</span></span></li>
+<li><span class="num">185</span><span class="falta">Неправильные (3): leyó, oyó, durmió, pidió, trajo <span class="tipo">урок</span></span></li>
+<li><span class="num">186</span><span class="falta">Рассказать историю и отреагировать <span class="tipo">урок</span></span></li>
+<li><span class="num">187</span><span class="falta">Короткие новости: кто, что, когда, где <span class="tipo">урок</span></span></li>
+<li><span class="num">188</span><span class="falta">Повторение недели 27: рассказ <span class="tipo">повторение</span></span></li>
+<li><span class="num">189</span><span class="falta">Легенды: Ла Льорона и Сид <span class="tipo">культура</span></span></li>
 </ul>
-<h3>Неделя 28</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>урок</span> Урок 190. Два года назад, уже … как, llevo … estudiando<br><small>hace + tiempo (назад); desde hace (уже … как); llevar + tiempo + gerundio; ¿Cuánto tiempo hace que…?</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 191. Ужасный день, идеальный день: эмоции<br><small>me puse nervioso / contento, me sentí fatal, me enfadé, me reí mucho; ponerse + adjetivo</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 192. История в картинках: от изображений к рассказу<br><small>9 viñetas con verbos de apoyo (como en el cuaderno de referencia); escribir el relato con imperfecto e indefinido</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 193. Знаешь, что со мной сегодня случилось? Perfecto в рассказе<br><small>anécdota reciente en perfecto frente a la de ayer en indefinido; registro oral; muletillas (bueno, pues, resulta que)</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 194. Моя история: текст и устная речь (интеграция)<br><small>Texto de 150 palabras; versión oral de 2 minutos con reacciones del oyente</small></li>
-<li class='falta'><span class='tipo'>тест</span> Урок 195. Тест по Уроку 14<br><small>15 ítems: narración, conectores, irregulares, hace / desde hace</small></li>
-<li class='falta'><span class='tipo'>культура</span> Урок 196. Испаноязычный юмор; итоговое задание<br><small>Chistes cortos; juegos de palabras sencillos; tarea final: «Mi mejor anécdota» en vídeo</small></li>
+<h3>Неделя 28</h3><ul class="dias">
+<li><span class="num">190</span><span class="falta">Два года назад, уже … как, llevo … estudiando <span class="tipo">урок</span></span></li>
+<li><span class="num">191</span><span class="falta">Ужасный день, идеальный день: эмоции <span class="tipo">урок</span></span></li>
+<li><span class="num">192</span><span class="falta">История в картинках: от изображений к рассказу <span class="tipo">урок</span></span></li>
+<li><span class="num">193</span><span class="falta">Знаешь, что со мной сегодня случилось? Perfecto в рассказе <span class="tipo">урок</span></span></li>
+<li><span class="num">194</span><span class="falta">Моя история: текст и устная речь (интеграция) <span class="tipo">урок</span></span></li>
+<li><span class="num">195</span><span class="falta">Тест по Уроку 14 <span class="tipo">тест</span></span></li>
+<li><span class="num">196</span><span class="falta">Испаноязычный юмор; итоговое задание <span class="tipo">культура</span></span></li>
 </ul>
-<h2>Тема 15: Учёба и работа · Estudios y trabajo</h2>
-<details><summary>Чему вы научитесь · уровень A2 · недели 29–30</summary><ul><li>Hablar de la formación y la experiencia laboral; escribir un currículum.</li><li>Leer ofertas de empleo y hacer una entrevista sencilla.</li><li>Escribir un correo formal.</li></ul></details>
-<h3>Неделя 29</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>урок</span> Урок 197. Чем ты занимаешься? Профессии и отрасли<br><small>profesiones ampliadas; sectores (la sanidad, la educación, la informática); trabajar de / en / para; estar en paro; ser autónomo</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 198. Saber, conocer, poder: знать, уметь, мочь<br><small>sé conducir / conozco Madrid / puedo venir; mapa de los tres frente a los tres rusos</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 199. Опыт: я работал…, уже три года<br><small>he trabajado como / en, durante dos años, de 2015 a 2018; llevar + tiempo; desde hace</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 200. Резюме<br><small>datos personales, formación, experiencia, idiomas (nivel A2, B1…), informática, habilidades; leer y completar un CV</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 201. Учёба: специальность, магистратура, экзамен<br><small>estudiar una carrera, hacer un máster, matricularse, aprobar / suspender, la nota; el sistema educativo español</small></li>
-<li class='falta'><span class='tipo'>повторение</span> Урок 202. Повторение недели 29: работа и saber / conocer<br><small>Mini-test de 15 ítems; dictado de profesiones</small></li>
-<li class='falta'><span class='tipo'>культура</span> Урок 203. Трудовая жизнь в испаноязычном мире<br><small>La jornada, las vacaciones, la paga extra, el enchufe; las becas Erasmus</small></li>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Тема 15. Учёба и работа</h2><span class="tipo">A2 · 0/14</span></div>
+<details><summary>Чему вы научитесь · недели 29–30</summary><ul><li>Hablar de la formación y la experiencia laboral; escribir un currículum.</li><li>Leer ofertas de empleo y hacer una entrevista sencilla.</li><li>Escribir un correo formal.</li></ul></details>
+<h3>Неделя 29</h3><ul class="dias">
+<li><span class="num">197</span><span class="falta">Чем ты занимаешься? Профессии и отрасли <span class="tipo">урок</span></span></li>
+<li><span class="num">198</span><span class="falta">Saber, conocer, poder: знать, уметь, мочь <span class="tipo">урок</span></span></li>
+<li><span class="num">199</span><span class="falta">Опыт: я работал…, уже три года <span class="tipo">урок</span></span></li>
+<li><span class="num">200</span><span class="falta">Резюме <span class="tipo">урок</span></span></li>
+<li><span class="num">201</span><span class="falta">Учёба: специальность, магистратура, экзамен <span class="tipo">урок</span></span></li>
+<li><span class="num">202</span><span class="falta">Повторение недели 29: работа и saber / conocer <span class="tipo">повторение</span></span></li>
+<li><span class="num">203</span><span class="falta">Трудовая жизнь в испаноязычном мире <span class="tipo">культура</span></span></li>
 </ul>
-<h3>Неделя 30</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>урок</span> Урок 204. Вакансии<br><small>se busca, se requiere, imprescindible, se valora, jornada completa / parcial, sueldo; leer 4 ofertas</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 205. Собеседование: мне хотелось бы, мог бы<br><small>preguntas típicas (¿Por qué quiere trabajar aquí?); responder con cortesía: me gustaría, podría, creo que; usted</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 206. Официальное письмо<br><small>Estimado / a señor / a; Le escribo para…; Quedo a la espera de…; Atentamente; estructura y registro; pedir información</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 207. Качества и недостатки<br><small>responsable, puntual, organizado, sociable, creativo; me cuesta madrugar; hablar de uno mismo con mesura; ser bueno en</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 208. Собеседование и заявка: интеграция<br><small>Simular la entrevista (grabada); correo de solicitud (120 palabras)</small></li>
-<li class='falta'><span class='tipo'>тест</span> Урок 209. Тест по Уроку 15<br><small>15 ítems: saber / conocer / poder, llevar, registro formal, léxico</small></li>
-<li class='falta'><span class='tipo'>культура</span> Урок 210. Испаноязычные предприниматели; итоговое задание<br><small>Historias de emprendedores; tarea final: CV en español</small></li>
+<h3>Неделя 30</h3><ul class="dias">
+<li><span class="num">204</span><span class="falta">Вакансии <span class="tipo">урок</span></span></li>
+<li><span class="num">205</span><span class="falta">Собеседование: мне хотелось бы, мог бы <span class="tipo">урок</span></span></li>
+<li><span class="num">206</span><span class="falta">Официальное письмо <span class="tipo">урок</span></span></li>
+<li><span class="num">207</span><span class="falta">Качества и недостатки <span class="tipo">урок</span></span></li>
+<li><span class="num">208</span><span class="falta">Собеседование и заявка: интеграция <span class="tipo">урок</span></span></li>
+<li><span class="num">209</span><span class="falta">Тест по Уроку 15 <span class="tipo">тест</span></span></li>
+<li><span class="num">210</span><span class="falta">Испаноязычные предприниматели; итоговое задание <span class="tipo">культура</span></span></li>
 </ul>
-<h2>Тема 16: Инструкции, город и услуги · Instrucciones, ciudad y servicios</h2>
-<details><summary>Чему вы научитесь · уровень A2 · недели 31–32</summary><ul><li>Dar instrucciones y órdenes afirmativas y negativas (tú, usted, vosotros, ustedes).</li><li>Usar los pronombres de objeto indirecto y combinarlos con los de objeto directo.</li><li>Hacer gestiones sencillas en el banco, correos y la administración.</li></ul></details>
-<h3>Неделя 31</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>урок</span> Урок 211. Повелительное: hablad, hablen; dímelo<br><small>vosotros (-ad / -ed / -id) y ustedes (-en / -an); pronombres pegados: dímelo, siéntese, levantaos</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 212. Отрицательный императив: no hables, no comas<br><small>formas del subjuntivo: no hables / no coma / no vivan; irregulares (no hagas, no vengas, no vayas, no seas, no pongas); pronombres delante (no lo hagas)</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 213. Рецепты: почисти, нарежь, добавь; se fríe<br><small>verbos de cocina en imperativo; la tortilla de patatas; se impersonal (se fríe, se añade)</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 214. Me, te, le, nos, os, les + lo, la: se lo doy<br><small>OI; combinación OI + OD; le / les → se (se lo digo); orden: OI antes de OD; con imperativo (dámelo)</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 215. Вывески и правила: курить запрещено<br><small>prohibido, no se puede, se vende, se alquila, cerrado por vacaciones, empujar / tirar; comprender avisos públicos</small></li>
-<li class='falta'><span class='tipo'>повторение</span> Урок 216. Повторение недели 31: императив и местоимения<br><small>Mini-test de 20 ítems; dictado de instrucciones</small></li>
-<li class='falta'><span class='tipo'>культура</span> Урок 217. Бюрократия: NIE, мэрия, предварительная запись<br><small>Trámites para vivir en España; el tuteo en la administración; vocabulario</small></li>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Тема 16. Инструкции, город и услуги</h2><span class="tipo">A2 · 0/14</span></div>
+<details><summary>Чему вы научитесь · недели 31–32</summary><ul><li>Dar instrucciones y órdenes afirmativas y negativas (tú, usted, vosotros, ustedes).</li><li>Usar los pronombres de objeto indirecto y combinarlos con los de objeto directo.</li><li>Hacer gestiones sencillas en el banco, correos y la administración.</li></ul></details>
+<h3>Неделя 31</h3><ul class="dias">
+<li><span class="num">211</span><span class="falta">Повелительное: hablad, hablen; dímelo <span class="tipo">урок</span></span></li>
+<li><span class="num">212</span><span class="falta">Отрицательный императив: no hables, no comas <span class="tipo">урок</span></span></li>
+<li><span class="num">213</span><span class="falta">Рецепты: почисти, нарежь, добавь; se fríe <span class="tipo">урок</span></span></li>
+<li><span class="num">214</span><span class="falta">Me, te, le, nos, os, les + lo, la: se lo doy <span class="tipo">урок</span></span></li>
+<li><span class="num">215</span><span class="falta">Вывески и правила: курить запрещено <span class="tipo">урок</span></span></li>
+<li><span class="num">216</span><span class="falta">Повторение недели 31: императив и местоимения <span class="tipo">повторение</span></span></li>
+<li><span class="num">217</span><span class="falta">Бюрократия: NIE, мэрия, предварительная запись <span class="tipo">культура</span></span></li>
 </ul>
-<h3>Неделя 32</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>урок</span> Урок 218. В банке и на почте<br><small>abrir una cuenta, sacar dinero, el cajero, la tarjeta, enviar un paquete / una carta certificada, el sello; formularios</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 219. Оформление документов: заполните, подпишите здесь<br><small>pedir cita previa, rellenar, firmar, el DNI / pasaporte, la fotocopia; por teléfono: ¿Dígame?, ¿me puede dar cita…?</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 220. Проблемы в городе: я потерял кошелёк<br><small>he perdido, me han robado, poner una denuncia, la comisaría, objetos perdidos; perfecto + imperativo (vaya a…)</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 221. Инструкция к прибору или приложению<br><small>encender / apagar, pulsar, conectar, descargar, introducir la contraseña; dar instrucciones a alguien de usted</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 222. Объяснить, как что-то сделать: интеграция<br><small>Explicación oral paso a paso; instrucciones escritas (receta o manual, 10 imperativos)</small></li>
-<li class='falta'><span class='tipo'>тест</span> Урок 223. Тест по Уроку 16<br><small>15 ítems: imperativo negativo, se lo, se impersonal, léxico</small></li>
-<li class='falta'><span class='tipo'>культура</span> Урок 224. Вывески и знаки испаноязычного мира; итоговое задание<br><small>Fotos de carteles de 6 países; variantes léxicas; tarea final: guía de mi ciudad</small></li>
+<h3>Неделя 32</h3><ul class="dias">
+<li><span class="num">218</span><span class="falta">В банке и на почте <span class="tipo">урок</span></span></li>
+<li><span class="num">219</span><span class="falta">Оформление документов: заполните, подпишите здесь <span class="tipo">урок</span></span></li>
+<li><span class="num">220</span><span class="falta">Проблемы в городе: я потерял кошелёк <span class="tipo">урок</span></span></li>
+<li><span class="num">221</span><span class="falta">Инструкция к прибору или приложению <span class="tipo">урок</span></span></li>
+<li><span class="num">222</span><span class="falta">Объяснить, как что-то сделать: интеграция <span class="tipo">урок</span></span></li>
+<li><span class="num">223</span><span class="falta">Тест по Уроку 16 <span class="tipo">тест</span></span></li>
+<li><span class="num">224</span><span class="falta">Вывески и знаки испаноязычного мира; итоговое задание <span class="tipo">культура</span></span></li>
 </ul>
-<h2>Тема 17: Будущее и прогнозы · El futuro y las predicciones</h2>
-<details><summary>Чему вы научитесь · уровень A2 · недели 33–34</summary><ul><li>Hablar del futuro con el futuro simple y con ir a + infinitivo.</li><li>Hacer predicciones y expresar condiciones reales (si + presente).</li><li>Expresar grados de certeza.</li></ul></details>
-<h3>Неделя 33</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>урок</span> Урок 225. Простое будущее: завтра будет дождь<br><small>-é, -ás, -á, -emos, -éis, -án sobre el infinitivo; frente a ir a + infinitivo (plan cercano / intención)</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 226. Неправильное будущее: tendré, haré, podré, habrá<br><small>tener, hacer, poder, salir, poner, venir, decir, querer, saber, haber (habrá); raíces</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 227. Прогноз погоды<br><small>nublado, tormenta, chubascos, máximas / mínimas, grados; mañana hará sol en…; mapas de España y de Rusia</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 228. Если пойдёт дождь, мы не пойдём: реальные условия<br><small>si + presente + futuro / presente / imperativo; «если … то»; nunca si + futuro</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 229. Через десять лет: личные прогнозы<br><small>dentro de, en el futuro, cuando sea mayor (fórmula fija); ¿Cómo será tu vida?; viviré, tendré, trabajaré</small></li>
-<li class='falta'><span class='tipo'>повторение</span> Урок 230. Повторение недели 33: будущее время<br><small>Mini-test de 20 formas; condiciones</small></li>
-<li class='falta'><span class='tipo'>культура</span> Урок 231. Суеверия, гороскоп и двенадцать виноградин<br><small>Martes 13, el horóscopo en futuro, las uvas de Nochevieja; leer un horóscopo</small></li>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Тема 17. Будущее и прогнозы</h2><span class="tipo">A2 · 0/14</span></div>
+<details><summary>Чему вы научитесь · недели 33–34</summary><ul><li>Hablar del futuro con el futuro simple y con ir a + infinitivo.</li><li>Hacer predicciones y expresar condiciones reales (si + presente).</li><li>Expresar grados de certeza.</li></ul></details>
+<h3>Неделя 33</h3><ul class="dias">
+<li><span class="num">225</span><span class="falta">Простое будущее: завтра будет дождь <span class="tipo">урок</span></span></li>
+<li><span class="num">226</span><span class="falta">Неправильное будущее: tendré, haré, podré, habrá <span class="tipo">урок</span></span></li>
+<li><span class="num">227</span><span class="falta">Прогноз погоды <span class="tipo">урок</span></span></li>
+<li><span class="num">228</span><span class="falta">Если пойдёт дождь, мы не пойдём: реальные условия <span class="tipo">урок</span></span></li>
+<li><span class="num">229</span><span class="falta">Через десять лет: личные прогнозы <span class="tipo">урок</span></span></li>
+<li><span class="num">230</span><span class="falta">Повторение недели 33: будущее время <span class="tipo">повторение</span></span></li>
+<li><span class="num">231</span><span class="falta">Суеверия, гороскоп и двенадцать виноградин <span class="tipo">культура</span></span></li>
 </ul>
-<h3>Неделя 34</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>урок</span> Урок 232. Наверняка, думаю что, вероятно, может быть<br><small>grados de certeza con indicativo; quizás / a lo mejor; opinar sobre el futuro; no creo que (solo como chunk, sin subjuntivo)</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 233. Что будет в 2050? Технологии и окружающая среда<br><small>el medio ambiente, reciclar, el cambio climático, los robots, la inteligencia artificial, los coches eléctricos</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 234. Обещания и намерения: обещаю, что…<br><small>te prometo que, lo haré, a partir de mañana; propósitos de Año Nuevo; dejar de (anticipo)</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 235. Организовать мероприятие: на следующей неделе<br><small>invitar en futuro, el programa, la hora, el lugar; el próximo mes; mensajes formales e informales</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 236. «Моя жизнь в 2040»: интеграция<br><small>Texto de 150 palabras en futuro; predicciones orales para un compañero</small></li>
-<li class='falta'><span class='tipo'>тест</span> Урок 237. Тест по Уроку 17<br><small>15 ítems: futuro, condicionales reales, certeza, léxico</small></li>
-<li class='falta'><span class='tipo'>культура</span> Урок 238. Испаноязычная фантастика и Новый год; итоговое задание<br><small>Un corto de ciencia ficción; el Año Nuevo en el mundo hispano; tarea final: pronóstico en vídeo</small></li>
+<h3>Неделя 34</h3><ul class="dias">
+<li><span class="num">232</span><span class="falta">Наверняка, думаю что, вероятно, может быть <span class="tipo">урок</span></span></li>
+<li><span class="num">233</span><span class="falta">Что будет в 2050? Технологии и окружающая среда <span class="tipo">урок</span></span></li>
+<li><span class="num">234</span><span class="falta">Обещания и намерения: обещаю, что… <span class="tipo">урок</span></span></li>
+<li><span class="num">235</span><span class="falta">Организовать мероприятие: на следующей неделе <span class="tipo">урок</span></span></li>
+<li><span class="num">236</span><span class="falta">«Моя жизнь в 2040»: интеграция <span class="tipo">урок</span></span></li>
+<li><span class="num">237</span><span class="falta">Тест по Уроку 17 <span class="tipo">тест</span></span></li>
+<li><span class="num">238</span><span class="falta">Испаноязычная фантастика и Новый год; итоговое задание <span class="tipo">культура</span></span></li>
 </ul>
-<h2>Тема 18: Общение: мнения и сообщения · Comunicarse: opiniones y mensajes</h2>
-<details><summary>Чему вы научитесь · уровень A2 · недели 35–36</summary><ul><li>Dar la opinión y expresar acuerdo y desacuerdo con cortesía.</li><li>Hablar por teléfono y dejar un recado; transmitir lo que dice otra persona.</li><li>Escribir correos y mensajes informales.</li></ul></details>
-<h3>Неделя 35</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>урок</span> Урок 239. Я думаю, мне кажется: выразить мнение<br><small>creo / pienso / me parece que + indicativo; para mí; en mi opinión; sobre + tema; temas cotidianos</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 240. Согласен, ты прав, а я да / а я нет<br><small>estoy (totalmente) de acuerdo, no estoy de acuerdo, depende, tienes razón; yo sí / yo no / yo también / yo tampoco</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 241. Кроме того, однако, поэтому, хотя<br><small>conectores de adición, oposición, causa y concesión; argumentar en 4 frases</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 242. По телефону: Марта дома? Кто её спрашивает?<br><small>¿Diga? / ¿Aló? / ¿Bueno?; ¿Está…?; ¿De parte de quién?; dejar un recado; llamar más tarde; se ha equivocado</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 243. Говорит, что…, спрашивает, ли…: передать сообщение<br><small>estilo indirecto en presente: dice que + presente; pregunta si / qué / dónde / cuándo; «ли» = si</small></li>
-<li class='falta'><span class='tipo'>повторение</span> Урок 244. Повторение недели 35: мнение и телефон<br><small>Mini-test de 15 ítems; dictado de una llamada</small></li>
-<li class='falta'><span class='tipo'>культура</span> Урок 245. Тертулия: спорить, не обижая<br><small>La tertulia de café, el debate en la sobremesa; fórmulas para suavizar (bueno, no sé, yo creo que…)</small></li>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Тема 18. Общение: мнения и сообщения</h2><span class="tipo">A2 · 0/14</span></div>
+<details><summary>Чему вы научитесь · недели 35–36</summary><ul><li>Dar la opinión y expresar acuerdo y desacuerdo con cortesía.</li><li>Hablar por teléfono y dejar un recado; transmitir lo que dice otra persona.</li><li>Escribir correos y mensajes informales.</li></ul></details>
+<h3>Неделя 35</h3><ul class="dias">
+<li><span class="num">239</span><span class="falta">Я думаю, мне кажется: выразить мнение <span class="tipo">урок</span></span></li>
+<li><span class="num">240</span><span class="falta">Согласен, ты прав, а я да / а я нет <span class="tipo">урок</span></span></li>
+<li><span class="num">241</span><span class="falta">Кроме того, однако, поэтому, хотя <span class="tipo">урок</span></span></li>
+<li><span class="num">242</span><span class="falta">По телефону: Марта дома? Кто её спрашивает? <span class="tipo">урок</span></span></li>
+<li><span class="num">243</span><span class="falta">Говорит, что…, спрашивает, ли…: передать сообщение <span class="tipo">урок</span></span></li>
+<li><span class="num">244</span><span class="falta">Повторение недели 35: мнение и телефон <span class="tipo">повторение</span></span></li>
+<li><span class="num">245</span><span class="falta">Тертулия: спорить, не обижая <span class="tipo">культура</span></span></li>
 </ul>
-<h3>Неделя 36</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>урок</span> Урок 246. Он сказал мне, что…: изменение лица<br><small>me ha dicho que, ha preguntado si; yo → él, mi → su, aquí → allí, hoy → ese día (básico)</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 247. Неформальные письма и сообщения: рассказать новости<br><small>Hola, ¿qué tal?; te escribo para contarte…; por cierto; un abrazo / un beso; responder a un correo</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 248. Интернет и социальные сети<br><small>subir, compartir, un enlace, la contraseña, el perfil, seguir a, un «me gusta»; opinar sobre las redes</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 249. СМИ: какие передачи ты смотришь?<br><small>la tele, la radio, la prensa, el podcast, las noticias, una serie, un programa de…; preferencias y opiniones</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 250. Мини-дебаты и письмо: интеграция<br><small>Debate de 3 minutos sobre un tema cotidiano; correo a un amigo con novedades (150 palabras)</small></li>
-<li class='falta'><span class='tipo'>тест</span> Урок 251. Тест по Уроку 18<br><small>15 ítems: opinión, estilo indirecto, conectores, léxico</small></li>
-<li class='falta'><span class='tipo'>культура</span> Урок 252. Испанский в интернете; итоговое задание<br><small>Abreviaturas (xq, tqm, ntp), memes, emoticonos; tarea final: hilo de opinión de 8 mensajes</small></li>
+<h3>Неделя 36</h3><ul class="dias">
+<li><span class="num">246</span><span class="falta">Он сказал мне, что…: изменение лица <span class="tipo">урок</span></span></li>
+<li><span class="num">247</span><span class="falta">Неформальные письма и сообщения: рассказать новости <span class="tipo">урок</span></span></li>
+<li><span class="num">248</span><span class="falta">Интернет и социальные сети <span class="tipo">урок</span></span></li>
+<li><span class="num">249</span><span class="falta">СМИ: какие передачи ты смотришь? <span class="tipo">урок</span></span></li>
+<li><span class="num">250</span><span class="falta">Мини-дебаты и письмо: интеграция <span class="tipo">урок</span></span></li>
+<li><span class="num">251</span><span class="falta">Тест по Уроку 18 <span class="tipo">тест</span></span></li>
+<li><span class="num">252</span><span class="falta">Испанский в интернете; итоговое задание <span class="tipo">культура</span></span></li>
 </ul>
-<h2>Тема 19: Сравнивать и выбирать · Comparar y elegir</h2>
-<details><summary>Чему вы научитесь · уровень A2 · недели 37–38</summary><ul><li>Comparar personas, lugares, productos y estilos de vida.</li><li>Definir y describir con oraciones de relativo (que, donde).</li><li>Usar los indefinidos (algo / nada, alguien / nadie, algún / ningún).</li></ul></details>
-<h3>Неделя 37</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>урок</span> Урок 253. Больше чем, меньше чем<br><small>más / menos + adjetivo / sustantivo / adverbio + que; «чем»; comparar con datos y números</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 254. Такой же … как, столько же … сколько; лучше, хуже, старше, младше<br><small>igualdad: tan + adj + como, tanto / a / os / as + sust + como; irregulares mejor / peor / mayor / menor</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 255. Самый высокий в классе; очень-очень хороший<br><small>superlativo relativo (el / la más … de) y absoluto (-ísimo, muy, super-); el mejor restaurante de la ciudad</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 256. Москва и Мадрид: сравнение городов<br><small>clima, tamaño, precios, transporte, población; datos reales; conectores de contraste</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 257. Деревня или город: сравнение образа жизни<br><small>ventajas y desventajas, tranquilo / ruidoso, caro / barato; prefiero … porque; argumentar la preferencia</small></li>
-<li class='falta'><span class='tipo'>повторение</span> Урок 258. Повторение недели 37: сравнительные конструкции<br><small>Mini-test de 20 ítems; corrección de errores típicos (más mejor, más grande que yo)</small></li>
-<li class='falta'><span class='tipo'>культура</span> Урок 259. Рекорды испаноязычного мира<br><small>El país más grande, la ciudad más alta, el río más largo, el idioma más hablado; leer datos</small></li>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Тема 19. Сравнивать и выбирать</h2><span class="tipo">A2 · 0/14</span></div>
+<details><summary>Чему вы научитесь · недели 37–38</summary><ul><li>Comparar personas, lugares, productos y estilos de vida.</li><li>Definir y describir con oraciones de relativo (que, donde).</li><li>Usar los indefinidos (algo / nada, alguien / nadie, algún / ningún).</li></ul></details>
+<h3>Неделя 37</h3><ul class="dias">
+<li><span class="num">253</span><span class="falta">Больше чем, меньше чем <span class="tipo">урок</span></span></li>
+<li><span class="num">254</span><span class="falta">Такой же … как, столько же … сколько; лучше, хуже, старше, младше <span class="tipo">урок</span></span></li>
+<li><span class="num">255</span><span class="falta">Самый высокий в классе; очень-очень хороший <span class="tipo">урок</span></span></li>
+<li><span class="num">256</span><span class="falta">Москва и Мадрид: сравнение городов <span class="tipo">урок</span></span></li>
+<li><span class="num">257</span><span class="falta">Деревня или город: сравнение образа жизни <span class="tipo">урок</span></span></li>
+<li><span class="num">258</span><span class="falta">Повторение недели 37: сравнительные конструкции <span class="tipo">повторение</span></span></li>
+<li><span class="num">259</span><span class="falta">Рекорды испаноязычного мира <span class="tipo">культура</span></span></li>
 </ul>
-<h3>Неделя 38</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>урок</span> Урок 260. Который, где, тот что: давать определения<br><small>es un objeto que sirve para…, es un lugar donde…, el que…; definiciones de 10 palabras</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 261. Что-то, ничего, кто-то, никто, какой-нибудь, никакой<br><small>indefinidos; doble negación obligatoria (no hay nadie = никого нет); todos / cada; ¿Hay algo…? No, nada</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 262. Выбрать товар: отзывы<br><small>características, ventajas y desventajas, la calidad, la relación calidad-precio; leer 3 reseñas; ¿cuál es mejor?</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 263. Быть похожим на: сравнение людей<br><small>se parece a, es igual que, es más … que; personalidades; los gemelos; el test de personalidad</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 264. Сравнить и порекомендовать: интеграция<br><small>Comparación escrita de dos opciones (150 palabras); recomendación oral de 1 minuto</small></li>
-<li class='falta'><span class='tipo'>тест</span> Урок 265. Тест по Уроку 19<br><small>15 ítems: comparativos, superlativos, relativos, indefinidos</small></li>
-<li class='falta'><span class='tipo'>культура</span> Урок 266. Мадрид или Барселона; итоговое задание<br><small>Rivalidades amistosas y sus tópicos; tarea final: reseña de un producto</small></li>
+<h3>Неделя 38</h3><ul class="dias">
+<li><span class="num">260</span><span class="falta">Который, где, тот что: давать определения <span class="tipo">урок</span></span></li>
+<li><span class="num">261</span><span class="falta">Что-то, ничего, кто-то, никто, какой-нибудь, никакой <span class="tipo">урок</span></span></li>
+<li><span class="num">262</span><span class="falta">Выбрать товар: отзывы <span class="tipo">урок</span></span></li>
+<li><span class="num">263</span><span class="falta">Быть похожим на: сравнение людей <span class="tipo">урок</span></span></li>
+<li><span class="num">264</span><span class="falta">Сравнить и порекомендовать: интеграция <span class="tipo">урок</span></span></li>
+<li><span class="num">265</span><span class="falta">Тест по Уроку 19 <span class="tipo">тест</span></span></li>
+<li><span class="num">266</span><span class="falta">Мадрид или Барселона; итоговое задание <span class="tipo">культура</span></span></li>
 </ul>
-<h2>Тема 20: Тело, здоровье и самочувствие (расширение) · Cuerpo, salud y bienestar (ampliación)</h2>
-<details><summary>Чему вы научитесь · уровень A2 · недели 39–40</summary><ul><li>Dar consejos con el condicional (deberías, yo que tú) y expresar deseos con cortesía.</li><li>Hablar de emociones y estados de ánimo.</li><li>Usar por y para en sus usos básicos.</li></ul></details>
-<h3>Неделя 39</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>урок</span> Урок 267. Условное наклонение: мне хотелось бы, мог бы<br><small>-ía sobre el infinitivo; irregulares como el futuro (tendría, haría, podría); cortesía: ¿podría…?, me gustaría…</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 268. Тебе следовало бы, я бы на твоём месте, лучше всего<br><small>consejos con condicional; ¿por qué no…?; responder: tienes razón, lo intentaré, no puedo porque…</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 269. Мне плохо, я нервничаю, мне страшно<br><small>sentirse / encontrarse + adjetivo; estar nervioso / preocupado / triste; ponerse + adjetivo; dar miedo / vergüenza / pena (dativo)</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 270. Por и para (1): причина и цель<br><small>lo hago por ti (из-за / ради) frente a para ti (для); para + infinitivo (чтобы); por la mañana, por teléfono</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 271. Стресс и отдых<br><small>estar estresado, desconectar, dormir bien, el móvil en la cama, relajarse; consejos para dormir mejor (condicional + imperativo)</small></li>
-<li class='falta'><span class='tipo'>повторение</span> Урок 272. Повторение недели 39: условное наклонение и por / para<br><small>Mini-test de 20 ítems; dictado de emociones</small></li>
-<li class='falta'><span class='tipo'>культура</span> Урок 273. Спокойная жизнь: прогулка, сиеста и застолье<br><small>El paseo de la tarde, la vida de barrio; una clase de yoga en español (vídeo)</small></li>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Тема 20. Тело, здоровье и самочувствие (расширение)</h2><span class="tipo">A2 · 0/14</span></div>
+<details><summary>Чему вы научитесь · недели 39–40</summary><ul><li>Dar consejos con el condicional (deberías, yo que tú) y expresar deseos con cortesía.</li><li>Hablar de emociones y estados de ánimo.</li><li>Usar por y para en sus usos básicos.</li></ul></details>
+<h3>Неделя 39</h3><ul class="dias">
+<li><span class="num">267</span><span class="falta">Условное наклонение: мне хотелось бы, мог бы <span class="tipo">урок</span></span></li>
+<li><span class="num">268</span><span class="falta">Тебе следовало бы, я бы на твоём месте, лучше всего <span class="tipo">урок</span></span></li>
+<li><span class="num">269</span><span class="falta">Мне плохо, я нервничаю, мне страшно <span class="tipo">урок</span></span></li>
+<li><span class="num">270</span><span class="falta">Por и para (1): причина и цель <span class="tipo">урок</span></span></li>
+<li><span class="num">271</span><span class="falta">Стресс и отдых <span class="tipo">урок</span></span></li>
+<li><span class="num">272</span><span class="falta">Повторение недели 39: условное наклонение и por / para <span class="tipo">повторение</span></span></li>
+<li><span class="num">273</span><span class="falta">Спокойная жизнь: прогулка, сиеста и застолье <span class="tipo">культура</span></span></li>
 </ul>
-<h3>Неделя 40</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>урок</span> Урок 274. Записаться по телефону и описать симптомы<br><small>pedir / cambiar / anular cita, el seguro, la receta; síntomas ampliados (mareo, alergia, insomnio); en la farmacia (ampliación)</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 275. Спорт и травмы: я ушибся<br><small>el gimnasio, correr, entrenar, estirar; me he hecho daño, me duele desde…, torcerse el tobillo; el fisioterapeuta</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 276. Здоровое питание: слишком, достаточно, довольно<br><small>dieta equilibrada, azúcar, grasas, fibra; demasiado / suficiente / bastante / poco; leer etiquetas</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 277. Por и para (2): длительность, средство, адресат, срок<br><small>por = a través de, durante, a cambio de; para = destinatario, plazo (para el lunes), opinión (para mí); mapa completo</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 278. Советы: интеграция<br><small>Consejos orales a tres personas (condicional); correo con consejos (150 palabras)</small></li>
-<li class='falta'><span class='tipo'>тест</span> Урок 279. Тест по Уроку 20<br><small>15 ítems: condicional, emociones, por / para, léxico</small></li>
-<li class='falta'><span class='tipo'>культура</span> Урок 280. Мате, кока и ромашка; итоговое задание<br><small>La medicina tradicional del mundo hispano; tarea final: plan semanal de bienestar</small></li>
+<h3>Неделя 40</h3><ul class="dias">
+<li><span class="num">274</span><span class="falta">Записаться по телефону и описать симптомы <span class="tipo">урок</span></span></li>
+<li><span class="num">275</span><span class="falta">Спорт и травмы: я ушибся <span class="tipo">урок</span></span></li>
+<li><span class="num">276</span><span class="falta">Здоровое питание: слишком, достаточно, довольно <span class="tipo">урок</span></span></li>
+<li><span class="num">277</span><span class="falta">Por и para (2): длительность, средство, адресат, срок <span class="tipo">урок</span></span></li>
+<li><span class="num">278</span><span class="falta">Советы: интеграция <span class="tipo">урок</span></span></li>
+<li><span class="num">279</span><span class="falta">Тест по Уроку 20 <span class="tipo">тест</span></span></li>
+<li><span class="num">280</span><span class="falta">Мате, кока и ромашка; итоговое задание <span class="tipo">культура</span></span></li>
 </ul>
-<h2>Тема 21: Дом, совместная жизнь и быт · Casa, convivencia y vida cotidiana</h2>
-<details><summary>Чему вы научитесь · уровень A2 · недели 41–42</summary><ul><li>Alquilar un piso, describir problemas en casa y quejarse con cortesía.</li><li>Pedir favores y permiso; agradecer y disculparse.</li><li>Hablar de las tareas domésticas y de las normas de convivencia.</li></ul></details>
-<h3>Неделя 41</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>урок</span> Урок 281. Снять квартиру: договор, залог, коммунальные<br><small>el contrato, la fianza, los gastos incluidos, el casero / la casera, amueblado; llamar por un anuncio</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 282. Сломан, открыта: estar + причастие<br><small>estar + participio con concordancia; irregulares: abierto, roto, hecho, escrito, puesto, visto, muerto, vuelto</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 283. Не работает, сломалось: проблемы дома<br><small>no funciona, se ha roto, hay una fuga, no hay luz / agua caliente; llamar al casero / al técnico; quejarse con cortesía</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 284. Домашние дела: кто запускает стиральную машину?<br><small>poner / quitar la mesa, hacer la cama, fregar los platos, pasar la aspiradora, sacar la basura, planchar; repartir tareas; frecuencia</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 285. Правила совместной жизни: надо, нельзя<br><small>hay que, (no) se puede, está prohibido, es mejor; compartir piso; horarios de ruido; turnos</small></li>
-<li class='falta'><span class='tipo'>повторение</span> Урок 286. Повторение недели 41: дом и estar + причастие<br><small>Mini-test de 15 ítems; dictado de tareas</small></li>
-<li class='falta'><span class='tipo'>культура</span> Урок 287. Снимать квартиру вместе и жить с родителями<br><small>Compartir piso en España; vivir con los padres hasta los 30; la comunidad de vecinos</small></li>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Тема 21. Дом, совместная жизнь и быт</h2><span class="tipo">A2 · 0/14</span></div>
+<details><summary>Чему вы научитесь · недели 41–42</summary><ul><li>Alquilar un piso, describir problemas en casa y quejarse con cortesía.</li><li>Pedir favores y permiso; agradecer y disculparse.</li><li>Hablar de las tareas domésticas y de las normas de convivencia.</li></ul></details>
+<h3>Неделя 41</h3><ul class="dias">
+<li><span class="num">281</span><span class="falta">Снять квартиру: договор, залог, коммунальные <span class="tipo">урок</span></span></li>
+<li><span class="num">282</span><span class="falta">Сломан, открыта: estar + причастие <span class="tipo">урок</span></span></li>
+<li><span class="num">283</span><span class="falta">Не работает, сломалось: проблемы дома <span class="tipo">урок</span></span></li>
+<li><span class="num">284</span><span class="falta">Домашние дела: кто запускает стиральную машину? <span class="tipo">урок</span></span></li>
+<li><span class="num">285</span><span class="falta">Правила совместной жизни: надо, нельзя <span class="tipo">урок</span></span></li>
+<li><span class="num">286</span><span class="falta">Повторение недели 41: дом и estar + причастие <span class="tipo">повторение</span></span></li>
+<li><span class="num">287</span><span class="falta">Снимать квартиру вместе и жить с родителями <span class="tipo">культура</span></span></li>
 </ul>
-<h3>Неделя 42</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>урок</span> Урок 288. Можешь…? Ты не против, если…? Можно…?<br><small>pedir favores: ¿puedes / podrías…?; pedir permiso: ¿puedo…? ¿te importa si…?; conceder / denegar con cortesía</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 289. Спасибо за, извини за, ничего страшного<br><small>muchas gracias por + sustantivo / infinitivo; perdona / perdone por; lo siento; no pasa nada, de nada, no te preocupes</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 290. Соседи: шум, вечеринка, записка<br><small>el ruido, la fiesta, la escalera, el ascensor; quejarse al vecino con cortesía; escribir una nota</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 291. Продаётся, сдаются, здесь говорят по-испански<br><small>se impersonal y pasiva refleja; concordancia (se venden pisos); carteles y anuncios</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 292. Претензия хозяину и совместная жизнь: интеграция<br><small>Reclamación por correo (150 palabras); diálogo con un compañero de piso sobre normas</small></li>
-<li class='falta'><span class='tipo'>тест</span> Урок 293. Тест по Уроку 21<br><small>15 ítems: estar + participio, se, favores y permiso, léxico</small></li>
-<li class='falta'><span class='tipo'>культура</span> Урок 294. Латиноамериканский дом; итоговое задание<br><small>El patio, la hamaca, la azotea; tarea final: anuncio de mi piso</small></li>
+<h3>Неделя 42</h3><ul class="dias">
+<li><span class="num">288</span><span class="falta">Можешь…? Ты не против, если…? Можно…? <span class="tipo">урок</span></span></li>
+<li><span class="num">289</span><span class="falta">Спасибо за, извини за, ничего страшного <span class="tipo">урок</span></span></li>
+<li><span class="num">290</span><span class="falta">Соседи: шум, вечеринка, записка <span class="tipo">урок</span></span></li>
+<li><span class="num">291</span><span class="falta">Продаётся, сдаются, здесь говорят по-испански <span class="tipo">урок</span></span></li>
+<li><span class="num">292</span><span class="falta">Претензия хозяину и совместная жизнь: интеграция <span class="tipo">урок</span></span></li>
+<li><span class="num">293</span><span class="falta">Тест по Уроку 21 <span class="tipo">тест</span></span></li>
+<li><span class="num">294</span><span class="falta">Латиноамериканский дом; итоговое задание <span class="tipo">культура</span></span></li>
 </ul>
-<h2>Тема 22: Праздники, культура и чувства · Fiestas, cultura y sentimientos</h2>
-<details><summary>Чему вы научитесь · уровень A2 · недели 43–44</summary><ul><li>Hablar de cambios y de fases de una acción con perífrasis (empezar a, dejar de, seguir, acabar de).</li><li>Expresar sentimientos y reacciones (me da miedo, me pone nervioso, estoy harto de).</li><li>Felicitar, invitar y describir fiestas y tradiciones.</li></ul></details>
-<h3>Неделя 43</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>урок</span> Урок 295. Начать, перестать, снова, только что<br><small>perífrasis de fase; acabar de = только что; tener ganas de; cambios de hábito</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 296. Продолжать + герундий, вот-вот<br><small>sigo estudiando (продолжаю учить); estar a punto de; llevar + gerundio (repaso); ya no (contraste)</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 297. Праздники испаноязычного мира: как празднуют?<br><small>Navidad, Reyes, Semana Santa, Día de Muertos, Carnaval, la Tomatina; se celebra, se come, se regala, se baila</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 298. Поздравляю! Приятного аппетита! Поздравить и пригласить<br><small>¡Felicidades! ¡Enhorabuena! ¡Feliz cumpleaños / Navidad!; fórmulas fijas con subjuntivo como chunks: ¡Que aproveche! ¡Que te mejores! ¡Que tengas suerte!; invitar a una fiesta</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 299. Рассказать о празднике: пошли, было много людей, танцевали<br><small>narrar una fiesta pasada (indefinido + imperfecto); la fiesta de cumpleaños; lo pasamos genial</small></li>
-<li class='falta'><span class='tipo'>повторение</span> Урок 300. Повторение недели 43: перифразы и праздники<br><small>Mini-test de 15 ítems; dictado de fiestas</small></li>
-<li class='falta'><span class='tipo'>культура</span> Урок 301. Испаноязычное Рождество и русский Новый год<br><small>Nochebuena, Reyes, el roscón, los villancicos, las doce uvas; comparar con el Новый год y Ded Moroz</small></li>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Тема 22. Праздники, культура и чувства</h2><span class="tipo">A2 · 0/14</span></div>
+<details><summary>Чему вы научитесь · недели 43–44</summary><ul><li>Hablar de cambios y de fases de una acción con perífrasis (empezar a, dejar de, seguir, acabar de).</li><li>Expresar sentimientos y reacciones (me da miedo, me pone nervioso, estoy harto de).</li><li>Felicitar, invitar y describir fiestas y tradiciones.</li></ul></details>
+<h3>Неделя 43</h3><ul class="dias">
+<li><span class="num">295</span><span class="falta">Начать, перестать, снова, только что <span class="tipo">урок</span></span></li>
+<li><span class="num">296</span><span class="falta">Продолжать + герундий, вот-вот <span class="tipo">урок</span></span></li>
+<li><span class="num">297</span><span class="falta">Праздники испаноязычного мира: как празднуют? <span class="tipo">урок</span></span></li>
+<li><span class="num">298</span><span class="falta">Поздравляю! Приятного аппетита! Поздравить и пригласить <span class="tipo">урок</span></span></li>
+<li><span class="num">299</span><span class="falta">Рассказать о празднике: пошли, было много людей, танцевали <span class="tipo">урок</span></span></li>
+<li><span class="num">300</span><span class="falta">Повторение недели 43: перифразы и праздники <span class="tipo">повторение</span></span></li>
+<li><span class="num">301</span><span class="falta">Испаноязычное Рождество и русский Новый год <span class="tipo">культура</span></span></li>
 </ul>
-<h3>Неделя 44</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>урок</span> Урок 302. Мне страшно, меня нервирует, мне надоело<br><small>me da miedo / pena / vergüenza; me pone nervioso / triste / de buen humor; me hace feliz / reír; estar harto / cansado de</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 303. Музыка и танец: сальса, фламенко, танго, реггетон<br><small>géneros, instrumentos, el ritmo, la letra; gustos musicales; una canción comentada (letra sencilla)</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 304. Кино и сериалы: о чём?<br><small>géneros, el actor / la actriz, el director, trata de, el final; recomendar: te recomiendo, merece la pena, no te la pierdas</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 305. Русские праздники по-испански<br><small>Maslenitsa, el 8 de marzo, el 9 de mayo, Nochevieja rusa; en mi país se celebra…, se come…, se regala…</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 306. Праздник моей страны: интеграция<br><small>Invitación escrita; texto «Una fiesta de mi país» (150 palabras); presentación oral de 2 minutos</small></li>
-<li class='falta'><span class='tipo'>тест</span> Урок 307. Тест по Уроку 22<br><small>15 ítems: perífrasis, sentimientos, fórmulas, léxico</small></li>
-<li class='falta'><span class='tipo'>культура</span> Урок 308. Фламенко, танго и кумбия; итоговое задание<br><small>Tres bailes en vídeo; de dónde vienen; tarea final: lista de reproducción comentada</small></li>
+<h3>Неделя 44</h3><ul class="dias">
+<li><span class="num">302</span><span class="falta">Мне страшно, меня нервирует, мне надоело <span class="tipo">урок</span></span></li>
+<li><span class="num">303</span><span class="falta">Музыка и танец: сальса, фламенко, танго, реггетон <span class="tipo">урок</span></span></li>
+<li><span class="num">304</span><span class="falta">Кино и сериалы: о чём? <span class="tipo">урок</span></span></li>
+<li><span class="num">305</span><span class="falta">Русские праздники по-испански <span class="tipo">урок</span></span></li>
+<li><span class="num">306</span><span class="falta">Праздник моей страны: интеграция <span class="tipo">урок</span></span></li>
+<li><span class="num">307</span><span class="falta">Тест по Уроку 22 <span class="tipo">тест</span></span></li>
+<li><span class="num">308</span><span class="falta">Фламенко, танго и кумбия; итоговое задание <span class="tipo">культура</span></span></li>
 </ul>
-<h2>Тема 23: Чтение и письмо: тексты из реальной жизни · Leer y escribir: textos de la vida real</h2>
-<details><summary>Чему вы научитесь · уровень A2 · недели 45–46</summary><ul><li>Leer textos reales sencillos con estrategias (anuncios, noticias, correos, carteles).</li><li>Escribir correos informales y formales y textos narrativos y descriptivos de 70-100 palabras.</li><li>Aplicar las reglas de ortografía y puntuación y autocorregirse.</li></ul></details>
-<h3>Неделя 45</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>урок</span> Урок 309. Стратегии чтения: объявления, вывески, программы<br><small>tipos de texto; lectura rápida (skimming) y de detalle (scanning); tareas tipo DELE A2 de lectura 1 y 2</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 310. Новости и информационные тексты: главная мысль<br><small>identificar la idea principal; preguntas de opción múltiple; tareas tipo DELE A2 de lectura 3 y 4</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 311. Орфография (1): тильда<br><small>repaso de las reglas; diptongos e hiatos; tildes diacríticas (tú / tu, él / el, sí / si, más / mas); dictado</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 312. Орфография (2): b / v, h, g / j, c / z / s, ll / y; пунктуация<br><small>reglas básicas y palabras frecuentes; ¿? ¡! coma, punto; mayúsculas (días y meses en minúscula)</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 313. Неформальное письмо (DELE A2, письменное задание 1)<br><small>responder a un correo: saludo, responder a TODAS las preguntas, despedida; 60-70 palabras; rúbrica</small></li>
-<li class='falta'><span class='tipo'>повторение</span> Урок 314. Повторение недели 45: чтение и орфография<br><small>Mini-test de ortografía (20 ítems); una tarea de lectura</small></li>
-<li class='falta'><span class='tipo'>культура</span> Урок 315. Микрорассказы и короткие стихи<br><small>Monterroso («El dinosaurio»), Neruda y Lorca adaptados; leer en voz alta; comprensión</small></li>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Тема 23. Чтение и письмо: тексты из реальной жизни</h2><span class="tipo">A2 · 0/14</span></div>
+<details><summary>Чему вы научитесь · недели 45–46</summary><ul><li>Leer textos reales sencillos con estrategias (anuncios, noticias, correos, carteles).</li><li>Escribir correos informales y formales y textos narrativos y descriptivos de 70-100 palabras.</li><li>Aplicar las reglas de ortografía y puntuación y autocorregirse.</li></ul></details>
+<h3>Неделя 45</h3><ul class="dias">
+<li><span class="num">309</span><span class="falta">Стратегии чтения: объявления, вывески, программы <span class="tipo">урок</span></span></li>
+<li><span class="num">310</span><span class="falta">Новости и информационные тексты: главная мысль <span class="tipo">урок</span></span></li>
+<li><span class="num">311</span><span class="falta">Орфография (1): тильда <span class="tipo">урок</span></span></li>
+<li><span class="num">312</span><span class="falta">Орфография (2): b / v, h, g / j, c / z / s, ll / y; пунктуация <span class="tipo">урок</span></span></li>
+<li><span class="num">313</span><span class="falta">Неформальное письмо (DELE A2, письменное задание 1) <span class="tipo">урок</span></span></li>
+<li><span class="num">314</span><span class="falta">Повторение недели 45: чтение и орфография <span class="tipo">повторение</span></span></li>
+<li><span class="num">315</span><span class="falta">Микрорассказы и короткие стихи <span class="tipo">культура</span></span></li>
 </ul>
-<h3>Неделя 46</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>урок</span> Урок 316. Официальное письмо: запросить, пожаловаться, поблагодарить<br><small>fórmulas; estructura; 70-80 palabras; registro usted</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 317. Повествовательный текст (DELE A2, письменное задание 2)<br><small>contar una experiencia pasada: estructura, tiempos, conectores; 70-80 palabras; rúbrica</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 318. Описательный текст: место, человек, предмет<br><small>orden de la descripción; adjetivación; hay / está / es; conectores espaciales</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 319. Проверить и исправить: чек-лист русскоговорящего<br><small>artículos, ser / estar, género, preposiciones, tildes, posición del adjetivo, muy / mucho, por / para; autocorregir un texto con 10 errores</small></li>
-<li class='falta'><span class='tipo'>урок</span> Урок 320. Два текста в формате DELE: интеграция<br><small>Correo (tarea 1) y narración (tarea 2) en 45 minutos repartidos; rúbrica de autoevaluación</small></li>
-<li class='falta'><span class='tipo'>тест</span> Урок 321. Тест по Уроку 23<br><small>15 ítems: ortografía, conectores, comprensión de un texto</small></li>
-<li class='falta'><span class='tipo'>культура</span> Урок 322. Рассказ в адаптированной версии; итоговое задание<br><small>Lectura graduada de nivel A2 (un capítulo); tarea final: diario de una semana</small></li>
+<h3>Неделя 46</h3><ul class="dias">
+<li><span class="num">316</span><span class="falta">Официальное письмо: запросить, пожаловаться, поблагодарить <span class="tipo">урок</span></span></li>
+<li><span class="num">317</span><span class="falta">Повествовательный текст (DELE A2, письменное задание 2) <span class="tipo">урок</span></span></li>
+<li><span class="num">318</span><span class="falta">Описательный текст: место, человек, предмет <span class="tipo">урок</span></span></li>
+<li><span class="num">319</span><span class="falta">Проверить и исправить: чек-лист русскоговорящего <span class="tipo">урок</span></span></li>
+<li><span class="num">320</span><span class="falta">Два текста в формате DELE: интеграция <span class="tipo">урок</span></span></li>
+<li><span class="num">321</span><span class="falta">Тест по Уроку 23 <span class="tipo">тест</span></span></li>
+<li><span class="num">322</span><span class="falta">Рассказ в адаптированной версии; итоговое задание <span class="tipo">культура</span></span></li>
 </ul>
-<h2>Тема 24: Итоговое повторение уровня A2 · Repaso integral del nivel A2</h2>
-<details><summary>Чему вы научитесь · уровень A2 · недели 47–48</summary><ul><li>Consolidar toda la gramática y el léxico de A2 con mapas y tablas de decisión.</li><li>Conocer el formato de las cuatro pruebas del DELE A2 y practicar cada una.</li><li>Tener la lista personal de errores lista para la fase final.</li></ul></details>
-<h3>Неделя 47</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>повторение</span> Урок 323. Повторение 1: настоящее время, возвратные и глаголы типа gustar<br><small>Mapa completo de gustar, encantar, doler, quedar, interesar, dar miedo, poner nervioso, parecer</small></li>
-<li class='falta'><span class='tipo'>повторение</span> Урок 324. Повторение 2: прошедшие времена, таблица решений<br><small>perfecto / indefinido / imperfecto: aspecto (вид) + marcador (hoy / ayer); relato guiado</small></li>
-<li class='falta'><span class='tipo'>повторение</span> Урок 325. Повторение 3: будущее, условное, ir a, перифразы<br><small>formas e irregulares; usos; tabla de perífrasis con equivalentes rusos</small></li>
-<li class='falta'><span class='tipo'>повторение</span> Урок 326. Повторение 4: императив, местоимения и se<br><small>afirmativo / negativo; OD + OI; se impersonal y pasiva refleja</small></li>
-<li class='falta'><span class='tipo'>повторение</span> Урок 327. Повторение 5: ser / estar / hay, por / para, сравнение, относительные, неопределённые<br><small>los puntos de decisión más frecuentes del rusohablante; 40 frases de elección</small></li>
-<li class='falta'><span class='tipo'>повторение</span> Урок 328. Повторение 6: лексика A2 и ложные друзья<br><small>campos léxicos de A2; juego de categorías; falsos amigos (constipado, sensible, éxito, largo, vaso…)</small></li>
-<li class='falta'><span class='tipo'>культура</span> Урок 329. Фильм на испанском (фрагменты)<br><small>Tres fragmentos con subtítulos en español; comprensión global; 20 palabras</small></li>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Тема 24. Итоговое повторение уровня A2</h2><span class="tipo">A2 · 0/14</span></div>
+<details><summary>Чему вы научитесь · недели 47–48</summary><ul><li>Consolidar toda la gramática y el léxico de A2 con mapas y tablas de decisión.</li><li>Conocer el formato de las cuatro pruebas del DELE A2 y practicar cada una.</li><li>Tener la lista personal de errores lista para la fase final.</li></ul></details>
+<h3>Неделя 47</h3><ul class="dias">
+<li><span class="num">323</span><span class="falta">Повторение 1: настоящее время, возвратные и глаголы типа gustar <span class="tipo">повторение</span></span></li>
+<li><span class="num">324</span><span class="falta">Повторение 2: прошедшие времена, таблица решений <span class="tipo">повторение</span></span></li>
+<li><span class="num">325</span><span class="falta">Повторение 3: будущее, условное, ir a, перифразы <span class="tipo">повторение</span></span></li>
+<li><span class="num">326</span><span class="falta">Повторение 4: императив, местоимения и se <span class="tipo">повторение</span></span></li>
+<li><span class="num">327</span><span class="falta">Повторение 5: ser / estar / hay, por / para, сравнение, относительные, неопределённые <span class="tipo">повторение</span></span></li>
+<li><span class="num">328</span><span class="falta">Повторение 6: лексика A2 и ложные друзья <span class="tipo">повторение</span></span></li>
+<li><span class="num">329</span><span class="falta">Фильм на испанском (фрагменты) <span class="tipo">культура</span></span></li>
 </ul>
-<h3>Неделя 48</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>повторение</span> Урок 330. Аудирование: стратегии и типы заданий<br><small>anticipar, palabras clave, números y horas; las 4 tareas de audio del DELE A2; práctica con audios cortos</small></li>
-<li class='falta'><span class='tipo'>повторение</span> Урок 331. Чтение: стратегии по заданиям<br><small>las 4 tareas de lectura del DELE A2; gestión del tiempo</small></li>
-<li class='falta'><span class='tipo'>повторение</span> Урок 332. Устная речь: три задания DELE A2<br><small>presentación de un tema (2-3 min), descripción de una foto, diálogo simulado; fichas; grabarse</small></li>
-<li class='falta'><span class='tipo'>повторение</span> Урок 333. Письмо: два текста с критериями<br><small>correo y texto narrativo / descriptivo; rúbrica DELE (adecuación, coherencia, corrección, alcance)</small></li>
-<li class='falta'><span class='tipo'>повторение</span> Урок 334. Мои ошибки: чёрный список русскоговорящего<br><small>análisis de la lista personal; ejercicios de corrección de los 5 errores más frecuentes</small></li>
-<li class='falta'><span class='tipo'>тест</span> Урок 335. Тест по Уроку 24: итоговый по A2<br><small>40 ítems de gramática y léxico de A2 (25 min) con clave</small></li>
-<li class='falta'><span class='tipo'>культура</span> Урок 336. Что после A2?<br><small>recursos para B1: podcasts, series, lecturas graduadas, intercambios; cómo seguir 30 minutos al día</small></li>
+<h3>Неделя 48</h3><ul class="dias">
+<li><span class="num">330</span><span class="falta">Аудирование: стратегии и типы заданий <span class="tipo">повторение</span></span></li>
+<li><span class="num">331</span><span class="falta">Чтение: стратегии по заданиям <span class="tipo">повторение</span></span></li>
+<li><span class="num">332</span><span class="falta">Устная речь: три задания DELE A2 <span class="tipo">повторение</span></span></li>
+<li><span class="num">333</span><span class="falta">Письмо: два текста с критериями <span class="tipo">повторение</span></span></li>
+<li><span class="num">334</span><span class="falta">Мои ошибки: чёрный список русскоговорящего <span class="tipo">повторение</span></span></li>
+<li><span class="num">335</span><span class="falta">Тест по Уроку 24: итоговый по A2 <span class="tipo">тест</span></span></li>
+<li><span class="num">336</span><span class="falta">Что после A2? <span class="tipo">культура</span></span></li>
 </ul>
-<h2>Заключительный этап: пробные экзамены DELE A2, проект и экзамен · Fase final: simulacros del DELE A2, proyecto y examen</h2>
-<h3>Неделя 49</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>пробный экзамен</span> Урок 337. Пробный экзамен 1 · Чтение, задания 1 и 2<br><small>DELE A2 comprensión de lectura: tareas 1-2 (30 min)</small></li>
-<li class='falta'><span class='tipo'>пробный экзамен</span> Урок 338. Пробный экзамен 1 · Чтение, задания 3 и 4<br><small>DELE A2 comprensión de lectura: tareas 3-4 (30 min)</small></li>
-<li class='falta'><span class='tipo'>пробный экзамен</span> Урок 339. Пробный экзамен 1 · Аудирование, задания 1 и 2<br><small>DELE A2 comprensión auditiva: tareas 1-2 (20 min) + revisión</small></li>
-<li class='falta'><span class='tipo'>пробный экзамен</span> Урок 340. Пробный экзамен 1 · Аудирование, задания 3 и 4<br><small>DELE A2 comprensión auditiva: tareas 3-4 (20 min) + revisión</small></li>
-<li class='falta'><span class='tipo'>пробный экзамен</span> Урок 341. Пробный экзамен 1 · Письмо, задание 1 (письмо)<br><small>DELE A2 expresión escrita: tarea 1 (20 min) + rúbrica</small></li>
-<li class='falta'><span class='tipo'>пробный экзамен</span> Урок 342. Пробный экзамен 1 · Письмо, задание 2 (текст)<br><small>DELE A2 expresión escrita: tarea 2 (25 min) + rúbrica</small></li>
-<li class='falta'><span class='tipo'>пробный экзамен</span> Урок 343. Пробный экзамен 1 · Устная часть (подготовка и выполнение)<br><small>DELE A2 expresión oral: 12 min de preparación + 12 min de ejecución grabada</small></li>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Заключительный этап: пробные экзамены DELE A2, проект и экзамен</h2></div>
+<h3>Неделя 49</h3><ul class="dias">
+<li><span class="num">337</span><span class="falta">Пробный экзамен 1 · Чтение, задания 1 и 2 <span class="tipo">пробный экзамен</span></span></li>
+<li><span class="num">338</span><span class="falta">Пробный экзамен 1 · Чтение, задания 3 и 4 <span class="tipo">пробный экзамен</span></span></li>
+<li><span class="num">339</span><span class="falta">Пробный экзамен 1 · Аудирование, задания 1 и 2 <span class="tipo">пробный экзамен</span></span></li>
+<li><span class="num">340</span><span class="falta">Пробный экзамен 1 · Аудирование, задания 3 и 4 <span class="tipo">пробный экзамен</span></span></li>
+<li><span class="num">341</span><span class="falta">Пробный экзамен 1 · Письмо, задание 1 (письмо) <span class="tipo">пробный экзамен</span></span></li>
+<li><span class="num">342</span><span class="falta">Пробный экзамен 1 · Письмо, задание 2 (текст) <span class="tipo">пробный экзамен</span></span></li>
+<li><span class="num">343</span><span class="falta">Пробный экзамен 1 · Устная часть (подготовка и выполнение) <span class="tipo">пробный экзамен</span></span></li>
 </ul>
-<h3>Неделя 50</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>повторение</span> Урок 344. Разбор пробного экзамена 1 и план работы над слабыми местами<br><small>Resultados por prueba (grupo 1: lectura + escritura; grupo 2: audio + oral); elegir 4 refuerzos</small></li>
-<li class='falta'><span class='tipo'>повторение</span> Урок 345. Работа над ошибками 1: грамматика<br><small>El punto gramatical más débil del simulacro (según resultados)</small></li>
-<li class='falta'><span class='tipo'>повторение</span> Урок 346. Работа над ошибками 2: лексика и аудирование<br><small>Campos léxicos débiles; práctica de audio con transcripción</small></li>
-<li class='falta'><span class='tipo'>повторение</span> Урок 347. Работа над ошибками 3: письмо<br><small>Reescribir los dos textos del simulacro con la rúbrica</small></li>
-<li class='falta'><span class='tipo'>повторение</span> Урок 348. Работа над ошибками 4: устная речь<br><small>Repetir las tres tareas orales con las fichas del simulacro</small></li>
-<li class='falta'><span class='tipo'>повторение</span> Урок 349. Общее повторение в игре: 50 вопросов<br><small>Quiz de 50 preguntas de todo el curso (gramática, léxico, cultura)</small></li>
-<li class='falta'><span class='tipo'>культура</span> Урок 350. Полнометражный фильм (первая половина)<br><small>Película en español con subtítulos en español; 20 palabras; comprensión global</small></li>
+<h3>Неделя 50</h3><ul class="dias">
+<li><span class="num">344</span><span class="falta">Разбор пробного экзамена 1 и план работы над слабыми местами <span class="tipo">повторение</span></span></li>
+<li><span class="num">345</span><span class="falta">Работа над ошибками 1: грамматика <span class="tipo">повторение</span></span></li>
+<li><span class="num">346</span><span class="falta">Работа над ошибками 2: лексика и аудирование <span class="tipo">повторение</span></span></li>
+<li><span class="num">347</span><span class="falta">Работа над ошибками 3: письмо <span class="tipo">повторение</span></span></li>
+<li><span class="num">348</span><span class="falta">Работа над ошибками 4: устная речь <span class="tipo">повторение</span></span></li>
+<li><span class="num">349</span><span class="falta">Общее повторение в игре: 50 вопросов <span class="tipo">повторение</span></span></li>
+<li><span class="num">350</span><span class="falta">Полнометражный фильм (первая половина) <span class="tipo">культура</span></span></li>
 </ul>
-<h3>Неделя 51</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>пробный экзамен</span> Урок 351. Пробный экзамен 2 · Чтение, задания 1 и 2<br><small>DELE A2 comprensión de lectura: tareas 1-2 (30 min)</small></li>
-<li class='falta'><span class='tipo'>пробный экзамен</span> Урок 352. Пробный экзамен 2 · Чтение, задания 3 и 4<br><small>DELE A2 comprensión de lectura: tareas 3-4 (30 min)</small></li>
-<li class='falta'><span class='tipo'>пробный экзамен</span> Урок 353. Пробный экзамен 2 · Аудирование, задания 1 и 2<br><small>DELE A2 comprensión auditiva: tareas 1-2 (20 min) + revisión</small></li>
-<li class='falta'><span class='tipo'>пробный экзамен</span> Урок 354. Пробный экзамен 2 · Аудирование, задания 3 и 4<br><small>DELE A2 comprensión auditiva: tareas 3-4 (20 min) + revisión</small></li>
-<li class='falta'><span class='tipo'>пробный экзамен</span> Урок 355. Пробный экзамен 2 · Письмо, задание 1 (письмо)<br><small>DELE A2 expresión escrita: tarea 1 (20 min) + rúbrica</small></li>
-<li class='falta'><span class='tipo'>пробный экзамен</span> Урок 356. Пробный экзамен 2 · Письмо, задание 2 (текст)<br><small>DELE A2 expresión escrita: tarea 2 (25 min) + rúbrica</small></li>
-<li class='falta'><span class='tipo'>пробный экзамен</span> Урок 357. Пробный экзамен 2 · Устная часть (подготовка и выполнение)<br><small>DELE A2 expresión oral: 12 min de preparación + 12 min de ejecución grabada</small></li>
+<h3>Неделя 51</h3><ul class="dias">
+<li><span class="num">351</span><span class="falta">Пробный экзамен 2 · Чтение, задания 1 и 2 <span class="tipo">пробный экзамен</span></span></li>
+<li><span class="num">352</span><span class="falta">Пробный экзамен 2 · Чтение, задания 3 и 4 <span class="tipo">пробный экзамен</span></span></li>
+<li><span class="num">353</span><span class="falta">Пробный экзамен 2 · Аудирование, задания 1 и 2 <span class="tipo">пробный экзамен</span></span></li>
+<li><span class="num">354</span><span class="falta">Пробный экзамен 2 · Аудирование, задания 3 и 4 <span class="tipo">пробный экзамен</span></span></li>
+<li><span class="num">355</span><span class="falta">Пробный экзамен 2 · Письмо, задание 1 (письмо) <span class="tipo">пробный экзамен</span></span></li>
+<li><span class="num">356</span><span class="falta">Пробный экзамен 2 · Письмо, задание 2 (текст) <span class="tipo">пробный экзамен</span></span></li>
+<li><span class="num">357</span><span class="falta">Пробный экзамен 2 · Устная часть (подготовка и выполнение) <span class="tipo">пробный экзамен</span></span></li>
 </ul>
-<h3>Неделя 52</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>повторение</span> Урок 358. Разбор пробного экзамена 2 и сравнение с первым<br><small>Resultados por prueba; progreso; ¿apto para el DELE A2?</small></li>
-<li class='falta'><span class='tipo'>проект</span> Урок 359. Итоговый проект (1): «Год с испанским», план<br><small>Presentación oral de 3 min (mi vida, mi pasado, mis planes) y texto de 150-200 palabras: guion</small></li>
-<li class='falta'><span class='tipo'>проект</span> Урок 360. Итоговый проект (2): написать и проверить<br><small>Redactar el texto; revisar con la lista de control del rusohablante</small></li>
-<li class='falta'><span class='tipo'>проект</span> Урок 361. Итоговый проект (3): записать и оценить<br><small>Grabar la presentación; autoevaluar con la rúbrica del DELE A2</small></li>
-<li class='falta'><span class='tipo'>повторение</span> Урок 362. Итоги: чек-лист «я умею» уровня A2<br><small>Autoevaluación completa de A2; lo que falta para B1</small></li>
-<li class='falta'><span class='tipo'>экзамен</span> Урок 363. Итоговый экзамен курса<br><small>60 ítems de gramática y léxico de A1 y A2 (30 min) con clave</small></li>
-<li class='falta'><span class='tipo'>культура</span> Урок 364. Завершение и план на B1<br><small>Recursos para seguir 30 minutos al día; cómo preparar el DELE A2 real; celebración</small></li>
+<h3>Неделя 52</h3><ul class="dias">
+<li><span class="num">358</span><span class="falta">Разбор пробного экзамена 2 и сравнение с первым <span class="tipo">повторение</span></span></li>
+<li><span class="num">359</span><span class="falta">Итоговый проект (1): «Год с испанским», план <span class="tipo">проект</span></span></li>
+<li><span class="num">360</span><span class="falta">Итоговый проект (2): написать и проверить <span class="tipo">проект</span></span></li>
+<li><span class="num">361</span><span class="falta">Итоговый проект (3): записать и оценить <span class="tipo">проект</span></span></li>
+<li><span class="num">362</span><span class="falta">Итоги: чек-лист «я умею» уровня A2 <span class="tipo">повторение</span></span></li>
+<li><span class="num">363</span><span class="falta">Итоговый экзамен курса <span class="tipo">экзамен</span></span></li>
+<li><span class="num">364</span><span class="falta">Завершение и план на B1 <span class="tipo">культура</span></span></li>
 </ul>
-<h2>День 365</h2>
-<h3>Неделя 53</h3><ul class='dias'>
-<li class='falta'><span class='tipo'>резерв</span> Урок 365. День 365: резервный день<br><small>Recuperar lo pendiente de la fase final o descansar; entrega definitiva del proyecto</small></li>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Заключительный этап: пробные экзамены DELE A2, проект и экзамен</h2></div>
+<h3>Неделя 53</h3><ul class="dias">
+<li><span class="num">365</span><span class="falta">День 365: резервный день <span class="tipo">резерв</span></span></li>
 </ul>
 
 </div></main>
 <footer class="sitio"><div class="envoltorio">
-<p>Испанский с нуля для русскоговорящих · <a href="./o-kurse.html">О курсе</a> · <a href="./kontakt.html">Контакты</a> · <a href="./privacy.html">Конфиденциальность</a></p>
+<p><a href="./o-kurse.html">О курсе</a> · <a href="./kontakt.html">Контакты</a> · <a href="./privacy.html">Политика конфиденциальности</a></p>
 <p>Материалы курса можно свободно использовать для учёбы.</p>
 </div></footer>
 

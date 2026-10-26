@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lessons — 365 days, 52 weeks, 24 units</title>
+<meta name="description" content="Links open the lessons already written. For the rest, the topic of the day is shown: the syllabus covers the whole year."><link rel="canonical" href="https://ianmusicall-max.github.io/espanol-desde-ruso/en/kurs.html"><link rel="alternate" hreflang="ru" href="https://ianmusicall-max.github.io/espanol-desde-ruso/kurs.html"><link rel="alternate" hreflang="es" href="https://ianmusicall-max.github.io/espanol-desde-ruso/es/kurs.html"><link rel="alternate" hreflang="en" href="https://ianmusicall-max.github.io/espanol-desde-ruso/en/kurs.html"><meta property="og:type" content="website"><meta property="og:locale" content="en"><meta property="og:title" content="Lessons — 365 days, 52 weeks, 24 units"><meta property="og:description" content="Links open the lessons already written. For the rest, the topic of the day is shown: the syllabus covers the whole year."><meta property="og:url" content="https://ianmusicall-max.github.io/espanol-desde-ruso/en/kurs.html">
+<style>
+:root{
+  --papel:#fdfbf6; --tinta:#1b1e23; --tenue:#646c78; --linea:#e2dacb;
+  --acento:#b03f26; --acento-suave:#fbeee9; --celeste:#2f6b8f; --celeste-suave:#eaf2f7;
+  --realce:#fdf3d8; --tarjeta:#f7f2e6; --sombra:0 1px 2px rgba(27,30,35,.05);
+  --ancho:44rem;
+}
+@media(prefers-color-scheme:dark){:root{
+  --papel:#14161a; --tinta:#e8e4da; --tenue:#9aa2ae; --linea:#333941;
+  --acento:#f0896a; --acento-suave:#2a1d19; --celeste:#7fb6d6; --celeste-suave:#162229;
+  --realce:#2a2718; --tarjeta:#1d2026; --sombra:none;
+}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--papel);color:var(--tinta);
+  font:400 17px/1.65 ui-serif,Georgia,"Times New Roman",serif;
+  -webkit-font-smoothing:antialiased;overflow-wrap:break-word}
+.sans{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.envoltorio{max-width:var(--ancho);margin:0 auto;padding:0 20px}
+
+/* ---- cabecera ---- */
+/* En el móvil la cabecera NO se queda pegada: ocupa dos filas y una lección es
+   una lectura larga, así que robaría una sexta parte de la pantalla todo el
+   rato. A partir de 40rem cabe en una fila y ahí sí se queda. */
+header.sitio{background:var(--papel);border-bottom:1px solid var(--linea)}
+@media(min-width:40rem){header.sitio{position:sticky;top:0;z-index:20;
+  background:color-mix(in srgb,var(--papel) 92%,transparent);backdrop-filter:saturate(1.6) blur(8px)}
+  html{scroll-padding-top:4rem}}
+header.sitio .envoltorio{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .9rem;padding-block:.5rem;
+  font-family:ui-sans-serif,system-ui,-apple-system,sans-serif;font-size:.86rem}
+header.sitio a{color:var(--tenue);text-decoration:none;white-space:nowrap}
+header.sitio a:hover,header.sitio nav.paginas a[aria-current]{color:var(--acento)}
+/* El título cede espacio antes que el selector de idioma: en un móvil
+   estrecho se recorta con puntos suspensivos, pero el selector no se sale. */
+header.sitio .marca{font-weight:650;color:var(--tinta);font-size:.95rem;letter-spacing:-.01em;
+  flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
+header.sitio nav.paginas{display:flex;gap:.9rem;order:3;flex:1 0 100%;overflow-x:auto;
+  scrollbar-width:none;padding-bottom:.1rem}
+header.sitio nav.paginas::-webkit-scrollbar{display:none}
+.idiomas{display:flex;gap:.2rem;flex:0 0 auto;border:1px solid var(--linea);border-radius:999px;padding:2px}
+.idiomas a{padding:.12rem .5rem;border-radius:999px;font-size:.75rem;font-weight:600;
+  text-transform:uppercase;letter-spacing:.05em;line-height:1.5}
+.idiomas a[aria-current]{background:var(--acento);color:#fff}
+@media(min-width:40rem){
+  header.sitio nav.paginas{order:0;flex:0 1 auto;margin-inline-start:auto}
+  header.sitio .marca{flex:0 1 auto}
+}
+
+main{padding-bottom:3.5rem}
+
+/* ---- tipografía ---- */
+h1{font-size:clamp(1.65rem,5.2vw,2.3rem);line-height:1.15;letter-spacing:-.022em;margin:1.6rem 0 .25rem;font-weight:650}
+h1 .segunda{display:block;color:var(--acento);font-weight:400}
+h2{font-size:clamp(1.08rem,3.2vw,1.22rem);margin:2.6rem 0 .7rem;padding-top:.9rem;
+  border-top:1px solid var(--linea);font-weight:650;letter-spacing:-.012em}
+h3{font-size:1rem;margin:1.6rem 0 .45rem;font-weight:650}
+h2,h3{font-family:ui-sans-serif,system-ui,-apple-system,sans-serif}
+p{margin:.75rem 0}
+a{color:var(--acento);text-underline-offset:2px}
+strong{font-weight:650}
+
+/* ---- portada ---- */
+.heroe{padding:2rem 0 .5rem}
+.heroe .lema{font-size:clamp(1.02rem,3.4vw,1.2rem);color:var(--tenue);margin:.5rem 0 1.1rem;font-style:italic}
+.botones{display:flex;flex-wrap:wrap;gap:.65rem;margin:1.4rem 0}
+.boton{display:inline-block;background:var(--acento);color:#fff;padding:.7rem 1.35rem;border-radius:8px;
+  text-decoration:none;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.97rem;font-weight:550;
+  box-shadow:var(--sombra);transition:transform .12s ease}
+.boton:hover{transform:translateY(-1px)}
+.boton.secundario{background:transparent;color:var(--acento);border:1.5px solid var(--acento);box-shadow:none}
+
+.progreso{margin:1.5rem 0;font-family:ui-sans-serif,system-ui,sans-serif}
+.progreso .cifras{display:flex;align-items:baseline;gap:.45rem;font-size:.88rem;color:var(--tenue)}
+.progreso .n{font-size:1.5rem;font-weight:700;color:var(--tinta);font-feature-settings:"tnum"}
+.barra{height:7px;border-radius:999px;background:var(--linea);overflow:hidden;margin-top:.45rem}
+.barra i{display:block;height:100%;background:linear-gradient(90deg,var(--acento),var(--celeste));border-radius:999px}
+
+/* ---- bloque de contraste: la firma del curso ---- */
+.contraste{background:var(--acento-suave);border:1px solid color-mix(in srgb,var(--acento) 22%,transparent);
+  border-radius:10px;padding:1rem 1.1rem;margin:1.3rem 0}
+.contraste>h3:first-child{margin-top:0;color:var(--acento)}
+.contraste p:last-child{margin-bottom:0}
+.mal{color:var(--acento)}
+.bien{color:#1d7a4f}
+@media(prefers-color-scheme:dark){.bien{color:#5fc48f}}
+
+blockquote{margin:1.2rem 0;padding:.85rem 1.1rem;background:var(--tarjeta);
+  border-inline-start:3px solid var(--celeste);border-radius:0 8px 8px 0}
+blockquote p:first-child{margin-top:0}blockquote p:last-child{margin-bottom:0}
+
+/* ---- tablas ---- */
+.tabla-env{overflow-x:auto;margin:.9rem 0;border:1px solid var(--linea);border-radius:9px;background:var(--papel)}
+table{border-collapse:collapse;width:100%;font-size:.92rem;font-family:ui-sans-serif,system-ui,sans-serif}
+th,td{padding:.45rem .65rem;text-align:start;vertical-align:top;border-bottom:1px solid var(--linea)}
+tr:last-child td{border-bottom:none}
+th{background:var(--tarjeta);font-weight:600;position:sticky;top:0}
+code{font-size:.88em;background:var(--tarjeta);padding:.1em .32em;border-radius:4px;
+  font-family:ui-monospace,"SF Mono",Menlo,monospace}
+
+/* ---- tarjetas y listas ---- */
+.rejilla{display:grid;gap:.85rem;grid-template-columns:1fr;margin:1rem 0}
+@media(min-width:36rem){.rejilla{grid-template-columns:1fr 1fr}}
+.tarjeta{border:1px solid var(--linea);border-radius:10px;padding:.95rem 1.1rem;background:var(--tarjeta);box-shadow:var(--sombra)}
+.tarjeta h3{margin:0 0 .3rem;font-size:.88rem;text-transform:uppercase;letter-spacing:.05em;color:var(--acento)}
+.tarjeta p{margin:0;font-size:.95rem}
+
+ul.dias{list-style:none;padding:0;margin:.5rem 0}
+ul.dias li{display:flex;gap:.6rem;align-items:baseline;padding:.4rem .2rem;border-bottom:1px solid var(--linea)}
+ul.dias li:last-child{border-bottom:none}
+ul.dias .num{font-family:ui-sans-serif,system-ui,sans-serif;font-size:.78rem;color:var(--tenue);
+  min-width:2.6rem;font-feature-settings:"tnum"}
+ul.dias a{text-decoration:none}ul.dias a:hover{text-decoration:underline}
+ul.dias .falta{color:var(--tenue)}
+.tipo{font-family:ui-sans-serif,system-ui,sans-serif;font-size:.67rem;color:var(--celeste);
+  text-transform:uppercase;letter-spacing:.07em;border:1px solid var(--linea);border-radius:999px;
+  padding:.05rem .4rem;white-space:nowrap}
+.unidad-cab{display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;margin-top:2.4rem}
+details{margin:.5rem 0;font-size:.93rem}
+summary{cursor:pointer;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.86rem;color:var(--tenue)}
+details ul{margin:.5rem 0}
+
+/* ---- lección ---- */
+.leccion-cab{display:flex;flex-wrap:wrap;gap:.45rem;align-items:center;margin:1.3rem 0 .2rem;
+  font-family:ui-sans-serif,system-ui,sans-serif;font-size:.78rem;color:var(--tenue)}
+.leccion-cab .n{background:var(--acento);color:#fff;border-radius:999px;padding:.12rem .6rem;font-weight:600}
+.aviso{background:var(--realce);border:1px solid var(--linea);border-radius:8px;padding:.6rem .85rem;
+  font-size:.88rem;font-family:ui-sans-serif,system-ui,sans-serif;margin:1rem 0}
+nav.pasos{display:flex;justify-content:space-between;gap:.8rem;margin:2.5rem 0 0;padding-top:1rem;
+  border-top:1px solid var(--linea);font-family:ui-sans-serif,system-ui,sans-serif;font-size:.86rem}
+nav.pasos a{text-decoration:none;padding:.4rem .7rem;border:1px solid var(--linea);border-radius:7px}
+nav.pasos a:hover{border-color:var(--acento)}
+input[type=checkbox]{margin-inline-end:.45rem}
+
+/* ---- anuncios, pie, cookies ---- */
+.anuncio{margin:2rem 0;text-align:center;min-height:1px}
+.anuncio::before{content:attr(data-etiqueta);display:block;font-family:ui-sans-serif,system-ui,sans-serif;
+  font-size:.64rem;color:var(--tenue);text-transform:uppercase;letter-spacing:.09em;margin-bottom:.3rem}
+footer.sitio{border-top:1px solid var(--linea);padding:1.6rem 0 3rem;
+  font-family:ui-sans-serif,system-ui,sans-serif;font-size:.83rem;color:var(--tenue)}
+footer.sitio a{color:var(--tenue)}
+footer.sitio p{margin:.35rem 0}
+#cookies{position:fixed;inset-inline:0;bottom:0;background:var(--tarjeta);border-top:1px solid var(--linea);
+  padding:.85rem 20px;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.85rem;display:flex;
+  flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:center;z-index:30}
+</style>
+
+</head>
+<body>
+<header class="sitio"><div class="envoltorio">
+<a class="marca" href="../index.html">Spanish from Russian</a>
+<nav class="paginas"><a href="../kurs.html" aria-current="page">Lessons</a><a href="../o-kurse.html">About</a><a href="../kontakt.html">Contact</a></nav>
+<div class="idiomas" title="Language"><a href="../kurs.html" hreflang="ru" lang="ru">ru</a><a href="../es/kurs.html" hreflang="es" lang="es">es</a><a href="../en/kurs.html" hreflang="en" lang="en" aria-current="true">en</a></div>
+</div></header>
+<main><div class="envoltorio">
+<h1>Lessons<span class="segunda">365 days, 52 weeks, 24 units</span></h1>
+<p>Links open the lessons already written. For the rest, the topic of the day is shown: the syllabus covers the whole year.</p>
+
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Unit 1. ¡Hola! Sonidos y saludos</h2><span class="tipo">A1 · 14/14</span></div>
+<details><summary>Objectives · weeks 1–2</summary><ul><li>Leer en voz alta cualquier palabra española con la pronunciación y el acento correctos.</li><li>Saludar, despedirse y presentarse (nombre, origen, edad) en tú y en usted.</li><li>Contar de 0 a 20 y deletrear el propio nombre.</li></ul></details>
+<h3>Week 1</h3><ul class="dias">
+<li><span class="num">1</span><span><a href="../semana-01/dia-1.html">El alfabeto y las cinco vocales</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">2</span><span><a href="../semana-01/dia-2.html">Consonantes fáciles y los saludos del día</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">3</span><span><a href="../semana-01/dia-3.html">Las letras difíciles: c, z, qu, g, j, ñ, ll, y, r, rr, ch, x</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">4</span><span><a href="../semana-01/dia-4.html">El acento: sílaba tónica y tilde</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">5</span><span><a href="../semana-01/dia-5.html">Números 0-10 y tú / usted</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">6</span><span><a href="../semana-01/dia-6.html">Repaso de la semana 1: sonidos y saludos</a> <span class="tipo">repaso</span></span></li>
+<li><span class="num">7</span><span><a href="../semana-01/dia-7.html">El mundo hispano: dónde se habla español</a> <span class="tipo">cultura</span></span></li>
+</ul>
+<h3>Week 2</h3><ul class="dias">
+<li><span class="num">8</span><span><a href="../semana-02/dia-1.html">Ser y las nacionalidades</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">9</span><span><a href="../semana-02/dia-2.html">Somos, sois, son: el plural</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">10</span><span><a href="../semana-02/dia-3.html">Números 11-20 y la edad</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">11</span><span><a href="../semana-02/dia-4.html">Las preguntas básicas y la entonación</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">12</span><span><a href="../semana-02/dia-5.html">Lenguaje del aula y de supervivencia</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">13</span><span><a href="../semana-02/dia-6.html">Prueba de la Unidad 1</a> <span class="tipo">prueba</span></span></li>
+<li><span class="num">14</span><span><a href="../semana-02/dia-7.html">Nombres, apellidos y formas de tratamiento</a> <span class="tipo">cultura</span></span></li>
+</ul>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Unit 2. Mi mundo: cosas, personas y profesiones</h2><span class="tipo">A1 · 14/14</span></div>
+<details><summary>Objectives · weeks 3–4</summary><ul><li>Nombrar objetos cotidianos con su artículo y en plural.</li><li>Decir la profesión y el lugar de trabajo propios y de otros.</li><li>Preguntar y decir precios y números de teléfono (hasta 100).</li></ul></details>
+<h3>Week 3</h3><ul class="dias">
+<li><span class="num">15</span><span><a href="../semana-03/dia-1.html">El género del sustantivo y el artículo el / la</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">16</span><span><a href="../semana-03/dia-2.html">El plural y los / las; ¿Qué es esto?</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">17</span><span><a href="../semana-03/dia-3.html">El / la frente a un / una</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">18</span><span><a href="../semana-03/dia-4.html">Las profesiones y el verbo ser</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">19</span><span><a href="../semana-03/dia-5.html">Números 20-100: teléfono, dirección, correo</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">20</span><span><a href="../semana-03/dia-6.html">Repaso de la semana 3: artículos y género</a> <span class="tipo">repaso</span></span></li>
+<li><span class="num">21</span><span><a href="../semana-03/dia-7.html">El trabajo en el mundo hispano</a> <span class="tipo">cultura</span></span></li>
+</ul>
+<h3>Week 4</h3><ul class="dias">
+<li><span class="num">22</span><span><a href="../semana-04/dia-1.html">Hay: existe o no existe</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">23</span><span><a href="../semana-04/dia-2.html">Este, esta, estos, estas; ese, esa</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">24</span><span><a href="../semana-04/dia-3.html">El adjetivo: concordancia y posición</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">25</span><span><a href="../semana-04/dia-4.html">¿Cómo es? Describir objetos</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">26</span><span><a href="../semana-04/dia-5.html">En la papelería: ¿Tiene…? ¿Cuánto cuesta?</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">27</span><span><a href="../semana-04/dia-6.html">Prueba de la Unidad 2</a> <span class="tipo">prueba</span></span></li>
+<li><span class="num">28</span><span><a href="../semana-04/dia-7.html">El euro, el peso y los objetos de cada día</a> <span class="tipo">cultura</span></span></li>
+</ul>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Unit 3. La familia y las personas</h2><span class="tipo">A1 · 14/14</span></div>
+<details><summary>Objectives · weeks 5–6</summary><ul><li>Presentar a la familia y decir qué relación tiene cada persona.</li><li>Describir el aspecto físico y el carácter de alguien.</li><li>Decir cómo se siente alguien y dónde está (primer contraste ser / estar).</li></ul></details>
+<h3>Week 5</h3><ul class="dias">
+<li><span class="num">29</span><span><a href="../semana-05/dia-1.html">La familia y el verbo tener</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">30</span><span><a href="../semana-05/dia-2.html">Los posesivos: mi, tu, su</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">31</span><span><a href="../semana-05/dia-3.html">Nuestro, vuestro y el estado civil</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">32</span><span><a href="../semana-05/dia-4.html">¿Cómo es? El aspecto físico</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">33</span><span><a href="../semana-05/dia-5.html">El carácter: ¿cómo es tu hermano?</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">34</span><span><a href="../semana-05/dia-6.html">Repaso de la semana 5: familia y descripción</a> <span class="tipo">repaso</span></span></li>
+<li><span class="num">35</span><span><a href="../semana-05/dia-7.html">La familia en España y Latinoamérica</a> <span class="tipo">cultura</span></span></li>
+</ul>
+<h3>Week 6</h3><ul class="dias">
+<li><span class="num">36</span><span><a href="../semana-06/dia-1.html">Ser o estar (1): el carácter y el estado</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">37</span><span><a href="../semana-06/dia-2.html">¿Dónde está? Estar + lugar</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">38</span><span><a href="../semana-06/dia-3.html">Las mascotas y el &#x27;de&#x27; posesivo</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">39</span><span><a href="../semana-06/dia-4.html">Preguntar e informar sobre otras personas</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">40</span><span><a href="../semana-06/dia-5.html">Mi familia: texto modelo y presentación</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">41</span><span><a href="../semana-06/dia-6.html">Prueba de la Unidad 3</a> <span class="tipo">prueba</span></span></li>
+<li><span class="num">42</span><span><a href="../semana-06/dia-7.html">Días de la familia y la tarea final</a> <span class="tipo">cultura</span></span></li>
+</ul>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Unit 4. Mi casa y mi ciudad</h2><span class="tipo">A1 · 14/14</span></div>
+<details><summary>Objectives · weeks 7–8</summary><ul><li>Describir la casa y situar objetos (hay / estar + preposiciones de lugar).</li><li>Preguntar por un lugar y entender y dar indicaciones sencillas.</li><li>Leer anuncios de pisos y entender precios y direcciones (números hasta 1000).</li></ul></details>
+<h3>Week 7</h3><ul class="dias">
+<li><span class="num">43</span><span><a href="../semana-07/dia-1.html">La casa: habitaciones y el verbo vivir</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">44</span><span><a href="../semana-07/dia-2.html">Muebles: hay o está</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">45</span><span><a href="../semana-07/dia-3.html">Mi piso: cómo es, dónde está, en qué planta</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">46</span><span><a href="../semana-07/dia-4.html">La ciudad: ¿Dónde está el banco?</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">47</span><span><a href="../semana-07/dia-5.html">Ir a: ¿Adónde vas?</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">48</span><span><a href="../semana-07/dia-6.html">Repaso de la semana 7: hay / estar y preposiciones</a> <span class="tipo">repaso</span></span></li>
+<li><span class="num">49</span><span><a href="../semana-07/dia-7.html">Cómo se vive: piso, casa, barrio</a> <span class="tipo">cultura</span></span></li>
+</ul>
+<h3>Week 8</h3><ul class="dias">
+<li><span class="num">50</span><span><a href="../semana-08/dia-1.html">Pedir y dar indicaciones</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">51</span><span><a href="../semana-08/dia-2.html">Números 100-1000 y las direcciones</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">52</span><span><a href="../semana-08/dia-3.html">Anuncios de pisos</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">53</span><span><a href="../semana-08/dia-4.html">Mi ciudad: lo que hay y lo que no hay</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">54</span><span><a href="../semana-08/dia-5.html">Mi barrio: del camino a casa al texto</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">55</span><span><a href="../semana-08/dia-6.html">Prueba de la Unidad 4</a> <span class="tipo">prueba</span></span></li>
+<li><span class="num">56</span><span><a href="../semana-08/dia-7.html">El metro, la calle y la tarea final</a> <span class="tipo">cultura</span></span></li>
+</ul>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Unit 5. Mi día a día</h2><span class="tipo">A1 · 14/14</span></div>
+<details><summary>Objectives · weeks 9–10</summary><ul><li>Decir la hora y hablar de la rutina diaria con verbos regulares, reflexivos e irregulares frecuentes.</li><li>Hablar de la frecuencia y de los días de la semana.</li><li>Contar un día normal por escrito (100 palabras).</li></ul></details>
+<h3>Week 9</h3><ul class="dias">
+<li><span class="num">57</span><span><a href="../semana-09/dia-1.html">¿Qué hora es?</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">58</span><span><a href="../semana-09/dia-2.html">El presente regular: -ar, -er, -ir</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">59</span><span><a href="../semana-09/dia-3.html">Los reflexivos: me levanto, te duchas</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">60</span><span><a href="../semana-09/dia-4.html">Los días de la semana y las partes del día</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">61</span><span><a href="../semana-09/dia-5.html">Mi rutina: primero, luego, después</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">62</span><span><a href="../semana-09/dia-6.html">Repaso de la semana 9: presente y reflexivos</a> <span class="tipo">repaso</span></span></li>
+<li><span class="num">63</span><span><a href="../semana-09/dia-7.html">Horarios españoles: comer a las tres, cenar a las diez</a> <span class="tipo">cultura</span></span></li>
+</ul>
+<h3>Week 10</h3><ul class="dias">
+<li><span class="num">64</span><span><a href="../semana-10/dia-1.html">Irregulares de la rutina: hago, salgo, voy, veo, pongo</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">65</span><span><a href="../semana-10/dia-2.html">Cambio vocálico: empiezo, vuelvo, duermo, juego</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">66</span><span><a href="../semana-10/dia-3.html">¿Con qué frecuencia?</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">67</span><span><a href="../semana-10/dia-4.html">El fin de semana: ¿qué haces los sábados?</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">68</span><span><a href="../semana-10/dia-5.html">Un día normal: entrevista y texto</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">69</span><span><a href="../semana-10/dia-6.html">Prueba de la Unidad 5</a> <span class="tipo">prueba</span></span></li>
+<li><span class="num">70</span><span><a href="../semana-10/dia-7.html">El ritmo de vida y la tarea final</a> <span class="tipo">cultura</span></span></li>
+</ul>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Unit 6. Comer y beber</h2><span class="tipo">A1 · 14/14</span></div>
+<details><summary>Objectives · weeks 11–12</summary><ul><li>Expresar gustos y preferencias con gustar / encantar (la estructura de «мне нравится»).</li><li>Pedir en un bar o restaurante, preguntar el precio y pagar.</li><li>Comprar comida con cantidades y envases.</li></ul></details>
+<h3>Week 11</h3><ul class="dias">
+<li><span class="num">71</span><span><a href="../semana-11/dia-1.html">El desayuno: alimentos y bebidas</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">72</span><span><a href="../semana-11/dia-2.html">Gustar (1): me gusta = мне нравится</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">73</span><span><a href="../semana-11/dia-3.html">Gustar (2): gustan, nos / os / les, a mí también</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">74</span><span><a href="../semana-11/dia-4.html">Encantar y la gradación de los gustos</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">75</span><span><a href="../semana-11/dia-5.html">Querer y preferir: en el bar</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">76</span><span><a href="../semana-11/dia-6.html">Repaso de la semana 11: gustar y la comida</a> <span class="tipo">repaso</span></span></li>
+<li><span class="num">77</span><span><a href="../semana-11/dia-7.html">Un viaje gastronómico por el mundo hispano</a> <span class="tipo">cultura</span></span></li>
+</ul>
+<h3>Week 12</h3><ul class="dias">
+<li><span class="num">78</span><span><a href="../semana-12/dia-1.html">En el restaurante: el menú del día</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">79</span><span><a href="../semana-12/dia-2.html">En el mercado: cantidades y envases</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">80</span><span><a href="../semana-12/dia-3.html">Poder: peticiones corteses; muy o mucho</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">81</span><span><a href="../semana-12/dia-4.html">La comida rusa explicada en español</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">82</span><span><a href="../semana-12/dia-5.html">Mi comida favorita: diálogo y texto</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">83</span><span><a href="../semana-12/dia-6.html">Prueba de la Unidad 6</a> <span class="tipo">prueba</span></span></li>
+<li><span class="num">84</span><span><a href="../semana-12/dia-7.html">Sobremesa, propina y brindis; tarea final</a> <span class="tipo">cultura</span></span></li>
+</ul>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Unit 7. De compras</h2><span class="tipo">A1 · 14/14</span></div>
+<details><summary>Objectives · weeks 13–14</summary><ul><li>Comprar ropa: describirla, preguntar por la talla, el color y el precio, y probársela.</li><li>Usar los pronombres de objeto directo (lo / la / los / las).</li><li>Comparar precios y hacer una reclamación sencilla.</li></ul></details>
+<h3>Week 13</h3><ul class="dias">
+<li><span class="num">85</span><span><a href="../semana-13/dia-1.html">La ropa y los colores</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">86</span><span><a href="../semana-13/dia-2.html">En la tienda: tallas, probador y este / ese / aquel</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">87</span><span><a href="../semana-13/dia-3.html">Lo, la, los, las: el objeto directo</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">88</span><span><a href="../semana-13/dia-4.html">Te queda bien: llevar y ponerse</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">89</span><span><a href="../semana-13/dia-5.html">Precios: es caro, está rebajado, más barato que</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">90</span><span><a href="../semana-13/dia-6.html">Repaso de la semana 13: ropa y pronombres</a> <span class="tipo">repaso</span></span></li>
+<li><span class="num">91</span><span><a href="../semana-13/dia-7.html">Rebajas, mercadillos y horarios comerciales</a> <span class="tipo">cultura</span></span></li>
+</ul>
+<h3>Week 14</h3><ul class="dias">
+<li><span class="num">92</span><span><a href="../semana-14/dia-1.html">Tiendas y productos: ¿dónde se compra…?</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">93</span><span><a href="../semana-14/dia-2.html">Un regalo: ¿para quién es?</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">94</span><span><a href="../semana-14/dia-3.html">Compras por internet</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">95</span><span><a href="../semana-14/dia-4.html">Reclamar y devolver</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">96</span><span><a href="../semana-14/dia-5.html">Integración: de la tienda al correo</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">97</span><span><a href="../semana-14/dia-6.html">Prueba de la Unidad 7</a> <span class="tipo">prueba</span></span></li>
+<li><span class="num">98</span><span><a href="../semana-14/dia-7.html">La moda hispana y el regateo; tarea final</a> <span class="tipo">cultura</span></span></li>
+</ul>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Unit 8. Tiempo libre, tiempo atmosférico y planes</h2><span class="tipo">A1 · 2/14</span></div>
+<details><summary>Objectives · weeks 15–16</summary><ul><li>Hablar de aficiones y deportes y de lo que gusta hacer.</li><li>Hablar del tiempo atmosférico, las estaciones y las fechas.</li><li>Hacer planes con ir a + infinitivo; invitar, aceptar y rechazar.</li></ul></details>
+<h3>Week 15</h3><ul class="dias">
+<li><span class="num">99</span><span><a href="../semana-15/dia-1.html">Aficiones y deportes</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">100</span><span><a href="../semana-15/dia-2.html">Me gusta bailar: gustar + infinitivo</a> <span class="tipo">leccion</span></span></li>
+<li><span class="num">101</span><span class="falta">Meses, estaciones y la fecha <span class="tipo">leccion</span></span></li>
+<li><span class="num">102</span><span class="falta">¿Qué tiempo hace? <span class="tipo">leccion</span></span></li>
+<li><span class="num">103</span><span class="falta">El clima de mi país y del mundo hispano <span class="tipo">leccion</span></span></li>
+<li><span class="num">104</span><span class="falta">Repaso de la semana 15: aficiones, fecha y tiempo <span class="tipo">repaso</span></span></li>
+<li><span class="num">105</span><span class="falta">El fútbol y el domingo en familia <span class="tipo">cultura</span></span></li>
+</ul>
+<h3>Week 16</h3><ul class="dias">
+<li><span class="num">106</span><span class="falta">Planes: voy a + infinitivo <span class="tipo">leccion</span></span></li>
+<li><span class="num">107</span><span class="falta">¿Quedamos? Invitar, aceptar y rechazar <span class="tipo">leccion</span></span></li>
+<li><span class="num">108</span><span class="falta">La agenda: citas, cambios y cancelaciones <span class="tipo">leccion</span></span></li>
+<li><span class="num">109</span><span class="falta">Mensajes de texto: invitar por WhatsApp <span class="tipo">leccion</span></span></li>
+<li><span class="num">110</span><span class="falta">Un fin de semana con un amigo: plan y texto <span class="tipo">leccion</span></span></li>
+<li><span class="num">111</span><span class="falta">Prueba de la Unidad 8 <span class="tipo">prueba</span></span></li>
+<li><span class="num">112</span><span class="falta">Fiestas populares del calendario; tarea final <span class="tipo">cultura</span></span></li>
+</ul>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Unit 9. Viajes y transporte</h2><span class="tipo">A1 · 0/14</span></div>
+<details><summary>Objectives · weeks 17–18</summary><ul><li>Comprar billetes, entender horarios y reservar un hotel.</li><li>Decir qué está pasando ahora (estar + gerundio).</li><li>Contar lo que se ha hecho hoy y las experiencias de viaje (pretérito perfecto).</li></ul></details>
+<h3>Week 17</h3><ul class="dias">
+<li><span class="num">113</span><span class="falta">Medios de transporte: ¿cómo vas al trabajo? <span class="tipo">leccion</span></span></li>
+<li><span class="num">114</span><span class="falta">En la estación: billetes y horarios <span class="tipo">leccion</span></span></li>
+<li><span class="num">115</span><span class="falta">¿Qué estás haciendo? Estar + gerundio <span class="tipo">leccion</span></span></li>
+<li><span class="num">116</span><span class="falta">En el hotel: reservar una habitación <span class="tipo">leccion</span></span></li>
+<li><span class="num">117</span><span class="falta">En el aeropuerto: hay que facturar <span class="tipo">leccion</span></span></li>
+<li><span class="num">118</span><span class="falta">Repaso de la semana 17: transporte y gerundio <span class="tipo">repaso</span></span></li>
+<li><span class="num">119</span><span class="falta">El Camino de Santiago y Machu Picchu <span class="tipo">cultura</span></span></li>
+</ul>
+<h3>Week 18</h3><ul class="dias">
+<li><span class="num">120</span><span class="falta">Pretérito perfecto (1): hoy he viajado <span class="tipo">leccion</span></span></li>
+<li><span class="num">121</span><span class="falta">Pretérito perfecto (2): ¿Has estado en…? <span class="tipo">leccion</span></span></li>
+<li><span class="num">122</span><span class="falta">Turismo: ¿qué has hecho hoy? <span class="tipo">leccion</span></span></li>
+<li><span class="num">123</span><span class="falta">Preposiciones de movimiento: de Moscú a Madrid <span class="tipo">leccion</span></span></li>
+<li><span class="num">124</span><span class="falta">Diario de viaje y recepción: integración <span class="tipo">leccion</span></span></li>
+<li><span class="num">125</span><span class="falta">Prueba de la Unidad 9 <span class="tipo">prueba</span></span></li>
+<li><span class="num">126</span><span class="falta">Destinos hispanos para rusos; tarea final <span class="tipo">cultura</span></span></li>
+</ul>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Unit 10. Salud y cuerpo</h2><span class="tipo">A1 · 0/14</span></div>
+<details><summary>Objectives · weeks 19–20</summary><ul><li>Decir qué duele y qué síntomas se tienen; entender al médico y al farmacéutico.</li><li>Dar consejos y expresar obligación (tener que, hay que, deber, imperativo).</li><li>Hablar de hábitos saludables.</li></ul></details>
+<h3>Week 19</h3><ul class="dias">
+<li><span class="num">127</span><span class="falta">Las partes del cuerpo <span class="tipo">leccion</span></span></li>
+<li><span class="num">128</span><span class="falta">Me duele: ¿qué te pasa? <span class="tipo">leccion</span></span></li>
+<li><span class="num">129</span><span class="falta">Síntomas con tener y estar <span class="tipo">leccion</span></span></li>
+<li><span class="num">130</span><span class="falta">En la consulta y en la farmacia <span class="tipo">leccion</span></span></li>
+<li><span class="num">131</span><span class="falta">Tener que, hay que, deber <span class="tipo">leccion</span></span></li>
+<li><span class="num">132</span><span class="falta">Repaso de la semana 19: cuerpo y síntomas <span class="tipo">repaso</span></span></li>
+<li><span class="num">133</span><span class="falta">Salud, farmacias y remedios caseros <span class="tipo">cultura</span></span></li>
+</ul>
+<h3>Week 20</h3><ul class="dias">
+<li><span class="num">134</span><span class="falta">Imperativo afirmativo: toma, bebe, descansa <span class="tipo">leccion</span></span></li>
+<li><span class="num">135</span><span class="falta">Imperativos irregulares y con pronombres <span class="tipo">leccion</span></span></li>
+<li><span class="num">136</span><span class="falta">¿Llevas una vida sana? <span class="tipo">leccion</span></span></li>
+<li><span class="num">137</span><span class="falta">Emergencias y servicios <span class="tipo">leccion</span></span></li>
+<li><span class="num">138</span><span class="falta">Consulta y consejos: integración <span class="tipo">leccion</span></span></li>
+<li><span class="num">139</span><span class="falta">Prueba de la Unidad 10 <span class="tipo">prueba</span></span></li>
+<li><span class="num">140</span><span class="falta">Dieta mediterránea, mate y tarea final <span class="tipo">cultura</span></span></li>
+</ul>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Unit 11. Repaso y evaluación del nivel A1</h2><span class="tipo">A1 · 0/14</span></div>
+<details><summary>Objectives · weeks 21–22</summary><ul><li>Consolidar toda la gramática y el léxico de A1.</li><li>Hacer un simulacro completo de un examen de nivel A1 (tipo DELE A1).</li><li>Presentar «Mi vida» (2 minutos orales y 120 palabras escritas).</li></ul></details>
+<h3>Week 21</h3><ul class="dias">
+<li><span class="num">141</span><span class="falta">Repaso 1: ser, estar, hay, tener <span class="tipo">repaso</span></span></li>
+<li><span class="num">142</span><span class="falta">Repaso 2: el presente <span class="tipo">repaso</span></span></li>
+<li><span class="num">143</span><span class="falta">Repaso 3: el sustantivo y sus acompañantes <span class="tipo">repaso</span></span></li>
+<li><span class="num">144</span><span class="falta">Repaso 4: gustar, ir a, perfecto, imperativo <span class="tipo">repaso</span></span></li>
+<li><span class="num">145</span><span class="falta">Repaso 5: el léxico de A1 <span class="tipo">repaso</span></span></li>
+<li><span class="num">146</span><span class="falta">Simulacro A1: comprensión de lectura y auditiva <span class="tipo">simulacro</span></span></li>
+<li><span class="num">147</span><span class="falta">Un cortometraje en español <span class="tipo">cultura</span></span></li>
+</ul>
+<h3>Week 22</h3><ul class="dias">
+<li><span class="num">148</span><span class="falta">Simulacro A1: expresión escrita <span class="tipo">simulacro</span></span></li>
+<li><span class="num">149</span><span class="falta">Simulacro A1: expresión oral <span class="tipo">simulacro</span></span></li>
+<li><span class="num">150</span><span class="falta">Mis errores: análisis como rusohablante <span class="tipo">repaso</span></span></li>
+<li><span class="num">151</span><span class="falta">Proyecto «Mi vida» (1): preparar <span class="tipo">proyecto</span></span></li>
+<li><span class="num">152</span><span class="falta">Proyecto «Mi vida» (2): grabar y evaluar <span class="tipo">proyecto</span></span></li>
+<li><span class="num">153</span><span class="falta">Examen final de A1 <span class="tipo">examen</span></span></li>
+<li><span class="num">154</span><span class="falta">Balance del nivel A1 y plan para A2 <span class="tipo">cultura</span></span></li>
+</ul>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Unit 12. Biografías: el pasado</h2><span class="tipo">A2 · 0/14</span></div>
+<details><summary>Objectives · weeks 23–24</summary><ul><li>Contar hechos pasados con el pretérito indefinido (regular e irregular).</li><li>Entender y contar una biografía con fechas y etapas.</li><li>Distinguir perfecto (hoy) e indefinido (ayer).</li></ul></details>
+<h3>Week 23</h3><ul class="dias">
+<li><span class="num">155</span><span class="falta">Indefinido regular -ar: ayer hablé <span class="tipo">leccion</span></span></li>
+<li><span class="num">156</span><span class="falta">Indefinido regular -er / -ir: comí, viví <span class="tipo">leccion</span></span></li>
+<li><span class="num">157</span><span class="falta">Irregulares (1): fui, tuve, estuve, hice <span class="tipo">leccion</span></span></li>
+<li><span class="num">158</span><span class="falta">Años y fechas: nací en 1995 <span class="tipo">leccion</span></span></li>
+<li><span class="num">159</span><span class="falta">La biografía: nació, estudió, se casó, murió <span class="tipo">leccion</span></span></li>
+<li><span class="num">160</span><span class="falta">Repaso de la semana 23: el indefinido <span class="tipo">repaso</span></span></li>
+<li><span class="num">161</span><span class="falta">Vidas hispanas: Frida, Picasso, Messi <span class="tipo">cultura</span></span></li>
+</ul>
+<h3>Week 24</h3><ul class="dias">
+<li><span class="num">162</span><span class="falta">Perfecto o indefinido: hoy / ayer <span class="tipo">leccion</span></span></li>
+<li><span class="num">163</span><span class="falta">Irregulares (2): pude, puse, quise, vine, dije, di, vi <span class="tipo">leccion</span></span></li>
+<li><span class="num">164</span><span class="falta">Mi biografía: etapas de la vida <span class="tipo">leccion</span></span></li>
+<li><span class="num">165</span><span class="falta">¿Qué tal el viaje? Contar un viaje pasado <span class="tipo">leccion</span></span></li>
+<li><span class="num">166</span><span class="falta">Entrevista sobre el pasado: integración <span class="tipo">leccion</span></span></li>
+<li><span class="num">167</span><span class="falta">Prueba de la Unidad 12 <span class="tipo">prueba</span></span></li>
+<li><span class="num">168</span><span class="falta">1492, las independencias y la tarea final <span class="tipo">cultura</span></span></li>
+</ul>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Unit 13. Antes y ahora: recuerdos</h2><span class="tipo">A2 · 0/14</span></div>
+<details><summary>Objectives · weeks 25–26</summary><ul><li>Describir personas, lugares y hábitos del pasado con el pretérito imperfecto.</li><li>Comparar la vida de antes y la de ahora.</li><li>Combinar imperfecto e indefinido en un relato sencillo (acción y contexto).</li></ul></details>
+<h3>Week 25</h3><ul class="dias">
+<li><span class="num">169</span><span class="falta">El imperfecto: de pequeño vivía en… <span class="tipo">leccion</span></span></li>
+<li><span class="num">170</span><span class="falta">Era, iba, veía: describir en pasado <span class="tipo">leccion</span></span></li>
+<li><span class="num">171</span><span class="falta">Antes y ahora: ya no, todavía, soler <span class="tipo">leccion</span></span></li>
+<li><span class="num">172</span><span class="falta">La infancia y la escuela <span class="tipo">leccion</span></span></li>
+<li><span class="num">173</span><span class="falta">Mi ciudad antes y ahora <span class="tipo">leccion</span></span></li>
+<li><span class="num">174</span><span class="falta">Repaso de la semana 25: el imperfecto <span class="tipo">repaso</span></span></li>
+<li><span class="num">175</span><span class="falta">Crecer en los 80 y 90: España y Rusia <span class="tipo">cultura</span></span></li>
+</ul>
+<h3>Week 26</h3><ul class="dias">
+<li><span class="num">176</span><span class="falta">El escenario: hacía frío, era de noche <span class="tipo">leccion</span></span></li>
+<li><span class="num">177</span><span class="falta">Indefinido o imperfecto (1): acción y contexto <span class="tipo">leccion</span></span></li>
+<li><span class="num">178</span><span class="falta">Indefinido o imperfecto (2): hábito y una vez <span class="tipo">leccion</span></span></li>
+<li><span class="num">179</span><span class="falta">Personas del pasado: mi abuelo era… <span class="tipo">leccion</span></span></li>
+<li><span class="num">180</span><span class="falta">«Cuando tenía diez años»: texto y oral <span class="tipo">leccion</span></span></li>
+<li><span class="num">181</span><span class="falta">Prueba de la Unidad 13 <span class="tipo">prueba</span></span></li>
+<li><span class="num">182</span><span class="falta">La Transición y la Movida; tarea final <span class="tipo">cultura</span></span></li>
+</ul>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Unit 14. Cuéntame qué pasó: anécdotas</h2><span class="tipo">A2 · 0/14</span></div>
+<details><summary>Objectives · weeks 27–28</summary><ul><li>Contar una anécdota combinando perfecto, indefinido e imperfecto con conectores.</li><li>Reaccionar como oyente (¡No me digas! ¿Y qué pasó?).</li><li>Entender una noticia breve y resumirla.</li></ul></details>
+<h3>Week 27</h3><ul class="dias">
+<li><span class="num">183</span><span class="falta">Estaba durmiendo cuando sonó el teléfono <span class="tipo">leccion</span></span></li>
+<li><span class="num">184</span><span class="falta">Conectores del relato: primero, entonces, de repente, al final <span class="tipo">leccion</span></span></li>
+<li><span class="num">185</span><span class="falta">Irregulares (3): leyó, oyó, durmió, pidió, trajo <span class="tipo">leccion</span></span></li>
+<li><span class="num">186</span><span class="falta">Contar una anécdota y reaccionar <span class="tipo">leccion</span></span></li>
+<li><span class="num">187</span><span class="falta">Noticias breves: quién, qué, cuándo, dónde <span class="tipo">leccion</span></span></li>
+<li><span class="num">188</span><span class="falta">Repaso de la semana 27: narrar <span class="tipo">repaso</span></span></li>
+<li><span class="num">189</span><span class="falta">Leyendas: La Llorona y el Cid <span class="tipo">cultura</span></span></li>
+</ul>
+<h3>Week 28</h3><ul class="dias">
+<li><span class="num">190</span><span class="falta">Hace dos años, desde hace, llevo … estudiando <span class="tipo">leccion</span></span></li>
+<li><span class="num">191</span><span class="falta">Un día terrible, un día perfecto: emociones <span class="tipo">leccion</span></span></li>
+<li><span class="num">192</span><span class="falta">Historia en viñetas: de las imágenes al relato <span class="tipo">leccion</span></span></li>
+<li><span class="num">193</span><span class="falta">¿Sabes qué me ha pasado hoy? El perfecto en la anécdota <span class="tipo">leccion</span></span></li>
+<li><span class="num">194</span><span class="falta">Mi anécdota: texto y oral (integración) <span class="tipo">leccion</span></span></li>
+<li><span class="num">195</span><span class="falta">Prueba de la Unidad 14 <span class="tipo">prueba</span></span></li>
+<li><span class="num">196</span><span class="falta">El humor hispano; tarea final <span class="tipo">cultura</span></span></li>
+</ul>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Unit 15. Estudios y trabajo</h2><span class="tipo">A2 · 0/14</span></div>
+<details><summary>Objectives · weeks 29–30</summary><ul><li>Hablar de la formación y la experiencia laboral; escribir un currículum.</li><li>Leer ofertas de empleo y hacer una entrevista sencilla.</li><li>Escribir un correo formal.</li></ul></details>
+<h3>Week 29</h3><ul class="dias">
+<li><span class="num">197</span><span class="falta">¿A qué te dedicas? Profesiones y sectores <span class="tipo">leccion</span></span></li>
+<li><span class="num">198</span><span class="falta">Saber, conocer, poder: знать, уметь, мочь <span class="tipo">leccion</span></span></li>
+<li><span class="num">199</span><span class="falta">La experiencia: he trabajado como…, llevo tres años <span class="tipo">leccion</span></span></li>
+<li><span class="num">200</span><span class="falta">El currículum <span class="tipo">leccion</span></span></li>
+<li><span class="num">201</span><span class="falta">Estudios: la carrera, el máster, el examen <span class="tipo">leccion</span></span></li>
+<li><span class="num">202</span><span class="falta">Repaso de la semana 29: trabajo y saber / conocer <span class="tipo">repaso</span></span></li>
+<li><span class="num">203</span><span class="falta">El mundo laboral hispano <span class="tipo">cultura</span></span></li>
+</ul>
+<h3>Week 30</h3><ul class="dias">
+<li><span class="num">204</span><span class="falta">Ofertas de empleo <span class="tipo">leccion</span></span></li>
+<li><span class="num">205</span><span class="falta">La entrevista: me gustaría, podría <span class="tipo">leccion</span></span></li>
+<li><span class="num">206</span><span class="falta">El correo formal <span class="tipo">leccion</span></span></li>
+<li><span class="num">207</span><span class="falta">Cualidades y defectos <span class="tipo">leccion</span></span></li>
+<li><span class="num">208</span><span class="falta">Entrevista y solicitud: integración <span class="tipo">leccion</span></span></li>
+<li><span class="num">209</span><span class="falta">Prueba de la Unidad 15 <span class="tipo">prueba</span></span></li>
+<li><span class="num">210</span><span class="falta">Emprendedores hispanos; tarea final <span class="tipo">cultura</span></span></li>
+</ul>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Unit 16. Instrucciones, ciudad y servicios</h2><span class="tipo">A2 · 0/14</span></div>
+<details><summary>Objectives · weeks 31–32</summary><ul><li>Dar instrucciones y órdenes afirmativas y negativas (tú, usted, vosotros, ustedes).</li><li>Usar los pronombres de objeto indirecto y combinarlos con los de objeto directo.</li><li>Hacer gestiones sencillas en el banco, correos y la administración.</li></ul></details>
+<h3>Week 31</h3><ul class="dias">
+<li><span class="num">211</span><span class="falta">Imperativo afirmativo: hablad, hablen; dímelo <span class="tipo">leccion</span></span></li>
+<li><span class="num">212</span><span class="falta">Imperativo negativo: no hables, no comas <span class="tipo">leccion</span></span></li>
+<li><span class="num">213</span><span class="falta">Recetas: pela, corta, añade; se fríe <span class="tipo">leccion</span></span></li>
+<li><span class="num">214</span><span class="falta">Me, te, le, nos, os, les + lo, la: se lo doy <span class="tipo">leccion</span></span></li>
+<li><span class="num">215</span><span class="falta">Carteles y normas: prohibido fumar <span class="tipo">leccion</span></span></li>
+<li><span class="num">216</span><span class="falta">Repaso de la semana 31: imperativo y pronombres <span class="tipo">repaso</span></span></li>
+<li><span class="num">217</span><span class="falta">La burocracia: el NIE, el ayuntamiento, la cita previa <span class="tipo">cultura</span></span></li>
+</ul>
+<h3>Week 32</h3><ul class="dias">
+<li><span class="num">218</span><span class="falta">En el banco y en correos <span class="tipo">leccion</span></span></li>
+<li><span class="num">219</span><span class="falta">Trámites y citas: rellene, firme aquí <span class="tipo">leccion</span></span></li>
+<li><span class="num">220</span><span class="falta">Problemas en la ciudad: he perdido la cartera <span class="tipo">leccion</span></span></li>
+<li><span class="num">221</span><span class="falta">Manual de un aparato o una app <span class="tipo">leccion</span></span></li>
+<li><span class="num">222</span><span class="falta">Explicar cómo hacer algo: integración <span class="tipo">leccion</span></span></li>
+<li><span class="num">223</span><span class="falta">Prueba de la Unidad 16 <span class="tipo">prueba</span></span></li>
+<li><span class="num">224</span><span class="falta">Carteles y señales del mundo hispano; tarea final <span class="tipo">cultura</span></span></li>
+</ul>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Unit 17. El futuro y las predicciones</h2><span class="tipo">A2 · 0/14</span></div>
+<details><summary>Objectives · weeks 33–34</summary><ul><li>Hablar del futuro con el futuro simple y con ir a + infinitivo.</li><li>Hacer predicciones y expresar condiciones reales (si + presente).</li><li>Expresar grados de certeza.</li></ul></details>
+<h3>Week 33</h3><ul class="dias">
+<li><span class="num">225</span><span class="falta">El futuro simple: mañana lloverá <span class="tipo">leccion</span></span></li>
+<li><span class="num">226</span><span class="falta">Futuro irregular: tendré, haré, podré, habrá <span class="tipo">leccion</span></span></li>
+<li><span class="num">227</span><span class="falta">El pronóstico del tiempo <span class="tipo">leccion</span></span></li>
+<li><span class="num">228</span><span class="falta">Si llueve, no iremos: condiciones reales <span class="tipo">leccion</span></span></li>
+<li><span class="num">229</span><span class="falta">Dentro de diez años: predicciones personales <span class="tipo">leccion</span></span></li>
+<li><span class="num">230</span><span class="falta">Repaso de la semana 33: el futuro <span class="tipo">repaso</span></span></li>
+<li><span class="num">231</span><span class="falta">Supersticiones, horóscopo y las doce uvas <span class="tipo">cultura</span></span></li>
+</ul>
+<h3>Week 34</h3><ul class="dias">
+<li><span class="num">232</span><span class="falta">Seguro que, creo que, probablemente, a lo mejor <span class="tipo">leccion</span></span></li>
+<li><span class="num">233</span><span class="falta">¿Qué pasará en 2050? Tecnología y medio ambiente <span class="tipo">leccion</span></span></li>
+<li><span class="num">234</span><span class="falta">Promesas y propósitos: te prometo que… <span class="tipo">leccion</span></span></li>
+<li><span class="num">235</span><span class="falta">Organizar un evento: la semana que viene <span class="tipo">leccion</span></span></li>
+<li><span class="num">236</span><span class="falta">«Mi vida en 2040»: integración <span class="tipo">leccion</span></span></li>
+<li><span class="num">237</span><span class="falta">Prueba de la Unidad 17 <span class="tipo">prueba</span></span></li>
+<li><span class="num">238</span><span class="falta">Ciencia ficción hispana y Año Nuevo; tarea final <span class="tipo">cultura</span></span></li>
+</ul>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Unit 18. Comunicarse: opiniones y mensajes</h2><span class="tipo">A2 · 0/14</span></div>
+<details><summary>Objectives · weeks 35–36</summary><ul><li>Dar la opinión y expresar acuerdo y desacuerdo con cortesía.</li><li>Hablar por teléfono y dejar un recado; transmitir lo que dice otra persona.</li><li>Escribir correos y mensajes informales.</li></ul></details>
+<h3>Week 35</h3><ul class="dias">
+<li><span class="num">239</span><span class="falta">Creo que, me parece que: dar la opinión <span class="tipo">leccion</span></span></li>
+<li><span class="num">240</span><span class="falta">Estoy de acuerdo, tienes razón, yo sí / yo no <span class="tipo">leccion</span></span></li>
+<li><span class="num">241</span><span class="falta">Además, sin embargo, por eso, aunque <span class="tipo">leccion</span></span></li>
+<li><span class="num">242</span><span class="falta">Al teléfono: ¿Está Marta? ¿De parte de quién? <span class="tipo">leccion</span></span></li>
+<li><span class="num">243</span><span class="falta">Dice que…, pregunta si…: transmitir un recado <span class="tipo">leccion</span></span></li>
+<li><span class="num">244</span><span class="falta">Repaso de la semana 35: opinión y teléfono <span class="tipo">repaso</span></span></li>
+<li><span class="num">245</span><span class="falta">La tertulia: discutir sin ofender <span class="tipo">cultura</span></span></li>
+</ul>
+<h3>Week 36</h3><ul class="dias">
+<li><span class="num">246</span><span class="falta">Me ha dicho que…: cambios de persona <span class="tipo">leccion</span></span></li>
+<li><span class="num">247</span><span class="falta">Correos y mensajes informales: contar novedades <span class="tipo">leccion</span></span></li>
+<li><span class="num">248</span><span class="falta">Internet y redes sociales <span class="tipo">leccion</span></span></li>
+<li><span class="num">249</span><span class="falta">Los medios: ¿qué programas ves? <span class="tipo">leccion</span></span></li>
+<li><span class="num">250</span><span class="falta">Mini-debate y correo: integración <span class="tipo">leccion</span></span></li>
+<li><span class="num">251</span><span class="falta">Prueba de la Unidad 18 <span class="tipo">prueba</span></span></li>
+<li><span class="num">252</span><span class="falta">El español en internet; tarea final <span class="tipo">cultura</span></span></li>
+</ul>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Unit 19. Comparar y elegir</h2><span class="tipo">A2 · 0/14</span></div>
+<details><summary>Objectives · weeks 37–38</summary><ul><li>Comparar personas, lugares, productos y estilos de vida.</li><li>Definir y describir con oraciones de relativo (que, donde).</li><li>Usar los indefinidos (algo / nada, alguien / nadie, algún / ningún).</li></ul></details>
+<h3>Week 37</h3><ul class="dias">
+<li><span class="num">253</span><span class="falta">Más que, menos que <span class="tipo">leccion</span></span></li>
+<li><span class="num">254</span><span class="falta">Tan … como, tanto … como; mejor, peor, mayor, menor <span class="tipo">leccion</span></span></li>
+<li><span class="num">255</span><span class="falta">El más alto de la clase; buenísimo <span class="tipo">leccion</span></span></li>
+<li><span class="num">256</span><span class="falta">Moscú y Madrid: comparar ciudades <span class="tipo">leccion</span></span></li>
+<li><span class="num">257</span><span class="falta">Campo o ciudad: comparar estilos de vida <span class="tipo">leccion</span></span></li>
+<li><span class="num">258</span><span class="falta">Repaso de la semana 37: comparativos <span class="tipo">repaso</span></span></li>
+<li><span class="num">259</span><span class="falta">Los «más» del mundo hispano <span class="tipo">cultura</span></span></li>
+</ul>
+<h3>Week 38</h3><ul class="dias">
+<li><span class="num">260</span><span class="falta">Que, donde, el que: definir cosas <span class="tipo">leccion</span></span></li>
+<li><span class="num">261</span><span class="falta">Algo, nada, alguien, nadie, algún, ningún <span class="tipo">leccion</span></span></li>
+<li><span class="num">262</span><span class="falta">Elegir un producto: reseñas <span class="tipo">leccion</span></span></li>
+<li><span class="num">263</span><span class="falta">Parecerse a: comparar personas <span class="tipo">leccion</span></span></li>
+<li><span class="num">264</span><span class="falta">Comparar y recomendar: integración <span class="tipo">leccion</span></span></li>
+<li><span class="num">265</span><span class="falta">Prueba de la Unidad 19 <span class="tipo">prueba</span></span></li>
+<li><span class="num">266</span><span class="falta">Madrid o Barcelona; tarea final <span class="tipo">cultura</span></span></li>
+</ul>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Unit 20. Cuerpo, salud y bienestar (ampliación)</h2><span class="tipo">A2 · 0/14</span></div>
+<details><summary>Objectives · weeks 39–40</summary><ul><li>Dar consejos con el condicional (deberías, yo que tú) y expresar deseos con cortesía.</li><li>Hablar de emociones y estados de ánimo.</li><li>Usar por y para en sus usos básicos.</li></ul></details>
+<h3>Week 39</h3><ul class="dias">
+<li><span class="num">267</span><span class="falta">El condicional: me gustaría, podría <span class="tipo">leccion</span></span></li>
+<li><span class="num">268</span><span class="falta">Deberías, yo que tú, lo mejor es <span class="tipo">leccion</span></span></li>
+<li><span class="num">269</span><span class="falta">Me siento mal, me pongo nervioso, me da miedo <span class="tipo">leccion</span></span></li>
+<li><span class="num">270</span><span class="falta">Por y para (1): causa y finalidad <span class="tipo">leccion</span></span></li>
+<li><span class="num">271</span><span class="falta">El estrés y el descanso <span class="tipo">leccion</span></span></li>
+<li><span class="num">272</span><span class="falta">Repaso de la semana 39: condicional y por / para <span class="tipo">repaso</span></span></li>
+<li><span class="num">273</span><span class="falta">La vida tranquila: paseo, siesta y sobremesa <span class="tipo">cultura</span></span></li>
+</ul>
+<h3>Week 40</h3><ul class="dias">
+<li><span class="num">274</span><span class="falta">Pedir cita por teléfono y describir síntomas <span class="tipo">leccion</span></span></li>
+<li><span class="num">275</span><span class="falta">Deporte y lesiones: me he hecho daño <span class="tipo">leccion</span></span></li>
+<li><span class="num">276</span><span class="falta">Comer sano: demasiado, suficiente, bastante <span class="tipo">leccion</span></span></li>
+<li><span class="num">277</span><span class="falta">Por y para (2): duración, medio, destinatario, plazo <span class="tipo">leccion</span></span></li>
+<li><span class="num">278</span><span class="falta">Consejos: integración <span class="tipo">leccion</span></span></li>
+<li><span class="num">279</span><span class="falta">Prueba de la Unidad 20 <span class="tipo">prueba</span></span></li>
+<li><span class="num">280</span><span class="falta">Mate, coca y manzanilla; tarea final <span class="tipo">cultura</span></span></li>
+</ul>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Unit 21. Casa, convivencia y vida cotidiana</h2><span class="tipo">A2 · 0/14</span></div>
+<details><summary>Objectives · weeks 41–42</summary><ul><li>Alquilar un piso, describir problemas en casa y quejarse con cortesía.</li><li>Pedir favores y permiso; agradecer y disculparse.</li><li>Hablar de las tareas domésticas y de las normas de convivencia.</li></ul></details>
+<h3>Week 41</h3><ul class="dias">
+<li><span class="num">281</span><span class="falta">Alquilar un piso: contrato, fianza, gastos <span class="tipo">leccion</span></span></li>
+<li><span class="num">282</span><span class="falta">Está roto, está abierta: estar + participio <span class="tipo">leccion</span></span></li>
+<li><span class="num">283</span><span class="falta">No funciona, se ha roto: problemas en casa <span class="tipo">leccion</span></span></li>
+<li><span class="num">284</span><span class="falta">Tareas domésticas: ¿quién pone la lavadora? <span class="tipo">leccion</span></span></li>
+<li><span class="num">285</span><span class="falta">Normas de convivencia: hay que, no se puede <span class="tipo">leccion</span></span></li>
+<li><span class="num">286</span><span class="falta">Repaso de la semana 41: casa y estar + participio <span class="tipo">repaso</span></span></li>
+<li><span class="num">287</span><span class="falta">Compartir piso y vivir con los padres <span class="tipo">cultura</span></span></li>
+</ul>
+<h3>Week 42</h3><ul class="dias">
+<li><span class="num">288</span><span class="falta">¿Puedes…? ¿Te importa si…? ¿Puedo…? <span class="tipo">leccion</span></span></li>
+<li><span class="num">289</span><span class="falta">Gracias por, perdona por, no pasa nada <span class="tipo">leccion</span></span></li>
+<li><span class="num">290</span><span class="falta">Los vecinos: el ruido, la fiesta, la nota <span class="tipo">leccion</span></span></li>
+<li><span class="num">291</span><span class="falta">Se vende, se alquilan, se habla español <span class="tipo">leccion</span></span></li>
+<li><span class="num">292</span><span class="falta">Reclamación al casero y convivencia: integración <span class="tipo">leccion</span></span></li>
+<li><span class="num">293</span><span class="falta">Prueba de la Unidad 21 <span class="tipo">prueba</span></span></li>
+<li><span class="num">294</span><span class="falta">La casa latinoamericana; tarea final <span class="tipo">cultura</span></span></li>
+</ul>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Unit 22. Fiestas, cultura y sentimientos</h2><span class="tipo">A2 · 0/14</span></div>
+<details><summary>Objectives · weeks 43–44</summary><ul><li>Hablar de cambios y de fases de una acción con perífrasis (empezar a, dejar de, seguir, acabar de).</li><li>Expresar sentimientos y reacciones (me da miedo, me pone nervioso, estoy harto de).</li><li>Felicitar, invitar y describir fiestas y tradiciones.</li></ul></details>
+<h3>Week 43</h3><ul class="dias">
+<li><span class="num">295</span><span class="falta">Empezar a, dejar de, volver a, acabar de <span class="tipo">leccion</span></span></li>
+<li><span class="num">296</span><span class="falta">Seguir + gerundio, estar a punto de <span class="tipo">leccion</span></span></li>
+<li><span class="num">297</span><span class="falta">Fiestas del mundo hispano: ¿cómo se celebra? <span class="tipo">leccion</span></span></li>
+<li><span class="num">298</span><span class="falta">¡Felicidades! ¡Que aproveche! Felicitar e invitar <span class="tipo">leccion</span></span></li>
+<li><span class="num">299</span><span class="falta">Contar una fiesta: fuimos, había mucha gente, bailamos <span class="tipo">leccion</span></span></li>
+<li><span class="num">300</span><span class="falta">Repaso de la semana 43: perífrasis y fiestas <span class="tipo">repaso</span></span></li>
+<li><span class="num">301</span><span class="falta">Navidad hispana frente a Новый год <span class="tipo">cultura</span></span></li>
+</ul>
+<h3>Week 44</h3><ul class="dias">
+<li><span class="num">302</span><span class="falta">Me da miedo, me pone nervioso, estoy harto de <span class="tipo">leccion</span></span></li>
+<li><span class="num">303</span><span class="falta">Música y baile: salsa, flamenco, tango, reguetón <span class="tipo">leccion</span></span></li>
+<li><span class="num">304</span><span class="falta">Cine y series: ¿de qué trata? <span class="tipo">leccion</span></span></li>
+<li><span class="num">305</span><span class="falta">Las fiestas rusas explicadas en español <span class="tipo">leccion</span></span></li>
+<li><span class="num">306</span><span class="falta">Una fiesta de mi país: integración <span class="tipo">leccion</span></span></li>
+<li><span class="num">307</span><span class="falta">Prueba de la Unidad 22 <span class="tipo">prueba</span></span></li>
+<li><span class="num">308</span><span class="falta">Flamenco, tango y cumbia; tarea final <span class="tipo">cultura</span></span></li>
+</ul>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Unit 23. Leer y escribir: textos de la vida real</h2><span class="tipo">A2 · 0/14</span></div>
+<details><summary>Objectives · weeks 45–46</summary><ul><li>Leer textos reales sencillos con estrategias (anuncios, noticias, correos, carteles).</li><li>Escribir correos informales y formales y textos narrativos y descriptivos de 70-100 palabras.</li><li>Aplicar las reglas de ortografía y puntuación y autocorregirse.</li></ul></details>
+<h3>Week 45</h3><ul class="dias">
+<li><span class="num">309</span><span class="falta">Estrategias de lectura: anuncios, carteles, programas <span class="tipo">leccion</span></span></li>
+<li><span class="num">310</span><span class="falta">Noticias y textos informativos: la idea principal <span class="tipo">leccion</span></span></li>
+<li><span class="num">311</span><span class="falta">Ortografía (1): la tilde <span class="tipo">leccion</span></span></li>
+<li><span class="num">312</span><span class="falta">Ortografía (2): b / v, h, g / j, c / z / s, ll / y; puntuación <span class="tipo">leccion</span></span></li>
+<li><span class="num">313</span><span class="falta">El correo informal (DELE A2, tarea 1 de escritura) <span class="tipo">leccion</span></span></li>
+<li><span class="num">314</span><span class="falta">Repaso de la semana 45: leer y ortografía <span class="tipo">repaso</span></span></li>
+<li><span class="num">315</span><span class="falta">Microcuentos y poemas cortos <span class="tipo">cultura</span></span></li>
+</ul>
+<h3>Week 46</h3><ul class="dias">
+<li><span class="num">316</span><span class="falta">El correo formal: solicitar, reclamar, agradecer <span class="tipo">leccion</span></span></li>
+<li><span class="num">317</span><span class="falta">El texto narrativo (DELE A2, tarea 2 de escritura) <span class="tipo">leccion</span></span></li>
+<li><span class="num">318</span><span class="falta">El texto descriptivo: un lugar, una persona, un objeto <span class="tipo">leccion</span></span></li>
+<li><span class="num">319</span><span class="falta">Revisar y corregir: la lista de control del rusohablante <span class="tipo">leccion</span></span></li>
+<li><span class="num">320</span><span class="falta">Dos textos tipo DELE: integración <span class="tipo">leccion</span></span></li>
+<li><span class="num">321</span><span class="falta">Prueba de la Unidad 23 <span class="tipo">prueba</span></span></li>
+<li><span class="num">322</span><span class="falta">Un cuento en versión fácil; tarea final <span class="tipo">cultura</span></span></li>
+</ul>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Unit 24. Repaso integral del nivel A2</h2><span class="tipo">A2 · 0/14</span></div>
+<details><summary>Objectives · weeks 47–48</summary><ul><li>Consolidar toda la gramática y el léxico de A2 con mapas y tablas de decisión.</li><li>Conocer el formato de las cuatro pruebas del DELE A2 y practicar cada una.</li><li>Tener la lista personal de errores lista para la fase final.</li></ul></details>
+<h3>Week 47</h3><ul class="dias">
+<li><span class="num">323</span><span class="falta">Repaso 1: presente, reflexivos y verbos tipo gustar <span class="tipo">repaso</span></span></li>
+<li><span class="num">324</span><span class="falta">Repaso 2: los pasados, tabla de decisión <span class="tipo">repaso</span></span></li>
+<li><span class="num">325</span><span class="falta">Repaso 3: futuro, condicional, ir a, perífrasis <span class="tipo">repaso</span></span></li>
+<li><span class="num">326</span><span class="falta">Repaso 4: imperativo, pronombres y se <span class="tipo">repaso</span></span></li>
+<li><span class="num">327</span><span class="falta">Repaso 5: ser / estar / hay, por / para, comparar, relativos, indefinidos <span class="tipo">repaso</span></span></li>
+<li><span class="num">328</span><span class="falta">Repaso 6: el léxico de A2 y los falsos amigos <span class="tipo">repaso</span></span></li>
+<li><span class="num">329</span><span class="falta">Una película en español (fragmentos) <span class="tipo">cultura</span></span></li>
+</ul>
+<h3>Week 48</h3><ul class="dias">
+<li><span class="num">330</span><span class="falta">Comprensión auditiva: estrategias y tipos de tarea <span class="tipo">repaso</span></span></li>
+<li><span class="num">331</span><span class="falta">Comprensión de lectura: estrategias por tarea <span class="tipo">repaso</span></span></li>
+<li><span class="num">332</span><span class="falta">Expresión oral: las tres tareas del DELE A2 <span class="tipo">repaso</span></span></li>
+<li><span class="num">333</span><span class="falta">Expresión escrita: los dos textos con rúbrica <span class="tipo">repaso</span></span></li>
+<li><span class="num">334</span><span class="falta">Mis errores: la lista negra del rusohablante <span class="tipo">repaso</span></span></li>
+<li><span class="num">335</span><span class="falta">Prueba de la Unidad 24: integral de A2 <span class="tipo">prueba</span></span></li>
+<li><span class="num">336</span><span class="falta">¿Qué hay después de A2? <span class="tipo">cultura</span></span></li>
+</ul>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Fase final: simulacros del DELE A2, proyecto y examen</h2></div>
+<h3>Week 49</h3><ul class="dias">
+<li><span class="num">337</span><span class="falta">Simulacro 1 · Lectura, tareas 1 y 2 <span class="tipo">simulacro</span></span></li>
+<li><span class="num">338</span><span class="falta">Simulacro 1 · Lectura, tareas 3 y 4 <span class="tipo">simulacro</span></span></li>
+<li><span class="num">339</span><span class="falta">Simulacro 1 · Audio, tareas 1 y 2 <span class="tipo">simulacro</span></span></li>
+<li><span class="num">340</span><span class="falta">Simulacro 1 · Audio, tareas 3 y 4 <span class="tipo">simulacro</span></span></li>
+<li><span class="num">341</span><span class="falta">Simulacro 1 · Escritura, tarea 1 (correo) <span class="tipo">simulacro</span></span></li>
+<li><span class="num">342</span><span class="falta">Simulacro 1 · Escritura, tarea 2 (texto) <span class="tipo">simulacro</span></span></li>
+<li><span class="num">343</span><span class="falta">Simulacro 1 · Oral (preparación y ejecución) <span class="tipo">simulacro</span></span></li>
+</ul>
+<h3>Week 50</h3><ul class="dias">
+<li><span class="num">344</span><span class="falta">Corrección del simulacro 1 y plan de refuerzo <span class="tipo">repaso</span></span></li>
+<li><span class="num">345</span><span class="falta">Refuerzo 1: gramática <span class="tipo">repaso</span></span></li>
+<li><span class="num">346</span><span class="falta">Refuerzo 2: léxico y audio <span class="tipo">repaso</span></span></li>
+<li><span class="num">347</span><span class="falta">Refuerzo 3: escritura <span class="tipo">repaso</span></span></li>
+<li><span class="num">348</span><span class="falta">Refuerzo 4: oral <span class="tipo">repaso</span></span></li>
+<li><span class="num">349</span><span class="falta">Repaso general en juego: 50 preguntas <span class="tipo">repaso</span></span></li>
+<li><span class="num">350</span><span class="falta">Una película completa (primera mitad) <span class="tipo">cultura</span></span></li>
+</ul>
+<h3>Week 51</h3><ul class="dias">
+<li><span class="num">351</span><span class="falta">Simulacro 2 · Lectura, tareas 1 y 2 <span class="tipo">simulacro</span></span></li>
+<li><span class="num">352</span><span class="falta">Simulacro 2 · Lectura, tareas 3 y 4 <span class="tipo">simulacro</span></span></li>
+<li><span class="num">353</span><span class="falta">Simulacro 2 · Audio, tareas 1 y 2 <span class="tipo">simulacro</span></span></li>
+<li><span class="num">354</span><span class="falta">Simulacro 2 · Audio, tareas 3 y 4 <span class="tipo">simulacro</span></span></li>
+<li><span class="num">355</span><span class="falta">Simulacro 2 · Escritura, tarea 1 (correo) <span class="tipo">simulacro</span></span></li>
+<li><span class="num">356</span><span class="falta">Simulacro 2 · Escritura, tarea 2 (texto) <span class="tipo">simulacro</span></span></li>
+<li><span class="num">357</span><span class="falta">Simulacro 2 · Oral (preparación y ejecución) <span class="tipo">simulacro</span></span></li>
+</ul>
+<h3>Week 52</h3><ul class="dias">
+<li><span class="num">358</span><span class="falta">Corrección del simulacro 2 y comparación con el 1 <span class="tipo">repaso</span></span></li>
+<li><span class="num">359</span><span class="falta">Proyecto final (1): «Un año en español», guion <span class="tipo">proyecto</span></span></li>
+<li><span class="num">360</span><span class="falta">Proyecto final (2): redactar y revisar <span class="tipo">proyecto</span></span></li>
+<li><span class="num">361</span><span class="falta">Proyecto final (3): grabar y autoevaluar <span class="tipo">proyecto</span></span></li>
+<li><span class="num">362</span><span class="falta">Balance: la lista can-do de A2 <span class="tipo">repaso</span></span></li>
+<li><span class="num">363</span><span class="falta">Examen final del curso <span class="tipo">examen</span></span></li>
+<li><span class="num">364</span><span class="falta">Cierre y plan para B1 <span class="tipo">cultura</span></span></li>
+</ul>
+<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Fase final: simulacros del DELE A2, proyecto y examen</h2></div>
+<h3>Week 53</h3><ul class="dias">
+<li><span class="num">365</span><span class="falta">Día 365: día de reserva <span class="tipo">reserva</span></span></li>
+</ul>
+
+</div></main>
+<footer class="sitio"><div class="envoltorio">
+<p><a href="../o-kurse.html">About</a> · <a href="../kontakt.html">Contact</a> · <a href="../privacy.html">Privacy policy</a></p>
+<p>Course material may be used freely for study.</p>
+</div></footer>
+
+</body>
+</html>

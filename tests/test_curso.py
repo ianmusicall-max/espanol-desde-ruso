@@ -262,115 +262,177 @@ class TestElGeneradorCuidaLaCache(unittest.TestCase):
 
 
 class TestElSitio(unittest.TestCase):
-    """El sitio público: estructura, enlaces y las páginas que pide AdSense."""
+    """El sitio público: tres idiomas, el diseño y las páginas que pide AdSense."""
 
     def setUp(self):
         self.cfg = construir_sitio.cargar_config()
+        self.textos = construir_sitio.cargar_textos()
+        self.idiomas = [i["codigo"] for i in self.textos["idiomas"]]
 
-    def test_el_sitio_se_construye_con_portada_indice_y_lecciones_enlazadas(self):
+    def _construir(self, cfg=None):
         destino = pathlib.Path(tempfile.mkdtemp())
-        n = construir_sitio.construir(destino, self.cfg)
-        self.assertEqual(n, len(validar.lecciones()))
+        construir_sitio.construir(destino, cfg or self.cfg, self.textos)
+        return destino
 
-        # La portada es para quien llega de Google; el índice del curso vive aparte.
+    def test_los_tres_idiomas_tienen_sus_cinco_paginas(self):
+        destino = self._construir()
+        for i in self.textos["idiomas"]:
+            carpeta = destino / i["carpeta"] if i["carpeta"] else destino
+            for nombre in ("index.html", "kurs.html", "o-kurse.html", "kontakt.html", "privacy.html"):
+                ruta = carpeta / nombre
+                self.assertTrue(ruta.exists(), f"{i['codigo']}/{nombre}")
+                self.assertIn(f'<html lang="{i["html"]}"', ruta.read_text(encoding="utf-8"))
+
+    def test_cada_pagina_ofrece_la_misma_pagina_en_los_otros_idiomas(self):
+        """El conmutador no manda a la portada: manda a la MISMA página."""
+        destino = self._construir()
+        pagina = (destino / "es" / "kurs.html").read_text(encoding="utf-8")
+        self.assertIn('href="../kurs.html" hreflang="ru"', pagina)
+        self.assertIn('href="../en/kurs.html" hreflang="en"', pagina)
+        self.assertIn('href="../es/kurs.html" hreflang="es"', pagina)
+        self.assertIn('aria-current="true"', pagina)
+        raiz = (destino / "privacy.html").read_text(encoding="utf-8")
+        self.assertIn('href="./es/privacy.html"', raiz)
+
+    def test_hay_hreflang_para_los_buscadores(self):
+        destino = self._construir()
         portada = (destino / "index.html").read_text(encoding="utf-8")
-        self.assertIn("kurs.html", portada)
-        self.assertIn(f"{n} уроков из 365", portada)
-        self.assertIn('lang="ru"', portada)
+        for i in self.textos["idiomas"]:
+            self.assertIn(f'rel="alternate" hreflang="{i["html"]}"', portada)
 
-        indice = (destino / "kurs.html").read_text(encoding="utf-8")
-        for ruta in validar.lecciones():
-            datos, _ = validar.frontmatter(ruta.read_text(encoding="utf-8"))
-            self.assertIn(f"semana-{int(datos['semana']):02d}/dia-{datos['dia']}.html", indice)
-        self.assertIn("Тема 24", indice)
-        self.assertIn(CAL["fase_final"]["titulo_ru"], indice)
+    def test_las_lecciones_existen_solo_en_ruso(self):
+        """No es un olvido: el curso enseña español A TRAVÉS del ruso, así que
+        una lección en español no tendría sentido."""
+        destino = self._construir()
+        for i in self.textos["idiomas"]:
+            if not i["carpeta"]:
+                continue
+            self.assertFalse((destino / i["carpeta"] / "semana-01").exists(), i["codigo"])
+        leccion = destino / "semana-01" / "dia-1.html"
+        self.assertTrue(leccion.exists())
+        self.assertIn('<html lang="ru"', leccion.read_text(encoding="utf-8"))
+
+    def test_el_indice_de_cada_idioma_enlaza_todas_las_lecciones_escritas(self):
+        destino = self._construir()
+        for i in self.textos["idiomas"]:
+            carpeta = destino / i["carpeta"] if i["carpeta"] else destino
+            raiz = ".." if i["carpeta"] else "."
+            indice = (carpeta / "kurs.html").read_text(encoding="utf-8")
+            for ruta in validar.lecciones():
+                datos, _ = validar.frontmatter(ruta.read_text(encoding="utf-8"))
+                enlace = f'{raiz}/semana-{int(datos["semana"]):02d}/dia-{datos["dia"]}.html'
+                self.assertIn(enlace, indice, f"{i['codigo']} → {enlace}")
+
+    def test_la_portada_dice_cuantas_lecciones_hay_de_verdad(self):
+        destino = self._construir()
+        n = len(validar.lecciones())
+        for i in self.textos["idiomas"]:
+            carpeta = destino / i["carpeta"] if i["carpeta"] else destino
+            portada = (carpeta / "index.html").read_text(encoding="utf-8")
+            self.assertIn(f'<span class="n">{n}</span>', portada)
+            self.assertIn(f"/ {len(DIAS)} ", portada)
 
     def test_cada_leccion_enlaza_con_la_anterior_y_la_siguiente(self):
-        destino = pathlib.Path(tempfile.mkdtemp())
-        construir_sitio.construir(destino, self.cfg)
+        destino = self._construir()
         pagina = (destino / "semana-01" / "dia-2.html").read_text(encoding="utf-8")
         self.assertIn("dia-1.html", pagina)
         self.assertIn("dia-3.html", pagina)
-        self.assertIn("Урок 2 из 365", pagina)
+        self.assertIn("Урок 2", pagina)
 
-    def test_las_paginas_que_adsense_pide_existen(self):
-        destino = pathlib.Path(tempfile.mkdtemp())
-        construir_sitio.construir(destino, self.cfg)
-        for nombre in ("index.html", "kurs.html", "o-kurse.html", "kontakt.html", "privacy.html", "robots.txt"):
-            self.assertTrue((destino / nombre).exists(), nombre)
-        self.assertTrue((destino / "programa" / "metodologia.html").exists())
-        # Todas las páginas se enlazan entre sí desde el menú.
-        portada = (destino / "index.html").read_text(encoding="utf-8")
-        for destino_menu, _ in construir_sitio.MENU:
-            self.assertIn(destino_menu, portada)
+    def test_el_contraste_con_el_ruso_se_marca_para_poder_destacarlo(self):
+        """Es la firma del curso, así que en la lección se ve distinto."""
+        destino = self._construir()
+        pagina = (destino / "semana-01" / "dia-1.html").read_text(encoding="utf-8")
+        self.assertIn('<section class="contraste">', pagina)
+        self.assertIn("Контраст с русским", pagina)
+
+    def test_las_tablas_van_en_su_propia_caja_con_scroll(self):
+        """Una tabla de diálogo no cabe en un móvil; si no se encierra, empuja
+        la página entera y el texto se sale."""
+        destino = self._construir()
+        pagina = (destino / "semana-01" / "dia-1.html").read_text(encoding="utf-8")
+        self.assertEqual(pagina.count("<table>"), pagina.count('<div class="tabla-env">'))
 
     def test_sin_anuncios_configurados_no_se_carga_nada_de_terceros(self):
-        """Lo que no está en la configuración no aparece en el HTML: ni script
-        de Google, ni hueco vacío, ni aviso de cookies que no hacen falta."""
         cfg = construir_sitio.cargar_config()
         cfg["adsense"]["cliente"] = ""
         cfg["analitica"]["google"] = ""
-        destino = pathlib.Path(tempfile.mkdtemp())
-        construir_sitio.construir(destino, cfg)
-        for nombre in ("index.html", "kurs.html", "semana-01/dia-1.html"):
+        destino = self._construir(cfg)
+        for nombre in ("index.html", "es/index.html", "en/kurs.html", "semana-01/dia-1.html"):
             pagina = (destino / nombre).read_text(encoding="utf-8")
-            self.assertNotIn("adsbygoogle", pagina, nombre)
-            self.assertNotIn("googlesyndication", pagina, nombre)
-            self.assertNotIn("googletagmanager", pagina, nombre)
-            self.assertNotIn('id="cookies"', pagina, nombre)
-        privacidad = (destino / "privacy.html").read_text(encoding="utf-8")
-        self.assertIn("не использует ни рекламные", privacidad)
+            for rastro in ("adsbygoogle", "googlesyndication", "googletagmanager", 'id="cookies"'):
+                self.assertNotIn(rastro, pagina, f"{nombre}: {rastro}")
+        for i in self.idiomas:
+            carpeta = destino / i if i != "ru" else destino
+            self.assertIn(self.textos[i]["privacidad"]["sin_cookies_texto"][:40],
+                          (carpeta / "privacy.html").read_text(encoding="utf-8"))
 
     def test_con_anuncios_configurados_aparecen_y_el_aviso_de_cookies_tambien(self):
         cfg = construir_sitio.cargar_config()
         cfg["adsense"]["cliente"] = "ca-pub-0000000000000000"
         cfg["adsense"]["bloques"] = {"cabecera": "111", "dentro": "222", "pie": "333"}
-        destino = pathlib.Path(tempfile.mkdtemp())
-        construir_sitio.construir(destino, cfg)
+        destino = self._construir(cfg)
         leccion = (destino / "semana-01" / "dia-1.html").read_text(encoding="utf-8")
         self.assertIn("ca-pub-0000000000000000", leccion)
         self.assertEqual(leccion.count('class="adsbygoogle"'), 3, "cabecera, dentro y pie")
         self.assertIn('id="cookies"', leccion)
-        # El anuncio de dentro se coloca antes de los ejercicios, no en mitad de una frase.
         self.assertLess(leccion.index('data-ad-slot="222"'), leccion.index("4. Практика"))
-        privacidad = (destino / "privacy.html").read_text(encoding="utf-8")
-        self.assertIn("AdSense", privacidad)
-        self.assertNotIn("не использует ни рекламные", privacidad)
+        # El aviso de cookies sale en el idioma de la página.
+        for i in self.idiomas:
+            carpeta = destino / i if i != "ru" else destino
+            portada = (carpeta / "index.html").read_text(encoding="utf-8")
+            self.assertIn(self.textos[i]["cookies_ok"], portada, i)
+            privacidad = (carpeta / "privacy.html").read_text(encoding="utf-8")
+            self.assertIn("AdSense", privacidad)
+            self.assertNotIn(self.textos[i]["privacidad"]["sin_cookies_texto"][:40], privacidad)
 
     def test_un_bloque_sin_identificador_no_deja_hueco(self):
         cfg = construir_sitio.cargar_config()
         cfg["adsense"]["cliente"] = "ca-pub-0000000000000000"
         cfg["adsense"]["bloques"] = {"cabecera": "111", "dentro": "", "pie": ""}
-        destino = pathlib.Path(tempfile.mkdtemp())
-        construir_sitio.construir(destino, cfg)
+        destino = self._construir(cfg)
         leccion = (destino / "semana-01" / "dia-1.html").read_text(encoding="utf-8")
         self.assertEqual(leccion.count('class="adsbygoogle"'), 1)
 
-    def test_el_sitemap_lista_las_paginas_y_las_lecciones_escritas(self):
-        destino = pathlib.Path(tempfile.mkdtemp())
-        construir_sitio.construir(destino, self.cfg)
+    def test_el_sitemap_lista_los_tres_idiomas_y_las_lecciones(self):
+        destino = self._construir()
         mapa = (destino / "sitemap.xml").read_text(encoding="utf-8")
-        for nombre in ("index.html", "kurs.html", "o-kurse.html", "privacy.html"):
-            self.assertIn(nombre, mapa)
+        for i in self.textos["idiomas"]:
+            base = f"{i['carpeta']}/" if i["carpeta"] else ""
+            self.assertIn(f"/{base}index.html", mapa, i["codigo"])
+            self.assertIn(f"/{base}kurs.html", mapa, i["codigo"])
         for ruta in validar.lecciones():
             datos, _ = validar.frontmatter(ruta.read_text(encoding="utf-8"))
             self.assertIn(f"semana-{int(datos['semana']):02d}/dia-{datos['dia']}.html", mapa)
         self.assertIn("sitemap.xml", (destino / "robots.txt").read_text(encoding="utf-8"))
 
     def test_un_borrador_se_anuncia_como_borrador(self):
-        destino = pathlib.Path(tempfile.mkdtemp())
-        construir_sitio.construir(destino, self.cfg)
+        destino = self._construir()
         for ruta in validar.lecciones():
             datos, _ = validar.frontmatter(ruta.read_text(encoding="utf-8"))
             pagina = (destino / f"semana-{int(datos['semana']):02d}" / f"dia-{datos['dia']}.html").read_text(encoding="utf-8")
+            aviso = self.textos["ru"]["leccion"]["borrador"][:30]
             if datos["revisado"]:
-                self.assertNotIn("Черновик", pagina, str(ruta))
+                self.assertNotIn(aviso, pagina, str(ruta))
             else:
-                self.assertIn("Черновик", pagina, str(ruta))
+                self.assertIn(aviso, pagina, str(ruta))
+
+    def test_los_textos_estan_completos_en_los_tres_idiomas(self):
+        """Una clave que falte en un idioma revienta la construcción de esa
+        página, y es el tipo de fallo que solo se ve mirando esa página."""
+        def claves(d, prefijo=""):
+            salida = set()
+            for k, v in d.items():
+                salida.add(prefijo + k)
+                if isinstance(v, dict):
+                    salida |= claves(v, f"{prefijo}{k}.")
+            return salida
+        referencia = claves(self.textos["ru"])
+        for i in ("es", "en"):
+            self.assertEqual(referencia - claves(self.textos[i]), set(), f"faltan claves en {i}")
 
     def test_docs_esta_al_dia(self):
-        destino = pathlib.Path(tempfile.mkdtemp())
-        construir_sitio.construir(destino, self.cfg)
+        destino = self._construir()
         for generado in destino.rglob("*"):
             if not generado.is_file():
                 continue
