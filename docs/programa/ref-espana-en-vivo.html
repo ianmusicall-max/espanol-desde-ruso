@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>espana-en-vivo — documentación</title>
+<meta name="description" content="Documentación del programa del curso."><link rel="canonical" href="https://ianmusicall-max.github.io/espanol-desde-ruso/es/programa/ref-espana-en-vivo.html"><meta property="og:type" content="website"><meta property="og:locale" content="es"><meta property="og:title" content="espana-en-vivo — documentación"><meta property="og:description" content="Documentación del programa del curso."><meta property="og:url" content="https://ianmusicall-max.github.io/espanol-desde-ruso/es/programa/ref-espana-en-vivo.html">
+<style>
+/* Tres estados: lo que diga el sistema, o lo que el lector elija con el botón
+   de la luna. El atributo data-tema del <html> gana siempre sobre el sistema;
+   lo escribe un script de dos líneas en <head> para que no haya parpadeo. */
+:root{
+  color-scheme:light;
+  --papel:#fdfbf6; --tinta:#1b1e23; --tenue:#646c78; --linea:#e2dacb;
+  --acento:#b03f26; --acento-suave:#fbeee9; --celeste:#2f6b8f; --celeste-suave:#eaf2f7;
+  --realce:#fdf3d8; --tarjeta:#f7f2e6; --sombra:0 1px 2px rgba(27,30,35,.05);
+  --ancho:44rem;
+}
+@media(prefers-color-scheme:dark){:root:not([data-tema="light"]){
+  color-scheme:dark;
+  --papel:#14161a; --tinta:#e8e4da; --tenue:#9aa2ae; --linea:#333941;
+  --acento:#f0896a; --acento-suave:#2a1d19; --celeste:#7fb6d6; --celeste-suave:#162229;
+  --realce:#2a2718; --tarjeta:#1d2026; --sombra:none;
+}}
+:root[data-tema="dark"]{
+  color-scheme:dark;
+  --papel:#14161a; --tinta:#e8e4da; --tenue:#9aa2ae; --linea:#333941;
+  --acento:#f0896a; --acento-suave:#2a1d19; --celeste:#7fb6d6; --celeste-suave:#162229;
+  --realce:#2a2718; --tarjeta:#1d2026; --sombra:none;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--papel);color:var(--tinta);
+  font:400 17px/1.65 ui-serif,Georgia,"Times New Roman",serif;
+  -webkit-font-smoothing:antialiased;overflow-wrap:break-word}
+.sans{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.envoltorio{max-width:var(--ancho);margin:0 auto;padding:0 20px}
+
+/* ---- cabecera ---- */
+/* En el móvil la cabecera NO se queda pegada: ocupa dos filas y una lección es
+   una lectura larga, así que robaría una sexta parte de la pantalla todo el
+   rato. A partir de 40rem cabe en una fila y ahí sí se queda. */
+header.sitio{background:var(--papel);border-bottom:1px solid var(--linea)}
+@media(min-width:40rem){header.sitio{position:sticky;top:0;z-index:20;
+  background:color-mix(in srgb,var(--papel) 92%,transparent);backdrop-filter:saturate(1.6) blur(8px)}
+  html{scroll-padding-top:4rem}}
+header.sitio .envoltorio{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .9rem;padding-block:.5rem;
+  font-family:ui-sans-serif,system-ui,-apple-system,sans-serif;font-size:.86rem}
+header.sitio a{color:var(--tenue);text-decoration:none;white-space:nowrap}
+header.sitio a:hover,header.sitio nav.paginas a[aria-current]{color:var(--acento)}
+/* El título cede espacio antes que el selector de idioma: en un móvil
+   estrecho se recorta con puntos suspensivos, pero el selector no se sale. */
+header.sitio .marca{font-weight:650;color:var(--tinta);font-size:.95rem;letter-spacing:-.01em;
+  flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
+header.sitio nav.paginas{display:flex;gap:.9rem;order:3;flex:1 0 100%;overflow-x:auto;
+  scrollbar-width:none;padding-bottom:.1rem}
+header.sitio nav.paginas::-webkit-scrollbar{display:none}
+.idiomas{display:flex;gap:.2rem;flex:0 0 auto;border:1px solid var(--linea);border-radius:999px;padding:2px}
+.idiomas a{padding:.12rem .5rem;border-radius:999px;font-size:.75rem;font-weight:600;
+  text-transform:uppercase;letter-spacing:.05em;line-height:1.5}
+.idiomas a[aria-current]{background:var(--acento);color:#fff}
+.tema{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;
+  width:30px;height:30px;padding:0;border:1px solid var(--linea);border-radius:999px;
+  background:transparent;color:var(--tenue);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.tema:hover{color:var(--acento);border-color:var(--acento)}
+.tema svg{display:block}
+/* De día se ve la luna (pulsa y se hace de noche); de noche, el sol. */
+.tema .sol{display:none}
+@media(prefers-color-scheme:dark){
+  :root:not([data-tema="light"]) .tema .luna{display:none}
+  :root:not([data-tema="light"]) .tema .sol{display:block}}
+:root[data-tema="dark"] .tema .luna{display:none}
+:root[data-tema="dark"] .tema .sol{display:block}
+:root[data-tema="light"] .tema .luna{display:block}
+:root[data-tema="light"] .tema .sol{display:none}
+
+/* audio: un ▶ al lado de cada frase española que esté locutada */
+.suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
+  font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
+.suena:hover,.suena:focus-visible{opacity:1}
+.suena[aria-pressed="true"]{opacity:1;color:var(--acento)}
+@media(hover:none){.suena{opacity:.9}}
+
+/* progreso del lector */
+/* El [hidden] del navegador pierde contra .boton{display:inline-block}, así que
+   «continuar» se vería como un botón naranja vacío en la primera visita. */
+[hidden]{display:none!important}
+.boton.marcar{margin:1.6rem 0 0}
+.boton.destacado{box-shadow:0 0 0 3px var(--acento-suave)}
+ul.dias li.hecha .num::after{content:"✓";color:var(--acento);font-weight:700;margin-inline-start:.25rem}
+ul.dias li.hecha a{color:var(--tenue)}
+#mio{margin-top:.9rem;padding-top:.9rem;border-top:1px dashed var(--linea)}
+.progreso-nota{font-size:.84rem;color:var(--tenue);font-family:ui-sans-serif,system-ui,sans-serif;margin-top:.5rem}
+#borrar-progreso{background:none;border:0;padding:0;color:var(--tenue);text-decoration:underline;
+  cursor:pointer;font:inherit;font-size:.84rem}
+@media(min-width:40rem){
+  header.sitio nav.paginas{order:0;flex:0 1 auto;margin-inline-start:auto}
+  header.sitio .marca{flex:0 1 auto}
+}
+
+main{padding-bottom:3.5rem}
+
+/* ---- tipografía ---- */
+h1{font-size:clamp(1.65rem,5.2vw,2.3rem);line-height:1.15;letter-spacing:-.022em;margin:1.6rem 0 .25rem;font-weight:650}
+h1 .segunda{display:block;color:var(--acento);font-weight:400}
+h2{font-size:clamp(1.08rem,3.2vw,1.22rem);margin:2.6rem 0 .7rem;padding-top:.9rem;
+  border-top:1px solid var(--linea);font-weight:650;letter-spacing:-.012em}
+h3{font-size:1rem;margin:1.6rem 0 .45rem;font-weight:650}
+h2,h3{font-family:ui-sans-serif,system-ui,-apple-system,sans-serif}
+p{margin:.75rem 0}
+a{color:var(--acento);text-underline-offset:2px}
+strong{font-weight:650}
+
+/* ---- portada ---- */
+.heroe{padding:2rem 0 .5rem}
+.heroe .lema{font-size:clamp(1.02rem,3.4vw,1.2rem);color:var(--tenue);margin:.5rem 0 1.1rem;font-style:italic}
+.botones{display:flex;flex-wrap:wrap;gap:.65rem;margin:1.4rem 0}
+.boton{display:inline-block;background:var(--acento);color:#fff;padding:.7rem 1.35rem;border-radius:8px;
+  text-decoration:none;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.97rem;font-weight:550;
+  box-shadow:var(--sombra);transition:transform .12s ease}
+.boton:hover{transform:translateY(-1px)}
+.boton.secundario{background:transparent;color:var(--acento);border:1.5px solid var(--acento);box-shadow:none}
+
+.progreso{margin:1.5rem 0;font-family:ui-sans-serif,system-ui,sans-serif}
+.progreso .cifras{display:flex;align-items:baseline;gap:.45rem;font-size:.88rem;color:var(--tenue)}
+.progreso .n{font-size:1.5rem;font-weight:700;color:var(--tinta);font-feature-settings:"tnum"}
+.barra{height:7px;border-radius:999px;background:var(--linea);overflow:hidden;margin-top:.45rem}
+.barra i{display:block;height:100%;background:linear-gradient(90deg,var(--acento),var(--celeste));border-radius:999px}
+
+/* ---- bloque de contraste: la firma del curso ---- */
+.contraste{background:var(--acento-suave);border:1px solid color-mix(in srgb,var(--acento) 22%,transparent);
+  border-radius:10px;padding:1rem 1.1rem;margin:1.3rem 0}
+.contraste>h3:first-child{margin-top:0;color:var(--acento)}
+.contraste p:last-child{margin-bottom:0}
+del{text-decoration-line:line-through;text-decoration-color:var(--acento);
+  text-decoration-thickness:2px;opacity:.75}
+.mal{color:var(--acento)}
+.bien{color:#1d7a4f}
+@media(prefers-color-scheme:dark){:root:not([data-tema="light"]) .bien{color:#5fc48f}}
+:root[data-tema="dark"] .bien{color:#5fc48f}
+
+blockquote{margin:1.2rem 0;padding:.85rem 1.1rem;background:var(--tarjeta);
+  border-inline-start:3px solid var(--celeste);border-radius:0 8px 8px 0}
+blockquote p:first-child{margin-top:0}blockquote p:last-child{margin-bottom:0}
+
+/* ---- tablas ---- */
+.tabla-env{overflow-x:auto;margin:.9rem 0;border:1px solid var(--linea);border-radius:9px;background:var(--papel)}
+table{border-collapse:collapse;width:100%;font-size:.92rem;font-family:ui-sans-serif,system-ui,sans-serif}
+th,td{padding:.45rem .65rem;text-align:start;vertical-align:top;border-bottom:1px solid var(--linea)}
+tr:last-child td{border-bottom:none}
+th{background:var(--tarjeta);font-weight:600;position:sticky;top:0}
+code{font-size:.88em;background:var(--tarjeta);padding:.1em .32em;border-radius:4px;
+  font-family:ui-monospace,"SF Mono",Menlo,monospace}
+
+/* ---- tarjetas y listas ---- */
+.rejilla{display:grid;gap:.85rem;grid-template-columns:1fr;margin:1rem 0}
+@media(min-width:36rem){.rejilla{grid-template-columns:1fr 1fr}}
+.tarjeta{border:1px solid var(--linea);border-radius:10px;padding:.95rem 1.1rem;background:var(--tarjeta);box-shadow:var(--sombra)}
+.tarjeta h3{margin:0 0 .3rem;font-size:.88rem;text-transform:uppercase;letter-spacing:.05em;color:var(--acento)}
+.tarjeta p{margin:0;font-size:.95rem}
+
+ul.dias{list-style:none;padding:0;margin:.5rem 0}
+ul.dias li{display:flex;gap:.6rem;align-items:baseline;padding:.4rem .2rem;border-bottom:1px solid var(--linea)}
+ul.dias li:last-child{border-bottom:none}
+ul.dias .num{font-family:ui-sans-serif,system-ui,sans-serif;font-size:.78rem;color:var(--tenue);
+  min-width:2.6rem;font-feature-settings:"tnum"}
+ul.dias a{text-decoration:none}ul.dias a:hover{text-decoration:underline}
+ul.dias .falta{color:var(--tenue)}
+.tipo{font-family:ui-sans-serif,system-ui,sans-serif;font-size:.67rem;color:var(--celeste);
+  text-transform:uppercase;letter-spacing:.07em;border:1px solid var(--linea);border-radius:999px;
+  padding:.05rem .4rem;white-space:nowrap}
+.unidad-cab{display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;margin-top:2.4rem}
+details{margin:.5rem 0;font-size:.93rem}
+summary{cursor:pointer;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.86rem;color:var(--tenue)}
+details ul{margin:.5rem 0}
+
+/* ---- lección ---- */
+.leccion-cab{display:flex;flex-wrap:wrap;gap:.45rem;align-items:center;margin:1.3rem 0 .2rem;
+  font-family:ui-sans-serif,system-ui,sans-serif;font-size:.78rem;color:var(--tenue)}
+.leccion-cab .n{background:var(--acento);color:#fff;border-radius:999px;padding:.12rem .6rem;font-weight:600}
+.aviso{background:var(--realce);border:1px solid var(--linea);border-radius:8px;padding:.6rem .85rem;
+  font-size:.88rem;font-family:ui-sans-serif,system-ui,sans-serif;margin:1rem 0}
+nav.pasos{display:flex;justify-content:space-between;gap:.8rem;margin:2.5rem 0 0;padding-top:1rem;
+  border-top:1px solid var(--linea);font-family:ui-sans-serif,system-ui,sans-serif;font-size:.86rem}
+nav.pasos a{text-decoration:none;padding:.4rem .7rem;border:1px solid var(--linea);border-radius:7px}
+nav.pasos a:hover{border-color:var(--acento)}
+input[type=checkbox]{margin-inline-end:.45rem}
+
+/* ---- anuncios, pie, cookies ---- */
+.anuncio{margin:2rem 0;text-align:center;min-height:1px}
+.anuncio::before{content:attr(data-etiqueta);display:block;font-family:ui-sans-serif,system-ui,sans-serif;
+  font-size:.64rem;color:var(--tenue);text-transform:uppercase;letter-spacing:.09em;margin-bottom:.3rem}
+footer.sitio{border-top:1px solid var(--linea);padding:1.6rem 0 3rem;
+  font-family:ui-sans-serif,system-ui,sans-serif;font-size:.83rem;color:var(--tenue)}
+footer.sitio a{color:var(--tenue)}
+footer.sitio p{margin:.35rem 0}
+#cookies{position:fixed;inset-inline:0;bottom:0;background:var(--tarjeta);border-top:1px solid var(--linea);
+  padding:.85rem 20px;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.85rem;display:flex;
+  flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:center;z-index:30}
+</style>
+<script>try{var t=localStorage.getItem('tema');if(t)document.documentElement.dataset.tema=t}catch(e){}</script>
+
+</head>
+<body>
+<header class="sitio"><div class="envoltorio">
+<a class="marca" href="../index.html">Español desde el ruso</a>
+<nav class="paginas"><a href="../kurs.html">Las lecciones</a><a href="../o-kurse.html">El curso</a><a href="../kontakt.html">Contacto</a></nav>
+<div class="idiomas" title="Idioma"><a href="../index.html" lang="ru">ru</a><a href="../es/index.html" lang="es" aria-current="true">es</a><a href="../en/index.html" lang="en">en</a></div>
+<button class="tema" id="tema" type="button" title="Tema claro u oscuro" aria-label="Tema claro u oscuro"><svg class="luna" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sol" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.5 1.5M17.9 17.9l1.5 1.5M2.5 12h2M19.5 12h2M4.6 19.4l1.5-1.5M17.9 6.1l1.5-1.5"/></svg></button>
+</div></header>
+<main><div class="envoltorio">
+<h1 id="espana-en-vivo-analisis-estructural">España en vivo — análisis estructural</h1>
+<blockquote>
+<p>Leído el 2026-10-26 del PDF del profesor (Google Drive). <strong>No se copia ningún
+contenido</strong>: aquí van la estructura, la tipología de secciones y las
+decisiones pedagógicas, que es para lo que sirve esta carpeta.</p>
+</blockquote>
+<h2 id="ficha">Ficha</h2>
+<div class="tabla-env"><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Título</td>
+<td><em>España en vivo</em></td>
+</tr>
+<tr>
+<td>Autores</td>
+<td>Georgy Nuzhdin (idea original), Paloma Martín Lora-Tamayo (la audionovela), Carmen Marín Estremera (los talleres y buena parte de los debates)</td>
+</tr>
+<tr>
+<td>Lengua vehicular</td>
+<td>Ruso, con el español como lengua meta</td>
+</tr>
+<tr>
+<td>Extensión</td>
+<td>6 unidades + 3 pruebas finales + claves (~300 pp.)</td>
+</tr>
+<tr>
+<td>Material sonoro</td>
+<td>CD con la audionovela, grabada por <strong>diez</strong> locutores españoles</td>
+</tr>
+<tr>
+<td>Nivel declarado</td>
+<td>A partir de <strong>180 horas</strong> y ~1400 palabras, con pasados y las bases de subjuntivo y condicional; pero el libro dice estar pensado sobre todo para <strong>300+ horas</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Es el mismo equipo de autores que <em>Español en vivo</em></strong>, y esto es lo que
+responde la pregunta de los niveles que quedó abierta el 2026-10-26: el autor
+<strong>sí</strong> tiene material por encima de B1, y es este. Por contenido y por horas
+declaradas, está en territorio <strong>B2</strong>.</p>
+<h2 id="como-esta-construido">Cómo está construido</h2>
+<p>Seis unidades <strong>de estructura idéntica</strong>, cada una sobre uno o dos problemas de
+la España contemporánea: inmigración, terrorismo, paro, vivienda, familia,
+drogas, ocio. Cada tema se aborda desde varios ángulos —prensa, debate,
+entrevista, literatura y diálogo hablado—, y hay una prueba final cada dos
+unidades, más claves detalladas que incluyen comentario cultural.</p>
+<p><strong>Lo que define el libro es que es modular.</strong> Dentro de cada unidad corren en
+paralelo los mismos «cursos», y el libro declara explícitamente que se puede
+trabajar de dos maneras:</p>
+<ul>
+<li><strong>en horizontal</strong>: se toma un tema (p. ej. la familia) y se recorren todos
+  los aspectos — prensa, debate, gramática, habla, pragmática…;</li>
+<li><strong>en vertical</strong>: se toma un aspecto (p. ej. la lengua hablada) y se recorre
+  en las seis unidades.</li>
+</ul>
+<h3 id="las-secciones-de-cada-unidad-en-orden">Las secciones de cada unidad, en orden</h3>
+<div class="tabla-env"><table>
+<thead>
+<tr>
+<th>Sección</th>
+<th>Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Introducción</td>
+<td>Ejercicios breves que presentan el problema: léxico básico y hechos</td>
+</tr>
+<tr>
+<td>Texto</td>
+<td>O una página para todo el grupo, o 2-3 páginas repartidas entre alumnos para comentarlas luego juntos</td>
+</tr>
+<tr>
+<td>Ejercicios post-texto</td>
+<td>Comprensión y léxico nuevo. <strong>Cierran siempre con un bloque de traducción ruso↔español</strong>, y eso es obligatorio en todas las unidades</td>
+</tr>
+<tr>
+<td>Debate</td>
+<td>Textos polémicos y fragmentos de entrevista para montar una clase-discusión; al final, expresiones útiles para debatir</td>
+</tr>
+<tr>
+<td>Gramática inductiva</td>
+<td>Los puntos que peor se asientan: artículo, subjuntivo, énfasis, condicionales, intensificadores</td>
+</tr>
+<tr>
+<td><strong>Audionovela</strong></td>
+<td>Una historia seriada en diálogos que atraviesa el libro entero, en lengua hablada de hoy. Cada entrega cierra con glosario coloquial, ejercicios de léxico, de comprensión y de diferencias socioculturales</td>
+</tr>
+<tr>
+<td>Pragmática</td>
+<td>Cómo conseguir algo hablando: abrir y cerrar una conversación, quejarse, aconsejar, pedir, aceptar o rehusar, halagar</td>
+</tr>
+<tr>
+<td>Interculturalidad</td>
+<td>Diferencias entre España y otros países (en particular Rusia): rituales, refranes, colores, chistes, cómo ven los españoles al extranjero</td>
+</tr>
+<tr>
+<td>Taller creativo</td>
+<td>Leer textos literarios y escribir textos propios de distinto tipo</td>
+</tr>
+</tbody>
+</table></div>
+<p>Dos secciones llevan icono: trabajo en parejas o grupo, y ejercicios de
+audición.</p>
+<p><strong>La audionovela es la pieza que sostiene el resto</strong>: la pragmática y la
+interculturalidad no se explican y ya, sino que se ven funcionando dentro de la
+historia. El libro lo dice tal cual: la audionovela es la ilustración viva de
+esas dos secciones.</p>
+<h2 id="que-se-toma">Qué se toma</h2>
+<ol>
+<li><strong>La historia seriada con personajes fijos, como columna vertebral.</strong> Este
+   curso ya tiene a <strong>Ana e Iván</strong> desde la lección 1, pero hoy son dos nombres
+   que reaparecen, no una historia que avanza. Convertirlos en un hilo con
+   trama —y grabarlo— es exactamente lo que este libro demuestra que funciona,
+   y llega justo cuando el audio ya está montado (<code>generar_audio.py</code>).</li>
+<li><strong>La sección de pragmática como curso propio.</strong> «Quejarse, aconsejar, pedir,
+   rehusar» no es vocabulario ni gramática: es la tercera cosa, y el PCIC la
+   recoge en su inventario de funciones, con el que este curso ya se alinea.
+   Hoy las funciones están repartidas por las lecciones; aquí se ve el valor de
+   darles un recorrido reconocible.</li>
+<li><strong>Interculturalidad más allá del error gramatical.</strong> El bloque
+   «⚠️ Контраст с русским» de este curso es la firma de la casa, pero solo
+   contrasta <strong>lengua</strong>. Este libro contrasta <strong>costumbre</strong>: rituales, refranes,
+   cómo se ve al extranjero. Es la extensión natural del bloque que ya existe, y
+   para un rusohablante que va a vivir en España vale tanto como la gramática.</li>
+<li><strong>El bloque de traducción ruso↔español obligatorio al cerrar.</strong> Es un tipo
+   de ejercicio que este curso casi no usa y que aquí es sistemático. Aprovecha
+   justo lo que un rusohablante trae puesto.</li>
+<li><strong>La prueba cada dos unidades.</strong> Aquí hay evaluación en las semanas 45-52;
+   este libro la distribuye a lo largo de todo el recorrido.</li>
+</ol>
+<h2 id="que-no-se-toma">Qué NO se toma</h2>
+<ul>
+<li><strong>La modularidad horizontal/vertical.</strong> Está pensada para un profesor con un
+  grupo que elige qué aspectos cubrir. Este curso es un camino de 30 minutos al
+  día en el que el alumno no decide nada, y esa es su ventaja: no hay que
+  elegir, se abre y se estudia. Tomar la modularidad sería romperlo.</li>
+<li><strong>Los temas.</strong> Terrorismo, drogas y paro son materia B2 para debatir en
+  grupo; aquí el alumno está en A1-A2 y estudia solo.</li>
+<li><strong>El formato de clase presencial</strong>: debates de grupo, textos repartidos entre
+  alumnos, trabajo en parejas. No hay grupo.</li>
+</ul>
+<h2 id="donde-se-aplica">Dónde se aplica</h2>
+<div class="tabla-env"><table>
+<thead>
+<tr>
+<th>Qué</th>
+<th>Dónde</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Historia seriada con Ana e Iván</td>
+<td><code>programa/metodologia.md</code> y la plantilla de lección; encaja con el audio ya construido</td>
+</tr>
+<tr>
+<td>Curso de pragmática</td>
+<td><code>programa/alineacion-mcer-pcic.md</code> §3 (funciones PCIC), hoy repartidas</td>
+</tr>
+<tr>
+<td>Interculturalidad en el bloque de contraste</td>
+<td><code>programa/contrastiva-ru-es.md</code>, que hoy es solo lingüístico</td>
+</tr>
+<tr>
+<td>Traducción ru↔es como tipo de ejercicio</td>
+<td><code>curso/plantilla-leccion.md</code>, apartado de práctica</td>
+</tr>
+<tr>
+<td>Evaluación periódica</td>
+<td><code>programa/evaluacion.md</code></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Para el segundo año (B1).</strong> Este libro arranca donde el curso actual termina
+—180 horas, 1400 palabras, pasados y bases de subjuntivo— así que su nivel de
+entrada es casi exactamente la salida prevista de los 365 días (182,5 horas).
+Como modelo de continuación encaja; como fuente de temas, no, por lo dicho
+arriba.</p>
+</div></main>
+<footer class="sitio"><div class="envoltorio">
+<p><a href="../o-kurse.html">El curso</a> · <a href="../kontakt.html">Contacto</a> · <a href="../privacy.html">Política de privacidad</a></p>
+<p>El material del curso puede usarse libremente para estudiar.</p>
+</div></footer>
+
+<script>(function(){var b=document.getElementById('tema');if(!b)return;function actual(){var r=document.documentElement;return r.dataset.tema||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}b.addEventListener('click',function(){var n=actual()==='dark'?'light':'dark';document.documentElement.dataset.tema=n;try{localStorage.setItem('tema',n)}catch(e){}});})();</script>
+<script>window.CURSO_TEXTOS={"continuar": "Continuar: lección", "empezar": "Empezar de cero", "marcar": "Marcar la lección como hecha", "hecho": "Lección hecha", "siguiente": "Siguiente lección", "tuyo": "hechas por usted", "titulo": "Su progreso", "aviso": "El progreso se guarda solo en este navegador y en este aparato. No hay registro y no se envía a ninguna parte. Si borra los datos del navegador o abre el curso en otro teléfono, las marcas no viajan con usted.", "borrar": "Borrar el progreso", "confirmar": "¿Borrar todas las marcas?"};window.CURSO_RAIZ="..";window.CURSO_PUBLICADAS=0;window.CURSO_DIAS={};</script>
+<script src="../progreso.js" defer></script>
+
+</body>
+</html>

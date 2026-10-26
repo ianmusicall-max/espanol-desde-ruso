@@ -8,6 +8,7 @@ versionan (derechos de autor): quedan fuera del repositorio.
 | Referencia | Qué es | Para qué se usa | Análisis |
 |---|---|---|---|
 | Точка Ру · Tochka Ru A2, Рабочая тетрадь, часть 2 (Долматова, Новачац, 2020) | Cuaderno de ejercicios de **ruso** como lengua extranjera, nivel A2, unidad 4 (verbos de movimiento, transporte, viajes) | Modelo de cuaderno A2 escrito para un público que aprende por ejercicios: estructura de la lección, 40 tipos de ejercicio, test de unidad y clave | [tochka-ru-a2-tetrad-2.md](tochka-ru-a2-tetrad-2.md) |
+| España en vivo (Nuzhdin, Martín Lora-Tamayo, Marín Estremera) | Manual de **B2** sobre la España contemporánea, en ruso. 6 unidades modulares, audionovela grabada por 10 locutores, claves con comentario cultural | Modelo de historia seriada con personajes fijos, de curso de pragmática y de interculturalidad más allá del error gramatical; y referencia de nivel de entrada para un segundo año | [espana-en-vivo.md](espana-en-vivo.md) |
 
 ## Cómo añadir una referencia
 

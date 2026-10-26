@@ -375,6 +375,62 @@ Lo que hay que saber si alguien lo toca:
 con instrucciones de hablar despacio y en español de España; cambiarla es
 cambiar `VOZ` y vuelve a costar 1,30 USD, porque es otro hash.
 
+## Los PDF del profesor: tres de cuatro son escaneos (2026-10-26)
+
+El usuario compartió una carpeta de Drive con cuatro manuales. **El conector de
+Google Drive funciona** —busca y lee archivos suyos, y el tamaño no estorba—,
+pero aquí el problema era otro.
+
+| Archivo | Peso | Capa de texto |
+|---|---|---|
+| `...Нуждин-Г-Espanol-en-Vivo.pdf` | 56,8 MB | **no** |
+| `...Нуждин-Курс...Для-продолжающих.pdf` | 51,9 MB | **no** (369 páginas vacías) |
+| `610554902-Испанский-Нуждин.pdf` | 46 MB | **no** |
+| `Espana_en_vivo.pdf` | 30,6 MB | **sí** (184 páginas) |
+
+Los dos que el usuario señaló como principales son justo los dos ilegibles. Un
+escaneo no tiene texto que extraer, así que no es un límite del conector.
+
+**Las tres vías para sacar el texto están cerradas desde aquí**, y conviene que
+quede escrito para no volver a recorrerlas: `read_file_content` devuelve vacío
+porque no hay nada que devolver; `download_file_content` entrega base64 y 56 MB
+se convierten en ~75 MB de texto que no caben en el contexto; y
+`drive.google.com` está bloqueado por el proxy del contenedor, así que tampoco
+se puede descargar con `curl`. Hay `pdftoppm`, `pdftotext` y `pypdf`, pero no
+`tesseract`: sin OCR local no hay forma de leer un escaneo.
+
+**La salida es que el OCR lo haga Google**: abrir el PDF en Drive con
+«Abrir con → Documentos de Google» crea un documento con el texto reconocido, y
+ese sí se lee entero. Puede que solo convierta parte de un libro grande. La
+alternativa segura son capturas de las páginas que hagan falta —el índice y una
+unidad completa bastan para un análisis estructural— porque las imágenes sí se
+leen.
+
+**Probar si un PDF tiene texto sin descargarlo** se hace con una consulta de
+búsqueda, `fullText contains 'que'` sobre la carpeta: los que no salen son
+escaneos. Sale barato y evita descargas inútiles.
+
+### `referencias/espana-en-vivo.md`
+
+El único legible resultó ser **otro libro**: *España en vivo*, del mismo equipo
+(Nuzhdin, Martín Lora-Tamayo, Marín Estremera), un manual de **B2** sobre la
+España contemporánea. **Eso contesta la pregunta de niveles que quedó abierta**:
+el autor sí tiene material por encima de B1.
+
+Y su nivel de entrada —180 horas, 1400 palabras, pasados y bases de subjuntivo—
+es casi exactamente la salida prevista de este curso (182,5 horas), así que
+sirve de referencia para un segundo año.
+
+Lo que se toma, anotado entero en el análisis: la **historia seriada con
+personajes fijos** como columna vertebral (este curso ya tiene a Ana e Iván,
+pero como nombres, no como trama, y el audio acaba de construirse), la
+**pragmática como curso propio**, la **interculturalidad** más allá del error
+gramatical —el bloque de contraste de aquí solo contrasta lengua, no costumbre—
+y el **bloque de traducción ru↔es** al cerrar los ejercicios. Lo que no se toma:
+la modularidad horizontal/vertical, que presupone un profesor y un grupo que
+eligen, y este curso es un camino fijo de 30 minutos donde no hay que decidir
+nada.
+
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.
