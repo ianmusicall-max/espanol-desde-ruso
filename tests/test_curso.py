@@ -4,6 +4,8 @@
 """
 from __future__ import annotations
 
+import html
+import json
 import pathlib
 import sys
 import tempfile
@@ -470,6 +472,95 @@ class TestElSitio(unittest.TestCase):
             versionado = RAIZ / "docs" / rel
             self.assertTrue(versionado.exists(), f"falta docs/{rel}: corre scripts/construir_sitio.py")
             self.assertEqual(versionado.read_text(encoding="utf-8"), generado.read_text(encoding="utf-8"), f"docs/{rel} desactualizado")
+
+
+class TestElProgresoDelLector(unittest.TestCase):
+    """Sin registro y sin servidor: el navegador recuerda por dónde iba.
+
+    Lo que se fija aquí es el contrato entre el HTML que genera el sitio y
+    progreso.js, que es lo único que los ata: un atributo que cambie de nombre
+    no rompe ninguna página, deja de funcionar el progreso y nadie se entera."""
+
+    def setUp(self):
+        self.cfg = construir_sitio.cargar_config()
+        self.textos = construir_sitio.cargar_textos()
+        self.destino = pathlib.Path(tempfile.mkdtemp())
+        construir_sitio.construir(self.destino, self.cfg, self.textos)
+        self.cal = plan.cargar()
+
+    def _leer(self, *partes):
+        return self.destino.joinpath(*partes).read_text(encoding="utf-8")
+
+    def test_el_guion_se_publica_y_lo_cargan_las_paginas(self):
+        self.assertTrue((self.destino / "progreso.js").exists())
+        for ruta in (("index.html",), ("kurs.html",), ("es", "index.html"),
+                     ("semana-01", "dia-1.html")):
+            html_ = self._leer(*ruta)
+            self.assertIn("progreso.js", html_, "/".join(ruta))
+            self.assertIn("CURSO_DIAS=", html_, "/".join(ruta))
+
+    def test_la_leccion_se_marca_con_article_y_no_con_el_li_del_indice(self):
+        """progreso.js busca article[data-leccion] para saber en qué lección está.
+
+        Si buscara [data-leccion] a secas, el primero del índice es un <li> de
+        la lección 1: abrir «todas las lecciones» movería «la última leída» al
+        principio del curso y «continuar» mandaría al día 1."""
+        guion = self._leer("progreso.js")
+        self.assertIn("querySelector('article[data-leccion]')", guion)
+        leccion = self._leer("semana-01", "dia-1.html")
+        self.assertIn('<article data-leccion="1">', leccion)
+        self.assertIn('id="marcar-caja"', leccion)
+        self.assertIn('id="enlace-siguiente"', leccion)
+        indice = self._leer("kurs.html")
+        self.assertIn('<li data-leccion="1">', indice)
+        self.assertNotIn("<article data-leccion", indice)
+
+    def test_solo_las_escritas_estan_en_el_mapa(self):
+        """«Continuar» no puede mandar a una lección que no existe."""
+        mapa = json.loads(construir_sitio.mapa_de_dias(self.cal))
+        escritas = {d.numero for d in construir_sitio.escritas(self.cal)}
+        self.assertEqual(set(int(k) for k in mapa), escritas)
+        for n, ruta in mapa.items():
+            self.assertTrue((self.destino / ruta).exists(), f"{n} → {ruta}")
+
+    def test_lo_que_depende_del_navegador_nace_oculto(self):
+        """La primera visita no sabe nada del lector: sin esto se vería un botón
+        «continuar» vacío y un contador en cero, que desaniman."""
+        portada = self._leer("index.html")
+        for trozo in ('id="continuar"', 'id="mio"', 'id="borrar-progreso"'):
+            i = portada.index(trozo)
+            self.assertIn("hidden", portada[i:portada.index(">", i)], trozo)
+        self.assertIn("[hidden]{display:none!important}", construir_sitio.CSS,
+                      "el [hidden] del navegador pierde contra .boton{display:inline-block}")
+
+    def test_el_aviso_de_que_el_progreso_no_viaja_esta_en_los_tres_idiomas(self):
+        """Es lo único que el lector tiene que saber: no hay cuenta, y si cambia
+        de teléfono o borra los datos del navegador, las marcas no van con él."""
+        for i in self.textos["idiomas"]:
+            aviso = self.textos[i["codigo"]]["progreso"]["aviso"]
+            carpeta = self.destino / i["carpeta"] if i["carpeta"] else self.destino
+            for pagina in ("index.html", "kurs.html"):
+                self.assertIn(html.escape(aviso), carpeta.joinpath(pagina).read_text(encoding="utf-8"),
+                              f"{i['codigo']}/{pagina}")
+
+
+class TestElTachado(unittest.TestCase):
+    """~~h~~otel y ~~Yo gusto~~: sin tachado, la forma mala parece la buena."""
+
+    def test_las_dobles_tildes_se_vuelven_del(self):
+        self.assertEqual(construir_sitio.md("~~h~~otel"), "<p><del>h</del>otel</p>")
+        self.assertEqual(construir_sitio.md("una ~~forma mala~~ aquí"),
+                         "<p>una <del>forma mala</del> aquí</p>")
+
+    def test_una_tilde_suelta_no_tacha_nada(self):
+        self.assertIn("~", construir_sitio.md("a ~~ b"))
+
+    def test_ninguna_leccion_publicada_deja_tildes_a_la_vista(self):
+        destino = pathlib.Path(tempfile.mkdtemp())
+        construir_sitio.construir(destino, construir_sitio.cargar_config(),
+                                  construir_sitio.cargar_textos())
+        for ruta in destino.glob("semana-*/dia-*.html"):
+            self.assertNotIn("~~", ruta.read_text(encoding="utf-8"), ruta.name)
 
 
 if __name__ == "__main__":

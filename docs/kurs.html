@@ -73,6 +73,19 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="dark"] .tema .sol{display:block}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
+
+/* progreso del lector */
+/* El [hidden] del navegador pierde contra .boton{display:inline-block}, así que
+   «continuar» se vería como un botón naranja vacío en la primera visita. */
+[hidden]{display:none!important}
+.boton.marcar{margin:1.6rem 0 0}
+.boton.destacado{box-shadow:0 0 0 3px var(--acento-suave)}
+ul.dias li.hecha .num::after{content:"✓";color:var(--acento);font-weight:700;margin-inline-start:.25rem}
+ul.dias li.hecha a{color:var(--tenue)}
+#mio{margin-top:.9rem;padding-top:.9rem;border-top:1px dashed var(--linea)}
+.progreso-nota{font-size:.84rem;color:var(--tenue);font-family:ui-sans-serif,system-ui,sans-serif;margin-top:.5rem}
+#borrar-progreso{background:none;border:0;padding:0;color:var(--tenue);text-decoration:underline;
+  cursor:pointer;font:inherit;font-size:.84rem}
 @media(min-width:40rem){
   header.sitio nav.paginas{order:0;flex:0 1 auto;margin-inline-start:auto}
   header.sitio .marca{flex:0 1 auto}
@@ -112,6 +125,8 @@ strong{font-weight:650}
   border-radius:10px;padding:1rem 1.1rem;margin:1.3rem 0}
 .contraste>h3:first-child{margin-top:0;color:var(--acento)}
 .contraste p:last-child{margin-bottom:0}
+del{text-decoration-line:line-through;text-decoration-color:var(--acento);
+  text-decoration-thickness:2px;opacity:.75}
 .mal{color:var(--acento)}
 .bien{color:#1d7a4f}
 @media(prefers-color-scheme:dark){:root:not([data-tema="light"]) .bien{color:#5fc48f}}
@@ -189,152 +204,153 @@ footer.sitio p{margin:.35rem 0}
 <main><div class="envoltorio">
 <h1>Все уроки<span class="segunda">365 дней, 52 недели, 24 темы</span></h1>
 <p>Ссылками открываются уроки, которые уже написаны. У остальных показана тема дня: программа составлена на весь год вперёд.</p>
+<div class="progreso" id="mio" hidden><div class="cifras"><span class="n">0</span><span class="texto"></span></div><div class="barra"><i style="width:1%"></i></div><p class="progreso-nota">Прогресс хранится только в этом браузере, на этом устройстве. Регистрации нет, и никуда он не отправляется. Если вы очистите данные браузера или откроете курс на другом телефоне, отметки не перенесутся. <button type="button" id="borrar-progreso" hidden>Сбросить прогресс</button></p></div>
 
 <div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Тема 1. ¡Hola! Звуки и приветствия</h2><span class="tipo">A1 · 14/14</span></div>
 <details><summary>Чему вы научитесь · недели 1–2</summary><ul><li>Leer en voz alta cualquier palabra española con la pronunciación y el acento correctos.</li><li>Saludar, despedirse y presentarse (nombre, origen, edad) en tú y en usted.</li><li>Contar de 0 a 20 y deletrear el propio nombre.</li></ul></details>
 <h3>Неделя 1</h3><ul class="dias">
-<li><span class="num">1</span><span><a href="./semana-01/dia-1.html">Алфавит и пять гласных</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">2</span><span><a href="./semana-01/dia-2.html">Простые согласные и приветствия по времени суток</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">3</span><span><a href="./semana-01/dia-3.html">Трудные буквы: c, z, qu, g, j, ñ, ll, y, r, rr, ch, x</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">4</span><span><a href="./semana-01/dia-4.html">Ударение: ударный слог и знак тильды</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">5</span><span><a href="./semana-01/dia-5.html">Числа 0-10 и ты / Вы</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">6</span><span><a href="./semana-01/dia-6.html">Повторение недели 1: звуки и приветствия</a> <span class="tipo">повторение</span></span></li>
-<li><span class="num">7</span><span><a href="./semana-01/dia-7.html">Испаноязычный мир: где говорят по-испански</a> <span class="tipo">культура</span></span></li>
+<li data-leccion="1"><span class="num">1</span><span><a href="./semana-01/dia-1.html">Алфавит и пять гласных</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="2"><span class="num">2</span><span><a href="./semana-01/dia-2.html">Простые согласные и приветствия по времени суток</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="3"><span class="num">3</span><span><a href="./semana-01/dia-3.html">Трудные буквы: c, z, qu, g, j, ñ, ll, y, r, rr, ch, x</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="4"><span class="num">4</span><span><a href="./semana-01/dia-4.html">Ударение: ударный слог и знак тильды</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="5"><span class="num">5</span><span><a href="./semana-01/dia-5.html">Числа 0-10 и ты / Вы</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="6"><span class="num">6</span><span><a href="./semana-01/dia-6.html">Повторение недели 1: звуки и приветствия</a> <span class="tipo">повторение</span></span></li>
+<li data-leccion="7"><span class="num">7</span><span><a href="./semana-01/dia-7.html">Испаноязычный мир: где говорят по-испански</a> <span class="tipo">культура</span></span></li>
 </ul>
 <h3>Неделя 2</h3><ul class="dias">
-<li><span class="num">8</span><span><a href="./semana-02/dia-1.html">Глагол ser и национальности</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">9</span><span><a href="./semana-02/dia-2.html">Мы, вы, они: множественное число</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">10</span><span><a href="./semana-02/dia-3.html">Числа 11-20 и возраст</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">11</span><span><a href="./semana-02/dia-4.html">Основные вопросы и интонация</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">12</span><span><a href="./semana-02/dia-5.html">Язык урока и язык выживания</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">13</span><span><a href="./semana-02/dia-6.html">Тест по Уроку 1</a> <span class="tipo">тест</span></span></li>
-<li><span class="num">14</span><span><a href="./semana-02/dia-7.html">Имена, фамилии и формы обращения</a> <span class="tipo">культура</span></span></li>
+<li data-leccion="8"><span class="num">8</span><span><a href="./semana-02/dia-1.html">Глагол ser и национальности</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="9"><span class="num">9</span><span><a href="./semana-02/dia-2.html">Мы, вы, они: множественное число</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="10"><span class="num">10</span><span><a href="./semana-02/dia-3.html">Числа 11-20 и возраст</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="11"><span class="num">11</span><span><a href="./semana-02/dia-4.html">Основные вопросы и интонация</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="12"><span class="num">12</span><span><a href="./semana-02/dia-5.html">Язык урока и язык выживания</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="13"><span class="num">13</span><span><a href="./semana-02/dia-6.html">Тест по Уроку 1</a> <span class="tipo">тест</span></span></li>
+<li data-leccion="14"><span class="num">14</span><span><a href="./semana-02/dia-7.html">Имена, фамилии и формы обращения</a> <span class="tipo">культура</span></span></li>
 </ul>
 <div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Тема 2. Мой мир: вещи, люди и профессии</h2><span class="tipo">A1 · 14/14</span></div>
 <details><summary>Чему вы научитесь · недели 3–4</summary><ul><li>Nombrar objetos cotidianos con su artículo y en plural.</li><li>Decir la profesión y el lugar de trabajo propios y de otros.</li><li>Preguntar y decir precios y números de teléfono (hasta 100).</li></ul></details>
 <h3>Неделя 3</h3><ul class="dias">
-<li><span class="num">15</span><span><a href="./semana-03/dia-1.html">Род существительного и артикль el / la</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">16</span><span><a href="./semana-03/dia-2.html">Множественное число и los / las; ¿Qué es esto?</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">17</span><span><a href="./semana-03/dia-3.html">El / la или un / una: определённый и неопределённый</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">18</span><span><a href="./semana-03/dia-4.html">Профессии и глагол ser</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">19</span><span><a href="./semana-03/dia-5.html">Числа 20-100: телефон, адрес, e-mail</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">20</span><span><a href="./semana-03/dia-6.html">Повторение недели 3: артикли и род</a> <span class="tipo">повторение</span></span></li>
-<li><span class="num">21</span><span><a href="./semana-03/dia-7.html">Работа в испаноязычном мире</a> <span class="tipo">культура</span></span></li>
+<li data-leccion="15"><span class="num">15</span><span><a href="./semana-03/dia-1.html">Род существительного и артикль el / la</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="16"><span class="num">16</span><span><a href="./semana-03/dia-2.html">Множественное число и los / las; ¿Qué es esto?</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="17"><span class="num">17</span><span><a href="./semana-03/dia-3.html">El / la или un / una: определённый и неопределённый</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="18"><span class="num">18</span><span><a href="./semana-03/dia-4.html">Профессии и глагол ser</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="19"><span class="num">19</span><span><a href="./semana-03/dia-5.html">Числа 20-100: телефон, адрес, e-mail</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="20"><span class="num">20</span><span><a href="./semana-03/dia-6.html">Повторение недели 3: артикли и род</a> <span class="tipo">повторение</span></span></li>
+<li data-leccion="21"><span class="num">21</span><span><a href="./semana-03/dia-7.html">Работа в испаноязычном мире</a> <span class="tipo">культура</span></span></li>
 </ul>
 <h3>Неделя 4</h3><ul class="dias">
-<li><span class="num">22</span><span><a href="./semana-04/dia-1.html">Hay: есть или нет</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">23</span><span><a href="./semana-04/dia-2.html">Этот, эта, эти; тот, та</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">24</span><span><a href="./semana-04/dia-3.html">Прилагательное: согласование и место</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">25</span><span><a href="./semana-04/dia-4.html">¿Cómo es? Описание предметов</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">26</span><span><a href="./semana-04/dia-5.html">В магазине канцтоваров: ¿Tiene…? ¿Cuánto cuesta?</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">27</span><span><a href="./semana-04/dia-6.html">Тест по Уроку 2</a> <span class="tipo">тест</span></span></li>
-<li><span class="num">28</span><span><a href="./semana-04/dia-7.html">Евро, песо и предметы быта</a> <span class="tipo">культура</span></span></li>
+<li data-leccion="22"><span class="num">22</span><span><a href="./semana-04/dia-1.html">Hay: есть или нет</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="23"><span class="num">23</span><span><a href="./semana-04/dia-2.html">Этот, эта, эти; тот, та</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="24"><span class="num">24</span><span><a href="./semana-04/dia-3.html">Прилагательное: согласование и место</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="25"><span class="num">25</span><span><a href="./semana-04/dia-4.html">¿Cómo es? Описание предметов</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="26"><span class="num">26</span><span><a href="./semana-04/dia-5.html">В магазине канцтоваров: ¿Tiene…? ¿Cuánto cuesta?</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="27"><span class="num">27</span><span><a href="./semana-04/dia-6.html">Тест по Уроку 2</a> <span class="tipo">тест</span></span></li>
+<li data-leccion="28"><span class="num">28</span><span><a href="./semana-04/dia-7.html">Евро, песо и предметы быта</a> <span class="tipo">культура</span></span></li>
 </ul>
 <div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Тема 3. Семья и люди</h2><span class="tipo">A1 · 14/14</span></div>
 <details><summary>Чему вы научитесь · недели 5–6</summary><ul><li>Presentar a la familia y decir qué relación tiene cada persona.</li><li>Describir el aspecto físico y el carácter de alguien.</li><li>Decir cómo se siente alguien y dónde está (primer contraste ser / estar).</li></ul></details>
 <h3>Неделя 5</h3><ul class="dias">
-<li><span class="num">29</span><span><a href="./semana-05/dia-1.html">Семья и глагол tener</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">30</span><span><a href="./semana-05/dia-2.html">Притяжательные: mi, tu, su</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">31</span><span><a href="./semana-05/dia-3.html">Nuestro, vuestro и семейное положение</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">32</span><span><a href="./semana-05/dia-4.html">¿Cómo es? Внешность</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">33</span><span><a href="./semana-05/dia-5.html">Характер: какой твой брат?</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">34</span><span><a href="./semana-05/dia-6.html">Повторение недели 5: семья и описание</a> <span class="tipo">повторение</span></span></li>
-<li><span class="num">35</span><span><a href="./semana-05/dia-7.html">Семья в Испании и Латинской Америке</a> <span class="tipo">культура</span></span></li>
+<li data-leccion="29"><span class="num">29</span><span><a href="./semana-05/dia-1.html">Семья и глагол tener</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="30"><span class="num">30</span><span><a href="./semana-05/dia-2.html">Притяжательные: mi, tu, su</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="31"><span class="num">31</span><span><a href="./semana-05/dia-3.html">Nuestro, vuestro и семейное положение</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="32"><span class="num">32</span><span><a href="./semana-05/dia-4.html">¿Cómo es? Внешность</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="33"><span class="num">33</span><span><a href="./semana-05/dia-5.html">Характер: какой твой брат?</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="34"><span class="num">34</span><span><a href="./semana-05/dia-6.html">Повторение недели 5: семья и описание</a> <span class="tipo">повторение</span></span></li>
+<li data-leccion="35"><span class="num">35</span><span><a href="./semana-05/dia-7.html">Семья в Испании и Латинской Америке</a> <span class="tipo">культура</span></span></li>
 </ul>
 <h3>Неделя 6</h3><ul class="dias">
-<li><span class="num">36</span><span><a href="./semana-06/dia-1.html">Ser или estar (1): характер и состояние</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">37</span><span><a href="./semana-06/dia-2.html">¿Dónde está? Estar + место</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">38</span><span><a href="./semana-06/dia-3.html">Домашние животные и притяжательное &#x27;de&#x27;</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">39</span><span><a href="./semana-06/dia-4.html">Спрашивать и рассказывать о других</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">40</span><span><a href="./semana-06/dia-5.html">Моя семья: образец текста и презентация</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">41</span><span><a href="./semana-06/dia-6.html">Тест по Уроку 3</a> <span class="tipo">тест</span></span></li>
-<li><span class="num">42</span><span><a href="./semana-06/dia-7.html">Семейные праздники и итоговое задание</a> <span class="tipo">культура</span></span></li>
+<li data-leccion="36"><span class="num">36</span><span><a href="./semana-06/dia-1.html">Ser или estar (1): характер и состояние</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="37"><span class="num">37</span><span><a href="./semana-06/dia-2.html">¿Dónde está? Estar + место</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="38"><span class="num">38</span><span><a href="./semana-06/dia-3.html">Домашние животные и притяжательное &#x27;de&#x27;</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="39"><span class="num">39</span><span><a href="./semana-06/dia-4.html">Спрашивать и рассказывать о других</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="40"><span class="num">40</span><span><a href="./semana-06/dia-5.html">Моя семья: образец текста и презентация</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="41"><span class="num">41</span><span><a href="./semana-06/dia-6.html">Тест по Уроку 3</a> <span class="tipo">тест</span></span></li>
+<li data-leccion="42"><span class="num">42</span><span><a href="./semana-06/dia-7.html">Семейные праздники и итоговое задание</a> <span class="tipo">культура</span></span></li>
 </ul>
 <div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Тема 4. Мой дом и мой город</h2><span class="tipo">A1 · 14/14</span></div>
 <details><summary>Чему вы научитесь · недели 7–8</summary><ul><li>Describir la casa y situar objetos (hay / estar + preposiciones de lugar).</li><li>Preguntar por un lugar y entender y dar indicaciones sencillas.</li><li>Leer anuncios de pisos y entender precios y direcciones (números hasta 1000).</li></ul></details>
 <h3>Неделя 7</h3><ul class="dias">
-<li><span class="num">43</span><span><a href="./semana-07/dia-1.html">Дом: комнаты и глагол vivir</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">44</span><span><a href="./semana-07/dia-2.html">Мебель: hay или está</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">45</span><span><a href="./semana-07/dia-3.html">Моя квартира: какая, где, на каком этаже</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">46</span><span><a href="./semana-07/dia-4.html">Город: где банк?</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">47</span><span><a href="./semana-07/dia-5.html">Ir a: куда идёшь?</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">48</span><span><a href="./semana-07/dia-6.html">Повторение недели 7: hay / estar и предлоги</a> <span class="tipo">повторение</span></span></li>
-<li><span class="num">49</span><span><a href="./semana-07/dia-7.html">Как живут: квартира, дом, район</a> <span class="tipo">культура</span></span></li>
+<li data-leccion="43"><span class="num">43</span><span><a href="./semana-07/dia-1.html">Дом: комнаты и глагол vivir</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="44"><span class="num">44</span><span><a href="./semana-07/dia-2.html">Мебель: hay или está</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="45"><span class="num">45</span><span><a href="./semana-07/dia-3.html">Моя квартира: какая, где, на каком этаже</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="46"><span class="num">46</span><span><a href="./semana-07/dia-4.html">Город: где банк?</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="47"><span class="num">47</span><span><a href="./semana-07/dia-5.html">Ir a: куда идёшь?</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="48"><span class="num">48</span><span><a href="./semana-07/dia-6.html">Повторение недели 7: hay / estar и предлоги</a> <span class="tipo">повторение</span></span></li>
+<li data-leccion="49"><span class="num">49</span><span><a href="./semana-07/dia-7.html">Как живут: квартира, дом, район</a> <span class="tipo">культура</span></span></li>
 </ul>
 <h3>Неделя 8</h3><ul class="dias">
-<li><span class="num">50</span><span><a href="./semana-08/dia-1.html">Спросить и объяснить дорогу</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">51</span><span><a href="./semana-08/dia-2.html">Числа 100-1000 и адреса</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">52</span><span><a href="./semana-08/dia-3.html">Объявления о квартирах</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">53</span><span><a href="./semana-08/dia-4.html">Мой город: что есть и чего нет</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">54</span><span><a href="./semana-08/dia-5.html">Мой район: от дороги домой к тексту</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">55</span><span><a href="./semana-08/dia-6.html">Тест по Уроку 4</a> <span class="tipo">тест</span></span></li>
-<li><span class="num">56</span><span><a href="./semana-08/dia-7.html">Метро, улица и итоговое задание</a> <span class="tipo">культура</span></span></li>
+<li data-leccion="50"><span class="num">50</span><span><a href="./semana-08/dia-1.html">Спросить и объяснить дорогу</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="51"><span class="num">51</span><span><a href="./semana-08/dia-2.html">Числа 100-1000 и адреса</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="52"><span class="num">52</span><span><a href="./semana-08/dia-3.html">Объявления о квартирах</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="53"><span class="num">53</span><span><a href="./semana-08/dia-4.html">Мой город: что есть и чего нет</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="54"><span class="num">54</span><span><a href="./semana-08/dia-5.html">Мой район: от дороги домой к тексту</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="55"><span class="num">55</span><span><a href="./semana-08/dia-6.html">Тест по Уроку 4</a> <span class="tipo">тест</span></span></li>
+<li data-leccion="56"><span class="num">56</span><span><a href="./semana-08/dia-7.html">Метро, улица и итоговое задание</a> <span class="tipo">культура</span></span></li>
 </ul>
 <div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Тема 5. Мой день</h2><span class="tipo">A1 · 14/14</span></div>
 <details><summary>Чему вы научитесь · недели 9–10</summary><ul><li>Decir la hora y hablar de la rutina diaria con verbos regulares, reflexivos e irregulares frecuentes.</li><li>Hablar de la frecuencia y de los días de la semana.</li><li>Contar un día normal por escrito (100 palabras).</li></ul></details>
 <h3>Неделя 9</h3><ul class="dias">
-<li><span class="num">57</span><span><a href="./semana-09/dia-1.html">Который час?</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">58</span><span><a href="./semana-09/dia-2.html">Настоящее время правильных глаголов: -ar, -er, -ir</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">59</span><span><a href="./semana-09/dia-3.html">Возвратные глаголы: me levanto, te duchas</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">60</span><span><a href="./semana-09/dia-4.html">Дни недели и части дня</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">61</span><span><a href="./semana-09/dia-5.html">Мой распорядок: сначала, потом, затем</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">62</span><span><a href="./semana-09/dia-6.html">Повторение недели 9: настоящее время и возвратные</a> <span class="tipo">повторение</span></span></li>
-<li><span class="num">63</span><span><a href="./semana-09/dia-7.html">Испанское расписание: обед в три, ужин в десять</a> <span class="tipo">культура</span></span></li>
+<li data-leccion="57"><span class="num">57</span><span><a href="./semana-09/dia-1.html">Который час?</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="58"><span class="num">58</span><span><a href="./semana-09/dia-2.html">Настоящее время правильных глаголов: -ar, -er, -ir</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="59"><span class="num">59</span><span><a href="./semana-09/dia-3.html">Возвратные глаголы: me levanto, te duchas</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="60"><span class="num">60</span><span><a href="./semana-09/dia-4.html">Дни недели и части дня</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="61"><span class="num">61</span><span><a href="./semana-09/dia-5.html">Мой распорядок: сначала, потом, затем</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="62"><span class="num">62</span><span><a href="./semana-09/dia-6.html">Повторение недели 9: настоящее время и возвратные</a> <span class="tipo">повторение</span></span></li>
+<li data-leccion="63"><span class="num">63</span><span><a href="./semana-09/dia-7.html">Испанское расписание: обед в три, ужин в десять</a> <span class="tipo">культура</span></span></li>
 </ul>
 <h3>Неделя 10</h3><ul class="dias">
-<li><span class="num">64</span><span><a href="./semana-10/dia-1.html">Неправильные глаголы: hago, salgo, voy, veo, pongo</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">65</span><span><a href="./semana-10/dia-2.html">Чередование гласных: empiezo, vuelvo, duermo, juego</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">66</span><span><a href="./semana-10/dia-3.html">Как часто?</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">67</span><span><a href="./semana-10/dia-4.html">Выходные: что ты делаешь по субботам?</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">68</span><span><a href="./semana-10/dia-5.html">Обычный день: интервью и текст</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">69</span><span><a href="./semana-10/dia-6.html">Тест по Уроку 5</a> <span class="tipo">тест</span></span></li>
-<li><span class="num">70</span><span><a href="./semana-10/dia-7.html">Ритм жизни и итоговое задание</a> <span class="tipo">культура</span></span></li>
+<li data-leccion="64"><span class="num">64</span><span><a href="./semana-10/dia-1.html">Неправильные глаголы: hago, salgo, voy, veo, pongo</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="65"><span class="num">65</span><span><a href="./semana-10/dia-2.html">Чередование гласных: empiezo, vuelvo, duermo, juego</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="66"><span class="num">66</span><span><a href="./semana-10/dia-3.html">Как часто?</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="67"><span class="num">67</span><span><a href="./semana-10/dia-4.html">Выходные: что ты делаешь по субботам?</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="68"><span class="num">68</span><span><a href="./semana-10/dia-5.html">Обычный день: интервью и текст</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="69"><span class="num">69</span><span><a href="./semana-10/dia-6.html">Тест по Уроку 5</a> <span class="tipo">тест</span></span></li>
+<li data-leccion="70"><span class="num">70</span><span><a href="./semana-10/dia-7.html">Ритм жизни и итоговое задание</a> <span class="tipo">культура</span></span></li>
 </ul>
 <div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Тема 6. Еда и напитки</h2><span class="tipo">A1 · 14/14</span></div>
 <details><summary>Чему вы научитесь · недели 11–12</summary><ul><li>Expresar gustos y preferencias con gustar / encantar (la estructura de «мне нравится»).</li><li>Pedir en un bar o restaurante, preguntar el precio y pagar.</li><li>Comprar comida con cantidades y envases.</li></ul></details>
 <h3>Неделя 11</h3><ul class="dias">
-<li><span class="num">71</span><span><a href="./semana-11/dia-1.html">Завтрак: еда и напитки</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">72</span><span><a href="./semana-11/dia-2.html">Gustar (1): me gusta = мне нравится</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">73</span><span><a href="./semana-11/dia-3.html">Gustar (2): gustan, nos / os / les, a mí también</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">74</span><span><a href="./semana-11/dia-4.html">Encantar и градация вкусов</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">75</span><span><a href="./semana-11/dia-5.html">Querer и preferir: в баре</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">76</span><span><a href="./semana-11/dia-6.html">Повторение недели 11: gustar и еда</a> <span class="tipo">повторение</span></span></li>
-<li><span class="num">77</span><span><a href="./semana-11/dia-7.html">Гастрономическое путешествие по испаноязычному миру</a> <span class="tipo">культура</span></span></li>
+<li data-leccion="71"><span class="num">71</span><span><a href="./semana-11/dia-1.html">Завтрак: еда и напитки</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="72"><span class="num">72</span><span><a href="./semana-11/dia-2.html">Gustar (1): me gusta = мне нравится</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="73"><span class="num">73</span><span><a href="./semana-11/dia-3.html">Gustar (2): gustan, nos / os / les, a mí también</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="74"><span class="num">74</span><span><a href="./semana-11/dia-4.html">Encantar и градация вкусов</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="75"><span class="num">75</span><span><a href="./semana-11/dia-5.html">Querer и preferir: в баре</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="76"><span class="num">76</span><span><a href="./semana-11/dia-6.html">Повторение недели 11: gustar и еда</a> <span class="tipo">повторение</span></span></li>
+<li data-leccion="77"><span class="num">77</span><span><a href="./semana-11/dia-7.html">Гастрономическое путешествие по испаноязычному миру</a> <span class="tipo">культура</span></span></li>
 </ul>
 <h3>Неделя 12</h3><ul class="dias">
-<li><span class="num">78</span><span><a href="./semana-12/dia-1.html">В ресторане: комплексный обед</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">79</span><span><a href="./semana-12/dia-2.html">На рынке: количество и упаковка</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">80</span><span><a href="./semana-12/dia-3.html">Poder: вежливые просьбы; muy или mucho</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">81</span><span><a href="./semana-12/dia-4.html">Русская кухня по-испански</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">82</span><span><a href="./semana-12/dia-5.html">Моя любимая еда: диалог и текст</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">83</span><span><a href="./semana-12/dia-6.html">Тест по Уроку 6</a> <span class="tipo">тест</span></span></li>
-<li><span class="num">84</span><span><a href="./semana-12/dia-7.html">Застолье, чаевые и тосты; итоговое задание</a> <span class="tipo">культура</span></span></li>
+<li data-leccion="78"><span class="num">78</span><span><a href="./semana-12/dia-1.html">В ресторане: комплексный обед</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="79"><span class="num">79</span><span><a href="./semana-12/dia-2.html">На рынке: количество и упаковка</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="80"><span class="num">80</span><span><a href="./semana-12/dia-3.html">Poder: вежливые просьбы; muy или mucho</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="81"><span class="num">81</span><span><a href="./semana-12/dia-4.html">Русская кухня по-испански</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="82"><span class="num">82</span><span><a href="./semana-12/dia-5.html">Моя любимая еда: диалог и текст</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="83"><span class="num">83</span><span><a href="./semana-12/dia-6.html">Тест по Уроку 6</a> <span class="tipo">тест</span></span></li>
+<li data-leccion="84"><span class="num">84</span><span><a href="./semana-12/dia-7.html">Застолье, чаевые и тосты; итоговое задание</a> <span class="tipo">культура</span></span></li>
 </ul>
 <div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Тема 7. Покупки</h2><span class="tipo">A1 · 14/14</span></div>
 <details><summary>Чему вы научитесь · недели 13–14</summary><ul><li>Comprar ropa: describirla, preguntar por la talla, el color y el precio, y probársela.</li><li>Usar los pronombres de objeto directo (lo / la / los / las).</li><li>Comparar precios y hacer una reclamación sencilla.</li></ul></details>
 <h3>Неделя 13</h3><ul class="dias">
-<li><span class="num">85</span><span><a href="./semana-13/dia-1.html">Одежда и цвета</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">86</span><span><a href="./semana-13/dia-2.html">В магазине: размеры, примерочная и este / ese / aquel</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">87</span><span><a href="./semana-13/dia-3.html">Lo, la, los, las: прямое дополнение</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">88</span><span><a href="./semana-13/dia-4.html">Тебе идёт: llevar и ponerse</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">89</span><span><a href="./semana-13/dia-5.html">Цены: дорого, со скидкой, дешевле чем</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">90</span><span><a href="./semana-13/dia-6.html">Повторение недели 13: одежда и местоимения</a> <span class="tipo">повторение</span></span></li>
-<li><span class="num">91</span><span><a href="./semana-13/dia-7.html">Распродажи, блошиные рынки и часы работы</a> <span class="tipo">культура</span></span></li>
+<li data-leccion="85"><span class="num">85</span><span><a href="./semana-13/dia-1.html">Одежда и цвета</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="86"><span class="num">86</span><span><a href="./semana-13/dia-2.html">В магазине: размеры, примерочная и este / ese / aquel</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="87"><span class="num">87</span><span><a href="./semana-13/dia-3.html">Lo, la, los, las: прямое дополнение</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="88"><span class="num">88</span><span><a href="./semana-13/dia-4.html">Тебе идёт: llevar и ponerse</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="89"><span class="num">89</span><span><a href="./semana-13/dia-5.html">Цены: дорого, со скидкой, дешевле чем</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="90"><span class="num">90</span><span><a href="./semana-13/dia-6.html">Повторение недели 13: одежда и местоимения</a> <span class="tipo">повторение</span></span></li>
+<li data-leccion="91"><span class="num">91</span><span><a href="./semana-13/dia-7.html">Распродажи, блошиные рынки и часы работы</a> <span class="tipo">культура</span></span></li>
 </ul>
 <h3>Неделя 14</h3><ul class="dias">
-<li><span class="num">92</span><span><a href="./semana-14/dia-1.html">Магазины и товары: где покупают…?</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">93</span><span><a href="./semana-14/dia-2.html">Подарок: для кого?</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">94</span><span><a href="./semana-14/dia-3.html">Покупки в интернете</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">95</span><span><a href="./semana-14/dia-4.html">Претензия и возврат</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">96</span><span><a href="./semana-14/dia-5.html">Интеграция: от магазина к письму</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">97</span><span><a href="./semana-14/dia-6.html">Тест по Уроку 7</a> <span class="tipo">тест</span></span></li>
-<li><span class="num">98</span><span><a href="./semana-14/dia-7.html">Испанская мода и торг; итоговое задание</a> <span class="tipo">культура</span></span></li>
+<li data-leccion="92"><span class="num">92</span><span><a href="./semana-14/dia-1.html">Магазины и товары: где покупают…?</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="93"><span class="num">93</span><span><a href="./semana-14/dia-2.html">Подарок: для кого?</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="94"><span class="num">94</span><span><a href="./semana-14/dia-3.html">Покупки в интернете</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="95"><span class="num">95</span><span><a href="./semana-14/dia-4.html">Претензия и возврат</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="96"><span class="num">96</span><span><a href="./semana-14/dia-5.html">Интеграция: от магазина к письму</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="97"><span class="num">97</span><span><a href="./semana-14/dia-6.html">Тест по Уроку 7</a> <span class="tipo">тест</span></span></li>
+<li data-leccion="98"><span class="num">98</span><span><a href="./semana-14/dia-7.html">Испанская мода и торг; итоговое задание</a> <span class="tipo">культура</span></span></li>
 </ul>
 <div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">Тема 8. Свободное время, погода и планы</h2><span class="tipo">A1 · 2/14</span></div>
 <details><summary>Чему вы научитесь · недели 15–16</summary><ul><li>Hablar de aficiones y deportes y de lo que gusta hacer.</li><li>Hablar del tiempo atmosférico, las estaciones y las fechas.</li><li>Hacer planes con ir a + infinitivo; invitar, aceptar y rechazar.</li></ul></details>
 <h3>Неделя 15</h3><ul class="dias">
-<li><span class="num">99</span><span><a href="./semana-15/dia-1.html">Увлечения и спорт</a> <span class="tipo">урок</span></span></li>
-<li><span class="num">100</span><span><a href="./semana-15/dia-2.html">Мне нравится танцевать: gustar + инфинитив</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="99"><span class="num">99</span><span><a href="./semana-15/dia-1.html">Увлечения и спорт</a> <span class="tipo">урок</span></span></li>
+<li data-leccion="100"><span class="num">100</span><span><a href="./semana-15/dia-2.html">Мне нравится танцевать: gustar + инфинитив</a> <span class="tipo">урок</span></span></li>
 <li><span class="num">101</span><span class="falta">Месяцы, времена года и дата <span class="tipo">урок</span></span></li>
 <li><span class="num">102</span><span class="falta">Какая погода? <span class="tipo">урок</span></span></li>
 <li><span class="num">103</span><span class="falta">Климат моей страны и испаноязычного мира <span class="tipo">урок</span></span></li>
@@ -719,5 +735,7 @@ footer.sitio p{margin:.35rem 0}
 </div></footer>
 
 <script>(function(){var b=document.getElementById('tema');if(!b)return;function actual(){var r=document.documentElement;return r.dataset.tema||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}b.addEventListener('click',function(){var n=actual()==='dark'?'light':'dark';document.documentElement.dataset.tema=n;try{localStorage.setItem('tema',n)}catch(e){}});})();</script>
+<script>window.CURSO_TEXTOS={"continuar": "Продолжить: урок", "empezar": "Начать сначала", "marcar": "Отметить урок пройденным", "hecho": "Урок пройден", "siguiente": "Следующий урок", "tuyo": "пройдено вами", "titulo": "Ваш прогресс", "aviso": "Прогресс хранится только в этом браузере, на этом устройстве. Регистрации нет, и никуда он не отправляется. Если вы очистите данные браузера или откроете курс на другом телефоне, отметки не перенесутся.", "borrar": "Сбросить прогресс", "confirmar": "Сбросить все отметки?"};window.CURSO_RAIZ=".";window.CURSO_PUBLICADAS=100;window.CURSO_DIAS={"1":"semana-01/dia-1.html","2":"semana-01/dia-2.html","3":"semana-01/dia-3.html","4":"semana-01/dia-4.html","5":"semana-01/dia-5.html","6":"semana-01/dia-6.html","7":"semana-01/dia-7.html","8":"semana-02/dia-1.html","9":"semana-02/dia-2.html","10":"semana-02/dia-3.html","11":"semana-02/dia-4.html","12":"semana-02/dia-5.html","13":"semana-02/dia-6.html","14":"semana-02/dia-7.html","15":"semana-03/dia-1.html","16":"semana-03/dia-2.html","17":"semana-03/dia-3.html","18":"semana-03/dia-4.html","19":"semana-03/dia-5.html","20":"semana-03/dia-6.html","21":"semana-03/dia-7.html","22":"semana-04/dia-1.html","23":"semana-04/dia-2.html","24":"semana-04/dia-3.html","25":"semana-04/dia-4.html","26":"semana-04/dia-5.html","27":"semana-04/dia-6.html","28":"semana-04/dia-7.html","29":"semana-05/dia-1.html","30":"semana-05/dia-2.html","31":"semana-05/dia-3.html","32":"semana-05/dia-4.html","33":"semana-05/dia-5.html","34":"semana-05/dia-6.html","35":"semana-05/dia-7.html","36":"semana-06/dia-1.html","37":"semana-06/dia-2.html","38":"semana-06/dia-3.html","39":"semana-06/dia-4.html","40":"semana-06/dia-5.html","41":"semana-06/dia-6.html","42":"semana-06/dia-7.html","43":"semana-07/dia-1.html","44":"semana-07/dia-2.html","45":"semana-07/dia-3.html","46":"semana-07/dia-4.html","47":"semana-07/dia-5.html","48":"semana-07/dia-6.html","49":"semana-07/dia-7.html","50":"semana-08/dia-1.html","51":"semana-08/dia-2.html","52":"semana-08/dia-3.html","53":"semana-08/dia-4.html","54":"semana-08/dia-5.html","55":"semana-08/dia-6.html","56":"semana-08/dia-7.html","57":"semana-09/dia-1.html","58":"semana-09/dia-2.html","59":"semana-09/dia-3.html","60":"semana-09/dia-4.html","61":"semana-09/dia-5.html","62":"semana-09/dia-6.html","63":"semana-09/dia-7.html","64":"semana-10/dia-1.html","65":"semana-10/dia-2.html","66":"semana-10/dia-3.html","67":"semana-10/dia-4.html","68":"semana-10/dia-5.html","69":"semana-10/dia-6.html","70":"semana-10/dia-7.html","71":"semana-11/dia-1.html","72":"semana-11/dia-2.html","73":"semana-11/dia-3.html","74":"semana-11/dia-4.html","75":"semana-11/dia-5.html","76":"semana-11/dia-6.html","77":"semana-11/dia-7.html","78":"semana-12/dia-1.html","79":"semana-12/dia-2.html","80":"semana-12/dia-3.html","81":"semana-12/dia-4.html","82":"semana-12/dia-5.html","83":"semana-12/dia-6.html","84":"semana-12/dia-7.html","85":"semana-13/dia-1.html","86":"semana-13/dia-2.html","87":"semana-13/dia-3.html","88":"semana-13/dia-4.html","89":"semana-13/dia-5.html","90":"semana-13/dia-6.html","91":"semana-13/dia-7.html","92":"semana-14/dia-1.html","93":"semana-14/dia-2.html","94":"semana-14/dia-3.html","95":"semana-14/dia-4.html","96":"semana-14/dia-5.html","97":"semana-14/dia-6.html","98":"semana-14/dia-7.html","99":"semana-15/dia-1.html","100":"semana-15/dia-2.html"};</script>
+<script src="./progreso.js" defer></script>
 </body>
 </html>

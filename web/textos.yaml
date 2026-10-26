@@ -116,6 +116,17 @@ ru:
   pie: "Материалы курса можно свободно использовать для учёбы."
   idioma: "Язык"
   tema: "Светлая или тёмная тема"
+  progreso:
+    continuar: "Продолжить: урок"
+    empezar: "Начать сначала"
+    marcar: "Отметить урок пройденным"
+    hecho: "Урок пройден"
+    siguiente: "Следующий урок"
+    tuyo: "пройдено вами"
+    titulo: "Ваш прогресс"
+    aviso: "Прогресс хранится только в этом браузере, на этом устройстве. Регистрации нет, и никуда он не отправляется. Если вы очистите данные браузера или откроете курс на другом телефоне, отметки не перенесутся."
+    borrar: "Сбросить прогресс"
+    confirmar: "Сбросить все отметки?"
 
 es:
   menu: {inicio: "Inicio", curso: "Las lecciones", sobre: "El curso", contacto: "Contacto"}
@@ -211,6 +222,17 @@ es:
   pie: "El material del curso puede usarse libremente para estudiar."
   idioma: "Idioma"
   tema: "Tema claro u oscuro"
+  progreso:
+    continuar: "Continuar: lección"
+    empezar: "Empezar de cero"
+    marcar: "Marcar la lección como hecha"
+    hecho: "Lección hecha"
+    siguiente: "Siguiente lección"
+    tuyo: "hechas por usted"
+    titulo: "Su progreso"
+    aviso: "El progreso se guarda solo en este navegador y en este aparato. No hay registro y no se envía a ninguna parte. Si borra los datos del navegador o abre el curso en otro teléfono, las marcas no viajan con usted."
+    borrar: "Borrar el progreso"
+    confirmar: "¿Borrar todas las marcas?"
 
 en:
   menu: {inicio: "Home", curso: "Lessons", sobre: "About", contacto: "Contact"}
@@ -306,3 +328,14 @@ en:
   pie: "Course material may be used freely for study."
   idioma: "Language"
   tema: "Light or dark theme"
+  progreso:
+    continuar: "Continue: lesson"
+    empezar: "Start from the beginning"
+    marcar: "Mark this lesson as done"
+    hecho: "Lesson done"
+    siguiente: "Next lesson"
+    tuyo: "done by you"
+    titulo: "Your progress"
+    aviso: "Progress is stored in this browser on this device only. There is no sign-up and nothing is sent anywhere. If you clear your browser data or open the course on another phone, your marks do not come with you."
+    borrar: "Reset progress"
+    confirmar: "Clear all marks?"

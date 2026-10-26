@@ -63,6 +63,54 @@ la documentación del programa, en español.
   (`revisado: false`) y el sitio las marca como tales. Las 21 primeras estan
   revisadas.
 
+## Progreso del lector, sin registro (2026-10-26)
+
+El sitio es estático: GitHub Pages sirve archivos, no ejecuta nada. Registro
+con usuario y contraseña necesita un servidor, pero «cerré la página, ¿dónde
+iba?» no: lo resuelve el propio navegador.
+
+`docs/progreso.js` guarda dos cosas en `localStorage`: `curso.hechas` (los
+números marcados) y `curso.ultima` (la última abierta). De ahí salen el botón
+«continuar» de la portada, el contador propio, las marcas del índice y el botón
+de marcar al pie de cada lección.
+
+Lo que hay que saber si alguien lo toca:
+
+- **El contrato entre el HTML y el guion son tres atributos**:
+  `<article data-leccion="N">` en la lección, `<li data-leccion="N">` en el
+  índice y los ids `marcar-caja`, `enlace-siguiente`, `continuar`, `empezar`,
+  `mio`, `borrar-progreso`. Cambiar uno no rompe ninguna página: deja de
+  funcionar el progreso en silencio. Por eso hay pruebas que los fijan.
+- **El guion busca `article[data-leccion]` y no `[data-leccion]` a secas.** En
+  el índice el primero que aparece es un `<li>` de la lección 1, así que con el
+  selector corto abrir «todas las lecciones» movía «la última leída» al
+  principio del curso y «continuar» mandaba al día 1.
+- **`[hidden]{display:none!important}` en el CSS.** El `[hidden]` del navegador
+  pierde contra `.boton{display:inline-block}`, así que «continuar» se veía como
+  un botón naranja vacío en la primera visita.
+- **Todo nace oculto y lo enciende el navegador.** Un contador en cero y un
+  botón «continuar» que no lleva a ninguna parte desaniman en la primera visita.
+- **Toda lectura y escritura va en try/catch.** En navegación privada
+  `localStorage` puede tirar al leerlo; hay una prueba en navegador que lo
+  bloquea y exige que la lección se lea igual y sin un solo error de JS.
+- **Solo las lecciones escritas entran en `CURSO_DIAS`**: «continuar» no puede
+  mandar a una página que no existe.
+- **El aviso es parte de la función**: en los tres idiomas se dice que el
+  progreso vive solo en ese navegador, que no hay registro y que no viaja a otro
+  teléfono. Prometer una cuenta que no existe sería peor que no ofrecer nada.
+
+**Lo que esto NO hace**: no sincroniza entre aparatos ni sobrevive a un borrado
+de datos del navegador. Eso ya pide cuentas de verdad —un servicio aparte
+(Supabase, Firebase), responsabilidad sobre datos personales, contraseñas que se
+pierden y soporte— y se decidió no hacerlo hasta que alguien lo pida.
+
+**De paso, el tachado.** `~~h~~otel` y `~~Yo gusto~~` salían con las tildes a la
+vista en ocho lecciones: Python-Markdown no trae tachado. La extensión `Tachado`
+de `construir_sitio.py` lo añade en ocho líneas, sin dependencia nueva. Importa
+porque es donde el sentido depende de que se vea tachado: la letra muda y la
+forma incorrecta. Una prueba recorre las cien lecciones publicadas y falla si
+queda una tilde doble.
+
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.
@@ -70,7 +118,8 @@ la documentación del programa, en español.
   la 15): unidades 1 a 7 completas, 908 tarjetas de vocabulario. Las 21
   primeras revisadas; el resto son borradores.
 - Sitio público en `docs/` con portada, índice, «О курсе», contacto y política
-  de privacidad. La publicidad se configura en `web/sitio.yaml` y está
+  de privacidad. Tres idiomas (ru/es/en), tema claro y oscuro, y progreso del
+  lector guardado en su navegador sin registro. La publicidad se configura en `web/sitio.yaml` y está
   apagada; sin identificador de AdSense no se carga nada de terceros.
 - Falta activar GitHub Pages (Settings → Pages → rama main, carpeta /docs).
 - Pendiente: lecciones 101-365, audio de los diálogos (TTS), más libros de

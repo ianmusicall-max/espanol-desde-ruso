@@ -41,6 +41,20 @@ CONFIG = RAIZ / "web" / "sitio.yaml"
 TEXTOS = RAIZ / "web" / "textos.yaml"
 EXTENSIONES = ["tables", "fenced_code", "sane_lists", "toc", "attr_list"]
 
+
+class Tachado(markdown.extensions.Extension):
+    """~~así~~ → <del>así</del>.
+
+    Python-Markdown no trae tachado y las lecciones lo usan para la letra muda
+    (~~h~~otel) y para la forma incorrecta (~~Yo gusto~~), que es justo donde el
+    sentido depende de que se vea tachado: sin esto salían las tildes a la vista
+    y la forma mala parecía la buena."""
+
+    def extendMarkdown(self, md):
+        md.inlinePatterns.register(
+            markdown.inlinepatterns.SimpleTagInlineProcessor(r"(~~)(.+?)~~", "del"),
+            "tachado", 65)
+
 CSS = """
 /* Tres estados: lo que diga el sistema, o lo que el lector elija con el botón
    de la luna. El atributo data-tema del <html> gana siempre sobre el sistema;
@@ -109,6 +123,19 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="dark"] .tema .sol{display:block}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
+
+/* progreso del lector */
+/* El [hidden] del navegador pierde contra .boton{display:inline-block}, así que
+   «continuar» se vería como un botón naranja vacío en la primera visita. */
+[hidden]{display:none!important}
+.boton.marcar{margin:1.6rem 0 0}
+.boton.destacado{box-shadow:0 0 0 3px var(--acento-suave)}
+ul.dias li.hecha .num::after{content:"✓";color:var(--acento);font-weight:700;margin-inline-start:.25rem}
+ul.dias li.hecha a{color:var(--tenue)}
+#mio{margin-top:.9rem;padding-top:.9rem;border-top:1px dashed var(--linea)}
+.progreso-nota{font-size:.84rem;color:var(--tenue);font-family:ui-sans-serif,system-ui,sans-serif;margin-top:.5rem}
+#borrar-progreso{background:none;border:0;padding:0;color:var(--tenue);text-decoration:underline;
+  cursor:pointer;font:inherit;font-size:.84rem}
 @media(min-width:40rem){
   header.sitio nav.paginas{order:0;flex:0 1 auto;margin-inline-start:auto}
   header.sitio .marca{flex:0 1 auto}
@@ -148,6 +175,8 @@ strong{font-weight:650}
   border-radius:10px;padding:1rem 1.1rem;margin:1.3rem 0}
 .contraste>h3:first-child{margin-top:0;color:var(--acento)}
 .contraste p:last-child{margin-bottom:0}
+del{text-decoration-line:line-through;text-decoration-color:var(--acento);
+  text-decoration-thickness:2px;opacity:.75}
 .mal{color:var(--acento)}
 .bien{color:#1d7a4f}
 @media(prefers-color-scheme:dark){:root:not([data-tema="light"]) .bien{color:#5fc48f}}
@@ -240,6 +269,103 @@ TEMA_SCRIPT = (
 )
 
 
+# El progreso del lector. Vive en SU navegador y en ninguna otra parte: sin
+# registro, sin servidor, sin datos personales. Un sitio estático no puede
+# guardar nada en un servidor, pero resulta que para «cerré la página, ¿dónde
+# iba?» tampoco hace falta.
+PROGRESO_JS = r"""(function(){
+  var CLAVE_HECHAS='curso.hechas', CLAVE_ULTIMA='curso.ultima';
+  var T=window.CURSO_TEXTOS||{}, RAIZ=window.CURSO_RAIZ||'.';
+
+  function leer(clave,porDefecto){
+    try{var v=localStorage.getItem(clave);return v?JSON.parse(v):porDefecto}catch(e){return porDefecto}
+  }
+  function guardar(clave,valor){
+    try{localStorage.setItem(clave,JSON.stringify(valor))}catch(e){}
+  }
+  function hechas(){var v=leer(CLAVE_HECHAS,[]);return Array.isArray(v)?v:[]}
+  function url(n){
+    var d=window.CURSO_DIAS&&window.CURSO_DIAS[n];
+    return d?RAIZ+'/'+d:null;
+  }
+
+  // --- en una lección: recordar que se pasó por aquí y poder marcarla ---
+  // article[data-leccion] y no [data-leccion] a secas: en el índice el primero
+  // que aparece es un <li data-leccion>, así que abrir el índice movía «la
+  // última leída» a la lección 1 y «continuar» mandaba al principio.
+  var cuerpoLeccion=document.querySelector('article[data-leccion]');
+  if(cuerpoLeccion){
+    var n=parseInt(cuerpoLeccion.getAttribute('data-leccion'),10);
+    if(n){guardar(CLAVE_ULTIMA,n);}
+    var caja=document.getElementById('marcar-caja');
+    if(caja&&n){
+      var boton=document.createElement('button');
+      boton.type='button';boton.className='boton marcar';
+      var siguiente=document.getElementById('enlace-siguiente');
+      function pintar(){
+        var yaEsta=hechas().indexOf(n)>=0;
+        boton.textContent=(yaEsta?'✓ ':'')+(yaEsta?T.hecho:T.marcar);
+        boton.classList.toggle('secundario',yaEsta);
+      }
+      boton.addEventListener('click',function(){
+        var lista=hechas(), i=lista.indexOf(n);
+        if(i>=0){lista.splice(i,1)}else{lista.push(n)}
+        guardar(CLAVE_HECHAS,lista);pintar();
+        if(i<0&&siguiente){siguiente.classList.add('destacado')}
+      });
+      pintar();caja.appendChild(boton);
+    }
+  }
+
+  // --- en la portada: continuar donde se dejó ---
+  var seguir=document.getElementById('continuar');
+  if(seguir){
+    var ultima=leer(CLAVE_ULTIMA,null), destino=ultima?url(ultima):null;
+    if(destino){
+      seguir.href=destino;
+      seguir.textContent=T.continuar+' '+ultima;
+      seguir.hidden=false;
+      var empezar=document.getElementById('empezar');
+      if(empezar){empezar.textContent=T.empezar;empezar.classList.add('secundario')}
+    }
+  }
+
+  // --- el contador personal, donde lo haya ---
+  var hechasAhora=hechas(), publicadas=window.CURSO_PUBLICADAS||0;
+  var contador=document.getElementById('mio');
+  if(contador&&hechasAhora.length){
+    contador.hidden=false;
+    var cifra=contador.querySelector('.n'), texto=contador.querySelector('.texto');
+    if(cifra)cifra.textContent=hechasAhora.length;
+    if(texto)texto.textContent='/ '+publicadas+' '+T.tuyo;
+    var barra=contador.querySelector('.barra i');
+    if(barra&&publicadas)barra.style.width=Math.max(hechasAhora.length*100/publicadas,1)+'%';
+  }
+
+  // --- en el índice: una marca en cada lección hecha ---
+  var filas=document.querySelectorAll('li[data-leccion]');
+  if(filas.length){
+    var mapa={};hechasAhora.forEach(function(x){mapa[x]=1});
+    for(var i=0;i<filas.length;i++){
+      if(mapa[parseInt(filas[i].getAttribute('data-leccion'),10)]){
+        filas[i].classList.add('hecha');
+      }
+    }
+  }
+
+  // --- borrar el progreso ---
+  var borrar=document.getElementById('borrar-progreso');
+  if(borrar){
+    borrar.hidden=!hechasAhora.length&&!leer(CLAVE_ULTIMA,null);
+    borrar.addEventListener('click',function(){
+      if(!window.confirm(T.confirmar))return;
+      try{localStorage.removeItem(CLAVE_HECHAS);localStorage.removeItem(CLAVE_ULTIMA)}catch(e){}
+      location.reload();
+    });
+  }
+})();"""
+
+
 # ---------------------------------------------------------------- configuración
 def cargar_config(ruta: pathlib.Path = CONFIG) -> dict:
     with open(ruta, encoding="utf-8") as f:
@@ -314,7 +440,8 @@ def _marcar_contraste(cuerpo: str) -> str:
 
 
 # ------------------------------------------------------------------------ shell
-def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id="", raiz=".", jsonld="") -> str:
+def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id="", raiz=".",
+           jsonld="", publicadas=0, mapa_dias="{}") -> str:
     """El armazón de toda página: cabecera con menú y cambio de idioma, cuerpo, pie."""
     dominio = cfg["dominio"]
     actual = next(i for i in idiomas if i["codigo"] == idioma)
@@ -372,16 +499,31 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
 </div></footer>
 {banda_cookies(cfg, t, raiz)}
 {TEMA_SCRIPT}
+<script>window.CURSO_TEXTOS={json.dumps(t['progreso'], ensure_ascii=False)};window.CURSO_RAIZ="{raiz}";window.CURSO_PUBLICADAS={publicadas};window.CURSO_DIAS={mapa_dias};</script>
+<script src="{raiz}/progreso.js" defer></script>
 </body>
 </html>"""
 
 
 def md(texto: str) -> str:
-    return markdown.markdown(texto, extensions=EXTENSIONES)
+    return markdown.markdown(texto, extensions=EXTENSIONES + [Tachado()])
 
 
 def escritas(cal: dict) -> list[plan.Dia]:
     return [d for d in plan.dias(cal) if d.ruta.exists()]
+
+
+def mapa_de_dias(cal: dict) -> str:
+    """{número de lección: ruta}, para que «continuar» sepa adónde ir.
+
+    Solo las escritas: mandar a una lección que no existe sería peor que no
+    tener el botón."""
+    return json.dumps({d.numero: f"semana-{d.semana:02d}/dia-{d.dia}.html" for d in escritas(cal)},
+                      ensure_ascii=False, separators=(",", ":"))
+
+
+def escribir_progreso_js(destino: pathlib.Path) -> None:
+    destino.joinpath("progreso.js").write_text(PROGRESO_JS, encoding="utf-8")
 
 
 # ----------------------------------------------------------------------- páginas
@@ -391,6 +533,7 @@ def construir_portada(cfg, t, idiomas, idioma, destino, cal, raiz) -> None:
     primera = hechas[0] if hechas else None
     enlace = f"{raiz}/semana-{primera.semana:02d}/dia-{primera.dia}.html" if primera else f"{raiz}/kurs.html"
     p = t["portada"]
+    pr = t["progreso"]
     pct = round(len(hechas) * 100 / total, 1)
 
     jsonld = json.dumps({
@@ -410,12 +553,18 @@ def construir_portada(cfg, t, idiomas, idioma, destino, cal, raiz) -> None:
 <p class="lema">{html.escape(p['lema'])}</p>
 <p>{html.escape(p['entrada'])}</p>
 <div class="botones">
-<a class="boton" href="{enlace}">{html.escape(p['boton'])}</a>
+<a class="boton" id="continuar" href="{enlace}" hidden></a>
+<a class="boton" id="empezar" href="{enlace}">{html.escape(p['boton'])}</a>
 <a class="boton secundario" href="{raiz}/kurs.html">{html.escape(p['boton2'])}</a>
 </div>
 <div class="progreso">
 <div class="cifras"><span class="n">{len(hechas)}</span><span>/ {total} {html.escape(p['progreso'])}</span></div>
 <div class="barra"><i style="width:{max(pct, 1)}%"></i></div>
+<div id="mio" hidden>
+<div class="cifras"><span class="n">0</span><span class="texto"></span></div>
+<div class="barra"><i style="width:1%"></i></div>
+<p class="progreso-nota">{html.escape(pr['aviso'])} <button type="button" id="borrar-progreso" hidden>{html.escape(pr['borrar'])}</button></p>
+</div>
 </div>
 </div>
 {anuncio(cfg, "cabecera")}
@@ -448,14 +597,23 @@ def construir_portada(cfg, t, idiomas, idioma, destino, cal, raiz) -> None:
 """
     destino.joinpath("index.html").write_text(
         pagina(cfg, t, idiomas, idioma, f"{p['titulo']} {p['titulo2']} — {p['lema']}", cuerpo,
-               descripcion=p["entrada"], pagina_id="index.html", raiz=raiz, jsonld=jsonld),
+               descripcion=p["entrada"], pagina_id="index.html", raiz=raiz, jsonld=jsonld,
+               publicadas=len(hechas), mapa_dias=mapa_de_dias(cal)),
         encoding="utf-8")
 
 
 def construir_indice_curso(cfg, t, idiomas, idioma, destino, cal, raiz) -> None:
-    c = t["curso"]
+    c, pr = t["curso"], t["progreso"]
     partes = [f'<h1>{html.escape(c["titulo"])}<span class="segunda">{html.escape(c["subtitulo"])}</span></h1>',
-              f'<p>{html.escape(c["entrada"])}</p>', anuncio(cfg, "cabecera")]
+              f'<p>{html.escape(c["entrada"])}</p>',
+              # Oculto hasta que el navegador diga que hay algo hecho: en blanco
+              # no dice nada y un «0 / 100» de bienvenida desanima.
+              f'<div class="progreso" id="mio" hidden>'
+              f'<div class="cifras"><span class="n">0</span><span class="texto"></span></div>'
+              f'<div class="barra"><i style="width:1%"></i></div>'
+              f'<p class="progreso-nota">{html.escape(pr["aviso"])} '
+              f'<button type="button" id="borrar-progreso" hidden>{html.escape(pr["borrar"])}</button></p></div>',
+              anuncio(cfg, "cabecera")]
     dias = plan.dias(cal)
     por_semana: dict[int, list[plan.Dia]] = {}
     for d in dias:
@@ -483,14 +641,15 @@ def construir_indice_curso(cfg, t, idiomas, idioma, destino, cal, raiz) -> None:
             etiqueta = f'<span class="tipo">{plan.TIPO_RU[d.tipo] if idioma == "ru" else d.tipo}</span>'
             num = f'<span class="num">{d.numero}</span>'
             if d.ruta.exists():
-                partes.append(f'<li>{num}<span><a href="{raiz}/semana-{d.semana:02d}/dia-{d.dia}.html">{html.escape(tema)}</a> {etiqueta}</span></li>')
+                partes.append(f'<li data-leccion="{d.numero}">{num}<span><a href="{raiz}/semana-{d.semana:02d}/dia-{d.dia}.html">{html.escape(tema)}</a> {etiqueta}</span></li>')
             else:
                 partes.append(f'<li>{num}<span class="falta">{html.escape(tema)} {etiqueta}</span></li>')
         partes.append("</ul>")
     partes.append(anuncio(cfg, "pie"))
     destino.joinpath("kurs.html").write_text(
         pagina(cfg, t, idiomas, idioma, f'{c["titulo"]} — {c["subtitulo"]}', "\n".join(partes),
-               descripcion=c["entrada"], pagina_id="kurs.html", raiz=raiz),
+               descripcion=c["entrada"], pagina_id="kurs.html", raiz=raiz,
+               publicadas=len(escritas(cal)), mapa_dias=mapa_de_dias(cal)),
         encoding="utf-8")
 
 
@@ -577,18 +736,25 @@ def construir_leccion(d, cfg, t, idiomas, destino, cal, todos) -> None:
     pasos = []
     pasos.append(f'<a href="../semana-{anterior.semana:02d}/dia-{anterior.dia}.html">← {L["anterior"]} {anterior.numero}</a>' if anterior else "<span></span>")
     pasos.append(f'<a href="../kurs.html">{html.escape(L["todos"])}</a>')
-    pasos.append(f'<a href="../semana-{siguiente.semana:02d}/dia-{siguiente.dia}.html">{L["siguiente"]} {siguiente.numero} →</a>' if siguiente else "<span></span>")
+    # El id lo usa progreso.js para destacarlo en cuanto marcas esta lección:
+    # el paso siguiente es lo único que se quiere hacer después de marcar.
+    pasos.append(f'<a id="enlace-siguiente" href="../semana-{siguiente.semana:02d}/dia-{siguiente.dia}.html">{L["siguiente"]} {siguiente.numero} →</a>' if siguiente else "<span></span>")
 
     cab = (f'<div class="leccion-cab"><span class="n">{L["urok"]} {d.numero}</span>'
            f'<span>{L["de"]} {len(todos)}</span><span class="tipo">{plan.TIPO_RU[d.tipo]}</span>'
            f'<span>{L["semana"]} {d.semana} · {L["nivel"]} {html.escape(d.nivel)}</span></div>')
-    cuerpo_final = cab + anuncio(cfg, "cabecera") + aviso + html_cuerpo + anuncio(cfg, "pie") + f'<nav class="pasos">{"".join(pasos)}</nav>'
+    # El botón de marcar lo pone el navegador y no el generador: sin JavaScript
+    # no haría nada, y un botón muerto es peor que ninguno.
+    cuerpo_final = (f'<article data-leccion="{d.numero}">' + cab + anuncio(cfg, "cabecera") + aviso
+                    + html_cuerpo + anuncio(cfg, "pie") + '<div id="marcar-caja"></div>'
+                    + f'<nav class="pasos">{"".join(pasos)}</nav></article>')
 
     salida = destino / f"semana-{d.semana:02d}" / f"dia-{d.dia}.html"
     salida.parent.mkdir(parents=True, exist_ok=True)
     salida.write_text(
         pagina(cfg, t, idiomas, "ru", titulo, cuerpo_final, descripcion=descripcion,
-               pagina_id=f"semana-{d.semana:02d}/dia-{d.dia}.html", raiz=".."),
+               pagina_id=f"semana-{d.semana:02d}/dia-{d.dia}.html", raiz="..",
+               publicadas=len(escritas(cal)), mapa_dias=mapa_de_dias(cal)),
         encoding="utf-8")
 
 
@@ -648,6 +814,7 @@ def construir(destino: pathlib.Path = DOCS, cfg: dict | None = None, textos: dic
         construir_leccion(d, cfg, textos["ru"], idiomas, destino, cal, todos)
     construir_programa(cfg, textos["es"], idiomas, destino)
     construir_sitemap(cfg, idiomas, destino, cal)
+    escribir_progreso_js(destino)
     destino.joinpath(".nojekyll").write_text("", encoding="utf-8")
     return len(hechas)
 
