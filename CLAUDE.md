@@ -568,6 +568,44 @@ y se repiten en las 125. En linea es lo correcto para la PRIMERA pintada (una
 peticion menos) y caro al navegar leccion a leccion. No se toco: es un cambio
 con dos lados y hace falta medir trafico real para decidirlo.
 
+## La cabecera se partia en escritorio (2026-10-26)
+
+El usuario recordo que habia mandado una pagina de referencia para el diseno.
+**No se pudo abrir** (`curso-ingles.com`, proxy 403), asi que de ese diseno no
+se copio nada: inventarse una referencia que no se ve es peor que no tenerla.
+Lo que si se hizo fue mirar el sitio propio en ESCRITORIO, que hasta entonces
+solo se habia visto en movil.
+
+Y ahi habia un fallo en todas las paginas: **el boton del tema caia a una
+segunda fila** en todos los anchos de escritorio, con 700 px de pantalla libres
+al lado. La cabecera media 83 px de alto en vez de 47.
+
+La causa no era la que parecia. El primer arreglo —quitarle el `flex:1 1 auto`
+al titulo, que solo tiene sentido en movil— era correcto y **no cambio nada**.
+Midiendo los hijos del flex en el navegador aparecio la cuenta de verdad:
+
+    marca 304 + nav 215 + idiomas 112 + luna 30 + huecos ≈ 708 px
+    columna                                                704 px
+
+**Fallaba por cuatro pixeles**, y por eso no se veia mirando una captura.
+
+El arreglo es conceptual, no un parche: **la barra de navegacion no tiene por
+que caber en la columna de lectura**. Una columna de prosa es estrecha a
+proposito (44rem, para no pasar de ~75 caracteres por linea); una barra con el
+titulo, tres enlaces, tres idiomas y un boton, no. La cabecera pasa a 60rem y
+el texto se queda en 44.
+
+De paso se recuperan **36 px de alto en todas las paginas** en escritorio.
+
+Las pruebas fijan la **invariante** (la barra mas ancha que el texto, y el
+texto por debajo de 48rem) y no el numero, porque el numero puede cambiar y lo
+que no puede es volver a igualarse. Son comprobaciones del CSS y no del dibujo:
+la suite es Python y no abre un navegador, asi que lo que cazan es que alguien
+vuelva a meter la cabecera en la columna de prosa.
+
+**Lo que sigue pendiente del diseno**: la captura de la pagina de referencia.
+Sin verla no hay nada que decir.
+
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.

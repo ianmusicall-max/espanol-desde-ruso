@@ -95,6 +95,15 @@ ul.dias li.hecha a{color:var(--tenue)}
   cursor:pointer;font:inherit;font-size:.84rem}
 @media(min-width:40rem){
   header.sitio nav.paginas{order:0;flex:0 1 auto;margin-inline-start:auto}
+  /* En escritorio el titulo NO crece: con flex:1 1 auto se comia el hueco que
+     la nav reclama con su margen automatico. */
+  header.sitio .marca{flex:0 1 auto}
+  /* Y la barra usa mas ancho que el texto. Una columna de lectura tiene que
+     ser estrecha; una barra de navegacion no. Metida en los mismos 704 px, el
+     titulo + los tres enlaces + los tres idiomas + la luna sumaban 708 y el
+     boton del tema caia a una segunda fila con 700 px de pantalla libres al
+     lado. Se vio midiendo los hijos, no mirando: fallaba por cuatro pixeles. */
+  header.sitio .envoltorio{max-width:60rem}
   header.sitio .marca{flex:0 1 auto}
 }
 

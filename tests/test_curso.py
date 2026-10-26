@@ -1120,5 +1120,45 @@ class TestLaEntrada(unittest.TestCase):
         self.assertTrue((destino / destino_boton.lstrip("./")).exists(), destino_boton)
 
 
+class TestLaCabecera(unittest.TestCase):
+    """La barra de navegación no cabe en la columna de lectura.
+
+    Con los dos al mismo ancho, en escritorio el título más los tres enlaces
+    más los tres idiomas más el botón del tema sumaban ~708 px en una columna
+    de 704, y el botón del tema caía a una segunda fila con 700 px de pantalla
+    libres al lado. Fallaba por cuatro píxeles, así que solo se vio midiendo
+    los hijos en un navegador, no mirando la captura.
+
+    Esto es una comprobación del CSS y no del dibujo: fija la invariante —la
+    barra más ancha que el texto— que es lo que impide que vuelva a pasar."""
+
+    def setUp(self):
+        self.css = construir_sitio.CSS
+
+    def _rem(self, patron):
+        m = re.search(patron, self.css)
+        self.assertIsNotNone(m, patron)
+        return float(m.group(1))
+
+    def test_la_barra_es_mas_ancha_que_la_columna_de_lectura(self):
+        texto = self._rem(r"--ancho:\s*([\d.]+)rem")
+        barra = self._rem(r"header\.sitio \.envoltorio\{max-width:([\d.]+)rem\}")
+        self.assertGreater(barra, texto,
+                           "la cabecera tiene que poder usar más ancho que la prosa")
+
+    def test_la_columna_de_lectura_sigue_siendo_estrecha(self):
+        """Ensanchar la barra no puede ensanchar el texto: una línea de prosa
+        muy larga se lee peor, y ese era justo el motivo de la columna."""
+        texto = self._rem(r"--ancho:\s*([\d.]+)rem")
+        self.assertLessEqual(texto, 48, "la prosa no debe pasar de ~48rem")
+
+    def test_el_titulo_solo_crece_en_movil(self):
+        """En móvil el título cede espacio y se recorta con puntos suspensivos
+        para que el selector de idioma no se salga; en escritorio, si creciera,
+        se comería el hueco que la nav reclama con su margen automático."""
+        self.assertIn("header.sitio .marca{flex:0 1 auto}", self.css)
+        self.assertRegex(self.css, r"header\.sitio \.marca\{[^}]*flex:1 1 auto")
+
+
 if __name__ == "__main__":
     unittest.main()
