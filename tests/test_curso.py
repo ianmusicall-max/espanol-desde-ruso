@@ -19,6 +19,7 @@ RAIZ = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(RAIZ / "scripts"))
 
 import construir_sitio  # noqa: E402
+import revisar_adsense  # noqa: E402
 import exportar_wordpress  # noqa: E402
 import escribir_leccion  # noqa: E402
 import exportar_anki  # noqa: E402
@@ -722,6 +723,80 @@ class TestElDespliegueEnNetlify(unittest.TestCase):
         self.assertIn("/ads.txt", cabeceras)
         edad = re.search(r"max-age=(\d+)", cabeceras["/ads.txt"]["Cache-Control"])
         self.assertLessEqual(int(edad.group(1)), 3600)
+
+
+class TestNingunEnlaceLlevaANingunaParte(unittest.TestCase):
+    """215 enlaces rotos vivieron meses en el sitio sin que nadie los viera.
+
+    Eran el conmutador de idioma en las páginas que existen en UNO solo: las
+    100 lecciones (en ruso, que son el curso) y los 7 documentos del programa
+    (en español). El lector pulsaba «ES» en una lección y le salía un 404, y
+    los hreflang apuntaban a páginas que no existen. No se vio antes porque
+    ninguna prueba recorría los enlaces: se miraba que el conmutador llevara a
+    la misma página, no que esa página estuviera."""
+
+    def setUp(self):
+        self.destino = pathlib.Path(tempfile.mkdtemp())
+        construir_sitio.construir(self.destino, construir_sitio.cargar_config(),
+                                  construir_sitio.cargar_textos())
+
+    def test_no_hay_un_solo_enlace_interno_roto(self):
+        rotos = revisar_adsense.enlaces_rotos(self.destino)
+        self.assertEqual(rotos, [], f"{len(rotos)} rotos, p.ej. {rotos[:3]}")
+
+    def test_en_una_leccion_el_conmutador_lleva_a_la_portada_de_ese_idioma(self):
+        """Mejor la portada en tu idioma que un 404: la lección no está
+        traducida, pero el sitio sí."""
+        leccion = (self.destino / "semana-01" / "dia-1.html").read_text(encoding="utf-8")
+        self.assertIn('<a href="../es/index.html"', leccion)
+        self.assertNotIn("../es/semana-01", leccion)
+
+    def test_una_pagina_sin_traducir_no_declara_hreflang(self):
+        """hreflang dice «esta URL es la MISMA página traducida». Apuntarlo a la
+        portada le cuenta a Google algo falso, que es peor que no decir nada."""
+        leccion = (self.destino / "semana-01" / "dia-1.html").read_text(encoding="utf-8")
+        self.assertNotIn('rel="alternate"', leccion)
+        programa = next((self.destino / "programa").glob("*.html")).read_text(encoding="utf-8")
+        self.assertNotIn('rel="alternate"', programa)
+
+    def test_las_paginas_que_sí_estan_en_tres_idiomas_los_siguen_declarando(self):
+        """El arreglo no puede llevarse por delante el hreflang de las que sí
+        están traducidas: son las que el buscador tiene que emparejar."""
+        for nombre in ("index.html", "kurs.html", "o-kurse.html", "privacy.html"):
+            pagina = (self.destino / nombre).read_text(encoding="utf-8")
+            self.assertEqual(pagina.count('rel="alternate"'), 3, nombre)
+
+
+class TestElRevisorDeAdsense(unittest.TestCase):
+    """Solo lee, y separa lo que se puede comprobar de lo que no."""
+
+    def test_no_escribe_nada(self):
+        destino = pathlib.Path(tempfile.mkdtemp())
+        construir_sitio.construir(destino, construir_sitio.cargar_config(),
+                                  construir_sitio.cargar_textos())
+        antes = {p: p.stat().st_mtime_ns for p in destino.rglob("*") if p.is_file()}
+        revisar_adsense.revisar(destino, construir_sitio.cargar_config(), plan.cargar())
+        despues = {p: p.stat().st_mtime_ns for p in destino.rglob("*") if p.is_file()}
+        self.assertEqual(antes, despues)
+
+    def test_un_dominio_gratis_se_marca_como_que_falta(self):
+        """github.io, netlify.app, vercel.app y wordpress.com son todos el mismo
+        caso: el dominio no es tuyo. Si uno se escapara, el revisor diría que
+        está listo y la solicitud se rechazaría un mes después."""
+        destino = pathlib.Path(tempfile.mkdtemp())
+        cfg = copy.deepcopy(construir_sitio.cargar_config())
+        for host in ("usuario.github.io", "curso.netlify.app", "curso.vercel.app",
+                     "curso.wordpress.com"):
+            cfg["dominio"] = f"https://{host}"
+            construir_sitio.construir(destino, cfg, construir_sitio.cargar_textos())
+            filas = revisar_adsense.revisar(destino, cfg, plan.cargar())
+            falta = [t for e, t, _ in filas if e == "FALTA" and "no es tuyo" in t]
+            self.assertTrue(falta, f"{host} tendría que marcarse como dominio ajeno")
+
+        cfg["dominio"] = "https://espanoldesderuso.com"
+        construir_sitio.construir(destino, cfg, construir_sitio.cargar_textos())
+        filas = revisar_adsense.revisar(destino, cfg, plan.cargar())
+        self.assertFalse([t for e, t, _ in filas if e == "FALTA" and "no es tuyo" in t])
 
 
 if __name__ == "__main__":

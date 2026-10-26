@@ -441,7 +441,7 @@ def _marcar_contraste(cuerpo: str) -> str:
 
 # ------------------------------------------------------------------------ shell
 def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id="", raiz=".",
-           jsonld="", publicadas=0, mapa_dias="{}") -> str:
+           jsonld="", publicadas=0, mapa_dias="{}", traducida=True) -> str:
     """El armazón de toda página: cabecera con menú y cambio de idioma, cuerpo, pie."""
     dominio = cfg["dominio"]
     actual = next(i for i in idiomas if i["codigo"] == idioma)
@@ -452,15 +452,25 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
         f'<a href="{raiz}/{destino}"{" aria-current=\"page\"" if destino == pagina_id else ""}>{html.escape(t["menu"][clave])}</a>'
         for clave, destino in (("curso", "kurs.html"), ("sobre", "o-kurse.html"), ("contacto", "kontakt.html"))
     )
-    # El cambio de idioma lleva a la MISMA página en el otro idioma.
+    # El cambio de idioma lleva a la MISMA página en el otro idioma, pero solo
+    # cuando esa página existe de verdad en los tres. Las lecciones están solo
+    # en ruso —son el curso— y los documentos del programa solo en español, así
+    # que ahí el conmutador apuntaba a una URL que no existe: el lector pulsaba
+    # «ES» en una lección y le salía un 404. En esas páginas lleva a la portada
+    # de ese idioma, que es lo más cerca que hay de «este sitio en tu idioma».
+    #
+    # Y el hreflang desaparece, no se redirige: hreflang declara que dos URL son
+    # la MISMA página traducida. Apuntarlo a la portada es decirle a Google algo
+    # falso, que es peor que no decirle nada.
     conmutador = []
     hreflangs = []
     for i in idiomas:
         prefijo = f"{raiz}/{i['carpeta']}".rstrip("/") if i["carpeta"] else raiz
-        destino = f"{prefijo}/{pagina_id or 'index.html'}"
+        hoja = pagina_id if (traducida and pagina_id) else "index.html"
         marca = ' aria-current="true"' if i["codigo"] == idioma else ""
-        conmutador.append(f'<a href="{destino}" hreflang="{i["html"]}" lang="{i["html"]}"{marca}>{i["codigo"]}</a>')
-        if dominio:
+        lengua = f' hreflang="{i["html"]}"' if traducida else ""
+        conmutador.append(f'<a href="{prefijo}/{hoja}"{lengua} lang="{i["html"]}"{marca}>{i["codigo"]}</a>')
+        if dominio and traducida:
             d = f"{dominio}/{i['carpeta']}".rstrip("/")
             hreflangs.append(f'<link rel="alternate" hreflang="{i["html"]}" href="{d}/{pagina_id or "index.html"}">')
 
@@ -772,8 +782,21 @@ def construir_leccion(d, cfg, t, idiomas, destino, cal, todos) -> None:
     salida.write_text(
         pagina(cfg, t, idiomas, "ru", titulo, cuerpo_final, descripcion=descripcion,
                pagina_id=f"semana-{d.semana:02d}/dia-{d.dia}.html", raiz="..",
-               publicadas=len(escritas(cal)), mapa_dias=mapa_de_dias(cal)),
+               publicadas=len(escritas(cal)), mapa_dias=mapa_de_dias(cal), traducida=False),
         encoding="utf-8")
+
+
+def _enlaces_entre_documentos(html_: str) -> str:
+    """Un .md citado desde otro documento se publica como .html.
+
+    Los documentos del programa se enlazan entre sí por su nombre de archivo,
+    que es lo correcto al leerlos en el repositorio y un enlace roto en la web.
+    Los de `referencias/` llevan además el prefijo `ref-`."""
+    def arreglar(m):
+        nombre = m.group(1)
+        prefijo = "ref-" if (RAIZ / "referencias" / f"{nombre}.md").exists() else ""
+        return f'href="{prefijo}{nombre}.html"'
+    return re.sub(r'href="(?!https?:)([^"/]+)\.md"', arreglar, html_)
 
 
 def construir_programa(cfg, t, idiomas, destino) -> None:
@@ -781,11 +804,12 @@ def construir_programa(cfg, t, idiomas, destino) -> None:
     carpeta.mkdir(parents=True, exist_ok=True)
     for origen, prefijo in ((RAIZ / "programa", ""), (RAIZ / "referencias", "ref-")):
         for ruta in sorted(origen.glob("*.md")):
-            cuerpo = _tablas_envueltas(md(ruta.read_text(encoding="utf-8")))
+            cuerpo = _enlaces_entre_documentos(_tablas_envueltas(md(ruta.read_text(encoding="utf-8"))))
             carpeta.joinpath(f"{prefijo}{ruta.stem}.html").write_text(
                 pagina(cfg, t, idiomas, "es", f"{ruta.stem} — documentación", cuerpo,
                        descripcion="Documentación del programa del curso.",
-                       pagina_id=f"programa/{prefijo}{ruta.stem}.html", raiz=".."),
+                       pagina_id=f"programa/{prefijo}{ruta.stem}.html", raiz="..",
+                       traducida=False),
                 encoding="utf-8")
 
 

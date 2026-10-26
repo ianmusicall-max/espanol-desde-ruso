@@ -199,6 +199,56 @@ archivo de despliegue que no se usa es el primero que se queda viejo, y el día
 que se conecte el fallo sería un sitio vacío con un «Page not found» que no
 apunta aquí.
 
+### El conmutador de idioma llevaba a 404 (2026-10-26)
+
+Lo encontró `scripts/revisar_adsense.py` al estrenarse: **215 enlaces internos
+rotos**, y llevaban meses ahí.
+
+`pagina()` escribe el conmutador apuntando a la MISMA página en el otro idioma,
+que es lo correcto para la portada, el índice y las estáticas. Pero las 100
+lecciones existen **solo en ruso** —son el curso— y los 7 documentos del
+programa **solo en español**. En esas 107 páginas el conmutador apuntaba a una
+URL que no existe: el lector pulsaba «ES» en una lección y le salía un 404. Y
+el `hreflang` declaraba esas mismas URL inexistentes como traducciones.
+
+Ninguna prueba lo vio porque se comprobaba que el conmutador llevara a la misma
+página, no que esa página ESTUVIERA. Es la forma del error que más se repite en
+este tipo de sitios: la regla era correcta y el caso que no cumple la regla no
+estaba contemplado.
+
+- `pagina(..., traducida=False)` para esas dos familias: el conmutador lleva a
+  la **portada de ese idioma** —mejor que un 404, y el sitio sí está traducido
+  aunque la lección no— y el `hreflang` **desaparece**, no se redirige:
+  `hreflang` declara que dos URL son la misma página traducida, y apuntarlo a la
+  portada le cuenta a Google algo falso, que es peor que callarse.
+- El roto 215 era otro: un documento del programa citaba a otro por su nombre
+  `.md`, correcto al leerlo en el repositorio y roto en la web.
+  `_enlaces_entre_documentos` lo reescribe a `.html`, con el prefijo `ref-` si
+  viene de `referencias/`.
+- Cuatro pruebas: ninguna página con un enlace roto, el conmutador de una
+  lección va a la portada, una página sin traducir no declara `hreflang`, y las
+  que SÍ están en tres idiomas conservan los suyos —el arreglo no podía
+  llevárselos por delante—.
+
+### `scripts/revisar_adsense.py`
+
+Dice qué le falta al sitio para que lo aprueben, y **solo lee**. Separa tres
+cosas que desde fuera se ven igual: lo comprobado contra el sitio construido
+(LISTO), lo que bloquea de verdad (FALTA) y lo que no se puede comprobar desde
+aquí (MIRAR). Hoy: 100 lecciones y 179.511 palabras listas; falta el correo de
+contacto y el dominio propio.
+
+Los dominios gratis de las cuatro plataformas —`github.io`, `netlify.app`,
+`vercel.app`, `wordpress.com`— se marcan por igual, y hay una prueba con las
+cuatro: si una se escapara, el revisor diría «listo» y el rechazo llegaría un
+mes después sin decir por qué.
+
+**AdSense no cuesta nada**: no hay cuota de alta ni mensual, no piden un mínimo
+de visitas para solicitarlo, el reparto es del ~68% para el editor y se cobra a
+partir de 100 USD acumulados. Un rechazo no penaliza y se puede volver a pedir.
+O sea que **solicitar el alta hoy es gratis**, y lo único de toda esta lista que
+cuesta dinero es el dominio.
+
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.
