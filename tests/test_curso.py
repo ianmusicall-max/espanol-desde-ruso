@@ -1160,5 +1160,68 @@ class TestLaCabecera(unittest.TestCase):
         self.assertRegex(self.css, r"header\.sitio \.marca\{[^}]*flex:1 1 auto")
 
 
+class TestElMapaDeUnidades(unittest.TestCase):
+    """24 tarjetas antes de la lista día a día.
+
+    El índice crudo medía 21.482 px de alto —24 pantallas de scroll— y nadie
+    navega eso. La idea viene de la referencia que mandó el profesor, que entra
+    a cada curso por una tarjeta; lo que se tomó es esa estructura, no su
+    aspecto."""
+
+    def setUp(self):
+        self.cal = plan.cargar()
+        self.textos = construir_sitio.cargar_textos()
+        self.destino = pathlib.Path(tempfile.mkdtemp())
+        construir_sitio.construir(self.destino, construir_sitio.cargar_config(), self.textos)
+
+    def _indice(self, carpeta=""):
+        return self.destino.joinpath(carpeta, "kurs.html").read_text(encoding="utf-8")
+
+    def test_hay_una_tarjeta_por_unidad(self):
+        html_ = self._indice()
+        self.assertEqual(html_.count('class="u-tarjeta'), len(self.cal["unidades"]))
+
+    def test_cada_tarjeta_lleva_su_episodio(self):
+        """Es donde la historia se ve sin abrir ninguna lección."""
+        html_ = self._indice()
+        for u in self.cal["unidades"]:
+            self.assertIn(html.escape(u["episodio"]["titulo"]), html_, u["numero"])
+
+    def test_una_unidad_escrita_enlaza_a_su_primera_leccion(self):
+        """Y una sin escribir no manda a un 404: ancla a su sección de abajo."""
+        html_ = self._indice()
+        self.assertIn('href="./semana-01/dia-1.html"', html_)
+        # Y desde una carpeta de idioma, con el prefijo que toca: las lecciones
+        # viven solo en la raíz.
+        self.assertIn('href="../semana-01/dia-1.html"', self._indice("es"))
+        for destino in re.findall(r'class="u-tarjeta[^"]*" href="([^"]+)"', html_):
+            if destino.startswith("#"):
+                self.assertIn(f'id="{destino[1:]}"', html_, destino)
+            else:
+                self.assertTrue((self.destino / destino).exists(), destino)
+
+    def test_las_unidades_sin_lecciones_se_ven_apagadas(self):
+        """Prometer una puerta que no abre es peor que enseñarla cerrada."""
+        html_ = self._indice()
+        self.assertIn("u-tarjeta vacia", html_)
+
+    def test_el_mapa_se_sale_de_la_columna_de_prosa(self):
+        """Mismo motivo que la cabecera: un mapa no se lee renglón a renglón.
+        Encerrado en los 44rem del texto solo caben dos columnas."""
+        self.assertRegex(construir_sitio.CSS, r"\.mapa\{[^}]*width:min\(60rem")
+
+    def test_el_pie_de_las_tarjetas_se_alinea_abajo(self):
+        """Sin esto, dos tarjetas vecinas enseñan la barra a distinta altura
+        según si el título ocupa una línea o dos."""
+        self.assertRegex(construir_sitio.CSS, r"\.u-tarjeta \.pie\{[^}]*margin-top:auto")
+        self.assertRegex(construir_sitio.CSS, r"\.u-tarjeta\{display:flex;flex-direction:column")
+
+    def test_el_mapa_esta_en_los_tres_idiomas(self):
+        for i in self.textos["idiomas"]:
+            html_ = self._indice(i["carpeta"])
+            self.assertIn('class="mapa"', html_, i["codigo"])
+            self.assertIn(html.escape(self.textos[i["codigo"]]["curso"]["mapa"]), html_)
+
+
 if __name__ == "__main__":
     unittest.main()

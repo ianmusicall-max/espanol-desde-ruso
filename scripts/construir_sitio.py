@@ -131,6 +131,41 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 .suena[aria-pressed="true"]{opacity:1;color:var(--acento)}
 @media(hover:none){.suena{opacity:.9}}
 
+/* El mapa de unidades: 24 tarjetas en vez de 365 filas.
+   El indice crudo medía 21.482 px de alto, o sea 24 pantallas de scroll, y
+   nadie navega eso. Las tarjetas dan una vista de todo el ano en una o dos. */
+.mapa{display:grid;gap:.85rem;margin:1.4rem 0 2.2rem;
+  grid-template-columns:repeat(auto-fill,minmax(13rem,1fr));
+  /* Se sale de la columna de prosa, como la cabecera y por lo mismo: un mapa
+     no se lee renglon a renglon. Encerrado en los 44rem del texto solo caben
+     dos columnas y el mapa medía 1.806 px, que es tan ilegible como la lista
+     que viene a sustituir. Centrado sobre la ventana y no sobre el padre, que
+     asi no hace falta saber cuanto mide el padre. */
+  width:min(60rem,calc(100vw - 2.5rem));position:relative;left:50%;translate:-50%}
+/* Columna y no bloque: la rejilla estira las tarjetas de una fila a la misma
+   altura, pero el pie quedaba pegado al texto, asi que las barras de dos
+   tarjetas vecinas salian a distinta altura segun si el titulo ocupaba una
+   linea o dos. Con margin-top:auto en el pie, todas se alinean abajo. */
+.u-tarjeta{display:flex;flex-direction:column;text-decoration:none;color:inherit;background:var(--tarjeta);
+  border:1px solid var(--linea);border-radius:12px;padding:.85rem .95rem;
+  font-family:ui-sans-serif,system-ui,sans-serif;transition:border-color .12s,transform .12s}
+.u-tarjeta:hover{border-color:var(--acento);transform:translateY(-2px)}
+.u-tarjeta .alto{display:flex;align-items:baseline;gap:.5rem;margin-bottom:.3rem}
+.u-tarjeta .num{font-size:1.45rem;font-weight:700;color:var(--acento);
+  font-feature-settings:"tnum";line-height:1}
+.u-tarjeta .nivel{margin-inline-start:auto;font-size:.68rem;font-weight:700;letter-spacing:.06em;
+  color:var(--celeste);border:1px solid var(--celeste);border-radius:999px;padding:.05rem .4rem}
+.u-tarjeta .tit{font-weight:600;font-size:.94rem;color:var(--tinta);line-height:1.3;
+  display:block;margin-bottom:.4rem}
+.u-tarjeta .serie{font-size:.78rem;color:var(--tenue);font-style:italic;
+  display:block;margin-bottom:.5rem}
+.u-tarjeta .pie{display:flex;align-items:center;gap:.5rem;font-size:.74rem;color:var(--tenue);
+  margin-top:auto;padding-top:.15rem}
+.u-tarjeta .mini{flex:1;height:4px;border-radius:999px;background:var(--linea);overflow:hidden}
+.u-tarjeta .mini i{display:block;height:100%;background:var(--acento);border-radius:999px}
+.u-tarjeta.vacia{opacity:.62}
+.u-tarjeta.vacia:hover{border-color:var(--linea);transform:none}
+
 /* progreso del lector */
 /* El [hidden] del navegador pierde contra .boton{display:inline-block}, así que
    «continuar» se vería como un botón naranja vacío en la primera visita. */
@@ -677,6 +712,44 @@ def construir_portada(cfg, t, idiomas, idioma, destino, cal, raiz) -> None:
         encoding="utf-8")
 
 
+def _mapa_de_unidades(cal: dict, dias: list, c: dict, idioma: str, raiz: str) -> str:
+    """Las 24 unidades como tarjetas, antes de la lista día a día.
+
+    La idea viene de la referencia que mandó el profesor, que entra a cada
+    curso por una tarjeta ilustrada. Lo que se toma es ESO —una puerta por
+    sección, en vez de una lista larga— y no su aspecto: la paleta sigue
+    siendo la de la casa, porque el azul y naranja de aquel sitio son los de
+    cualquier portal de idiomas y esta crema no se parece a nada.
+
+    Cada tarjeta lleva además el título del episodio de esa unidad: es donde
+    la historia de Ana e Iván se hace visible sin abrir ninguna lección."""
+    tarjetas = []
+    for u in cal["unidades"]:
+        suyos = [d for d in dias if d.unidad == u["numero"]]
+        hechas = sum(1 for d in suyos if d.ruta.exists())
+        primera = next((d for d in suyos if d.ruta.exists()), None)
+        # Con `raiz`: las lecciones viven solo en la carpeta de ruso, asi que
+        # desde /es/kurs.html y /en/kurs.html un enlace relativo sin prefijo
+        # apunta a /es/semana-01/..., que no existe. Lo caza la prueba de
+        # enlaces rotos, que es la misma que encontro los 404 del conmutador.
+        destino_u = (f"{raiz}/semana-{primera.semana:02d}/dia-{primera.dia}.html" if primera
+                     else f"#u{u['numero']}")
+        titulo = u["titulo_ru"] if idioma == "ru" else u["titulo_es"]
+        ep = (u.get("episodio") or {}).get("titulo", "")
+        pct = round(hechas * 100 / len(suyos)) if suyos else 0
+        tarjetas.append(
+            f'<a class="u-tarjeta{"" if primera else " vacia"}" href="{destino_u}">'
+            f'<span class="alto"><span class="num">{u["numero"]}</span>'
+            f'<span class="nivel">{html.escape(u["nivel"])}</span></span>'
+            f'<span class="tit">{html.escape(titulo)}</span>'
+            + (f'<span class="serie">{html.escape(c["episodio"])}: {html.escape(ep)}</span>' if ep else "")
+            + f'<span class="pie"><span>{hechas}/{len(suyos)} {html.escape(c["listos"])}</span>'
+              f'<span class="mini"><i style="width:{pct}%"></i></span></span></a>')
+    return (f'<h2>{html.escape(c["mapa"])}</h2>'
+            f'<p>{html.escape(c["mapa_nota"])}</p>'
+            f'<div class="mapa">{"".join(tarjetas)}</div>')
+
+
 def construir_indice_curso(cfg, t, idiomas, idioma, destino, cal, raiz) -> None:
     c, pr = t["curso"], t["progreso"]
     partes = [f'<h1>{html.escape(c["titulo"])}<span class="segunda">{html.escape(c["subtitulo"])}</span></h1>',
@@ -690,6 +763,7 @@ def construir_indice_curso(cfg, t, idiomas, idioma, destino, cal, raiz) -> None:
               f'<button type="button" id="borrar-progreso" hidden>{html.escape(pr["borrar"])}</button></p></div>',
               anuncio(cfg, "cabecera")]
     dias = plan.dias(cal)
+    partes.append(_mapa_de_unidades(cal, dias, c, idioma, raiz))
     por_semana: dict[int, list[plan.Dia]] = {}
     for d in dias:
         por_semana.setdefault(d.semana, []).append(d)
@@ -702,7 +776,7 @@ def construir_indice_curso(cfg, t, idiomas, idioma, destino, cal, raiz) -> None:
                 titulo_u = u["titulo_ru"] if idioma == "ru" else u["titulo_es"]
                 hechas_u = sum(1 for d in dias if d.unidad == u["numero"] and d.ruta.exists())
                 partes.append(
-                    f'<div class="unidad-cab"><h2 style="border:0;margin:0;padding:0">{c["tema"]} {u["numero"]}. {html.escape(titulo_u)}</h2>'
+                    f'<div class="unidad-cab" id="u{u["numero"]}"><h2 style="border:0;margin:0;padding:0">{c["tema"]} {u["numero"]}. {html.escape(titulo_u)}</h2>'
                     f'<span class="tipo">{html.escape(u["nivel"])} · {hechas_u}/14</span></div>')
                 objetivos = "".join(f"<li>{html.escape(o)}</li>" for o in u["objetivos"])
                 partes.append(f'<details><summary>{html.escape(c["objetivos"])} · {html.escape(c["semanas"])} {u["semanas"][0]}–{u["semanas"][1]}</summary><ul>{objetivos}</ul></details>')

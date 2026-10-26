@@ -68,6 +68,10 @@ ru:
     tema: "Тема"
     semana: "Неделя"
     objetivos: "Чему вы научитесь"
+    mapa: "Весь курс целиком"
+    mapa_nota: "24 темы за год. Нажмите на тему, чтобы увидеть её уроки."
+    episodio: "Серия"
+    listos: "готово"
     niveles: "уровень"
     semanas: "недели"
   sobre:
@@ -176,6 +180,10 @@ es:
     tema: "Unidad"
     semana: "Semana"
     objetivos: "Objetivos"
+    mapa: "El curso entero"
+    mapa_nota: "24 unidades en un año. Pulse una unidad para ver sus lecciones."
+    episodio: "Episodio"
+    listos: "listas"
     niveles: "nivel"
     semanas: "semanas"
   sobre:
@@ -284,6 +292,10 @@ en:
     tema: "Unit"
     semana: "Week"
     objetivos: "Objectives"
+    mapa: "The whole course"
+    mapa_nota: "24 units in a year. Tap a unit to see its lessons."
+    episodio: "Episode"
+    listos: "ready"
     niveles: "level"
     semanas: "weeks"
   sobre:

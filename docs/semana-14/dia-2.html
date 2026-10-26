@@ -81,6 +81,41 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 .suena[aria-pressed="true"]{opacity:1;color:var(--acento)}
 @media(hover:none){.suena{opacity:.9}}
 
+/* El mapa de unidades: 24 tarjetas en vez de 365 filas.
+   El indice crudo medía 21.482 px de alto, o sea 24 pantallas de scroll, y
+   nadie navega eso. Las tarjetas dan una vista de todo el ano en una o dos. */
+.mapa{display:grid;gap:.85rem;margin:1.4rem 0 2.2rem;
+  grid-template-columns:repeat(auto-fill,minmax(13rem,1fr));
+  /* Se sale de la columna de prosa, como la cabecera y por lo mismo: un mapa
+     no se lee renglon a renglon. Encerrado en los 44rem del texto solo caben
+     dos columnas y el mapa medía 1.806 px, que es tan ilegible como la lista
+     que viene a sustituir. Centrado sobre la ventana y no sobre el padre, que
+     asi no hace falta saber cuanto mide el padre. */
+  width:min(60rem,calc(100vw - 2.5rem));position:relative;left:50%;translate:-50%}
+/* Columna y no bloque: la rejilla estira las tarjetas de una fila a la misma
+   altura, pero el pie quedaba pegado al texto, asi que las barras de dos
+   tarjetas vecinas salian a distinta altura segun si el titulo ocupaba una
+   linea o dos. Con margin-top:auto en el pie, todas se alinean abajo. */
+.u-tarjeta{display:flex;flex-direction:column;text-decoration:none;color:inherit;background:var(--tarjeta);
+  border:1px solid var(--linea);border-radius:12px;padding:.85rem .95rem;
+  font-family:ui-sans-serif,system-ui,sans-serif;transition:border-color .12s,transform .12s}
+.u-tarjeta:hover{border-color:var(--acento);transform:translateY(-2px)}
+.u-tarjeta .alto{display:flex;align-items:baseline;gap:.5rem;margin-bottom:.3rem}
+.u-tarjeta .num{font-size:1.45rem;font-weight:700;color:var(--acento);
+  font-feature-settings:"tnum";line-height:1}
+.u-tarjeta .nivel{margin-inline-start:auto;font-size:.68rem;font-weight:700;letter-spacing:.06em;
+  color:var(--celeste);border:1px solid var(--celeste);border-radius:999px;padding:.05rem .4rem}
+.u-tarjeta .tit{font-weight:600;font-size:.94rem;color:var(--tinta);line-height:1.3;
+  display:block;margin-bottom:.4rem}
+.u-tarjeta .serie{font-size:.78rem;color:var(--tenue);font-style:italic;
+  display:block;margin-bottom:.5rem}
+.u-tarjeta .pie{display:flex;align-items:center;gap:.5rem;font-size:.74rem;color:var(--tenue);
+  margin-top:auto;padding-top:.15rem}
+.u-tarjeta .mini{flex:1;height:4px;border-radius:999px;background:var(--linea);overflow:hidden}
+.u-tarjeta .mini i{display:block;height:100%;background:var(--acento);border-radius:999px}
+.u-tarjeta.vacia{opacity:.62}
+.u-tarjeta.vacia:hover{border-color:var(--linea);transform:none}
+
 /* progreso del lector */
 /* El [hidden] del navegador pierde contra .boton{display:inline-block}, así que
    «continuar» se vería como un botón naranja vacío en la primera visita. */

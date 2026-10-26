@@ -606,6 +606,47 @@ vuelva a meter la cabecera en la columna de prosa.
 **Lo que sigue pendiente del diseno**: la captura de la pagina de referencia.
 Sin verla no hay nada que decir.
 
+## El diseno de referencia, y el mapa de unidades (2026-10-26)
+
+El profesor mando capturas de `curso-ingles.com`, que no se podia abrir desde
+aqui. Con ellas delante se pudo separar lo que vale de lo que no.
+
+**Lo que NO se copio, y conviene que quede escrito**: su piel. Azul marino con
+naranja es la combinacion de cualquier portal de idiomas; la crema con salmon
+y celeste de esta casa no se parece a nada y ademas aguanta mejor una pagina
+que es casi toda texto. Tampoco sus mega-menus (ellos tienen ~15 destinos
+colgando de 3 menus; aqui hay 3 destinos en total), ni «Accede / Registrate»
+—se decidio no tener cuentas—, ni su buscador como accion principal del heroe:
+eso sirve a un portal de consulta, y este curso es un camino donde lo primero
+tiene que ser «empieza por la leccion 1».
+
+**Lo que si se tomo es una idea estructural**: ellos entran a cada curso por
+una **tarjeta**, no por una lista. Aqui el indice eran **365 filas, 21.482 px
+de alto y 100 KB** —24 pantallas de scroll—, y nadie navega eso.
+
+`_mapa_de_unidades` pone **24 tarjetas** antes de la lista dia a dia: numero,
+nivel, titulo, **el titulo del episodio de Ana e Ivan** —que es donde la
+historia se ve sin abrir ninguna leccion— y cuantas lecciones estan escritas,
+con su barra. Las unidades sin escribir salen apagadas y anclan a su seccion
+de abajo en vez de prometer una puerta que no abre.
+
+Tres cosas que costaron una vuelta:
+
+- **El mapa se sale de la columna de prosa**, igual que la cabecera y por el
+  mismo motivo: encerrado en los 44rem del texto solo caben **dos** columnas y
+  medía 1.806 px, tan ilegible como la lista que viene a sustituir. Centrado
+  sobre la VENTANA (`left:50%;translate:-50%`) y no sobre el padre, que asi no
+  hace falta saber cuanto mide el padre. Con eso: 4 columnas y 1.016 px.
+- **El pie de la tarjeta va con `margin-top:auto`.** La rejilla estira las
+  tarjetas de una fila a la misma altura, pero sin eso el pie queda pegado al
+  texto y dos barras vecinas salen a distinta altura segun si el titulo ocupa
+  una linea o dos.
+- **Las tarjetas necesitan `raiz`.** Sin ella, desde `/es/kurs.html` el enlace
+  relativo apuntaba a `/es/semana-01/...`, que no existe: las lecciones viven
+  solo en la raiz. **Lo cazo la prueba de enlaces rotos**, la misma que
+  encontro los 404 del conmutador de idioma. Es la segunda vez que ese fallo
+  aparece por el mismo motivo, y la segunda vez que esa prueba lo para.
+
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.
