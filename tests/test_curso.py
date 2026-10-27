@@ -24,6 +24,7 @@ import yaml  # noqa: E402
 import construir_sitio  # noqa: E402
 import generar_audio  # noqa: E402
 import generar_imagenes  # noqa: E402
+import exportar_apkg  # noqa: E402
 import poner_dominio  # noqa: E402
 import revisar_adsense  # noqa: E402
 import exportar_wordpress  # noqa: E402
@@ -295,8 +296,16 @@ class TestElSitio(unittest.TestCase):
         # Lo mismo para los dibujos del vocabulario, y por lo mismo: se copia
         # solo el índice y no las 300 imágenes, porque los <img> dependen de él
         # y no de que los archivos estén.
+        # El manifiesto de la baraja va con ellos y NO el .apkg de 22 MB: para
+        # eso existe el manifiesto. El .apkg se finge con un archivo vacío,
+        # porque el bloque solo mira que esté.
+        apkg = RAIZ / "docs" / "vocabulario" / "espanol-desde-ruso.apkg"
+        if apkg.exists():
+            (destino / "vocabulario").mkdir(parents=True, exist_ok=True)
+            (destino / "vocabulario" / apkg.name).touch()
         for carpeta, nombre in (("audio", construir_sitio.INDICE_AUDIO),
-                                ("img", construir_sitio.INDICE_IMG)):
+                                ("img", construir_sitio.INDICE_IMG),
+                                ("vocabulario", construir_sitio.MANIFIESTO_BARAJA)):
             indice = RAIZ / "docs" / carpeta / nombre
             if indice.exists():
                 (destino / carpeta).mkdir(parents=True, exist_ok=True)
@@ -499,6 +508,13 @@ class TestElSitio(unittest.TestCase):
             rel = generado.relative_to(destino)
             versionado = RAIZ / "docs" / rel
             self.assertTrue(versionado.exists(), f"falta docs/{rel}: corre scripts/construir_sitio.py")
+            # El .apkg no lo escribe el generador del sitio sino
+            # `exportar_apkg.py`, y aquí es un archivo vacío que solo está para
+            # que el bloque de descarga se pinte. Compararlo acusaría a `docs/`
+            # de algo que esta prueba no mira, y además son 22 MB de binario
+            # que `read_text` ni siquiera puede abrir.
+            if generado.suffix == ".apkg":
+                continue
             self.assertEqual(versionado.read_text(encoding="utf-8"), generado.read_text(encoding="utf-8"), f"docs/{rel} desactualizado")
 
 
@@ -1807,4 +1823,76 @@ class TestLosDibujosEnLaLeccion(unittest.TestCase):
     def test_el_indice_se_lee_del_disco_y_aguanta_que_no_esté(self):
         with tempfile.TemporaryDirectory() as tmp:
             self.assertEqual({}, construir_sitio.indice_de_imagenes(pathlib.Path(tmp)))
+
+
+class TestLaBarajaDeTarjetas(unittest.TestCase):
+    """La baraja de Anki: `exportar_apkg.py` y su bloque de descarga.
+
+    El curso está construido sobre las tarjetas y no era un añadido: 92 de las
+    100 lecciones empiezan con «Карточки: 10 слов» y 87 cierran pidiendo que se
+    añadan 5 palabras a la baraja. Lo que faltaba era la baraja."""
+
+    def test_el_curso_de_verdad_pide_tarjetas(self):
+        """Si un día dejara de pedirlas, la baraja sobraría y habría que
+        quitarla en vez de mantenerla. Por eso el número se fija aquí."""
+        calienta = pide = 0
+        for d in plan.dias(plan.cargar()):
+            if not d.ruta.exists():
+                continue
+            texto = d.ruta.read_text(encoding="utf-8")
+            calienta += "арточк" in texto.split("## 2.")[0]
+            pide += "колод" in texto
+        self.assertGreaterEqual(calienta, 80, "las lecciones ya no empiezan con tarjetas")
+        self.assertGreaterEqual(pide, 80, "las lecciones ya no mandan añadir a la baraja")
+
+    def test_los_identificadores_son_fijos(self):
+        """Anki reconoce baraja, modelo y nota por su id. Con ids al azar,
+        volver a importar no actualiza la baraja del alumno: le crea otra al
+        lado y pierde meses de repasos. Es el único fallo de este guion que no
+        se vería hasta meses después y en el ordenador de otro."""
+        self.assertEqual(exportar_apkg._id("Юнит 03"), exportar_apkg._id("Юнит 03"))
+        self.assertNotEqual(exportar_apkg._id("Юнит 03"), exportar_apkg._id("Юнит 04"))
+
+    def test_la_tarjeta_del_dibujo_solo_existe_si_hay_dibujo(self):
+        """Va envuelta en {{#Imagen}}…{{/Imagen}}: sin eso, las 600 palabras
+        sin dibujo tendrían una tarjeta con el anverso en blanco, imposible de
+        contestar."""
+        dibujo = next(p for p in exportar_apkg.PLANTILLAS if "рисунок" in p["name"])
+        self.assertIn("{{#Imagen}}", dibujo["qfmt"])
+        self.assertIn("{{/Imagen}}", dibujo["qfmt"])
+
+    def test_el_bloque_sale_de_lo_que_hay_en_disco(self):
+        """Sin manifiesto no hay bloque: un botón de descarga que lleva a un
+        404 es peor que no ofrecer la baraja."""
+        textos = construir_sitio.cargar_textos()["ru"]
+        with tempfile.TemporaryDirectory() as tmp:
+            vacio = pathlib.Path(tmp)
+            self.assertEqual("", construir_sitio._bloque_de_la_baraja(textos, vacio, "."))
+
+            # Con manifiesto pero sin el archivo, tampoco: el manifiesto puede
+            # haber sobrevivido a un borrado del .apkg.
+            (vacio / "vocabulario").mkdir()
+            (vacio / "vocabulario" / construir_sitio.MANIFIESTO_BARAJA).write_text(
+                json.dumps({"archivo": "x.apkg", "bytes": 1_000_000, "palabras": 10,
+                            "con_voz": 9, "con_dibujo": 3}), encoding="utf-8")
+            self.assertEqual("", construir_sitio._bloque_de_la_baraja(textos, vacio, "."))
+
+            (vacio / "vocabulario" / "x.apkg").touch()
+            bloque = construir_sitio._bloque_de_la_baraja(textos, vacio, ".")
+            self.assertIn("./vocabulario/x.apkg", bloque)
+            self.assertIn("10", bloque)
+
+    def test_los_tres_idiomas_enlazan_la_misma_baraja_en_la_raiz(self):
+        """La baraja vive UNA vez en `docs/vocabulario/`, no una por idioma.
+        El índice en español se escribe en `docs/es/`, así que mirándola en su
+        propia carpeta no la encontraría y el bloque se caería en dos de las
+        tres páginas."""
+        destino = pathlib.Path(RAIZ / "docs")
+        if not (destino / "vocabulario" / construir_sitio.MANIFIESTO_BARAJA).exists():
+            self.skipTest("todavía no se ha generado la baraja")
+        for pagina, prefijo in (("kurs.html", "."), ("es/kurs.html", ".."),
+                                ("en/kurs.html", "..")):
+            texto = (destino / pagina).read_text(encoding="utf-8")
+            self.assertIn('class="baraja"', texto, pagina)
+            self.assertIn(f'href="{prefijo}/vocabulario/', texto, pagina)
 

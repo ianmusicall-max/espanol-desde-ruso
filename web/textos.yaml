@@ -146,6 +146,13 @@ ru:
     errores: "Что стоит посмотреть"
     borrador: "Вопросы ещё не проверены преподавателем."
     sin_js: "Для теста нужен JavaScript. Без него начните с первого урока."
+  baraja:
+    titulo: "Карточки для повторения"
+    texto: "Каждый урок начинается с карточек и заканчивается словами дня. Вот вся колода: {n} слов, {v} с озвучкой и {d} с картинкой."
+    anki: "Скачать для Anki"
+    anki_nota: "Один файл, открывается одним щелчком. Anki бесплатен на компьютере и Android; на iPhone — платное приложение или бесплатный AnkiWeb в браузере."
+    tsv: "Скачать таблицей (TSV)"
+    tsv_nota: "Для Excel, Google Таблиц, Quizlet и любого другого приложения."
   progreso:
     continuar: "Продолжить: урок"
     empezar: "Начать сначала"
@@ -282,6 +289,13 @@ es:
     errores: "Lo que conviene mirar"
     borrador: "Las preguntas aún no las ha revisado el profesor."
     sin_js: "El test necesita JavaScript. Sin él, empiece por la primera lección."
+  baraja:
+    titulo: "Tarjetas de repaso"
+    texto: "Cada lección empieza con tarjetas y termina con las palabras del día. Aquí está la baraja entera: {n} palabras, {v} con voz y {d} con dibujo."
+    anki: "Descargar para Anki"
+    anki_nota: "Un solo archivo, se abre de un clic. Anki es gratis en ordenador y Android; en iPhone, la app es de pago o se usa AnkiWeb en el navegador."
+    tsv: "Descargar como tabla (TSV)"
+    tsv_nota: "Para Excel, Google Sheets, Quizlet y cualquier otra app."
   progreso:
     continuar: "Continuar: lección"
     empezar: "Empezar de cero"
@@ -418,6 +432,13 @@ en:
     errores: "Worth a look"
     borrador: "The questions have not been reviewed by the teacher yet."
     sin_js: "The test needs JavaScript. Without it, start at the first lesson."
+  baraja:
+    titulo: "Review flashcards"
+    texto: "Every lesson opens with flashcards and closes with the words of the day. Here is the whole deck: {n} words, {v} with audio and {d} with a picture."
+    anki: "Download for Anki"
+    anki_nota: "One file, opens in a click. Anki is free on desktop and Android; on iPhone the app is paid, or use AnkiWeb in the browser."
+    tsv: "Download as a table (TSV)"
+    tsv_nota: "For Excel, Google Sheets, Quizlet and any other app."
   progreso:
     continuar: "Continue: lesson"
     empezar: "Start from the beginning"

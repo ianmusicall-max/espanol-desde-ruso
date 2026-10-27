@@ -1111,6 +1111,66 @@ mirar son las ambiguas que sí se dejaron: `el banco` (asiento o entidad), `la
 planta` (vegetal o piso), `el partido` (deporte o político), `la entrada`
 (billete o puerta) y `la carta` (misiva o menú).
 
+## La baraja de tarjetas (2026-10-27)
+
+El profesor preguntó qué era Anki y para qué sirve. **La respuesta estaba en su
+propio curso**: 92 de las 100 lecciones empiezan con «Карточки: 10 слов» y 87
+cierran pidiendo «añade 5 palabras a tu baraja». El método está construido
+sobre las tarjetas desde el principio. Lo que no existía era la baraja: los
+TSV de `exportar_anki.py` vivían solo en el repositorio y `docs/vocabulario/`
+estaba vacío, así que el alumno leía «repasa tus tarjetas» el primer día y no
+tenía ninguna.
+
+**Se publican DOS formatos y eso no es indecisión:**
+
+- **`.apkg`** (`scripts/exportar_apkg.py`, con `genanki`): 908 notas, 1213
+  tarjetas, 21,8 MB, con los 305 dibujos y las 905 voces **dentro**. Se abre de
+  un clic. Pero necesita Anki, y Anki en iPhone cuesta unos 25 USD (pago único;
+  en ordenador, Android y AnkiWeb es gratis).
+- **`.tsv`**, el que ya existía: sin medios, pero lo abre Excel, Google Sheets,
+  Quizlet y cualquier app de tarjetas. Es lo que evita que el curso dependa de
+  una app de pago para quien tenga iPhone.
+
+**Dos tipos de tarjeta, y el segundo es el que justifica los dibujos:**
+
+1. `español → русский`, que entrena a traducir.
+2. `рисунок → español`, que entrena a PENSAR en español sin pasar por el ruso.
+   Solo se crea cuando hay dibujo, con la plantilla condicional de Anki
+   (`{{#Imagen}}…{{/Imagen}}`): sin eso, las 603 palabras sin dibujo tendrían
+   una tarjeta con el anverso en blanco, imposible de contestar. Por eso son
+   1213 tarjetas y no 1816.
+
+### Lo que rompe esto sin avisar
+
+- **Los identificadores son FIJOS**, derivados de un texto fijo. Anki reconoce
+  baraja, modelo y nota por su id: con ids al azar, volver a importar no
+  actualizaría la baraja del alumno sino que le crearía otra al lado, y
+  perdería meses de repasos. **Es el único fallo de este guion que no se vería
+  hasta meses después y en el ordenador de otro.** Lo mismo el `guid` de cada
+  nota, que sale de la palabra y no del orden: así cambiar el reparto de
+  unidades no le borra el progreso a nadie.
+- **El bloque de descarga sale de un manifiesto** (`docs/vocabulario/baraja.json`,
+  cinco números), no de abrir el `.apkg`. Dos razones: construir el sitio no
+  tiene que leer 22 MB, y la prueba que compara `docs/` puede copiar el
+  manifiesto entero sin arrastrarlos. Es el mismo patrón que los `indice.json`
+  del audio y los dibujos.
+- **Sin manifiesto —o con manifiesto y sin archivo— el bloque no sale.** Un
+  botón de descarga que lleva a un 404 es peor que no ofrecer la baraja.
+- **El índice del curso recibe DOS carpetas**: la del idioma y la raíz del
+  sitio. La baraja vive una sola vez en `docs/vocabulario/` para los tres
+  idiomas, así que buscándola en `docs/es/vocabulario/` no se encontraría y el
+  bloque se caía en dos de las tres páginas. Se vio construyendo, no leyendo.
+- **El copiado de los TSV va ANTES del bucle de idiomas.** Puesto después, el
+  índice se construía antes de que los archivos estuvieran y el bloque se caía
+  en la primera corrida.
+
+**Lo que esto cuesta en el repositorio, y hay que saberlo**: el `.apkg` son
+22 MB de zip, que git no puede comprimir ni deltar. Cada regeneración es un
+blob nuevo entero. Por eso **no se genera al construir el sitio**: es un
+comando aparte y deliberado, como el audio y los dibujos. Si algún día pesa
+demasiado en el historial, el camino es moverlo a un *release* de GitHub, que
+no vive en git.
+
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.

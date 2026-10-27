@@ -26,6 +26,7 @@ import html
 import json
 import pathlib
 import re
+import shutil
 import sys
 
 import markdown
@@ -51,6 +52,12 @@ TEST = RAIZ / "programa" / "test-nivel.yaml"
 INDICE_AUDIO = "indice.json"
 # Y el de los dibujos del vocabulario, que lo deja scripts/generar_imagenes.py
 INDICE_IMG = "indice.json"
+
+# La baraja de tarjetas. El `.apkg` lo escribe scripts/exportar_apkg.py y los
+# TSV scripts/exportar_anki.py; aquí solo se copian y se enlazan, igual que con
+# el audio: generar es una decisión y construir el sitio no puede gastar.
+VOCABULARIO_WEB = "vocabulario"
+MANIFIESTO_BARAJA = "baraja.json"
 EXTENSIONES = ["tables", "fenced_code", "sane_lists", "toc", "attr_list"]
 
 
@@ -147,6 +154,15 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* la baraja de tarjetas: dos descargas, la de Anki primero. En tarjeta y no
+   en una lista suelta porque es una oferta, no un apartado del curso. */
+.baraja{margin:2rem 0;padding:1.1rem 1.2rem;border:1px solid var(--linea);
+  border-radius:12px;background:var(--tarjeta)}
+.baraja h2{margin:0 0 .4rem;font-size:1.05rem}
+.baraja>p{margin:0 0 .9rem}
+.baraja .bajar{display:flex;flex-wrap:wrap;gap:.6rem}
+.baraja .bajar a{flex:1 1 15rem}
+.baraja .nota{margin:.35rem 0 0;font-size:.82rem;color:var(--tenue)}
 /* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
    propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
    el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
@@ -1070,7 +1086,75 @@ def _mapa_de_unidades(cal: dict, dias: list, c: dict, idioma: str, raiz: str) ->
             f'<div class="mapa">{"".join(tarjetas)}</div>')
 
 
-def construir_indice_curso(cfg, t, idiomas, idioma, destino, cal, raiz) -> None:
+def construir_vocabulario(destino: pathlib.Path) -> int:
+    """Copia los TSV del vocabulario a la web.
+
+    Viven en `vocabulario/`, que es la fuente que una prueba mantiene al día.
+    El `.apkg` NO se copia aquí: lo escribe `exportar_apkg.py` directamente en
+    `docs/`, como el audio y los dibujos, porque generarlo es una decisión que
+    cuesta medio minuto y construir el sitio tiene que ser barato."""
+    origen = RAIZ / "vocabulario"
+    if not origen.is_dir():
+        return 0
+    carpeta = destino / VOCABULARIO_WEB
+    carpeta.mkdir(parents=True, exist_ok=True)
+    tsv = sorted(origen.glob("*.tsv"))
+    for f in tsv:
+        shutil.copy2(f, carpeta / f.name)
+    return len(tsv)
+
+
+def _bloque_de_la_baraja(t, destino: pathlib.Path, raiz: str) -> str:
+    """La descarga de las tarjetas, si la baraja existe.
+
+    Sale de lo que HAY en disco y no de una promesa en el código: sin
+    `baraja.json` el bloque no aparece y la página queda como estaba. Es la
+    misma regla que el audio y los dibujos —el sitio se construye igual con
+    todo y sin nada— y aquí importa el doble, porque un botón de descarga que
+    lleva a un 404 es peor que no ofrecer nada.
+
+    Los números salen del manifiesto y no de recontar el vocabulario: el que
+    sabe cuántas tarjetas tiene la baraja es quien la armó. Así además esto no
+    abre un archivo de 22 MB en cada construcción.
+
+    Se ofrecen los DOS formatos a propósito. El `.apkg` lleva los dibujos y la
+    voz dentro y se abre de un clic, pero necesita Anki, que en iPhone es de
+    pago. El TSV no lleva medios y lo abre cualquier cosa —Excel, Google
+    Sheets, Quizlet—, así que nadie se queda sin tarjetas por el móvil que
+    tenga."""
+    b = t["baraja"]
+    try:
+        m = json.loads((destino / VOCABULARIO_WEB / MANIFIESTO_BARAJA)
+                       .read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return ""
+    if not (destino / VOCABULARIO_WEB / m["archivo"]).exists():
+        return ""
+
+    texto = html.escape(b["texto"]).format(
+        n=m["palabras"], v=m["con_voz"], d=m["con_dibujo"])
+    enlaces = [
+        f'<div><a class="boton" href="{raiz}/{VOCABULARIO_WEB}/{html.escape(m["archivo"])}" '
+        f'download>{html.escape(b["anki"])} · {m["bytes"] / 1e6:.0f} MB</a>'
+        f'<p class="nota">{html.escape(b["anki_nota"])}</p></div>']
+    if (destino / VOCABULARIO_WEB / "todo.tsv").exists():
+        enlaces.append(
+            f'<div><a class="boton secundario" href="{raiz}/{VOCABULARIO_WEB}/todo.tsv" '
+            f'download>{html.escape(b["tsv"])}</a>'
+            f'<p class="nota">{html.escape(b["tsv_nota"])}</p></div>')
+
+    return (f'<section class="baraja"><h2>{html.escape(b["titulo"])}</h2>'
+            f'<p>{texto}</p><div class="bajar">{"".join(enlaces)}</div></section>')
+
+
+def construir_indice_curso(cfg, t, idiomas, idioma, destino, cal, raiz,
+                           sitio=None) -> None:
+    """`destino` es la carpeta del idioma y `sitio` la raíz del sitio.
+
+    No son lo mismo y por eso se pasan las dos: el índice en español se
+    escribe en `docs/es/`, pero la baraja vive en `docs/vocabulario/` una sola
+    vez para los tres idiomas. Mirándola en `destino` no se encontraría nunca
+    y el bloque se caería en dos de las tres páginas."""
     c, pr = t["curso"], t["progreso"]
     partes = [f'<h1>{html.escape(c["titulo"])}<span class="segunda">{html.escape(c["subtitulo"])}</span></h1>',
               f'<p>{html.escape(c["entrada"])}</p>',
@@ -1086,6 +1170,7 @@ def construir_indice_curso(cfg, t, idiomas, idioma, destino, cal, raiz) -> None:
               anuncio(cfg, "cabecera")]
     dias = plan.dias(cal)
     partes.append(_mapa_de_unidades(cal, dias, c, idioma, raiz))
+    partes.append(_bloque_de_la_baraja(t, sitio or destino, raiz))
     por_semana: dict[int, list[plan.Dia]] = {}
     for d in dias:
         por_semana.setdefault(d.semana, []).append(d)
@@ -1590,13 +1675,17 @@ def construir(destino: pathlib.Path = DOCS, cfg: dict | None = None, textos: dic
     idiomas = textos["idiomas"]
     destino.mkdir(parents=True, exist_ok=True)
 
+    # Antes de las páginas, porque el índice del curso enlaza la baraja y mira
+    # si está: copiarlos después dejaría el bloque fuera en la primera corrida.
+    construir_vocabulario(destino)
+
     for i in idiomas:
         t = textos[i["codigo"]]
         carpeta = destino / i["carpeta"] if i["carpeta"] else destino
         carpeta.mkdir(parents=True, exist_ok=True)
         raiz = ".." if i["carpeta"] else "."
         construir_portada(cfg, t, idiomas, i["codigo"], carpeta, cal, raiz)
-        construir_indice_curso(cfg, t, idiomas, i["codigo"], carpeta, cal, raiz)
+        construir_indice_curso(cfg, t, idiomas, i["codigo"], carpeta, cal, raiz, destino)
         construir_estaticas(cfg, t, idiomas, i["codigo"], carpeta, cal, raiz)
 
     construir_test(cfg, textos["ru"], idiomas, destino, cal, preguntas)

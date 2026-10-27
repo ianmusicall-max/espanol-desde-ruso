@@ -85,6 +85,15 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* la baraja de tarjetas: dos descargas, la de Anki primero. En tarjeta y no
+   en una lista suelta porque es una oferta, no un apartado del curso. */
+.baraja{margin:2rem 0;padding:1.1rem 1.2rem;border:1px solid var(--linea);
+  border-radius:12px;background:var(--tarjeta)}
+.baraja h2{margin:0 0 .4rem;font-size:1.05rem}
+.baraja>p{margin:0 0 .9rem}
+.baraja .bajar{display:flex;flex-wrap:wrap;gap:.6rem}
+.baraja .bajar a{flex:1 1 15rem}
+.baraja .nota{margin:.35rem 0 0;font-size:.82rem;color:var(--tenue)}
 /* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
    propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
    el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
