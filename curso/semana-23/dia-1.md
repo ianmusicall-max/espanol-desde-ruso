@@ -221,10 +221,10 @@ revisado: false
 | el **lu**nes pa**sa**do | в прошлый понедельник | El lunes pasado empecé el curso. |
 | la se**ma**na pa**sa**da | на прошлой неделе | La semana pasada estudié mucho. |
 | el **a**ño pa**sa**do | в прошлом году | El año pasado viajé a España. |
-| coci**nar** | готовить | El sábado cociné algo. |
+| empe**zar** → empe**cé** | начать (форма «я» пишется с c) | Empecé a las ocho. |
 | un **ra**to | немного времени | Descansé un rato. |
 | de **to**do | обо всём | Hablamos de todo. |
-| conmi**go** · con**ti**go | со мной · с тобой | Él habló conmigo. |
+| lle**gar** → lle**gué** | приехать (форма «я» пишется с u) | Llegué a las once. |
 
 ## Ответы
 

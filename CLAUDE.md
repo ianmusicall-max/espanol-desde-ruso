@@ -1693,6 +1693,61 @@ nada dependa de llegar al final.
 dibujos y el `.apkg` de 22 MB. Los tres son comandos aparte y se hacen por
 tandas, no por lección.
 
+## La unidad 12: empieza el A2 con el pasado (días 155-168)
+
+Catorce lecciones, semanas 23 y 24. El curso pasa de 154 a **168 de 365** y
+entra en **A2**: 1.448 tarjetas de vocabulario.
+
+**Toda la unidad es una sola cosa: el pretérito indefinido.** Y la decisión
+de fondo ya estaba tomada y documentada (2026-10-26): el perfecto se enseñó
+primero, en la semana 18, siguiendo el PCIC y porque la salida del curso es
+el DELE A2, que es peninsular. Aquí llega el indefinido, y el día 162 es la
+frontera entre los dos.
+
+Lo que decidió el contenido:
+
+- **El hilo de las dos semanas es la tilde**, y cambia de bando a mitad de
+  unidad. En los regulares es obligatoria y distingue palabras (*hablo* /
+  *habló*); en los once irregulares es un error, porque el acento cae en la
+  raíz. Se abre el lunes, se invierte el miércoles y vuelve en el test.
+- **El aspecto ruso no sirve aquí, y se dice explícitamente.** «Говорил» y
+  «поговорил» se oponen por aspecto; *he hablado* y *hablé* se oponen por
+  **tiempo**. Es otro eje, y trasladar uno al otro es el error más duradero
+  de todo el A2. La regla operativa que se da no es gramatical sino léxica:
+  mire la palabra de tiempo.
+- **«Esta mañana» es perfecto** aunque la mañana haya pasado: el día en que
+  estuvo sigue abierto. Es el caso que más cuesta.
+- 🌎 **Y en América la frontera casi no existe**: *hoy comí* es correcto allí.
+  Se enseña la norma peninsular porque el examen lo es, y se marca la
+  variante, que es la regla 8.
+- **Los once irregulares se presentan como cuatro + siete**, con una sola
+  tabla de terminaciones para todos. Lo que se aprende son once raíces, no
+  sesenta y seis formas.
+- **`dijeron` sin `i`** es la única excepción del paradigma (raíz en *j*), y
+  no tiene apoyo en ruso: se aprende como ortografía.
+- **`no pude` es «no conseguí» y `no quise` es «me negué»**, no «no podía» ni
+  «no quería». Esos están en el imperfecto, que llega en la unidad 13.
+- **Las biografías del domingo 161 y las fechas del 168** se escribieron con
+  datos estables y universalmente citados —los años de nacimiento y muerte de
+  Frida, Picasso y Messi; 1492; las independencias de 1810-1825; 1898— y sin
+  ninguna cifra que cambie o se discuta (goles, premios contados, cifras de
+  asistencia). Es el criterio de la regla 7 que ya se aplicó en la unidad 9.
+  Un detalle que además enseña: Frida decía haber nacido en 1910, el año de la
+  Revolución; su partida dice 1907.
+
+**El validador cazó un tema que no coincidía con el calendario** (regla 4) en
+la primera lección: el YAML dice «Pretérito indefinido -ar: вчера я говорил» y
+yo había escrito otra cosa. Se cambió la lección, no el calendario.
+
+**Diecisiete entradas duplicadas** las cazó `revisar_lexico.py` al cerrar cada
+semana —entre ellas las tres centenas irregulares, que ya se habían enseñado
+en la semana 8, y toda la frecuencia de la semana 10—. Quedan los 13 de
+siempre, todos de las semanas 1 a 14.
+
+**La prueba del día 167 se escribió primero con 18 ítems** y una nota de «elija
+los seis mejores». Eso no es el formato: `evaluacion.md` §4 fija 6 + 6 + 3.
+Recortada a quince exactos y comprobada ejecutando `pruebas.py`.
+
 ## La unidad 11: el nivel A1 cerrado (días 141-154)
 
 Catorce lecciones, semanas 21 y 22. El curso pasa de 140 a **154 de 365**, y
@@ -1833,6 +1888,31 @@ enlaza a su lección.
 `OPENAI_API_KEY`; ya van 4.404 frases y 1,67 USD para todo lo escrito), los
 dibujos y el `.apkg` de 22 MB. Los TSV sí, porque hay una prueba que lo exige.
 
+## El disco de la sesión se agota antes que el trabajo (2026-10-27)
+
+Escribiendo la unidad 12 la máquina se quedó **sin cuota de disco**: `df`
+decía 252 GB de volumen, 39 GB usados y **280 KB libres**, que es la firma de
+una cuota gastada y no de un disco lleno. A partir de ahí fallaba todo, hasta
+`git status`: el intérprete no podía ni escribir su propia salida.
+
+**Lo que la gastó fue reconstruir el sitio.** `construir_sitio.py` escribe
+unos 130 MB (154 lecciones × 3 idiomas, más los índices), y `test_docs_esta_al_dia`
+lo construye otra vez en un temporal en cada corrida de la suite. Con una
+decena de reconstrucciones y media docena de suites, el sistema de archivos se
+queda con todas las versiones intermedias aunque los archivos se sobrescriban.
+
+**Lo que se aprende para la próxima:**
+
+- **Escribir lecciones es barato** (15 KB cada una) y **reconstruir es caro**.
+  Se puede escribir una unidad entera validando con `validar.py`, que no
+  construye nada, y dejar `construir_sitio.py` para el final.
+- **La suite completa cuesta una reconstrucción**, así que no se corre por
+  lección ni por semana: una vez por unidad, y con el árbol ya construido.
+- **Los temporales se liberan borrando**, y eso sí funciona con el disco
+  lleno. Lo que no se puede es escribir.
+- Con la cuota gastada **el trabajo se commitea igual** si se libera lo
+  propio primero; una sesión nueva arranca en una máquina limpia.
+
 ## La Red de Publicidad de Yandex, cableada y apagada (2026-10-27)
 
 El profesor se dio de alta en РСЯ y creó el primer bloque. **Por qué además de
@@ -1954,9 +2034,9 @@ de verdad.
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.
-- **154 lecciones escritas** (semanas 1-22 enteras): **el nivel A1 completo**,
-  unidades 1 a 11, 1.316 tarjetas de vocabulario. Las 21 primeras revisadas; el
-  resto son borradores.
+- **168 lecciones escritas** (semanas 1-24 enteras): el nivel A1 completo y la
+  primera unidad de A2, 1.448 tarjetas de vocabulario. Las 21 primeras
+  revisadas; el resto son borradores.
 - Sitio público en `docs/` con portada, índice, test de nivel, «О курсе»,
   contacto y política de privacidad. Tres idiomas (ru/es/en) —el test solo en
   ruso, como las lecciones—, tema claro y oscuro, y progreso del lector

@@ -215,10 +215,10 @@ revisado: false
 | **ha**ce + отрезок | … назад | Hace dos días llegué. |
 | ¿Qué hi**cis**te? | Что ты делал? | ¿Qué hiciste ayer? |
 | cono**cer** (cono**cí**) | знакомиться (познакомился) | Conocí a Ana en 2020. |
-| respon**der** | отвечать | Él respondió despacio. |
-| deci**dir** | решить | Decidí hablar con él. |
+| el ca**se**ro / la ca**se**ra | хозяин квартиры | Conocí al casero. |
+| el boca**di**llo | бутерброд | Comí bocadillos toda la semana. |
 | enten**der** (en**tien**do) | понимать | No entendí nada. |
-| la direc**ción** | адрес | Escribí la dirección en un papel. |
+| des**pa**cio | медленно | Él respondió despacio. |
 | el pa**pel** | бумага, бумажка | Lo escribí en un papel. |
 | la mi**tad** | половина | Entendí la mitad. |
 | sufi**cien**te | достаточно | Fue suficiente. |
