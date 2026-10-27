@@ -1936,6 +1936,63 @@ enlaza a su lección.
 `OPENAI_API_KEY`; ya van 4.404 frases y 1,67 USD para todo lo escrito), los
 dibujos y el `.apkg` de 22 MB. Los TSV sí, porque hay una prueba que lo exige.
 
+## La unidad 14: narrar, y el tercer bloque del test cambia (días 183-196)
+
+Catorce lecciones, semanas 27 y 28. El curso pasa de 182 a **196 de 365** y
+cierra la mitad del A2: **1.704 tarjetas** de vocabulario.
+
+**La unidad no añade un tiempo nuevo: enseña a usar los tres que ya hay.** El
+alumno sabe perfecto (semana 18), indefinido (unidad 12) e imperfecto (unidad
+13); aquí aprende a contar algo con los tres a la vez, que es lo que de verdad
+pide el DELE A2 en la expresión escrita y en la oral.
+
+Lo que decidió el contenido:
+
+- **`estaba durmiendo` es la tercera forma de fondo**, y el día 183 la pone al
+  lado de `dormía` en vez de presentarla sola: *dormía* es la costumbre o el
+  fondo largo, *estaba durmiendo* es **ese** momento exacto. En ruso las dos
+  son «я спал», así que la elección no la da el verbo ruso y hay que darla por
+  escrito.
+- **Los conectores son el día 184 entero** porque son la diferencia entre una
+  lista y un relato, y el rusohablante los tiene todos en su lengua: el
+  problema no es entenderlos sino acordarse de ponerlos.
+- **Los cinco irregulares del día 185 (`leyó, oyó, durmió, pidió, trajo`) son
+  los que quedaban** del indefinido: el cambio ortográfico de la *y*, el
+  cambio vocálico de tercera persona y la raíz en *j*. Se dan juntos porque
+  los tres son de tercera persona, que es la que usa un relato.
+- **`hace dos años` / `desde hace` / `llevo … estudiando`** es el día 190 y es
+  el punto donde el ruso más estorba: «два года назад» y «уже два года»
+  parecen lo mismo y son tiempos distintos en español.
+- **El día 192 cuenta nueve viñetas** y la lección es que entre una lista de
+  escenas y un relato hay exactamente tres cosas: el fondo que no está en la
+  imagen, las conexiones y la emoción. Es el método que se usa el viernes.
+- **El día 196 es humor**, que es el contenido cultural más difícil de enseñar
+  y el único donde no hay nada que memorizar: se explica por qué un chiste no
+  se traduce y se dan los dos o tres mecanismos que sí viajan.
+- **Las leyendas del día 189 van sin cifra inventada** (regla 7): La Llorona
+  no tiene fecha y el Cid se cuenta con lo verificable —el Cantar es del siglo
+  XII, Rodrigo Díaz murió en Valencia en 1099— y nada más.
+
+**Y aquí el test de unidad cambia de forma, que es lo que había que
+comprobar antes de escribirlo.** `evaluacion.md` §4 fija 6 + 6 + 3, pero el
+tercer bloque deja de ser ortografía **a partir de la unidad 14** y pasa a ser
+«Выражения». No es un detalle de formato: a esta altura el alumno ya no falla
+por tildes sino por construcciones (*hace* / *desde hace*, *tan* / *tanto*,
+*sin ganas de*), y el test tiene que medir eso. Comprobado ejecutando
+`pruebas.py`: las 15 se leen y cada una enlaza a su lección.
+
+**Un fallo que la propia prueba encontró**: el día 195 tenía dos opciones
+idénticas en la pregunta 4 de gramática (`б) leyó` y `г) leyó`), o sea una
+pregunta con dos respuestas correctas. Se barrieron después **todos** los
+tests de unidad del curso buscando opciones repetidas: 0 problemas más.
+
+**Tres entradas duplicadas** las cazó `revisar_lexico.py` al cerrar la semana
+28, las tres en el día 192: `la parada` (ya en S08D5), `al fondo` (S13D2) y
+`la maleta` (S17D5) — las tres son palabras del dibujo que el alumno ya
+conocía. En su lugar entraron `dormirse` (que no es `dormir`, y ese contraste
+pasó al bloque de contraste del día), `junto a` y `el relato`. Quedan los 13
+de siempre, todos de las semanas 1 a 14.
+
 ## El disco de la sesión se agota antes que el trabajo (2026-10-27)
 
 Escribiendo la unidad 12 la máquina se quedó **sin cuota de disco**: `df`
@@ -2082,9 +2139,12 @@ de verdad.
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.
-- **182 lecciones escritas** (semanas 1-26 enteras): el nivel A1 completo y
-  dos unidades de A2, 1.567 tarjetas de vocabulario. Las 21 primeras
+- **196 lecciones escritas** (semanas 1-28 enteras): el nivel A1 completo y
+  tres unidades de A2, 1.704 tarjetas de vocabulario. Las 21 primeras
   revisadas; el resto son borradores.
+  **`docs/` va por detrás**: se quedó en 154 lecciones porque la cuota de
+  disco de la sesión se agotó (ver más abajo). Las 42 últimas están en el
+  repositorio y no en la web hasta que alguien corra `construir_sitio.py`.
 - Sitio público en `docs/` con portada, índice, test de nivel, «О курсе»,
   contacto y política de privacidad. Tres idiomas (ru/es/en) —el test solo en
   ruso, como las lecciones—, tema claro y oscuro, y progreso del lector
