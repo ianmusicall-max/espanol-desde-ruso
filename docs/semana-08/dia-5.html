@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -529,7 +541,7 @@ casa <strong>(9)</strong> ______ el gimnasio hay dos kilómetros, y son quince m
 </thead>
 <tbody>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/f2be20782e6794646ea0.mp3" title="Прослушать" aria-label="Прослушать: la acera">▶</button>la <strong>ace</strong>ra</td>
+<td><img class="dibujo" src="../img/56600ea34013eb4c8589.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/f2be20782e6794646ea0.mp3" title="Прослушать" aria-label="Прослушать: la acera">▶</button>la <strong>ace</strong>ra</td>
 <td>тротуар</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b25b412607ee2299c9a6.mp3" title="Прослушать" aria-label="Прослушать: Los vecinos hablan en la acera.">▶</button>Los vecinos hablan en la acera.</td>
 </tr>
@@ -564,12 +576,12 @@ casa <strong>(9)</strong> ______ el gimnasio hay dos kilómetros, y son quince m
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/2660d70f9b3d63cae651.mp3" title="Прослушать" aria-label="Прослушать: Al final tomo el metro.">▶</button>Al final tomo el metro.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/9bed8ef356c5a199b079.mp3" title="Прослушать" aria-label="Прослушать: la parada">▶</button>la pa<strong>ra</strong>da</td>
+<td><img class="dibujo" src="../img/952e61b70393c2d1b404.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/9bed8ef356c5a199b079.mp3" title="Прослушать" aria-label="Прослушать: la parada">▶</button>la pa<strong>ra</strong>da</td>
 <td>остановка</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/c7d61b2143c9755f958b.mp3" title="Прослушать" aria-label="Прослушать: Bajo en la segunda parada.">▶</button>Bajo en la segunda parada.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/f2a2c1fa82a5e310c82d.mp3" title="Прослушать" aria-label="Прослушать: el semáforo">▶</button>el se<strong>má</strong>foro</td>
+<td><img class="dibujo" src="../img/89060074d5e42b3f0486.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/f2a2c1fa82a5e310c82d.mp3" title="Прослушать" aria-label="Прослушать: el semáforo">▶</button>el se<strong>má</strong>foro</td>
 <td>светофор</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/366a7fa2e106abc4ef86.mp3" title="Прослушать" aria-label="Прослушать: Gira a la derecha en el semáforo.">▶</button>Gira a la derecha en el semáforo.</td>
 </tr>

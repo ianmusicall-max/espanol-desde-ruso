@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -666,7 +678,7 @@ cuarto</em>. Понимать надо оба, говорить — как уд�
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/bc2932b1afce053d0437.mp3" title="Прослушать" aria-label="Прослушать: ¿A qué hora comes?">▶</button>¿A qué hora comes?</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/f8c20f9ee8da69c3187c.mp3" title="Прослушать" aria-label="Прослушать: el reloj">▶</button>el re<strong>loj</strong></td>
+<td><img class="dibujo" src="../img/05e13025af8e93dbde4b.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/f8c20f9ee8da69c3187c.mp3" title="Прослушать" aria-label="Прослушать: el reloj">▶</button>el re<strong>loj</strong></td>
 <td>часы (прибор)</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/4ef25205c96732132f39.mp3" title="Прослушать" aria-label="Прослушать: El reloj está en la pared.">▶</button>El reloj está en la pared.</td>
 </tr>
@@ -696,7 +708,7 @@ cuarto</em>. Понимать надо оба, говорить — как уд�
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/c61c83701b9a95a7e751.mp3" title="Прослушать" aria-label="Прослушать: ¿A qué hora es la clase?">▶</button>¿A qué hora es la clase?</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/cdd5b2383a721a30d768.mp3" title="Прослушать" aria-label="Прослушать: el mediodía">▶</button>el medio<strong>dí</strong>a</td>
+<td><img class="dibujo" src="../img/bad6d635eacaa2d11f05.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/cdd5b2383a721a30d768.mp3" title="Прослушать" aria-label="Прослушать: el mediodía">▶</button>el medio<strong>dí</strong>a</td>
 <td>полдень</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b93761fd5b449f65b272.mp3" title="Прослушать" aria-label="Прослушать: La comida es a mediodía.">▶</button>La comida es a mediodía.</td>
 </tr>

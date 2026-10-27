@@ -40,6 +40,7 @@ import os
 import pathlib
 import re
 import sys
+import time
 
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(RAIZ / "scripts"))
@@ -105,6 +106,11 @@ ABSTRACTOS = {
     "paso", "pausa", "pedido", "pena", "permiso", "plan", "plazo", "precio",
     "presente", "problema", "pronóstico", "pregunta", "punto", "razón",
     "respuesta", "resultado", "ruido", "rutina", "sabor", "sección", "sentido",
+    # «El trabajo» y «el grupo» los tumbó la muestra del 2026-10-27, y por eso
+    # existe la muestra: plano dibujó un señor en un escritorio CON CASCO DE
+    # OBRA y acuarela un hombre con una pala. Ninguna dice «trabajo»: dicen
+    # «oficina» y «obrero». Un abstracto no avisa de que lo es hasta que se ve.
+    "grupo", "trabajo",
     "ser", "servicio", "servicios", "significado", "sitio", "sobremesa",
     "sonido", "suerte", "tipo", "trozo", "turno", "vez", "vida",
     # Gramática y lengua: dibujarlos es dibujar una explicación, y para eso
@@ -255,10 +261,30 @@ def escribir_indice(palabras: list[str], carpeta: pathlib.Path, estilo: str = ES
     return len(indice)
 
 
-# Seis a la vez, por lo mismo que el audio: casi todo es esperar a que OpenAI
-# conteste, y el límite de peticiones de la cuenta es lo siguiente que se
-# rompería. Un 429 se paga en reintentos.
-HILOS = 6
+# TRES a la vez, no seis como el audio. Con seis, la primera tanda real del
+# 2026-10-27 perdió 142 de 300 con un 429: el límite de imágenes por minuto es
+# mucho más bajo que el de voz, porque cada imagen cuesta mucho más de generar.
+HILOS = 3
+
+# Y aun con tres hay que reintentar: el límite se mide por minuto, así que un
+# 429 no quiere decir «no puedes», quiere decir «ahora no». Las esperas crecen
+# para no empujar contra un límite que ya está lleno.
+#
+# Lo que NO se hace es tragarse el último error: devolverlo es lo que deja que
+# la corrida diga cuántas faltan de verdad. Una tanda que miente sobre lo que
+# consiguió es peor que una que falla.
+ESPERAS = (5, 15, 35, 70)
+
+
+def _cuanto_esperar(error: str, intento: int) -> float:
+    """Lo que OpenAI pida, si lo dice, y si no la espera que toque.
+
+    El mensaje del 429 suele traer «Please try again in 2.48s», y ese número
+    sabe mejor que nosotros cuánto falta para que se libere el minuto."""
+    pedido = re.search(r"try again in ([\d.]+)s", error)
+    if pedido:
+        return min(float(pedido.group(1)) + 1, 70)
+    return ESPERAS[min(intento, len(ESPERAS) - 1)]
 
 
 def _encoger(datos: bytes, lado: int = LADO) -> bytes:
@@ -277,16 +303,21 @@ def _una(palabra: str, carpeta: pathlib.Path, cliente, estilo: str,
     """Dibuja una palabra. Devuelve el error si lo hubo, o None si salió."""
     destino = carpeta / nombre_de(palabra, estilo, modelo, calidad)
     parcial = destino.with_suffix(".parcial")
-    try:
-        r = cliente.images.generate(model=modelo, prompt=pedido_de(palabra, estilo),
-                                    size=MEDIDA, quality=calidad, n=1)
-        crudo = base64.b64decode(r.data[0].b64_json)
-        parcial.write_bytes(_encoger(crudo))
-        parcial.replace(destino)
-        return None
-    except Exception as e:  # una palabra que falla no puede tumbar la tanda
-        parcial.unlink(missing_ok=True)
-        return str(e)
+    for intento in range(len(ESPERAS) + 1):
+        try:
+            r = cliente.images.generate(model=modelo, prompt=pedido_de(palabra, estilo),
+                                        size=MEDIDA, quality=calidad, n=1)
+            crudo = base64.b64decode(r.data[0].b64_json)
+            parcial.write_bytes(_encoger(crudo))
+            parcial.replace(destino)
+            return None
+        except Exception as e:  # una palabra que falla no puede tumbar la tanda
+            parcial.unlink(missing_ok=True)
+            fallo = str(e)
+            if "429" not in fallo or intento == len(ESPERAS):
+                return fallo
+            time.sleep(_cuanto_esperar(fallo, intento))
+    return fallo
 
 
 def generar(palabras: list[str], carpeta: pathlib.Path, cliente, estilo: str = ESTILO,

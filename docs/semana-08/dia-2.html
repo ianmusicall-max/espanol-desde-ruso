@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -614,7 +626,7 @@ cuesta?</strong> вы знаете с 4-й недели; новое здесь �
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/2de196c88b692a4643da.mp3" title="Прослушать" aria-label="Прослушать: El alquiler es de 700 euros.">▶</button>El alquiler es de 700 euros.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/71bdbb1e4bc360c93b3e.mp3" title="Прослушать" aria-label="Прослушать: la inmobiliaria">▶</button>la inmobi<strong>lia</strong>ria</td>
+<td><img class="dibujo" src="../img/39667d6b7940708a9475.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/71bdbb1e4bc360c93b3e.mp3" title="Прослушать" aria-label="Прослушать: la inmobiliaria">▶</button>la inmobi<strong>lia</strong>ria</td>
 <td>агентство недвижимости</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/f100d55f45cf8226bb09.mp3" title="Прослушать" aria-label="Прослушать: Llamo a la inmobiliaria por el piso.">▶</button>Llamo a la inmobiliaria por el piso.</td>
 </tr>

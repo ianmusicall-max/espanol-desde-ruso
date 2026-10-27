@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -539,42 +551,42 @@ llave — las llaves…</em> Напишите и прочитайте вслух
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/02ef1e35b2e5cfb8c810.mp3" title="Прослушать" aria-label="Прослушать: ¿Qué es esto? — Es un lápiz.">▶</button>¿Qué es esto? — Es un lápiz.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/0e8be464037584d0ee99.mp3" title="Прослушать" aria-label="Прослушать: el lápiz / los lápices">▶</button>el <strong>lá</strong>piz / los <strong>lá</strong>pices</td>
+<td><img class="dibujo" src="../img/360bbc47e7ca129aea21.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/0e8be464037584d0ee99.mp3" title="Прослушать" aria-label="Прослушать: el lápiz / los lápices">▶</button>el <strong>lá</strong>piz / los <strong>lá</strong>pices</td>
 <td>карандаш / карандаши</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/cb2d3d5a8ba65da75325.mp3" title="Прослушать" aria-label="Прослушать: Son unos lápices de colores.">▶</button>Son unos lápices de colores.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/3447f11bbbd87122e5f9.mp3" title="Прослушать" aria-label="Прослушать: la goma">▶</button>la <strong>go</strong>ma</td>
+<td><img class="dibujo" src="../img/75093f2f41c51d67964b.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/3447f11bbbd87122e5f9.mp3" title="Прослушать" aria-label="Прослушать: la goma">▶</button>la <strong>go</strong>ma</td>
 <td>ластик</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/82457c4a4cd322d3b54b.mp3" title="Прослушать" aria-label="Прослушать: Es una goma.">▶</button>Es una goma.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/91e8a62483a370581c3a.mp3" title="Прослушать" aria-label="Прослушать: la llave / las llaves">▶</button>la <strong>lla</strong>ve / las <strong>lla</strong>ves</td>
+<td><img class="dibujo" src="../img/cfcddac8a1d7726efa60.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/91e8a62483a370581c3a.mp3" title="Прослушать" aria-label="Прослушать: la llave / las llaves">▶</button>la <strong>lla</strong>ve / las <strong>lla</strong>ves</td>
 <td>ключ / ключи</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/2325cecd608e4d65d3ca.mp3" title="Прослушать" aria-label="Прослушать: Las llaves de casa.">▶</button>Las llaves de casa.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/33d6c8e944ed56c713a2.mp3" title="Прослушать" aria-label="Прослушать: el móvil">▶</button>el <strong>mó</strong>vil</td>
+<td><img class="dibujo" src="../img/e94374040b7587f2f3dd.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/33d6c8e944ed56c713a2.mp3" title="Прослушать" aria-label="Прослушать: el móvil">▶</button>el <strong>mó</strong>vil</td>
 <td>мобильный телефон</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/404ff3d173e707e699a5.mp3" title="Прослушать" aria-label="Прослушать: ¿Dónde está el móvil?">▶</button>¿Dónde está el móvil?</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/24dd912c6f6449f5369d.mp3" title="Прослушать" aria-label="Прослушать: las gafas">▶</button>las <strong>ga</strong>fas</td>
+<td><img class="dibujo" src="../img/c012c4299028843d1340.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/24dd912c6f6449f5369d.mp3" title="Прослушать" aria-label="Прослушать: las gafas">▶</button>las <strong>ga</strong>fas</td>
 <td>очки</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/cfb68d64aa3d6dad6dbb.mp3" title="Прослушать" aria-label="Прослушать: Son unas gafas.">▶</button>Son unas gafas.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/30625d67c4c6ed116cb7.mp3" title="Прослушать" aria-label="Прослушать: los auriculares">▶</button>los auricu<strong>la</strong>res</td>
+<td><img class="dibujo" src="../img/2fe625a4672ad3456d0c.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/30625d67c4c6ed116cb7.mp3" title="Прослушать" aria-label="Прослушать: los auriculares">▶</button>los auricu<strong>la</strong>res</td>
 <td>наушники</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/65e3b159b4f400d7a264.mp3" title="Прослушать" aria-label="Прослушать: Los auriculares de Lucía.">▶</button>Los auriculares de Lucía.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/382a41f04103fe875560.mp3" title="Прослушать" aria-label="Прослушать: la botella de agua">▶</button>la bo<strong>te</strong>lla de <strong>a</strong>gua</td>
+<td><img class="dibujo" src="../img/6bd729fddc8dbe5b6d1f.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/382a41f04103fe875560.mp3" title="Прослушать" aria-label="Прослушать: la botella de agua">▶</button>la bo<strong>te</strong>lla de <strong>a</strong>gua</td>
 <td>бутылка воды</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/e9267e201e10b5d913ae.mp3" title="Прослушать" aria-label="Прослушать: Una botella de agua.">▶</button>Una botella de agua.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/4b3f6acd145f9ad4944a.mp3" title="Прослушать" aria-label="Прослушать: el papel / los papeles">▶</button>el pa<strong>pel</strong> / los pa<strong>pe</strong>les</td>
+<td><img class="dibujo" src="../img/f31d2c02525ee70380ac.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/4b3f6acd145f9ad4944a.mp3" title="Прослушать" aria-label="Прослушать: el papel / los papeles">▶</button>el pa<strong>pel</strong> / los pa<strong>pe</strong>les</td>
 <td>бумага, лист / бумаги</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/a3ed56b61569563bf730.mp3" title="Прослушать" aria-label="Прослушать: Los papeles de la universidad.">▶</button>Los papeles de la universidad.</td>
 </tr>

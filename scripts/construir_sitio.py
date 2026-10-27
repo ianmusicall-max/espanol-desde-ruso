@@ -36,6 +36,11 @@ sys.path.insert(0, str(RAIZ / "scripts"))
 import plan  # noqa: E402
 import pruebas  # noqa: E402
 import validar  # noqa: E402
+# Se importa por `limpiar`: la palabra del índice de imágenes está limpia de
+# negritas, del 🌎 y de la barra de variantes, así que aquí hay que limpiar la
+# celda EXACTAMENTE igual o no casaría ninguna. Dos copias de esa regla es como
+# se descubre tarde que una de las dos se quedó vieja.
+import generar_imagenes  # noqa: E402
 
 DOCS = RAIZ / "docs"
 CONFIG = RAIZ / "web" / "sitio.yaml"
@@ -44,6 +49,8 @@ TEST = RAIZ / "programa" / "test-nivel.yaml"
 # El nombre del índice de audio: lo escribe generar_audio.py y lo leen
 # tanto el generador como las pruebas, así que vive en un solo sitio.
 INDICE_AUDIO = "indice.json"
+# Y el de los dibujos del vocabulario, que lo deja scripts/generar_imagenes.py
+INDICE_IMG = "indice.json"
 EXTENSIONES = ["tables", "fenced_code", "sane_lists", "toc", "attr_list"]
 
 
@@ -140,6 +147,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -1301,7 +1320,8 @@ def _envolver_prueba(html_: str, t: dict) -> str:
     return "".join(trozos)
 
 
-def construir_leccion(d, cfg, t, idiomas, destino, cal, todos, audio=None) -> None:
+def construir_leccion(d, cfg, t, idiomas, destino, cal, todos, audio=None,
+                      dibujos=None) -> None:
     """Las lecciones solo existen en ruso: son el curso."""
     datos, cuerpo = validar.frontmatter(d.ruta.read_text(encoding="utf-8"))
     i = todos.index(d)
@@ -1310,6 +1330,7 @@ def construir_leccion(d, cfg, t, idiomas, destino, cal, todos, audio=None) -> No
     L = t["leccion"]
 
     html_cuerpo = _botones_de_audio(md(cuerpo), audio or {}, "..")
+    html_cuerpo = _dibujos_en_el_vocabulario(html_cuerpo, dibujos or {}, "..")
     html_cuerpo = _anuncios_en_la_leccion(_marcar_contraste(_tablas_envueltas(html_cuerpo)), cfg)
 
     # Los días de tipo `prueba` traen quince preguntas con su clave, ya escritas
@@ -1394,6 +1415,92 @@ def _botones_de_audio(html_: str, indice: dict, raiz: str) -> str:
         return f"{m.group(1)}{boton}{dentro}</td>"
 
     return re.sub(r"(<td[^>]*>)(.*?)</td>", celda, html_, flags=re.S)
+
+
+def indice_de_imagenes(destino: pathlib.Path) -> dict:
+    """Palabra → archivo. Vacío si todavía no se ha dibujado nada.
+
+    Igual que el del audio y por lo mismo: se lee de `docs/img/`, no de una
+    lista en el código, así que el sitio se construye igual con dibujos y sin
+    ellos y encenderlos no es tocar el generador."""
+    ruta = destino / "img" / INDICE_IMG
+    try:
+        return json.loads(ruta.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+
+
+# Las DOS tablas de vocabulario del curso, y son dos formas distintas:
+#
+#   `Словарь дня`  (lecciones)  Español | Русский | Пример     -> la columna 0
+#   `3. Слова`     (domingos)   Español | Русский | Español | Русский
+#                                                              -> las 0 y la 2
+#
+# Son las únicas que llevan dibujo, y eso no es tacañería: en las de fonética
+# la primera columna es una letra y en las de conjugación una forma verbal, así
+# que un dibujo ahí no enseñaría nada y rompería la tabla.
+#
+# El domingo se descubrió tarde: las 50 lecciones de cultura generaban sus
+# dibujos y no los enseñaba ninguna, porque el extractor del vocabulario SÍ lee
+# esa tabla y el montaje no la miraba.
+VOCABULARIO = re.compile(
+    r'<h2[^>]*>\s*(?:Словарь дня|3\.\s*Слова[^<]*)\s*</h2>(.*?)(?=<h2|\Z)', re.S)
+
+# En qué columnas de cada tabla hay español. La de los domingos repite el par
+# (español, ruso), así que son las pares.
+COLUMNAS_ES = {3: (0,), 4: (0, 2)}
+
+
+def _dibujos_en_el_vocabulario(html_: str, indice: dict, raiz: str) -> str:
+    """El dibujo del sustantivo, delante de la palabra, en la tabla del día.
+
+    Solo en la PRIMERA celda de cada fila, que es la columna española. La rusa
+    no casaría nunca —el índice no tiene cirílico— pero la de ejemplo sí
+    podría: «la manzana» aparece en la frase de ejemplo de otra palabra, y ahí
+    el dibujo sobraría.
+
+    Una palabra sin dibujo se queda como está, sin hueco: las imágenes se
+    generan por tandas y «algunas sí y otras no» es el estado normal.
+
+    El `alt` va VACÍO a propósito. El dibujo no añade información que no esté
+    ya en la fila —la palabra está al lado y su traducción en la columna
+    siguiente—, así que un lector de pantalla que lo leyera diría la misma
+    palabra dos veces."""
+    if not indice:
+        return html_
+
+    def con_dibujo(abre, dentro):
+        # El <button> del audio se quita ENTERO y no solo sus etiquetas:
+        # `_botones_de_audio` corre antes y deja un «▶» dentro de la celda, así
+        # que quitando solo las etiquetas el texto salía «▶el marido» y no
+        # casaba con el índice —las 100 lecciones salieron sin un dibujo—.
+        # Quitar el elemento entero aguanta además que mañana lleve otro signo.
+        limpio = re.sub(r"<button\b.*?</button>", "", dentro, flags=re.S)
+        texto = html.unescape(re.sub(r"<[^>]+>", "", limpio)).strip()
+        archivo = indice.get(generar_imagenes.limpiar(texto))
+        if not archivo:
+            return None
+        img = (f'<img class="dibujo" src="{raiz}/img/{html.escape(archivo)}" '
+               f'alt="" width="56" height="56" loading="lazy" decoding="async">')
+        return f"{abre}{img}{dentro}</td>"
+
+    def seccion(m):
+        salida = []
+        for tr in re.split(r"(?=<tr[^>]*>)", m.group(1)):
+            celdas = re.findall(r"(<td[^>]*>)(.*?)</td>", tr, flags=re.S)
+            cuales = COLUMNAS_ES.get(len(celdas))
+            if not cuales:
+                salida.append(tr)
+                continue
+            for i in cuales:
+                puesto = con_dibujo(*celdas[i])
+                if puesto:
+                    viejo_td = f"{celdas[i][0]}{celdas[i][1]}</td>"
+                    tr = tr.replace(viejo_td, puesto, 1)
+            salida.append(tr)
+        return m.group(0).replace(m.group(1), "".join(salida))
+
+    return VOCABULARIO.sub(seccion, html_)
 
 
 def _enlaces_entre_documentos(html_: str) -> str:
@@ -1496,8 +1603,10 @@ def construir(destino: pathlib.Path = DOCS, cfg: dict | None = None, textos: dic
     todos = plan.dias(cal)
     hechas = escritas(cal)
     audio = indice_de_audio(destino)
+    dibujos = indice_de_imagenes(destino)
     for d in hechas:
-        construir_leccion(d, cfg, textos["ru"], idiomas, destino, cal, todos, audio)
+        construir_leccion(d, cfg, textos["ru"], idiomas, destino, cal, todos, audio,
+                          dibujos)
     construir_programa(cfg, textos["es"], idiomas, destino)
     construir_sitemap(cfg, idiomas, destino, cal)
     construir_ads_txt(cfg, destino)

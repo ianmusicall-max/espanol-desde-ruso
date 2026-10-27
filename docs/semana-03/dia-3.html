@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -515,27 +527,27 @@ es de Iván. En ___ pared hay ___ mapa. Es ___ mapa de España.</p>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/61b2dafc394ee3114ca0.mp3" title="Прослушать" aria-label="Прослушать: En la mesa hay un libro.">▶</button>En la mesa hay un libro.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/c3cb801e66735ccb9938.mp3" title="Прослушать" aria-label="Прослушать: la clase">▶</button>la <strong>cla</strong>se</td>
+<td><img class="dibujo" src="../img/bb85a6c5385e72dabc85.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/c3cb801e66735ccb9938.mp3" title="Прослушать" aria-label="Прослушать: la clase">▶</button>la <strong>cla</strong>se</td>
 <td>класс, занятие</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/71bdc0437cb3a8cd561f.mp3" title="Прослушать" aria-label="Прослушать: En la clase hay diez sillas.">▶</button>En la clase hay diez sillas.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/f1a9029ae600346380dd.mp3" title="Прослушать" aria-label="Прослушать: la pared">▶</button>la pa<strong>red</strong></td>
+<td><img class="dibujo" src="../img/9ae29c159c4ba7f20ef9.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/f1a9029ae600346380dd.mp3" title="Прослушать" aria-label="Прослушать: la pared">▶</button>la pa<strong>red</strong></td>
 <td>стена</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/a000ae1e3bff4201516b.mp3" title="Прослушать" aria-label="Прослушать: El mapa está en la pared.">▶</button>El mapa está en la pared.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/8c2e8bdee80f19b83dda.mp3" title="Прослушать" aria-label="Прослушать: la pizarra">▶</button>la pi<strong>za</strong>rra</td>
+<td><img class="dibujo" src="../img/6351e872832cefa8ea30.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/8c2e8bdee80f19b83dda.mp3" title="Прослушать" aria-label="Прослушать: la pizarra">▶</button>la pi<strong>za</strong>rra</td>
 <td>доска</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/5a2e06f7146a4cd264cd.mp3" title="Прослушать" aria-label="Прослушать: La pizarra es grande.">▶</button>La pizarra es grande.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/2e2ae61d76b5fbb678ac.mp3" title="Прослушать" aria-label="Прослушать: la ventana">▶</button>la ven<strong>ta</strong>na</td>
+<td><img class="dibujo" src="../img/04fa6d3d951c690edae2.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/2e2ae61d76b5fbb678ac.mp3" title="Прослушать" aria-label="Прослушать: la ventana">▶</button>la ven<strong>ta</strong>na</td>
 <td>окно</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/1bd6b3975923e374b4b0.mp3" title="Прослушать" aria-label="Прослушать: Hay una ventana grande.">▶</button>Hay una ventana grande.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/a8c244087e0043b28b2a.mp3" title="Прослушать" aria-label="Прослушать: la puerta">▶</button>la <strong>puer</strong>ta</td>
+<td><img class="dibujo" src="../img/906b2006e4e470691701.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/a8c244087e0043b28b2a.mp3" title="Прослушать" aria-label="Прослушать: la puerta">▶</button>la <strong>puer</strong>ta</td>
 <td>дверь</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/004b9c63328d33bfcaed.mp3" title="Прослушать" aria-label="Прослушать: La ventana está al lado de la puerta.">▶</button>La ventana está al lado de la puerta.</td>
 </tr>

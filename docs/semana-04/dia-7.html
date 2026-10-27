@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -405,19 +417,19 @@ nombre es una instrucción.</p>
 </thead>
 <tbody>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/8a9b6dd70bf186e01f24.mp3" title="Прослушать" aria-label="Прослушать: el dinero">▶</button>el dinero</td>
+<td><img class="dibujo" src="../img/2f68faf63c0ab9b75ecb.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/8a9b6dd70bf186e01f24.mp3" title="Прослушать" aria-label="Прослушать: el dinero">▶</button>el dinero</td>
 <td>деньги</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/d2d4bc5d107f916022fd.mp3" title="Прослушать" aria-label="Прослушать: la moneda">▶</button>la moneda</td>
+<td><img class="dibujo" src="../img/f4911013c8ba390fe192.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/d2d4bc5d107f916022fd.mp3" title="Прослушать" aria-label="Прослушать: la moneda">▶</button>la moneda</td>
 <td>монета; валюта</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/60c74dbd6055f163f4a8.mp3" title="Прослушать" aria-label="Прослушать: el billete">▶</button>el billete</td>
+<td><img class="dibujo" src="../img/f74d473ca103f5f830b5.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/60c74dbd6055f163f4a8.mp3" title="Прослушать" aria-label="Прослушать: el billete">▶</button>el billete</td>
 <td>банкнота; билет</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/803dcf4dd47f739d5b2d.mp3" title="Прослушать" aria-label="Прослушать: el céntimo">▶</button>el céntimo</td>
+<td><img class="dibujo" src="../img/0d7c131be3d69d06eb04.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/803dcf4dd47f739d5b2d.mp3" title="Прослушать" aria-label="Прослушать: el céntimo">▶</button>el céntimo</td>
 <td>цент</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/3118c0c7200f7fea9f79.mp3" title="Прослушать" aria-label="Прослушать: la tarjeta">▶</button>la tarjeta</td>
+<td><img class="dibujo" src="../img/567bd7daf26affc372cc.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/3118c0c7200f7fea9f79.mp3" title="Прослушать" aria-label="Прослушать: la tarjeta">▶</button>la tarjeta</td>
 <td>карта (банковская)</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/7baeaf1ce7978889a8f1.mp3" title="Прослушать" aria-label="Прослушать: en efectivo">▶</button>en efectivo</td>
 <td>наличными</td>
@@ -429,13 +441,13 @@ nombre es una instrucción.</p>
 <td>сдача; обмен</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/5265d33ed6982133cc0a.mp3" title="Прослушать" aria-label="Прослушать: la cartera">▶</button>la cartera</td>
+<td><img class="dibujo" src="../img/1c421d8b4af8b1fb0d05.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/5265d33ed6982133cc0a.mp3" title="Прослушать" aria-label="Прослушать: la cartera">▶</button>la cartera</td>
 <td>кошелёк, бумажник</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/8793419481feff910c23.mp3" title="Прослушать" aria-label="Прослушать: el monedero">▶</button>el monedero</td>
+<td><img class="dibujo" src="../img/c14e266d9d3fee76139c.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/8793419481feff910c23.mp3" title="Прослушать" aria-label="Прослушать: el monedero">▶</button>el monedero</td>
 <td>кошелёк для монет</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/80913ed3c4ecab32c44b.mp3" title="Прослушать" aria-label="Прослушать: el bolsillo">▶</button>el bolsillo</td>
+<td><img class="dibujo" src="../img/100002c448e664bfa44e.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/80913ed3c4ecab32c44b.mp3" title="Прослушать" aria-label="Прослушать: el bolsillo">▶</button>el bolsillo</td>
 <td>карман</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/f9923440695e5ebc3772.mp3" title="Прослушать" aria-label="Прослушать: el precio">▶</button>el precio</td>
 <td>цена</td>
@@ -453,15 +465,15 @@ nombre es una instrucción.</p>
 <td>бесплатно</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/95e811ba9dbbef319803.mp3" title="Прослушать" aria-label="Прослушать: la tienda">▶</button>la tienda</td>
+<td><img class="dibujo" src="../img/3f90d6c5d0993c342a13.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/95e811ba9dbbef319803.mp3" title="Прослушать" aria-label="Прослушать: la tienda">▶</button>la tienda</td>
 <td>магазин</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/5778a8371eef42706959.mp3" title="Прослушать" aria-label="Прослушать: el mercado">▶</button>el mercado</td>
+<td><img class="dibujo" src="../img/8a6e07a12c5df495485b.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/5778a8371eef42706959.mp3" title="Прослушать" aria-label="Прослушать: el mercado">▶</button>el mercado</td>
 <td>рынок</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/bedc27f886bdd4c6c2c1.mp3" title="Прослушать" aria-label="Прослушать: el supermercado">▶</button>el supermercado</td>
+<td><img class="dibujo" src="../img/5648ed91087e961f67fa.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/bedc27f886bdd4c6c2c1.mp3" title="Прослушать" aria-label="Прослушать: el supermercado">▶</button>el supermercado</td>
 <td>супермаркет</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/1bdca64146a9e3438d10.mp3" title="Прослушать" aria-label="Прослушать: los grandes almacenes">▶</button>los grandes almacenes</td>
+<td><img class="dibujo" src="../img/734c8705b088181f1381.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/1bdca64146a9e3438d10.mp3" title="Прослушать" aria-label="Прослушать: los grandes almacenes">▶</button>los grandes almacenes</td>
 <td>универмаг</td>
 </tr>
 </tbody>

@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -619,32 +631,32 @@ antes de dormir. Cocino los fines de semana.</em></p>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/49d6f46568106fbc1560.mp3" title="Прослушать" aria-label="Прослушать: Practico natación en verano.">▶</button>Practico natación en verano.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/04b6859a3911d8cac328.mp3" title="Прослушать" aria-label="Прослушать: la guitarra">▶</button>la gui<strong>ta</strong>rra</td>
+<td><img class="dibujo" src="../img/0ca61ce9e23f7e906072.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/04b6859a3911d8cac328.mp3" title="Прослушать" aria-label="Прослушать: la guitarra">▶</button>la gui<strong>ta</strong>rra</td>
 <td>гитара</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/3a8393bd16a0f0de4223.mp3" title="Прослушать" aria-label="Прослушать: Tatiana toca la guitarra.">▶</button>Tatiana toca la guitarra.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b52df0bde40b2f56340a.mp3" title="Прослушать" aria-label="Прослушать: el yoga">▶</button>el <strong>yo</strong>ga</td>
+<td><img class="dibujo" src="../img/02aaa473c16fa046a985.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b52df0bde40b2f56340a.mp3" title="Прослушать" aria-label="Прослушать: el yoga">▶</button>el <strong>yo</strong>ga</td>
 <td>йога</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/0e728291e6f341884013.mp3" title="Прослушать" aria-label="Прослушать: Hago yoga los lunes.">▶</button>Hago yoga los lunes.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b2202b4fb2b615fe63af.mp3" title="Прослушать" aria-label="Прослушать: la natación">▶</button>la nata<strong>ción</strong></td>
+<td><img class="dibujo" src="../img/c8fd5dd9080116d4a046.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b2202b4fb2b615fe63af.mp3" title="Прослушать" aria-label="Прослушать: la natación">▶</button>la nata<strong>ción</strong></td>
 <td>плавание</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/40e6532cc49e1a41081f.mp3" title="Прослушать" aria-label="Прослушать: Practico natación tres veces por semana.">▶</button>Practico natación tres veces por semana.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/91a7f5b17427150c2167.mp3" title="Прослушать" aria-label="Прослушать: el baloncesto">▶</button>el balon<strong>ces</strong>to</td>
+<td><img class="dibujo" src="../img/f1fd70fc335d40dc4014.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/91a7f5b17427150c2167.mp3" title="Прослушать" aria-label="Прослушать: el baloncesto">▶</button>el balon<strong>ces</strong>to</td>
 <td>баскетбол (🌎 el <strong>bás</strong>quet)</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/0665e4c4333dd7c938ba.mp3" title="Прослушать" aria-label="Прослушать: ¿Juegas al baloncesto?">▶</button>¿Juegas al baloncesto?</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/776ca019b7f87ae631c6.mp3" title="Прослушать" aria-label="Прослушать: el ajedrez">▶</button>el aje<strong>drez</strong></td>
+<td><img class="dibujo" src="../img/714ff6a2d62a7747bd91.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/776ca019b7f87ae631c6.mp3" title="Прослушать" aria-label="Прослушать: el ajedrez">▶</button>el aje<strong>drez</strong></td>
 <td>шахматы</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/22457c3fdf5fa07d2150.mp3" title="Прослушать" aria-label="Прослушать: Mi padre juega al ajedrez.">▶</button>Mi padre juega al ajedrez.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/f969a48851dd73f969a5.mp3" title="Прослушать" aria-label="Прослушать: la piscina">▶</button>la pis<strong>ci</strong>na</td>
+<td><img class="dibujo" src="../img/4e831ff6537bb02e0340.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/f969a48851dd73f969a5.mp3" title="Прослушать" aria-label="Прослушать: la piscina">▶</button>la pis<strong>ci</strong>na</td>
 <td>бассейн (🌎 la al<strong>ber</strong>ca, la pi<strong>le</strong>ta)</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/6d1f446112d0dd133e62.mp3" title="Прослушать" aria-label="Прослушать: Hago natación en la piscina.">▶</button>Hago natación en la piscina.</td>
 </tr>

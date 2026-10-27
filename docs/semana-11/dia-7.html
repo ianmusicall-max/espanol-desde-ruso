@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -362,45 +374,45 @@ las ocho. En Argentina y Uruguay se cena tarde, como en España.</p>
 </thead>
 <tbody>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/85fbc0cca1ad6bcdb10f.mp3" title="Прослушать" aria-label="Прослушать: la tapa">▶</button>la tapa</td>
+<td><img class="dibujo" src="../img/628d6acd5f8fd09c2ad3.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/85fbc0cca1ad6bcdb10f.mp3" title="Прослушать" aria-label="Прослушать: la tapa">▶</button>la tapa</td>
 <td>маленькая закуска к напитку</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/eceb107acb4b10c0e25f.mp3" title="Прослушать" aria-label="Прослушать: ir de tapas">▶</button>ir de tapas</td>
 <td>ходить по барам за тапас</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/a9394965f4fb98dbba81.mp3" title="Прослушать" aria-label="Прослушать: la sartén">▶</button>la sartén</td>
+<td><img class="dibujo" src="../img/e547a2731595e3248180.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/a9394965f4fb98dbba81.mp3" title="Прослушать" aria-label="Прослушать: la sartén">▶</button>la sartén</td>
 <td>сковорода</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b6b3de4776499834eb81.mp3" title="Прослушать" aria-label="Прослушать: la parrilla">▶</button>la parrilla</td>
+<td><img class="dibujo" src="../img/a4b0d7e5c94b68f9a1df.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b6b3de4776499834eb81.mp3" title="Прослушать" aria-label="Прослушать: la parrilla">▶</button>la parrilla</td>
 <td>решётка для гриля</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/5960ffab0e8747883cce.mp3" title="Прослушать" aria-label="Прослушать: el arroz">▶</button>el arroz</td>
+<td><img class="dibujo" src="../img/6b13a62645c1324f06ca.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/5960ffab0e8747883cce.mp3" title="Прослушать" aria-label="Прослушать: el arroz">▶</button>el arroz</td>
 <td>рис</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b3bb1a176853f0d4faf1.mp3" title="Прослушать" aria-label="Прослушать: el maíz">▶</button>el maíz</td>
+<td><img class="dibujo" src="../img/4e0c5e9c13f232fd22b4.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b3bb1a176853f0d4faf1.mp3" title="Прослушать" aria-label="Прослушать: el maíz">▶</button>el maíz</td>
 <td>кукуруза</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/ad0f1a4d046611bed306.mp3" title="Прослушать" aria-label="Прослушать: el pollo">▶</button>el pollo</td>
+<td><img class="dibujo" src="../img/e13195c9c839bf136f54.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/ad0f1a4d046611bed306.mp3" title="Прослушать" aria-label="Прослушать: el pollo">▶</button>el pollo</td>
 <td>курица</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/47ed9bd19f742d073268.mp3" title="Прослушать" aria-label="Прослушать: el conejo">▶</button>el conejo</td>
+<td><img class="dibujo" src="../img/b52b9ba3065ac604e602.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/47ed9bd19f742d073268.mp3" title="Прослушать" aria-label="Прослушать: el conejo">▶</button>el conejo</td>
 <td>кролик</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/4112f16225fb048e5170.mp3" title="Прослушать" aria-label="Прослушать: el marisco">▶</button>el marisco</td>
+<td><img class="dibujo" src="../img/225688a69f6f02970db6.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/4112f16225fb048e5170.mp3" title="Прослушать" aria-label="Прослушать: el marisco">▶</button>el marisco</td>
 <td>морепродукты</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/4265c82f66cc2172e739.mp3" title="Прослушать" aria-label="Прослушать: las gambas">▶</button>las gambas</td>
+<td><img class="dibujo" src="../img/e4ffbc26559803e8172b.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/4265c82f66cc2172e739.mp3" title="Прослушать" aria-label="Прослушать: las gambas">▶</button>las gambas</td>
 <td>креветки</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/06c4271aa0e054af5d37.mp3" title="Прослушать" aria-label="Прослушать: la carne de vaca">▶</button>la carne de vaca</td>
+<td><img class="dibujo" src="../img/45f739f6ed15c0534d17.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/06c4271aa0e054af5d37.mp3" title="Прослушать" aria-label="Прослушать: la carne de vaca">▶</button>la carne de vaca</td>
 <td>говядина</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/e8eff32d139d33fa34fa.mp3" title="Прослушать" aria-label="Прослушать: el chorizo">▶</button>el chorizo</td>
+<td><img class="dibujo" src="../img/4db99022df14baaf24ee.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/e8eff32d139d33fa34fa.mp3" title="Прослушать" aria-label="Прослушать: el chorizo">▶</button>el chorizo</td>
 <td>колбаса чоризо</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/18837d42b187f415358a.mp3" title="Прослушать" aria-label="Прослушать: el tomate">▶</button>el tomate</td>
+<td><img class="dibujo" src="../img/fefa1621f1790de88e6c.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/18837d42b187f415358a.mp3" title="Прослушать" aria-label="Прослушать: el tomate">▶</button>el tomate</td>
 <td>помидор</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/a5ddf67c78b44510b2bc.mp3" title="Прослушать" aria-label="Прослушать: el pimiento">▶</button>el pimiento</td>
+<td><img class="dibujo" src="../img/c5940b5173ae5969ac2e.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/a5ddf67c78b44510b2bc.mp3" title="Прослушать" aria-label="Прослушать: el pimiento">▶</button>el pimiento</td>
 <td>перец (овощ)</td>
 </tr>
 <tr>
@@ -416,9 +428,9 @@ las ocho. En Argentina y Uruguay se cena tarde, como en España.</p>
 <td>потому что</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/cdd5b2383a721a30d768.mp3" title="Прослушать" aria-label="Прослушать: el mediodía">▶</button>el mediodía</td>
+<td><img class="dibujo" src="../img/bad6d635eacaa2d11f05.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/cdd5b2383a721a30d768.mp3" title="Прослушать" aria-label="Прослушать: el mediodía">▶</button>el mediodía</td>
 <td>полдень</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/373b245b2e1871baba67.mp3" title="Прослушать" aria-label="Прослушать: la merienda">▶</button>la merienda</td>
+<td><img class="dibujo" src="../img/a87aa94d62c453296d67.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/373b245b2e1871baba67.mp3" title="Прослушать" aria-label="Прослушать: la merienda">▶</button>la merienda</td>
 <td>перекус днём</td>
 </tr>
 </tbody>
@@ -434,17 +446,17 @@ las ocho. En Argentina y Uruguay se cena tarde, como en España.</p>
 </thead>
 <tbody>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/74372c0c53749e33c8c6.mp3" title="Прослушать" aria-label="Прослушать: el zumo">▶</button>el <strong>zu</strong>mo</td>
+<td><img class="dibujo" src="../img/f85bc439738644f912ff.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/74372c0c53749e33c8c6.mp3" title="Прослушать" aria-label="Прослушать: el zumo">▶</button>el <strong>zu</strong>mo</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b71d7c6becb8783bee16.mp3" title="Прослушать" aria-label="Прослушать: el jugo">▶</button>el <strong>ju</strong>go</td>
 <td>сок</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/a89112cd3547530ce5cf.mp3" title="Прослушать" aria-label="Прослушать: la patata">▶</button>la pa<strong>ta</strong>ta</td>
+<td><img class="dibujo" src="../img/a014dc05614f664394b5.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/a89112cd3547530ce5cf.mp3" title="Прослушать" aria-label="Прослушать: la patata">▶</button>la pa<strong>ta</strong>ta</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/161592dcd59c366ba0d9.mp3" title="Прослушать" aria-label="Прослушать: la papa">▶</button>la <strong>pa</strong>pa</td>
 <td>картошка</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/42c250bf0a1e234fa306.mp3" title="Прослушать" aria-label="Прослушать: el aguacate">▶</button>el agua<strong>ca</strong>te</td>
+<td><img class="dibujo" src="../img/a04df7bee7c178705e39.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/42c250bf0a1e234fa306.mp3" title="Прослушать" aria-label="Прослушать: el aguacate">▶</button>el agua<strong>ca</strong>te</td>
 <td>la <strong>pal</strong>ta (Арг., Чили, Перу)</td>
 <td>авокадо</td>
 </tr>
@@ -454,7 +466,7 @@ las ocho. En Argentina y Uruguay se cena tarde, como en España.</p>
 <td>обед</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/612c542d405c5f53fde3.mp3" title="Прослушать" aria-label="Прослушать: el camarero">▶</button>el cama<strong>re</strong>ro</td>
+<td><img class="dibujo" src="../img/255b77fe616394199950.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/612c542d405c5f53fde3.mp3" title="Прослушать" aria-label="Прослушать: el camarero">▶</button>el cama<strong>re</strong>ro</td>
 <td>el me<strong>se</strong>ro (Мекс.) · el <strong>mo</strong>zo (Арг.)</td>
 <td>официант</td>
 </tr>

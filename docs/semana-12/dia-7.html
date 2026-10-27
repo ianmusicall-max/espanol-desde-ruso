@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -376,9 +388,9 @@ de comer, nunca de desayuno.</p>
 </thead>
 <tbody>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/3cfcf69e09b23a998547.mp3" title="Прослушать" aria-label="Прослушать: la propina">▶</button>la propina</td>
+<td><img class="dibujo" src="../img/420c5fc7a1468e721203.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/3cfcf69e09b23a998547.mp3" title="Прослушать" aria-label="Прослушать: la propina">▶</button>la propina</td>
 <td>чаевые</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/403741ebf98b23745c9d.mp3" title="Прослушать" aria-label="Прослушать: el brindis">▶</button>el brindis</td>
+<td><img class="dibujo" src="../img/d09d6dda878c0f8f02e5.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/403741ebf98b23745c9d.mp3" title="Прослушать" aria-label="Прослушать: el brindis">▶</button>el brindis</td>
 <td>тост</td>
 </tr>
 <tr>
@@ -402,7 +414,7 @@ de comer, nunca de desayuno.</p>
 <tr>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/1fbc067dbc875a36b4ab.mp3" title="Прослушать" aria-label="Прослушать: a escote">▶</button>a escote</td>
 <td>скинувшись, каждый за своё</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/6f2870b5051122137d81.mp3" title="Прослушать" aria-label="Прослушать: el ticket">▶</button>el ticket</td>
+<td><img class="dibujo" src="../img/97bedbdfe876d6fe680d.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/6f2870b5051122137d81.mp3" title="Прослушать" aria-label="Прослушать: el ticket">▶</button>el ticket</td>
 <td>чек</td>
 </tr>
 <tr>
@@ -414,7 +426,7 @@ de comer, nunca de desayuno.</p>
 <tr>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/2f861a00e7010cd6f80f.mp3" title="Прослушать" aria-label="Прослушать: el cambio">▶</button>el cambio</td>
 <td>сдача</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/d2d4bc5d107f916022fd.mp3" title="Прослушать" aria-label="Прослушать: la moneda">▶</button>la moneda</td>
+<td><img class="dibujo" src="../img/f4911013c8ba390fe192.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/d2d4bc5d107f916022fd.mp3" title="Прослушать" aria-label="Прослушать: la moneda">▶</button>la moneda</td>
 <td>монета</td>
 </tr>
 <tr>
@@ -424,15 +436,15 @@ de comer, nunca de desayuno.</p>
 <td>обязательный</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/0c8c6751740fb34ef510.mp3" title="Прослушать" aria-label="Прослушать: el cortado">▶</button>el cortado</td>
+<td><img class="dibujo" src="../img/f9e09b8c5f323386c056.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/0c8c6751740fb34ef510.mp3" title="Прослушать" aria-label="Прослушать: el cortado">▶</button>el cortado</td>
 <td>кофе с капелькой молока</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/8843d3319e3f05c88a9e.mp3" title="Прослушать" aria-label="Прослушать: el carajillo">▶</button>el carajillo</td>
+<td><img class="dibujo" src="../img/2e97a0674b2c230bf408.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/8843d3319e3f05c88a9e.mp3" title="Прослушать" aria-label="Прослушать: el carajillo">▶</button>el carajillo</td>
 <td>кофе с ликёром</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/d9dd7fe9c465fc21fa94.mp3" title="Прослушать" aria-label="Прослушать: el cubierto">▶</button>el cubierto</td>
+<td><img class="dibujo" src="../img/ca8bbd1fdd30ed8db789.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/d9dd7fe9c465fc21fa94.mp3" title="Прослушать" aria-label="Прослушать: el cubierto">▶</button>el cubierto</td>
 <td>столовый прибор; сбор за прибор (Арг.)</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/10ce2124c33c369df5d3.mp3" title="Прослушать" aria-label="Прослушать: el discurso">▶</button>el discurso</td>
+<td><img class="dibujo" src="../img/821a40c94023dba96cf1.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/10ce2124c33c369df5d3.mp3" title="Прослушать" aria-label="Прослушать: el discurso">▶</button>el discurso</td>
 <td>речь</td>
 </tr>
 </tbody>

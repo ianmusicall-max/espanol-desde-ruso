@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -563,27 +575,27 @@ la ventana. La lámpara está encima de la mesa…</em></p>
 </thead>
 <tbody>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/d00b86b09bc70ec42cbd.mp3" title="Прослушать" aria-label="Прослушать: el mueble">▶</button>el <strong>mue</strong>ble</td>
+<td><img class="dibujo" src="../img/4ea716b32e845eb6bb61.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/d00b86b09bc70ec42cbd.mp3" title="Прослушать" aria-label="Прослушать: el mueble">▶</button>el <strong>mue</strong>ble</td>
 <td>предмет мебели</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/638c6a167daec863d14e.mp3" title="Прослушать" aria-label="Прослушать: En el salón hay tres muebles.">▶</button>En el salón hay tres muebles.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/d7b5a3a06772bce1da97.mp3" title="Прослушать" aria-label="Прослушать: la cama">▶</button>la <strong>ca</strong>ma</td>
+<td><img class="dibujo" src="../img/b50211eb0b27626d0058.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/d7b5a3a06772bce1da97.mp3" title="Прослушать" aria-label="Прослушать: la cama">▶</button>la <strong>ca</strong>ma</td>
 <td>кровать</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/c655bec07099fd015693.mp3" title="Прослушать" aria-label="Прослушать: La cama está al lado del armario.">▶</button>La cama está al lado del armario.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/f144d2433950a841c2e3.mp3" title="Прослушать" aria-label="Прослушать: el armario">▶</button>el ar<strong>ma</strong>rio</td>
+<td><img class="dibujo" src="../img/ce18ebb85822bb6350c8.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/f144d2433950a841c2e3.mp3" title="Прослушать" aria-label="Прослушать: el armario">▶</button>el ar<strong>ma</strong>rio</td>
 <td>шкаф</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/f59cf30c4b39381d7460.mp3" title="Прослушать" aria-label="Прослушать: ¿Hay un armario en el dormitorio?">▶</button>¿Hay un armario en el dormitorio?</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/16a0ed9fa683be39d1be.mp3" title="Прослушать" aria-label="Прослушать: el sofá">▶</button>el so<strong>fá</strong></td>
+<td><img class="dibujo" src="../img/b860f71f0fb2c00462bd.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/16a0ed9fa683be39d1be.mp3" title="Прослушать" aria-label="Прослушать: el sofá">▶</button>el so<strong>fá</strong></td>
 <td>диван</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/1ace1eac4408f78d4e58.mp3" title="Прослушать" aria-label="Прослушать: El sofá está delante de la ventana.">▶</button>El sofá está delante de la ventana.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/d2f130d0e30a56c68cc7.mp3" title="Прослушать" aria-label="Прослушать: la lámpara">▶</button>la <strong>lám</strong>para</td>
+<td><img class="dibujo" src="../img/3c523622a3f51ab18ab6.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/d2f130d0e30a56c68cc7.mp3" title="Прослушать" aria-label="Прослушать: la lámpara">▶</button>la <strong>lám</strong>para</td>
 <td>лампа</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b5f38075ccc52299ac8b.mp3" title="Прослушать" aria-label="Прослушать: Hay una lámpara encima de la mesa.">▶</button>Hay una lámpara encima de la mesa.</td>
 </tr>

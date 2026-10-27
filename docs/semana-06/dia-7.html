@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -360,19 +372,19 @@ julio; un José, el 19 de marzo. Hoy se celebra menos que antes, pero la frase
 <tr>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/ab4a237dc67d58b21363.mp3" title="Прослушать" aria-label="Прослушать: la fecha">▶</button>la fecha</td>
 <td>дата</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/237b55ce990d58726006.mp3" title="Прослушать" aria-label="Прослушать: el cumpleaños">▶</button>el cumpleaños</td>
+<td><img class="dibujo" src="../img/dee27f6529b4aea6bf9b.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/237b55ce990d58726006.mp3" title="Прослушать" aria-label="Прослушать: el cumpleaños">▶</button>el cumpleaños</td>
 <td>день рождения</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/794358b27af57b229c96.mp3" title="Прослушать" aria-label="Прослушать: el regalo">▶</button>el regalo</td>
+<td><img class="dibujo" src="../img/2b7345f3cbfe963826cf.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/794358b27af57b229c96.mp3" title="Прослушать" aria-label="Прослушать: el regalo">▶</button>el regalo</td>
 <td>подарок</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b54000b47316f2fe4add.mp3" title="Прослушать" aria-label="Прослушать: las flores">▶</button>las flores</td>
+<td><img class="dibujo" src="../img/dd3187ce49fc94b269f4.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b54000b47316f2fe4add.mp3" title="Прослушать" aria-label="Прослушать: las flores">▶</button>las flores</td>
 <td>цветы</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/3118c0c7200f7fea9f79.mp3" title="Прослушать" aria-label="Прослушать: la tarjeta">▶</button>la tarjeta</td>
+<td><img class="dibujo" src="../img/567bd7daf26affc372cc.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/3118c0c7200f7fea9f79.mp3" title="Прослушать" aria-label="Прослушать: la tarjeta">▶</button>la tarjeta</td>
 <td>открытка</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/6c2facc080a4cc6f8600.mp3" title="Прослушать" aria-label="Прослушать: la carta">▶</button>la carta</td>
+<td><img class="dibujo" src="../img/61187122814214843897.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/6c2facc080a4cc6f8600.mp3" title="Прослушать" aria-label="Прослушать: la carta">▶</button>la carta</td>
 <td>письмо</td>
 </tr>
 <tr>
@@ -382,9 +394,9 @@ julio; un José, el 19 de marzo. Hoy se celebra menos que antes, pero la frase
 <td>Поздравляю!</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/3905235cd4bed95a79b7.mp3" title="Прослушать" aria-label="Прослушать: la comida familiar">▶</button>la comida familiar</td>
+<td><img class="dibujo" src="../img/02fe56eac518f618ddc7.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/3905235cd4bed95a79b7.mp3" title="Прослушать" aria-label="Прослушать: la comida familiar">▶</button>la comida familiar</td>
 <td>семейный обед</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b72395431dfad0b3c87c.mp3" title="Прослушать" aria-label="Прослушать: la llamada">▶</button>la llamada</td>
+<td><img class="dibujo" src="../img/de92d648188f3ca3128b.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b72395431dfad0b3c87c.mp3" title="Прослушать" aria-label="Прослушать: la llamada">▶</button>la llamada</td>
 <td>телефонный звонок</td>
 </tr>
 <tr>
@@ -394,21 +406,21 @@ julio; un José, el 19 de marzo. Hoy se celebra menos que antes, pero la frase
 <td>святой покровитель</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/442f3aa0e467972a2f37.mp3" title="Прослушать" aria-label="Прослушать: la fiesta">▶</button>la fiesta</td>
+<td><img class="dibujo" src="../img/d96abc1574ea4c06a6e3.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/442f3aa0e467972a2f37.mp3" title="Прослушать" aria-label="Прослушать: la fiesta">▶</button>la fiesta</td>
 <td>праздник</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/23cff312172a65ceaa4b.mp3" title="Прослушать" aria-label="Прослушать: la canción">▶</button>la canción</td>
+<td><img class="dibujo" src="../img/7f719eb7c926a4003cd6.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/23cff312172a65ceaa4b.mp3" title="Прослушать" aria-label="Прослушать: la canción">▶</button>la canción</td>
 <td>песня</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/e062901f15c9d24da617.mp3" title="Прослушать" aria-label="Прослушать: el ramo de flores">▶</button>el ramo de flores</td>
+<td><img class="dibujo" src="../img/f5942c32e78734dc7d89.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/e062901f15c9d24da617.mp3" title="Прослушать" aria-label="Прослушать: el ramo de flores">▶</button>el ramo de flores</td>
 <td>букет цветов</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/1d181ee556a3f2fa4a4f.mp3" title="Прослушать" aria-label="Прослушать: hecho a mano">▶</button>hecho a mano</td>
 <td>сделанный своими руками</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b696e6df7ee2332d0b49.mp3" title="Прослушать" aria-label="Прослушать: el árbol genealógico">▶</button>el árbol genealógico</td>
+<td><img class="dibujo" src="../img/a70ef2a9c07e4c5f1b89.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b696e6df7ee2332d0b49.mp3" title="Прослушать" aria-label="Прослушать: el árbol genealógico">▶</button>el árbol genealógico</td>
 <td>семейное древо</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/45b62ce104a97c76367b.mp3" title="Прослушать" aria-label="Прослушать: los bisabuelos">▶</button>los bisabuelos</td>
+<td><img class="dibujo" src="../img/8a6994ac7ce8fcb72a2c.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/45b62ce104a97c76367b.mp3" title="Прослушать" aria-label="Прослушать: los bisabuelos">▶</button>los bisabuelos</td>
 <td>прадедушка и прабабушка</td>
 </tr>
 </tbody>

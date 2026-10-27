@@ -292,10 +292,15 @@ class TestElSitio(unittest.TestCase):
         desactualizado. Se copia solo el índice y no los 3.543 MP3: los botones
         dependen de él, no de que los archivos estén."""
         destino = pathlib.Path(tempfile.mkdtemp())
-        indice = RAIZ / "docs" / "audio" / construir_sitio.INDICE_AUDIO
-        if indice.exists():
-            (destino / "audio").mkdir(parents=True, exist_ok=True)
-            shutil.copy2(indice, destino / "audio" / construir_sitio.INDICE_AUDIO)
+        # Lo mismo para los dibujos del vocabulario, y por lo mismo: se copia
+        # solo el índice y no las 300 imágenes, porque los <img> dependen de él
+        # y no de que los archivos estén.
+        for carpeta, nombre in (("audio", construir_sitio.INDICE_AUDIO),
+                                ("img", construir_sitio.INDICE_IMG)):
+            indice = RAIZ / "docs" / carpeta / nombre
+            if indice.exists():
+                (destino / carpeta).mkdir(parents=True, exist_ok=True)
+                shutil.copy2(indice, destino / carpeta / nombre)
         construir_sitio.construir(destino, cfg or self.cfg, self.textos)
         return destino
 
@@ -1716,4 +1721,90 @@ class TestLasImagenesDelVocabulario(unittest.TestCase):
 
             indice = json.loads((carpeta / generar_imagenes.INDICE).read_text(encoding="utf-8"))
             self.assertEqual({}, indice, "una imagen vacía no puede entrar en el índice")
+
+
+class TestLosDibujosEnLaLeccion(unittest.TestCase):
+    """El dibujo del sustantivo, delante de la palabra, en la tabla del día.
+
+    Espeja al audio: el índice se lee de `docs/img/` y no de una lista en el
+    código, así que el sitio se construye igual con dibujos y sin ellos."""
+
+    CUERPO = """## Словарь дня
+
+| Español | Русский | Пример |
+|---|---|---|
+| el ma**ri**do | муж | Su marido es médico. |
+| la **car**ta 🌎 el me**nú** | меню | ¿Nos trae la carta? |
+| ma**yor** | старший | Mi hermano mayor. |
+
+## Ответы
+
+| Español | Русский |
+|---|---|
+| el ma**ri**do | aquí no |
+"""
+    INDICE = {"el marido": "AAA.webp", "la carta": "BBB.webp"}
+
+    def _puesto(self):
+        return construir_sitio._dibujos_en_el_vocabulario(
+            construir_sitio.md(self.CUERPO), self.INDICE, "..")
+
+    def test_el_dibujo_va_en_la_palabra_que_le_toca(self):
+        salida = self._puesto()
+        self.assertEqual(2, salida.count('class="dibujo"'))
+        # Solo las filas del vocabulario: «el marido» sale también en la tabla
+        # de Ответы, y mirando el documento entero esa otra pisaba a esta.
+        vocabulario = salida.split("Ответы")[0]
+        filas = {re.sub(r"<[^>]+>", "", tr.split("</td>")[0]).strip():
+                 'class="dibujo"' in tr
+                 for tr in re.findall(r"<tr>(.*?)</tr>", vocabulario, re.S)}
+        self.assertTrue(filas["el marido"])
+        self.assertFalse(filas["mayor"], "«mayor» no lleva artículo: no se dibuja")
+
+    def test_la_variante_americana_casa_con_su_dibujo(self):
+        """«la carta 🌎 el menú» tiene que encontrar la entrada «la carta».
+
+        Es lo que obliga a que el generador y el sitio limpien la celda con la
+        MISMA función: con dos copias de esa regla, el día que una cambie los
+        dibujos dejarían de aparecer sin que nada falle."""
+        self.assertIn("BBB.webp", self._puesto())
+
+    def test_solo_la_tabla_del_vocabulario_y_solo_su_primera_columna(self):
+        """En las de fonética la primera columna es una letra y en las de
+        conjugación una forma verbal: un dibujo ahí no enseña nada. Y en la
+        columna de ejemplo sobraría, porque la palabra ya tiene el suyo."""
+        salida = self._puesto()
+        self.assertNotIn('class="dibujo"', salida.split("Ответы")[1])
+        primera_fila = salida.split("Su marido")[1].split("</tr>")[0]
+        self.assertNotIn('class="dibujo"', primera_fila)
+
+    def test_sin_indice_la_leccion_sale_igual_que_siempre(self):
+        """Las imágenes se generan por tandas: «algunas sí y otras no» es el
+        estado normal, y ninguna página puede romperse por eso."""
+        html_ = construir_sitio.md(self.CUERPO)
+        self.assertEqual(html_, construir_sitio._dibujos_en_el_vocabulario(html_, {}, ".."))
+
+    def test_el_dibujo_no_se_lee_dos_veces_en_voz_alta(self):
+        """El `alt` va vacío a propósito: la palabra está al lado y su
+        traducción en la columna siguiente, así que un lector de pantalla que
+        leyera el dibujo diría lo mismo dos veces."""
+        self.assertIn('alt=""', self._puesto())
+        self.assertNotIn('alt="el marido"', self._puesto())
+
+    def test_el_boton_del_audio_en_la_celda_no_tapa_la_palabra(self):
+        """El camino REAL: `_botones_de_audio` corre antes y mete un «▶» en la
+        celda. Quitando solo las etiquetas, el texto salía «▶el marido» y no
+        casaba con nada: las 100 lecciones se construyeron sin un solo dibujo
+        mientras la prueba de al lado seguía en verde, porque su HTML no tenía
+        botones. Por eso esta prueba los pone."""
+        con_audio = construir_sitio._botones_de_audio(
+            construir_sitio.md(self.CUERPO), {"el marido": "x.mp3"}, "..")
+        self.assertIn("▶", con_audio, "el montaje de la prueba tiene que traer el botón")
+
+        salida = construir_sitio._dibujos_en_el_vocabulario(con_audio, self.INDICE, "..")
+        self.assertIn("AAA.webp", salida, "el ▶ del audio tapó la palabra")
+
+    def test_el_indice_se_lee_del_disco_y_aguanta_que_no_esté(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            self.assertEqual({}, construir_sitio.indice_de_imagenes(pathlib.Path(tmp)))
 

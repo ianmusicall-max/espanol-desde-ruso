@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -669,7 +681,7 @@ doscientos gramos de · un litro de · ¿Algo más? · ¿Cuánto es? · Son</p>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/66c1435fc2059dd61197.mp3" title="Прослушать" aria-label="Прослушать: Medio kilo de tomates.">▶</button>Medio kilo de tomates.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/67cb7e186cd3e82322f0.mp3" title="Прослушать" aria-label="Прослушать: los gramos">▶</button>los <strong>gra</strong>mos</td>
+<td><img class="dibujo" src="../img/d14fa875c85f1aa275b0.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/67cb7e186cd3e82322f0.mp3" title="Прослушать" aria-label="Прослушать: los gramos">▶</button>los <strong>gra</strong>mos</td>
 <td>граммы</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/f8a7e974bbcb2065b9ea.mp3" title="Прослушать" aria-label="Прослушать: Doscientos gramos de jamón.">▶</button>Doscientos gramos de jamón.</td>
 </tr>
@@ -684,17 +696,17 @@ doscientos gramos de · un litro de · ¿Algo más? · ¿Cuánto es? · Son</p>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/09e8ffb87355e8ed1b1d.mp3" title="Прослушать" aria-label="Прослушать: Una docena de huevos.">▶</button>Una docena de huevos.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/77d116f37668e8c1e1ec.mp3" title="Прослушать" aria-label="Прослушать: la lata">▶</button>la <strong>la</strong>ta</td>
+<td><img class="dibujo" src="../img/773d39a3fb6cc342bd6c.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/77d116f37668e8c1e1ec.mp3" title="Прослушать" aria-label="Прослушать: la lata">▶</button>la <strong>la</strong>ta</td>
 <td>жестяная банка</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/23567e0c6e8eb33bf449.mp3" title="Прослушать" aria-label="Прослушать: Una lata de sardinas.">▶</button>Una lata de sardinas.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/2e8c9a05eea7befa21f3.mp3" title="Прослушать" aria-label="Прослушать: el paquete">▶</button>el pa<strong>que</strong>te</td>
+<td><img class="dibujo" src="../img/b5446954f7a4de396eb3.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/2e8c9a05eea7befa21f3.mp3" title="Прослушать" aria-label="Прослушать: el paquete">▶</button>el pa<strong>que</strong>te</td>
 <td>пакет, упаковка</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/983c6a7d5fb74b9e937a.mp3" title="Прослушать" aria-label="Прослушать: Un paquete de arroz.">▶</button>Un paquete de arroz.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/318b02f91ee2d46d94cc.mp3" title="Прослушать" aria-label="Прослушать: la bolsa">▶</button>la <strong>bol</strong>sa</td>
+<td><img class="dibujo" src="../img/926f74ba1851e2ddc951.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/318b02f91ee2d46d94cc.mp3" title="Прослушать" aria-label="Прослушать: la bolsa">▶</button>la <strong>bol</strong>sa</td>
 <td>пакет, сумка</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/68563c6ff455140aad87.mp3" title="Прослушать" aria-label="Прослушать: Una bolsa de naranjas.">▶</button>Una bolsa de naranjas.</td>
 </tr>
@@ -704,7 +716,7 @@ doscientos gramos de · un litro de · ¿Algo más? · ¿Cuánto es? · Son</p>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/0ff3be9d40ad77380559.mp3" title="Прослушать" aria-label="Прослушать: Un trozo de queso.">▶</button>Un trozo de queso.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/948c667420a858dd07a0.mp3" title="Прослушать" aria-label="Прослушать: la manzana">▶</button>la man<strong>za</strong>na</td>
+<td><img class="dibujo" src="../img/1ca20af20fd23adcfaea.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/948c667420a858dd07a0.mp3" title="Прослушать" aria-label="Прослушать: la manzana">▶</button>la man<strong>za</strong>na</td>
 <td>яблоко</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/2e8f37c87933d65037ba.mp3" title="Прослушать" aria-label="Прослушать: Un kilo de manzanas.">▶</button>Un kilo de manzanas.</td>
 </tr>

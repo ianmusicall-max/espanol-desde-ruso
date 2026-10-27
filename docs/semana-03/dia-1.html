@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -492,47 +504,47 @@ programa · radio · música · profesor</p>
 </thead>
 <tbody>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/63447e0bca4191ab5369.mp3" title="Прослушать" aria-label="Прослушать: el libro">▶</button>el <strong>li</strong>bro</td>
+<td><img class="dibujo" src="../img/831ae86cff4b3d72a04c.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/63447e0bca4191ab5369.mp3" title="Прослушать" aria-label="Прослушать: el libro">▶</button>el <strong>li</strong>bro</td>
 <td>книга</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/3c5288790ff9605db42a.mp3" title="Прослушать" aria-label="Прослушать: El libro está en la mesa.">▶</button>El libro está en la mesa.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/e8e4c10bb47d5f01a849.mp3" title="Прослушать" aria-label="Прослушать: el cuaderno">▶</button>el cua<strong>der</strong>no</td>
+<td><img class="dibujo" src="../img/0484102a9ac7a804822e.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/e8e4c10bb47d5f01a849.mp3" title="Прослушать" aria-label="Прослушать: el cuaderno">▶</button>el cua<strong>der</strong>no</td>
 <td>тетрадь</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/78293af41678b366bd5c.mp3" title="Прослушать" aria-label="Прослушать: Tengo el cuaderno.">▶</button>Tengo el cuaderno.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/db6f7bf43c4b554c4673.mp3" title="Прослушать" aria-label="Прослушать: el bolígrafo">▶</button>el bo<strong>lí</strong>grafo</td>
+<td><img class="dibujo" src="../img/92d8e15f8c91dc6fdcfc.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/db6f7bf43c4b554c4673.mp3" title="Прослушать" aria-label="Прослушать: el bolígrafo">▶</button>el bo<strong>lí</strong>grafo</td>
 <td>ручка</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/e7aee819c1d0a7145cb6.mp3" title="Прослушать" aria-label="Прослушать: ¿Tienes el bolígrafo?">▶</button>¿Tienes el bolígrafo?</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/1648af5d9608309dedab.mp3" title="Прослушать" aria-label="Прослушать: la mochila">▶</button>la mo<strong>chi</strong>la</td>
+<td><img class="dibujo" src="../img/4f4e837222fa56a84776.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/1648af5d9608309dedab.mp3" title="Прослушать" aria-label="Прослушать: la mochila">▶</button>la mo<strong>chi</strong>la</td>
 <td>рюкзак</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/f4769ca1b5f34c51a559.mp3" title="Прослушать" aria-label="Прослушать: La mochila de Pablo.">▶</button>La mochila de Pablo.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/93ed2d08dd83c2fff568.mp3" title="Прослушать" aria-label="Прослушать: la mesa">▶</button>la <strong>me</strong>sa</td>
+<td><img class="dibujo" src="../img/3cd98b03fd882779fc39.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/93ed2d08dd83c2fff568.mp3" title="Прослушать" aria-label="Прослушать: la mesa">▶</button>la <strong>me</strong>sa</td>
 <td>стол</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/91542747c514a2d34caf.mp3" title="Прослушать" aria-label="Прослушать: En la mesa.">▶</button>En la mesa.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/7638305d2d4eb20fbc6d.mp3" title="Прослушать" aria-label="Прослушать: la silla">▶</button>la <strong>si</strong>lla</td>
+<td><img class="dibujo" src="../img/409a911612f10a43279c.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/7638305d2d4eb20fbc6d.mp3" title="Прослушать" aria-label="Прослушать: la silla">▶</button>la <strong>si</strong>lla</td>
 <td>стул</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/433a9bfda7f661873649.mp3" title="Прослушать" aria-label="Прослушать: En la silla.">▶</button>En la silla.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/40166ae1d54ae53a96b8.mp3" title="Прослушать" aria-label="Прослушать: la página">▶</button>la <strong>pá</strong>gina</td>
+<td><img class="dibujo" src="../img/0f6a8c0eaee89156efde.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/40166ae1d54ae53a96b8.mp3" title="Прослушать" aria-label="Прослушать: la página">▶</button>la <strong>pá</strong>gina</td>
 <td>страница</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/bb21bcdb7b02c18c9981.mp3" title="Прослушать" aria-label="Прослушать: La página diez.">▶</button>La página diez.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/1f2143e836c6e44f8446.mp3" title="Прослушать" aria-label="Прослушать: el mapa">▶</button>el <strong>ma</strong>pa</td>
+<td><img class="dibujo" src="../img/92a84bc8ade18578c23b.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/1f2143e836c6e44f8446.mp3" title="Прослушать" aria-label="Прослушать: el mapa">▶</button>el <strong>ma</strong>pa</td>
 <td>карта</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/80c738318aedc7bf8a92.mp3" title="Прослушать" aria-label="Прослушать: El mapa de España.">▶</button>El mapa de España.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/e766ff05de3e7298f23d.mp3" title="Прослушать" aria-label="Прослушать: la mano">▶</button>la <strong>ma</strong>no</td>
+<td><img class="dibujo" src="../img/120831dcf213686b6634.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/e766ff05de3e7298f23d.mp3" title="Прослушать" aria-label="Прослушать: la mano">▶</button>la <strong>ma</strong>no</td>
 <td>рука</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/8c23a84c99b306026301.mp3" title="Прослушать" aria-label="Прослушать: La mano.">▶</button>La mano.</td>
 </tr>

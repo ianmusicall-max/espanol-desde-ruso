@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -404,7 +416,7 @@ Uruguay se cena tarde, como en España: a las nueve o las diez.</p>
 </thead>
 <tbody>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/ad4d36422c5b8d848848.mp3" title="Прослушать" aria-label="Прослушать: el horario">▶</button>el horario</td>
+<td><img class="dibujo" src="../img/bdf7ed55e45daa5378a9.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/ad4d36422c5b8d848848.mp3" title="Прослушать" aria-label="Прослушать: el horario">▶</button>el horario</td>
 <td>расписание, режим дня</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/0430158a83d8e1b8c6c5.mp3" title="Прослушать" aria-label="Прослушать: el huso horario">▶</button>el huso horario</td>
 <td>часовой пояс</td>
@@ -416,9 +428,9 @@ Uruguay se cena tarde, como en España: a las nueve o las diez.</p>
 <td>в середине утра</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/bc23cc4b999f88cb883f.mp3" title="Прослушать" aria-label="Прослушать: el plato principal">▶</button>el plato principal</td>
+<td><img class="dibujo" src="../img/e24552559ced4e43e764.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/bc23cc4b999f88cb883f.mp3" title="Прослушать" aria-label="Прослушать: el plato principal">▶</button>el plato principal</td>
 <td>главное блюдо</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/5881db632d56904763b8.mp3" title="Прослушать" aria-label="Прослушать: el postre">▶</button>el postre</td>
+<td><img class="dibujo" src="../img/82ba258d004b3d7784c4.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/5881db632d56904763b8.mp3" title="Прослушать" aria-label="Прослушать: el postre">▶</button>el postre</td>
 <td>десерт</td>
 </tr>
 <tr>
@@ -428,19 +440,19 @@ Uruguay se cena tarde, como en España: a las nueve o las diez.</p>
 <td>обычай, привычка</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/2110d34447c470c9ae34.mp3" title="Прослушать" aria-label="Прослушать: el sol">▶</button>el sol</td>
+<td><img class="dibujo" src="../img/c5bfea9351ab6a97feb9.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/2110d34447c470c9ae34.mp3" title="Прослушать" aria-label="Прослушать: el sol">▶</button>el sol</td>
 <td>солнце</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/607063aa977846009b16.mp3" title="Прослушать" aria-label="Прослушать: alto / alta">▶</button>alto / alta</td>
 <td>высокий; высоко (о солнце)</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/f443e26fe2bd44dc69ed.mp3" title="Прослушать" aria-label="Прослушать: el verano">▶</button>el verano</td>
+<td><img class="dibujo" src="../img/a31c6162f285b231a964.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/f443e26fe2bd44dc69ed.mp3" title="Прослушать" aria-label="Прослушать: el verano">▶</button>el verano</td>
 <td>лето</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/52b4a9b2c7bad986ba36.mp3" title="Прослушать" aria-label="Прослушать: la Península">▶</button>la Península</td>
 <td>Пиренейский полуостров (Испания без островов)</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/71e86a2438f92fa2b12c.mp3" title="Прослушать" aria-label="Прослушать: la conversación">▶</button>la conversación</td>
+<td><img class="dibujo" src="../img/3b6f5ed407d7827f0dec.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/71e86a2438f92fa2b12c.mp3" title="Прослушать" aria-label="Прослушать: la conversación">▶</button>la conversación</td>
 <td>разговор</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/5690cc26e7fc1b53325c.mp3" title="Прослушать" aria-label="Прослушать: seguir (sigue)">▶</button>seguir (sigue)</td>
 <td>продолжать(ся)</td>

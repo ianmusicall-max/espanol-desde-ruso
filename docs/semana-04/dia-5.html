@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -537,7 +549,7 @@ un estuche, una regla</em> — <strong>rojo, azul, verde, negro</strong>. Цен
 </thead>
 <tbody>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/d6bb327e8f56bf7ced82.mp3" title="Прослушать" aria-label="Прослушать: la papelería">▶</button>la pape<strong>le</strong>ría</td>
+<td><img class="dibujo" src="../img/8c20cc14ec4ed1a48c29.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/d6bb327e8f56bf7ced82.mp3" title="Прослушать" aria-label="Прослушать: la papelería">▶</button>la pape<strong>le</strong>ría</td>
 <td>магазин канцтоваров</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/0cd54d1350bfcbbf7757.mp3" title="Прослушать" aria-label="Прослушать: En la papelería hay cuadernos.">▶</button>En la papelería hay cuadernos.</td>
 </tr>
@@ -557,12 +569,12 @@ un estuche, una regla</em> — <strong>rojo, azul, verde, negro</strong>. Цен
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/379a224ebe7d51050e22.mp3" title="Прослушать" aria-label="Прослушать: ¿Cuánto cuestan estas tijeras?">▶</button>¿Cuánto cuestan estas tijeras?</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/a39c94acb7f88524d3c3.mp3" title="Прослушать" aria-label="Прослушать: el euro">▶</button>el <strong>eu</strong>ro</td>
+<td><img class="dibujo" src="../img/7959d80660b44795dd0a.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/a39c94acb7f88524d3c3.mp3" title="Прослушать" aria-label="Прослушать: el euro">▶</button>el <strong>eu</strong>ro</td>
 <td>евро</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/cf92ffc91ce12be11b9a.mp3" title="Прослушать" aria-label="Прослушать: Cuestan cuatro euros.">▶</button>Cuestan cuatro euros.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/803dcf4dd47f739d5b2d.mp3" title="Прослушать" aria-label="Прослушать: el céntimo">▶</button>el <strong>cén</strong>timo</td>
+<td><img class="dibujo" src="../img/0d7c131be3d69d06eb04.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/803dcf4dd47f739d5b2d.mp3" title="Прослушать" aria-label="Прослушать: el céntimo">▶</button>el <strong>cén</strong>timo</td>
 <td>цент (1/100 евро)</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/c125f074af3fec8da0c9.mp3" title="Прослушать" aria-label="Прослушать: Ochenta céntimos.">▶</button>Ochenta céntimos.</td>
 </tr>

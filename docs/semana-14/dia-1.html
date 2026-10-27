@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -582,37 +594,37 @@ los sellos · los libros</p>
 </thead>
 <tbody>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/e479f91f7cc5f2d87916.mp3" title="Прослушать" aria-label="Прослушать: la panadería">▶</button>la panade<strong>rí</strong>a</td>
+<td><img class="dibujo" src="../img/4fdb442671edeb64efa7.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/e479f91f7cc5f2d87916.mp3" title="Прослушать" aria-label="Прослушать: la panadería">▶</button>la panade<strong>rí</strong>a</td>
 <td>булочная</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b33b5239d32cbb9d9143.mp3" title="Прослушать" aria-label="Прослушать: El pan se compra en la panadería.">▶</button>El pan se compra en la panadería.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/0349e653a6ec4db9e9f4.mp3" title="Прослушать" aria-label="Прослушать: la frutería">▶</button>la frute<strong>rí</strong>a</td>
+<td><img class="dibujo" src="../img/7b7f9f46a721f15b280c.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/0349e653a6ec4db9e9f4.mp3" title="Прослушать" aria-label="Прослушать: la frutería">▶</button>la frute<strong>rí</strong>a</td>
 <td>фруктовая лавка</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/f7d3b724c52c522c7e4d.mp3" title="Прослушать" aria-label="Прослушать: La fruta es más barata en la frutería.">▶</button>La fruta es más barata en la frutería.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/8f568e65d9c060ff9f8a.mp3" title="Прослушать" aria-label="Прослушать: la carnicería">▶</button>la carnice<strong>rí</strong>a</td>
+<td><img class="dibujo" src="../img/2d8ee2b8f87effc10e8c.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/8f568e65d9c060ff9f8a.mp3" title="Прослушать" aria-label="Прослушать: la carnicería">▶</button>la carnice<strong>rí</strong>a</td>
 <td>мясной магазин</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/63c458b238108555d140.mp3" title="Прослушать" aria-label="Прослушать: La carne, en la carnicería.">▶</button>La carne, en la carnicería.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/1d30529bec78aca41b48.mp3" title="Прослушать" aria-label="Прослушать: la pescadería">▶</button>la pescade<strong>rí</strong>a</td>
+<td><img class="dibujo" src="../img/4819b785341bf5be5121.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/1d30529bec78aca41b48.mp3" title="Прослушать" aria-label="Прослушать: la pescadería">▶</button>la pescade<strong>rí</strong>a</td>
 <td>рыбный магазин</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/45b9df7eeb26dd943441.mp3" title="Прослушать" aria-label="Прослушать: El pescado se vende en la pescadería.">▶</button>El pescado se vende en la pescadería.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/a1e170eb46c98c991863.mp3" title="Прослушать" aria-label="Прослушать: la librería">▶</button>la libre<strong>rí</strong>a</td>
+<td><img class="dibujo" src="../img/8a6df166ce51a9a680b0.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/a1e170eb46c98c991863.mp3" title="Прослушать" aria-label="Прослушать: la librería">▶</button>la libre<strong>rí</strong>a</td>
 <td>книжный магазин (не библиотека!)</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/e61ab99b616409d8e4e7.mp3" title="Прослушать" aria-label="Прослушать: Voy a la librería: quiero un libro.">▶</button>Voy a la librería: quiero un libro.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/371019d1fa612d052369.mp3" title="Прослушать" aria-label="Прослушать: el estanco">▶</button>el es<strong>tan</strong>co</td>
+<td><img class="dibujo" src="../img/994b8a197372dd0c05af.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/371019d1fa612d052369.mp3" title="Прослушать" aria-label="Прослушать: el estanco">▶</button>el es<strong>tan</strong>co</td>
 <td>табачный киоск (табак и марки)</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/48f595f18486db8dc5c2.mp3" title="Прослушать" aria-label="Прослушать: Los sellos se venden en el estanco.">▶</button>Los sellos se venden en el estanco.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/ddaf2d62024dfb2aa294.mp3" title="Прослушать" aria-label="Прослушать: el sello">▶</button>el <strong>se</strong>llo</td>
+<td><img class="dibujo" src="../img/831f52dca806a6b7289d.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/ddaf2d62024dfb2aa294.mp3" title="Прослушать" aria-label="Прослушать: el sello">▶</button>el <strong>se</strong>llo</td>
 <td>почтовая марка</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b208502f50b84f1abe6d.mp3" title="Прослушать" aria-label="Прослушать: Quiero comprar sellos para una carta.">▶</button>Quiero comprar sellos para una carta.</td>
 </tr>
@@ -622,7 +634,7 @@ los sellos · los libros</p>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/e6d405680424fb65e7b1.mp3" title="Прослушать" aria-label="Прослушать: La sección de pescadería.">▶</button>La sección de pescadería.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/318b02f91ee2d46d94cc.mp3" title="Прослушать" aria-label="Прослушать: la bolsa">▶</button>la <strong>bol</strong>sa</td>
+<td><img class="dibujo" src="../img/926f74ba1851e2ddc951.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/318b02f91ee2d46d94cc.mp3" title="Прослушать" aria-label="Прослушать: la bolsa">▶</button>la <strong>bol</strong>sa</td>
 <td>пакет, сумка</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/50509ae3cde7c594b2f5.mp3" title="Прослушать" aria-label="Прослушать: — ¿Quiere una bolsa? — Sí, por favor.">▶</button>— ¿Quiere una bolsa? — Sí, por favor.</td>
 </tr>

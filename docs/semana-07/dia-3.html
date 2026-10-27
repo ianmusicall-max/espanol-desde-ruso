@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -579,27 +591,27 @@ edificio tiene ascensor. Vivo aquí con mi hermana.</em></p>
 </thead>
 <tbody>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/043a1d9fd1b19733da5e.mp3" title="Прослушать" aria-label="Прослушать: la planta">▶</button>la <strong>plan</strong>ta</td>
+<td><img class="dibujo" src="../img/0f4933f2dd2a183868a9.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/043a1d9fd1b19733da5e.mp3" title="Прослушать" aria-label="Прослушать: la planta">▶</button>la <strong>plan</strong>ta</td>
 <td>этаж</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/4aefc5e1e65e5ed6caac.mp3" title="Прослушать" aria-label="Прослушать: ¿En qué planta vives?">▶</button>¿En qué planta vives?</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/95e343c8772530eb863d.mp3" title="Прослушать" aria-label="Прослушать: la planta baja">▶</button>la <strong>plan</strong>ta <strong>ba</strong>ja</td>
+<td><img class="dibujo" src="../img/315ecc9a67c549411492.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/95e343c8772530eb863d.mp3" title="Прослушать" aria-label="Прослушать: la planta baja">▶</button>la <strong>plan</strong>ta <strong>ba</strong>ja</td>
 <td>уличный («нулевой») этаж</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/9f13053d52aff32a0336.mp3" title="Прослушать" aria-label="Прослушать: Rosa vive en la planta baja.">▶</button>Rosa vive en la planta baja.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/14a56654876f6feb2ecd.mp3" title="Прослушать" aria-label="Прослушать: el ático">▶</button>el <strong>á</strong>tico</td>
+<td><img class="dibujo" src="../img/29d4c00f66115d1a3cf0.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/14a56654876f6feb2ecd.mp3" title="Прослушать" aria-label="Прослушать: el ático">▶</button>el <strong>á</strong>tico</td>
 <td>мансарда, квартира под крышей</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/37f71e3ead420d49d700.mp3" title="Прослушать" aria-label="Прослушать: El ático es pequeño pero luminoso.">▶</button>El ático es pequeño pero luminoso.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b254b61539de30d03cf8.mp3" title="Прослушать" aria-label="Прослушать: el ascensor">▶</button>el ascen<strong>sor</strong></td>
+<td><img class="dibujo" src="../img/c9b675d72662c7e15144.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b254b61539de30d03cf8.mp3" title="Прослушать" aria-label="Прослушать: el ascensor">▶</button>el ascen<strong>sor</strong></td>
 <td>лифт</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/a6d20b47cd654cfa44db.mp3" title="Прослушать" aria-label="Прослушать: El edificio no tiene ascensor.">▶</button>El edificio no tiene ascensor.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/cc3d3b6e4736d8145b8b.mp3" title="Прослушать" aria-label="Прослушать: el edificio">▶</button>el edi<strong>fi</strong>cio</td>
+<td><img class="dibujo" src="../img/e62801d5472af9fecbd2.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/cc3d3b6e4736d8145b8b.mp3" title="Прослушать" aria-label="Прослушать: el edificio">▶</button>el edi<strong>fi</strong>cio</td>
 <td>здание, дом</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/f43914865d8e09fbc1fe.mp3" title="Прослушать" aria-label="Прослушать: El edificio está en el centro.">▶</button>El edificio está en el centro.</td>
 </tr>

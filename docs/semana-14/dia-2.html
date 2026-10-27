@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -593,27 +605,27 @@ coches.</em></p>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/849c8c54add4f23b47f4.mp3" title="Прослушать" aria-label="Прослушать: ¿Me lo envuelve para regalo?">▶</button>¿Me lo envuelve para regalo?</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/6cc41a23c6784fa7bc7b.mp3" title="Прослушать" aria-label="Прослушать: el papel de regalo">▶</button>el pa<strong>pel</strong> de re<strong>ga</strong>lo</td>
+<td><img class="dibujo" src="../img/916b95056e370da365a3.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/6cc41a23c6784fa7bc7b.mp3" title="Прослушать" aria-label="Прослушать: el papel de regalo">▶</button>el pa<strong>pel</strong> de re<strong>ga</strong>lo</td>
 <td>подарочная бумага</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/2077eb79402922d4ff62.mp3" title="Прослушать" aria-label="Прослушать: ¿Tienen papel de regalo azul?">▶</button>¿Tienen papel de regalo azul?</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/dc24e3bdf5448988ef83.mp3" title="Прослушать" aria-label="Прослушать: el perfume">▶</button>el per<strong>fu</strong>me</td>
+<td><img class="dibujo" src="../img/37f4fd4ef147d644b7e4.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/dc24e3bdf5448988ef83.mp3" title="Прослушать" aria-label="Прослушать: el perfume">▶</button>el per<strong>fu</strong>me</td>
 <td>духи</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/af327189627c06424503.mp3" title="Прослушать" aria-label="Прослушать: Un perfume para mi madre.">▶</button>Un perfume para mi madre.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/7ba121ac1c19bc0af716.mp3" title="Прослушать" aria-label="Прослушать: los bombones">▶</button>los bom<strong>bo</strong>nes</td>
+<td><img class="dibujo" src="../img/69989a3531f61179a35d.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/7ba121ac1c19bc0af716.mp3" title="Прослушать" aria-label="Прослушать: los bombones">▶</button>los bom<strong>bo</strong>nes</td>
 <td>шоколадные конфеты</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/07cb37b12072c66b3e05.mp3" title="Прослушать" aria-label="Прослушать: Una caja de bombones.">▶</button>Una caja de bombones.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/7a105b7d1832651526f8.mp3" title="Прослушать" aria-label="Прослушать: el juguete">▶</button>el ju<strong>gue</strong>te</td>
+<td><img class="dibujo" src="../img/654ce12a0a7c0da0b858.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/7a105b7d1832651526f8.mp3" title="Прослушать" aria-label="Прослушать: el juguete">▶</button>el ju<strong>gue</strong>te</td>
 <td>игрушка</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/eaea125ae63762521681.mp3" title="Прослушать" aria-label="Прослушать: Un juguete para mi sobrino.">▶</button>Un juguete para mi sobrino.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/dc6eda9ee28dc51c1982.mp3" title="Прослушать" aria-label="Прослушать: los pendientes">▶</button>los pen<strong>dien</strong>tes</td>
+<td><img class="dibujo" src="../img/acb8dd47e47e456e590f.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/dc6eda9ee28dc51c1982.mp3" title="Прослушать" aria-label="Прослушать: los pendientes">▶</button>los pen<strong>dien</strong>tes</td>
 <td>серёжки</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/51110c2495b12b84afd0.mp3" title="Прослушать" aria-label="Прослушать: Unos pendientes para mi hermana.">▶</button>Unos pendientes para mi hermana.</td>
 </tr>

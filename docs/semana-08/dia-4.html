@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -563,12 +575,12 @@ No hay mar. En mi barrio no hay ningún cine…</em></p>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/251301186c08814f1a58.mp3" title="Прослушать" aria-label="Прослушать: Hay demasiado tráfico.">▶</button>Hay demasiado tráfico.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/ded4b4a19e3beb36699f.mp3" title="Прослушать" aria-label="Прослушать: el tráfico">▶</button>el <strong>trá</strong>fico</td>
+<td><img class="dibujo" src="../img/e84198cc517a28c00576.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/ded4b4a19e3beb36699f.mp3" title="Прослушать" aria-label="Прослушать: el tráfico">▶</button>el <strong>trá</strong>fico</td>
 <td>движение, пробки</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/c42987371bc90a8e12a8.mp3" title="Прослушать" aria-label="Прослушать: En el centro hay mucho tráfico.">▶</button>En el centro hay mucho tráfico.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/4afdc4873e85f2faed96.mp3" title="Прослушать" aria-label="Прослушать: la gente">▶</button>la <strong>gen</strong>te</td>
+<td><img class="dibujo" src="../img/f8329670f113e8428df0.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/4afdc4873e85f2faed96.mp3" title="Прослушать" aria-label="Прослушать: la gente">▶</button>la <strong>gen</strong>te</td>
 <td>люди (единственное число!)</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/2829e21bc33102ddc384.mp3" title="Прослушать" aria-label="Прослушать: Hay mucha gente en la calle.">▶</button>Hay mucha gente en la calle.</td>
 </tr>
@@ -578,7 +590,7 @@ No hay mar. En mi barrio no hay ningún cine…</em></p>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/45a4183b249335533123.mp3" title="Прослушать" aria-label="Прослушать: Hay poco ruido por la noche.">▶</button>Hay poco ruido por la noche.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/dcc6106b7892f0112daa.mp3" title="Прослушать" aria-label="Прослушать: el habitante">▶</button>el habi<strong>tan</strong>te</td>
+<td><img class="dibujo" src="../img/f315f74bedad875f0cdb.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/dcc6106b7892f0112daa.mp3" title="Прослушать" aria-label="Прослушать: el habitante">▶</button>el habi<strong>tan</strong>te</td>
 <td>житель</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/995742b506bbc73893b5.mp3" title="Прослушать" aria-label="Прослушать: En mi ciudad hay muchos habitantes.">▶</button>En mi ciudad hay muchos habitantes.</td>
 </tr>

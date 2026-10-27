@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -562,12 +574,12 @@ mantequilla. También toma un zumo de naranja. El desayuno español es pequeño.
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/3b7bfa8f96095a820866.mp3" title="Прослушать" aria-label="Прослушать: Café con leche y pan con mantequilla.">▶</button>Café con leche y pan con mantequilla.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/3d51089a885bfe63c9d5.mp3" title="Прослушать" aria-label="Прослушать: el té">▶</button>el <strong>té</strong></td>
+<td><img class="dibujo" src="../img/47bc9569c8f4a578e26f.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/3d51089a885bfe63c9d5.mp3" title="Прослушать" aria-label="Прослушать: el té">▶</button>el <strong>té</strong></td>
 <td>чай</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/ec7b20cfecbaa695818c.mp3" title="Прослушать" aria-label="Прослушать: Serguéi toma té con limón.">▶</button>Serguéi toma té con limón.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/632122fa83ed0936b5e2.mp3" title="Прослушать" aria-label="Прослушать: el zumo 🌎 el jugo">▶</button>el <strong>zu</strong>mo 🌎 el <strong>ju</strong>go</td>
+<td><img class="dibujo" src="../img/f85bc439738644f912ff.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/632122fa83ed0936b5e2.mp3" title="Прослушать" aria-label="Прослушать: el zumo 🌎 el jugo">▶</button>el <strong>zu</strong>mo 🌎 el <strong>ju</strong>go</td>
 <td>сок</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/8d24c5a27d2bd2d57e71.mp3" title="Прослушать" aria-label="Прослушать: Un zumo de naranja.">▶</button>Un zumo de naranja.</td>
 </tr>
@@ -577,12 +589,12 @@ mantequilla. También toma un zumo de naranja. El desayuno español es pequeño.
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/86fcb48240c2af053b0e.mp3" title="Прослушать" aria-label="Прослушать: Un zumo de naranja. Té con limón.">▶</button>Un zumo de naranja. Té con limón.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/1811d7012d9b6a4c2889.mp3" title="Прослушать" aria-label="Прослушать: la fruta">▶</button>la <strong>fru</strong>ta</td>
+<td><img class="dibujo" src="../img/2ca3b1bb3a7d2610d507.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/1811d7012d9b6a4c2889.mp3" title="Прослушать" aria-label="Прослушать: la fruta">▶</button>la <strong>fru</strong>ta</td>
 <td>фрукты (собирательно)</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/125b789de8a4105aaaad.mp3" title="Прослушать" aria-label="Прослушать: La fruta, de postre.">▶</button>La fruta, de postre.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/df6aaf2f30e02385579b.mp3" title="Прослушать" aria-label="Прослушать: el huevo / los huevos">▶</button>el <strong>hue</strong>vo / los <strong>hue</strong>vos</td>
+<td><img class="dibujo" src="../img/06c60afec4b39ae8800d.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/df6aaf2f30e02385579b.mp3" title="Прослушать" aria-label="Прослушать: el huevo / los huevos">▶</button>el <strong>hue</strong>vo / los <strong>hue</strong>vos</td>
 <td>яйцо / яйца</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/a4ad0bce786a009c9193.mp3" title="Прослушать" aria-label="Прослушать: En Rusia desayunan huevos.">▶</button>En Rusia desayunan huevos.</td>
 </tr>
@@ -592,7 +604,7 @@ mantequilla. También toma un zumo de naranja. El desayuno español es pequeño.
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/e0b073c95b472219f664.mp3" title="Прослушать" aria-label="Прослушать: Un bocadillo de queso y jamón.">▶</button>Un bocadillo de queso y jamón.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/54a9c9cdddc527f16b3f.mp3" title="Прослушать" aria-label="Прослушать: el bollo">▶</button>el <strong>bo</strong>llo</td>
+<td><img class="dibujo" src="../img/5607085ecb5aaef60491.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/54a9c9cdddc527f16b3f.mp3" title="Прослушать" aria-label="Прослушать: el bollo">▶</button>el <strong>bo</strong>llo</td>
 <td>булочка</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/c3d9b6225fcdb66d96e0.mp3" title="Прослушать" aria-label="Прослушать: Un café y un bollo.">▶</button>Un café y un bollo.</td>
 </tr>

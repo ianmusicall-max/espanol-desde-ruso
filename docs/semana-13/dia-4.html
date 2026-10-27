@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -619,17 +631,17 @@ grande.</em></p>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/205ef581cd29d7311017.mp3" title="Прослушать" aria-label="Прослушать: Te quedan estrechos.">▶</button>Te quedan estrechos.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/15275d6b7c134fe5beeb.mp3" title="Прослушать" aria-label="Прослушать: la corbata">▶</button>la cor<strong>ba</strong>ta</td>
+<td><img class="dibujo" src="../img/792210fdfd06f99788af.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/15275d6b7c134fe5beeb.mp3" title="Прослушать" aria-label="Прослушать: la corbata">▶</button>la cor<strong>ba</strong>ta</td>
 <td>галстук</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/10c89e12f6ee08361a6c.mp3" title="Прослушать" aria-label="Прослушать: No lleva corbata nunca.">▶</button>No lleva corbata nunca.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/3ff27a6442b639ed13cc.mp3" title="Прослушать" aria-label="Прослушать: los calcetines">▶</button>los calce<strong>ti</strong>nes</td>
+<td><img class="dibujo" src="../img/1fed481a2c76e6cd1cea.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/3ff27a6442b639ed13cc.mp3" title="Прослушать" aria-label="Прослушать: los calcetines">▶</button>los calce<strong>ti</strong>nes</td>
 <td>носки</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/66ce1fc5fb361cfab1db.mp3" title="Прослушать" aria-label="Прослушать: Unos calcetines grises.">▶</button>Unos calcetines grises.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b692329d377f1b0ca524.mp3" title="Прослушать" aria-label="Прослушать: el cinturón">▶</button>el cintu<strong>rón</strong></td>
+<td><img class="dibujo" src="../img/651f74c70388ced91297.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b692329d377f1b0ca524.mp3" title="Прослушать" aria-label="Прослушать: el cinturón">▶</button>el cintu<strong>rón</strong></td>
 <td>ремень</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/232a3678c80c0e28de0f.mp3" title="Прослушать" aria-label="Прослушать: Un cinturón negro.">▶</button>Un cinturón negro.</td>
 </tr>

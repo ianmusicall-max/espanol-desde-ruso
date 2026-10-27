@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -344,13 +356,13 @@ equis, ye, zeta. ¡Ya está!</p>
 </thead>
 <tbody>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b993e00e7cd5d32226fd.mp3" title="Прослушать" aria-label="Прослушать: el país / los países">▶</button>el país / los países</td>
+<td><img class="dibujo" src="../img/eb08667eb8de636cfdce.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b993e00e7cd5d32226fd.mp3" title="Прослушать" aria-label="Прослушать: el país / los países">▶</button>el país / los países</td>
 <td>страна / страны</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b7608035e5dfe1a82ac2.mp3" title="Прослушать" aria-label="Прослушать: la lengua, el idioma">▶</button>la lengua, el idioma</td>
 <td>язык</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/10d00b043dace2ddacbf.mp3" title="Прослушать" aria-label="Прослушать: el mundo">▶</button>el mundo</td>
+<td><img class="dibujo" src="../img/064dcb337d5bbea63a3c.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/10d00b043dace2ddacbf.mp3" title="Прослушать" aria-label="Прослушать: el mundo">▶</button>el mundo</td>
 <td>мир</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/5402413176765bd1143f.mp3" title="Прослушать" aria-label="Прослушать: hablar">▶</button>hablar</td>
 <td>говорить</td>
@@ -358,7 +370,7 @@ equis, ye, zeta. ¡Ya está!</p>
 <tr>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/c4906c637b0d1863909f.mp3" title="Прослушать" aria-label="Прослушать: millones de personas">▶</button>millones de personas</td>
 <td>миллионов человек</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/8942463e45b31ad5557c.mp3" title="Прослушать" aria-label="Прослушать: el hablante">▶</button>el hablante</td>
+<td><img class="dibujo" src="../img/4e6914e909b62a1f08b2.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/8942463e45b31ad5557c.mp3" title="Прослушать" aria-label="Прослушать: el hablante">▶</button>el hablante</td>
 <td>говорящий, носитель</td>
 </tr>
 <tr>
@@ -374,7 +386,7 @@ equis, ye, zeta. ¡Ya está!</p>
 <td>звук</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/2a2f6a6bc518c5d57560.mp3" title="Прослушать" aria-label="Прослушать: el coche / el carro / el auto">▶</button>el coche / el carro / el auto</td>
+<td><img class="dibujo" src="../img/6e21b006cf7774bd5c5e.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/2a2f6a6bc518c5d57560.mp3" title="Прослушать" aria-label="Прослушать: el coche / el carro / el auto">▶</button>el coche / el carro / el auto</td>
 <td>машина (Испания / Мексика / Аргентина)</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b0ec2e7cfb48deda7df9.mp3" title="Прослушать" aria-label="Прослушать: hoy">▶</button>hoy</td>
 <td>сегодня</td>
@@ -382,11 +394,11 @@ equis, ye, zeta. ¡Ya está!</p>
 <tr>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/049a0c396f4a7be9433d.mp3" title="Прослушать" aria-label="Прослушать: dos besos">▶</button>dos besos</td>
 <td>два поцелуя (при встрече)</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/2a0d9d49caa7a042676c.mp3" title="Прослушать" aria-label="Прослушать: un apretón de manos">▶</button>un apretón de manos</td>
+<td><img class="dibujo" src="../img/dff3fc71c887ce3ea15b.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/2a0d9d49caa7a042676c.mp3" title="Прослушать" aria-label="Прослушать: un apretón de manos">▶</button>un apretón de manos</td>
 <td>рукопожатие</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/beaf17cfb56d48af6996.mp3" title="Прослушать" aria-label="Прослушать: un abrazo">▶</button>un abrazo</td>
+<td><img class="dibujo" src="../img/5501c84b21fc10520792.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/beaf17cfb56d48af6996.mp3" title="Прослушать" aria-label="Прослушать: un abrazo">▶</button>un abrazo</td>
 <td>объятие</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/309e736fadccccbe2764.mp3" title="Прослушать" aria-label="Прослушать: ¡Ya está!">▶</button>¡Ya está!</td>
 <td>Готово!</td>

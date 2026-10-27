@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -548,17 +560,17 @@ Javier y Lucía…</em></p>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/93366c1eebb1926d3595.mp3" title="Прослушать" aria-label="Прослушать: su mujer, sus hijos">▶</button>su mujer, sus hijos</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/6112443c4f6f696a4614.mp3" title="Прослушать" aria-label="Прослушать: el marido">▶</button>el ma<strong>ri</strong>do</td>
+<td><img class="dibujo" src="../img/a227c1de36c0ddfd7868.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/6112443c4f6f696a4614.mp3" title="Прослушать" aria-label="Прослушать: el marido">▶</button>el ma<strong>ri</strong>do</td>
 <td>муж</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/d3cb9d37e406eb836a4a.mp3" title="Прослушать" aria-label="Прослушать: Su marido es médico.">▶</button>Su marido es médico.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/fd64069f121968bf3149.mp3" title="Прослушать" aria-label="Прослушать: la mujer">▶</button>la mu<strong>jer</strong></td>
+<td><img class="dibujo" src="../img/66c5b0d1eb0e3c1c1641.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/fd64069f121968bf3149.mp3" title="Прослушать" aria-label="Прослушать: la mujer">▶</button>la mu<strong>jer</strong></td>
 <td>жена; женщина</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/9faff0c6d26ea73e82eb.mp3" title="Прослушать" aria-label="Прослушать: Marta es su mujer.">▶</button>Marta es su mujer.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/9f7caffa5442857c82d9.mp3" title="Прослушать" aria-label="Прослушать: el sobrino / la sobrina">▶</button>el so<strong>bri</strong>no / la so<strong>bri</strong>na</td>
+<td><img class="dibujo" src="../img/9550be4452866fd16b39.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/9f7caffa5442857c82d9.mp3" title="Прослушать" aria-label="Прослушать: el sobrino / la sobrina">▶</button>el so<strong>bri</strong>no / la so<strong>bri</strong>na</td>
 <td>племянник / племянница</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/79188568ca1b5c6c2ec9.mp3" title="Прослушать" aria-label="Прослушать: Estos son mis sobrinos.">▶</button>Estos son mis sobrinos.</td>
 </tr>
@@ -578,7 +590,7 @@ Javier y Lucía…</em></p>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/9429ef68bd1380f1d0a9.mp3" title="Прослушать" aria-label="Прослушать: Es el coche de ella.">▶</button>Es el coche de ella.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/a215a3e95b944413bd56.mp3" title="Прослушать" aria-label="Прослушать: el señor / la señora">▶</button>el se<strong>ñor</strong> / la se<strong>ño</strong>ra</td>
+<td><img class="dibujo" src="../img/8fbf431ea637ec599a7c.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/a215a3e95b944413bd56.mp3" title="Прослушать" aria-label="Прослушать: el señor / la señora">▶</button>el se<strong>ñor</strong> / la se<strong>ño</strong>ra</td>
 <td>господин / госпожа</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/39a1521e4591bafeba7d.mp3" title="Прослушать" aria-label="Прослушать: Señor López, ¿son sus nietos?">▶</button>Señor López, ¿son sus nietos?</td>
 </tr>

@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -572,32 +584,32 @@ está al final de la calle Nueva…</em></p>
 </thead>
 <tbody>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/a8fdfbb31dbb527b8e51.mp3" title="Прослушать" aria-label="Прослушать: el banco">▶</button>el <strong>ban</strong>co</td>
+<td><img class="dibujo" src="../img/ba5bd99bffc98d156e3e.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/a8fdfbb31dbb527b8e51.mp3" title="Прослушать" aria-label="Прослушать: el banco">▶</button>el <strong>ban</strong>co</td>
 <td>банк</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/583752db8a9220e77d23.mp3" title="Прослушать" aria-label="Прослушать: ¿Dónde está el banco?">▶</button>¿Dónde está el banco?</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/92057f8403b93fa1de4f.mp3" title="Прослушать" aria-label="Прослушать: la farmacia">▶</button>la far<strong>ma</strong>cia</td>
+<td><img class="dibujo" src="../img/13cf1d9df75cfb623d94.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/92057f8403b93fa1de4f.mp3" title="Прослушать" aria-label="Прослушать: la farmacia">▶</button>la far<strong>ma</strong>cia</td>
 <td>аптека</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b725ea7338e5c2f9a819.mp3" title="Прослушать" aria-label="Прослушать: La farmacia está enfrente del hospital.">▶</button>La farmacia está enfrente del hospital.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/bedc27f886bdd4c6c2c1.mp3" title="Прослушать" aria-label="Прослушать: el supermercado">▶</button>el supermer<strong>ca</strong>do</td>
+<td><img class="dibujo" src="../img/5648ed91087e961f67fa.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/bedc27f886bdd4c6c2c1.mp3" title="Прослушать" aria-label="Прослушать: el supermercado">▶</button>el supermer<strong>ca</strong>do</td>
 <td>супермаркет</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/bab642828ac8a17d580f.mp3" title="Прослушать" aria-label="Прослушать: Voy al supermercado.">▶</button>Voy al supermercado.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/02e8bf91933619347c04.mp3" title="Прослушать" aria-label="Прослушать: la estación">▶</button>la esta<strong>ción</strong></td>
+<td><img class="dibujo" src="../img/9fe9d3a78edeb576f71e.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/02e8bf91933619347c04.mp3" title="Прослушать" aria-label="Прослушать: la estación">▶</button>la esta<strong>ción</strong></td>
 <td>вокзал, станция</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/afb5e615be03734231fe.mp3" title="Прослушать" aria-label="Прослушать: La estación está al final de la calle.">▶</button>La estación está al final de la calle.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/f6d4d6d609ec6e347ee7.mp3" title="Прослушать" aria-label="Прослушать: el parque">▶</button>el <strong>par</strong>que</td>
+<td><img class="dibujo" src="../img/bd89ad301ef46ace1185.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/f6d4d6d609ec6e347ee7.mp3" title="Прослушать" aria-label="Прослушать: el parque">▶</button>el <strong>par</strong>que</td>
 <td>парк</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/da3e56e0fc12d84dcc75.mp3" title="Прослушать" aria-label="Прослушать: El parque está detrás del hospital.">▶</button>El parque está detrás del hospital.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/71db3ae7e58e3a719bf2.mp3" title="Прослушать" aria-label="Прослушать: el hospital">▶</button>el hospi<strong>tal</strong></td>
+<td><img class="dibujo" src="../img/3bf57754740890d8df74.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/71db3ae7e58e3a719bf2.mp3" title="Прослушать" aria-label="Прослушать: el hospital">▶</button>el hospi<strong>tal</strong></td>
 <td>больница</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b55e76073e0a3bc8351c.mp3" title="Прослушать" aria-label="Прослушать: El hospital está cerca del centro.">▶</button>El hospital está cerca del centro.</td>
 </tr>
@@ -607,7 +619,7 @@ está al final de la calle Nueva…</em></p>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/5c8cbc94710afc942d6e.mp3" title="Прослушать" aria-label="Прослушать: Correos está enfrente de la plaza.">▶</button>Correos está enfrente de la plaza.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b0386c4d071fd683f044.mp3" title="Прослушать" aria-label="Прослушать: la plaza">▶</button>la <strong>pla</strong>za</td>
+<td><img class="dibujo" src="../img/3bf628fc85f94a71e013.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b0386c4d071fd683f044.mp3" title="Прослушать" aria-label="Прослушать: la plaza">▶</button>la <strong>pla</strong>za</td>
 <td>площадь</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/6d60ffad200b3b1ecf21.mp3" title="Прослушать" aria-label="Прослушать: La plaza está en el centro.">▶</button>La plaza está en el centro.</td>
 </tr>
@@ -617,7 +629,7 @@ está al final de la calle Nueva…</em></p>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/a7015ba37c97f739a5b5.mp3" title="Прослушать" aria-label="Прослушать: Enfrente de mi casa hay un parque.">▶</button>Enfrente de mi casa hay un parque.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/c44cf9891981d75f4c59.mp3" title="Прослушать" aria-label="Прослушать: la esquina">▶</button>la es<strong>qui</strong>na</td>
+<td><img class="dibujo" src="../img/5d349a321cf1456891ac.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/c44cf9891981d75f4c59.mp3" title="Прослушать" aria-label="Прослушать: la esquina">▶</button>la es<strong>qui</strong>na</td>
 <td>угол</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/6708f00a169d7f973c60.mp3" title="Прослушать" aria-label="Прослушать: El bar está en la esquina.">▶</button>El bar está en la esquina.</td>
 </tr>

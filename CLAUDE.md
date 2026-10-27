@@ -1004,6 +1004,113 @@ el revisor de enlaces rotos NO los mira desde que salta los scripts (2026-10-26)
 Hay una prueba que los comprueba uno a uno: o se comprueban ahí o no los
 comprueba nadie.
 
+## Los dibujos del vocabulario (2026-10-27)
+
+El profesor preguntó si se pueden añadir imágenes educativas. **Sí, y cuestan
+1,50 USD una sola vez**: 300 sustantivos dibujados con `gpt-image-1-mini`, que
+salen delante de la palabra en las tablas de vocabulario. 341 dibujos en 69 de
+las 100 lecciones, 4,7 MB.
+
+**No se dibujan las 976 entradas del vocabulario, y ese es el dato que manda.**
+471 llevan artículo; las otras 505 son saludos, adjetivos y palabras
+funcionales —`hola`, `muy`, `mi/mis`, `mayor`— que no tienen dibujo posible.
+De los sustantivos se quitan a mano 66 abstractos: `el IVA`, `la fianza`, `el
+huso horario`, `la tilde`, `el patronímico`… y `la regla`, que es regla de
+medir Y norma, así que el dibujo enseñaría la acepción equivocada.
+
+**`la Península` y `el Día del Padre` quedan fuera por la regla 7**: una imagen
+generada de un sitio o una fiesta reales es un invento con pinta de dato.
+
+### Lo que decidió la muestra, y por qué se hizo muestra
+
+Igual que con la voz del audio: **tres estilos, seis palabras, 0,09 USD**, y el
+profesor eligió **plano** sobre acuarela y foto. No es cuestión de gusto:
+
+- **Es el único inequívoco.** «La profesora» en plano trae puntero y libro, así
+  que se lee «profesora»; en foto es una señora con una carpeta, que podría ser
+  cualquiera.
+- **Es la paleta del sitio** (crema `#f4f1ea`). Las fotos meten grises de
+  estudio que al lado de una lección cantan.
+- **Pesa un tercio** (10-13 KB contra 27-31) y **sigue legible a 56 px**, que
+  es justo lo que una foto no aguanta.
+- **No inventa personas.** Las de «foto» eran caras generadas con pinta de
+  persona real.
+
+**Y la muestra encontró un fallo que ninguna lectura habría encontrado**: «el
+trabajo» salió como un señor en un escritorio CON CASCO DE OBRA en plano, y
+como un hombre con una pala en acuarela. Ninguna dice «trabajo»: dicen
+«oficina» y «obrero». Es un abstracto y no avisa de que lo es hasta que se ve
+dibujado. Está fuera, con «el grupo».
+
+### `scripts/generar_imagenes.py`
+
+Hermano de `generar_audio.py` y con sus tres decisiones: el hash del pedido
+entero como nombre, el `.parcial` que se renombra al final, y el índice
+reconstruido de lo que hay en disco. Lo propio:
+
+- **Ni una letra en la imagen.** Los modelos escriben texto con faltas, y un
+  dibujo de «la mesa» con «MEZA» encima le enseña al alumno la falta. Los tres
+  estilos comparten esa cláusula y hay una prueba que la exige. En las 300
+  generadas no salió ni una.
+- **Un solo estilo**, que entra en el hash: sueltas saldrían 300 estilos y el
+  curso parecería un vertedero de clipart. Así además dos estilos conviven en
+  disco y se comparan sin pisarse.
+- **512 px y webp, no los 1024 que vienen.** Se ven a 56 px, y git guarda el
+  historial para siempre: subir las grandes y encogerlas después deja el
+  repositorio con los dos juegos. Es la lección del audio, recodificado a
+  64 kbps ANTES del primer commit.
+- **TRES hilos y no seis.** La primera tanda con seis perdió **142 de 300** con
+  un 429: el límite de imágenes por minuto es mucho más bajo que el de voz,
+  porque cada imagen cuesta mucho más de generar. Ahora reintenta hasta cuatro
+  veces y **respeta el «try again in 2.48s»** que el propio mensaje de OpenAI
+  trae, que sabe mejor que nosotros cuánto falta. Lo que NO hace es tragarse el
+  último error: una tanda que miente sobre lo que consiguió es peor que una que
+  falla.
+
+**`--modelos` pregunta a la cuenta qué modelos de imagen tiene**, y fue útil el
+primer día: las fuentes de terceros decían que `gpt-image-1` se había retirado
+el 23 de octubre, y la cuenta lo listaba tan vivo como `gpt-image-2.5`. Un dato
+de un blog sobre un proveedor se comprueba contra el proveedor.
+
+### Cómo salen en la página
+
+- **Encima de la palabra, no al lado.** A 420 px la columna española mide unos
+  110, así que con el dibujo en línea le quedaban 50 a la palabra y «el marido»
+  se partía por la mitad. **Se vio en una captura del móvil, no razonándolo.**
+- **56 px**, porque la palabra manda y el dibujo acompaña. Crece al pasar el
+  ratón en escritorio, que sale gratis.
+- **El `alt` va vacío a propósito.** La palabra está al lado y su traducción en
+  la columna siguiente: un lector de pantalla que leyera el dibujo diría lo
+  mismo dos veces.
+- **Las DOS tablas de vocabulario**, que tienen formas distintas: `Словарь дня`
+  (Español·Русский·Пример, columna 0) y el `3. Слова` de los domingos de
+  cultura (Español·Русский·Español·Русский, columnas 0 y 2). El domingo se
+  descubrió tarde: las 50 lecciones de cultura generaban sus dibujos y no los
+  enseñaba ninguna, porque el extractor del vocabulario SÍ lee esa tabla y el
+  montaje no la miraba. Eran 193 dibujos; con ella, 341.
+- **Ninguna otra tabla.** En las de fonética la primera columna es una letra y
+  en las de conjugación una forma verbal: un dibujo ahí no enseñaría nada.
+
+**Y el fallo que costó una construcción entera en blanco**: `_botones_de_audio`
+corre ANTES e inserta un `<button>▶</button>` en la celda. Quitando solo las
+etiquetas para leer el texto, el «▶» se quedaba y la celda decía `▶el marido`,
+que no casa con ninguna entrada del índice. **Las 100 lecciones se
+construyeron sin un solo dibujo mientras la prueba de al lado seguía en
+verde**, porque su HTML de mentira no tenía botones. Ahora se quita el
+`<button>` ENTERO —no solo sus etiquetas, que así aguanta que mañana lleve otro
+signo— y hay una prueba que pone el botón, que es el camino real.
+
+**El índice se copia a la construcción de prueba**, como el del audio desde el
+26: si no, `test_docs_esta_al_dia` compara un sitio con dibujos contra uno sin
+ellos y acusa a `docs/` de estar desactualizado.
+
+**Lo que esto NO hace**: las 300 están sin revisar. Por la regla 6 el profesor
+tiene que verlas una a una, y no es trámite —si «el sobrino» sale dibujado como
+una niña, el alumno aprende lo contrario y nada falla—. Las que más conviene
+mirar son las ambiguas que sí se dejaron: `el banco` (asiento o entidad), `la
+planta` (vegetal o piso), `el partido` (deporte o político), `la entrada`
+(billete o puerta) y `la carta` (misiva o menú).
+
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.

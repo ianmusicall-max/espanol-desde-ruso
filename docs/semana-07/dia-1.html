@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -589,42 +601,42 @@ Tiene un baño y un pasillo pequeño. No tengo balcón. Vivo con mi familia.</em
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/7cd4625d3506163e351d.mp3" title="Прослушать" aria-label="Прослушать: ¿Dónde vives? — Vivo en Moscú.">▶</button>¿Dónde vives? — Vivo en Moscú.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/cf0d055d1167697e63c2.mp3" title="Прослушать" aria-label="Прослушать: la casa">▶</button>la <strong>ca</strong>sa</td>
+<td><img class="dibujo" src="../img/2afe4f3f11894624e189.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/cf0d055d1167697e63c2.mp3" title="Прослушать" aria-label="Прослушать: la casa">▶</button>la <strong>ca</strong>sa</td>
 <td>дом</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/5848d4107c55d072c278.mp3" title="Прослушать" aria-label="Прослушать: Nikolái vive en una casa.">▶</button>Nikolái vive en una casa.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/8f8423fe2084b72e38e3.mp3" title="Прослушать" aria-label="Прослушать: la habitación">▶</button>la habita<strong>ción</strong></td>
+<td><img class="dibujo" src="../img/c00c234785ad0353f630.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/8f8423fe2084b72e38e3.mp3" title="Прослушать" aria-label="Прослушать: la habitación">▶</button>la habita<strong>ción</strong></td>
 <td>комната</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/29662e8d75b8bc2ad470.mp3" title="Прослушать" aria-label="Прослушать: El piso tiene cuatro habitaciones.">▶</button>El piso tiene cuatro habitaciones.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/180374550644a74686a6.mp3" title="Прослушать" aria-label="Прослушать: el salón">▶</button>el sa<strong>lón</strong></td>
+<td><img class="dibujo" src="../img/639116ed5a6a91dfc071.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/180374550644a74686a6.mp3" title="Прослушать" aria-label="Прослушать: el salón">▶</button>el sa<strong>lón</strong></td>
 <td>гостиная</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/48e345733a848823fe1e.mp3" title="Прослушать" aria-label="Прослушать: En el salón hay un sofá.">▶</button>En el salón hay un sofá.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/63eeab53fe59b94705ef.mp3" title="Прослушать" aria-label="Прослушать: la cocina">▶</button>la co<strong>ci</strong>na</td>
+<td><img class="dibujo" src="../img/782e869779d1576edd66.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/63eeab53fe59b94705ef.mp3" title="Прослушать" aria-label="Прослушать: la cocina">▶</button>la co<strong>ci</strong>na</td>
 <td>кухня</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/773efe6da9e299668054.mp3" title="Прослушать" aria-label="Прослушать: La cocina es pequeña.">▶</button>La cocina es pequeña.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/056fbe9ac12391fcb19b.mp3" title="Прослушать" aria-label="Прослушать: el dormitorio">▶</button>el dormi<strong>to</strong>rio</td>
+<td><img class="dibujo" src="../img/2b81ec9bb96f63e8e347.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/056fbe9ac12391fcb19b.mp3" title="Прослушать" aria-label="Прослушать: el dormitorio">▶</button>el dormi<strong>to</strong>rio</td>
 <td>спальня</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/ceb29564c99fa5a24357.mp3" title="Прослушать" aria-label="Прослушать: Mi piso tiene un dormitorio.">▶</button>Mi piso tiene un dormitorio.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/5804f3c454741042de7d.mp3" title="Прослушать" aria-label="Прослушать: el baño">▶</button>el <strong>ba</strong>ño</td>
+<td><img class="dibujo" src="../img/d8b7b5e6498962939072.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/5804f3c454741042de7d.mp3" title="Прослушать" aria-label="Прослушать: el baño">▶</button>el <strong>ba</strong>ño</td>
 <td>ванная, туалет</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/859eccdf33f5263d3fba.mp3" title="Прослушать" aria-label="Прослушать: El baño está al lado de la cocina.">▶</button>El baño está al lado de la cocina.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/78e99b7b5a04e088c498.mp3" title="Прослушать" aria-label="Прослушать: el pasillo">▶</button>el pa<strong>si</strong>llo</td>
+<td><img class="dibujo" src="../img/68a0cb614a94294f9103.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/78e99b7b5a04e088c498.mp3" title="Прослушать" aria-label="Прослушать: el pasillo">▶</button>el pa<strong>si</strong>llo</td>
 <td>коридор</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/d10864969bff34a1f1c7.mp3" title="Прослушать" aria-label="Прослушать: El pasillo es largo.">▶</button>El pasillo es largo.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/221742f752521a513f04.mp3" title="Прослушать" aria-label="Прослушать: el balcón">▶</button>el bal<strong>cón</strong></td>
+<td><img class="dibujo" src="../img/0e055abb47f44a4a3327.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/221742f752521a513f04.mp3" title="Прослушать" aria-label="Прослушать: el balcón">▶</button>el bal<strong>cón</strong></td>
 <td>балкон</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/eb1e4a1e407860a53949.mp3" title="Прослушать" aria-label="Прослушать: ¿Tienes balcón? — Sí, un balcón pequeño.">▶</button>¿Tienes balcón? — Sí, un balcón pequeño.</td>
 </tr>

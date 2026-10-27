@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -405,27 +417,27 @@ español de veinte años dice <em>un tío</em>, casi nunca habla de su familia.<
 </thead>
 <tbody>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/5a335c692f7cef6f6a9f.mp3" title="Прослушать" aria-label="Прослушать: la familia">▶</button>la familia</td>
+<td><img class="dibujo" src="../img/8b75cf77da46f7ab3876.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/5a335c692f7cef6f6a9f.mp3" title="Прослушать" aria-label="Прослушать: la familia">▶</button>la familia</td>
 <td>семья</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/69ede0e2b68bbfdfe92d.mp3" title="Прослушать" aria-label="Прослушать: la parentela">▶</button>la parentela</td>
 <td>родня</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/301b11f64d0628c90033.mp3" title="Прослушать" aria-label="Прослушать: los parientes">▶</button>los parientes</td>
+<td><img class="dibujo" src="../img/b400b597acd3deb7d1c1.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/301b11f64d0628c90033.mp3" title="Прослушать" aria-label="Прослушать: los parientes">▶</button>los parientes</td>
 <td>родственники</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/9518f950a28ad5e82187.mp3" title="Прослушать" aria-label="Прослушать: el primo / la prima">▶</button>el primo / la prima</td>
+<td><img class="dibujo" src="../img/4d26ee032fcdfe928faa.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/9518f950a28ad5e82187.mp3" title="Прослушать" aria-label="Прослушать: el primo / la prima">▶</button>el primo / la prima</td>
 <td>двоюродный брат / сестра</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/e7bed7a0c99f57738978.mp3" title="Прослушать" aria-label="Прослушать: los abuelos">▶</button>los abuelos</td>
+<td><img class="dibujo" src="../img/7ba5cc5fc4dcd1615e55.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/e7bed7a0c99f57738978.mp3" title="Прослушать" aria-label="Прослушать: los abuelos">▶</button>los abuelos</td>
 <td>дедушка с бабушкой</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/f71bac46f68e7df46919.mp3" title="Прослушать" aria-label="Прослушать: cuidar">▶</button>cuidar</td>
 <td>заботиться, присматривать</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/a2232a0055c2be3875f4.mp3" title="Прослушать" aria-label="Прослушать: los nietos">▶</button>los nietos</td>
+<td><img class="dibujo" src="../img/af0029d4b2b65f9a73b9.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/a2232a0055c2be3875f4.mp3" title="Прослушать" aria-label="Прослушать: los nietos">▶</button>los nietos</td>
 <td>внуки</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/0c48f84777654b398866.mp3" title="Прослушать" aria-label="Прослушать: el colegio">▶</button>el colegio</td>
+<td><img class="dibujo" src="../img/9f963f2433e6cf087996.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/0c48f84777654b398866.mp3" title="Прослушать" aria-label="Прослушать: el colegio">▶</button>el colegio</td>
 <td>школа</td>
 </tr>
 <tr>
@@ -435,13 +447,13 @@ español de veinte años dice <em>un tío</em>, casi nunca habla de su familia.<
 <td>есть вместе</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/1c3f445753ea7d3aa198.mp3" title="Прослушать" aria-label="Прослушать: el piso">▶</button>el piso</td>
+<td><img class="dibujo" src="../img/6aad838b0693982d865e.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/1c3f445753ea7d3aa198.mp3" title="Прослушать" aria-label="Прослушать: el piso">▶</button>el piso</td>
 <td>квартира</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/64687ea38328437539e6.mp3" title="Прослушать" aria-label="Прослушать: caro">▶</button>caro</td>
 <td>дорогой</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/65a2996f8985d612e367.mp3" title="Прослушать" aria-label="Прослушать: el joven / los jóvenes">▶</button>el joven / los jóvenes</td>
+<td><img class="dibujo" src="../img/2294bc23c1bdcb998e58.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/65a2996f8985d612e367.mp3" title="Прослушать" aria-label="Прослушать: el joven / los jóvenes">▶</button>el joven / los jóvenes</td>
 <td>молодой человек / молодёжь</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/6e96f71a29de0d6cbefa.mp3" title="Прослушать" aria-label="Прослушать: salir de casa">▶</button>salir de casa</td>
 <td>уйти из дома</td>
@@ -449,19 +461,19 @@ español de veinte años dice <em>un tío</em>, casi nunca habla de su familia.<
 <tr>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/abc0489c2aead1a9f979.mp3" title="Прослушать" aria-label="Прослушать: el nombre">▶</button>el nombre</td>
 <td>имя</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/a9b3aa95e43f8f76f603.mp3" title="Прослушать" aria-label="Прослушать: el apellido">▶</button>el apellido</td>
+<td><img class="dibujo" src="../img/c26720cf442d5848f3e8.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/a9b3aa95e43f8f76f603.mp3" title="Прослушать" aria-label="Прослушать: el apellido">▶</button>el apellido</td>
 <td>фамилия</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/8ddd137764e247a379aa.mp3" title="Прослушать" aria-label="Прослушать: los padrinos">▶</button>los padrinos</td>
+<td><img class="dibujo" src="../img/7dc687dde127679cab10.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/8ddd137764e247a379aa.mp3" title="Прослушать" aria-label="Прослушать: los padrinos">▶</button>los padrinos</td>
 <td>крёстные</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/9a517fea514f20077af7.mp3" title="Прослушать" aria-label="Прослушать: el bautizo">▶</button>el bautizo</td>
+<td><img class="dibujo" src="../img/ae22a6bb7eeafbb07acd.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/9a517fea514f20077af7.mp3" title="Прослушать" aria-label="Прослушать: el bautizo">▶</button>el bautizo</td>
 <td>крестины</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/aae8d5b3fea045e3bcb2.mp3" title="Прослушать" aria-label="Прослушать: el compadre / la comadre">▶</button>el compadre / la comadre</td>
+<td><img class="dibujo" src="../img/2ead7d1c692128230918.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/aae8d5b3fea045e3bcb2.mp3" title="Прослушать" aria-label="Прослушать: el compadre / la comadre">▶</button>el compadre / la comadre</td>
 <td>кум / кума</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/7a3fa9cc63e48bf5ed07.mp3" title="Прослушать" aria-label="Прослушать: la quinceañera">▶</button>la quinceañera</td>
+<td><img class="dibujo" src="../img/7b2a7bd4f551a5c60d88.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/7a3fa9cc63e48bf5ed07.mp3" title="Прослушать" aria-label="Прослушать: la quinceañera">▶</button>la quinceañera</td>
 <td>праздник пятнадцатилетия</td>
 </tr>
 </tbody>

@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -370,55 +382,55 @@ todo el invierno: es la diferencia que más se nota.</p>
 </thead>
 <tbody>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/6e2e4453f992b511d37f.mp3" title="Прослушать" aria-label="Прослушать: el barrio">▶</button>el barrio</td>
+<td><img class="dibujo" src="../img/16c0489a28c369bbe83d.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/6e2e4453f992b511d37f.mp3" title="Прослушать" aria-label="Прослушать: el barrio">▶</button>el barrio</td>
 <td>район</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/1978bf93702524153d41.mp3" title="Прослушать" aria-label="Прослушать: el vecino / la vecina">▶</button>el vecino / la vecina</td>
+<td><img class="dibujo" src="../img/396e76652fcaf2a6e984.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/1978bf93702524153d41.mp3" title="Прослушать" aria-label="Прослушать: el vecino / la vecina">▶</button>el vecino / la vecina</td>
 <td>сосед / соседка</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/cc3d3b6e4736d8145b8b.mp3" title="Прослушать" aria-label="Прослушать: el edificio">▶</button>el edificio</td>
+<td><img class="dibujo" src="../img/e62801d5472af9fecbd2.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/cc3d3b6e4736d8145b8b.mp3" title="Прослушать" aria-label="Прослушать: el edificio">▶</button>el edificio</td>
 <td>здание, дом</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b6e798ff4051f383f3dc.mp3" title="Прослушать" aria-label="Прослушать: el portal">▶</button>el portal</td>
+<td><img class="dibujo" src="../img/29ee8e9d03c8ab8eb69e.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b6e798ff4051f383f3dc.mp3" title="Прослушать" aria-label="Прослушать: el portal">▶</button>el portal</td>
 <td>подъезд</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/fe44acb79328d0891c91.mp3" title="Прослушать" aria-label="Прослушать: la escalera">▶</button>la escalera</td>
+<td><img class="dibujo" src="../img/037f56746c3d8e0b2373.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/fe44acb79328d0891c91.mp3" title="Прослушать" aria-label="Прослушать: la escalera">▶</button>la escalera</td>
 <td>лестница</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b254b61539de30d03cf8.mp3" title="Прослушать" aria-label="Прослушать: el ascensor">▶</button>el ascensor</td>
+<td><img class="dibujo" src="../img/c9b675d72662c7e15144.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b254b61539de30d03cf8.mp3" title="Прослушать" aria-label="Прослушать: el ascensor">▶</button>el ascensor</td>
 <td>лифт</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/5acabe747635920a19f2.mp3" title="Прослушать" aria-label="Прослушать: el patio">▶</button>el patio</td>
+<td><img class="dibujo" src="../img/081625c5a0b68ec832e0.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/5acabe747635920a19f2.mp3" title="Прослушать" aria-label="Прослушать: el patio">▶</button>el patio</td>
 <td>внутренний двор</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/4c5cc3ffde0cf425c65a.mp3" title="Прослушать" aria-label="Прослушать: la terraza">▶</button>la terraza</td>
+<td><img class="dibujo" src="../img/c50cb3d2ef6384dc2554.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/4c5cc3ffde0cf425c65a.mp3" title="Прослушать" aria-label="Прослушать: la terraza">▶</button>la terraza</td>
 <td>терраса; веранда кафе</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/8c7b3aabb8ffb0d5e9e1.mp3" title="Прослушать" aria-label="Прослушать: la azotea">▶</button>la azotea</td>
+<td><img class="dibujo" src="../img/9dc9f7b3fd901bbfea86.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/8c7b3aabb8ffb0d5e9e1.mp3" title="Прослушать" aria-label="Прослушать: la azotea">▶</button>la azotea</td>
 <td>плоская крыша-терраса</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/7050d8cb1bf0d54e1ab2.mp3" title="Прослушать" aria-label="Прослушать: el chalet">▶</button>el chalet</td>
+<td><img class="dibujo" src="../img/6e56dc120cdc50cd78f7.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/7050d8cb1bf0d54e1ab2.mp3" title="Прослушать" aria-label="Прослушать: el chalet">▶</button>el chalet</td>
 <td>отдельный дом с садом</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/40bbde4393e547f1118d.mp3" title="Прослушать" aria-label="Прослушать: la casa adosada">▶</button>la casa adosada</td>
+<td><img class="dibujo" src="../img/28b3d77604cb8993271b.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/40bbde4393e547f1118d.mp3" title="Прослушать" aria-label="Прослушать: la casa adosada">▶</button>la casa adosada</td>
 <td>дом в общей линии домов</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/54c66b2dccc224bfd3ce.mp3" title="Прослушать" aria-label="Прослушать: el pueblo">▶</button>el pueblo</td>
+<td><img class="dibujo" src="../img/c6dc441eca5d60e3ea52.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/54c66b2dccc224bfd3ce.mp3" title="Прослушать" aria-label="Прослушать: el pueblo">▶</button>el pueblo</td>
 <td>посёлок, деревня</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/9aaa3d184d48e45995c0.mp3" title="Прослушать" aria-label="Прослушать: la plaza mayor">▶</button>la plaza mayor</td>
+<td><img class="dibujo" src="../img/92698364c357a089e998.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/9aaa3d184d48e45995c0.mp3" title="Прослушать" aria-label="Прослушать: la plaza mayor">▶</button>la plaza mayor</td>
 <td>главная площадь</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/e50b304e8836151a2498.mp3" title="Прослушать" aria-label="Прослушать: el ayuntamiento">▶</button>el ayuntamiento</td>
+<td><img class="dibujo" src="../img/e038f1c241a68df3c3f4.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/e50b304e8836151a2498.mp3" title="Прослушать" aria-label="Прослушать: el ayuntamiento">▶</button>el ayuntamiento</td>
 <td>мэрия</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/91bbe46aeddcb9f2382e.mp3" title="Прослушать" aria-label="Прослушать: la iglesia">▶</button>la iglesia</td>
+<td><img class="dibujo" src="../img/ef739ab1d06d0ee34cf3.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/91bbe46aeddcb9f2382e.mp3" title="Прослушать" aria-label="Прослушать: la iglesia">▶</button>la iglesia</td>
 <td>церковь</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/5778a8371eef42706959.mp3" title="Прослушать" aria-label="Прослушать: el mercado">▶</button>el mercado</td>
+<td><img class="dibujo" src="../img/8a6e07a12c5df495485b.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/5778a8371eef42706959.mp3" title="Прослушать" aria-label="Прослушать: el mercado">▶</button>el mercado</td>
 <td>рынок</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/31d832964cd534518073.mp3" title="Прослушать" aria-label="Прослушать: la calefacción">▶</button>la calefacción</td>
+<td><img class="dibujo" src="../img/029f34fac617ab2dc176.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/31d832964cd534518073.mp3" title="Прослушать" aria-label="Прослушать: la calefacción">▶</button>la calefacción</td>
 <td>отопление</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/72cd2379ac23d5a7c260.mp3" title="Прослушать" aria-label="Прослушать: la comunidad">▶</button>la comunidad</td>
 <td>товарищество жильцов</td>

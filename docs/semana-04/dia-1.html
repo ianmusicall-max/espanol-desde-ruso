@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -541,17 +553,17 @@ papeles. En mi mochila hay un estuche, una carpeta y tres bolígrafos…</em></p
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/879b6850143cbdc01383.mp3" title="Прослушать" aria-label="Прослушать: ¿Cuántas gomas hay?">▶</button>¿Cuántas gomas hay?</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/e10e404015219a46a204.mp3" title="Прослушать" aria-label="Прослушать: el estuche">▶</button>el es<strong>tu</strong>che</td>
+<td><img class="dibujo" src="../img/0a569847ab0e0903b637.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/e10e404015219a46a204.mp3" title="Прослушать" aria-label="Прослушать: el estuche">▶</button>el es<strong>tu</strong>che</td>
 <td>пенал</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/8d289fbef9cabea7d36c.mp3" title="Прослушать" aria-label="Прослушать: En el estuche hay una regla.">▶</button>En el estuche hay una regla.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/ba920495a80d94cfe89f.mp3" title="Прослушать" aria-label="Прослушать: la carpeta">▶</button>la car<strong>pe</strong>ta</td>
+<td><img class="dibujo" src="../img/16ad197758eabeec3885.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/ba920495a80d94cfe89f.mp3" title="Прослушать" aria-label="Прослушать: la carpeta">▶</button>la car<strong>pe</strong>ta</td>
 <td>папка</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/783438adce297cf8b50c.mp3" title="Прослушать" aria-label="Прослушать: Hay unos papeles en la carpeta.">▶</button>Hay unos papeles en la carpeta.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/17749ad7bca7d528f3f0.mp3" title="Прослушать" aria-label="Прослушать: las tijeras">▶</button>las ti<strong>je</strong>ras</td>
+<td><img class="dibujo" src="../img/1fca7975ef1a5f48bd72.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/17749ad7bca7d528f3f0.mp3" title="Прослушать" aria-label="Прослушать: las tijeras">▶</button>las ti<strong>je</strong>ras</td>
 <td>ножницы</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/eaa0eb7683443c47c44a.mp3" title="Прослушать" aria-label="Прослушать: No hay tijeras.">▶</button>No hay tijeras.</td>
 </tr>
@@ -561,12 +573,12 @@ papeles. En mi mochila hay un estuche, una carpeta y tres bolígrafos…</em></p
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/5e8e5deccc5792fb75ed.mp3" title="Прослушать" aria-label="Прослушать: Hay una regla y una goma.">▶</button>Hay una regla y una goma.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/5564ed13e4a4a5ba0a7d.mp3" title="Прослушать" aria-label="Прослушать: el cargador">▶</button>el carga<strong>dor</strong></td>
+<td><img class="dibujo" src="../img/a0b4f77dde0ac44f6553.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/5564ed13e4a4a5ba0a7d.mp3" title="Прослушать" aria-label="Прослушать: el cargador">▶</button>el carga<strong>dor</strong></td>
 <td>зарядное устройство</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/355066176d1e692ed1b3.mp3" title="Прослушать" aria-label="Прослушать: Hoy no hay cargador.">▶</button>Hoy no hay cargador.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/5265d33ed6982133cc0a.mp3" title="Прослушать" aria-label="Прослушать: la cartera">▶</button>la car<strong>te</strong>ra</td>
+<td><img class="dibujo" src="../img/1c421d8b4af8b1fb0d05.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/5265d33ed6982133cc0a.mp3" title="Прослушать" aria-label="Прослушать: la cartera">▶</button>la car<strong>te</strong>ra</td>
 <td>кошелёк, бумажник</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/ff867fdf217e88998eb2.mp3" title="Прослушать" aria-label="Прослушать: La cartera está en la mochila.">▶</button>La cartera está en la mochila.</td>
 </tr>

@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -599,22 +611,22 @@ familia. Los domingos no voy a ningún sitio.</em></p>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/d0b49e9f174e2c33461b.mp3" title="Прослушать" aria-label="Прослушать: Voy a pie: está cerca.">▶</button>Voy a pie: está cerca.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/e5b123cb60c9ba8ab153.mp3" title="Прослушать" aria-label="Прослушать: el metro">▶</button>el <strong>me</strong>tro</td>
+<td><img class="dibujo" src="../img/f15fa45fd2026df83080.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/e5b123cb60c9ba8ab153.mp3" title="Прослушать" aria-label="Прослушать: el metro">▶</button>el <strong>me</strong>tro</td>
 <td>метро</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/50834c0dd69ad469fd00.mp3" title="Прослушать" aria-label="Прослушать: Nikolái va en metro.">▶</button>Nikolái va en metro.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/572630af0ddb84e0e8a4.mp3" title="Прослушать" aria-label="Прослушать: el autobús">▶</button>el auto<strong>bús</strong></td>
+<td><img class="dibujo" src="../img/f6f229b24dce2f08a075.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/572630af0ddb84e0e8a4.mp3" title="Прослушать" aria-label="Прослушать: el autobús">▶</button>el auto<strong>bús</strong></td>
 <td>автобус</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/d82fd715dde29c5f2b2d.mp3" title="Прослушать" aria-label="Прослушать: Voy al supermercado en autobús.">▶</button>Voy al supermercado en autobús.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/45f821ee4ead1378f773.mp3" title="Прослушать" aria-label="Прослушать: el coche">▶</button>el <strong>co</strong>che</td>
+<td><img class="dibujo" src="../img/6e21b006cf7774bd5c5e.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/45f821ee4ead1378f773.mp3" title="Прослушать" aria-label="Прослушать: el coche">▶</button>el <strong>co</strong>che</td>
 <td>машина</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/62d95536e0db378d0931.mp3" title="Прослушать" aria-label="Прослушать: Vamos al parque en coche.">▶</button>Vamos al parque en coche.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/9d526b083eae5e4670f4.mp3" title="Прослушать" aria-label="Прослушать: el gimnasio">▶</button>el gim<strong>na</strong>sio</td>
+<td><img class="dibujo" src="../img/996ee4f24e405814921c.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/9d526b083eae5e4670f4.mp3" title="Прослушать" aria-label="Прослушать: el gimnasio">▶</button>el gim<strong>na</strong>sio</td>
 <td>спортзал</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/fb4c7f1238c1130e0b82.mp3" title="Прослушать" aria-label="Прослушать: Los viernes voy al gimnasio.">▶</button>Los viernes voy al gimnasio.</td>
 </tr>

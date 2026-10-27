@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -343,7 +355,7 @@ diciembre. Agosto es el mes de vacaciones: muchas tiendas y empresas cierran.</p
 <tr>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/735632b0f354d85d0b6e.mp3" title="Прослушать" aria-label="Прослушать: el trabajo">▶</button>el trabajo</td>
 <td>работа</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/410d878f1562e13ccc07.mp3" title="Прослушать" aria-label="Прослушать: la oficina">▶</button>la oficina</td>
+<td><img class="dibujo" src="../img/44c44e5550bffb36ae27.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/410d878f1562e13ccc07.mp3" title="Прослушать" aria-label="Прослушать: la oficina">▶</button>la oficina</td>
 <td>офис</td>
 </tr>
 <tr>
@@ -361,23 +373,23 @@ diciembre. Agosto es el mes de vacaciones: muchas tiendas y empresas cierran.</p
 <tr>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/a4265df5a383d264c915.mp3" title="Прослушать" aria-label="Прослушать: la pausa">▶</button>la pausa</td>
 <td>перерыв</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/133af61824063d2f27a8.mp3" title="Прослушать" aria-label="Прослушать: el desayuno">▶</button>el desayuno</td>
+<td><img class="dibujo" src="../img/1b84740ff5eb17c4389f.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/133af61824063d2f27a8.mp3" title="Прослушать" aria-label="Прослушать: el desayuno">▶</button>el desayuno</td>
 <td>завтрак</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/72e25b186d3d75a5641e.mp3" title="Прослушать" aria-label="Прослушать: la comida">▶</button>la comida</td>
+<td><img class="dibujo" src="../img/57c9e311799e934ec018.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/72e25b186d3d75a5641e.mp3" title="Прослушать" aria-label="Прослушать: la comida">▶</button>la comida</td>
 <td>обед; еда</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/9522875a6e1fd734b9ce.mp3" title="Прослушать" aria-label="Прослушать: la cena">▶</button>la cena</td>
+<td><img class="dibujo" src="../img/72fd5dfb6bb5415f1c13.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/9522875a6e1fd734b9ce.mp3" title="Прослушать" aria-label="Прослушать: la cena">▶</button>la cena</td>
 <td>ужин</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/ed3e6408e590a36230a4.mp3" title="Прослушать" aria-label="Прослушать: el menú del día">▶</button>el menú del día</td>
+<td><img class="dibujo" src="../img/405d12c480933eb115f0.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/ed3e6408e590a36230a4.mp3" title="Прослушать" aria-label="Прослушать: el menú del día">▶</button>el menú del día</td>
 <td>комплексный обед</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/9f629cb6353f0906831b.mp3" title="Прослушать" aria-label="Прослушать: la sobremesa">▶</button>la sobremesa</td>
 <td>разговор за столом после еды</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/6d06fb7af23695811ee0.mp3" title="Прослушать" aria-label="Прослушать: la siesta">▶</button>la siesta</td>
+<td><img class="dibujo" src="../img/67a0dc6543537e8a775e.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/6d06fb7af23695811ee0.mp3" title="Прослушать" aria-label="Прослушать: la siesta">▶</button>la siesta</td>
 <td>послеобеденный сон</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/922242fd3cfa5ac91233.mp3" title="Прослушать" aria-label="Прослушать: el mito">▶</button>el mito</td>
 <td>миф</td>
@@ -389,13 +401,13 @@ diciembre. Agosto es el mes de vacaciones: muchas tiendas y empresas cierran.</p
 <td>выходные</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/16a64867edc58b60ef47.mp3" title="Прослушать" aria-label="Прослушать: las vacaciones">▶</button>las vacaciones</td>
+<td><img class="dibujo" src="../img/3e46e5c4d6e01cda6e98.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/16a64867edc58b60ef47.mp3" title="Прослушать" aria-label="Прослушать: las vacaciones">▶</button>las vacaciones</td>
 <td>отпуск</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/4d0598054e8748d2334a.mp3" title="Прослушать" aria-label="Прослушать: la paga extra">▶</button>la paga extra</td>
 <td>тринадцатая зарплата</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/54c66b2dccc224bfd3ce.mp3" title="Прослушать" aria-label="Прослушать: el pueblo">▶</button>el pueblo</td>
+<td><img class="dibujo" src="../img/c6dc441eca5d60e3ea52.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/54c66b2dccc224bfd3ce.mp3" title="Прослушать" aria-label="Прослушать: el pueblo">▶</button>el pueblo</td>
 <td>посёлок, деревня</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/ac257549819242c931c3.mp3" title="Прослушать" aria-label="Прослушать: cerrar">▶</button>cerrar</td>
 <td>закрывать(ся)</td>

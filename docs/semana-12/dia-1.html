@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -623,7 +635,7 @@ segundo, postre</em> и <strong>para</strong> перед <em>beber</em>? Ест�
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b2c22420cdafefb8d151.mp3" title="Прослушать" aria-label="Прослушать: La cuenta, por favor.">▶</button>La cuenta, por favor.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b9c462e800c7fa4ebace.mp3" title="Прослушать" aria-label="Прослушать: la bebida">▶</button>la be<strong>bi</strong>da</td>
+<td><img class="dibujo" src="../img/d9a7d3e0f3ebda74514e.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b9c462e800c7fa4ebace.mp3" title="Прослушать" aria-label="Прослушать: la bebida">▶</button>la be<strong>bi</strong>da</td>
 <td>напиток</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/5c0884c3614d2310fbbe.mp3" title="Прослушать" aria-label="Прослушать: Pan y bebida incluidos.">▶</button>Pan y bebida incluidos.</td>
 </tr>
@@ -633,17 +645,17 @@ segundo, postre</em> и <strong>para</strong> перед <em>beber</em>? Ест�
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/c5edbd206e5015df33d4.mp3" title="Прослушать" aria-label="Прослушать: El postre está incluido.">▶</button>El postre está incluido.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/61cb3be2946795f2a3d5.mp3" title="Прослушать" aria-label="Прослушать: la carta 🌎 el menú">▶</button>la <strong>car</strong>ta 🌎 el me<strong>nú</strong></td>
+<td><img class="dibujo" src="../img/61187122814214843897.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/61cb3be2946795f2a3d5.mp3" title="Прослушать" aria-label="Прослушать: la carta 🌎 el menú">▶</button>la <strong>car</strong>ta 🌎 el me<strong>nú</strong></td>
 <td>меню (список блюд)</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/8f6054f8977196fd46d4.mp3" title="Прослушать" aria-label="Прослушать: ¿Nos trae la carta?">▶</button>¿Nos trae la carta?</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/7fdbcb572a9ba70fd6ea.mp3" title="Прослушать" aria-label="Прослушать: la ración">▶</button>la ra<strong>ción</strong></td>
+<td><img class="dibujo" src="../img/09ed22d2ecafa78cbcda.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/7fdbcb572a9ba70fd6ea.mp3" title="Прослушать" aria-label="Прослушать: la ración">▶</button>la ra<strong>ción</strong></td>
 <td>порция (в баре — больше, чем tapa)</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/850f71169e36874fce26.mp3" title="Прослушать" aria-label="Прослушать: Una ración de jamón.">▶</button>Una ración de jamón.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/13da213444b2e38fd3d4.mp3" title="Прослушать" aria-label="Прослушать: el vino tinto / blanco · la copa">▶</button>el <strong>vi</strong>no <strong>tin</strong>to / <strong>blan</strong>co · la <strong>co</strong>pa</td>
+<td><img class="dibujo" src="../img/af758e42089f500cb741.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/13da213444b2e38fd3d4.mp3" title="Прослушать" aria-label="Прослушать: el vino tinto / blanco · la copa">▶</button>el <strong>vi</strong>no <strong>tin</strong>to / <strong>blan</strong>co · la <strong>co</strong>pa</td>
 <td>красное / белое вино · бокал</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/625a7eefc7fd0ca33825.mp3" title="Прослушать" aria-label="Прослушать: Una copa de vino tinto.">▶</button>Una copa de vino tinto.</td>
 </tr>

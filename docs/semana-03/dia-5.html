@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -534,12 +546,12 @@ teléfono, correo electrónico. <strong>Cuál</strong> — «какой имен
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/67a117d28f6fc86fafba.mp3" title="Прослушать" aria-label="Прослушать: ¿Cuál es su dirección?">▶</button>¿Cuál es su dirección?</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/bdf8b11f4b2554aab4cb.mp3" title="Прослушать" aria-label="Прослушать: la calle">▶</button>la <strong>ca</strong>lle</td>
+<td><img class="dibujo" src="../img/15d0391b9590ef374902.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/bdf8b11f4b2554aab4cb.mp3" title="Прослушать" aria-label="Прослушать: la calle">▶</button>la <strong>ca</strong>lle</td>
 <td>улица</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/a462cbb0afa5a5dbb964.mp3" title="Прослушать" aria-label="Прослушать: Calle Goya, número 35.">▶</button>Calle Goya, número 35.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/1c3f445753ea7d3aa198.mp3" title="Прослушать" aria-label="Прослушать: el piso">▶</button>el <strong>pi</strong>so</td>
+<td><img class="dibujo" src="../img/6aad838b0693982d865e.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/1c3f445753ea7d3aa198.mp3" title="Прослушать" aria-label="Прослушать: el piso">▶</button>el <strong>pi</strong>so</td>
 <td>этаж; квартира</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/4971e4d28869f0f7bef9.mp3" title="Прослушать" aria-label="Прослушать: Piso cuarto, puerta B.">▶</button>Piso cuarto, puerta B.</td>
 </tr>
@@ -549,7 +561,7 @@ teléfono, correo electrónico. <strong>Cuál</strong> — «какой имен
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/e2a8eb54d85f4ea8d77c.mp3" title="Прослушать" aria-label="Прослушать: Código postal 28001.">▶</button>Código postal 28001.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/621b76220cde82d5512f.mp3" title="Прослушать" aria-label="Прослушать: el correo electrónico">▶</button>el co<strong>rreo</strong> elec<strong>tró</strong>nico</td>
+<td><img class="dibujo" src="../img/06b6dae9657343dfd218.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/621b76220cde82d5512f.mp3" title="Прослушать" aria-label="Прослушать: el correo electrónico">▶</button>el co<strong>rreo</strong> elec<strong>tró</strong>nico</td>
 <td>электронная почта</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/3d3269bbd1d21db87089.mp3" title="Прослушать" aria-label="Прослушать: Mi correo es…">▶</button>Mi correo es…</td>
 </tr>
@@ -564,7 +576,7 @@ teléfono, correo electrónico. <strong>Cuál</strong> — «какой имен
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/577d59d229bd303e1371.mp3" title="Прослушать" aria-label="Прослушать: ¿Cuál es tu número de teléfono?">▶</button>¿Cuál es tu número de teléfono?</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/72b7d9b87512549be028.mp3" title="Прослушать" aria-label="Прослушать: la ficha">▶</button>la <strong>fi</strong>cha</td>
+<td><img class="dibujo" src="../img/839cd3651ca379ef343b.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/72b7d9b87512549be028.mp3" title="Прослушать" aria-label="Прослушать: la ficha">▶</button>la <strong>fi</strong>cha</td>
 <td>анкета, карточка</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/89ad1679a3273978d011.mp3" title="Прослушать" aria-label="Прослушать: Rellene la ficha, por favor.">▶</button>Rellene la ficha, por favor.</td>
 </tr>

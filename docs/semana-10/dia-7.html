@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -376,19 +388,19 @@ tenía, lavaba</em> — это прошедшее время. Оно у вас �
 </thead>
 <tbody>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/5884f5e6742e75fdca2b.mp3" title="Прослушать" aria-label="Прослушать: la ciudad">▶</button>la ciudad</td>
+<td><img class="dibujo" src="../img/f0cffca8bed2fe38f965.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/5884f5e6742e75fdca2b.mp3" title="Прослушать" aria-label="Прослушать: la ciudad">▶</button>la ciudad</td>
 <td>город</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/6e2e4453f992b511d37f.mp3" title="Прослушать" aria-label="Прослушать: el barrio">▶</button>el barrio</td>
+<td><img class="dibujo" src="../img/16c0489a28c369bbe83d.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/6e2e4453f992b511d37f.mp3" title="Прослушать" aria-label="Прослушать: el barrio">▶</button>el barrio</td>
 <td>район</td>
 </tr>
 <tr>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/97143b3865ab48220f6a.mp3" title="Прослушать" aria-label="Прослушать: cenar">▶</button>cenar</td>
 <td>ужинать</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/9522875a6e1fd734b9ce.mp3" title="Прослушать" aria-label="Прослушать: la cena">▶</button>la cena</td>
+<td><img class="dibujo" src="../img/72fd5dfb6bb5415f1c13.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/9522875a6e1fd734b9ce.mp3" title="Прослушать" aria-label="Прослушать: la cena">▶</button>la cena</td>
 <td>ужин</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/4c5cc3ffde0cf425c65a.mp3" title="Прослушать" aria-label="Прослушать: la terraza">▶</button>la terraza</td>
+<td><img class="dibujo" src="../img/c50cb3d2ef6384dc2554.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/4c5cc3ffde0cf425c65a.mp3" title="Прослушать" aria-label="Прослушать: la terraza">▶</button>la terraza</td>
 <td>терраса (столики на улице)</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/73275e317a2bd1bc572b.mp3" title="Прослушать" aria-label="Прослушать: tomar algo">▶</button>tomar algo</td>
 <td>выпить или перекусить где-нибудь</td>
@@ -406,9 +418,9 @@ tenía, lavaba</em> — это прошедшее время. Оно у вас �
 <td>закрывать(ся)</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/f7a6bc11c4e4975f1cff.mp3" title="Прослушать" aria-label="Прослушать: el subte 🌎">▶</button>el subte 🌎</td>
+<td><img class="dibujo" src="../img/83ba22286b084dc1cc9b.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/f7a6bc11c4e4975f1cff.mp3" title="Прослушать" aria-label="Прослушать: el subte 🌎">▶</button>el subte 🌎</td>
 <td>метро (Аргентина)</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/58d82ff7145dd84ba0a9.mp3" title="Прослушать" aria-label="Прослушать: el colectivo 🌎">▶</button>el colectivo 🌎</td>
+<td><img class="dibujo" src="../img/6605ff6b81d52b3716c5.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/58d82ff7145dd84ba0a9.mp3" title="Прослушать" aria-label="Прослушать: el colectivo 🌎">▶</button>el colectivo 🌎</td>
 <td>автобус (Аргентина)</td>
 </tr>
 <tr>
@@ -418,7 +430,7 @@ tenía, lavaba</em> — это прошедшее время. Оно у вас �
 <td>житель Буэнос-Айреса</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/c4253c2eaa0ff582ec88.mp3" title="Прослушать" aria-label="Прослушать: el dicho">▶</button>el dicho</td>
+<td><img class="dibujo" src="../img/ff3a2c9f3361b7c8b83c.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/c4253c2eaa0ff582ec88.mp3" title="Прослушать" aria-label="Прослушать: el dicho">▶</button>el dicho</td>
 <td>поговорка</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/6f1cc4137f41867c3cef.mp3" title="Прослушать" aria-label="Прослушать: la función">▶</button>la función</td>
 <td>сеанс, спектакль</td>
@@ -426,7 +438,7 @@ tenía, lavaba</em> — это прошедшее время. Оно у вас �
 <tr>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b94f46fbcbed6ffb1e2d.mp3" title="Прослушать" aria-label="Прослушать: almorzar (almuerzo) 🌎">▶</button>almorzar (almuerzo) 🌎</td>
 <td>обедать (Лат. Америка)</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/1ad5b1f5db1dfe5185c3.mp3" title="Прослушать" aria-label="Прослушать: el almuerzo 🌎">▶</button>el almuerzo 🌎</td>
+<td><img class="dibujo" src="../img/9855fed3020a87956464.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/1ad5b1f5db1dfe5185c3.mp3" title="Прослушать" aria-label="Прослушать: el almuerzo 🌎">▶</button>el almuerzo 🌎</td>
 <td>обед (Лат. Америка)</td>
 </tr>
 <tr>

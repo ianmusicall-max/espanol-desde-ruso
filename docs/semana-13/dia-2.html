@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -555,7 +567,7 @@ dos</em>. В Аргентине и Уругвае вместо <em>talla</em> г
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/c246fc9e85aefaeec47f.mp3" title="Прослушать" aria-label="Прослушать: ¿Qué talla usa?">▶</button>¿Qué talla usa?</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/bb9ce22090a9a6786f4f.mp3" title="Прослушать" aria-label="Прослушать: el probador">▶</button>el proba<strong>dor</strong></td>
+<td><img class="dibujo" src="../img/c1b812de38dccb06a1b9.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/bb9ce22090a9a6786f4f.mp3" title="Прослушать" aria-label="Прослушать: el probador">▶</button>el proba<strong>dor</strong></td>
 <td>примерочная</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/91766046fca9414dee5a.mp3" title="Прослушать" aria-label="Прослушать: ¿Dónde está el probador?">▶</button>¿Dónde está el probador?</td>
 </tr>
@@ -570,12 +582,12 @@ dos</em>. В Аргентине и Уругвае вместо <em>talla</em> г
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/58327b6511dcffbd6296.mp3" title="Прослушать" aria-label="Прослушать: Aquel jersey del escaparate.">▶</button>Aquel jersey del escaparate.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/23a783350230f2a7c7a2.mp3" title="Прослушать" aria-label="Прослушать: el jersey">▶</button>el jer<strong>sey</strong></td>
+<td><img class="dibujo" src="../img/9fbbe5cc45b427f40b25.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/23a783350230f2a7c7a2.mp3" title="Прослушать" aria-label="Прослушать: el jersey">▶</button>el jer<strong>sey</strong></td>
 <td>свитер</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/66f00ba2fce8a289ed19.mp3" title="Прослушать" aria-label="Прослушать: Este jersey es de lana.">▶</button>Este jersey es de lana.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/8c3160cdd0e812f771e3.mp3" title="Прослушать" aria-label="Прослушать: la chaqueta">▶</button>la cha<strong>que</strong>ta</td>
+<td><img class="dibujo" src="../img/140f770c683274abef7d.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/8c3160cdd0e812f771e3.mp3" title="Прослушать" aria-label="Прослушать: la chaqueta">▶</button>la cha<strong>que</strong>ta</td>
 <td>куртка, пиджак</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/8ec101f6e588cbc56be7.mp3" title="Прослушать" aria-label="Прослушать: Aquellas chaquetas son bonitas.">▶</button>Aquellas chaquetas son bonitas.</td>
 </tr>
@@ -590,7 +602,7 @@ dos</em>. В Аргентине и Уругвае вместо <em>talla</em> г
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/01fb66d4bad8fae59c8f.mp3" title="Прослушать" aria-label="Прослушать: ¿Es de algodón o de lana?">▶</button>¿Es de algodón o de lana?</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/02a694fc38b09783c7f7.mp3" title="Прослушать" aria-label="Прослушать: el escaparate">▶</button>el escapa<strong>ra</strong>te</td>
+<td><img class="dibujo" src="../img/e7e3d479ad5d19f6574a.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/02a694fc38b09783c7f7.mp3" title="Прослушать" aria-label="Прослушать: el escaparate">▶</button>el escapa<strong>ra</strong>te</td>
 <td>витрина</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/304930f9bf26c2f02517.mp3" title="Прослушать" aria-label="Прослушать: El jersey del escaparate.">▶</button>El jersey del escaparate.</td>
 </tr>

@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -507,42 +519,42 @@ vecinas</em> — без изменений.</p>
 </thead>
 <tbody>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/ce16db864c5f84638470.mp3" title="Прослушать" aria-label="Прослушать: la mascota">▶</button>la mas<strong>co</strong>ta</td>
+<td><img class="dibujo" src="../img/ca2588f51e9aad745629.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/ce16db864c5f84638470.mp3" title="Прослушать" aria-label="Прослушать: la mascota">▶</button>la mas<strong>co</strong>ta</td>
 <td>домашнее животное, питомец</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/fd874b815c2520855652.mp3" title="Прослушать" aria-label="Прослушать: ¿Tienes mascota?">▶</button>¿Tienes mascota?</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b889e5ef332185bee4e5.mp3" title="Прослушать" aria-label="Прослушать: el perro">▶</button>el <strong>pe</strong>rro</td>
+<td><img class="dibujo" src="../img/a857f18a919e59961538.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b889e5ef332185bee4e5.mp3" title="Прослушать" aria-label="Прослушать: el perro">▶</button>el <strong>pe</strong>rro</td>
 <td>собака</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/0128965a0166c8af4b7a.mp3" title="Прослушать" aria-label="Прослушать: El perro de mi hermana.">▶</button>El perro de mi hermana.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/cbb14e626077448f30f3.mp3" title="Прослушать" aria-label="Прослушать: el gato">▶</button>el <strong>ga</strong>to</td>
+<td><img class="dibujo" src="../img/6ea5c5f53859bf1e29a4.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/cbb14e626077448f30f3.mp3" title="Прослушать" aria-label="Прослушать: el gato">▶</button>el <strong>ga</strong>to</td>
 <td>кот, кошка</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/a200a978a04893b9deb0.mp3" title="Прослушать" aria-label="Прослушать: Es el gato de mi abuela.">▶</button>Es el gato de mi abuela.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/a038d9bf64c15175a045.mp3" title="Прослушать" aria-label="Прослушать: el pez / los peces">▶</button>el <strong>pez</strong> / los <strong>pe</strong>ces</td>
+<td><img class="dibujo" src="../img/e5131bfbdcea6bc12d45.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/a038d9bf64c15175a045.mp3" title="Прослушать" aria-label="Прослушать: el pez / los peces">▶</button>el <strong>pez</strong> / los <strong>pe</strong>ces</td>
 <td>рыба, рыбка (живая)</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/4299e6f3e175a195d0ff.mp3" title="Прослушать" aria-label="Прослушать: Los peces de mi primo.">▶</button>Los peces de mi primo.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/fc9d158d8c6064d174c1.mp3" title="Прослушать" aria-label="Прослушать: el pájaro">▶</button>el <strong>pá</strong>jaro</td>
+<td><img class="dibujo" src="../img/05d513f4777b4d7be347.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/fc9d158d8c6064d174c1.mp3" title="Прослушать" aria-label="Прослушать: el pájaro">▶</button>el <strong>pá</strong>jaro</td>
 <td>птица</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/7c8edc3c6f3b3662ed1a.mp3" title="Прослушать" aria-label="Прослушать: ¿De quién es el pájaro?">▶</button>¿De quién es el pájaro?</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/47ed9bd19f742d073268.mp3" title="Прослушать" aria-label="Прослушать: el conejo">▶</button>el co<strong>ne</strong>jo</td>
+<td><img class="dibujo" src="../img/b52b9ba3065ac604e602.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/47ed9bd19f742d073268.mp3" title="Прослушать" aria-label="Прослушать: el conejo">▶</button>el co<strong>ne</strong>jo</td>
 <td>кролик</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/c4f9e327661fe67b3a36.mp3" title="Прослушать" aria-label="Прослушать: Tengo un conejo.">▶</button>Tengo un conejo.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/9e2623a3e1fe29bef77f.mp3" title="Прослушать" aria-label="Прослушать: la tortuga">▶</button>la tor<strong>tu</strong>ga</td>
+<td><img class="dibujo" src="../img/92ae094e664f75903add.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/9e2623a3e1fe29bef77f.mp3" title="Прослушать" aria-label="Прослушать: la tortuga">▶</button>la tor<strong>tu</strong>ga</td>
 <td>черепаха</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/cc94531314e88c2439ad.mp3" title="Прослушать" aria-label="Прослушать: Tengo una tortuga pequeña.">▶</button>Tengo una tortuga pequeña.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/e19aa33c5a8f6589c096.mp3" title="Прослушать" aria-label="Прослушать: el dueño / la dueña">▶</button>el <strong>due</strong>ño / la <strong>due</strong>ña</td>
+<td><img class="dibujo" src="../img/872cdb2530fd5881e783.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/e19aa33c5a8f6589c096.mp3" title="Прослушать" aria-label="Прослушать: el dueño / la dueña">▶</button>el <strong>due</strong>ño / la <strong>due</strong>ña</td>
 <td>хозяин / хозяйка</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/777094265069335df0cc.mp3" title="Прослушать" aria-label="Прослушать: El dueño del perro es mi hermana.">▶</button>El dueño del perro es mi hermana.</td>
 </tr>

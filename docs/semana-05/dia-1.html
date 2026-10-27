@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -598,7 +610,7 @@ años. Mi abuela tiene setenta y ocho años y tiene tres nietos…</em></p>
 </thead>
 <tbody>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/5a335c692f7cef6f6a9f.mp3" title="Прослушать" aria-label="Прослушать: la familia">▶</button>la fa<strong>mi</strong>lia</td>
+<td><img class="dibujo" src="../img/8b75cf77da46f7ab3876.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/5a335c692f7cef6f6a9f.mp3" title="Прослушать" aria-label="Прослушать: la familia">▶</button>la fa<strong>mi</strong>lia</td>
 <td>семья</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/564b103a23fadba37ed9.mp3" title="Прослушать" aria-label="Прослушать: En mi familia somos seis.">▶</button>En mi familia somos seis.</td>
 </tr>
@@ -608,42 +620,42 @@ años. Mi abuela tiene setenta y ocho años y tiene tres nietos…</em></p>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/0a06ee3fd42d5517ee85.mp3" title="Прослушать" aria-label="Прослушать: Tengo dos hermanos.">▶</button>Tengo dos hermanos.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/14b1f4195615fc5429a8.mp3" title="Прослушать" aria-label="Прослушать: el padre / la madre">▶</button>el <strong>pa</strong>dre / la <strong>ma</strong>dre</td>
+<td><img class="dibujo" src="../img/6b8c2d7e9f2afddb000b.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/14b1f4195615fc5429a8.mp3" title="Прослушать" aria-label="Прослушать: el padre / la madre">▶</button>el <strong>pa</strong>dre / la <strong>ma</strong>dre</td>
 <td>отец / мать</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/ef3f9524641311b00521.mp3" title="Прослушать" aria-label="Прослушать: Mi madre es profesora.">▶</button>Mi madre es profesora.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/26c87df40026f5354d97.mp3" title="Прослушать" aria-label="Прослушать: los padres">▶</button>los <strong>pa</strong>dres</td>
+<td><img class="dibujo" src="../img/679fabbe6dc7a24ead83.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/26c87df40026f5354d97.mp3" title="Прослушать" aria-label="Прослушать: los padres">▶</button>los <strong>pa</strong>dres</td>
 <td>родители</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/2c814026df40ad3e4143.mp3" title="Прослушать" aria-label="Прослушать: Mis padres están en Rusia.">▶</button>Mis padres están en Rusia.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/095b6924e4d6c406fc59.mp3" title="Прослушать" aria-label="Прослушать: el hijo / la hija">▶</button>el <strong>hi</strong>jo / la <strong>hi</strong>ja</td>
+<td><img class="dibujo" src="../img/0ff5538af18f2d28d4f7.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/095b6924e4d6c406fc59.mp3" title="Прослушать" aria-label="Прослушать: el hijo / la hija">▶</button>el <strong>hi</strong>jo / la <strong>hi</strong>ja</td>
 <td>сын / дочь</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/ae5f2407bfcae91a0c1a.mp3" title="Прослушать" aria-label="Прослушать: Carmen tiene dos hijos.">▶</button>Carmen tiene dos hijos.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/80751cc37fb5ecbf3ece.mp3" title="Прослушать" aria-label="Прослушать: el hermano / la hermana">▶</button>el her<strong>ma</strong>no / la her<strong>ma</strong>na</td>
+<td><img class="dibujo" src="../img/b65be8bc2b5b404c9c1e.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/80751cc37fb5ecbf3ece.mp3" title="Прослушать" aria-label="Прослушать: el hermano / la hermana">▶</button>el her<strong>ma</strong>no / la her<strong>ma</strong>na</td>
 <td>брат / сестра</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/41c071e817ec6c2f75bd.mp3" title="Прослушать" aria-label="Прослушать: ¿Tienes hermanos?">▶</button>¿Tienes hermanos?</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/6d904a683df0942579ad.mp3" title="Прослушать" aria-label="Прослушать: el abuelo / la abuela">▶</button>el a<strong>bue</strong>lo / la a<strong>bue</strong>la</td>
+<td><img class="dibujo" src="../img/f60576204c9bf65c7f84.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/6d904a683df0942579ad.mp3" title="Прослушать" aria-label="Прослушать: el abuelo / la abuela">▶</button>el a<strong>bue</strong>lo / la a<strong>bue</strong>la</td>
 <td>дедушка / бабушка</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/6b551653fb1a2e0ad49c.mp3" title="Прослушать" aria-label="Прослушать: Mi abuela tiene setenta y ocho años.">▶</button>Mi abuela tiene setenta y ocho años.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/9101a8cc253e2b31122f.mp3" title="Прослушать" aria-label="Прослушать: el nieto / la nieta">▶</button>el <strong>nie</strong>to / la <strong>nie</strong>ta</td>
+<td><img class="dibujo" src="../img/bb0a47f23943d516d53f.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/9101a8cc253e2b31122f.mp3" title="Прослушать" aria-label="Прослушать: el nieto / la nieta">▶</button>el <strong>nie</strong>to / la <strong>nie</strong>ta</td>
 <td>внук / внучка</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/de8f9f536799b52e2522.mp3" title="Прослушать" aria-label="Прослушать: Tiene nueve nietos.">▶</button>Tiene nueve nietos.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/e06edbc28fe47987ead9.mp3" title="Прослушать" aria-label="Прослушать: el tío / la tía">▶</button>el <strong>tí</strong>o / la <strong>tí</strong>a</td>
+<td><img class="dibujo" src="../img/928e17d5fee2c2008876.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/e06edbc28fe47987ead9.mp3" title="Прослушать" aria-label="Прослушать: el tío / la tía">▶</button>el <strong>tí</strong>o / la <strong>tí</strong>a</td>
 <td>дядя / тётя</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/bffdbdbffb698ce54676.mp3" title="Прослушать" aria-label="Прослушать: Mis tíos son de Valencia.">▶</button>Mis tíos son de Valencia.</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/9518f950a28ad5e82187.mp3" title="Прослушать" aria-label="Прослушать: el primo / la prima">▶</button>el <strong>pri</strong>mo / la <strong>pri</strong>ma</td>
+<td><img class="dibujo" src="../img/4d26ee032fcdfe928faa.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/9518f950a28ad5e82187.mp3" title="Прослушать" aria-label="Прослушать: el primo / la prima">▶</button>el <strong>pri</strong>mo / la <strong>pri</strong>ma</td>
 <td>двоюродный брат / сестра</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/498d98bef9587b60efc3.mp3" title="Прослушать" aria-label="Прослушать: Tengo muchos primos.">▶</button>Tengo muchos primos.</td>
 </tr>

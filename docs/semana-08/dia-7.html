@@ -85,6 +85,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -355,27 +367,27 @@ la calle misma, de cara a los que pasan.</p>
 </thead>
 <tbody>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/711ea6ef26cb1cacbc1c.mp3" title="Прослушать" aria-label="Прослушать: el andén">▶</button>el andén</td>
+<td><img class="dibujo" src="../img/bdcddfc69cc81c37f7f0.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/711ea6ef26cb1cacbc1c.mp3" title="Прослушать" aria-label="Прослушать: el andén">▶</button>el andén</td>
 <td>платформа</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/382c2bf35e5be806a1c7.mp3" title="Прослушать" aria-label="Прослушать: la salida">▶</button>la salida</td>
+<td><img class="dibujo" src="../img/2dde3c30dff1af98f6b0.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/382c2bf35e5be806a1c7.mp3" title="Прослушать" aria-label="Прослушать: la salida">▶</button>la salida</td>
 <td>выход</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/517b0423b64a07edfa99.mp3" title="Прослушать" aria-label="Прослушать: la entrada">▶</button>la entrada</td>
+<td><img class="dibujo" src="../img/5629e85e690f28bbbb05.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/517b0423b64a07edfa99.mp3" title="Прослушать" aria-label="Прослушать: la entrada">▶</button>la entrada</td>
 <td>вход</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/0123e1f22cb5bad7a147.mp3" title="Прослушать" aria-label="Прослушать: el torno">▶</button>el torno</td>
+<td><img class="dibujo" src="../img/9be067db6e35337d9674.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/0123e1f22cb5bad7a147.mp3" title="Прослушать" aria-label="Прослушать: el torno">▶</button>el torno</td>
 <td>турникет</td>
 </tr>
 <tr>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/f7c415d1a1979ecca5e2.mp3" title="Прослушать" aria-label="Прослушать: la correspondencia / el transbordo">▶</button>la correspondencia / el transbordo</td>
 <td>переход, пересадка</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/bb8bbf8b023c5c367584.mp3" title="Прослушать" aria-label="Прослушать: la boca de metro">▶</button>la boca de metro</td>
+<td><img class="dibujo" src="../img/fedd29041050a2e93b2c.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/bb8bbf8b023c5c367584.mp3" title="Прослушать" aria-label="Прослушать: la boca de metro">▶</button>la boca de metro</td>
 <td>вход в метро (Испания)</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/61e3999016906f57e2fc.mp3" title="Прослушать" aria-label="Прослушать: el billete 🌎 / el boleto 🌎">▶</button>el billete 🌎 / el boleto 🌎</td>
+<td><img class="dibujo" src="../img/f74d473ca103f5f830b5.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/61e3999016906f57e2fc.mp3" title="Прослушать" aria-label="Прослушать: el billete 🌎 / el boleto 🌎">▶</button>el billete 🌎 / el boleto 🌎</td>
 <td>билет (Испания / Америка)</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b779eb0cc815162b5855.mp3" title="Прослушать" aria-label="Прослушать: el vagón">▶</button>el vagón</td>
+<td><img class="dibujo" src="../img/bce7058cf4fdbb0e2ae7.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/b779eb0cc815162b5855.mp3" title="Прослушать" aria-label="Прослушать: el vagón">▶</button>el vagón</td>
 <td>вагон</td>
 </tr>
 <tr>
@@ -385,31 +397,31 @@ la calle misma, de cara a los que pasan.</p>
 <td>выходить на…</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/30625218bbaebedeff3d.mp3" title="Прослушать" aria-label="Прослушать: el plano del metro">▶</button>el plano del metro</td>
+<td><img class="dibujo" src="../img/497810c116115dc7a13a.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/30625218bbaebedeff3d.mp3" title="Прослушать" aria-label="Прослушать: el plano del metro">▶</button>el plano del metro</td>
 <td>схема метро</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/6b804f4f1223f9ecd9b1.mp3" title="Прослушать" aria-label="Прослушать: la línea">▶</button>la línea</td>
+<td><img class="dibujo" src="../img/d5059e648f443f57ffdd.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/6b804f4f1223f9ecd9b1.mp3" title="Прослушать" aria-label="Прослушать: la línea">▶</button>la línea</td>
 <td>линия, ветка</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/ff4ba2249efc4aaf1b54.mp3" title="Прослушать" aria-label="Прослушать: el icono">▶</button>el icono</td>
+<td><img class="dibujo" src="../img/c4f1a229b67c5d692090.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/ff4ba2249efc4aaf1b54.mp3" title="Прослушать" aria-label="Прослушать: el icono">▶</button>el icono</td>
 <td>значок, пиктограмма</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/87a52001f3cc0d28fb3c.mp3" title="Прослушать" aria-label="Прослушать: el paso de peatones">▶</button>el paso de peatones</td>
+<td><img class="dibujo" src="../img/a503ee2fbcef01989191.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/87a52001f3cc0d28fb3c.mp3" title="Прослушать" aria-label="Прослушать: el paso de peatones">▶</button>el paso de peatones</td>
 <td>пешеходный переход</td>
 </tr>
 <tr>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/0dc1a22e8bf5d8fadeb1.mp3" title="Прослушать" aria-label="Прослушать: el banco (asiento)">▶</button>el banco (asiento)</td>
 <td>скамейка (а не только банк!)</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/9726335a5394073e15f2.mp3" title="Прослушать" aria-label="Прослушать: el quiosco">▶</button>el quiosco</td>
+<td><img class="dibujo" src="../img/11e7bff083f6fd166194.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/9726335a5394073e15f2.mp3" title="Прослушать" aria-label="Прослушать: el quiosco">▶</button>el quiosco</td>
 <td>газетный киоск</td>
 </tr>
 <tr>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/0b0379d2a21af8c9eb8b.mp3" title="Прослушать" aria-label="Прослушать: salir a la calle">▶</button>salir a la calle</td>
 <td>выйти к людям, «на улицу»</td>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/3c167117397b1c7803b2.mp3" title="Прослушать" aria-label="Прослушать: el vecindario">▶</button>el vecindario</td>
+<td><img class="dibujo" src="../img/a0afaa359ba8bc44e063.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/3c167117397b1c7803b2.mp3" title="Прослушать" aria-label="Прослушать: el vecindario">▶</button>el vecindario</td>
 <td>соседи, округа</td>
 </tr>
 <tr>
-<td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/ab711bf9152a2b6b84b4.mp3" title="Прослушать" aria-label="Прослушать: el paseo">▶</button>el paseo</td>
+<td><img class="dibujo" src="../img/39a388a5869daf4d69ba.webp" alt="" width="56" height="56" loading="lazy" decoding="async"><button type="button" class="suena" aria-pressed="false" data-audio="../audio/ab711bf9152a2b6b84b4.mp3" title="Прослушать" aria-label="Прослушать: el paseo">▶</button>el paseo</td>
 <td>прогулка; бульвар</td>
 <td><button type="button" class="suena" aria-pressed="false" data-audio="../audio/e137dec6a08634767708.mp3" title="Прослушать" aria-label="Прослушать: dar un paseo">▶</button>dar un paseo</td>
 <td>гулять</td>
