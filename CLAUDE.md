@@ -893,17 +893,19 @@ ensena.
   ruso, como las lecciones—, tema claro y oscuro, y progreso del lector
   guardado en su navegador sin registro. La publicidad se configura en `web/sitio.yaml` y está
   apagada; sin identificador de AdSense no se carga nada de terceros.
-- **GitHub Pages YA está activado** (comprobado el 2026-10-26 contra la API:
-  `has_pages: true`, repositorio público, rama por defecto `main`). La nota que
-  decía «falta activar» llevaba desfasada quién sabe cuánto. **Lo que no se
-  puede comprobar desde aquí** es que la página de verdad cargue: el proxy del
-  contenedor niega el endpoint `/pages` —así que no se lee qué rama y qué
-  carpeta sirve— y `ianmusicall-max.github.io` ni siquiera resuelve, porque
-  aquí no hay DNS. Eso lo contesta el profesor abriendo la dirección en el
-  móvil, y es lo primero que hay que mirar si algo no se ve.
-- Para AdSense **solo falta el dominio propio** (y el CMP de Google al
-  encender los anuncios). El correo de contacto ya está puesto y el resto de
-  la lista la da por buena `scripts/revisar_adsense.py`.
+- **El sitio está EN LÍNEA en `https://espanoldesderuso.com`, con certificado**
+  (confirmado por el profesor el 2026-10-27, abriéndolo en su navegador). La
+  cadena entera: dominio en Cloudflare Registrar → 9 registros DNS en gris →
+  GitHub Pages con dominio propio → certificado y Enforce HTTPS. **Desde este
+  contenedor nada de eso se puede comprobar**: no hay DNS —ni `google.com`
+  resuelve— y el proxy niega el endpoint `/pages` de la API. Lo que pase con la
+  web en internet solo lo puede contestar alguien abriéndola.
+- **AdSense: el sitio está verificado y enviado a revisión** (2026-10-27). El
+  identificador es `ca-pub-6339208855562328`, el `ads.txt` está en la raíz y el
+  script en las 125 páginas. `scripts/revisar_adsense.py` da **10 listo · 0
+  falta**. Queda esperar el veredicto (de días a dos semanas) y **publicar el
+  CMP** en AdSense → Privacidad y mensajería, que hace falta antes de que se
+  sirvan anuncios en la UE y que la banda de cookies de aquí NO sustituye.
 - **El audio está hecho** (2026-10-26): 3.543 frases locutadas con la voz
   `shimmer`, 1,30 USD, 92 MB a 64 kbps, y 4.225 botones ▶ en 94 de las 100
   lecciones. Comprobado que suena en navegador.
