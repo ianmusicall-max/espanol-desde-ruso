@@ -2064,6 +2064,64 @@ son términos españoles (*Situación*, *Problema*, *Desenlace*). Un barrido de
 las semanas 27 a 30 buscando tokens con letras de los dos alfabetos lo
 encontró; conviene repetirlo al cerrar cada unidad, porque a ojo no se ve.
 
+## La unidad 16: instrucciones, ciudad y servicios (días 211-224)
+
+Catorce lecciones, semanas 31 y 32. El curso pasa de 210 a **224 de 365** y
+**1.954 tarjetas**.
+
+**Lo que se comprobó antes de escribir**: el imperativo de *tú* y de *usted*
+ya estaba dado en la unidad 10 (`¡descansa!`, `¡haz!`, `¡pon!`, `¡ven!`,
+`¡di!`, `siéntese`, en S20D1-2). Así que esta unidad añade solo *vosotros*,
+*ustedes* y **el negativo**, que es lo de verdad nuevo.
+
+Lo que decidió el contenido:
+
+- **El imperativo de *vosotros* es el más fácil del idioma y se dice así**:
+  infinitivo, `-r` → `-d`, **sin una sola excepción**. Lo que sí tiene truco
+  es el reflexivo, donde la `-d` desaparece (*sentad + os → sentaos*).
+- **Lo del negativo no es que lleve `no`: es que cambia la forma del verbo.**
+  En ruso «говори» → «не говори» es el mismo verbo con una partícula; en
+  español *habla* → *no hables* es otra forma. Es la dificultad central de la
+  unidad y no se puede rodear.
+- **Los irregulares del negativo salen de la forma «yo»**: *hago* → *no
+  hagas*, *vengo* → *no vengas*. Eso ahorra la tabla entera y deja solo tres
+  excepciones (*ser*, *ir*, *dar*).
+- **`le + lo = se lo` no tiene ningún equivalente ruso**, y la lección lo dice
+  así: es fonética, no lógica, y `le lo` simplemente **no existe en el
+  idioma**. Lo que sí ayuda del ruso es el orden («дай мне это» = *dámelo*).
+- **El imperativo de `usted` se enseña para LEERLO, no solo para decirlo.** El
+  lunes y el martes de la semana 31 existen para el miércoles de la 32, donde
+  el policía contesta *llame al banco, vaya al consulado, quédese con el
+  justificante* y hay que entenderlo rápido y en mal momento. La misma forma
+  está en el cajero automático, en el cartel y en la receta: una gramática,
+  tres sitios.
+- **`he perdido` / `me han robado` / `se me ha caído` es una decisión, no una
+  conjugación**: en comisaría son tres denuncias distintas. Y `me han robado
+  la cartera` va sin posesivo, por la misma regla que `me duele la cabeza`.
+- **El domingo de la semana 32 es la regla 8 en acción**: TIRE/JALE,
+  AUTOBÚS/CAMIÓN/GUAGUA/COLECTIVO, ASCENSOR/ELEVADOR, MÓVIL/CELULAR. Ninguno
+  es más correcto; el curso enseña el más extendido y marca el otro con 🌎.
+- **Nada con cifra inventada** (regla 7): del NIE, el padrón y la cita previa
+  se cuenta el procedimiento y el orden, que son estables, y ni un precio ni
+  un plazo. Donde el alumno no sepa uno, la lección le pide escribir
+  `[VERIFICAR]`, como hacen los autores.
+
+**El test de la unidad** mantiene el bloque «Выражения». Y aquí la primera
+versión tuvo **dos fallos, los dos propios del formato**: los enunciados
+escritos en negrita y numerados 1–15 corridos (`pruebas.leer` → `None`; su
+`INICIO` espera `^N. ` y la numeración se reinicia por bloque), y, al
+arreglarlo, **diez de las quince respuestas correctas en la б)**. Ahora son
+а×4, б×4, в×4, г×3, y las quince se verificaron comparando el TEXTO marcado,
+no la letra.
+
+**Diecisiete entradas duplicadas** las cazó `revisar_lexico.py` al cerrar cada
+semana. Dos de ellas se colaron al sustituir las otras —`hacer un favor`
+junto a `pedir un favor` en la misma tabla, e `imprimir` dos veces en la
+misma tabla— y las vio una lectura de la tabla entera, no el script: el
+informe compara entre lecciones, así que **un duplicado dentro de una sola
+tabla no lo detecta nadie**. Conviene mirar la tabla completa después de
+cada sustitución.
+
 ## El disco de la sesión se agota antes que el trabajo (2026-10-27)
 
 Escribiendo la unidad 12 la máquina se quedó **sin cuota de disco**: `df`
@@ -2210,13 +2268,13 @@ de verdad.
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.
-- **210 lecciones escritas** (semanas 1-30 enteras): el nivel A1 completo y
-  cuatro unidades de A2, 1.831 tarjetas de vocabulario. Las 21 primeras
+- **224 lecciones escritas** (semanas 1-32 enteras): el nivel A1 completo y
+  cinco unidades de A2, 1.954 tarjetas de vocabulario. Las 21 primeras
   revisadas; el resto son borradores.
   **`docs/` va por detrás**: se quedó en 154 lecciones porque la cuota de
   disco de la sesión se agotó (ver más abajo). Las 42 últimas están en el
   repositorio y no en la web hasta que alguien corra `construir_sitio.py`
-  (son 56 lecciones de diferencia).
+  (son 70 lecciones de diferencia).
 - Sitio público en `docs/` con portada, índice, test de nivel, «О курсе»,
   contacto y política de privacidad. Tres idiomas (ru/es/en) —el test solo en
   ruso, como las lecciones—, tema claro y oscuro, y progreso del lector

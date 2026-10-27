@@ -1,0 +1,64 @@
+espanol	ruso	ejemplo	etiquetas
+la cuenta (bancaria)	счёт в банке	Quería abrir una cuenta.	S32 U16 A2 leccion
+sacar ↔ ingresar dinero	снять ↔ внести деньги	Voy a sacar doscientos euros.	S32 U16 A2 leccion
+el cajero (automático)	банкомат	¿Dónde hay un cajero?	S32 U16 A2 leccion
+la transferencia	денежный перевод	Le hice una transferencia.	S32 U16 A2 leccion
+la comisión	комиссия	¿Tiene comisiones la cuenta?	S32 U16 A2 leccion
+certificado / -a	заказной (о письме)	Una carta certificada, por favor.	S32 U16 A2 leccion
+el remitente ↔ el destinatario	отправитель ↔ получатель	Rellene remitente y destinatario.	S32 U16 A2 leccion
+el sobre	конверт	Un sobre y un sello.	S32 U16 A2 leccion
+¿Cuánto tarda?	сколько идёт / займёт?	¿Cuánto tarda a Rusia?	S32 U16 A2 leccion
+deletrear	продиктовать по буквам	¿Me lo puede deletrear?	S32 U16 A2 leccion
+¿Dígame?	алло, слушаю	— ¿Dígame? — Buenos días.	S32 U16 A2 leccion
+¿Le va bien…?	вам удобно…?	¿Le va bien el jueves?	S32 U16 A2 leccion
+¿De parte de quién?	кто спрашивает?	¿De parte de quién, por favor?	S32 U16 A2 leccion
+los apellidos	фамилия (в бланке)	Nombre y apellidos.	S32 U16 A2 leccion
+el domicilio	адрес проживания	Domicilio: calle Mayor 14.	S32 U16 A2 leccion
+el motivo de la solicitud	причина обращения	Motivo: solicitud de NIE.	S32 U16 A2 leccion
+presentar (un documento)	подать (документ)	Presente el impreso en ventanilla.	S32 U16 A2 leccion
+adjuntar	приложить	Adjunte dos fotocopias.	S32 U16 A2 leccion
+No le he entendido	я вас не понял	Perdone, no le he entendido.	S32 U16 A2 leccion
+robar: me han robado	украсть: у меня украли	Me han robado el móvil.	S32 U16 A2 leccion
+poner una denuncia	подать заявление	Quería poner una denuncia.	S32 U16 A2 leccion
+la comisaría	полицейский участок	Fui a la comisaría.	S32 U16 A2 leccion
+se me ha caído	я уронил	Se me ha caído el móvil.	S32 U16 A2 leccion
+se me han olvidado	я забыл (они)	Se me han olvidado las llaves.	S32 U16 A2 leccion
+anular (una tarjeta)	заблокировать карту	Llame para anular las tarjetas.	S32 U16 A2 leccion
+el bolso	сумка	Me abrieron el bolso en el autobús.	S32 U16 A2 leccion
+el consulado	консульство	Vaya al consulado.	S32 U16 A2 leccion
+quedarse con algo	оставить себе	Quédese con el justificante.	S32 U16 A2 leccion
+llevar dentro	быть внутри (о содержимом)	¿Qué llevaba dentro el bolso?	S32 U16 A2 leccion
+encender ↔ apagar	включить ↔ выключить	Encienda el aparato.	S32 U16 A2 leccion
+enchufar ↔ desenchufar	включить ↔ выдернуть из розетки	Desenchúfelo y espere.	S32 U16 A2 leccion
+pulsar (un botón)	нажать	Pulse el botón verde.	S32 U16 A2 leccion
+introducir (introduzca)	ввести	Introduzca la contraseña.	S32 U16 A2 leccion
+descargar / instalar	скачать / установить	Descargue la aplicación.	S32 U16 A2 leccion
+la contraseña	пароль	Cree una contraseña de ocho caracteres.	S32 U16 A2 leccion
+intentar(lo)	попробовать, попытаться	Vuelva a intentarlo.	S32 U16 A2 leccion
+guardar ↔ borrar	сохранить ↔ удалить	Guarde los cambios.	S32 U16 A2 leccion
+los ajustes	настройки	Entre en Ajustes.	S32 U16 A2 leccion
+cerrar sesión	выйти из аккаунта	No olvide cerrar sesión.	S32 U16 A2 leccion
+primero… luego…	сначала… потом…	Primero pela, luego corta.	S32 U16 A2 leccion
+mientras tanto	тем временем	Mientras tanto, bate los huevos.	S32 U16 A2 leccion
+al final de todo	в самом конце	Al final de todo, guarda los cambios.	S32 U16 A2 leccion
+Ojo:	внимание:	Ojo: hay pocas citas.	S32 U16 A2 leccion
+sobre todo, no…	главное, не…	Sobre todo, no vayas sin cita.	S32 U16 A2 leccion
+a primera hora	рано утром, в первый час	Mira a primera hora.	S32 U16 A2 leccion
+imprimir (impreso)	распечатать	Imprime el justificante.	S32 U16 A2 leccion
+llevar consigo	взять с собой	Llévalo contigo.	S32 U16 A2 leccion
+el paso (de una instrucción)	шаг (инструкции)	Son ocho pasos.	S32 U16 A2 leccion
+la provincia	регион, провинция	Elige tu provincia y el trámite.	S32 U16 A2 leccion
+la señal	дорожный знак		S32 U16 A2 cultura
+jalar 🌎	тянуть (о двери)		S32 U16 A2 cultura
+el aparcamiento 🌎 el estacionamiento	парковка		S32 U16 A2 cultura
+el ascensor 🌎 el elevador	лифт		S32 U16 A2 cultura
+el móvil 🌎 el celular	мобильный телефон		S32 U16 A2 cultura
+el ordenador 🌎 la computadora	компьютер		S32 U16 A2 cultura
+el autobús 🌎 el camión, la guagua	автобус		S32 U16 A2 cultura
+ajeno / -a a	посторонний, не относящийся к		S32 U16 A2 cultura
+el descanso del personal	перерыв на обед		S32 U16 A2 cultura
+el tope 🌎 el badén	лежачий полицейский		S32 U16 A2 cultura
+advertir (advierto)	предупредить		S32 U16 A2 cultura
+la adverténcia	предупреждение		S32 U16 A2 cultura
+según el país	в зависимости от страны		S32 U16 A2 cultura
+la variante	вариант		S32 U16 A2 cultura
