@@ -1693,6 +1693,54 @@ nada dependa de llegar al final.
 dibujos y el `.apkg` de 22 MB. Los tres son comandos aparte y se hacen por
 tandas, no por lección.
 
+## La unidad 13: el imperfecto, y donde el aspecto ruso deja de servir (días 169-182)
+
+Catorce lecciones, semanas 25 y 26. El curso pasa de 168 a **182 de 365**.
+
+**La unidad tiene un arco deliberado, y es el hallazgo didáctico:** empieza
+diciendo que el aspecto ruso SÍ ayuda y termina enseñando dónde deja de
+ayudar.
+
+- **Semana 25, lunes:** «я жил» = *vivía*, «я прожил» = *viví*. Es la
+  primera vez en todo el curso que el ruso da la respuesta directa, y se dice
+  así de claro. Con una advertencia al pie: aprovéchelo mientras dure.
+- **Semana 26, miércoles:** «каждое лето мы **ездили**» → *íbamos*; «одним
+  летом мы **ездили**» → *fuimos*. **El mismo verbo ruso, el mismo aspecto,
+  dos tiempos españoles.** Ahí el criterio deja de ser el aspecto y pasa a
+  ser «cuántas veces». Y el caso que más cuesta: «всю неделю шёл дождь» es
+  *llovió*, indefinido, porque un tramo con número cierra la acción aunque el
+  ruso lo diga en imperfectivo.
+
+Lo demás que decidió el contenido:
+
+- **Las cuatro cosas que van siempre en imperfecto** (hora, tiempo
+  atmosférico, estado del cuerpo, lo que había) se dan como lista cerrada el
+  lunes de la semana 26: si usted dice qué hora era, la elección ya está
+  hecha.
+- **`había` no concuerda nunca**, y se repite tres días seguidos porque es el
+  error que cometen hasta los nativos.
+- **La proporción de un relato es tres a uno.** El texto modelo del día 180
+  trae dieciséis verbos en imperfecto y cinco en indefinido, y se cuenta
+  explícitamente: si usted tiene mitad y mitad, ha contado sucesos en vez de
+  describir una vida.
+- **Los tres pasos de revisión** (¿hora, tiempo, estado? ¿cuántas veces?
+  ¿tramos con número?) son la técnica del día 180 y se repiten en el test.
+- **El domingo 175 compara la infancia en España y en Rusia** y el hallazgo
+  es que casi todo coincide: la calle, el patio, dos canales, los abuelos en
+  el pueblo o en la dacha. Lo que no coincide son los noventa, y eso se dice
+  en una línea sin adjetivos.
+- **El domingo 182 cuenta la Transición y la Movida** con fechas estables
+  (1975, 1977, 1978, 1981, 1982) y sin ninguna cifra discutible. Y sirve de
+  demostración: la época va en imperfecto, los hechos en indefinido.
+- **La tarea final es una entrevista a un familiar mayor**, traducida al
+  español por el alumno. Es la tarea más útil del curso hasta aquí, porque es
+  exactamente lo que hace la cabeza al hablar de la propia vida en otra
+  lengua.
+
+**Nueve entradas duplicadas** las cazó `revisar_lexico.py` —entre ellas una
+que la lección se duplicaba a sí misma, dos filas con la misma entrada en la
+misma tabla—. Quedan los 13 de siempre.
+
 ## La unidad 12: empieza el A2 con el pasado (días 155-168)
 
 Catorce lecciones, semanas 23 y 24. El curso pasa de 154 a **168 de 365** y
@@ -2034,8 +2082,8 @@ de verdad.
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.
-- **168 lecciones escritas** (semanas 1-24 enteras): el nivel A1 completo y la
-  primera unidad de A2, 1.448 tarjetas de vocabulario. Las 21 primeras
+- **182 lecciones escritas** (semanas 1-26 enteras): el nivel A1 completo y
+  dos unidades de A2, 1.567 tarjetas de vocabulario. Las 21 primeras
   revisadas; el resto son borradores.
 - Sitio público en `docs/` con portada, índice, test de nivel, «О курсе»,
   contacto y política de privacidad. Tres idiomas (ru/es/en) —el test solo en
