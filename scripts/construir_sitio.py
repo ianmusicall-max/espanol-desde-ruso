@@ -34,6 +34,7 @@ import yaml
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(RAIZ / "scripts"))
 import plan  # noqa: E402
+import pruebas  # noqa: E402
 import validar  # noqa: E402
 
 DOCS = RAIZ / "docs"
@@ -571,6 +572,81 @@ TEST_JS = r"""(function(){
 })();"""
 
 
+PRUEBA_JS = r"""(function(){
+  var D=window.CURSO_PRUEBA; if(!D)return;
+  var caja=document.getElementById('prueba'); if(!caja)return;
+  var papel=document.getElementById('prueba-papel');
+  var clave=document.getElementById('prueba-clave');
+  var i=0, fallos=[], aciertos=0;
+
+  function esc(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML}
+
+  // Sin JavaScript la pagina se queda EXACTAMENTE como estaba: las quince
+  // preguntas y su clave, para leer o imprimir. El guion solo las esconde
+  // cuando de verdad puede ofrecer algo mejor.
+  if(papel)papel.hidden=true;
+  if(clave)clave.hidden=true;
+
+  function pregunta(){
+    var q=D.preguntas[i];
+    caja.innerHTML='<div class="test-caja">'
+      +'<div class="test-cuenta">'+(i+1)+' '+esc(D.t.de)+' '+D.preguntas.length
+      +' · '+esc(q.bloque)+'</div>'
+      +'<p class="test-pregunta">'+esc(q.enunciado)+'</p>'
+      +'<div class="test-ops">'+q.opciones.map(function(o,n){
+          return '<button type="button" data-n="'+n+'">'+esc(o)+'</button>'}).join('')+'</div>'
+      +'<div class="test-barra"><i style="width:'+(i*100/D.preguntas.length)+'%"></i></div></div>';
+    caja.querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click',function(){responder(parseInt(b.dataset.n,10))});
+    });
+  }
+
+  function responder(n){
+    var q=D.preguntas[i];
+    if(n===q.correcta){aciertos++}else{fallos.push(q)}
+    i++;
+    if(i<D.preguntas.length){pregunta()}else{resultado()}
+  }
+
+  function resultado(){
+    var h='<div class="test-caja"><div class="test-cuenta">'+esc(D.t.resultado)+'</div>'
+      +'<p class="test-pregunta">'+aciertos+' / '+D.preguntas.length+' '+esc(D.t.aciertos)+'</p>';
+    if(!fallos.length){h+='<p>'+esc(D.t.sin_fallos)+'</p>'}
+    else{
+      h+='<p class="test-cuenta" style="margin-top:1.2rem">'+esc(D.t.errores)+'</p>';
+      fallos.forEach(function(q){
+        // La clave del profesor dice de que leccion sale cada respuesta, asi
+        // que el fallo no solo se corrige: se puede ir a releerlo.
+        h+='<div class="test-fallo"><b>'+esc(q.opciones[q.correcta])+'</b>'
+          +'<span>'+esc(q.enunciado)+'</span>'
+          +(q.url?'<span><a href="'+q.url+'">'+esc(D.t.donde)+' '+q.n+' →</a></span>':'')
+          +'</div>';
+      });
+    }
+    h+='<p style="margin-top:1.2rem">'
+      +'<button type="button" class="boton secundario" id="otra-vez">'+esc(D.t.repetir)+'</button> '
+      +'<button type="button" class="boton secundario" id="ver-clave">'+esc(D.t.clave)+'</button></p></div>';
+    caja.innerHTML=h;
+    var r=document.getElementById('otra-vez');
+    if(r)r.addEventListener('click',function(){i=0;fallos=[];aciertos=0;pregunta()});
+    var v=document.getElementById('ver-clave');
+    // El discurso sobre los distractores que cierra la clave es lo mejor del
+    // dia, y solo ensena DESPUES de contestar: antes seria la respuesta.
+    if(v)v.addEventListener('click',function(){
+      if(clave){clave.hidden=false;clave.scrollIntoView({behavior:'smooth'})}
+      v.hidden=true;
+    });
+  }
+
+  var arranque=document.getElementById('prueba-arranque');
+  var boton=document.getElementById('prueba-empezar');
+  if(arranque&&boton){
+    arranque.hidden=false;
+    boton.addEventListener('click',function(){arranque.hidden=true;pregunta()});
+  }
+})();"""
+
+
 # ---------------------------------------------------------------- configuración
 def cargar_config(ruta: pathlib.Path = CONFIG) -> dict:
     with open(ruta, encoding="utf-8") as f:
@@ -658,7 +734,8 @@ def _marcar_contraste(cuerpo: str) -> str:
 
 # ------------------------------------------------------------------------ shell
 def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id="", raiz=".",
-           jsonld="", publicadas=0, mapa_dias="{}", traducida=True, con_audio=False, test=None) -> str:
+           jsonld="", publicadas=0, mapa_dias="{}", traducida=True, con_audio=False, test=None,
+           prueba=None) -> str:
     """El armazón de toda página: cabecera con menú y cambio de idioma, cuerpo, pie."""
     dominio = cfg["dominio"]
     actual = next(i for i in idiomas if i["codigo"] == idioma)
@@ -750,6 +827,7 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
 <script src="{raiz}/progreso.js" defer></script>
 {f'<script>{AUDIO_JS}</script>' if con_audio else ""}
 {f'<script>window.CURSO_TEST={json.dumps(test, ensure_ascii=False)};{TEST_JS}</script>' if test else ""}
+{f'<script>window.CURSO_PRUEBA={json.dumps(prueba, ensure_ascii=False)};{PRUEBA_JS}</script>' if prueba else ""}
 </body>
 </html>"""
 
@@ -1142,6 +1220,48 @@ def _anuncios_en_la_leccion(html_cuerpo: str, cfg: dict) -> str:
     return html_cuerpo
 
 
+def _pregunta_al_navegador(q, todos) -> dict:
+    """Una pregunta, con el enlace a la lección donde se enseña si la clave lo dice."""
+    salida = {"bloque": q.bloque, "enunciado": q.enunciado,
+              "opciones": q.opciones, "correcta": q.correcta}
+    if q.semana and q.dia:
+        leccion = next((x for x in todos
+                        if x.semana == q.semana and x.dia == q.dia and x.ruta.exists()), None)
+        if leccion:
+            salida["url"] = f"../semana-{leccion.semana:02d}/dia-{leccion.dia}.html"
+            salida["n"] = leccion.numero
+    return salida
+
+
+def _envolver_prueba(html_: str, t: dict) -> str:
+    """Marca en el HTML qué parte es el test en papel y cuál la clave.
+
+    Se trabaja sobre el HTML ya convertido y no sobre el Markdown a propósito:
+    envolver Markdown en un `<div>` haría que Python-Markdown lo pasara tal cual
+    sin convertirlo, y las quince preguntas saldrían en crudo.
+
+    Los tres trozos se marcan de atrás adelante porque cada inserción mueve
+    todas las posiciones siguientes."""
+    cabeceras = [(m.start(), m.end(), re.sub("<[^>]+>", "", m.group(1)).strip())
+                 for m in re.finditer(r"<h2[^>]*>(.*?)</h2>", html_, re.S)]
+    inicio_test = fin_test = inicio_clave = None
+    for j, (ini, fin, texto) in enumerate(cabeceras):
+        if texto.startswith("2.") and inicio_test is None:
+            inicio_test, fin_test = fin, (cabeceras[j + 1][0] if j + 1 < len(cabeceras) else len(html_))
+        if texto == "Ответы":
+            inicio_clave = ini
+    if inicio_test is None or inicio_clave is None:
+        return html_
+
+    boton = (f'<div class="botones" id="prueba-arranque" hidden>'
+             f'<button type="button" class="boton" id="prueba-empezar">'
+             f'{html.escape(t["test"]["empezar"])}</button></div><div id="prueba"></div>')
+    trozos = [html_[:inicio_test], boton, '<div id="prueba-papel">', html_[inicio_test:fin_test],
+              "</div>", html_[fin_test:inicio_clave], '<div id="prueba-clave">',
+              html_[inicio_clave:], "</div>"]
+    return "".join(trozos)
+
+
 def construir_leccion(d, cfg, t, idiomas, destino, cal, todos, audio=None) -> None:
     """Las lecciones solo existen en ruso: son el curso."""
     datos, cuerpo = validar.frontmatter(d.ruta.read_text(encoding="utf-8"))
@@ -1152,6 +1272,19 @@ def construir_leccion(d, cfg, t, idiomas, destino, cal, todos, audio=None) -> No
 
     html_cuerpo = _botones_de_audio(md(cuerpo), audio or {}, "..")
     html_cuerpo = _anuncios_en_la_leccion(_marcar_contraste(_tablas_envueltas(html_cuerpo)), cfg)
+
+    # Los días de tipo `prueba` traen quince preguntas con su clave, ya escritas
+    # y revisadas por el profesor. Si se pueden leer con seguridad, se ofrecen
+    # para contestar; si no, la página se queda exactamente como está.
+    datos_prueba = None
+    if d.tipo == "prueba":
+        preguntas = pruebas.leer(cuerpo)
+        if preguntas:
+            datos_prueba = {
+                "preguntas": [_pregunta_al_navegador(q, todos) for q in preguntas],
+                "t": t["test"],
+            }
+            html_cuerpo = _envolver_prueba(html_cuerpo, t)
 
     titulo = f"{L['urok']} {d.numero}: {d.tema_ru} — {t['titulo_sitio']}"
     descripcion = f"{L['urok']} {d.numero}: {d.tema_ru}. {d.foco[:110]}"
@@ -1179,7 +1312,7 @@ def construir_leccion(d, cfg, t, idiomas, destino, cal, todos, audio=None) -> No
         pagina(cfg, t, idiomas, "ru", titulo, cuerpo_final, descripcion=descripcion,
                pagina_id=f"semana-{d.semana:02d}/dia-{d.dia}.html", raiz="..",
                publicadas=len(escritas(cal)), mapa_dias=mapa_de_dias(cal), traducida=False,
-               con_audio='class="suena"' in cuerpo_final),
+               con_audio='class="suena"' in cuerpo_final, prueba=datos_prueba),
         encoding="utf-8")
 
 

@@ -882,6 +882,71 @@ avisa. Lo que el profesor tiene que comprobar es que cada distractor sea de
 verdad el error que dice, y que la unidad asignada sea donde el curso lo
 ensena.
 
+## La prueba de unidad se contesta, no se lee (2026-10-27)
+
+El profesor lo pidió así: *«¿no debería haber un pequeño test para continuar a
+la siguiente clase o tema?»*. La primera respuesta fue proponerle escribir
+120 preguntas nuevas. **Era innecesario: ya estaban escritas.**
+
+El calendario tiene **23 días de tipo `prueba`**, uno al cerrar cada unidad, y
+cada uno trae **15 preguntas de opción múltiple** en tres bloques con su clave.
+Siete están escritos y el de la unidad 1 está `revisado: true`. El cierre de la
+clave ya decía lo mismo que el test de nivel:
+
+> «Los distractores no son al azar: а) Por favor, а) francés, а) eres son justo
+> lo que dice un rusohablante. Si los elegiste, encontraste tu error. Eso vale
+> más que 15 de 15.»
+
+**Es la cuarta vez que pasa** —la receta, beneficios, la escena en el proyecto
+de salud— y por eso ahora se comprueba ANTES de escribir nada. Lo que faltaba
+no era contenido: en la web ese día era una página de texto con la clave a un
+scroll, que es como nadie se autoevalúa.
+
+### `scripts/pruebas.py`
+
+Lee las preguntas de la **propia lección**. Si vivieran además en un YAML, el
+día que el profesor corrigiera una en el Markdown la web seguiría con la vieja:
+este proyecto ya se ha tropezado varias veces con lo escrito y lo que corre
+dejando de coincidir.
+
+**Y falla de forma segura**: `leer` devuelve `None` en cuanto algo no cuadra
+—menos respuestas que preguntas, una letra que no está entre las opciones, un
+bloque descolgado— y esa unidad se queda como está. Decirle a alguien que
+acertó cuando falló es mucho peor que no ofrecerle el test.
+
+**Se corta por el marcador `а)` y no por el `·` que separa las opciones.** La
+primera versión cortaba por el punto y dejaba fuera dos de las siete: en la
+unidad 4 una opción es una transcripción fonética con su propio «·» dentro
+(`а) [дос · а-би-та-сьо-нес]`) y en la unidad 5 las opciones se parten entre
+dos renglones. El fallo seguro las descartó en vez de inventarse una respuesta
+—que es para lo que está— y al mirar POR QUÉ se arreglaron las dos.
+
+**La clave regala algo que no se esperaba**: dice de qué lección sale cada
+respuesta («нед. 2, день 5»). Así el resultado no solo corrige, sino que
+**enlaza a la lección donde se enseña lo que acabas de fallar**. De 105
+preguntas, 91 lo traen.
+
+### Cómo queda en la página
+
+- **Sin JavaScript no cambia nada**: las quince preguntas y la clave siguen en
+  el HTML, para leer o imprimir. Es el guion el que las esconde cuando de
+  verdad puede ofrecer algo mejor.
+- **El envoltorio se hace sobre el HTML ya convertido**, no sobre el Markdown:
+  envolver Markdown en un `<div>` haría que Python-Markdown lo pasara tal cual
+  y las quince preguntas saldrían en crudo. Los tres trozos se marcan de atrás
+  adelante, porque cada inserción mueve las posiciones siguientes.
+- **La clave se enseña al terminar, con un botón.** El discurso sobre los
+  distractores es lo mejor del día y solo enseña DESPUÉS de contestar: antes
+  sería la respuesta.
+- **No bloquea el paso a la unidad siguiente**, y es una decisión: en un curso
+  gratis de autoestudio una puerta cerrada hace que la gente abandone, no que
+  repase.
+
+**Los enlaces del resultado viven dentro del JSON de un `<script>`**, así que
+el revisor de enlaces rotos NO los mira desde que salta los scripts (2026-10-26).
+Hay una prueba que los comprueba uno a uno: o se comprueban ahí o no los
+comprueba nadie.
+
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.

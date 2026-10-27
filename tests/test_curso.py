@@ -29,6 +29,7 @@ import exportar_wordpress  # noqa: E402
 import escribir_leccion  # noqa: E402
 import exportar_anki  # noqa: E402
 import plan  # noqa: E402
+import pruebas  # noqa: E402
 import validar  # noqa: E402
 
 CAL = plan.cargar()
@@ -1503,6 +1504,103 @@ class TestElTestDeNivel(unittest.TestCase):
         construir_sitio.construir(destino, cfg, construir_sitio.cargar_textos())
         mapa = (destino / "sitemap.xml").read_text(encoding="utf-8")
         self.assertEqual(mapa.count("/test.html</loc>"), 1)
+
+
+class TestLaPruebaDeUnidad(unittest.TestCase):
+    """Los días `prueba` se pueden contestar, no solo leer.
+
+    El calendario tiene 23, uno al cerrar cada unidad, con 15 preguntas y su
+    clave que el profesor ya escribió y revisó. Aquí no se inventa ninguna: se
+    leen de la propia lección, que es la única fuente de verdad.
+
+    Lo que estas pruebas vigilan es lo único que haría daño de verdad: que una
+    respuesta quede mal mapeada y la web le diga a alguien que acertó cuando
+    falló."""
+
+    def setUp(self):
+        self.cal = plan.cargar()
+        self.dias = [d for d in plan.dias(self.cal) if d.tipo == "prueba" and d.ruta.exists()]
+
+    # ---- el analizador
+    def test_las_respuestas_salen_igual_que_en_la_clave_del_profesor(self):
+        """La unidad 1 está revisada y su clave dice: Léxico б в б б б а,
+        Gramática в б г б б а, Ortografía б в в. Si el analizador leyera otra
+        cosa, el test corregiría mal y nadie se enteraría."""
+        ruta = RAIZ / "curso" / "semana-02" / "dia-6.md"
+        preguntas = pruebas.de_la_leccion(ruta)
+        self.assertIsNotNone(preguntas)
+        letras = "".join(pruebas.LETRAS[q.correcta] for q in preguntas)
+        self.assertEqual(letras, "бвбббавбгббабвв")
+
+    def test_las_siete_pruebas_escritas_se_leen(self):
+        """Dos no se leían al principio: en la unidad 4 una opción es una
+        transcripción fonética con su propio «·» dentro, y en la unidad 5 las
+        opciones se parten entre dos renglones. Por eso se corta por el
+        marcador «а)» y no por el punto."""
+        for d in self.dias:
+            with self.subTest(unidad=d.unidad):
+                self.assertIsNotNone(pruebas.de_la_leccion(d.ruta),
+                                     f"la unidad {d.unidad} dejó de poder leerse")
+
+    def test_la_respuesta_correcta_esta_entre_las_opciones(self):
+        for d in self.dias:
+            for q in pruebas.de_la_leccion(d.ruta):
+                self.assertIn(q.correcta, range(len(q.opciones)), f"unidad {d.unidad}")
+                self.assertGreaterEqual(len(q.opciones), 2, q.enunciado)
+                self.assertEqual(len(set(q.opciones)), len(q.opciones),
+                                 f"dos opciones iguales: {q.enunciado}")
+
+    def test_una_clave_que_no_cuadra_no_genera_test(self):
+        """El fallo seguro: antes que corregir mal, no ofrecer el test."""
+        bueno = (RAIZ / "curso" / "semana-02" / "dia-6.md").read_text(encoding="utf-8")
+        _, cuerpo = validar.frontmatter(bueno)
+        self.assertIsNotNone(pruebas.leer(cuerpo))
+        # una respuesta de menos en el primer bloque
+        roto = cuerpo.replace("5 б (нед. 2, день 5) · 6 а", "6 а", 1)
+        self.assertIsNone(pruebas.leer(roto))
+        # una letra que no existe entre las opciones
+        roto = cuerpo.replace("**1. Лексика:** 1 б", "**1. Лексика:** 1 д", 1)
+        self.assertIsNone(pruebas.leer(roto))
+        # y sin clave no hay test
+        self.assertIsNone(pruebas.leer(cuerpo.split("## Ответы")[0]))
+
+    # ---- la página
+    def test_la_pagina_esconde_el_papel_y_ofrece_el_test(self):
+        destino = pathlib.Path(tempfile.mkdtemp())
+        construir_sitio.construir(destino, construir_sitio.cargar_config(),
+                                  construir_sitio.cargar_textos())
+        prueba = (destino / "semana-02" / "dia-6.html").read_text(encoding="utf-8")
+        for marca in ('id="prueba"', 'id="prueba-papel"', 'id="prueba-clave"',
+                      'id="prueba-empezar"', "window.CURSO_PRUEBA"):
+            self.assertIn(marca, prueba, marca)
+        # Sin JavaScript la página se queda como estaba: las preguntas siguen
+        # en el HTML y es el guion el que las esconde.
+        self.assertIn("De nada", prueba)
+        self.assertIn("papel.hidden=true", construir_sitio.PRUEBA_JS)
+
+        # y una lección normal no lleva nada de esto
+        normal = (destino / "semana-01" / "dia-1.html").read_text(encoding="utf-8")
+        self.assertNotIn("window.CURSO_PRUEBA", normal)
+        self.assertNotIn('id="prueba"', normal)
+
+    def test_los_enlaces_del_resultado_llevan_a_lecciones_que_existen(self):
+        """Van dentro del JSON de un <script>, así que el revisor de enlaces
+        rotos NO los mira: desde que salta los scripts, hay que comprobarlos
+        aquí o no los comprueba nadie."""
+        destino = pathlib.Path(tempfile.mkdtemp())
+        construir_sitio.construir(destino, construir_sitio.cargar_config(),
+                                  construir_sitio.cargar_textos())
+        total = 0
+        for d in self.dias:
+            pagina = (destino / f"semana-{d.semana:02d}" / f"dia-{d.dia}.html").read_text(encoding="utf-8")
+            m = re.search(r"window\.CURSO_PRUEBA=(\{.*?\});\(function", pagina, re.S)
+            self.assertIsNotNone(m, f"unidad {d.unidad}")
+            for q in json.loads(m.group(1))["preguntas"]:
+                if "url" in q:
+                    total += 1
+                    destino_q = (destino / f"semana-{d.semana:02d}" / q["url"]).resolve()
+                    self.assertTrue(destino_q.exists(), f"unidad {d.unidad}: {q['url']}")
+        self.assertGreater(total, 50, "la clave dice de qué lección sale cada respuesta")
 
 
 if __name__ == "__main__":
