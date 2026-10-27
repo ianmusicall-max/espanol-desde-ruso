@@ -71,7 +71,7 @@ la documentación del programa, en español.
   2026-10-26) estan en `revisado: false` y la pagina lo avisa. Hay que
   comprobar que cada distractor sea de verdad el error que dice y que la unidad
   asignada sea donde el curso lo ensena.
-- **Las 98 lecciones de las semanas 4 en adelante son borradores**
+- **Las 105 lecciones de las semanas 4 en adelante son borradores**
   (`revisado: false`) y el sitio las marca como tales. Las 21 primeras estan
   revisadas.
 - **El orden de los pasados: se recomendo NO cambiarlo** (2026-10-26, de
@@ -1592,15 +1592,20 @@ nada dependa de llegar al final.
 - **Semana 17 (días 113-119)**, primera mitad de la **unidad 9**: transporte,
   la estación, *estar + gerundio*, el hotel, el aeropuerto, el repaso y el día
   de cultura (Camino de Santiago y Machu Picchu).
+- **Semana 18 (días 120-126)**, que cierra la **unidad 9**: el pretérito
+  perfecto en dos días (lo de hoy y lo de toda la vida), el día del turista,
+  las preposiciones de movimiento, el diario y la queja en recepción, la prueba
+  de unidad y el día de cultura con la postal.
 
 ### Lo que decidió el contenido
 
-- **El primer episodio de Ana e Iván entra aquí** (día 112, «Dice que sí»). Es
-  el primero que cae en semana no escrita, así que no hubo retrofit: se copió
-  **tal cual está en `programa/historia.md`**, que es donde el profesor lo
-  aprobó. Copiarlo y no reescribirlo importa: hay una prueba que exige que el
-  .md y el calendario nombren los mismos episodios, y dos versiones del texto
-  serían la deriva de siempre.
+- **Los dos primeros episodios de Ana e Iván entran aquí**: el 8 en el día 112
+  («Dice que sí») y el 9 en el día 126 («Un tramo del Camino»). El 9 se escribió
+  para esta lección y **no se copió a `historia.md`**: ese documento explica el
+  arco y guarda UN episodio escrito como muestra de tono; duplicar el texto
+  sería tener dos versiones del mismo episodio. El del día 112, en cambio, es
+  el que ya estaba escrito ahí, y se copió **tal cual**, que es donde el
+  profesor lo aprobó.
 - **La prueba de la unidad 8 se escribió para que `pruebas.py` la lea**, no
   solo para imprimirla: 15 preguntas en tres bloques y una clave con «нед. N,
   день N» en cada respuesta. Se comprobó ejecutando el analizador, no leyendo
@@ -1638,9 +1643,9 @@ tandas, no por lección.
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.
-- **119 lecciones escritas** (semanas 1-17 enteras): unidades 1 a 8 completas
-  y la primera mitad de la 9, 1.091 entradas de vocabulario. Las 21 primeras
-  revisadas; el resto son borradores.
+- **126 lecciones escritas** (semanas 1-18 enteras): unidades 1 a 9 completas,
+  1.155 entradas de vocabulario. Las 21 primeras revisadas; el resto son
+  borradores.
 - Sitio público en `docs/` con portada, índice, test de nivel, «О курсе»,
   contacto y política de privacidad. Tres idiomas (ru/es/en) —el test solo en
   ruso, como las lecciones—, tema claro y oscuro, y progreso del lector
