@@ -1385,6 +1385,83 @@ analizador salían **2 de 61**; con los tres arreglados, 23.
 - **La corrección compara sin acentos ni mayúsculas**, porque la clave escribe
   «Aquí» al empezar frase y el banco «aquí».
 
+## La portada con los 300 dibujos, y la tarjeta de compartir (2026-10-27)
+
+El profesor dijo que la página «se ve muy aburrida» y pidió fondos o efectos.
+**Lo que la viste son sus propios 300 dibujos**: ya están pagados, son de la
+paleta de la casa, no los tiene nadie más y no cargan un solo byte de fuera.
+Efectos de movimiento no se hicieron, y es una decisión: esto es un sitio para
+leer media hora al día y una animación cansa a la tercera visita.
+
+### La vitrina de la portada
+
+Doce palabras con su dibujo y su traducción, entre el héroe y «Чем этот курс
+отличается». **No es solo decoración: el visitante aprende doce palabras antes
+de pulsar nada**, que es la mejor forma de enseñar de qué va el curso.
+
+- **Las doce se eligen a mano** (`construir_sitio.PORTADA_DIBUJOS`) y en orden.
+  De 300 hay que escoger, y éstas son la cara del sitio: tienen que ser
+  inequívocas —nada de `el banco`, que es asiento y entidad—, distintas entre
+  sí de un vistazo y de campos diferentes (comida, casa, animal, ropa, objeto,
+  transporte). Se miraron una a una en una hoja de contactos antes de
+  elegirlas; no se razonaron.
+- **Doce y no diez** porque la rejilla es de 3, 4 o 6 columnas según el ancho:
+  doce es el único número pequeño que deja filas enteras en los tres casos.
+  Hay una prueba con los tres.
+- **La traducción sale del vocabulario de las lecciones** (`lexico_del_curso`),
+  no de una lista en el código. Escrita a mano, el día que el profesor
+  corrigiera una traducción la portada seguiría enseñando la vieja.
+- **Y por eso hace falta un filtro que no se ve venir**: la columna rusa trae a
+  veces la variante americana (`el zumo → el jugo`, por la regla 8) o una
+  corrección (`el vaso → стакан (✗ не «ваза»!)`). Lo primero pondría español
+  donde se promete ruso. `NO_ES_TRADUCCION` rechaza las dos. De los doce
+  candidatos iniciales, `la llave` se cayó por no estar en el vocabulario y
+  `el zumo` y `el vaso` por esto.
+- **Se cae de pie y en silencio**, como la baraja y el audio: sin dibujos
+  generados no sale nada, y una palabra sin dibujo o sin traducción se salta.
+  Por debajo de `MUESTRA_MINIMA` (6) no sale la banda entera: media vitrina con
+  tres huecos no se lee como «faltan dibujos», se lee como una página rota.
+- **Pero una prueba exige que hoy salgan las doce.** Si no, la vitrina se
+  encogería sola el día que cambie una lección y nadie lo vería hasta mirar la
+  portada.
+- El índice y el léxico se leen **una vez para los tres idiomas**: dentro del
+  bucle serían tres recorridos de las 100 lecciones para el mismo resultado.
+
+### La tarjeta de compartir (`scripts/tarjeta_social.py`)
+
+Los botones de compartir son de este mismo día y **el enlace llegaba sin
+imagen**: Telegram, WhatsApp, Facebook y VK pintan la vista previa con
+`og:image`, y no había ninguno. Un enlace pelado en un chat se mira mucho
+menos, así que la mitad del trabajo de los botones se perdía ahí.
+
+Se compone con ocho de los doce dibujos de la portada, el título y el dominio,
+a 1200x630, que es lo que piden las tres plataformas. 120 KB.
+
+- **Es un comando aparte**, como el audio y los dibujos: construir el sitio
+  tiene que ser barato y esto abre doce imágenes y una fuente del sistema.
+- **La fuente es Inter y si no DejaVu**, las dos con cirílico, que es lo único
+  que no se puede dar por hecho: el título está en ruso.
+- **El texto se MIDE y se centra antes de dibujarlo.** Escrito de arriba abajo
+  con una `y` que crece, un título de dos renglones dejaba el bloque descolgado
+  y un hueco muerto encima de la franja. Es la lección de los flyers de salud.
+- **Cada dibujo va en su ficha con la esquina redonda.** El fondo de cada
+  imagen es un crema ligeramente distinto y, pegados a hueso, esas diferencias
+  se leen como rectángulos sucios.
+- **La franja abajo y el texto arriba**: al revés, la vista previa de WhatsApp
+  —que a veces recorta a cuadrado— se come el título, que es lo único que no
+  puede faltar.
+- **`construir_sitio` solo mira si el archivo ESTÁ**, y lo mira en `docs/` y no
+  en la carpeta de destino. Al revés que la baraja, a propósito: aquello se
+  enlaza con una ruta relativa, así que importa qué hay en la construcción;
+  esto se declara con la URL **absoluta** del sitio publicado, así que importa
+  qué hay versionado. Sin dominio o sin imagen no se declara nada: un
+  `og:image` que da 404 es peor que ninguno.
+
+**Lo que queda pendiente del profesor**: las doce de la portada y las ocho de
+la tarjeta son dibujos sin revisar (regla 6) y ahora son lo más visible del
+sitio. Son `la manzana, la casa, el perro, el libro, el café, el reloj, la
+camisa, el coche, las flores, el pescado, la guitarra, la silla`.
+
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.

@@ -63,6 +63,8 @@ ru:
     final_titulo: "Сколько готово сейчас"
     final_texto: "Программа всех 365 дней составлена целиком. Уроки выходят по мере готовности."
     final_boton: "Начать сейчас"
+    muestra: "Слова, которые вы выучите"
+    muestra_nota: "В курсе {n} слов нарисованы — у каждого есть ещё озвучка и пример. Вот {k} из них."
   curso:
     titulo: "Все уроки"
     subtitulo: "365 дней, 52 недели, 24 темы"
@@ -228,6 +230,8 @@ es:
     final_titulo: "Cuánto hay publicado"
     final_texto: "El programa de los 365 días está completo. Las lecciones se publican a medida que se escriben y se revisan."
     final_boton: "Empezar"
+    muestra: "Palabras que vas a aprender"
+    muestra_nota: "El curso tiene {n} palabras dibujadas, cada una con su voz y su ejemplo. Estas son {k}."
   curso:
     titulo: "Las lecciones"
     subtitulo: "365 días, 52 semanas, 24 unidades"
@@ -393,6 +397,8 @@ en:
     final_titulo: "How much is published"
     final_texto: "The syllabus for all 365 days is complete. Lessons go up as they are written and reviewed."
     final_boton: "Start"
+    muestra: "Words you will learn"
+    muestra_nota: "The course has {n} illustrated words, each with audio and an example. Here are {k}."
   curso:
     titulo: "Lessons"
     subtitulo: "365 days, 52 weeks, 24 units"

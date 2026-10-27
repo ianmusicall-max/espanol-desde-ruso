@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Урок 42: Семейные праздники и итоговое задание — Испанский с нуля для русскоговорящих</title>
-<meta name="description" content="Урок 42: Семейные праздники и итоговое задание. Día de la Madre / del Padre en el mundo hispano; tarea final: árbol genealógico comentado"><link rel="canonical" href="https://espanoldesderuso.com/semana-06/dia-7.html"><meta property="og:type" content="website"><meta property="og:locale" content="ru"><meta property="og:title" content="Урок 42: Семейные праздники и итоговое задание — Испанский с нуля для русскоговорящих"><meta property="og:description" content="Урок 42: Семейные праздники и итоговое задание. Día de la Madre / del Padre en el mundo hispano; tarea final: árbol genealógico comentado"><meta property="og:url" content="https://espanoldesderuso.com/semana-06/dia-7.html">
+<meta name="description" content="Урок 42: Семейные праздники и итоговое задание. Día de la Madre / del Padre en el mundo hispano; tarea final: árbol genealógico comentado"><link rel="canonical" href="https://espanoldesderuso.com/semana-06/dia-7.html"><meta property="og:type" content="website"><meta property="og:locale" content="ru"><meta property="og:title" content="Урок 42: Семейные праздники и итоговое задание — Испанский с нуля для русскоговорящих"><meta property="og:description" content="Урок 42: Семейные праздники и итоговое задание. Día de la Madre / del Padre en el mundo hispano; tarea final: árbol genealógico comentado"><meta property="og:url" content="https://espanoldesderuso.com/semana-06/dia-7.html"><meta property="og:image" content="https://espanoldesderuso.com/img/tarjeta.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Урок 42: Семейные праздники и итоговое задание — Испанский с нуля для русскоговорящих"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://espanoldesderuso.com/img/tarjeta.png">
 <style>
 /* Tres estados: lo que diga el sistema, o lo que el lector elija con el botón
    de la luna. El atributo data-tema del <html> gana siempre sobre el sistema;
@@ -261,6 +261,25 @@ strong{font-weight:650}
   box-shadow:var(--sombra);transition:transform .12s ease}
 .boton:hover{transform:translateY(-1px)}
 .boton.secundario{background:transparent;color:var(--acento);border:1.5px solid var(--acento);box-shadow:none}
+
+/* La vitrina de la portada: doce palabras con su dibujo. La rejilla es de 3,
+   4 o 6 columnas según el ancho, y por eso son doce: en los tres casos quedan
+   filas enteras. El dibujo manda aquí —al revés que en la tabla de la
+   lección— porque lo que hace es enseñar de qué va el curso de un vistazo. */
+.muestra{margin:2.2rem 0}
+.muestra h2{margin-bottom:.3rem}
+.muestra>p{margin:0 0 1rem;color:var(--tenue);font-size:.92rem}
+.vitrina{list-style:none;padding:0;margin:0;display:grid;gap:.6rem;
+  grid-template-columns:repeat(3,1fr)}
+@media(min-width:30rem){.vitrina{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:52rem){.vitrina{grid-template-columns:repeat(6,1fr)}}
+.vitrina li{background:var(--tarjeta);border:1px solid var(--linea);border-radius:11px;
+  padding:.6rem .3rem .55rem;text-align:center;box-shadow:var(--sombra);
+  font-family:ui-sans-serif,system-ui,sans-serif;transition:transform .12s ease}
+@media(hover:hover){.vitrina li:hover{transform:translateY(-2px)}}
+.vitrina img{display:block;width:72px;height:72px;margin:0 auto .4rem;border-radius:8px}
+.vitrina b{display:block;font-size:.84rem;font-weight:600}
+.vitrina span{display:block;font-size:.78rem;color:var(--tenue);margin-top:.1rem}
 
 .progreso{margin:1.5rem 0;font-family:ui-sans-serif,system-ui,sans-serif}
 .progreso .cifras{display:flex;align-items:baseline;gap:.45rem;font-size:.88rem;color:var(--tenue)}

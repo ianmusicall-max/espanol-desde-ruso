@@ -44,6 +44,11 @@ import validar  # noqa: E402
 # celda EXACTAMENTE igual o no casaría ninguna. Dos copias de esa regla es como
 # se descubre tarde que una de las dos se quedó vieja.
 import generar_imagenes  # noqa: E402
+# Y por `tarjetas_de`: la traducción de las doce palabras de la portada sale
+# del vocabulario de las lecciones, no de una lista aquí. Si se escribieran a
+# mano, el día que el profesor corrigiera una traducción la portada seguiría
+# enseñando la vieja.
+import exportar_anki  # noqa: E402
 
 DOCS = RAIZ / "docs"
 CONFIG = RAIZ / "web" / "sitio.yaml"
@@ -60,6 +65,11 @@ INDICE_IMG = "indice.json"
 # el audio: generar es una decisión y construir el sitio no puede gastar.
 VOCABULARIO_WEB = "vocabulario"
 MANIFIESTO_BARAJA = "baraja.json"
+
+# La tarjeta de la vista previa al compartir. La compone
+# scripts/tarjeta_social.py con los dibujos del curso; aquí solo se declara si
+# está, porque un `og:image` que da 404 es peor que ninguno.
+TARJETA_SOCIAL = "img/tarjeta.png"
 EXTENSIONES = ["tables", "fenced_code", "sane_lists", "toc", "attr_list"]
 
 
@@ -332,6 +342,25 @@ strong{font-weight:650}
   box-shadow:var(--sombra);transition:transform .12s ease}
 .boton:hover{transform:translateY(-1px)}
 .boton.secundario{background:transparent;color:var(--acento);border:1.5px solid var(--acento);box-shadow:none}
+
+/* La vitrina de la portada: doce palabras con su dibujo. La rejilla es de 3,
+   4 o 6 columnas según el ancho, y por eso son doce: en los tres casos quedan
+   filas enteras. El dibujo manda aquí —al revés que en la tabla de la
+   lección— porque lo que hace es enseñar de qué va el curso de un vistazo. */
+.muestra{margin:2.2rem 0}
+.muestra h2{margin-bottom:.3rem}
+.muestra>p{margin:0 0 1rem;color:var(--tenue);font-size:.92rem}
+.vitrina{list-style:none;padding:0;margin:0;display:grid;gap:.6rem;
+  grid-template-columns:repeat(3,1fr)}
+@media(min-width:30rem){.vitrina{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:52rem){.vitrina{grid-template-columns:repeat(6,1fr)}}
+.vitrina li{background:var(--tarjeta);border:1px solid var(--linea);border-radius:11px;
+  padding:.6rem .3rem .55rem;text-align:center;box-shadow:var(--sombra);
+  font-family:ui-sans-serif,system-ui,sans-serif;transition:transform .12s ease}
+@media(hover:hover){.vitrina li:hover{transform:translateY(-2px)}}
+.vitrina img{display:block;width:72px;height:72px;margin:0 auto .4rem;border-radius:8px}
+.vitrina b{display:block;font-size:.84rem;font-weight:600}
+.vitrina span{display:block;font-size:.78rem;color:var(--tenue);margin-top:.1rem}
 
 .progreso{margin:1.5rem 0;font-family:ui-sans-serif,system-ui,sans-serif}
 .progreso .cifras{display:flex;align-items:baseline;gap:.45rem;font-size:.88rem;color:var(--tenue)}
@@ -1035,6 +1064,41 @@ def _marcar_contraste(cuerpo: str) -> str:
 
 
 # ------------------------------------------------------------------------ shell
+def _tarjeta_social(cfg, titulo: str) -> str:
+    """La imagen de la vista previa al compartir, si existe y si hay dominio.
+
+    Sin ella el enlace llega pelado a Telegram y a WhatsApp —que es por donde
+    se comparte este curso desde el 2026-10-27— y un enlace sin imagen se mira
+    mucho menos.
+
+    **Las dos condiciones son necesarias y no son lo mismo.** La imagen la
+    escribe `scripts/tarjeta_social.py`, que es un comando aparte: si no se ha
+    corrido, prometer un `og:image` que da 404 es peor que no declarar
+    ninguno. Y `og:image` tiene que ser una URL ABSOLUTA —la plataforma la
+    descarga desde su propio servidor, no desde la página—, así que sin
+    dominio configurado tampoco sirve.
+
+    Se mira en `docs/` y NO en la carpeta de destino, al revés que la baraja o
+    el índice de dibujos, y es a propósito: aquello se enlaza con una ruta
+    relativa, así que lo que importa es qué hay en la construcción; esto se
+    declara con la URL absoluta del sitio publicado, así que lo que importa es
+    qué hay versionado en `docs/`. Construir en otra carpeta no cambia lo que
+    la plataforma va a descargar.
+
+    `summary_large_image` es lo que hace que la tarjeta salga grande y no como
+    una miniatura cuadrada al lado del texto."""
+    dominio = (cfg.get("dominio") or "").rstrip("/")
+    if not dominio or not (DOCS / TARJETA_SOCIAL).exists():
+        return ""
+    url = f"{dominio}/{TARJETA_SOCIAL}"
+    return (f'<meta property="og:image" content="{html.escape(url)}">'
+            f'<meta property="og:image:width" content="1200">'
+            f'<meta property="og:image:height" content="630">'
+            f'<meta property="og:image:alt" content="{html.escape(titulo)}">'
+            f'<meta name="twitter:card" content="summary_large_image">'
+            f'<meta name="twitter:image" content="{html.escape(url)}">')
+
+
 def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id="", raiz=".",
            jsonld="", publicadas=0, mapa_dias="{}", traducida=True, con_audio=False, test=None,
            huecos=None,
@@ -1109,7 +1173,8 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
     og = (f'<meta property="og:type" content="website"><meta property="og:locale" content="{actual["html"]}">'
           f'<meta property="og:title" content="{html.escape(titulo)}">'
           f'<meta property="og:description" content="{html.escape(descripcion)}">'
-          + (f'<meta property="og:url" content="{html.escape(canonica)}">' if canonica else ""))
+          + (f'<meta property="og:url" content="{html.escape(canonica)}">' if canonica else "")
+          + _tarjeta_social(cfg, titulo))
     estructura = f'<script type="application/ld+json">{jsonld}</script>' if jsonld else ""
 
     return f"""<!doctype html>
@@ -1206,8 +1271,86 @@ def escribir_progreso_js(destino: pathlib.Path) -> None:
     destino.joinpath("progreso.js").write_text(PROGRESO_JS, encoding="utf-8")
 
 
+# Las doce palabras que se enseñan en la portada, elegidas A MANO y en este
+# orden. De los 300 dibujos hay que escoger, y los de la portada son la cara
+# del sitio: tienen que ser inequívocos (nada de «el banco», que es asiento y
+# entidad), distintos entre sí de un vistazo, y de campos diferentes —comida,
+# casa, animal, ropa, objeto, transporte— para que se vea de qué va el curso.
+#
+# Doce y no más porque la rejilla es de 3, 4 o 6 columnas según el ancho: con
+# doce quedan filas enteras en los tres casos y ninguna huérfana.
+PORTADA_DIBUJOS = ("la manzana", "la casa", "el perro", "el libro",
+                   "el café", "el reloj", "la camisa", "el coche",
+                   "las flores", "el pescado", "la guitarra", "la silla")
+
+# Por debajo de esto la banda no sale. Media vitrina con tres huecos no se lee
+# como «todavía no están todos los dibujos»: se lee como una página rota.
+MUESTRA_MINIMA = 6
+
+# Una traducción tiene que estar en ruso. Suena obvio y no lo es: la columna
+# rusa del vocabulario trae a veces la variante americana («el zumo → el
+# jugo», por la regla 8) o una corrección («el vaso → стакан (✗ не ваза!)»).
+# Lo primero pondría español donde se promete ruso; lo segundo es una nota
+# para el alumno, no una traducción.
+NO_ES_TRADUCCION = re.compile(r"[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]|✗")
+
+
+def lexico_del_curso(cal) -> dict:
+    """Palabra española → su traducción rusa, leída de las lecciones.
+
+    De las lecciones y no de una lista en el código, por lo mismo que el
+    índice de dibujos se lee de `docs/img/`: la fuente es el curso. Si dos
+    lecciones enseñan la misma entrada se queda la primera, que es la que la
+    presenta como nueva."""
+    palabras: dict[str, str] = {}
+    for d in plan.dias(cal):
+        if d.ruta.exists():
+            for es, ru, _ej, _et in exportar_anki.tarjetas_de(d.ruta):
+                palabras.setdefault(es, ru)
+    return palabras
+
+
+def _muestra_de_dibujos(t, dibujos: dict, lexico: dict, raiz: str) -> str:
+    """Doce palabras con su dibujo, en la portada.
+
+    El profesor dijo que la página «se ve muy aburrida», y lo que la viste son
+    los dibujos que ya están pagados y en disco: son de la paleta de la casa,
+    no los tiene nadie más y no cargan ni un byte de fuera. Lo que NO se hizo
+    son efectos de movimiento: esto es un sitio para leer media hora al día y
+    una animación cansa a la tercera visita.
+
+    Y no es solo decoración: el visitante aprende doce palabras antes de
+    pulsar nada, que es la mejor forma de enseñar de qué va el curso.
+
+    **Se cae sola y en silencio.** Sin dibujos generados no sale nada —igual
+    que la baraja y el audio, el sitio se construye con todo y sin nada— y una
+    palabra sin dibujo o sin traducción rusa en el curso se salta. Si quedan
+    menos de `MUESTRA_MINIMA`, no sale la banda entera: una vitrina a medias
+    parece un fallo, no una obra en marcha."""
+    if not dibujos:
+        return ""
+    p = t["portada"]
+    fichas = []
+    for palabra in PORTADA_DIBUJOS:
+        archivo = dibujos.get(generar_imagenes.limpiar(palabra))
+        ruso = lexico.get(palabra, "")
+        if not archivo or not ruso or NO_ES_TRADUCCION.search(ruso):
+            continue
+        fichas.append(
+            f'<li><img src="{raiz}/img/{html.escape(archivo)}" alt="" '
+            f'width="72" height="72" loading="lazy" decoding="async">'
+            f'<b>{html.escape(palabra)}</b>'
+            f'<span>{html.escape(ruso)}</span></li>')
+    if len(fichas) < MUESTRA_MINIMA:
+        return ""
+    nota = html.escape(p["muestra_nota"]).format(n=len(dibujos), k=len(fichas))
+    return (f'<section class="muestra"><h2>{html.escape(p["muestra"])}</h2>'
+            f'<p>{nota}</p><ul class="vitrina">{"".join(fichas)}</ul></section>')
+
+
 # ----------------------------------------------------------------------- páginas
-def construir_portada(cfg, t, idiomas, idioma, destino, cal, raiz) -> None:
+def construir_portada(cfg, t, idiomas, idioma, destino, cal, raiz,
+                      dibujos=None, lexico=None) -> None:
     hechas = escritas(cal)
     total = len(plan.dias(cal))
     primera = hechas[0] if hechas else None
@@ -1260,6 +1403,7 @@ def construir_portada(cfg, t, idiomas, idioma, destino, cal, raiz) -> None:
 </div>
 </div>
 </div>
+{_muestra_de_dibujos(t, dibujos or {}, lexico or {}, raiz)}
 {anuncio(cfg, "cabecera")}
 
 <h2>{html.escape(p['dif_titulo'])}</h2>
@@ -2083,12 +2227,19 @@ def construir(destino: pathlib.Path = DOCS, cfg: dict | None = None, textos: dic
     # si está: copiarlos después dejaría el bloque fuera en la primera corrida.
     construir_vocabulario(destino)
 
+    # Antes del bucle y no dentro: la portada de los tres idiomas enseña los
+    # mismos doce dibujos, así que leer el índice y recorrer las lecciones una
+    # vez por idioma sería hacer tres veces el mismo trabajo.
+    dibujos = indice_de_imagenes(destino)
+    lexico = lexico_del_curso(cal) if dibujos else {}
+
     for i in idiomas:
         t = textos[i["codigo"]]
         carpeta = destino / i["carpeta"] if i["carpeta"] else destino
         carpeta.mkdir(parents=True, exist_ok=True)
         raiz = ".." if i["carpeta"] else "."
-        construir_portada(cfg, t, idiomas, i["codigo"], carpeta, cal, raiz)
+        construir_portada(cfg, t, idiomas, i["codigo"], carpeta, cal, raiz,
+                          dibujos, lexico)
         construir_indice_curso(cfg, t, idiomas, i["codigo"], carpeta, cal, raiz, destino)
         construir_estaticas(cfg, t, idiomas, i["codigo"], carpeta, cal, raiz)
 
@@ -2096,7 +2247,6 @@ def construir(destino: pathlib.Path = DOCS, cfg: dict | None = None, textos: dic
     todos = plan.dias(cal)
     hechas = escritas(cal)
     audio = indice_de_audio(destino)
-    dibujos = indice_de_imagenes(destino)
     for d in hechas:
         construir_leccion(d, cfg, textos["ru"], idiomas, destino, cal, todos, audio,
                           dibujos)

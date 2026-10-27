@@ -28,6 +28,7 @@ import huecos  # noqa: E402
 import exportar_apkg  # noqa: E402
 import poner_dominio  # noqa: E402
 import revisar_adsense  # noqa: E402
+import tarjeta_social  # noqa: E402
 import exportar_wordpress  # noqa: E402
 import escribir_leccion  # noqa: E402
 import exportar_anki  # noqa: E402
@@ -2129,3 +2130,150 @@ class TestLosHuecosInteractivos(unittest.TestCase):
         que no se ve mirando la página."""
         for pagina in (RAIZ / "docs").rglob("*.html"):
             self.assertNotIn(b"\x00", pagina.read_bytes(), str(pagina.name))
+
+
+class TestLaVitrinaDeLaPortada(unittest.TestCase):
+    """Los doce dibujos de la portada.
+
+    El profesor dijo que la página «se ve muy aburrida». Lo que la viste son
+    los 300 dibujos que ya están pagados y en disco: son de la paleta de la
+    casa, no los tiene nadie más y no cargan un solo byte de fuera. Y no es
+    solo decoración: el visitante aprende doce palabras antes de pulsar
+    nada."""
+
+    def setUp(self):
+        self.t = construir_sitio.cargar_textos()["ru"]
+        self.dibujos = construir_sitio.indice_de_imagenes(RAIZ / "docs")
+        self.lexico = construir_sitio.lexico_del_curso(CAL)
+
+    def test_las_doce_palabras_salen_todas_hoy(self):
+        """La página se cae de pie si falta alguna, pero aquí se exige que no
+        falte ninguna: el día que una lección cambie una traducción o alguien
+        borre un dibujo, la vitrina se encogería en silencio y nadie lo vería
+        hasta mirar la portada."""
+        if not self.dibujos:
+            self.skipTest("todavía no se han generado los dibujos")
+        for palabra in construir_sitio.PORTADA_DIBUJOS:
+            with self.subTest(palabra=palabra):
+                self.assertIn(generar_imagenes.limpiar(palabra), self.dibujos,
+                              "sin dibujo")
+                ruso = self.lexico.get(palabra, "")
+                self.assertTrue(ruso, "no está en el vocabulario del curso")
+                self.assertIsNone(construir_sitio.NO_ES_TRADUCCION.search(ruso),
+                                  f"la traducción no es rusa limpia: {ruso!r}")
+
+    def test_son_doce_para_que_no_quede_ninguna_huerfana(self):
+        """La rejilla es de 3, 4 o 6 columnas según el ancho. Doce es el único
+        número pequeño que deja filas enteras en los tres casos."""
+        n = len(construir_sitio.PORTADA_DIBUJOS)
+        self.assertEqual(n, len(set(construir_sitio.PORTADA_DIBUJOS)), "hay repetidas")
+        for columnas in (3, 4, 6):
+            self.assertEqual(0, n % columnas, f"con {columnas} columnas sobra una fila a medias")
+
+    def test_sin_dibujos_generados_no_sale_nada(self):
+        """Igual que la baraja y el audio: el sitio se construye con todo y
+        sin nada."""
+        self.assertEqual("", construir_sitio._muestra_de_dibujos(self.t, {}, {}, "."))
+
+    def test_una_traduccion_que_no_es_rusa_se_salta(self):
+        """La columna rusa del vocabulario trae a veces la variante americana
+        («el zumo → el jugo», por la regla 8) o una corrección («стакан (✗ не
+        ваза!)»). Lo primero pondría español donde se promete ruso."""
+        dibujos = {generar_imagenes.limpiar(p): f"{i}.webp"
+                   for i, p in enumerate(construir_sitio.PORTADA_DIBUJOS)}
+        lexico = dict.fromkeys(construir_sitio.PORTADA_DIBUJOS, "слово")
+        malas = {construir_sitio.PORTADA_DIBUJOS[0]: "el jugo",
+                 construir_sitio.PORTADA_DIBUJOS[1]: "стакан (✗ не «ваза»!)"}
+        lexico.update(malas)
+        bloque = construir_sitio._muestra_de_dibujos(self.t, dibujos, lexico, ".")
+        self.assertEqual(len(construir_sitio.PORTADA_DIBUJOS) - 2, bloque.count("<li>"))
+        for palabra in malas:
+            self.assertNotIn(f"<b>{palabra}</b>", bloque)
+
+    def test_media_vitrina_no_sale(self):
+        """Con tres huecos no se lee como «todavía faltan dibujos»: se lee como
+        una página rota."""
+        palabras = construir_sitio.PORTADA_DIBUJOS[:construir_sitio.MUESTRA_MINIMA - 1]
+        dibujos = {generar_imagenes.limpiar(p): "x.webp" for p in palabras}
+        lexico = dict.fromkeys(palabras, "слово")
+        self.assertEqual("", construir_sitio._muestra_de_dibujos(self.t, dibujos, lexico, "."))
+
+    def test_la_portada_de_los_tres_idiomas_la_ensena(self):
+        """Las mismas doce en ru, es y en: son el vocabulario del curso, no un
+        texto de la interfaz. Y el `src` tiene que llevar el prefijo correcto,
+        porque los dibujos viven UNA vez en `docs/img/` y la portada española
+        se escribe en `docs/es/`."""
+        docs = RAIZ / "docs"
+        if not (docs / "img" / construir_sitio.INDICE_IMG).exists():
+            self.skipTest("todavía no se han generado los dibujos")
+        for pagina, prefijo in (("index.html", "./img/"), ("es/index.html", "../img/"),
+                                ("en/index.html", "../img/")):
+            texto = (docs / pagina).read_text(encoding="utf-8")
+            vitrina = re.search(r'<ul class="vitrina">.*?</ul>', texto, re.S)
+            self.assertIsNotNone(vitrina, pagina)
+            self.assertEqual(len(construir_sitio.PORTADA_DIBUJOS),
+                             vitrina.group(0).count("<li>"), pagina)
+            for src in re.findall(r'<img src="([^"]+)"', vitrina.group(0)):
+                self.assertTrue(src.startswith(prefijo), f"{pagina}: {src}")
+                self.assertTrue((docs / src.split("/", 1)[1].lstrip("./")).exists()
+                                or (docs / src.replace("../", "").lstrip("./")).exists(),
+                                f"{pagina}: no existe {src}")
+
+    def test_el_lexico_sale_de_las_lecciones(self):
+        """De las lecciones y no de una lista en el código: si se escribieran a
+        mano, el día que el profesor corrigiera una traducción la portada
+        seguiría enseñando la vieja."""
+        self.assertGreater(len(self.lexico), 500)
+        self.assertEqual("яблоко", self.lexico.get("la manzana"))
+
+
+class TestLaTarjetaSocial(unittest.TestCase):
+    """La imagen de la vista previa al compartir, hecha con los dibujos.
+
+    Los botones de compartir son del 2026-10-27 y el enlace llegaba sin
+    imagen: Telegram, WhatsApp, Facebook y VK pintan la vista previa con
+    `og:image`, y no había ninguno."""
+
+    def test_la_medida_es_la_que_piden_las_plataformas(self):
+        self.assertEqual((1200, 630), (tarjeta_social.ANCHO, tarjeta_social.ALTO))
+
+    def test_son_las_mismas_palabras_que_la_portada(self):
+        """Quien llega por el enlace ve primero la tarjeta y enseguida la
+        página: que sean las mismas doce hace que el sitio se reconozca."""
+        indice = {generar_imagenes.limpiar(p): "x.webp"
+                  for p in construir_sitio.PORTADA_DIBUJOS}
+        self.assertEqual(list(construir_sitio.PORTADA_DIBUJOS),
+                         tarjeta_social.palabras_con_dibujo(indice))
+        self.assertEqual([], tarjeta_social.palabras_con_dibujo({}))
+
+    def test_sin_dominio_no_se_declara(self):
+        """`og:image` se descarga desde el servidor de la plataforma, así que
+        tiene que ser una URL absoluta: sin dominio no sirve de nada."""
+        self.assertEqual("", construir_sitio._tarjeta_social({"dominio": ""}, "x"))
+
+    def test_sin_imagen_no_se_declara(self):
+        """Prometer una imagen que da 404 es peor que no declarar ninguna."""
+        antes = construir_sitio.TARJETA_SOCIAL
+        construir_sitio.TARJETA_SOCIAL = "img/no-existe-esta-tarjeta.png"
+        try:
+            self.assertEqual("", construir_sitio._tarjeta_social(
+                {"dominio": "https://ejemplo.com"}, "x"))
+        finally:
+            construir_sitio.TARJETA_SOCIAL = antes
+
+    def test_la_imagen_esta_en_las_paginas_y_en_disco(self):
+        docs = RAIZ / "docs"
+        if not (docs / construir_sitio.TARJETA_SOCIAL).exists():
+            self.skipTest("todavía no se ha compuesto la tarjeta")
+        dominio = construir_sitio.cargar_config().get("dominio", "")
+        if not dominio:
+            self.skipTest("sin dominio configurado")
+        from PIL import Image
+        with Image.open(docs / construir_sitio.TARJETA_SOCIAL) as im:
+            self.assertEqual((tarjeta_social.ANCHO, tarjeta_social.ALTO), im.size)
+        for pagina in ("index.html", "es/index.html", "kurs.html",
+                       "semana-01/dia-1.html"):
+            texto = (docs / pagina).read_text(encoding="utf-8")
+            self.assertIn(f'property="og:image" content="{dominio}/'
+                          f'{construir_sitio.TARJETA_SOCIAL}"', texto, pagina)
+            self.assertIn('name="twitter:card" content="summary_large_image"', texto, pagina)
