@@ -25,6 +25,7 @@ Tres decisiones que no son de forma:
 from __future__ import annotations
 
 import argparse
+import concurrent.futures as cf
 import hashlib
 import json
 import os
@@ -40,7 +41,10 @@ AUDIO = RAIZ / "docs" / "audio"
 INDICE = "indice.json"
 
 MODELO = "gpt-4o-mini-tts"
-VOZ = "nova"
+# La eligió el profesor el 2026-10-26 oyendo las tres con la misma frase
+# (`--muestra 3 --voz …`). Cambiarla aquí es otro hash, o sea 1,30 USD otra
+# vez: si alguien la toca, que sea después de volver a escucharlas.
+VOZ = "shimmer"
 INSTRUCCIONES = ("Habla en español de España, claro y despacio, como un profesor "
                  "que dicta para que un principiante repita. Pronuncia cada sílaba.")
 
@@ -150,25 +154,48 @@ def escribir_indice(frases: list[str], carpeta: pathlib.Path, voz: str = VOZ) ->
     return len(indice)
 
 
-def generar(frases: list[str], carpeta: pathlib.Path, cliente, voz: str = VOZ) -> int:
+# A una frase por vez, las 3.543 tardan hora y media: casi todo es esperar a
+# que OpenAI conteste, no trabajo nuestro. Seis a la vez lo dejan en unos
+# quince minutos. No más de seis a propósito: el límite de peticiones de la
+# cuenta es lo siguiente que se rompería, y un 429 se paga en reintentos.
+HILOS = 6
+
+
+def _una(texto: str, carpeta: pathlib.Path, cliente, voz: str) -> str | None:
+    """Locuta una frase. Devuelve el error si lo hubo, o None si salió.
+
+    Escribe en `.parcial` y renombra: una descarga cortada dejaría un MP3 de
+    cero bytes que el sitio serviría como bueno, y el lector pulsaría ▶ sin que
+    sonara nada. El `.parcial` lleva el nombre del destino, así que dos hilos
+    nunca escriben en el mismo archivo temporal."""
+    destino = carpeta / nombre_de(texto, voz)
+    parcial = destino.with_suffix(".parcial")
+    try:
+        with cliente.audio.speech.with_streaming_response.create(
+                model=MODELO, voice=voz, input=texto,
+                instructions=INSTRUCCIONES, response_format="mp3") as r:
+            r.stream_to_file(parcial)
+        parcial.replace(destino)
+        return None
+    except Exception as e:  # una frase que falla no puede tumbar la tanda
+        parcial.unlink(missing_ok=True)
+        return str(e)
+
+
+def generar(frases: list[str], carpeta: pathlib.Path, cliente, voz: str = VOZ,
+            hilos: int = HILOS) -> int:
     carpeta.mkdir(parents=True, exist_ok=True)
     hechos = 0
-    for i, texto in enumerate(frases, 1):
-        destino = carpeta / nombre_de(texto, voz)
-        parcial = destino.with_suffix(".parcial")
-        try:
-            with cliente.audio.speech.with_streaming_response.create(
-                    model=MODELO, voice=voz, input=texto,
-                    instructions=INSTRUCCIONES, response_format="mp3") as r:
-                r.stream_to_file(parcial)
-            parcial.replace(destino)
-            hechos += 1
-        except Exception as e:  # una frase que falla no puede tumbar la tanda
-            parcial.unlink(missing_ok=True)
-            print(f"  [{i}/{len(frases)}] falló «{texto[:40]}»: {e}")
-            continue
-        if i % 50 == 0:
-            print(f"  {i}/{len(frases)}")
+    with cf.ThreadPoolExecutor(max_workers=hilos) as pool:
+        pedidos = {pool.submit(_una, t, carpeta, cliente, voz): t for t in frases}
+        for i, fut in enumerate(cf.as_completed(pedidos), 1):
+            fallo = fut.result()
+            if fallo:
+                print(f"  [{i}/{len(frases)}] falló «{pedidos[fut][:40]}»: {fallo}")
+            else:
+                hechos += 1
+            if i % 250 == 0:
+                print(f"  {i}/{len(frases)}", flush=True)
     return hechos
 
 

@@ -397,11 +397,11 @@ Lo que hay que saber si alguien lo toca:
   sin `docs/audio/` el sitio se construye igual y sin un solo ▶. El audio se
   genera por tandas, así que «algunas frases sí y otras no» es el estado normal
   durante un tiempo y ninguna página puede romperse por eso.
-- **`docs/audio/` está en `.gitignore` por ahora.** Cuando el audio esté hecho
-  de verdad hay que quitar esa línea para que se publique. Se probó el
-  reproductor con tonos generados con ffmpeg —no hay TTS ni clave en este
-  contenedor— y **esos tonos se borraron antes de subir nada**: publicar un
-  pitido donde el lector espera una voz es peor que no tener audio.
+- **`docs/audio/` SE VERSIONA** desde el 2026-10-26, que es el día que el
+  audio se generó de verdad. Antes estaba en `.gitignore` y se probó el
+  reproductor con tonos de ffmpeg que **se borraron antes de subir nada**:
+  publicar un pitido donde el lector espera una voz es peor que no tener
+  audio. Lo único que sigue ignorado es `docs/audio/*.parcial`.
 
 **El camino quedó abierto el 2026-10-26**, y costó encontrar los dos
 escalones porque el segundo no se ve hasta que se tropieza con él:
@@ -415,12 +415,45 @@ escalones porque el segundo no se ve hasta que se tropieza con él:
    La caja de *Allowed domains* no aparece hasta elegir el nivel «Limited»,
    que es donde se atascó el profesor dos veces.
 
-**Pesa 97 MB, no 50** (medido el 2026-10-26 sobre la muestra real, no
-estimado: 149 caracteres dan 11,6 s a 128 kbps, y son 81.505 caracteres, o sea
-unos 106 minutos). Cabe de sobra en el 1 GB de GitHub Pages y no cambia el
-precio. Si algún día estorba, `ffmpeg` a 64 kbps mono lo deja en ~35 MB sin
-que se note en voz y con la mitad de datos móviles para el lector —y se hace
-sobre los MP3 ya descargados, así que no se vuelve a pagar—.
+### Hecho el 2026-10-26: 3.543 audios, 1,30 USD, sin un solo fallo
+
+**La voz es `shimmer` y la eligió el profesor**, oyendo las tres candidatas con
+la misma frase (`--muestra 3 --voz …`). Está puesta como `VOZ` por defecto; si
+alguien la cambia, que sea después de volver a escucharlas, porque es otro hash
+y son 1,30 USD otra vez.
+
+**Se generan en paralelo** (`HILOS = 6`). De una en una son hora y media y casi
+todo es esperar a que OpenAI conteste; de seis en seis, unos diez minutos. No
+más de seis a propósito: el límite de peticiones de la cuenta es lo siguiente
+que se rompería, y un 429 se paga en reintentos.
+
+**El tamaño se calculó mal DOS veces, y conviene saber por qué**: primero 50 MB
+a ojo, luego 97 MB extrapolando de la muestra… y salieron **164 MB**. El error
+está en que la muestra son las frases más LARGAS, y la media real es de 23
+caracteres: una frase corta tiene el mismo encabezado y los mismos silencios de
+guarda que una larga, así que el coste por carácter no es constante. Lo medido
+de verdad: **179 minutos en 3.543 archivos**, 3,0 s de media.
+
+**Se publican a 64 kbps mono y lo decidió el profesor**, sobre las dos muestras
+a la vez. Vienen de OpenAI a 128 kbps mono 24 kHz, que para voz es tirar bits
+que el oído no recoge. La cuenta que decidió:
+
+    128 kbps → 164 MB hoy · 598 MB con las 365 lecciones
+     64 kbps →  92 MB hoy · 299 MB con las 365 lecciones
+                            (el límite de GitHub Pages es 1024 MB)
+
+**Se recodificó ANTES del primer commit, y eso es lo que importa**: git guarda
+el historial para siempre, así que subir los de 128 y recodificar después
+dejaría el repositorio cargando con los dos juegos. El nombre NO cambia —es la
+llave del índice— y se escribe aparte y se renombra encima, igual que el
+`.parcial` del generador: si ffmpeg se corta a la mitad, lo que queda es el
+original intacto y no un MP3 truncado que el sitio serviría como bueno.
+
+**Comprobado en navegador, no deducido**: 4.225 botones en 94 lecciones, el ▶
+suena, y al pulsar otro se para el anterior. La primera comprobación dio «no se
+creó ningún `<audio>`» y **el fallo era de la prueba**: el reproductor usa
+`new Audio()`, que no inserta nada en el DOM. La señal observable es el
+`aria-pressed` del botón, que solo se pone a `true` si `play()` resolvió.
 
 Anthropic **no tiene servicio de voz**, así que el audio no lo puede poner
 Claude: tiene que venir de un TTS de fuera. OpenAI es el que está programado
@@ -789,6 +822,9 @@ ensena.
 - Para AdSense **solo falta el dominio propio** (y el CMP de Google al
   encender los anuncios). El correo de contacto ya está puesto y el resto de
   la lista la da por buena `scripts/revisar_adsense.py`.
-- Pendiente: lecciones 101-365, generar el audio (el camino ya está:
-  `scripts/generar_audio.py`, 1,30 USD y una clave de OpenAI), más libros de
-  referencia, y lo de «Pendiente de revision del profesor» de arriba.
+- **El audio está hecho** (2026-10-26): 3.543 frases locutadas con la voz
+  `shimmer`, 1,30 USD, 92 MB a 64 kbps, y 4.225 botones ▶ en 94 de las 100
+  lecciones. Comprobado que suena en navegador.
+- Pendiente: lecciones 101-365 (y su audio, que son otros ~4 USD en total),
+  más libros de referencia, y lo de «Pendiente de revision del profesor» de
+  arriba.

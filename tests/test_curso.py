@@ -9,6 +9,7 @@ import html
 import json
 import pathlib
 import re
+import shutil
 import sys
 import tempfile
 import unittest
@@ -281,7 +282,18 @@ class TestElSitio(unittest.TestCase):
         self.idiomas = [i["codigo"] for i in self.textos["idiomas"]]
 
     def _construir(self, cfg=None):
+        """Construye en una carpeta temporal, con el MISMO índice de audio.
+
+        Sin copiarlo, `indice_de_audio` no encuentra nada en la carpeta nueva y
+        el sitio sale sin un solo ▶, así que `test_docs_esta_al_dia` compararía
+        un sitio con audio contra uno sin audio y acusaría a `docs/` de estar
+        desactualizado. Se copia solo el índice y no los 3.543 MP3: los botones
+        dependen de él, no de que los archivos estén."""
         destino = pathlib.Path(tempfile.mkdtemp())
+        indice = RAIZ / "docs" / "audio" / construir_sitio.INDICE_AUDIO
+        if indice.exists():
+            (destino / "audio").mkdir(parents=True, exist_ok=True)
+            shutil.copy2(indice, destino / "audio" / construir_sitio.INDICE_AUDIO)
         construir_sitio.construir(destino, cfg or self.cfg, self.textos)
         return destino
 

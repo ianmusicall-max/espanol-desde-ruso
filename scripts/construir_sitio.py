@@ -40,6 +40,9 @@ DOCS = RAIZ / "docs"
 CONFIG = RAIZ / "web" / "sitio.yaml"
 TEXTOS = RAIZ / "web" / "textos.yaml"
 TEST = RAIZ / "programa" / "test-nivel.yaml"
+# El nombre del índice de audio: lo escribe generar_audio.py y lo leen
+# tanto el generador como las pruebas, así que vive en un solo sitio.
+INDICE_AUDIO = "indice.json"
 EXTENSIONES = ["tables", "fenced_code", "sane_lists", "toc", "attr_list"]
 
 
@@ -1126,7 +1129,7 @@ def indice_de_audio(destino: pathlib.Path) -> dict:
     Se lee de `docs/audio/`, que es donde lo deja `scripts/generar_audio.py`, y
     no de una lista en el código: así el sitio se construye igual con audio y
     sin él, y encender el audio no es tocar el generador."""
-    ruta = destino / "audio" / "indice.json"
+    ruta = destino / "audio" / INDICE_AUDIO
     try:
         return json.loads(ruta.read_text(encoding="utf-8"))
     except (OSError, ValueError):

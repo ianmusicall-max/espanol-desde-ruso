@@ -8,9 +8,10 @@ data/tmp/
 # Lo que generan los exportadores: se rehace con un comando.
 salida/
 
-# El audio se genera con scripts/generar_audio.py y pesa unos MB. Se versiona
-# a propósito cuando esté hecho de verdad: quitar esta línea entonces.
-docs/audio/
+# El audio SÍ se versiona desde el 2026-10-26: son 3.543 MP3 y ~97 MB, y sin
+# ellos en el repositorio GitHub Pages no tiene qué servir. Lo que no entra es
+# el `.parcial` de una descarga cortada, que no es un audio.
+docs/audio/*.parcial
 
 # Capturas de pantalla para enseñar algo, no son del sitio
 capturas/
