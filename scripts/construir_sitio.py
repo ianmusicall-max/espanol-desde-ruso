@@ -114,9 +114,17 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 .idiomas a,.idiomas span{padding:.12rem .5rem;border-radius:999px;font-size:.75rem;font-weight:600;
   text-transform:uppercase;letter-spacing:.05em;line-height:1.5}
 .idiomas [aria-current]{background:var(--acento);color:#fff}
-/* Los idiomas en los que esta página no existe: se ven, no se pulsan, y el
-   `title` dice por qué. Enlazarlos a la portada movía al lector de sitio. */
-.idiomas .apagado{color:var(--tenue);opacity:.45;cursor:default;user-select:none}
+/* Los idiomas en los que esta página no existe: se ven apagados, se pulsan y
+   lo que abren es el aviso de abajo. Enlazarlos movía al lector de sitio. */
+.idiomas .apagado{color:var(--tenue);opacity:.6;cursor:pointer;background:none;border:0;
+  font:inherit;font-size:.75rem;font-weight:600}
+.idiomas .apagado:hover{opacity:1}
+/* El aviso de «aquí no hay versión en ese idioma»: ocupa toda la fila de la
+   cabecera para que se lea, y nace oculto porque sin JavaScript los botones no
+   hacen nada y un aviso suelto no diría nada de nada. */
+.sin-idioma{flex:1 0 100%;order:4;margin:.3rem 0 0;font-size:.82rem;color:var(--tenue);
+  font-family:ui-sans-serif,system-ui,sans-serif}
+.sin-idioma a{color:var(--acento);font-weight:600}
 .tema{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;
   width:30px;height:30px;padding:0;border:1px solid var(--linea);border-radius:999px;
   background:transparent;color:var(--tenue);cursor:pointer;-webkit-tap-highlight-color:transparent}
@@ -572,6 +580,22 @@ TEST_JS = r"""(function(){
 })();"""
 
 
+# Los idiomas apagados: explican en vez de no hacer nada. Va en línea y no en
+# un fichero aparte porque son ocho líneas y solo está en las páginas que lo
+# necesitan.
+IDIOMA_SCRIPT = """<script>(function(){
+  var aviso=document.getElementById('sin-idioma'); if(!aviso)return;
+  document.querySelectorAll('.idiomas .apagado').forEach(function(b){
+    b.addEventListener('click',function(){
+      var a=aviso.querySelector('a');
+      a.href=b.dataset.portada;
+      a.textContent=a.dataset.ir+' ('+b.dataset.idioma+') \u2192';
+      aviso.hidden=false;
+    });
+  });
+})();</script>"""
+
+
 PRUEBA_JS = r"""(function(){
   var D=window.CURSO_PRUEBA; if(!D)return;
   var caja=document.getElementById('prueba'); if(!caja)return;
@@ -758,10 +782,10 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
     # Lo dijo el profesor en cuanto lo usó.
     #
     # Ahora, en esas 108 páginas, los otros idiomas NO son enlaces: se enseñan
-    # apagados y con el motivo en el `title`. Un botón que no se puede pulsar
-    # dice la verdad —esta página no está en tu idioma— y además no te mueve de
-    # donde estás, que es lo que de verdad molestaba. Apagarlos y no esconderlos
-    # porque el conmutador es la señal de que el sitio tiene tres idiomas.
+    # apagados y al pulsarlos sale un aviso visible que dice que esta página solo
+    # existe en este idioma y ofrece la portada del otro como una elección. Así
+    # nadie se mueve sin quererlo y nadie se queda sin saber por qué. Apagados y
+    # no escondidos, porque el conmutador es la señal de que hay tres idiomas.
     #
     # Y el hreflang desaparece, no se redirige: hreflang declara que dos URL son
     # la MISMA página traducida. Apuntarlo a la portada es decirle a Google algo
@@ -772,19 +796,32 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
         prefijo = f"{raiz}/{i['carpeta']}".rstrip("/") if i["carpeta"] else raiz
         actual_este = i["codigo"] == idioma
         if not traducida:
-            # Ni siquiera el idioma ACTUAL es un enlace aquí: apuntaba también a
-            # la portada, así que pulsar «ru» desde una lección en ruso te sacaba
-            # de la lección. Ninguno de los tres mueve ya al lector.
-            clase = "" if actual_este else ' class="apagado"'
-            marca = ' aria-current="true"' if actual_este else ""
-            titulo = "" if actual_este else f' title="{html.escape(t["solo_este_idioma"])}"'
-            conmutador.append(f'<span{clase} lang="{i["html"]}"{marca}{titulo}>{i["codigo"]}</span>')
+            # Tercera y cuarta versión de esto. Resumen, porque cada una arregló
+            # la queja de la anterior:
+            #   1.ª  llevaba a la gemela  -> 404 (215 enlaces rotos)
+            #   2.ª  llevaba a la portada -> «se regresa a la página del inicio»
+            #   3.ª  no hacía nada        -> «no cambian los idiomas»
+            # Las tres fallaban en lo mismo: la página nunca DECÍA que aquí no
+            # hay versión en ese idioma. El aviso estaba en un `title`, que en
+            # el móvil no existe, así que el botón parecía roto.
+            #
+            # Ahora se pulsan y abren un aviso visible que lo explica y ofrece
+            # la portada de ese idioma COMO UNA ELECCIÓN. Nadie se mueve de
+            # sitio sin quererlo, y nadie se queda sin saber por qué.
+            if actual_este:
+                conmutador.append(f'<span lang="{i["html"]}" aria-current="true">{i["codigo"]}</span>')
+            else:
+                conmutador.append(
+                    f'<button type="button" class="apagado" lang="{i["html"]}" '
+                    f'data-portada="{prefijo}/index.html" data-idioma="{i["nombre"]}">'
+                    f'{i["codigo"]}</button>')
             continue
-        hoja = pagina_id if (traducida and pagina_id) else "index.html"
+        # De aquí abajo `traducida` es siempre cierto: el caso contrario se fue
+        # por el `continue`.
+        hoja = pagina_id or "index.html"
         marca = ' aria-current="true"' if actual_este else ""
-        lengua = f' hreflang="{i["html"]}"' if traducida else ""
-        conmutador.append(f'<a href="{prefijo}/{hoja}"{lengua} lang="{i["html"]}"{marca}>{i["codigo"]}</a>')
-        if dominio and traducida:
+        conmutador.append(f'<a href="{prefijo}/{hoja}" hreflang="{i["html"]}" lang="{i["html"]}"{marca}>{i["codigo"]}</a>')
+        if dominio:
             d = f"{dominio}/{i['carpeta']}".rstrip("/")
             hreflangs.append(f'<link rel="alternate" hreflang="{i["html"]}" href="{d}/{pagina_id or "index.html"}">')
 
@@ -813,6 +850,7 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
 <nav class="paginas">{menu}</nav>
 <div class="idiomas" title="{html.escape(t['idioma'])}">{"".join(conmutador)}</div>
 <button class="tema" id="tema" type="button" title="{html.escape(t['tema'])}" aria-label="{html.escape(t['tema'])}">{LUNA}{SOL}</button>
+{f'<p class="sin-idioma" id="sin-idioma" hidden>{html.escape(t["solo_este_idioma"])}. <a href="" data-ir="{html.escape(t["ir_a_portada"])}"></a></p>' if not traducida else ""}
 </div></header>
 <main><div class="envoltorio">
 {cuerpo}
@@ -823,6 +861,7 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
 </div></footer>
 {banda_cookies(cfg, t, raiz)}
 {TEMA_SCRIPT}
+{IDIOMA_SCRIPT if not traducida else ""}
 <script>window.CURSO_TEXTOS={json.dumps(t['progreso'], ensure_ascii=False)};window.CURSO_RAIZ="{raiz}";window.CURSO_PUBLICADAS={publicadas};window.CURSO_DIAS={mapa_dias};</script>
 <script src="{raiz}/progreso.js" defer></script>
 {f'<script>{AUDIO_JS}</script>' if con_audio else ""}

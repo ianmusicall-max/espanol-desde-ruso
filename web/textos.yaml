@@ -123,6 +123,7 @@ ru:
   pie: "Материалы курса можно свободно использовать для учёбы."
   idioma: "Язык"
   solo_este_idioma: "Эта страница есть только на русском"
+  ir_a_portada: "Открыть главную страницу"
   tema: "Светлая или тёмная тема"
   test:
     titulo: "Тест на уровень"
@@ -258,6 +259,7 @@ es:
   pie: "El material del curso puede usarse libremente para estudiar."
   idioma: "Idioma"
   solo_este_idioma: "Esta página solo existe en español"
+  ir_a_portada: "Ir a la portada"
   tema: "Tema claro u oscuro"
   test:
     titulo: "Test de nivel"
@@ -393,6 +395,7 @@ en:
   pie: "Course material may be used freely for study."
   idioma: "Language"
   solo_este_idioma: "This page exists in one language only"
+  ir_a_portada: "Go to the home page"
   tema: "Light or dark theme"
   test:
     titulo: "Level test"

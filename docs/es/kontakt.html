@@ -59,9 +59,17 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 .idiomas a,.idiomas span{padding:.12rem .5rem;border-radius:999px;font-size:.75rem;font-weight:600;
   text-transform:uppercase;letter-spacing:.05em;line-height:1.5}
 .idiomas [aria-current]{background:var(--acento);color:#fff}
-/* Los idiomas en los que esta página no existe: se ven, no se pulsan, y el
-   `title` dice por qué. Enlazarlos a la portada movía al lector de sitio. */
-.idiomas .apagado{color:var(--tenue);opacity:.45;cursor:default;user-select:none}
+/* Los idiomas en los que esta página no existe: se ven apagados, se pulsan y
+   lo que abren es el aviso de abajo. Enlazarlos movía al lector de sitio. */
+.idiomas .apagado{color:var(--tenue);opacity:.6;cursor:pointer;background:none;border:0;
+  font:inherit;font-size:.75rem;font-weight:600}
+.idiomas .apagado:hover{opacity:1}
+/* El aviso de «aquí no hay versión en ese idioma»: ocupa toda la fila de la
+   cabecera para que se lea, y nace oculto porque sin JavaScript los botones no
+   hacen nada y un aviso suelto no diría nada de nada. */
+.sin-idioma{flex:1 0 100%;order:4;margin:.3rem 0 0;font-size:.82rem;color:var(--tenue);
+  font-family:ui-sans-serif,system-ui,sans-serif}
+.sin-idioma a{color:var(--acento);font-weight:600}
 .tema{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;
   width:30px;height:30px;padding:0;border:1px solid var(--linea);border-radius:999px;
   background:transparent;color:var(--tenue);cursor:pointer;-webkit-tap-highlight-color:transparent}
@@ -275,6 +283,7 @@ footer.sitio p{margin:.35rem 0}
 <nav class="paginas"><a href="../kurs.html">Las lecciones</a><a href="../o-kurse.html">El curso</a><a href="../kontakt.html" aria-current="page">Contacto</a></nav>
 <div class="idiomas" title="Idioma"><a href="../kontakt.html" hreflang="ru" lang="ru">ru</a><a href="../es/kontakt.html" hreflang="es" lang="es" aria-current="true">es</a><a href="../en/kontakt.html" hreflang="en" lang="en">en</a></div>
 <button class="tema" id="tema" type="button" title="Tema claro u oscuro" aria-label="Tema claro u oscuro"><svg class="luna" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sol" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.5 1.5M17.9 17.9l1.5 1.5M2.5 12h2M19.5 12h2M4.6 19.4l1.5-1.5M17.9 6.1l1.5-1.5"/></svg></button>
+
 </div></header>
 <main><div class="envoltorio">
 
@@ -291,6 +300,7 @@ footer.sitio p{margin:.35rem 0}
 </div></footer>
 <div id="cookies"><span>Usamos cookies para la publicidad y la estadística de visitas. <a href="../privacy.html">Más información</a>.</span><button class="boton" style="padding:.4rem 1rem;font-size:.85rem" onclick="try{localStorage.setItem('cookies','1')}catch(e){};this.parentNode.remove()">De acuerdo</button></div><script>try{if(localStorage.getItem('cookies')){var b=document.getElementById('cookies');b&&b.remove()}}catch(e){}</script>
 <script>(function(){var b=document.getElementById('tema');if(!b)return;function actual(){var r=document.documentElement;return r.dataset.tema||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}b.addEventListener('click',function(){var n=actual()==='dark'?'light':'dark';document.documentElement.dataset.tema=n;try{localStorage.setItem('tema',n)}catch(e){}});})();</script>
+
 <script>window.CURSO_TEXTOS={"continuar": "Continuar: lección", "empezar": "Empezar de cero", "marcar": "Marcar la lección como hecha", "hecho": "Lección hecha", "siguiente": "Siguiente lección", "tuyo": "hechas por usted", "titulo": "Su progreso", "aviso": "El progreso se guarda solo en este navegador y en este aparato. No hay registro y no se envía a ninguna parte. Si borra los datos del navegador o abre el curso en otro teléfono, las marcas no viajan con usted.", "borrar": "Borrar el progreso", "confirmar": "¿Borrar todas las marcas?"};window.CURSO_RAIZ="..";window.CURSO_PUBLICADAS=0;window.CURSO_DIAS={};</script>
 <script src="../progreso.js" defer></script>
 

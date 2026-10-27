@@ -270,9 +270,10 @@ ese idioma en esas 108 páginas, y sobre el papel era razonable —mejor que un
 404—. En la mano no: pulsas «ES» esperando *esta* página en español y apareces
 en la portada, **habiendo perdido la lección que estabas leyendo**.
 
-Ahora, donde no hay gemela, **ninguno de los tres es un enlace**: los otros dos
-van apagados y con el motivo en el `title` («Эта страница есть только на
-русском»), y el activo se queda resaltado pero inerte.
+Esa versión dejó, donde no hay gemela, **ninguno de los tres como enlace**: los
+otros dos apagados y con el motivo en el `title` («Эта страница есть только на
+русском»), y el activo resaltado pero inerte. **El `title` es lo que la hizo
+fallar también** —ver la cuarta versión, abajo—.
 
 Tres cosas que importan si alguien lo toca:
 
@@ -291,6 +292,62 @@ ahora exige que el conmutador de una lección **no contenga ni un `<a>`**. Y hay
 otra nueva que exige lo contrario donde sí hay traducción —las cinco páginas de
 tres idiomas—, porque el arreglo no podía apagar el conmutador en todo el
 sitio.
+
+### Y la cuarta: apagados no bastaba, hay que DECIRLO (2026-10-27)
+
+El profesor volvió el mismo día: **«verifiqué y no cambian los idiomas en la
+página»**. Y tenía razón las tres veces, porque las tres versiones fallaban en
+lo mismo y ninguna lo arregló:
+
+| | Qué hacía | Qué se veía |
+|---|---|---|
+| 1.ª | enlazaba a la gemela | 404 (215 enlaces rotos) |
+| 2.ª | enlazaba a la portada | «se regresa a la página del inicio» |
+| 3.ª | no hacía nada | «no cambian los idiomas» |
+
+**Lo que faltaba no era un destino mejor: era que la página DIJERA que aquí no
+hay versión en ese idioma.** El motivo estaba en el `title` del botón, o sea en
+un tooltip que **en el móvil no existe** y que en escritorio pide pararse un
+segundo encima. Sin eso, un botón apagado no se lee como «esta página solo está
+en ruso»: se lee como un botón roto. Por eso la 3.ª versión, que era correcta
+en lo que hacía, se denunció igual que las otras dos.
+
+Ahora los dos idiomas ajenos **se pulsan** y lo que abren es un aviso visible en
+la propia cabecera:
+
+> Эта страница есть только на русском. **Открыть главную страницу (Español) →**
+
+O sea que la portada del otro idioma sigue estando —era lo útil de la segunda
+versión— pero como una **elección del lector** y no como un salto que le pasa
+encima. Nadie se mueve sin querer y nadie se queda sin saber por qué.
+
+Lo que importa si alguien lo toca:
+
+- **El aviso nace oculto y lo enciende el navegador**, como el resto del sitio.
+  Sin JavaScript los botones no abren nada, y un aviso suelto en la cabecera
+  diciendo «esta página solo existe en ruso» no explicaría nada de nada.
+- **El destino viaja en un `data-portada` y NADIE lo revisaba.**
+  `revisar_adsense.enlaces_rotos` se salta los `<script>` (desde el 26) y
+  también el `href=""` vacío que rellena el navegador, así que la ruta relativa
+  de ese botón no la miraba ningún revisor. Es exactamente el fallo que esta
+  suite ya cazó dos veces por el mismo motivo —el conmutador de idioma y las
+  tarjetas del mapa de unidades: una ruta escrita sin tener en cuenta en qué
+  carpeta está la página—, así que hay una prueba que resuelve los dos destinos
+  contra el disco en cuatro páginas de tres profundidades distintas.
+- **El aviso ocupa la fila entera de la cabecera** (`flex:1 0 100%;order:4`) y
+  no un hueco entre los botones y la luna. La barra se acababa de arreglar el 26
+  y fallaba por cuatro píxeles con tres enlaces: una frase más dentro de la fila
+  la vuelve a partir.
+- **`solo_este_idioma` está en los tres idiomas y se escoge por el de la
+  PÁGINA**, no por el del botón: en una lección rusa el aviso llega en ruso,
+  que es el idioma del que lo lee. Lo único que cambia con el botón es el nombre
+  del idioma que se ofrece.
+
+La prueba de la tercera versión se reescribió al contrato nuevo —ningún `<a>`,
+dos botones apagados, el activo en un `<span aria-current>`— y se le sumaron las
+dos que faltaban: que el aviso exista, nazca oculto y traiga su texto, y que la
+portada que ofrece exista de verdad.
+
 ### `scripts/revisar_adsense.py`
 
 Dice qué le falta al sitio para que lo aprueben, y **solo lee**. Separa tres

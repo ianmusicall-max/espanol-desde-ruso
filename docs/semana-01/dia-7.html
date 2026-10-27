@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title> title=&quot;Эта страница есть только на русском&quot;</title>
-<meta name="description" content="Урок 7: Испаноязычный мир: где говорят по-испански. 21 países, 500 millones de hablantes; el mapa; saludos con beso y apretón; canción del alfabeto"><link rel="canonical" href="https://espanoldesderuso.com/semana-01/dia-7.html"><meta property="og:type" content="website"><meta property="og:locale" content="ru"><meta property="og:title" content=" title=&quot;Эта страница есть только на русском&quot;"><meta property="og:description" content="Урок 7: Испаноязычный мир: где говорят по-испански. 21 países, 500 millones de hablantes; el mapa; saludos con beso y apretón; canción del alfabeto"><meta property="og:url" content="https://espanoldesderuso.com/semana-01/dia-7.html">
+<title>Урок 7: Испаноязычный мир: где говорят по-испански — Испанский с нуля для русскоговорящих</title>
+<meta name="description" content="Урок 7: Испаноязычный мир: где говорят по-испански. 21 países, 500 millones de hablantes; el mapa; saludos con beso y apretón; canción del alfabeto"><link rel="canonical" href="https://espanoldesderuso.com/semana-01/dia-7.html"><meta property="og:type" content="website"><meta property="og:locale" content="ru"><meta property="og:title" content="Урок 7: Испаноязычный мир: где говорят по-испански — Испанский с нуля для русскоговорящих"><meta property="og:description" content="Урок 7: Испаноязычный мир: где говорят по-испански. 21 países, 500 millones de hablantes; el mapa; saludos con beso y apretón; canción del alfabeto"><meta property="og:url" content="https://espanoldesderuso.com/semana-01/dia-7.html">
 <style>
 /* Tres estados: lo que diga el sistema, o lo que el lector elija con el botón
    de la luna. El atributo data-tema del <html> gana siempre sobre el sistema;
@@ -59,9 +59,17 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 .idiomas a,.idiomas span{padding:.12rem .5rem;border-radius:999px;font-size:.75rem;font-weight:600;
   text-transform:uppercase;letter-spacing:.05em;line-height:1.5}
 .idiomas [aria-current]{background:var(--acento);color:#fff}
-/* Los idiomas en los que esta página no existe: se ven, no se pulsan, y el
-   `title` dice por qué. Enlazarlos a la portada movía al lector de sitio. */
-.idiomas .apagado{color:var(--tenue);opacity:.45;cursor:default;user-select:none}
+/* Los idiomas en los que esta página no existe: se ven apagados, se pulsan y
+   lo que abren es el aviso de abajo. Enlazarlos movía al lector de sitio. */
+.idiomas .apagado{color:var(--tenue);opacity:.6;cursor:pointer;background:none;border:0;
+  font:inherit;font-size:.75rem;font-weight:600}
+.idiomas .apagado:hover{opacity:1}
+/* El aviso de «aquí no hay versión en ese idioma»: ocupa toda la fila de la
+   cabecera para que se lea, y nace oculto porque sin JavaScript los botones no
+   hacen nada y un aviso suelto no diría nada de nada. */
+.sin-idioma{flex:1 0 100%;order:4;margin:.3rem 0 0;font-size:.82rem;color:var(--tenue);
+  font-family:ui-sans-serif,system-ui,sans-serif}
+.sin-idioma a{color:var(--acento);font-weight:600}
 .tema{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;
   width:30px;height:30px;padding:0;border:1px solid var(--linea);border-radius:999px;
   background:transparent;color:var(--tenue);cursor:pointer;-webkit-tap-highlight-color:transparent}
@@ -273,8 +281,9 @@ footer.sitio p{margin:.35rem 0}
 <header class="sitio"><div class="envoltorio">
 <a class="marca" href="../index.html">Испанский с нуля для русскоговорящих</a>
 <nav class="paginas"><a href="../kurs.html">Все уроки</a><a href="../o-kurse.html">О курсе</a><a href="../kontakt.html">Контакты</a></nav>
-<div class="idiomas" title="Язык"><span lang="ru" aria-current="true">ru</span><span class="apagado" lang="es" title="Эта страница есть только на русском">es</span><span class="apagado" lang="en" title="Эта страница есть только на русском">en</span></div>
+<div class="idiomas" title="Язык"><span lang="ru" aria-current="true">ru</span><button type="button" class="apagado" lang="es" data-portada="../es/index.html" data-idioma="Español">es</button><button type="button" class="apagado" lang="en" data-portada="../en/index.html" data-idioma="English">en</button></div>
 <button class="tema" id="tema" type="button" title="Светлая или тёмная тема" aria-label="Светлая или тёмная тема"><svg class="luna" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sol" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.5 1.5M17.9 17.9l1.5 1.5M2.5 12h2M19.5 12h2M4.6 19.4l1.5-1.5M17.9 6.1l1.5-1.5"/></svg></button>
+<p class="sin-idioma" id="sin-idioma" hidden>Эта страница есть только на русском. <a href="" data-ir="Открыть главную страницу"></a></p>
 </div></header>
 <main><div class="envoltorio">
 <article data-leccion="7"><div class="leccion-cab"><span class="n">Урок 7</span><span>из 365</span><span class="tipo">культура</span><span>неделя 1 · уровень A1</span></div><h1 id="semana-1-dia-7-el-mundo-hispano-donde-se-habla-espanol">Semana 1 · Día 7 — El mundo hispano: dónde se habla español</h1>
@@ -423,6 +432,17 @@ Co<strong>lom</strong>bia (кончается на гласную → предп
 </div></footer>
 <div id="cookies"><span>Мы используем файлы cookie для показа рекламы и статистики посещений. <a href="../privacy.html">Подробнее</a>.</span><button class="boton" style="padding:.4rem 1rem;font-size:.85rem" onclick="try{localStorage.setItem('cookies','1')}catch(e){};this.parentNode.remove()">Понятно</button></div><script>try{if(localStorage.getItem('cookies')){var b=document.getElementById('cookies');b&&b.remove()}}catch(e){}</script>
 <script>(function(){var b=document.getElementById('tema');if(!b)return;function actual(){var r=document.documentElement;return r.dataset.tema||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}b.addEventListener('click',function(){var n=actual()==='dark'?'light':'dark';document.documentElement.dataset.tema=n;try{localStorage.setItem('tema',n)}catch(e){}});})();</script>
+<script>(function(){
+  var aviso=document.getElementById('sin-idioma'); if(!aviso)return;
+  document.querySelectorAll('.idiomas .apagado').forEach(function(b){
+    b.addEventListener('click',function(){
+      var a=aviso.querySelector('a');
+      a.href=b.dataset.portada;
+      a.textContent=a.dataset.ir+' ('+b.dataset.idioma+') →';
+      aviso.hidden=false;
+    });
+  });
+})();</script>
 <script>window.CURSO_TEXTOS={"continuar": "Продолжить: урок", "empezar": "Начать сначала", "marcar": "Отметить урок пройденным", "hecho": "Урок пройден", "siguiente": "Следующий урок", "tuyo": "пройдено вами", "titulo": "Ваш прогресс", "aviso": "Прогресс хранится только в этом браузере, на этом устройстве. Регистрации нет, и никуда он не отправляется. Если вы очистите данные браузера или откроете курс на другом телефоне, отметки не перенесутся.", "borrar": "Сбросить прогресс", "confirmar": "Сбросить все отметки?"};window.CURSO_RAIZ="..";window.CURSO_PUBLICADAS=100;window.CURSO_DIAS={"1":"semana-01/dia-1.html","2":"semana-01/dia-2.html","3":"semana-01/dia-3.html","4":"semana-01/dia-4.html","5":"semana-01/dia-5.html","6":"semana-01/dia-6.html","7":"semana-01/dia-7.html","8":"semana-02/dia-1.html","9":"semana-02/dia-2.html","10":"semana-02/dia-3.html","11":"semana-02/dia-4.html","12":"semana-02/dia-5.html","13":"semana-02/dia-6.html","14":"semana-02/dia-7.html","15":"semana-03/dia-1.html","16":"semana-03/dia-2.html","17":"semana-03/dia-3.html","18":"semana-03/dia-4.html","19":"semana-03/dia-5.html","20":"semana-03/dia-6.html","21":"semana-03/dia-7.html","22":"semana-04/dia-1.html","23":"semana-04/dia-2.html","24":"semana-04/dia-3.html","25":"semana-04/dia-4.html","26":"semana-04/dia-5.html","27":"semana-04/dia-6.html","28":"semana-04/dia-7.html","29":"semana-05/dia-1.html","30":"semana-05/dia-2.html","31":"semana-05/dia-3.html","32":"semana-05/dia-4.html","33":"semana-05/dia-5.html","34":"semana-05/dia-6.html","35":"semana-05/dia-7.html","36":"semana-06/dia-1.html","37":"semana-06/dia-2.html","38":"semana-06/dia-3.html","39":"semana-06/dia-4.html","40":"semana-06/dia-5.html","41":"semana-06/dia-6.html","42":"semana-06/dia-7.html","43":"semana-07/dia-1.html","44":"semana-07/dia-2.html","45":"semana-07/dia-3.html","46":"semana-07/dia-4.html","47":"semana-07/dia-5.html","48":"semana-07/dia-6.html","49":"semana-07/dia-7.html","50":"semana-08/dia-1.html","51":"semana-08/dia-2.html","52":"semana-08/dia-3.html","53":"semana-08/dia-4.html","54":"semana-08/dia-5.html","55":"semana-08/dia-6.html","56":"semana-08/dia-7.html","57":"semana-09/dia-1.html","58":"semana-09/dia-2.html","59":"semana-09/dia-3.html","60":"semana-09/dia-4.html","61":"semana-09/dia-5.html","62":"semana-09/dia-6.html","63":"semana-09/dia-7.html","64":"semana-10/dia-1.html","65":"semana-10/dia-2.html","66":"semana-10/dia-3.html","67":"semana-10/dia-4.html","68":"semana-10/dia-5.html","69":"semana-10/dia-6.html","70":"semana-10/dia-7.html","71":"semana-11/dia-1.html","72":"semana-11/dia-2.html","73":"semana-11/dia-3.html","74":"semana-11/dia-4.html","75":"semana-11/dia-5.html","76":"semana-11/dia-6.html","77":"semana-11/dia-7.html","78":"semana-12/dia-1.html","79":"semana-12/dia-2.html","80":"semana-12/dia-3.html","81":"semana-12/dia-4.html","82":"semana-12/dia-5.html","83":"semana-12/dia-6.html","84":"semana-12/dia-7.html","85":"semana-13/dia-1.html","86":"semana-13/dia-2.html","87":"semana-13/dia-3.html","88":"semana-13/dia-4.html","89":"semana-13/dia-5.html","90":"semana-13/dia-6.html","91":"semana-13/dia-7.html","92":"semana-14/dia-1.html","93":"semana-14/dia-2.html","94":"semana-14/dia-3.html","95":"semana-14/dia-4.html","96":"semana-14/dia-5.html","97":"semana-14/dia-6.html","98":"semana-14/dia-7.html","99":"semana-15/dia-1.html","100":"semana-15/dia-2.html"};</script>
 <script src="../progreso.js" defer></script>
 <script>(function(){

@@ -774,21 +774,58 @@ class TestNingunEnlaceLlevaANingunaParte(unittest.TestCase):
         self.assertEqual(rotos, [], f"{len(rotos)} rotos, p.ej. {rotos[:3]}")
 
     def test_en_una_leccion_el_conmutador_no_mueve_al_lector(self):
-        """Tercera versión de esto, y las dos anteriores estaban mal.
+        """Cuarta versión de esto, y las tres anteriores estaban mal.
 
         La 1.ª apuntaba a la gemela y daba 404 (215 enlaces rotos). La 2.ª
         mandaba a la portada de ese idioma, y el profesor lo reportó en cuanto
         lo usó: pulsas «ES» esperando esta página en español y apareces en la
-        portada, habiendo perdido la lección que leías. Ahora NINGUNO de los
-        tres es un enlace: los otros idiomas van apagados y con el motivo en el
-        `title`, y el propio también es inerte —era enlace a la portada, así
-        que pulsar «ru» desde una lección en ruso también te sacaba de ella—."""
+        portada, habiendo perdido la lección que leías. La 3.ª dejó los tres
+        inertes, y el profesor volvió: «no cambian los idiomas». Las tres
+        fallaban en lo mismo —la página nunca DECÍA que aquí no hay versión en
+        ese idioma; el motivo estaba en un `title`, que en el móvil no existe—.
+
+        El contrato de ahora: ningún `<a>` en el conmutador, los otros dos
+        idiomas son botones con la portada que van a OFRECER, y el propio es un
+        span inerte (era enlace a la portada, así que pulsar «ru» desde una
+        lección en ruso también te sacaba de ella)."""
         leccion = (self.destino / "semana-01" / "dia-1.html").read_text(encoding="utf-8")
         conmutador = re.search(r'<div class="idiomas".*?</div>', leccion, re.S).group(0)
         self.assertNotIn("<a ", conmutador, "el conmutador no puede llevar a ninguna parte")
-        self.assertIn('class="apagado"', conmutador)
-        self.assertIn(self.textos["ru"]["solo_este_idioma"], conmutador)
+        self.assertEqual(2, conmutador.count('class="apagado"'), conmutador)
+        self.assertIn('<span lang="ru" aria-current="true">', conmutador)
         self.assertNotIn("../es/semana-01", leccion)
+
+    def test_el_aviso_explica_por_que_y_nace_oculto(self):
+        """El defecto de las tres versiones anteriores era este: nada decía al
+        lector por qué el otro idioma no hacía lo que esperaba. El aviso lo
+        dice, y nace oculto porque sin JavaScript los botones no abren nada y
+        un aviso suelto en la cabecera no explicaría nada de nada."""
+        leccion = (self.destino / "semana-01" / "dia-1.html").read_text(encoding="utf-8")
+        aviso = re.search(r'<p class="sin-idioma".*?</p>', leccion, re.S).group(0)
+        self.assertIn("hidden", aviso)
+        self.assertIn(self.textos["ru"]["solo_este_idioma"], aviso)
+        self.assertIn(self.textos["ru"]["ir_a_portada"], aviso)
+        # Y el guion que los enciende tiene que estar en esa página: sin él los
+        # botones son adorno y volvemos a la tercera versión.
+        self.assertIn("sin-idioma", construir_sitio.IDIOMA_SCRIPT)
+        self.assertIn(construir_sitio.IDIOMA_SCRIPT, leccion)
+
+    def test_la_portada_que_ofrece_el_aviso_existe(self):
+        """Nadie más comprueba esto: `revisar_adsense.enlaces_rotos` se salta el
+        `href=""` vacío (lo rellena el navegador) y los `<script>`. O sea que el
+        destino viaja en un `data-portada` que ningún revisor mira.
+
+        Y es justo el fallo que esta suite ya ha cazado dos veces por el mismo
+        motivo —el conmutador y las tarjetas del mapa de unidades—: una ruta
+        relativa escrita sin tener en cuenta en qué carpeta está la página."""
+        for relativa in ("semana-01/dia-1.html", "semana-14/dia-7.html",
+                         "programa/metodologia.html", "test.html"):
+            pagina = self.destino / relativa
+            marcas = re.findall(r'data-portada="([^"]+)"', pagina.read_text(encoding="utf-8"))
+            self.assertEqual(2, len(marcas), relativa)
+            for destino in marcas:
+                self.assertTrue((pagina.parent / destino).resolve().exists(),
+                                f"{relativa} ofrece {destino}, que no existe")
 
     def test_pero_donde_la_pagina_sí_esta_traducida_el_conmutador_funciona(self):
         """El arreglo no podía apagar el conmutador en todo el sitio: en las
