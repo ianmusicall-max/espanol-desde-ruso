@@ -2122,6 +2122,126 @@ informe compara entre lecciones, así que **un duplicado dentro de una sola
 tabla no lo detecta nadie**. Conviene mirar la tabla completa después de
 cada sustitución.
 
+## «A simple vista»: los dibujos suben y el sitio estrena tipografía (2026-10-27)
+
+El profesor volvió sobre la portada: *«aún crees que la página se ve aburrida,
+no es agradable a simple vista»*, y después *«y la fuente de la letra no crees
+que es aburrida?»*. Las dos veces tenía razón, y las dos veces la causa se
+podía medir en vez de opinar.
+
+### Lo que se midió, porque no se podía mirar
+
+Chromium no arranca en esta sesión —la cuota de disco está gastada— así que
+**no hubo captura**: el diagnóstico sale de leer el HTML construido, y se dijo
+así al profesor en vez de fingir que se había visto. Lo que el HTML decía de la
+primera pantalla del móvil (390 px), en orden: título, lema, dos botones, la
+línea del test y la del contador. **Cinco líneas de letra sobre crema y ni una
+imagen.** Los doce dibujos —lo único que este sitio tiene y nadie más, y que ya
+está pagado— empezaban DEBAJO del pliegue, bajo un `<h2>`. El mejor activo de
+la página era invisible justo en el segundo en que el visitante decide si se
+queda.
+
+### Los dibujos suben al héroe
+
+`_arte_del_heroe` pone **seis** de los doce arriba del todo. En el móvil la
+tira va ANTES del título (`order:-1`): ves comida, un perro y una guitarra
+antes de leer una palabra. En escritorio (≥46rem) el héroe pasa a dos columnas
+y la tira se coloca al lado, para no empujar los botones fuera de la vista.
+
+- **Seis y no doce**: tienen que caber en UNA fila dentro de los 358 px de la
+  columna del móvil. Doce obligarían a dos filas o a hacerlos tan pequeños que
+  dejarían de leerse como dibujos.
+- **Son los MISMOS ficheros que la vitrina de abajo**, así que el navegador los
+  sirve de caché y no cuestan un byte más. Hay una prueba que lo exige.
+- **Es decoración y no interfaz**: `aria-hidden`, `alt` vacío, sin enlace y sin
+  botón. Lo que se pulsa y suena es la vitrina, que además enseña la palabra.
+- **Se cae sola**, como la vitrina y la baraja: sin dibujos no sale nada, y por
+  debajo de `HEROE_MINIMO` (4) tampoco, porque cuatro sueltos en una fila
+  pensada para seis se leen como una página a medio cargar.
+
+### La tipografía: Literata y Onest, servidas desde el dominio propio
+
+El sitio **no cargaba ninguna fuente**. El cuerpo decía `ui-serif, Georgia,
+"Times New Roman"` y los títulos `ui-sans-serif, system-ui`. Consecuencia
+concreta: en Windows y en Android el cirílico caía en Times o en una fallback
+mediocre —la cara de un libro de texto de 1998— mientras que en iPhone caía en
+New York y se veía bien. **El sitio se veía peor justo en los aparatos del
+público al que va dirigido**, y eso no se nota desde un Mac.
+
+El profesor eligió **B · Literata + Onest** sobre una lámina con cuatro
+tipografías puestas en la misma pantalla (la misma forma en que eligió la voz
+`shimmer` y el estilo plano de los dibujos). La lámina se dibujó con PIL, no
+con un navegador, y se le dijo: el espaciado real será algo mejor.
+
+**No se enlaza a Google Fonts, y no es manía.** Dos razones: la política de
+privacidad de este sitio promete que sin anuncios no se carga nada de terceros,
+y un `<link>` a `fonts.googleapis.com` la volvería mentira; y hay sentencias
+alemanas que multan por incrustar Google Fonts, porque manda la IP del
+visitante a Google — y Alemania es uno de los países del público. Los diez
+`.woff2` están en `docs/fonts/` (430 KB en total) y se sirven desde el dominio.
+
+Tres cosas que lo rompen sin avisar:
+
+- **`CSS` no puede pasar por `.format()`**: la hoja está llena de llaves de CSS
+  y habría que duplicarlas todas. Por eso las `@font-face` viven aparte, en
+  `CARAS`, y se concatenan con `caras(raiz)`. Si alguien las metiera dentro de
+  `CSS`, el `{raiz}` llegaría literal al navegador y **ninguna fuente cargaría
+  sin que nada fallara**.
+- **La ruta depende de la profundidad de la página**, y aquí no la revisa
+  nadie: `revisar_adsense.py` mira `href=` y `src=`, no los `url()` de una hoja
+  de estilo. Es la CUARTA vez que este proyecto se tropieza con una ruta
+  escrita sin tener en cuenta en qué carpeta está la página —el conmutador de
+  idioma, las tarjetas del mapa, los destinos del probador— así que hay una
+  prueba que las resuelve contra el disco desde cuatro páginas de tres
+  profundidades.
+- **Cada cara trae su `unicode-range`**: sin él el navegador se baja las diez
+  en cuanto pinta. Con él, una lección rusa no toca el latino hasta el primer
+  ejemplo español. Y la **cursiva es real y no sintética**, porque el curso
+  pone todos los ejemplos españoles en `<em>` y un navegador que inclina la
+  redonda deja medio curso sucio.
+
+### Dos textos que sonaban raro, y el usted que faltaba
+
+También los trajo el profesor: *«Restaurar con un código»* y *«¿Ya sabe algo de
+español? Test de nivel →»*, «y esto suena confuso».
+
+- **El enlace del test reusaba el TÍTULO de la página.** «¿Ya sabe algo de
+  español? Test de nivel →» son dos titulares seguidos: el segundo es un
+  sintagma nominal, no una acción, y no dice para qué sirve el test. Ahora cada
+  idioma tiene `ya_sabe_enlace` y dice lo único que importa: que el test te
+  coloca en la lección por la que empezar.
+- **«Restaurar con un código» no significa nada para quien acaba de llegar** —y
+  ese botón está visible precisamente para él, porque el que limpió el
+  navegador no tiene progreso que enseñar (nota del 2026-10-27)—. Ahora nombra
+  lo que recupera; de dónde sale el código lo explica la caja al abrirse.
+- **Y al ir a tocarlo apareció otra cosa: el español mezclaba tú y usted.**
+  Contado sobre el YAML, 24 cadenas de usted contra 6 de tú, y **cinco de las
+  seis estaban en el bloque del respaldo** —«pégalo en tus notas», «Pega aquí
+  tu código», «guarda tu código»—. Mezclar las dos formas en la misma pantalla
+  se nota más que una falta de ortografía. Hay una prueba que lo fija, y su
+  primera versión se puso en rojo con «el progreso **se guarda** solo en este
+  navegador», que es impersonal: la regla quedó solo con las marcas que no
+  admiten otra lectura (posesivos, pronombres y formas verbales de segunda
+  persona), porque `guarda`, `pega` y `empieza` son también tercera.
+
+### Lo que queda pendiente y por qué
+
+**El sitio no se reconstruyó.** `construir_sitio.py` escribe unos 130 MB y a
+esta sesión le quedan 9 MB de cuota: los 30 GB que la gastaron son las
+carpetas temporales que `test_docs_esta_al_dia` deja en `/tmp` en cada corrida
+de la suite, y borrarlas lo deniega el clasificador de permisos. O sea que
+`docs/` sigue en 154 lecciones y **sin fuentes, sin la tira del héroe y con los
+textos viejos**, aunque los `.woff2` ya están versionados.
+
+`test_docs_esta_al_dia` ya estaba en rojo antes de estos cambios, por lo mismo:
+el repositorio lleva 224 lecciones y `docs/` 154. Las catorce pruebas nuevas no
+construyen nada —`caras()` y `_arte_del_heroe` son funciones puras y las rutas
+se resuelven contra el disco— y pasan, pero **lo visual no está comprobado en
+un navegador**: Chromium tampoco arranca con este disco.
+
+Para cerrarlo hacen falta dos comandos en una sesión nueva:
+`scripts/construir_sitio.py` y la suite entera.
+
 ## El disco de la sesión se agota antes que el trabajo (2026-10-27)
 
 Escribiendo la unidad 12 la máquina se quedó **sin cuota de disco**: `df`

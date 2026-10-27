@@ -2823,3 +2823,179 @@ class TestLaRedDeYandex(unittest.TestCase):
     def test_los_tres_idiomas_tienen_el_texto_de_la_politica(self):
         for i in ("ru", "es", "en"):
             self.assertTrue(self.textos[i]["privacidad"]["anuncios_yandex"].strip(), i)
+
+
+class TestLaTipografia(unittest.TestCase):
+    """Literata y Onest, servidas desde este dominio.
+
+    El profesor preguntó si la fuente no era aburrida, y lo era por una razón
+    concreta: el sitio no cargaba NINGUNA. El cuerpo decía `ui-serif, Georgia,
+    "Times New Roman"` y los títulos `ui-sans-serif, system-ui`, así que en
+    Windows y en Android el cirílico caía en Times o en una fallback mediocre
+    —la cara de un libro de texto de 1998— mientras que en iPhone caía en New
+    York y se veía bien. El sitio se veía peor justo en los aparatos del
+    público al que va dirigido, y eso no se ve desde un Mac.
+
+    Estas pruebas no construyen el sitio: `caras()` es una función pura y las
+    rutas se resuelven contra el disco. Así son baratas y se pueden correr sin
+    esperar una construcción entera."""
+
+    FUENTES = RAIZ / "docs" / "fonts"
+
+    def test_cada_cara_nombra_un_fichero_que_existe(self):
+        nombres = re.findall(r"url\(\{raiz\}/fonts/([^)]+)\)", construir_sitio.CARAS)
+        self.assertTrue(nombres, "CARAS no declara ninguna @font-face")
+        for n in nombres:
+            self.assertTrue((self.FUENTES / n).exists(), f"falta docs/fonts/{n}")
+
+    def test_las_rutas_resuelven_desde_las_tres_profundidades(self):
+        """Es el fallo que esta suite ya cazó TRES veces por el mismo motivo:
+        una ruta escrita sin tener en cuenta en qué carpeta está la página —el
+        conmutador de idioma, las tarjetas del mapa de unidades y los destinos
+        del probador—. Y aquí no lo cazaría nadie más: `revisar_adsense.py`
+        mira `href=` y `src=`, no los `url()` de una hoja de estilo."""
+        for pagina, raiz in (("docs/index.html", "."),
+                             ("docs/es/index.html", ".."),
+                             ("docs/en/index.html", ".."),
+                             ("docs/semana-01/dia-1.html", "..")):
+            base = (RAIZ / pagina).parent
+            for u in re.findall(r"url\(([^)]+)\)", construir_sitio.caras(raiz)):
+                self.assertTrue((base / u).resolve().exists(),
+                                f"desde {pagina} la fuente {u} no resuelve")
+
+    def test_cada_cara_trae_su_unicode_range(self):
+        """Sin `unicode-range` el navegador se baja las diez caras en cuanto
+        pinta la página. Con él, una lección rusa no toca el latino hasta que
+        encuentra el primer ejemplo español."""
+        for bloque in construir_sitio.CARAS.split("@font-face")[1:]:
+            self.assertIn("unicode-range", bloque)
+            self.assertIn("font-display:swap", bloque)
+
+    def test_hay_cursiva_de_verdad(self):
+        """El curso pone TODOS los ejemplos españoles en <em>. Sin cursiva
+        real el navegador inclina la redonda y deja medio curso sucio."""
+        self.assertIn("font-style:italic", construir_sitio.CARAS)
+
+    def test_no_se_enlaza_a_google_fonts(self):
+        """Dos razones y ninguna es manía: la política de privacidad de este
+        sitio promete que sin anuncios no se carga nada de terceros, y un
+        enlace a fonts.googleapis.com la volvería mentira; y hay sentencias
+        alemanas que multan por incrustar Google Fonts, porque manda la IP del
+        visitante a Google. Alemania es uno de los países del público."""
+        for dominio in ("fonts.googleapis.com", "fonts.gstatic.com"):
+            self.assertNotIn(dominio, construir_sitio.CARAS)
+            self.assertNotIn(dominio, construir_sitio.CSS)
+
+    def test_las_pilas_empiezan_por_la_fuente_propia(self):
+        self.assertIn("font:400 17px/1.65 Literata,", construir_sitio.CSS)
+        self.assertIn("h1,h2,h3{font-family:Onest,", construir_sitio.CSS)
+
+    def test_la_hoja_no_se_queda_con_el_marcador_sin_resolver(self):
+        """`CSS` no puede pasar por `.format()` —está llena de llaves de CSS—,
+        así que las caras se concatenan con `caras(raiz)`. Si alguien las
+        metiera dentro de `CSS`, el `{raiz}` llegaría literal al navegador y
+        ninguna fuente cargaría, sin que nada fallara."""
+        self.assertNotIn("{raiz}", construir_sitio.CSS)
+        self.assertNotIn("{raiz}", construir_sitio.caras(".."))
+
+
+class TestElArteDelHeroe(unittest.TestCase):
+    """Los dibujos suben a la primera pantalla.
+
+    Medida la portada del móvil, lo que se veía antes de hacer scroll eran
+    cinco líneas de letra sobre crema y ni una imagen: los doce dibujos
+    —lo único que este sitio tiene y nadie más, y que ya está pagado— empezaban
+    DEBAJO del pliegue, bajo un `<h2>`. O sea que el mejor activo de la página
+    era invisible justo en el segundo en que el visitante decide si se queda."""
+
+    def setUp(self):
+        indice = RAIZ / "docs" / "img" / construir_sitio.INDICE_IMG
+        self.dibujos = json.loads(indice.read_text(encoding="utf-8")) if indice.exists() else {}
+
+    def test_salen_los_dibujos_y_los_ficheros_estan(self):
+        if not self.dibujos:
+            self.skipTest("sin dibujos generados")
+        arte = construir_sitio._arte_del_heroe(self.dibujos, "..")
+        imgs = re.findall(r'src="\.\./img/([^"]+)"', arte)
+        self.assertEqual(len(imgs), construir_sitio.HEROE_DIBUJOS)
+        for i in imgs:
+            self.assertTrue((RAIZ / "docs" / "img" / i).exists(), f"falta docs/img/{i}")
+
+    def test_es_decoracion_y_no_interfaz(self):
+        """Lo que se puede pulsar y oír es la vitrina de abajo, que además
+        enseña la palabra y su traducción. Esta tira solo pone color: si un
+        lector de pantalla la leyera, diría doce veces lo mismo."""
+        if not self.dibujos:
+            self.skipTest("sin dibujos generados")
+        arte = construir_sitio._arte_del_heroe(self.dibujos, ".")
+        self.assertIn('aria-hidden="true"', arte)
+        self.assertNotIn("<a ", arte)
+        self.assertNotIn("<button", arte)
+        self.assertEqual(arte.count('alt=""'), construir_sitio.HEROE_DIBUJOS)
+
+    def test_se_cae_sola_y_en_silencio(self):
+        """Igual que la vitrina, la baraja y el audio: el sitio se construye
+        con todo y sin nada. Y por debajo del mínimo no sale la tira entera,
+        porque cuatro dibujos sueltos en una fila pensada para seis se leen
+        como una página a medio cargar."""
+        self.assertEqual(construir_sitio._arte_del_heroe({}, "."), "")
+        pocos = dict(list(self.dibujos.items())[:construir_sitio.HEROE_MINIMO - 1])
+        self.assertEqual(construir_sitio._arte_del_heroe(pocos, "."), "")
+
+    def test_no_son_dibujos_nuevos(self):
+        """Son los MISMOS ficheros que la vitrina de abajo, así que el
+        navegador los sirve de caché y no cuestan un byte más."""
+        if not self.dibujos:
+            self.skipTest("sin dibujos generados")
+        arte = set(re.findall(r'src="\./img/([^"]+)"',
+                              construir_sitio._arte_del_heroe(self.dibujos, ".")))
+        de_la_vitrina = {self.dibujos[generar_imagenes.limpiar(p)]
+                         for p in construir_sitio.PORTADA_DIBUJOS
+                         if generar_imagenes.limpiar(p) in self.dibujos}
+        self.assertTrue(arte <= de_la_vitrina)
+
+
+class TestElEnlaceDelTestDeNivel(unittest.TestCase):
+    """«¿Ya sabe algo de español? Test de nivel →» eran dos titulares seguidos.
+
+    Lo trajo el profesor: «y esto suena confuso». Tenía razón y el motivo es
+    concreto: el enlace reusaba el TÍTULO de la página del test, que es un
+    sintagma nominal, no una acción, y no dice para qué sirve. Ahora cada
+    idioma tiene su propia etiqueta y dice lo único que importa: que el test
+    te coloca en la lección por la que empezar."""
+
+    def setUp(self):
+        self.textos = construir_sitio.cargar_textos()
+
+    def test_los_tres_idiomas_tienen_etiqueta_propia(self):
+        for codigo in ("ru", "es", "en"):
+            p = self.textos[codigo]["portada"]
+            self.assertTrue(p.get("ya_sabe_enlace"), f"{codigo} sin ya_sabe_enlace")
+            self.assertNotEqual(p["ya_sabe_enlace"], self.textos[codigo]["test"]["titulo"],
+                                f"{codigo}: el enlace vuelve a ser el título de la página")
+
+    def test_el_boton_de_restaurar_dice_que_restaura(self):
+        """«Restaurar con un código» no significa nada para quien acaba de
+        llegar —y ese botón está visible precisamente para él, porque el que
+        limpió el navegador no tiene progreso que enseñar—. Ahora nombra lo que
+        recupera; de dónde sale el código lo explica la caja al abrirse."""
+        for codigo in ("ru", "es", "en"):
+            pr = self.textos[codigo]["progreso"]
+            self.assertNotIn("код", pr["restaurar"].lower())
+            self.assertNotIn("código", pr["restaurar"].lower())
+            self.assertNotIn("code", pr["restaurar"].lower())
+
+    def test_el_espanol_trata_de_usted_en_todo_el_bloque_del_progreso(self):
+        """El sitio español trata de usted (24 cadenas contra 6), pero el
+        bloque del respaldo se había escrito de tú: «pégalo en tus notas»,
+        «Pega aquí tu código», «guarda tu código». Mezclar las dos formas en la
+        misma pantalla se nota más que una falta de ortografía."""
+        # Solo las marcas que no admiten otra lectura: posesivos, pronombres y
+        # formas verbales de segunda persona. `guarda`, `pega` y `empieza` se
+        # quedan fuera a propósito —son también tercera persona, y «el progreso
+        # SE GUARDA solo en este navegador» no trata de tú—. Con los posesivos
+        # basta: cazaban cinco de las seis cadenas que había que cambiar.
+        TU = re.compile(r"\b(tus?|tú|ti|te|contigo|tienes|sabes|puedes|quieres)\b", re.I)
+        for clave, texto in self.textos["es"]["progreso"].items():
+            if isinstance(texto, str):
+                self.assertIsNone(TU.search(texto), f"progreso.{clave} trata de tú: {texto!r}")
