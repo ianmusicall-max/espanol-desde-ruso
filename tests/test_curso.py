@@ -1635,14 +1635,61 @@ class TestLaPruebaDeUnidad(unittest.TestCase):
 
     # ---- el analizador
     def test_las_respuestas_salen_igual_que_en_la_clave_del_profesor(self):
-        """La unidad 1 está revisada y su clave dice: Léxico б в б б б а,
-        Gramática в б г б б а, Ortografía б в в. Si el analizador leyera otra
-        cosa, el test corregiría mal y nadie se enteraría."""
-        ruta = RAIZ / "curso" / "semana-02" / "dia-6.md"
-        preguntas = pruebas.de_la_leccion(ruta)
-        self.assertIsNotNone(preguntas)
-        letras = "".join(pruebas.LETRAS[q.correcta] for q in preguntas)
-        self.assertEqual(letras, "бвбббавбгббабвв")
+        """Si el analizador leyera otra letra, el test corregiría mal y nadie
+        se enteraría.
+
+        La clave se vuelve a leer aquí con una expresión regular propia y se
+        compara con lo que devolvió `pruebas.leer`. **No se fija la secuencia
+        literal**: la primera versión guardaba «бвбббавбгббабвв» para la
+        semana 2, y el día que se repartieron las respuestas correctas de los
+        quince tests —porque catorce de quince eran la б y marcar todo б
+        aprobaba la unidad— se puso en rojo sin que el analizador tuviera nada
+        que ver. Una prueba que fija el CONTENIDO de un fichero de datos se
+        rompe cada vez que ese fichero cambia por una razón legítima, y
+        entonces se afloja. Esta comprueba la relación, que es lo que importa:
+        la letra de la clave y la opción marcada tienen que ser la misma
+        posición, en los quince tests y no solo en uno."""
+        for ruta in sorted((RAIZ / "curso").glob("semana-*/dia-6.md")):
+            datos, cuerpo = validar.frontmatter(ruta.read_text(encoding="utf-8"))
+            if datos.get("tipo") != "prueba":
+                continue
+            preguntas = pruebas.leer(cuerpo)
+            self.assertIsNotNone(preguntas, ruta.parent.name)
+            # la clave, leída otra vez y por otro camino
+            clave = cuerpo.split("## Ответы", 1)[1]
+            bloques = re.split(r"\*\*\d+\.\s*[^*]+?:\*\*", clave)[1:]
+            letras = []
+            for bloque in bloques:
+                bloque = re.sub(r"\n(?!\n)", " ", bloque).split("\n\n")[0]
+                letras += [m[1] for m in pruebas.RESPUESTA.findall(bloque)]
+            self.assertEqual(len(letras), len(preguntas), ruta.parent.name)
+            for i, (letra, q) in enumerate(zip(letras, preguntas), 1):
+                self.assertEqual(pruebas.LETRAS[q.correcta], letra,
+                                 f"{ruta.parent.name}, pregunta {i}")
+
+    def test_la_letra_correcta_esta_repartida(self):
+        """Un test donde 14 de 15 respuestas son la б) no mide nada: marcando
+        todo б se saca 14/15 y se «aprueba» la unidad. Y desde que `pruebas.py`
+        los hace contestables en la web, el alumno se puntúa con eso.
+
+        Tampoco vale el reparto perfecto а-б-в-г-а-б-в-г, que fue la primera
+        corrección: equilibrado en el recuento y trivial de aprender. Por eso
+        aquí se exige además que no haya tres iguales seguidos ni una escalera
+        ascendente completa."""
+        for ruta in sorted((RAIZ / "curso").glob("semana-*/dia-6.md")):
+            datos, cuerpo = validar.frontmatter(ruta.read_text(encoding="utf-8"))
+            if datos.get("tipo") != "prueba":
+                continue
+            preguntas = pruebas.leer(cuerpo)
+            idx = [q.correcta for q in preguntas]
+            veces = Counter(idx)
+            self.assertLessEqual(max(veces.values()), len(idx) * 0.45,
+                                 f"{ruta.parent.name}: la letra más repetida se lleva "
+                                 f"{max(veces.values())} de {len(idx)}")
+            self.assertFalse(any(idx[i] == idx[i+1] == idx[i+2] for i in range(len(idx)-2)),
+                             f"{ruta.parent.name}: tres respuestas seguidas con la misma letra")
+            self.assertFalse(all((idx[i]+1) % 4 == idx[i+1] for i in range(len(idx)-1)),
+                             f"{ruta.parent.name}: la secuencia es el ciclo а-б-в-г")
 
     def test_las_siete_pruebas_escritas_se_leen(self):
         """Dos no se leían al principio: en la unidad 4 una opción es una
@@ -1663,16 +1710,38 @@ class TestLaPruebaDeUnidad(unittest.TestCase):
                                  f"dos opciones iguales: {q.enunciado}")
 
     def test_una_clave_que_no_cuadra_no_genera_test(self):
-        """El fallo seguro: antes que corregir mal, no ofrecer el test."""
+        """El fallo seguro: antes que corregir mal, no ofrecer el test.
+
+        La avería se DERIVA del fichero, no se escribe a mano. La primera
+        versión fijaba las letras de la semana 2 («5 б … · 6 а», «1. Лексика:
+        1 б») y el día que se repartieron las respuestas correctas de los
+        quince tests esas cadenas dejaron de existir: los dos `.replace()` se
+        quedaron en nada y el test comprobaba un fichero intacto. Se puso en
+        rojo, que es lo que había que hacer, pero por entonces ya no medía lo
+        que dice. Por eso cada paso exige además que la avería se haya
+        aplicado de verdad."""
         bueno = (RAIZ / "curso" / "semana-02" / "dia-6.md").read_text(encoding="utf-8")
         _, cuerpo = validar.frontmatter(bueno)
         self.assertIsNotNone(pruebas.leer(cuerpo))
+
+        clave = cuerpo.split("## Ответы", 1)[1]
+        respuestas = pruebas.RESPUESTA.findall(clave)
+        self.assertGreaterEqual(len(respuestas), 2)
+
         # una respuesta de menos en el primer bloque
-        roto = cuerpo.replace("5 б (нед. 2, день 5) · 6 а", "6 а", 1)
+        ultima = pruebas.RESPUESTA.search(clave, clave.index(f"{respuestas[-1][0]} "))
+        primeras = list(pruebas.RESPUESTA.finditer(clave))
+        quitar = primeras[len(respuestas) // 3 - 1]          # la última del bloque 1
+        roto = cuerpo.replace(quitar.group(0), "", 1)
+        self.assertNotEqual(roto, cuerpo, "la avería no se aplicó")
         self.assertIsNone(pruebas.leer(roto))
-        # una letra que no existe entre las opciones
-        roto = cuerpo.replace("**1. Лексика:** 1 б", "**1. Лексика:** 1 д", 1)
+
+        # una letra que no está entre las opciones
+        uno = primeras[0]
+        roto = cuerpo.replace(uno.group(0), uno.group(0).replace(uno.group(2), "д", 1), 1)
+        self.assertNotEqual(roto, cuerpo, "la avería no se aplicó")
         self.assertIsNone(pruebas.leer(roto))
+
         # y sin clave no hay test
         self.assertIsNone(pruebas.leer(cuerpo.split("## Ответы")[0]))
 

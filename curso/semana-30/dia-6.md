@@ -35,34 +35,34 @@ revisado: false
 Прочитайте предложения и выберите правильный ответ.
 
 1. Mi madre no trabaja para nadie: tiene su propia peluquería. Es ______.
-   а) autónoma · б) asalariada · в) desempleada · г) becaria
+   а) asalariada · б) autónoma · в) desempleada · г) becaria
 2. No encuentra trabajo desde enero: está ______.
    а) de paro · б) en paro · в) sin paro · г) al paro
 3. Estudié cinco años en la universidad: hice la ______ de Economía.
    а) asignatura · б) academia · в) carrera · г) formación
 4. Saqué un 9,5: un ______.
-   а) notable · б) suspenso · в) aprobado · г) sobresaliente
+   а) sobresaliente · б) suspenso · в) aprobado · г) notable
 5. En el anuncio pone «______ experiencia»: sin ella no te cogen.
-   а) imprescindible · б) se ofrece · в) se valora · г) se precisa
+   а) se precisa · б) se ofrece · в) se valora · г) imprescindible
 6. Gana 1.400 € ______, o sea unos 1.150 en la cuenta.
-   а) netos · б) brutos · в) extras · г) semanales
+   а) netos · б) extras · в) brutos · г) semanales
 
 ### 2. Грамматика (6 баллов)
 
 Выберите правильный вариант.
 
 1. ¿______ a la nueva directora?
-   а) Sabes · б) Sabe · в) Conoces · г) Conozco
+   а) Conoces · б) Sabe · в) Sabes · г) Conozco
 2. No ______ dónde está Recursos Humanos.
    а) conozco · б) se · в) puedo · г) sé
 3. ______ tres años trabajando aquí.
-   а) Llevo · б) He llevado · в) Tengo · г) Hago
+   а) Hago · б) He llevado · в) Tengo · г) Llevo
 4. Trabajo en esta empresa ______ dos años.
    а) desde · б) desde hace · в) durante que · г) hace que
 5. Soy ingeniero, pero trabajo ______ camarero.
-   а) en · б) para · в) de · г) como para
+   а) en · б) de · в) para · г) como para
 6. Se ______ dos repartidores con carné B.
-   а) busca · б) buscaba · в) buscamos · г) buscan
+   а) buscan · б) buscaba · в) buscamos · г) busca
 
 ### 3. Выражения (3 балла)
 
@@ -72,8 +72,8 @@ revisado: false
    а) Me gustaría trabajar con ustedes · б) Necesito este trabajo · в)
    Quiero trabajar aquí · г) ¿Me dan el puesto?
 2. Después de «Estimada señora» va:
-   а) una coma · б) dos puntos y mayúscula ·
-   в) un signo de exclamación · г) nada
+   а) una coma · б) un signo de exclamación · в) dos puntos y mayúscula ·
+   г) nada
 3. «Мне трудно рано вставать» es:
    а) Soy difícil de madrugar · б) Cuesto madrugar · в) Me cuesta madrugar
    · г) Me cuesto madrugar
@@ -123,15 +123,15 @@ revisado: false
 
 ## Ответы
 
-**1. Лексика:** 1 а (нед. 29, день 1) · 2 б (нед. 29, день 1) · 3 в
-(нед. 29, день 5) · 4 г (нед. 29, день 5) · 5 а (нед. 30, день 1) · 6 б
+**1. Лексика:** 1 б (нед. 29, день 1) · 2 б (нед. 29, день 1) · 3 в
+(нед. 29, день 5) · 4 а (нед. 29, день 5) · 5 г (нед. 30, день 1) · 6 в
 (нед. 30, день 1).
 
-**2. Грамматика:** 1 в (нед. 29, день 2) · 2 г (нед. 29, день 2) · 3 а
-(нед. 29, день 3) · 4 б (нед. 29, день 3) · 5 в (нед. 29, день 1) · 6 г
+**2. Грамматика:** 1 а (нед. 29, день 2) · 2 г (нед. 29, день 2) · 3 г
+(нед. 29, день 3) · 4 б (нед. 29, день 3) · 5 б (нед. 29, день 1) · 6 а
 (нед. 30, день 1).
 
-**3. Выражения:** 1 а (нед. 30, день 2) · 2 б (нед. 30, день 3) · 3 в
+**3. Выражения:** 1 а (нед. 30, день 2) · 2 в (нед. 30, день 3) · 3 в
 (нед. 30, день 4).
 
 Шесть пунктов, которые стоит перечитать, если вы их потеряли:
@@ -145,7 +145,7 @@ revisado: false
   experiencia», без кавычек-прилагательного.
 - **Лексика 6.** *Brutos* — до налогов. Подсказка внутри фразы: 1.150 на
   счёте меньше 1.400, значит это сумма до вычетов.
-- **Грамматика 1.** Человек → *conocer*. Варианты а) и б) — правильный
+- **Грамматика 1.** Человек → *conocer*. Варианты б) и в) — правильный
   предлог *a* при неправильном глаголе: ловушка именно в этом, потому что
   *a* в предложении уже стоит и подталкивает выбрать что попало.
 - **Грамматика 2.** Дальше придаточное с *dónde*, значит *saber*. Вариант

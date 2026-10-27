@@ -37,43 +37,43 @@ revisado: false
 Прочитайте предложения и выберите правильный ответ.
 
 1. ______ dos años cambié de puesto.
-   а) Hace · б) Desde · в) Llevo · г) Desde hace
+   а) Desde · б) Hace · в) Llevo · г) Desde hace
 2. Busco trabajo ______ cuatro meses.
-   а) hace · б) desde hace · в) llevo · г) desde
+   а) desde hace · б) hace · в) llevo · г) desde
 3. ______ dos años estudiando español.
-   а) Hace · б) Desde hace · в) Llevo · г) Estoy
+   а) Hace · б) Desde hace · в) Estoy · г) Llevo
 4. Al entrar ______ nervioso.
-   а) fui · б) estaba · в) era · г) me puse
+   а) fui · б) estaba · в) me puse · г) era
 5. ______ en el metro: ahora estoy sin móvil.
-   а) Me lo he dejado · б) He perdido · в) He dejado · г) Lo he olvidado
+   а) Lo he olvidado · б) He perdido · в) He dejado · г) Me lo he dejado
 6. Estaba ______ cansado ______ se durmió enseguida.
-   а) tanto / que · б) tan / que · в) muy / que · г) tan / como
+   а) tanto / que · б) tan / como · в) muy / que · г) tan / que
 
 ### 2. Грамматика (6 баллов)
 
 Прочитайте предложения и выберите правильный ответ.
 
 1. ______ durmiendo cuando sonó el teléfono.
-   а) Era · б) Estuve · в) Estaba · г) He estado
+   а) Era · б) Estaba · в) Estuve · г) He estado
 2. Mientras ______, sonó el despertador. (dormirse, yo)
-   а) me dormí · б) me duermo · в) me he dormido · г) me dormía
+   а) me dormí · б) me duermo · в) me dormía · г) me he dormido
 3. ______ una tarta enorme. (traer, ellos)
-   а) Trajeron · б) Trajieron · в) Traieron · г) Trayeron
+   а) Traieron · б) Trajieron · в) Trajeron · г) Trayeron
 4. Él ______ la carta y no dijo nada. (leer)
    а) leió · б) leyó · в) leía · г) leeyó
 5. Hoy ______ tres veces a objetos perdidos. (llamar, yo)
-   а) llamé · б) llamaba · в) he llamado · г) llamo
+   а) he llamado · б) llamaba · в) llamé · г) llamo
 6. La cerradura estaba rota ______ meses.
-   а) desde hace · б) hacía · в) hace · г) desde hacía
+   а) desde hacía · б) hacía · в) hace · г) desde hace
 
 ### 3. Выражения (3 балла)
 
 1. — Perdí el avión por cinco minutos. — ______
-   а) ¡Qué mala suerte! · б) ¡Qué bien! · в) ¡Me encanta!
+   а) ¡Me encanta! · б) ¡Qué bien! · в) ¡Qué mala suerte!
 2. ______ que no llevaba el pasaporte.
    а) Me di cuenta · б) Me di cuenta de · в) Me daba cuenta
 3. ______, que he perdido el móvil.
-   а) Por nada · б) Pues nadie · в) Pues nada
+   а) Pues nada · б) Pues nadie · в) Por nada
 
 **Всего: ___ / 15** · Лексика ___ / 6 · Грамматика ___ / 6 · Выражения ___ / 3
 
@@ -119,15 +119,15 @@ revisado: false
 
 ## Ответы
 
-**1. Лексика:** 1 а (нед. 28, день 1) · 2 б (нед. 28, день 1) · 3 в (нед. 28,
-день 1) · 4 г (нед. 28, день 2) · 5 а (нед. 28, день 4) · 6 б (нед. 28,
+**1. Лексика:** 1 б (нед. 28, день 1) · 2 а (нед. 28, день 1) · 3 г (нед. 28,
+день 1) · 4 в (нед. 28, день 2) · 5 г (нед. 28, день 4) · 6 г (нед. 28,
 день 3).
 
-**2. Грамматика:** 1 в (нед. 27, день 1) · 2 г (нед. 27, день 1) · 3 а
-(нед. 27, день 3) · 4 б (нед. 27, день 3) · 5 в (нед. 28, день 4) · 6 г
+**2. Грамматика:** 1 б (нед. 27, день 1) · 2 в (нед. 27, день 1) · 3 в
+(нед. 27, день 3) · 4 б (нед. 27, день 3) · 5 а (нед. 28, день 4) · 6 а
 (нед. 28, день 5).
 
-**3. Выражения:** 1 а (нед. 27, день 4) · 2 б (нед. 27, день 2) · 3 в
+**3. Выражения:** 1 в (нед. 27, день 4) · 2 б (нед. 27, день 2) · 3 а
 (нед. 28, день 4).
 
 Четыре вопроса, которые стоит перечитать, если вы их потеряли:
@@ -138,7 +138,7 @@ revisado: false
   целиком.
 - **Лексика 4 (б) *estaba***: *estaba nervioso* — был нервным какое-то
   время. *Al entrar* — это момент, значит **me puse**.
-- **Грамматика 6 (а) *desde hace***: в прошлом оно становится **desde
+- **Грамматика 6 (г) *desde hace***: в прошлом оно становится **desde
   hacía**. Это та же пара *hace / hacía*, что у всех глаголов.
 - **Выражения 2 (а)**: *me di cuenta* без *de* слышно в речи каждый день, но
   на экзамене это ошибка.

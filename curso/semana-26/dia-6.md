@@ -34,44 +34,44 @@ revisado: false
 Прочитайте предложения и выберите правильный ответ.
 
 1. En el ______ jugábamos al fútbol en el patio.
-   а) recreo · б) examen · в) pupitre · г) alumno
+   а) examen · б) recreo · в) pupitre · г) alumno
 2. Teníamos muchos ______: dos horas cada tarde.
-   а) deber · б) deberes · в) tareas · г) notas
+   а) deberes · б) deber · в) tareas · г) notas
 3. Jugaba ______ muñecas hasta los diez años.
-   а) a · б) a las · в) con · г) de
+   а) a · б) con · в) a las · г) de
 4. ______ fumo: lo dejé hace tres años.
-   а) Todavía · б) Aún · в) Todavía no · г) Ya no
+   а) Ya no · б) Aún · в) Todavía no · г) Todavía
 5. ______ ir al gimnasio tres veces por semana. (привычка)
-   а) Solía · б) Usualmente iba · в) Suelo · г) Soy
+   а) Soy · б) Usualmente iba · в) Suelo · г) Solía
 6. Mi abuelo ______ de mecánico toda su vida.
-   а) trabajaba como mucho · б) trabajaba de · в) era de · г) hacía de
+   а) trabajaba como mucho · б) era de · в) trabajaba de · г) hacía de
 
 ### 2. Грамматика (6 баллов)
 
 Прочитайте предложения и выберите правильный ответ.
 
 1. De pequeño ______ en Moscú. (vivir, yo)
-   а) viví · б) he vivido · в) vivía · г) vivo
+   а) viví · б) he vivido · в) vivo · г) vivía
 2. Siempre ______ niños en el patio.
-   а) habrá · б) habían · в) hubo · г) había
+   а) habrá · б) habían · в) había · г) hubo
 3. ______ muy pobres entonces. (ser, nosotros)
-   а) Éramos · б) Fuimos · в) Eramos · г) Estábamos
+   а) Fuimos · б) Éramos · в) Eramos · г) Estábamos
 4. Mientras ______, sonó el teléfono. (cenar, yo)
-   а) cené · б) cenaba · в) he cenado · г) cenaría
+   а) cenaba · б) cené · в) he cenado · г) cenaría
 5. ______ toda la semana y no salimos del hotel. (llover)
-   а) Llovía · б) Ha llovido · в) Llovió · г) Llueve
+   а) Llovía · б) Ha llovido · в) Llueve · г) Llovió
 6. Todos los veranos ______ al pueblo, pero un verano ______ a la playa.
-   а) fuimos / íbamos · б) fuimos / fuimos · в) íbamos / íbamos · г)
-   íbamos / fuimos
+   а) fuimos / íbamos · б) fuimos / fuimos · в) íbamos / fuimos · г)
+   íbamos / íbamos
 
 ### 3. Орфография и произношение (3 балла)
 
 1. ¿Cuál está bien escrito?
    а) íbamos · б) ibamos · в) iwamos
 2. ¿Cuántas sílabas tiene **vivía**?
-   а) dos · б) tres · в) cuatro
+   а) dos · б) cuatro · в) tres
 3. ¿Cuál está bien escrito?
-   а) habían muchos árboles · б) habia muchos árboles · в) había muchos
+   а) habían muchos árboles · б) había muchos árboles · в) habia muchos
    árboles
 
 **Всего: ___ / 15** · Лексика ___ / 6 · Грамматика ___ / 6 · Орфография ___ / 3
@@ -120,20 +120,20 @@ revisado: false
 
 ## Ответы
 
-**1. Лексика:** 1 а (нед. 25, день 4) · 2 б (нед. 25, день 4) · 3 в (нед. 25,
-день 4) · 4 г (нед. 25, день 3) · 5 а (нед. 25, день 3) · 6 б (нед. 26,
+**1. Лексика:** 1 б (нед. 25, день 4) · 2 а (нед. 25, день 4) · 3 б (нед. 25,
+день 4) · 4 а (нед. 25, день 3) · 5 г (нед. 25, день 3) · 6 в (нед. 26,
 день 4).
 
-**2. Грамматика:** 1 в (нед. 25, день 1) · 2 г (нед. 25, день 1) · 3 а
-(нед. 25, день 2) · 4 б (нед. 26, день 2) · 5 в (нед. 26, день 3) · 6 г
+**2. Грамматика:** 1 г (нед. 25, день 1) · 2 в (нед. 25, день 1) · 3 б
+(нед. 25, день 2) · 4 а (нед. 26, день 2) · 5 г (нед. 26, день 3) · 6 в
 (нед. 26, день 3).
 
-**3. Орфография:** 1 а (нед. 25, день 2) · 2 б (нед. 25, день 1) · 3 в
+**3. Орфография:** 1 а (нед. 25, день 2) · 2 в (нед. 25, день 1) · 3 б
 (нед. 25, день 1).
 
 Четыре вопроса, которые стоит перечитать, если вы их потеряли:
 
-- **Лексика 2 (а) *deber***: в единственном это «долг», а домашнее задание
+- **Лексика 2 (б) *deber***: в единственном это «долг», а домашнее задание
   всегда *los deberes*. 🌎 В Америке — *la tarea*, и тогда единственное.
 - **Грамматика 2 (б) *habían***: формы нет. Это самая частая ошибка единицы,
   и её делают даже испанцы.

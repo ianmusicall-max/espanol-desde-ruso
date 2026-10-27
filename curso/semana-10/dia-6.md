@@ -36,25 +36,25 @@ revisado: false
 Прочитайте предложения и выберите правильный ответ.
 
 1. Son las 14:00. En España es la hora de ______.
-   а) la comida · б) el desayuno · в) la cena · г) la merienda
+   а) el desayuno · б) la comida · в) la cena · г) la merienda
 2. Los sábados Olga no trabaja: ______ hasta tarde.
-   а) se levanta · б) duerme · в) empieza · г) sale
+   а) se levanta · б) sale · в) empieza · г) duerme
 3. Javier compra pan, leche y fruta en el supermercado: ______.
    а) va de compras · б) queda con amigos · в) hace la compra · г) pone la
    mesa
 4. Antes de cenar, Javier ______ para cuatro personas.
-   а) ve la tele · б) hace deporte · в) sale de casa · г) pone la mesa
+   а) pone la mesa · б) hace deporte · в) sale de casa · г) ve la tele
 5. — ¿______ vas al gimnasio? — Dos veces a la semana.
    а) ¿Con qué frecuencia · б) ¿A qué hora · в) ¿Cuándo · г) ¿Cuántos
 6. Olga va al cine ______ al mes.
-   а) dos vez · б) dos veces · в) dos horas · г) segunda vez
+   а) dos vez · б) dos horas · в) dos veces · г) segunda vez
 
 ### 2. Грамматика (6 баллов)
 
 Прочитайте предложения и выберите правильный ответ.
 
 1. Yo ______ deporte tres veces a la semana.
-   а) haco · б) hazo · в) hago · г) hace
+   а) haco · б) hago · в) hazo · г) hace
 2. La clase ______ a las nueve en punto.
    а) empeza · б) empezo · в) empiezo · г) empieza
 3. Nosotros ______ a casa a las siete y media.
@@ -63,16 +63,16 @@ revisado: false
    а) Me siempre levanto · б) Siempre me levanto · в) Siempre levanto me ·
    г) Yo me siempre levanto
 5. — ¿Qué hora es? — ______.
-   а) Son la una · б) Está la una · в) Es la una · г) Es las una
+   а) Son la una · б) Está la una · в) Es las una · г) Es la una
 6. ______ veo la tele por la mañana: no tengo tiempo.
-   а) Nunca no · б) No nunca · в) Nunca yo no · г) Nunca
+   а) Nunca no · б) No nunca · в) Nunca · г) Nunca yo no
 
 ### 3. Орфография и произношение (3 балла)
 
 1. Какое слово написано правильно?
-   а) empiezo · б) enpiezo · в) empiézo
+   а) enpiezo · б) empiezo · в) empiézo
 2. В какой форме есть дифтонг **ue**?
-   а) volvemos · б) vuelve · в) dormimos
+   а) vuelve · б) volvemos · в) dormimos
 3. Вы говорите с Хавьером на «ты». В какой фразе **-s** второго лица на месте?
    а) ¿Dónde come? · б) ¿Dónde comen? · в) ¿Dónde comes?
 
@@ -107,18 +107,18 @@ poder, jugar), и в двух из шести поставьте **nosotros**. �
 
 ## Ответы
 
-**1. Лексика:** 1 **а** (нед. 9, день 7: в Испании обедают в два-три) ·
-2 **б** (*dormir hasta tarde*; нед. 10, день 4) · 3 **в** (нед. 10, день 4) ·
-4 **г** (*poner la mesa*; нед. 10, день 1) · 5 **а** (нед. 10, день 3) ·
-6 **б** (нед. 10, день 3).
+**1. Лексика:** 1 **б** (нед. 9, день 7: в Испании обедают в два-три) ·
+2 **г** (*dormir hasta tarde*; нед. 10, день 4) · 3 **в** (нед. 10, день 4) ·
+4 **а** (*poner la mesa*; нед. 10, день 1) · 5 **а** (нед. 10, день 3) ·
+6 **в** (нед. 10, день 3).
 
-**2. Грамматика:** 1 **в** · 2 **г** · 3 **а** · 4 **б** · 5 **в** ·
-6 **г**. (Дни: 1 — нед. 10, день 1; 2 и 3 — нед. 10, день 2; 4 — нед. 10,
+**2. Грамматика:** 1 **б** · 2 **г** · 3 **а** · 4 **б** · 5 **г** ·
+6 **в**. (Дни: 1 — нед. 10, день 1; 2 и 3 — нед. 10, день 2; 4 — нед. 10,
 день 3 и нед. 9, день 3; 5 — нед. 9, день 1; 6 — нед. 10, день 3.)
 
-**3. Орфография и произношение:** 1 **а** (*em-pie-zo* кончается на гласную,
+**3. Орфография и произношение:** 1 **б** (*em-pie-zo* кончается на гласную,
 ударение на предпоследнем слоге — по правилу, тильда не нужна; а **n** перед
-**p** в испанском не пишется: только **m**; нед. 3, день 1) · 2 **б**
+**p** в испанском не пишется: только **m**; нед. 3, день 1) · 2 **а**
 (дифтонг только под ударением: *vu**e**lve*, но *volvemos*; нед. 10, день 2) ·
 3 **в** (нед. 10, день 1).
 
@@ -126,22 +126,22 @@ poder, jugar), и в двух из шести поставьте **nosotros**. �
 русскоговорящий, и если вы выбрали один из них, вы не «ошиблись случайно» — вы
 нашли свою ошибку. Вот они по именам:
 
-- **Грамматика 1а)** *haco* и **1б)** *hazo* — форма «я» построена по правилу,
+- **Грамматика 1а)** *haco* и **1в)** *hazo* — форма «я» построена по правилу,
   как *trabajo*. У *hacer* она неправильная: **hago**. То же было бы с
   *salo*, *pono*, *vo*.
-- **Грамматика 2а)** *empeza* и **2г)** *empezo* — забыли чередование там, где
-  оно есть (ударение на корне → **empieza**). А **3а)** *vuelvemos* — обратная
+- **Грамматика 2а)** *empeza* и **2б)** *empezo* — забыли чередование там, где
+  оно есть (ударение на корне → **empieza**). А **3б)** *vuelvemos* — обратная
   ошибка: приклеили дифтонг к форме *nosotros*, где ударение на окончании и
   дифтонга быть не может. Эти две ошибки ходят парой: сначала одна, потом, когда
   правило выучено, другая.
 - **Грамматика 4а)** *me siempre levanto* и **4в)** *siempre levanto me* —
   наречие влезло внутрь пары *me levanto* или ушло за глагол. Пара неразрывна:
-  наречие обходит её слева или справа. А **4б)** добавляет сверху ещё и
+  наречие обходит её слева или справа. А **4г)** добавляет сверху ещё и
   лишнее *yo*: по-испански подлежащее-местоимение в такой фразе не нужно.
 - **Грамматика 5а)** *son la una* — час один, поэтому **es**, а не *son*.
   Это самая частая ошибка в теме времени: *son* запоминается как «форма для
-  часов» и ставится везде. **5в)** *está la una* — время всегда с *ser*.
-- **Грамматика 6а)** *nunca no* и **6в)** *nunca yo no* — русское «никогда
+  часов» и ставится везде. **5б)** *está la una* — время всегда с *ser*.
+- **Грамматика 6а)** *nunca no* и **6г)** *nunca yo no* — русское «никогда
   **не**» приехало целиком. По-испански одного *nunca* перед глаголом
   достаточно.
 - **Лексика 3а)** *va de compras* — это одежда и магазины, а хлеб и молоко —

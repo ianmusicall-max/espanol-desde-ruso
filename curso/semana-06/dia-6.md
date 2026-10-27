@@ -34,44 +34,45 @@ revisado: false
 Прочитайте предложения и выберите правильный ответ.
 
 1. El padre de mi madre es mi ______.
-   а) abuelo · б) tío · в) hermano · г) primo
+   а) tío · б) abuelo · в) hermano · г) primo
 2. La hija de mi tío es mi ______.
-   а) hermana · б) prima · в) nieta · г) sobrina
+   а) hermana · б) nieta · в) prima · г) sobrina
 3. Mi hermana no tiene marido y no tiene pareja: está ______.
-   а) casada · б) viuda · в) soltera · г) divorciada
+   а) soltera · б) viuda · в) casada · г) divorciada
 4. Mi abuela tiene ochenta y cinco años: no es joven, es ______.
-   а) grande · б) larga · в) pequeña · г) mayor
+   а) grande · б) larga · в) mayor · г) pequeña
 5. Tengo un animal en casa: vive en el agua. Es un ______.
-   а) pez · б) conejo · в) pájaro · г) gato
+   а) pájaro · б) conejo · в) pez · г) gato
 6. Mi hermano no habla mucho con gente nueva: es muy ______.
-   а) hablador · б) tímido · в) trabajador · г) alegre
+   а) hablador · б) alegre · в) trabajador · г) tímido
 
 ### 2. Грамматика (6 баллов)
 
 Прочитайте предложения и выберите правильный ответ.
 
 1. — ¿______ hermanos? — Sí, tengo dos.
-   а) Tengo · б) Tiene · в) Tienes · г) Tienen
+   а) Tengo · б) Tienes · в) Tiene · г) Tienen
 2. Mi tía ______ muy simpática y trabajadora.
    а) está · б) hay · в) tiene · г) es
 3. Hoy mi tía ______ enferma y ______ en casa.
    а) está / está · б) es / es · в) es / está · г) está / es
 4. Кармен говорит о своей собственной матери: «______ madre es de Valencia».
-   а) Su · б) Mi · в) Tu · г) Mis
+   а) Su · б) Mis · в) Tu · г) Mi
 5. «Собака моей сестры» по-испански:
-   а) Mi hermana perro · б) El perro mi hermana · в) El perro de mi hermana · г) Perro de mi hermana
+   а) Mi hermana perro · б) El perro de mi hermana · в) El perro mi
+   hermana · г) Perro de mi hermana
 6. Mi primo tiene ______.
-   а) un rojo coche · б) rojo coche · в) coche rojo · г) un coche rojo
+   а) un coche rojo · б) rojo coche · в) coche rojo · г) un rojo coche
 
 ### 3. Орфография и произношение (3 балла)
 
 1. Какая запись правильная?
-   а) Mi madre está en casa. · б) Mi madre esta en casa. · в) Mi madre
-   està en casa.
+   а) Mi madre està en casa. · б) Mi madre esta en casa. · в) Mi madre
+   está en casa.
 2. В каком слове **r** — один короткий удар языка?
    а) perro · б) pero · в) carro
 3. Сколько слогов в слове **abuelo**?
-   а) четыре (a-bu-e-lo) · б) два (a-buelo) · в) три (a-bue-lo)
+   а) три (a-bue-lo) · б) два (a-buelo) · в) четыре (a-bu-e-lo)
 
 **Всего: ___ / 15** · Лексика ___ / 6 · Грамматика ___ / 6 · Орфография ___ / 3
 
@@ -106,17 +107,17 @@ revisado: false
 
 ## Ответы
 
-**1. Лексика:** 1 а (нед. 5, день 1) · 2 б (нед. 5, день 1) · 3 в (нед. 5,
-день 3) · 4 г (нед. 5, день 4) · 5 а (нед. 6, день 3) · 6 б (нед. 5, день 5).
+**1. Лексика:** 1 б (нед. 5, день 1) · 2 в (нед. 5, день 1) · 3 а (нед. 5,
+день 3) · 4 в (нед. 5, день 4) · 5 в (нед. 6, день 3) · 6 г (нед. 5, день 5).
 
-**2. Грамматика:** 1 в · 2 г (характер — ser; нед. 6, день 1) · 3 а
-(состояние и место — оба estar; нед. 6, дни 1–2) · 4 б (о СВОЕЙ матери Кармен
-говорит *mi madre*; нед. 5, день 2) · 5 в (нед. 6, день 3) · 6 г (нед. 4,
+**2. Грамматика:** 1 б · 2 г (характер — ser; нед. 6, день 1) · 3 а
+(состояние и место — оба estar; нед. 6, дни 1–2) · 4 г (о СВОЕЙ матери Кармен
+говорит *mi madre*; нед. 5, день 2) · 5 б (нед. 6, день 3) · 6 а (нед. 4,
 день 3).
 
-**3. Орфография и произношение:** 1 а (**está** с тильдой; без неё *esta* —
+**3. Орфография и произношение:** 1 в (**está** с тильдой; без неё *esta* —
 это «эта»; нед. 6, день 1) · 2 б (**pero** — один удар, **perro** и **carro** —
-раскат; нед. 6, день 3) · 3 в (**ue** — один слог: a-bue-lo; нед. 6, день 2).
+раскат; нед. 6, день 3) · 3 а (**ue** — один слог: a-bue-lo; нед. 6, день 2).
 
 Дистракторы в этом тесте — не случайные. Это ваши собственные ошибки,
 собранные по урокам единицы:
@@ -128,7 +129,7 @@ revisado: false
 - **а) Su madre** в вопросе 4 — это русское «своя мать»: «свой» в испанском
   не существует, а *su* значит «его / её / их / Ваш», то есть мать кого-то
   другого;
-- **а) un rojo coche** в вопросе 6 — прилагательное перед существительным, как
+- **г) un rojo coche** в вопросе 6 — прилагательное перед существительным, как
   в русском;
 - **б) larga** в вопросе 4 блока «Лексика» — ложный друг: *largo* это
   «длинный», а не «большой».

@@ -35,13 +35,13 @@ revisado: false
 1. Quería un billete de ______ y vuelta para Valencia.
    а) ida · б) venida · в) salida · г) vuelta
 2. El tren llega con ______: media hora tarde.
-   а) escala · б) retraso · в) parada · г) andén
+   а) escala · б) parada · в) retraso · г) andén
 3. En el aeropuerto hay que ______ la maleta grande.
-   а) anular · б) aplazar · в) facturar · г) arreglar
+   а) anular · б) facturar · в) aplazar · г) arreglar
 4. He comprado la ______ del museo por internet.
-   а) billete · б) tarjeta · в) taquilla · г) entrada
+   а) entrada · б) tarjeta · в) taquilla · г) billete
 5. Perdone, el wifi no ______ en mi habitación.
-   а) funciona · б) trabaja · в) anda · г) hace
+   а) hace · б) trabaja · в) anda · г) funciona
 6. En Argentina al autobús lo llaman el ______.
    а) guagua · б) colectivo · в) combi · г) micro
 
@@ -50,27 +50,27 @@ revisado: false
 Прочитайте предложения и выберите правильный ответ.
 
 1. Hoy ______ veinte fotos.
-   а) he hacido · б) tengo hecho · в) he hecho · г) he hacer
+   а) he hacido · б) tengo hecho · в) he hacer · г) he hecho
 2. María ______ a las dos.
-   а) ha llegada · б) es llegado · в) han llegado · г) ha llegado
+   а) ha llegada · б) ha llegado · в) han llegado · г) es llegado
 3. ¿______ alguna vez en España?
-   а) Has estado · б) Has sido · в) Eres · г) Estás
+   а) Estás · б) Has sido · в) Eres · г) Has estado
 4. ¡No hagas ruido! El niño ______.
-   а) duerme · б) está durmiendo · в) va a dormir · г) ha dormido
+   а) está durmiendo · б) duerme · в) va a dormir · г) ha dormido
 5. ______ en el centro y he preguntado a una señora.
    а) He me perdido · б) Me perdido he · в) Me he perdido · г) He perdido
    me
 6. Vivo ______ Valencia, pero mañana voy ______ Madrid.
-   а) a / en · б) a / a · в) en / en · г) en / a
+   а) a / en · б) a / a · в) en / a · г) en / en
 
 ### 3. Орфография и произношение (3 балла)
 
 1. Как читается **he**?
    а) [э] · б) [хе] · в) [ге]
 2. Где ударение в слове **hablado**?
-   а) **ha**-bla-do · б) ha-**bla**-do · в) ha-bla-**do**
+   а) **ha**-bla-do · б) ha-bla-**do** · в) ha-**bla**-do
 3. Как правильно пишется?
-   а) enbarque · б) emvarque · в) embarque
+   а) enbarque · б) embarque · в) emvarque
 
 **Всего: ___ / 15** · Лексика ___ / 6 · Грамматика ___ / 6 · Орфография ___ / 3
 
@@ -108,17 +108,17 @@ revisado: false
 
 ## Ответы
 
-**1. Лексика:** 1 а (нед. 17, день 2) · 2 б (нед. 17, день 2) · 3 в (нед. 17,
-день 5) · 4 г (нед. 18, день 3) · 5 а (нед. 18, день 5) · 6 б (нед. 17,
+**1. Лексика:** 1 а (нед. 17, день 2) · 2 в (нед. 17, день 2) · 3 б (нед. 17,
+день 5) · 4 а (нед. 18, день 3) · 5 г (нед. 18, день 5) · 6 б (нед. 17,
 день 7).
 
-**2. Грамматика:** 1 в (неправильное причастие; нед. 18, день 1) · 2 г
-(причастие не согласуется; нед. 18, день 1) · 3 а (с местом всегда *estar*;
-нед. 18, день 2) · 4 б (прямо сейчас; нед. 17, день 3) · 5 в (нед. 18,
-день 3) · 6 г (место — *en*, движение — *a*; нед. 18, день 4).
+**2. Грамматика:** 1 г (неправильное причастие; нед. 18, день 1) · 2 б
+(причастие не согласуется; нед. 18, день 1) · 3 г (с местом всегда *estar*;
+нед. 18, день 2) · 4 а (прямо сейчас; нед. 17, день 3) · 5 в (нед. 18,
+день 3) · 6 в (место — *en*, движение — *a*; нед. 18, день 4).
 
-**3. Орфография и произношение:** 1 а (h немая; нед. 18, день 1) · 2 б
-(ударение на -**a**-do; нед. 18, день 1) · 3 в (перед b и p пишется m;
+**3. Орфография и произношение:** 1 а (h немая; нед. 18, день 1) · 2 в
+(ударение на -**a**-do; нед. 18, день 1) · 3 б (перед b и p пишется m;
 нед. 17, день 5).
 
 Неправильные варианты здесь не случайные. **1.1 «venida»** — слово есть, но в

@@ -36,41 +36,41 @@ revisado: false
 1. Mi padre ______ al ajedrez todos los días.
    а) juega · б) toca · в) hace · г) practica
 2. En Moscú ______ desde noviembre hasta marzo.
-   а) llueve · б) nieva · в) hace niebla · г) hay nieva
+   а) llueve · б) hay nieva · в) hace niebla · г) nieva
 3. Lo siento, no puedo el martes. ______ tengo cita con el médico.
-   а) Porque · б) Pero · в) Es que · г) Si
+   а) Porque · б) Es que · в) Pero · г) Si
 4. ¿Haces algo este ______? El sábado vamos al parque.
-   а) día festivo · б) puente · в) mes · г) finde
+   а) finde · б) puente · в) mes · г) día festivo
 5. El martes me viene ______: tengo clase hasta las nueve.
-   а) mal · б) mejor · в) bien · г) genial
+   а) bien · б) mejor · в) mal · г) genial
 6. En Canarias el clima es muy ______ todo el año.
-   а) seco · б) suave · в) húmedo · г) especial
+   а) seco · б) húmedo · в) suave · г) especial
 
 ### 2. Грамматика (6 баллов)
 
 Прочитайте предложения и выберите правильный ответ.
 
 1. Me ______ leer y viajar.
-   а) gusto · б) gustan · в) gusta · г) gustas
+   а) gusto · б) gustan · в) gustas · г) gusta
 2. Mi cumpleaños es ______ tres ______ abril.
-   а) en / de · б) — / — · в) el / en · г) el / de
+   а) el / de · б) — / — · в) el / en · г) en / de
 3. Hoy ______ mucho frío.
-   а) hace · б) está · в) es · г) tiene
+   а) es · б) está · в) hace · г) tiene
 4. En agosto hace ______ calor en Sevilla.
    а) muy · б) mucho · в) mucha · г) muchos
 5. Mañana ______ trabajar hasta las ocho.
-   а) voy · б) voy de · в) voy a · г) vo a
+   а) voy · б) voy a · в) voy de · г) vo a
 6. ¿Vienes ______ al cine?
    а) con mí · б) con me · в) con yo · г) conmigo
 
 ### 3. Орфография и произношение (3 балла)
 
 1. Как правильно написать «да» в сообщении?
-   а) sí · б) si · в) sî
+   а) si · б) sí · в) sî
 2. Как правильно написать дату?
-   а) el 12 de Marzo · б) el doce de marzo · в) el duodécimo de marzo
+   а) el 12 de Marzo · б) el duodécimo de marzo · в) el doce de marzo
 3. В каком слове **ll** звучит как [й]?
-   а) calor · б) clima · в) llueve
+   а) llueve · б) clima · в) calor
 
 **Всего: ___ / 15** · Лексика ___ / 6 · Грамматика ___ / 6 · Орфография ___ / 3
 
@@ -108,18 +108,18 @@ revisado: false
 
 ## Ответы
 
-**1. Лексика:** 1 а (нед. 15, день 1) · 2 б (нед. 15, день 4) · 3 в (нед. 16,
-день 2) · 4 г (нед. 16, день 4) · 5 а (нед. 16, день 3) · 6 б (нед. 15,
+**1. Лексика:** 1 а (нед. 15, день 1) · 2 г (нед. 15, день 4) · 3 б (нед. 16,
+день 2) · 4 а (нед. 16, день 4) · 5 в (нед. 16, день 3) · 6 в (нед. 15,
 день 5).
 
-**2. Грамматика:** 1 в (перед инфинитивом всегда *gusta*; нед. 15, день 2) ·
-2 г (нед. 15, день 3) · 3 а (нед. 15, день 4) · 4 б (*calor* —
-существительное; нед. 15, день 5) · 5 в (нед. 16, день 1) · 6 г (нед. 16,
+**2. Грамматика:** 1 г (перед инфинитивом всегда *gusta*; нед. 15, день 2) ·
+2 а (нед. 15, день 3) · 3 в (нед. 15, день 4) · 4 б (*calor* —
+существительное; нед. 15, день 5) · 5 б (нед. 16, день 1) · 6 г (нед. 16,
 день 2).
 
-**3. Орфография и произношение:** 1 а (без тильды это «если»; нед. 16,
-день 4) · 2 б (месяц с маленькой буквы, число количественное; нед. 15,
-день 3) · 3 в (нед. 15, день 4).
+**3. Орфография и произношение:** 1 б (без тильды это «если»; нед. 16,
+день 4) · 2 в (месяц с маленькой буквы, число количественное; нед. 15,
+день 3) · 3 а (нед. 15, день 4).
 
 Неправильные варианты здесь не случайные. **1.2 «hay nieva»** — правильный
 глагол с лишним помощником. **1.3 «Porque»** — по смыслу подходит, но в

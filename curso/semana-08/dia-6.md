@@ -37,14 +37,14 @@ revisado: false
 1. В этой комнате спят. Это ______.
    а) el dormitorio · б) la cocina · в) el baño · г) el balcón
 2. Mi piso tiene muchas ventanas y mucha luz: es muy ______.
-   а) ruidoso · б) luminoso · в) tranquilo · г) céntrico
+   а) ruidoso · б) céntrico · в) tranquilo · г) luminoso
 3. Para comprar medicinas voy a ______.
-   а) el banco · б) correos · в) la farmacia · г) el supermercado
+   а) la farmacia · б) correos · в) el banco · г) el supermercado
 4. «Поверните налево» по-испански — ______.
-   а) Gire a la derecha · б) Cruce la plaza · в) Siga todo recto · г) Gire
-   a la izquierda
+   а) Gire a la derecha · б) Cruce la plaza · в) Gire a la izquierda · г)
+   Siga todo recto
 5. В объявлении: «60 m², 2 hab., con **asc.**». Что значит **asc.**?
-   а) ascensor · б) aseo · в) asiento · г) asociación
+   а) aseo · б) ascensor · в) asiento · г) asociación
 6. En el centro hay mucho ______: muchos coches y muchos autobuses.
    а) ruido · б) tráfico · в) gente · г) parques
 
@@ -53,28 +53,27 @@ revisado: false
 Выберите правильный ответ.
 
 1. En la cocina ______.
-   а) hay la mesa · б) está una mesa · в) hay una mesa · г) es una mesa
+   а) hay la mesa · б) está una mesa · в) es una mesa · г) hay una mesa
 2. El armario ______ al lado ______ la ventana.
-   а) hay / de · б) es / a · в) está / — (ничего) · г) está / de
+   а) hay / de · б) es / a · в) está / de · г) está / — (ничего)
 3. Los sábados voy ______ parque con mis amigos.
    а) al · б) a el · в) a la · г) en el
 4. En mi ciudad no ______ metro.
-   а) está · б) hay · в) son · г) es
+   а) está · б) son · в) hay · г) es
 5. Camino ______ la calle Mayor ______ la plaza del Mercado.
-   а) en / hasta · б) por / a · в) por / hasta · г) a / hasta
+   а) en / hasta · б) por / hasta · в) por / a · г) a / hasta
 6. En el edificio hay ______ puertas. (200)
    а) doscientos · б) doscienta · в) dos cientas · г) doscientas
 
 ### 3. Орфография и произношение (3 балла)
 
 1. Какое написание правильное?
-   а) la habitación · б) la habitacion · в) la abitación
+   а) la abitación · б) la habitacion · в) la habitación
 2. В каком вопросе голос к концу **падает**?
    а) ¿Hay un banco aquí? · б) ¿Dónde está el banco? · в) ¿La farmacia está cerca?
 3. Как звучит *dos habitaciones* в беглой речи?
-   а) [дос · а-би-та-сьо-нес], с паузой между словами · б)
-   [дос-ха-би-та-сьо-нес], с [х] на месте **h** · в)
-   [до-са-би-та-сьо-нес], слитно
+   а) [до-са-би-та-сьо-нес], слитно · б) [дос-ха-би-та-сьо-нес], с [х] на
+   месте **h** · в) [дос · а-би-та-сьо-нес], с паузой между словами
 
 **Всего: ___ / 15** · Лексика ___ / 6 · Грамматика ___ / 6 · Орфография ___ / 3
 
@@ -120,18 +119,18 @@ revisado: false
 
 ## Ответы
 
-**1. Лексика:** 1 **а** (нед. 7, день 1) · 2 **б** (нед. 7, день 3) ·
-3 **в** (нед. 7, день 4) · 4 **г** (нед. 8, день 1) · 5 **а** (нед. 8,
+**1. Лексика:** 1 **а** (нед. 7, день 1) · 2 **г** (нед. 7, день 3) ·
+3 **а** (нед. 7, день 4) · 4 **в** (нед. 8, день 1) · 5 **б** (нед. 8,
 день 3) · 6 **б** (нед. 8, день 4).
 
-**2. Грамматика:** 1 **в** (нед. 7, день 2) · 2 **г** (нед. 7, день 2) ·
-3 **а** (нед. 7, день 5) · 4 **б** (нед. 8, день 4) · 5 **в** (нед. 8,
+**2. Грамматика:** 1 **г** (нед. 7, день 2) · 2 **в** (нед. 7, день 2) ·
+3 **а** (нед. 7, день 5) · 4 **в** (нед. 8, день 4) · 5 **б** (нед. 8,
 день 5) · 6 **г** (нед. 8, день 2).
 
-**3. Орфография и произношение:** 1 **а** (нед. 8, день 3: тильда в
+**3. Орфография и произношение:** 1 **в** (нед. 8, день 3: тильда в
 **-ción** и молчащая **h**, которая пишется, но не звучит) · 2 **б**
 (нед. 7, день 4: в вопросе с вопросительным словом голос к концу падает ↘; в
-вопросах без него — поднимается и остаётся наверху ↗) · 3 **в**
+вопросах без него — поднимается и остаётся наверху ↗) · 3 **а**
 (нед. 8, день 3: слова склеиваются, а **h** не мешает, потому что звука нет).
 
 **Дистракторы здесь не случайные — это ваши ошибки, по одной на каждый пункт
@@ -141,7 +140,7 @@ revisado: false
   Так нельзя никогда: **hay** идёт только с **un / una / unos / unas** или
   вообще без артикля. Вариант б) ***está una mesa*** — вторая половина той же
   ошибки: **está** идёт с **el / la**, потому что это «тот самый, известный».
-- **Грамматика 2, вариант в) *está al lado la ventana***: пропущенный
+- **Грамматика 2, вариант г) *está al lado la ventana***: пропущенный
   предлог. По-русски «рядом с окном» — предлог плюс окончание; по-испански
   нужны **два** слова: *al lado **de** la ventana*. То же в *encima **de***,
   *debajo **de***, *enfrente **de***, *detrás **de***.
@@ -157,7 +156,7 @@ revisado: false
 - **Лексика 2, вариант в) *tranquilo***: *luminoso* (светлый) и *tranquilo*
   (тихий) — два похвальных слова из одного дня, и их легко перепутать:
   светлый — про свет, тихий — про шум.
-- **Орфография 1, вариант в) *abitación***: вы написали так, как слышите.
+- **Орфография 1, вариант а) *abitación***: вы написали так, как слышите.
   Испанская **h** не звучит, но пишется всегда.
 - **Орфография 2, варианты а) и в)**: это вопросы **без** вопросительного
   слова, и в них голос идёт вверх. Русская привычка опускать голос в конце

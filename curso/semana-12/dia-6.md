@@ -39,40 +39,40 @@ revisado: false
    а) La cuenta, por favor · б) La carta, por favor · в) El cuenta, por
    favor · г) ¿Algo más?
 2. ______ de huevos son doce huevos.
-   а) Un paquete · б) Una docena · в) Un trozo · г) Un litro
+   а) Una docena · б) Un paquete · в) Un trozo · г) Un litro
 3. En el menú del día hay primero, segundo, ______ y bebida.
    а) carta · б) ración · в) postre · г) cuenta
 4. El borsch es una ______ de remolacha.
    а) ensalada · б) bebida · в) masa · г) sopa
 5. El camarero trae la comida a la mesa y dice: ______.
-   а) ¡Que aproveche! · б) ¿Cuánto es? · в) La cuenta, por favor · г) ¿Me
+   а) La cuenta, por favor · б) ¿Cuánto es? · в) ¡Que aproveche! · г) ¿Me
    puede traer la sal?
 6. Esta sopa tiene demasiada sal. Está ______.
-   а) sosa · б) salada · в) dulce · г) picante
+   а) sosa · б) picante · в) dulce · г) salada
 
 ### 2. Грамматика (6 баллов)
 
 Прочитайте и выберите правильный ответ.
 
 1. Me ______ los platos rusos.
-   а) gusta · б) gusto · в) gustan · г) gustas
+   а) gustan · б) gusto · в) gusta · г) gustas
 2. Un kilo ______ manzanas, por favor.
-   а) — (ничего) · б) a · в) de las · г) de
+   а) — (ничего) · б) de · в) de las · г) a
 3. La sopa está ______ caliente.
-   а) muy · б) muy mucho · в) mucho · г) mucha
+   а) muy mucho · б) muy · в) mucho · г) mucha
 4. Tengo ______ hambre: no como nada desde ayer.
-   а) muy · б) mucha · в) mucho · г) muchas
+   а) muy · б) mucho · в) mucha · г) muchas
 5. Yo ______ la carne, no el pescado.
-   а) prefero · б) prefierro · в) prefiero · г) preferimos
+   а) prefero · б) prefiero · в) prefierro · г) preferimos
 6. ¿______ pagar con tarjeta? (вы спрашиваете про себя)
    а) Podemos · б) Puede · в) Puedes · г) Puedo
 
 ### 3. Орфография и произношение (3 балла)
 
 1. Какое слово написано правильно?
-   а) menú del día · б) menu del dia · в) ménu del dia
+   а) menu del dia · б) menú del día · в) ménu del dia
 2. Как читается **ll** в слове *botella*?
-   а) как русское «ль» · б) как «й» в слове «йогурт» · в) как «л»
+   а) как «й» в слове «йогурт» · б) как русское «ль» · в) как «л»
 3. Какое чтение слова *docena* в испанском невозможно?
    а) [doˈθena] (Испания) · б) [doˈsena] (Америка) · в) [доце́на]
 
@@ -112,16 +112,16 @@ revisado: false
 
 ## Ответы
 
-**1. Лексика:** 1 **а** (нед. 12, день 1) · 2 **б** (нед. 12, день 2) ·
-3 **в** (нед. 12, день 1) · 4 **г** (нед. 12, день 4) · 5 **а** (нед. 12,
-день 1) · 6 **б** (нед. 12, день 5).
+**1. Лексика:** 1 **а** (нед. 12, день 1) · 2 **а** (нед. 12, день 2) ·
+3 **в** (нед. 12, день 1) · 4 **г** (нед. 12, день 4) · 5 **в** (нед. 12,
+день 1) · 6 **г** (нед. 12, день 5).
 
-**2. Грамматика:** 1 **в** (нед. 11, день 3) · 2 **г** (нед. 12, день 2) ·
-3 **а** (нед. 12, день 3) · 4 **б** (нед. 12, день 3) · 5 **в** (нед. 11,
+**2. Грамматика:** 1 **а** (нед. 11, день 3) · 2 **б** (нед. 12, день 2) ·
+3 **б** (нед. 12, день 3) · 4 **в** (нед. 12, день 3) · 5 **б** (нед. 11,
 день 5) · 6 **г** (нед. 12, день 3).
 
-**3. Орфография и произношение:** 1 **а** (нед. 11, день 4 — тильда в *menú* и
-в *día*) · 2 **б** (нед. 11, день 1) · 3 **в** (нед. 11, день 5 и нед. 12,
+**3. Орфография и произношение:** 1 **б** (нед. 11, день 4 — тильда в *menú* и
+в *día*) · 2 **а** (нед. 11, день 1) · 3 **в** (нед. 11, день 5 и нед. 12,
 день 2: [ц] не существует в испанском ни в одном варианте).
 
 **Дистракторы в этом тесте — не случайные.** Это то, что русскоговорящий

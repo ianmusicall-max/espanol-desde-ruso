@@ -2122,6 +2122,63 @@ informe compara entre lecciones, así que **un duplicado dentro de una sola
 tabla no lo detecta nadie**. Conviene mirar la tabla completa después de
 cada sustitución.
 
+## Los quince tests de unidad no medían nada (2026-10-27)
+
+Contadas las respuestas correctas de los quince días de `prueba`: en la
+semana 24, **catorce de quince eran la б)**. Marcando todo б se sacaba 14/15 y
+se «aprobaba» la unidad sin saber nada. En la 18 y la 4 eran doce de quince, y
+en **doce de los quince tests** la letra más repetida se llevaba más del 45 %.
+Desde que `pruebas.py` los hace contestables en la web (2026-10-27), el alumno
+se puntúa con eso.
+
+Ahora los quince están en **4/4/4/3**. No cambió ni un enunciado ni el texto
+de una opción: solo su orden, la letra de la clave y las referencias a letras
+de la prosa del análisis. Verificado comparando el TEXTO de la respuesta
+marcada pregunta por pregunta contra la versión anterior, más el conjunto de
+opciones, el enunciado y el enlace a la lección: **0 diferencias en 225
+preguntas**.
+
+**Y el reparto no puede ser un ciclo.** La primera corrección usaba `n % 4`,
+que deja la secuencia **а-б-в-г-а-б-в-г**: equilibrada en el recuento y
+trivial de aprender, o sea el mismo defecto con otra cara. Lo delató una
+prueba que fijaba la secuencia literal de la semana 2 y que, al ponerse en
+rojo, enseñó el ciclo entero. Ahora el plan se baraja con una semilla sacada
+del nombre del fichero —determinista, así que reconstruir el sitio no mueve
+ninguna respuesta— y se descarta cualquier plan con tres letras iguales
+seguidas o con una escalera ascendente. `test_la_letra_correcta_esta_repartida`
+exige las tres cosas en los quince tests.
+
+**Las dos pruebas que se pusieron en rojo tenían razón y las dos medían mal**,
+y es el mismo defecto: fijaban el CONTENIDO de un fichero de datos.
+
+- `test_una_clave_que_no_cuadra_no_genera_test` rompía la clave con dos
+  `.replace()` de cadenas literales («5 б (нед. 2, день 5) · 6 а»). Al cambiar
+  las letras, los dos `.replace()` se quedaron en nada y la prueba comprobaba
+  un fichero intacto. Ahora la avería se DERIVA del fichero y cada paso exige
+  además que se haya aplicado de verdad.
+- `test_las_respuestas_salen_igual_que_en_la_clave_del_profesor` guardaba la
+  secuencia «бвбббавбгббабвв». Ahora vuelve a leer la clave con una expresión
+  regular propia y la compara con lo que devolvió `pruebas.leer`, en los
+  quince tests y no solo en uno: comprueba la RELACIÓN, que es lo que importa,
+  y no se rompe el día que el contenido cambie por una razón legítima.
+
+**Dos cosas más que costaron el arreglo:**
+
+- Cortar el fichero por la cadena `## 3.` para separar la prosa del test
+  también casa con `### 3. Орфография`, que está DENTRO del test. Con ese corte
+  la sustitución reescribía la letra de una opción de verdad y rompía la
+  secuencia а, б, в, г; la semana 26 se descartaba por eso. El corte va por el
+  índice de línea de la siguiente cabecera `## `.
+- **Las referencias de la prosa se arreglaron A MANO: quince.** El remapeo
+  automático acierta cuando la prosa cita la opción tal cual; no acierta
+  cuando la alarga («а) a el parque» donde la opción es «a el»), le cambia la
+  mayúscula, la envuelve en tres asteriscos, la parte entre dos renglones o
+  —el caso que más se repite— cita una FRASE que no es ninguna opción y hay
+  que razonar a cuál señala («no está metro» apunta a la opción *está*). Y la
+  semana 10 usa otro formato entero, `**Грамматика 1б)** *hazo*`, que ningún
+  patrón de los demás reconoce. La comprobación final lee las 28 referencias
+  comprobables y exige que la letra case con la posición real de la opción.
+
 ## «A simple vista»: los dibujos suben y el sitio estrena tipografía (2026-10-27)
 
 El profesor volvió sobre la portada: *«aún crees que la página se ve aburrida,
