@@ -1686,6 +1686,78 @@ hacen residente fiscal ruso aunque no tenga permiso de residencia, y eso toca
 también su AdSense (Google cerró las cuentas de editores rusos en agosto de
 2024).
 
+## La portada se toca: la vitrina suena y hay tres preguntas (2026-10-27)
+
+El profesor lo dijo así: «no crees que a la pagina le falta mas interactividad,
+es como aburrida al comienzo». Y tenía razón **en el sitio exacto**: el curso es
+interactivo por dentro —4.225 botones ▶, 189 huecos que se rellenan, las pruebas
+de unidad contestables— y la portada solo se leía. Quien llega y no pulsa
+«empezar» no toca nada en toda la página.
+
+**No se escribió contenido nuevo para ninguna de las dos cosas**, que es lo que
+hace que quepan en una sesión: los audios y las preguntas ya estaban pagados y
+en disco.
+
+### La ficha de la vitrina suena
+
+Las doce palabras de la portada ya tenían dibujo; se comprobó que las doce están
+también en `docs/audio/indice.json`, y ahora cada tarjeta es un botón que las
+dice. Reutiliza `AUDIO_JS`, el mismo reproductor único de las lecciones, así que
+al pulsar la segunda se para la primera.
+
+- **La ficha ENTERA es el botón, no un ▶ al lado.** En el móvil un icono de doce
+  píxeles junto a una palabra no se acierta con el dedo.
+- **Hay que apagarle el cromo del navegador** (`background:none;border:0;
+  font:inherit`): sin eso sale un botón gris con su borde DENTRO de la tarjeta.
+  No se ve razonando, se ve abriendo la portada.
+- **La traducción pasó de `.vitrina span` a `.vitrina .ru`.** Desde que la ficha
+  muda es un `<span>`, el selector corto le daba a la tarjeta entera el tamaño de
+  letra de la traducción.
+- **Una palabra sin locutar se queda como estaba**, en un `<span class="ficha">`:
+  el audio se genera por tandas, así que «algunas sí y otras no» es el estado
+  normal un tiempo y la vitrina no puede encogerse por eso.
+- Comprobado en navegador y no deducido: doce botones, los dos MP3 pedidos de
+  verdad en la red, `aria-pressed` a `true` y la anterior apagada, cero errores
+  de JS. **La señal es el MP3 pedido**, no el `aria-pressed`: `aria-pressed` solo
+  se pone si `play()` resolvió, así que sobre `file://` da «false» con el código
+  bien.
+
+### Tres preguntas jugables, dentro del párrafo que las merecía
+
+`_probador` coge los **tres primeros grupos** de `programa/test-nivel.yaml`
+—unidades 1 a 3— y los juega en la portada. Va DENTRO del apartado «en qué se
+diferencia este curso», justo donde el texto promete que la lección nombra el
+error antes de que lo cometas: era el mejor párrafo de la página y estaba en
+forma de texto.
+
+- **El error se enseña al contestar, no al final.** Con tres preguntas, un
+  resumen final no lo lee nadie; y ese discurso —por dónde te traiciona el ruso—
+  es lo único que esta página tiene que demostrar.
+- **Mismo barajado que el test de nivel y por el mismo motivo**: se COPIA la
+  pregunta (`opciones.slice()`), porque sobre el original la segunda partida
+  encontraría las opciones ya movidas y `correcta` apuntando a otra cosa. Es el
+  fallo que le diría «has fallado» a quien acertó.
+- **Termina en dos botones: la lección 1 y el test completo.** Quien acierta las
+  tres no necesita empezar por el día 1, y ahí es donde se entera de que existe
+  el test; quien falla ya tiene la razón para empezar.
+- **Los dos destinos viven dentro de un `<script>`**, así que
+  `revisar_adsense.enlaces_rotos` no los mira desde el 2026-10-26. Hay una prueba
+  que los resuelve contra el disco en los tres idiomas: o se comprueban ahí o no
+  los comprueba nadie. Es la tercera vez que un enlace escrito sin tener en
+  cuenta la carpeta de la página se cuela por este hueco.
+- **Nace oculto y lo enciende el navegador**, como el resto del sitio. Sin
+  JavaScript no hay botón, y el párrafo de contraste que hay encima ya explica lo
+  mismo en texto.
+- **`probador_siguiente` y `probador_ver` son textos propios.** La primera
+  versión los armaba con los del test (`de` + flecha), y en ruso eso daba
+  **«из →»**, que significa «de». Hay una prueba que exige que no coincidan.
+- **Sin banco suficiente no sale nada**, como la vitrina y la baraja: media
+  partida es peor que ninguna.
+
+**Lo que esto NO hace**: no mete a nadie en el sitio. La portada ahora retiene a
+quien llega; traer visitas sigue siendo lo de las redes, y el cuello de botella
+de verdad.
+
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.

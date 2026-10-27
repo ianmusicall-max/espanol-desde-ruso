@@ -175,6 +175,9 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
   background:var(--papel);border:1.5px solid var(--linea);border-radius:9px;
   padding:.6rem .8rem;cursor:pointer;transition:border-color .12s,background .12s}
 .test-ops button:hover{border-color:var(--acento)}
+.test-ops button[disabled]{cursor:default;opacity:.75}
+.test-ops button.bien{border-color:#1d7a4f;opacity:1;font-weight:600}
+.test-ops button.mal{border-color:var(--acento);opacity:1}
 .test-seg{float:inline-end;font-variant-numeric:tabular-nums;color:var(--tenue);font-weight:600}
 .test-reloj{height:3px;border-radius:999px;background:var(--linea);overflow:hidden;margin:0 0 .9rem}
 .test-reloj i{display:block;height:100%;background:var(--acento);opacity:.55}
@@ -285,9 +288,16 @@ strong{font-weight:650}
   padding:.6rem .3rem .55rem;text-align:center;box-shadow:var(--sombra);
   font-family:ui-sans-serif,system-ui,sans-serif;transition:transform .12s ease}
 @media(hover:hover){.vitrina li:hover{transform:translateY(-2px)}}
+/* La ficha ENTERA es el boton que suena, asi que hay que quitarle el cromo
+   del navegador: sin esto sale un boton gris con su borde dentro de la
+   tarjeta. El <span> es la misma ficha cuando esa palabra no esta locutada. */
+.vitrina .ficha{display:block;width:100%;background:none;border:0;padding:0;
+  margin:0;color:inherit;font:inherit;text-align:center}
+.vitrina button.ficha{cursor:pointer}
+.vitrina button.ficha[aria-pressed="true"] b{color:var(--acento)}
 .vitrina img{display:block;width:72px;height:72px;margin:0 auto .4rem;border-radius:8px}
 .vitrina b{display:block;font-size:.84rem;font-weight:600}
-.vitrina span{display:block;font-size:.78rem;color:var(--tenue);margin-top:.1rem}
+.vitrina .ru{display:block;font-size:.78rem;color:var(--tenue);margin-top:.1rem}
 
 .progreso{margin:1.5rem 0;font-family:ui-sans-serif,system-ui,sans-serif}
 .progreso .cifras{display:flex;align-items:baseline;gap:.45rem;font-size:.88rem;color:var(--tenue)}
@@ -401,7 +411,7 @@ footer.sitio p{margin:.35rem 0}
 </div>
 </div>
 </div>
-<section class="muestra"><h2>Words you will learn</h2><p>The course has 300 illustrated words, each with audio and an example. Here are 12.</p><ul class="vitrina"><li><img src="../img/1ca20af20fd23adcfaea.webp" alt="" width="72" height="72" loading="lazy" decoding="async"><b>la manzana</b><span>яблоко</span></li><li><img src="../img/2afe4f3f11894624e189.webp" alt="" width="72" height="72" loading="lazy" decoding="async"><b>la casa</b><span>дом</span></li><li><img src="../img/a857f18a919e59961538.webp" alt="" width="72" height="72" loading="lazy" decoding="async"><b>el perro</b><span>собака</span></li><li><img src="../img/831ae86cff4b3d72a04c.webp" alt="" width="72" height="72" loading="lazy" decoding="async"><b>el libro</b><span>книга</span></li><li><img src="../img/8c1bf256365077168f63.webp" alt="" width="72" height="72" loading="lazy" decoding="async"><b>el café</b><span>кофе</span></li><li><img src="../img/05e13025af8e93dbde4b.webp" alt="" width="72" height="72" loading="lazy" decoding="async"><b>el reloj</b><span>часы (прибор)</span></li><li><img src="../img/533aa5da9637e4b6fb9b.webp" alt="" width="72" height="72" loading="lazy" decoding="async"><b>la camisa</b><span>рубашка</span></li><li><img src="../img/6e21b006cf7774bd5c5e.webp" alt="" width="72" height="72" loading="lazy" decoding="async"><b>el coche</b><span>машина</span></li><li><img src="../img/dd3187ce49fc94b269f4.webp" alt="" width="72" height="72" loading="lazy" decoding="async"><b>las flores</b><span>цветы</span></li><li><img src="../img/df67cd16c36ba2ab0cbe.webp" alt="" width="72" height="72" loading="lazy" decoding="async"><b>el pescado</b><span>рыба</span></li><li><img src="../img/0ca61ce9e23f7e906072.webp" alt="" width="72" height="72" loading="lazy" decoding="async"><b>la guitarra</b><span>гитара</span></li><li><img src="../img/409a911612f10a43279c.webp" alt="" width="72" height="72" loading="lazy" decoding="async"><b>la silla</b><span>стул</span></li></ul></section>
+<section class="muestra"><h2>Words you will learn</h2><p>The course has 300 illustrated words, each with audio and an example. Here are 12.</p><ul class="vitrina"><li><button type="button" class="suena ficha" aria-pressed="false" data-audio="../audio/948c667420a858dd07a0.mp3" aria-label="Listen: la manzana"><img src="../img/1ca20af20fd23adcfaea.webp" alt="" width="72" height="72" loading="lazy" decoding="async"><b>la manzana</b><span class="ru">яблоко</span></button></li><li><button type="button" class="suena ficha" aria-pressed="false" data-audio="../audio/cf0d055d1167697e63c2.mp3" aria-label="Listen: la casa"><img src="../img/2afe4f3f11894624e189.webp" alt="" width="72" height="72" loading="lazy" decoding="async"><b>la casa</b><span class="ru">дом</span></button></li><li><button type="button" class="suena ficha" aria-pressed="false" data-audio="../audio/b889e5ef332185bee4e5.mp3" aria-label="Listen: el perro"><img src="../img/a857f18a919e59961538.webp" alt="" width="72" height="72" loading="lazy" decoding="async"><b>el perro</b><span class="ru">собака</span></button></li><li><button type="button" class="suena ficha" aria-pressed="false" data-audio="../audio/63447e0bca4191ab5369.mp3" aria-label="Listen: el libro"><img src="../img/831ae86cff4b3d72a04c.webp" alt="" width="72" height="72" loading="lazy" decoding="async"><b>el libro</b><span class="ru">книга</span></button></li><li><button type="button" class="suena ficha" aria-pressed="false" data-audio="../audio/23fbbc4d47fe2f13a323.mp3" aria-label="Listen: el café"><img src="../img/8c1bf256365077168f63.webp" alt="" width="72" height="72" loading="lazy" decoding="async"><b>el café</b><span class="ru">кофе</span></button></li><li><button type="button" class="suena ficha" aria-pressed="false" data-audio="../audio/f8c20f9ee8da69c3187c.mp3" aria-label="Listen: el reloj"><img src="../img/05e13025af8e93dbde4b.webp" alt="" width="72" height="72" loading="lazy" decoding="async"><b>el reloj</b><span class="ru">часы (прибор)</span></button></li><li><button type="button" class="suena ficha" aria-pressed="false" data-audio="../audio/d4ea4e77745603b96778.mp3" aria-label="Listen: la camisa"><img src="../img/533aa5da9637e4b6fb9b.webp" alt="" width="72" height="72" loading="lazy" decoding="async"><b>la camisa</b><span class="ru">рубашка</span></button></li><li><button type="button" class="suena ficha" aria-pressed="false" data-audio="../audio/45f821ee4ead1378f773.mp3" aria-label="Listen: el coche"><img src="../img/6e21b006cf7774bd5c5e.webp" alt="" width="72" height="72" loading="lazy" decoding="async"><b>el coche</b><span class="ru">машина</span></button></li><li><button type="button" class="suena ficha" aria-pressed="false" data-audio="../audio/b54000b47316f2fe4add.mp3" aria-label="Listen: las flores"><img src="../img/dd3187ce49fc94b269f4.webp" alt="" width="72" height="72" loading="lazy" decoding="async"><b>las flores</b><span class="ru">цветы</span></button></li><li><button type="button" class="suena ficha" aria-pressed="false" data-audio="../audio/456e68c6997986bc1d04.mp3" aria-label="Listen: el pescado"><img src="../img/df67cd16c36ba2ab0cbe.webp" alt="" width="72" height="72" loading="lazy" decoding="async"><b>el pescado</b><span class="ru">рыба</span></button></li><li><button type="button" class="suena ficha" aria-pressed="false" data-audio="../audio/04b6859a3911d8cac328.mp3" aria-label="Listen: la guitarra"><img src="../img/0ca61ce9e23f7e906072.webp" alt="" width="72" height="72" loading="lazy" decoding="async"><b>la guitarra</b><span class="ru">гитара</span></button></li><li><button type="button" class="suena ficha" aria-pressed="false" data-audio="../audio/7638305d2d4eb20fbc6d.mp3" aria-label="Listen: la silla"><img src="../img/409a911612f10a43279c.webp" alt="" width="72" height="72" loading="lazy" decoding="async"><b>la silla</b><span class="ru">стул</span></button></li></ul></section>
 
 
 <h2>What makes it different</h2>
@@ -412,6 +422,84 @@ footer.sitio p{margin:.35rem 0}
 <p>Russian has no article at all. So the learner does not «forget» it: they cannot hear that anything is missing. For the first three months the article comes back in the answer key of every exercise.</p>
 </section>
 <p>And the other way round: where Russian <em>helps</em>, the course says so plainly. <em>Me gusta el café</em> is literally «мне нравится кофе», the same structure. Reflexives are the Russian <em>-ся</em>. The past tenses are taught on the aspect the learner already has.</p>
+<h3>Try it right here</h3><p>Three sentences. Pick the Spanish version and see where Russian trips you up.</p><div class="botones" id="probador-arranque" hidden><button type="button" class="boton" id="probador-empezar">Start the test</button></div><div id="probador"></div><script>window.CURSO_PROBADOR={"grupos": [[{"pregunta": "Ана — врач.", "opciones": ["Ana médica.", "Ana es médica.", "Ana está médica."], "correcta": 1, "unidad": 1, "error": "В русском в настоящем времени связки нет, в испанском глагол не опускается никогда."}, {"pregunta": "Она учительница.", "opciones": ["Ella es una profesora.", "Ella es profesora.", "Ella profesora."], "correcta": 1, "unidad": 1, "error": "Профессия после ser идёт БЕЗ артикля: es profesora, а не «es una profesora»."}], [{"pregunta": "На столе книга.", "opciones": ["Hay el libro en la mesa.", "Hay un libro en la mesa.", "Está un libro en la mesa."], "correcta": 1, "unidad": 2, "error": "После «hay» никогда не ставится el / la: что-то существует, но ещё не известно какое именно."}, {"pregunta": "Красная машина.", "opciones": ["Un coche rojo.", "Un rojo coche.", "Una coche roja."], "correcta": 0, "unidad": 2, "error": "Прилагательное стоит ПОСЛЕ существительного, и el coche — мужского рода, хотя «машина» женского."}], [{"pregunta": "Мне тридцать лет.", "opciones": ["Soy treinta años.", "Tengo treinta años.", "Estoy treinta años."], "correcta": 1, "unidad": 3, "error": "Возраст по-испански «имеют», а не «являются». Русский здесь не подсказывает ничего."}, {"pregunta": "У меня есть брат.", "opciones": ["Tengo un hermano.", "Tengo hermano.", "Yo tengo el hermano."], "correcta": 0, "unidad": 3, "error": "В русском артикля нет, поэтому его забывают: после tener нужен un / una."}]], "leccion": "../semana-01/dia-1.html", "test": "../test.html", "t": {"de": "of", "instruccion": "How do you say this in Spanish?", "resultado": "Your result", "aciertos": "correct", "empezar": "See the first lesson", "test": "Take the level test", "bien": "Correct", "mal": "This is where Russian trips you up", "final": "Every lesson works like this: first the mistake you are going to make, then the rule.", "siguiente": "Next →", "ver": "See the result"}};(function(){
+  var D=window.CURSO_PROBADOR; if(!D)return;
+  var caja=document.getElementById('probador'); if(!caja)return;
+  var i=0, fallos=[], aciertos=0, preguntas=[];
+
+  function esc(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML}
+
+  // Mismo barajado que el test de nivel y por el mismo motivo: se COPIA la
+  // pregunta, porque sobre el original la segunda partida encontraria las
+  // opciones ya movidas y `correcta` apuntando a otra cosa.
+  function barajar(q){
+    var ops=q.opciones.slice(), orden=[], n;
+    for(n=0;n<ops.length;n++)orden.push(n);
+    for(n=orden.length-1;n>0;n--){
+      var j=Math.floor(Math.random()*(n+1)), t=orden[n]; orden[n]=orden[j]; orden[j]=t;
+    }
+    return {pregunta:q.pregunta, error:q.error,
+            opciones:orden.map(function(k){return ops[k]}),
+            correcta:orden.indexOf(q.correcta)};
+  }
+
+  function pregunta(){
+    var q=preguntas[i];
+    caja.innerHTML='<div class="test-caja"><div class="test-cuenta">'
+      +(i+1)+' '+esc(D.t.de)+' '+preguntas.length+' · '+esc(D.t.instruccion)+'</div>'
+      +'<p class="test-pregunta">'+esc(q.pregunta)+'</p>'
+      +'<div class="test-ops">'+q.opciones.map(function(o,n){
+          return '<button type="button" data-n="'+n+'">'+esc(o)+'</button>'}).join('')+'</div></div>';
+    caja.querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click',function(){responder(parseInt(b.dataset.n,10),b)});
+    });
+  }
+
+  // Se contesta y se ENSEÑA el error ahi mismo, sin esperar al final: el
+  // discurso sobre por que el ruso te traiciona es lo unico que esta pagina
+  // tiene que demostrar, y al final de tres preguntas ya nadie lo lee.
+  function responder(n,boton){
+    var q=preguntas[i], bien=(n===q.correcta);
+    if(bien){aciertos++}else{fallos.push(q)}
+    caja.querySelectorAll('.test-ops button').forEach(function(b,k){
+      b.disabled=true;
+      if(k===q.correcta)b.classList.add('bien');
+      else if(b===boton)b.classList.add('mal');
+    });
+    var p=document.createElement('div');
+    p.className='test-fallo';
+    p.innerHTML='<b>'+esc(bien?D.t.bien:D.t.mal)+'</b><span>'+esc(q.error)+'</span>';
+    caja.querySelector('.test-caja').appendChild(p);
+    var sig=document.createElement('button');
+    sig.type='button'; sig.className='boton';
+    sig.textContent=(i+1<preguntas.length)?D.t.siguiente:D.t.ver;
+    sig.style.marginTop='1rem';
+    sig.addEventListener('click',function(){i++;if(i<preguntas.length){pregunta()}else{resultado()}});
+    caja.querySelector('.test-caja').appendChild(sig);
+  }
+
+  function resultado(){
+    caja.innerHTML='<div class="test-caja"><div class="test-cuenta">'+esc(D.t.resultado)+'</div>'
+      +'<p class="test-pregunta">'+aciertos+' / '+preguntas.length+' '+esc(D.t.aciertos)+'</p>'
+      +'<p>'+esc(D.t.final)+'</p>'
+      +'<div class="botones"><a class="boton" href="'+D.leccion+'">'+esc(D.t.empezar)+'</a>'
+      +'<a class="boton secundario" href="'+D.test+'">'+esc(D.t.test)+'</a></div></div>';
+  }
+
+  // Nace oculto y lo enciende el navegador, como el resto del sitio: sin
+  // JavaScript seria un boton que no hace nada, y el parrafo de contraste que
+  // hay encima ya explica lo mismo en texto.
+  var arranque=document.getElementById('probador-arranque');
+  var boton=document.getElementById('probador-empezar');
+  if(arranque&&boton){
+    arranque.hidden=false;
+    boton.addEventListener('click',function(){
+      arranque.hidden=true;
+      preguntas=(D.grupos||[]).map(function(g){return barajar(g[Math.floor(Math.random()*g.length)])});
+      pregunta();
+    });
+  }
+})();</script>
 
 <h2>What a session looks like</h2>
 <div class="tabla-env"><table>
@@ -441,7 +529,23 @@ footer.sitio p{margin:.35rem 0}
 
 <script>window.CURSO_TEXTOS={"continuar": "Continue: lesson", "empezar": "Start from the beginning", "marcar": "Mark this lesson as done", "hecho": "Lesson done", "siguiente": "Next lesson", "tuyo": "done by you", "titulo": "Your progress", "aviso": "Progress is stored in this browser on this device only. There is no sign-up and nothing is sent anywhere. If you clear your browser data or open the course on another phone, your marks do not come with you.", "borrar": "Reset progress", "confirmar": "Clear all marks?", "copiar": "Save my progress", "copiado": "Code copied — paste it into your notes or a message to yourself", "restaurar": "Restore from a code", "pegar": "Paste your code here", "aplicar": "Restore", "cancelar": "Cancel", "malo": "That does not look like a progress code. Nothing was changed.", "menos": "That code has fewer lessons than you have marked (%a% instead of %b%). Restore anyway?", "hecho_restaurar": "Done: %n% lessons restored", "antes": "Before clearing your browser or switching phones, save your code."};window.CURSO_RAIZ="..";window.CURSO_PUBLICADAS=126;window.CURSO_DIAS={"1":"semana-01/dia-1.html","2":"semana-01/dia-2.html","3":"semana-01/dia-3.html","4":"semana-01/dia-4.html","5":"semana-01/dia-5.html","6":"semana-01/dia-6.html","7":"semana-01/dia-7.html","8":"semana-02/dia-1.html","9":"semana-02/dia-2.html","10":"semana-02/dia-3.html","11":"semana-02/dia-4.html","12":"semana-02/dia-5.html","13":"semana-02/dia-6.html","14":"semana-02/dia-7.html","15":"semana-03/dia-1.html","16":"semana-03/dia-2.html","17":"semana-03/dia-3.html","18":"semana-03/dia-4.html","19":"semana-03/dia-5.html","20":"semana-03/dia-6.html","21":"semana-03/dia-7.html","22":"semana-04/dia-1.html","23":"semana-04/dia-2.html","24":"semana-04/dia-3.html","25":"semana-04/dia-4.html","26":"semana-04/dia-5.html","27":"semana-04/dia-6.html","28":"semana-04/dia-7.html","29":"semana-05/dia-1.html","30":"semana-05/dia-2.html","31":"semana-05/dia-3.html","32":"semana-05/dia-4.html","33":"semana-05/dia-5.html","34":"semana-05/dia-6.html","35":"semana-05/dia-7.html","36":"semana-06/dia-1.html","37":"semana-06/dia-2.html","38":"semana-06/dia-3.html","39":"semana-06/dia-4.html","40":"semana-06/dia-5.html","41":"semana-06/dia-6.html","42":"semana-06/dia-7.html","43":"semana-07/dia-1.html","44":"semana-07/dia-2.html","45":"semana-07/dia-3.html","46":"semana-07/dia-4.html","47":"semana-07/dia-5.html","48":"semana-07/dia-6.html","49":"semana-07/dia-7.html","50":"semana-08/dia-1.html","51":"semana-08/dia-2.html","52":"semana-08/dia-3.html","53":"semana-08/dia-4.html","54":"semana-08/dia-5.html","55":"semana-08/dia-6.html","56":"semana-08/dia-7.html","57":"semana-09/dia-1.html","58":"semana-09/dia-2.html","59":"semana-09/dia-3.html","60":"semana-09/dia-4.html","61":"semana-09/dia-5.html","62":"semana-09/dia-6.html","63":"semana-09/dia-7.html","64":"semana-10/dia-1.html","65":"semana-10/dia-2.html","66":"semana-10/dia-3.html","67":"semana-10/dia-4.html","68":"semana-10/dia-5.html","69":"semana-10/dia-6.html","70":"semana-10/dia-7.html","71":"semana-11/dia-1.html","72":"semana-11/dia-2.html","73":"semana-11/dia-3.html","74":"semana-11/dia-4.html","75":"semana-11/dia-5.html","76":"semana-11/dia-6.html","77":"semana-11/dia-7.html","78":"semana-12/dia-1.html","79":"semana-12/dia-2.html","80":"semana-12/dia-3.html","81":"semana-12/dia-4.html","82":"semana-12/dia-5.html","83":"semana-12/dia-6.html","84":"semana-12/dia-7.html","85":"semana-13/dia-1.html","86":"semana-13/dia-2.html","87":"semana-13/dia-3.html","88":"semana-13/dia-4.html","89":"semana-13/dia-5.html","90":"semana-13/dia-6.html","91":"semana-13/dia-7.html","92":"semana-14/dia-1.html","93":"semana-14/dia-2.html","94":"semana-14/dia-3.html","95":"semana-14/dia-4.html","96":"semana-14/dia-5.html","97":"semana-14/dia-6.html","98":"semana-14/dia-7.html","99":"semana-15/dia-1.html","100":"semana-15/dia-2.html","101":"semana-15/dia-3.html","102":"semana-15/dia-4.html","103":"semana-15/dia-5.html","104":"semana-15/dia-6.html","105":"semana-15/dia-7.html","106":"semana-16/dia-1.html","107":"semana-16/dia-2.html","108":"semana-16/dia-3.html","109":"semana-16/dia-4.html","110":"semana-16/dia-5.html","111":"semana-16/dia-6.html","112":"semana-16/dia-7.html","113":"semana-17/dia-1.html","114":"semana-17/dia-2.html","115":"semana-17/dia-3.html","116":"semana-17/dia-4.html","117":"semana-17/dia-5.html","118":"semana-17/dia-6.html","119":"semana-17/dia-7.html","120":"semana-18/dia-1.html","121":"semana-18/dia-2.html","122":"semana-18/dia-3.html","123":"semana-18/dia-4.html","124":"semana-18/dia-5.html","125":"semana-18/dia-6.html","126":"semana-18/dia-7.html"};</script>
 <script src="../progreso.js" defer></script>
-
+<script>(function(){
+  var sonando=null, reproductor=new Audio();
+  reproductor.addEventListener('ended',function(){if(sonando){sonando.setAttribute('aria-pressed','false');sonando=null}});
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.suena');
+    if(!b)return;
+    e.preventDefault();
+    if(sonando===b){reproductor.pause();b.setAttribute('aria-pressed','false');sonando=null;return}
+    if(sonando)sonando.setAttribute('aria-pressed','false');
+    reproductor.src=b.getAttribute('data-audio');
+    reproductor.currentTime=0;
+    // Si el archivo no está, no se avisa con una alerta: el botón vuelve a su
+    // sitio y la lección se sigue leyendo igual.
+    reproductor.play().then(function(){b.setAttribute('aria-pressed','true');sonando=b})
+                      .catch(function(){b.setAttribute('aria-pressed','false');sonando=null});
+  });
+})();</script>
 
 
 

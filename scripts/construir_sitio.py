@@ -256,6 +256,9 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
   background:var(--papel);border:1.5px solid var(--linea);border-radius:9px;
   padding:.6rem .8rem;cursor:pointer;transition:border-color .12s,background .12s}
 .test-ops button:hover{border-color:var(--acento)}
+.test-ops button[disabled]{cursor:default;opacity:.75}
+.test-ops button.bien{border-color:#1d7a4f;opacity:1;font-weight:600}
+.test-ops button.mal{border-color:var(--acento);opacity:1}
 .test-seg{float:inline-end;font-variant-numeric:tabular-nums;color:var(--tenue);font-weight:600}
 .test-reloj{height:3px;border-radius:999px;background:var(--linea);overflow:hidden;margin:0 0 .9rem}
 .test-reloj i{display:block;height:100%;background:var(--acento);opacity:.55}
@@ -366,9 +369,16 @@ strong{font-weight:650}
   padding:.6rem .3rem .55rem;text-align:center;box-shadow:var(--sombra);
   font-family:ui-sans-serif,system-ui,sans-serif;transition:transform .12s ease}
 @media(hover:hover){.vitrina li:hover{transform:translateY(-2px)}}
+/* La ficha ENTERA es el boton que suena, asi que hay que quitarle el cromo
+   del navegador: sin esto sale un boton gris con su borde dentro de la
+   tarjeta. El <span> es la misma ficha cuando esa palabra no esta locutada. */
+.vitrina .ficha{display:block;width:100%;background:none;border:0;padding:0;
+  margin:0;color:inherit;font:inherit;text-align:center}
+.vitrina button.ficha{cursor:pointer}
+.vitrina button.ficha[aria-pressed="true"] b{color:var(--acento)}
 .vitrina img{display:block;width:72px;height:72px;margin:0 auto .4rem;border-radius:8px}
 .vitrina b{display:block;font-size:.84rem;font-weight:600}
-.vitrina span{display:block;font-size:.78rem;color:var(--tenue);margin-top:.1rem}
+.vitrina .ru{display:block;font-size:.78rem;color:var(--tenue);margin-top:.1rem}
 
 .progreso{margin:1.5rem 0;font-family:ui-sans-serif,system-ui,sans-serif}
 .progreso .cifras{display:flex;align-items:baseline;gap:.45rem;font-size:.88rem;color:var(--tenue)}
@@ -1400,7 +1410,7 @@ def lexico_del_curso(cal) -> dict:
     return palabras
 
 
-def _muestra_de_dibujos(t, dibujos: dict, lexico: dict, raiz: str) -> str:
+def _muestra_de_dibujos(t, dibujos: dict, lexico: dict, raiz: str, audio: dict | None = None) -> str:
     """Doce palabras con su dibujo, en la portada.
 
     El profesor dijo que la página «se ve muy aburrida», y lo que la viste son
@@ -1426,11 +1436,22 @@ def _muestra_de_dibujos(t, dibujos: dict, lexico: dict, raiz: str) -> str:
         ruso = lexico.get(palabra, "")
         if not archivo or not ruso or NO_ES_TRADUCCION.search(ruso):
             continue
+        # El dibujo SUENA si esa palabra está locutada. En una web de idiomas
+        # es lo primero que el visitante quiere hacer —oír cómo suena— y aquí
+        # no cuesta nada: los 3.543 audios ya están pagados y en disco.
+        # La ficha entera es el botón, no un ▶ al lado: en el móvil un icono
+        # de doce píxeles al lado de una palabra no se acierta con el dedo.
+        mp3 = (audio or {}).get(palabra)
+        etiqueta = f'{html.escape(t["portada"]["oir"])}: {html.escape(palabra)}'
+        abre = (f'<button type="button" class="suena ficha" aria-pressed="false" '
+                f'data-audio="{raiz}/audio/{html.escape(mp3)}" aria-label="{etiqueta}">'
+                if mp3 else '<span class="ficha">')
+        cierra = "</button>" if mp3 else "</span>"
         fichas.append(
-            f'<li><img src="{raiz}/img/{html.escape(archivo)}" alt="" '
+            f'<li>{abre}<img src="{raiz}/img/{html.escape(archivo)}" alt="" '
             f'width="72" height="72" loading="lazy" decoding="async">'
             f'<b>{html.escape(palabra)}</b>'
-            f'<span>{html.escape(ruso)}</span></li>')
+            f'<span class="ru">{html.escape(ruso)}</span>{cierra}</li>')
     if len(fichas) < MUESTRA_MINIMA:
         return ""
     nota = html.escape(p["muestra_nota"]).format(n=len(dibujos), k=len(fichas))
@@ -1438,9 +1459,135 @@ def _muestra_de_dibujos(t, dibujos: dict, lexico: dict, raiz: str) -> str:
             f'<p>{nota}</p><ul class="vitrina">{"".join(fichas)}</ul></section>')
 
 
+PROBADOR_JS = r"""(function(){
+  var D=window.CURSO_PROBADOR; if(!D)return;
+  var caja=document.getElementById('probador'); if(!caja)return;
+  var i=0, fallos=[], aciertos=0, preguntas=[];
+
+  function esc(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML}
+
+  // Mismo barajado que el test de nivel y por el mismo motivo: se COPIA la
+  // pregunta, porque sobre el original la segunda partida encontraria las
+  // opciones ya movidas y `correcta` apuntando a otra cosa.
+  function barajar(q){
+    var ops=q.opciones.slice(), orden=[], n;
+    for(n=0;n<ops.length;n++)orden.push(n);
+    for(n=orden.length-1;n>0;n--){
+      var j=Math.floor(Math.random()*(n+1)), t=orden[n]; orden[n]=orden[j]; orden[j]=t;
+    }
+    return {pregunta:q.pregunta, error:q.error,
+            opciones:orden.map(function(k){return ops[k]}),
+            correcta:orden.indexOf(q.correcta)};
+  }
+
+  function pregunta(){
+    var q=preguntas[i];
+    caja.innerHTML='<div class="test-caja"><div class="test-cuenta">'
+      +(i+1)+' '+esc(D.t.de)+' '+preguntas.length+' · '+esc(D.t.instruccion)+'</div>'
+      +'<p class="test-pregunta">'+esc(q.pregunta)+'</p>'
+      +'<div class="test-ops">'+q.opciones.map(function(o,n){
+          return '<button type="button" data-n="'+n+'">'+esc(o)+'</button>'}).join('')+'</div></div>';
+    caja.querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click',function(){responder(parseInt(b.dataset.n,10),b)});
+    });
+  }
+
+  // Se contesta y se ENSEÑA el error ahi mismo, sin esperar al final: el
+  // discurso sobre por que el ruso te traiciona es lo unico que esta pagina
+  // tiene que demostrar, y al final de tres preguntas ya nadie lo lee.
+  function responder(n,boton){
+    var q=preguntas[i], bien=(n===q.correcta);
+    if(bien){aciertos++}else{fallos.push(q)}
+    caja.querySelectorAll('.test-ops button').forEach(function(b,k){
+      b.disabled=true;
+      if(k===q.correcta)b.classList.add('bien');
+      else if(b===boton)b.classList.add('mal');
+    });
+    var p=document.createElement('div');
+    p.className='test-fallo';
+    p.innerHTML='<b>'+esc(bien?D.t.bien:D.t.mal)+'</b><span>'+esc(q.error)+'</span>';
+    caja.querySelector('.test-caja').appendChild(p);
+    var sig=document.createElement('button');
+    sig.type='button'; sig.className='boton';
+    sig.textContent=(i+1<preguntas.length)?D.t.siguiente:D.t.ver;
+    sig.style.marginTop='1rem';
+    sig.addEventListener('click',function(){i++;if(i<preguntas.length){pregunta()}else{resultado()}});
+    caja.querySelector('.test-caja').appendChild(sig);
+  }
+
+  function resultado(){
+    caja.innerHTML='<div class="test-caja"><div class="test-cuenta">'+esc(D.t.resultado)+'</div>'
+      +'<p class="test-pregunta">'+aciertos+' / '+preguntas.length+' '+esc(D.t.aciertos)+'</p>'
+      +'<p>'+esc(D.t.final)+'</p>'
+      +'<div class="botones"><a class="boton" href="'+D.leccion+'">'+esc(D.t.empezar)+'</a>'
+      +'<a class="boton secundario" href="'+D.test+'">'+esc(D.t.test)+'</a></div></div>';
+  }
+
+  // Nace oculto y lo enciende el navegador, como el resto del sitio: sin
+  // JavaScript seria un boton que no hace nada, y el parrafo de contraste que
+  // hay encima ya explica lo mismo en texto.
+  var arranque=document.getElementById('probador-arranque');
+  var boton=document.getElementById('probador-empezar');
+  if(arranque&&boton){
+    arranque.hidden=false;
+    boton.addEventListener('click',function(){
+      arranque.hidden=true;
+      preguntas=(D.grupos||[]).map(function(g){return barajar(g[Math.floor(Math.random()*g.length)])});
+      pregunta();
+    });
+  }
+})();"""
+
+# Cuántas preguntas se ofrecen en la portada. Tres y no catorce: esto no
+# coloca a nadie, solo enseña de qué va el curso antes de pedir un clic. El
+# test de verdad está a un botón de distancia al terminar.
+PROBADOR_PREGUNTAS = 3
+
+
+def _probador(t, preguntas: dict, raiz: str, enlace: str) -> str:
+    """Tres preguntas jugables en la portada, con las del test de nivel.
+
+    El profesor lo dijo dos veces: la página «se ve muy aburrida» y «le falta
+    interactividad al comienzo». Y tenía razón en el sitio exacto: el curso es
+    interactivo por dentro —audio, huecos que se rellenan, pruebas de unidad—
+    pero la portada solo se lee.
+
+    **No se escribió ni una pregunta nueva.** Son las de
+    `programa/test-nivel.yaml`, que ya existen, ya están agrupadas por unidad y
+    ya traen la explicación del error en ruso. Aquí se cogen los tres primeros
+    grupos, que son las unidades 1 a 3: lo bastante fáciles para que un
+    principiante acierte y siga, y lo bastante rápidas para que quien ya sabe
+    español llegue al final y pulse «hacer el test completo».
+
+    Va DENTRO del apartado «en qué se diferencia este curso», justo donde el
+    texto promete que la lección nombra el error antes de que lo cometas. Era
+    el mejor párrafo de la página y estaba en forma de texto: ahora se toca."""
+    grupos = grupos_por_unidad(preguntas.get("preguntas") or [])[:PROBADOR_PREGUNTAS]
+    if len(grupos) < PROBADOR_PREGUNTAS:
+        return ""
+    p, k = t["portada"], t["test"]
+    datos = {
+        "grupos": grupos,
+        "leccion": enlace,
+        "test": f"{raiz}/test.html",
+        "t": {"de": k["de"], "instruccion": k["instruccion"], "resultado": k["resultado"],
+              "aciertos": k["aciertos"], "empezar": p["boton"], "test": p["probador_test"],
+              "bien": p["probador_bien"], "mal": p["probador_mal"], "final": p["probador_final"],
+              "siguiente": p["probador_siguiente"], "ver": p["probador_ver"]},
+    }
+    return (f'<h3>{html.escape(p["probador_titulo"])}</h3>'
+            f'<p>{html.escape(p["probador_entrada"])}</p>'
+            f'<div class="botones" id="probador-arranque" hidden>'
+            f'<button type="button" class="boton" id="probador-empezar">'
+            f'{html.escape(k["empezar"])}</button></div>'
+            f'<div id="probador"></div>'
+            f'<script>window.CURSO_PROBADOR={json.dumps(datos, ensure_ascii=False)};'
+            f'{PROBADOR_JS}</script>')
+
+
 # ----------------------------------------------------------------------- páginas
 def construir_portada(cfg, t, idiomas, idioma, destino, cal, raiz,
-                      dibujos=None, lexico=None) -> None:
+                      dibujos=None, lexico=None, audio=None, preguntas=None) -> None:
     hechas = escritas(cal)
     total = len(plan.dias(cal))
     primera = hechas[0] if hechas else None
@@ -1493,7 +1640,7 @@ def construir_portada(cfg, t, idiomas, idioma, destino, cal, raiz,
 </div>
 </div>
 </div>
-{_muestra_de_dibujos(t, dibujos or {}, lexico or {}, raiz)}
+{_muestra_de_dibujos(t, dibujos or {}, lexico or {}, raiz, audio or {})}
 {anuncio(cfg, "cabecera")}
 
 <h2>{html.escape(p['dif_titulo'])}</h2>
@@ -1504,6 +1651,7 @@ def construir_portada(cfg, t, idiomas, idioma, destino, cal, raiz,
 <p>{html.escape(p['dif_nota'])}</p>
 </section>
 <p>{p['dif_ayuda']}</p>
+{_probador(t, preguntas or {}, raiz, enlace)}
 
 <h2>{html.escape(p['dia_titulo'])}</h2>
 <div class="tabla-env"><table>
@@ -1525,7 +1673,8 @@ def construir_portada(cfg, t, idiomas, idioma, destino, cal, raiz,
     destino.joinpath("index.html").write_text(
         pagina(cfg, t, idiomas, idioma, f"{p['titulo']} {p['titulo2']} — {p['lema']}", cuerpo,
                descripcion=p["entrada"], pagina_id="index.html", raiz=raiz, jsonld=jsonld,
-               publicadas=len(hechas), mapa_dias=mapa_de_dias(cal)),
+               publicadas=len(hechas), mapa_dias=mapa_de_dias(cal),
+               con_audio='class="suena ficha"' in cuerpo),
         encoding="utf-8")
 
 
@@ -2447,6 +2596,7 @@ def construir(destino: pathlib.Path = DOCS, cfg: dict | None = None, textos: dic
     # vez por idioma sería hacer tres veces el mismo trabajo.
     dibujos = indice_de_imagenes(destino)
     lexico = lexico_del_curso(cal) if dibujos else {}
+    audio = indice_de_audio(destino)
 
     for i in idiomas:
         t = textos[i["codigo"]]
@@ -2454,14 +2604,13 @@ def construir(destino: pathlib.Path = DOCS, cfg: dict | None = None, textos: dic
         carpeta.mkdir(parents=True, exist_ok=True)
         raiz = ".." if i["carpeta"] else "."
         construir_portada(cfg, t, idiomas, i["codigo"], carpeta, cal, raiz,
-                          dibujos, lexico)
+                          dibujos, lexico, audio, preguntas)
         construir_indice_curso(cfg, t, idiomas, i["codigo"], carpeta, cal, raiz, destino)
         construir_estaticas(cfg, t, idiomas, i["codigo"], carpeta, cal, raiz)
 
     construir_test(cfg, textos["ru"], idiomas, destino, cal, preguntas)
     todos = plan.dias(cal)
     hechas = escritas(cal)
-    audio = indice_de_audio(destino)
     for d in hechas:
         construir_leccion(d, cfg, textos["ru"], idiomas, destino, cal, todos, audio,
                           dibujos)

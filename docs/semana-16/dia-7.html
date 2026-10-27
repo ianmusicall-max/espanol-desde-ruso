@@ -175,6 +175,9 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
   background:var(--papel);border:1.5px solid var(--linea);border-radius:9px;
   padding:.6rem .8rem;cursor:pointer;transition:border-color .12s,background .12s}
 .test-ops button:hover{border-color:var(--acento)}
+.test-ops button[disabled]{cursor:default;opacity:.75}
+.test-ops button.bien{border-color:#1d7a4f;opacity:1;font-weight:600}
+.test-ops button.mal{border-color:var(--acento);opacity:1}
 .test-seg{float:inline-end;font-variant-numeric:tabular-nums;color:var(--tenue);font-weight:600}
 .test-reloj{height:3px;border-radius:999px;background:var(--linea);overflow:hidden;margin:0 0 .9rem}
 .test-reloj i{display:block;height:100%;background:var(--acento);opacity:.55}
@@ -285,9 +288,16 @@ strong{font-weight:650}
   padding:.6rem .3rem .55rem;text-align:center;box-shadow:var(--sombra);
   font-family:ui-sans-serif,system-ui,sans-serif;transition:transform .12s ease}
 @media(hover:hover){.vitrina li:hover{transform:translateY(-2px)}}
+/* La ficha ENTERA es el boton que suena, asi que hay que quitarle el cromo
+   del navegador: sin esto sale un boton gris con su borde dentro de la
+   tarjeta. El <span> es la misma ficha cuando esa palabra no esta locutada. */
+.vitrina .ficha{display:block;width:100%;background:none;border:0;padding:0;
+  margin:0;color:inherit;font:inherit;text-align:center}
+.vitrina button.ficha{cursor:pointer}
+.vitrina button.ficha[aria-pressed="true"] b{color:var(--acento)}
 .vitrina img{display:block;width:72px;height:72px;margin:0 auto .4rem;border-radius:8px}
 .vitrina b{display:block;font-size:.84rem;font-weight:600}
-.vitrina span{display:block;font-size:.78rem;color:var(--tenue);margin-top:.1rem}
+.vitrina .ru{display:block;font-size:.78rem;color:var(--tenue);margin-top:.1rem}
 
 .progreso{margin:1.5rem 0;font-family:ui-sans-serif,system-ui,sans-serif}
 .progreso .cifras{display:flex;align-items:baseline;gap:.45rem;font-size:.88rem;color:var(--tenue)}

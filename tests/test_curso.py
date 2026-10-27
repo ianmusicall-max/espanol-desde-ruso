@@ -2277,6 +2277,151 @@ class TestLaVitrinaDeLaPortada(unittest.TestCase):
         self.assertGreater(len(self.lexico), 500)
         self.assertEqual("яблоко", self.lexico.get("la manzana"))
 
+    # ---- la ficha suena ----
+
+    def test_las_doce_fichas_son_botones_que_suenan(self):
+        """La ficha ENTERA es el botón, no un ▶ al lado de la palabra: en el
+        móvil un icono de doce píxeles no se acierta con el dedo.
+
+        Y el `data-audio` tiene que apuntar a un archivo que exista: un botón
+        que no suena es peor que ninguno, porque el visitante aprende en el
+        primer clic que esta web no funciona."""
+        docs = RAIZ / "docs"
+        audio = construir_sitio.indice_de_audio(docs)
+        if not audio or not construir_sitio.indice_de_imagenes(docs):
+            self.skipTest("todavía no se han generado el audio o los dibujos")
+        for pagina, prefijo in (("index.html", "./audio/"), ("es/index.html", "../audio/")):
+            texto = (docs / pagina).read_text(encoding="utf-8")
+            vitrina = re.search(r'<ul class="vitrina">.*?</ul>', texto, re.S).group(0)
+            fuentes = re.findall(r'class="suena ficha"[^>]*data-audio="([^"]+)"', vitrina)
+            self.assertEqual(len(construir_sitio.PORTADA_DIBUJOS), len(fuentes), pagina)
+            for src in fuentes:
+                self.assertTrue(src.startswith(prefijo), f"{pagina}: {src}")
+                self.assertTrue((docs / "audio" / src.rsplit("/", 1)[1]).exists(),
+                                f"{pagina}: no existe {src}")
+
+    def test_sin_audio_la_ficha_sigue_siendo_una_ficha(self):
+        """El audio se genera por tandas, así que «algunas palabras sí y otras
+        no» es el estado normal durante un tiempo. Una palabra sin locutar no
+        puede dejar la tarjeta a medias ni desaparecer de la vitrina: se queda
+        igual, sin botón."""
+        dibujos = {generar_imagenes.limpiar(p): f"{i}.webp"
+                   for i, p in enumerate(construir_sitio.PORTADA_DIBUJOS)}
+        lexico = dict.fromkeys(construir_sitio.PORTADA_DIBUJOS, "слово")
+        muda = construir_sitio._muestra_de_dibujos(self.t, dibujos, lexico, ".")
+        self.assertEqual(len(construir_sitio.PORTADA_DIBUJOS), muda.count("<li>"))
+        self.assertNotIn("suena", muda)
+        self.assertEqual(len(construir_sitio.PORTADA_DIBUJOS), muda.count('<span class="ficha">'))
+        # Y con media tanda locutada, cada una en su estado.
+        media = dict(list(zip(construir_sitio.PORTADA_DIBUJOS, ["a.mp3", "b.mp3"])))
+        mezcla = construir_sitio._muestra_de_dibujos(self.t, dibujos, lexico, ".", media)
+        self.assertEqual(2, mezcla.count('class="suena ficha"'))
+        self.assertEqual(len(construir_sitio.PORTADA_DIBUJOS) - 2,
+                         mezcla.count('<span class="ficha">'))
+
+    def test_el_boton_no_se_lleva_por_delante_el_estilo_de_la_ficha(self):
+        """Un `<button>` trae el cromo del navegador —fondo gris, borde, letra
+        de sistema— y la ficha es una tarjeta. Sin estas reglas sale un botón
+        dentro de la tarjeta, y eso no se ve hasta abrir la portada.
+
+        Y la traducción rusa cuelga de `.ru` y no de `.vitrina span`: desde que
+        la ficha muda ES un `<span>`, el selector corto le daría a la tarjeta
+        entera el tamaño de letra de la traducción."""
+        css = construir_sitio.CSS
+        regla = re.search(r"\.vitrina \.ficha\{([^}]*)\}", css)
+        self.assertIsNotNone(regla, "la ficha no tiene regla propia")
+        for apagado in ("background:none", "border:0", "font:inherit"):
+            self.assertIn(apagado, regla.group(1), f"falta {apagado}")
+        self.assertIn(".vitrina .ru{", css)
+        self.assertNotIn(".vitrina span{", css)
+
+
+class TestElProbadorDeLaPortada(unittest.TestCase):
+    """Tres preguntas jugables en la portada.
+
+    El profesor lo dijo dos veces: la página «se ve muy aburrida» y «le falta
+    interactividad al comienzo». Tenía razón en el sitio exacto: el curso es
+    interactivo por dentro —audio, huecos que se rellenan, pruebas de unidad—
+    pero la portada solo se leía.
+
+    No se escribió ni una pregunta nueva: son las del test de nivel."""
+
+    def setUp(self):
+        self.t = construir_sitio.cargar_textos()["ru"]
+        self.preguntas = yaml.safe_load(
+            (RAIZ / "programa" / "test-nivel.yaml").read_text(encoding="utf-8"))
+
+    def test_las_tres_salen_del_banco_del_test_de_nivel(self):
+        """Del banco y no de una lista aparte: una copia se queda vieja el día
+        que el profesor corrija una pregunta, y además esas ya traen la
+        explicación del error en ruso, que es lo único que esta página tiene
+        que demostrar."""
+        bloque = construir_sitio._probador(self.t, self.preguntas, ".", "./x.html")
+        datos = json.loads(re.search(r"window\.CURSO_PROBADOR=(\{.*?\});\(function",
+                                     bloque, re.S).group(1))
+        self.assertEqual(construir_sitio.PROBADOR_PREGUNTAS, len(datos["grupos"]))
+        banco = {q["pregunta"] for q in self.preguntas["preguntas"]}
+        for grupo in datos["grupos"]:
+            self.assertTrue(grupo, "un grupo vacío dejaría la portada sin pregunta")
+            for q in grupo:
+                self.assertIn(q["pregunta"], banco)
+                self.assertTrue(q["error"], "sin explicación no enseña nada")
+
+    def test_son_las_tres_primeras_unidades(self):
+        """Lo bastante fáciles para que un principiante acierte y siga, y lo
+        bastante rápidas para que quien ya sabe español llegue al final y pulse
+        «hacer el test completo»."""
+        grupos = construir_sitio.grupos_por_unidad(self.preguntas["preguntas"])
+        tomados = grupos[:construir_sitio.PROBADOR_PREGUNTAS]
+        self.assertEqual([1, 2, 3], [g[0]["unidad"] for g in tomados])
+
+    def test_sin_banco_suficiente_no_sale_nada(self):
+        """Como la vitrina y la baraja: el sitio se construye con todo y sin
+        nada. Media partida es peor que ninguna."""
+        corto = {"preguntas": self.preguntas["preguntas"][:1]}
+        self.assertEqual("", construir_sitio._probador(self.t, corto, ".", "./x.html"))
+        self.assertEqual("", construir_sitio._probador(self.t, {}, ".", "./x.html"))
+
+    def test_los_dos_destinos_del_final_existen(self):
+        """Termina con dos botones —la lección 1 y el test completo— y los dos
+        viven dentro de un `<script>`, así que `revisar_adsense.enlaces_rotos`
+        no los mira desde el 2026-10-26: o se comprueban aquí o no los
+        comprueba nadie."""
+        docs = RAIZ / "docs"
+        for pagina in ("index.html", "es/index.html", "en/index.html"):
+            carpeta = (docs / pagina).parent
+            texto = (docs / pagina).read_text(encoding="utf-8")
+            datos = json.loads(re.search(r"window\.CURSO_PROBADOR=(\{.*?\});\(function",
+                                         texto, re.S).group(1))
+            for clave in ("leccion", "test"):
+                destino = (carpeta / datos[clave]).resolve()
+                self.assertTrue(destino.exists(), f"{pagina}: {clave} → {datos[clave]}")
+
+    def test_el_boton_nace_oculto_y_lo_enciende_el_navegador(self):
+        """Sin JavaScript sería un botón que no hace nada. El párrafo de
+        contraste que hay encima ya explica lo mismo en texto, así que quien
+        llegue sin guion no se pierde nada."""
+        texto = (RAIZ / "docs" / "index.html").read_text(encoding="utf-8")
+        arranque = re.search(r'<div class="botones" id="probador-arranque"([^>]*)>', texto)
+        self.assertIsNotNone(arranque)
+        self.assertIn("hidden", arranque.group(1))
+        self.assertIn("arranque.hidden=false", texto)
+
+    def test_el_siguiente_no_sale_de_la_palabra_de(self):
+        """Los textos de los dos botones son suyos y no un apaño con los del
+        test («de» + flecha daba «из →», que en ruso significa «de»). Hay tres
+        idiomas y los tres tienen que decirlo entero."""
+        todos = construir_sitio.cargar_textos()
+        for idioma in ("ru", "es", "en"):
+            p = todos[idioma]["portada"]
+            with self.subTest(idioma=idioma):
+                for clave in ("probador_siguiente", "probador_ver", "probador_titulo",
+                              "probador_entrada", "probador_bien", "probador_mal",
+                              "probador_final", "probador_test", "oir"):
+                    self.assertTrue(p.get(clave, "").strip(), f"falta {clave}")
+                self.assertNotEqual(p["probador_siguiente"].strip(" →"),
+                                    todos[idioma]["test"]["de"])
+
 
 class TestLaTarjetaSocial(unittest.TestCase):
     """La imagen de la vista previa al compartir, hecha con los dibujos.
