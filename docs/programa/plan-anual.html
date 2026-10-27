@@ -106,6 +106,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 .hueco:empty::before{content:" "}
 .hueco.bien{border-color:#2e7d4f;color:#2e7d4f}
 .hueco.mal{border-color:#b3332b;color:#b3332b}
+/* Y el hueco que se ESCRIBE, que son casi todos: 1.398 de los 1.587. No
+   lleva ficha que pulsar porque su ejercicio no trae banco de palabras, así
+   que se teclea. Sigue pareciendo la raya que sustituye —sin caja, solo el
+   subrayado— para que la frase se lea igual que en papel. */
+/* El ancho se fija y no se deja al navegador: un `<input>` sin ancho mide
+   lo que su `size` por defecto —unos 230 px— y partía en dos los renglones
+   que llevan dos huecos. El guion lo hace crecer al teclear. */
+.hueco-escribir{display:inline-block;width:5.5rem;max-width:100%;
+  padding:0 .3rem;border:0;border-bottom:2px solid var(--acento);
+  background:transparent;color:var(--tinta);font:inherit;font-weight:600;
+  text-align:center;border-radius:0}
+.hueco-escribir:focus{outline:none;background:var(--acento-suave)}
 .huecos-pie{display:flex;align-items:center;gap:.8rem;margin:.9rem 0}
 .marcador{font-size:.9rem;color:var(--tenue)}
 /* compartir: tres botones iguales al pie de la lección. Discretos —son una
@@ -695,6 +707,7 @@ en 30 minutos, se parte en dos días; nunca se alarga la sesión.</p>
 })();</script>
 <script>window.CURSO_TEXTOS={"continuar": "Continuar: lección", "empezar": "Empezar de cero", "marcar": "Marcar la lección como hecha", "hecho": "Lección hecha", "siguiente": "Siguiente lección", "tuyo": "hechas por usted", "titulo": "Su progreso", "aviso": "El progreso se guarda solo en este navegador y en este aparato. No hay registro y no se envía a ninguna parte. Si borra los datos del navegador o abre el curso en otro teléfono, las marcas no viajan con usted.", "borrar": "Borrar el progreso", "confirmar": "¿Borrar todas las marcas?", "copiar": "Guardar mi progreso", "copiado": "Código copiado — pégalo en tus notas o en un mensaje a ti mismo", "restaurar": "Restaurar con un código", "pegar": "Pega aquí tu código", "aplicar": "Restaurar", "cancelar": "Cancelar", "malo": "Esto no parece un código de progreso. No se ha cambiado nada.", "menos": "Ese código trae menos lecciones de las que tienes marcadas (%a% en vez de %b%). ¿Restaurar igualmente?", "hecho_restaurar": "Listo: %n% lecciones restauradas", "antes": "Antes de limpiar el navegador o cambiar de móvil, guarda tu código."};window.CURSO_RAIZ="..";window.CURSO_PUBLICADAS=0;window.CURSO_DIAS={};</script>
 <script src="../progreso.js" defer></script>
+
 
 
 

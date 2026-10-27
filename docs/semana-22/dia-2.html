@@ -1,0 +1,723 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Урок 149: Пробный экзамен A1: устная речь — Испанский с нуля для русскоговорящих</title>
+<meta name="description" content="Урок 149: Пробный экзамен A1: устная речь. Presentación personal (1 min), descripción de una foto, diálogo simulado; grabarse"><link rel="canonical" href="https://espanoldesderuso.com/semana-22/dia-2.html"><meta property="og:type" content="website"><meta property="og:locale" content="ru"><meta property="og:title" content="Урок 149: Пробный экзамен A1: устная речь — Испанский с нуля для русскоговорящих"><meta property="og:description" content="Урок 149: Пробный экзамен A1: устная речь. Presentación personal (1 min), descripción de una foto, diálogo simulado; grabarse"><meta property="og:url" content="https://espanoldesderuso.com/semana-22/dia-2.html"><meta property="og:image" content="https://espanoldesderuso.com/img/tarjeta.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Урок 149: Пробный экзамен A1: устная речь — Испанский с нуля для русскоговорящих"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://espanoldesderuso.com/img/tarjeta.png">
+<style>
+/* Tres estados: lo que diga el sistema, o lo que el lector elija con el botón
+   de la luna. El atributo data-tema del <html> gana siempre sobre el sistema;
+   lo escribe un script de dos líneas en <head> para que no haya parpadeo. */
+:root{
+  color-scheme:light;
+  --papel:#fdfbf6; --tinta:#1b1e23; --tenue:#646c78; --linea:#e2dacb;
+  --acento:#b03f26; --acento-suave:#fbeee9; --celeste:#2f6b8f; --celeste-suave:#eaf2f7;
+  --realce:#fdf3d8; --tarjeta:#f7f2e6; --sombra:0 1px 2px rgba(27,30,35,.05);
+  --ancho:44rem;
+}
+@media(prefers-color-scheme:dark){:root:not([data-tema="light"]){
+  color-scheme:dark;
+  --papel:#14161a; --tinta:#e8e4da; --tenue:#9aa2ae; --linea:#333941;
+  --acento:#f0896a; --acento-suave:#2a1d19; --celeste:#7fb6d6; --celeste-suave:#162229;
+  --realce:#2a2718; --tarjeta:#1d2026; --sombra:none;
+}}
+:root[data-tema="dark"]{
+  color-scheme:dark;
+  --papel:#14161a; --tinta:#e8e4da; --tenue:#9aa2ae; --linea:#333941;
+  --acento:#f0896a; --acento-suave:#2a1d19; --celeste:#7fb6d6; --celeste-suave:#162229;
+  --realce:#2a2718; --tarjeta:#1d2026; --sombra:none;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--papel);color:var(--tinta);
+  font:400 17px/1.65 ui-serif,Georgia,"Times New Roman",serif;
+  -webkit-font-smoothing:antialiased;overflow-wrap:break-word}
+.sans{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.envoltorio{max-width:var(--ancho);margin:0 auto;padding:0 20px}
+
+/* ---- cabecera ---- */
+/* En el móvil la cabecera NO se queda pegada: ocupa dos filas y una lección es
+   una lectura larga, así que robaría una sexta parte de la pantalla todo el
+   rato. A partir de 40rem cabe en una fila y ahí sí se queda. */
+header.sitio{background:var(--papel);border-bottom:1px solid var(--linea)}
+@media(min-width:40rem){header.sitio{position:sticky;top:0;z-index:20;
+  background:color-mix(in srgb,var(--papel) 92%,transparent);backdrop-filter:saturate(1.6) blur(8px)}
+  html{scroll-padding-top:4rem}}
+header.sitio .envoltorio{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .9rem;padding-block:.5rem;
+  font-family:ui-sans-serif,system-ui,-apple-system,sans-serif;font-size:.86rem}
+header.sitio a{color:var(--tenue);text-decoration:none;white-space:nowrap}
+header.sitio a:hover,header.sitio nav.paginas a[aria-current]{color:var(--acento)}
+/* El título cede espacio antes que el selector de idioma: en un móvil
+   estrecho se recorta con puntos suspensivos, pero el selector no se sale. */
+header.sitio .marca{font-weight:650;color:var(--tinta);font-size:.95rem;letter-spacing:-.01em;
+  flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
+header.sitio nav.paginas{display:flex;gap:.9rem;order:3;flex:1 0 100%;overflow-x:auto;
+  scrollbar-width:none;padding-bottom:.1rem}
+header.sitio nav.paginas::-webkit-scrollbar{display:none}
+.idiomas{display:flex;gap:.2rem;flex:0 0 auto;border:1px solid var(--linea);border-radius:999px;padding:2px}
+.idiomas a,.idiomas span{padding:.12rem .5rem;border-radius:999px;font-size:.75rem;font-weight:600;
+  text-transform:uppercase;letter-spacing:.05em;line-height:1.5}
+.idiomas [aria-current]{background:var(--acento);color:#fff}
+/* Los idiomas en los que esta página no existe: se ven apagados, se pulsan y
+   lo que abren es el aviso de abajo. Enlazarlos movía al lector de sitio. */
+.idiomas .apagado{color:var(--tenue);opacity:.6;cursor:pointer;background:none;border:0;
+  font:inherit;font-size:.75rem;font-weight:600}
+.idiomas .apagado:hover{opacity:1}
+/* El aviso de «aquí no hay versión en ese idioma»: ocupa toda la fila de la
+   cabecera para que se lea, y nace oculto porque sin JavaScript los botones no
+   hacen nada y un aviso suelto no diría nada de nada. */
+.sin-idioma{flex:1 0 100%;order:4;margin:.3rem 0 0;font-size:.82rem;color:var(--tenue);
+  font-family:ui-sans-serif,system-ui,sans-serif}
+.sin-idioma a{color:var(--acento);font-weight:600}
+.tema{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;
+  width:30px;height:30px;padding:0;border:1px solid var(--linea);border-radius:999px;
+  background:transparent;color:var(--tenue);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.tema:hover{color:var(--acento);border-color:var(--acento)}
+.tema svg{display:block}
+/* De día se ve la luna (pulsa y se hace de noche); de noche, el sol. */
+.tema .sol{display:none}
+@media(prefers-color-scheme:dark){
+  :root:not([data-tema="light"]) .tema .luna{display:none}
+  :root:not([data-tema="light"]) .tema .sol{display:block}}
+:root[data-tema="dark"] .tema .luna{display:none}
+:root[data-tema="dark"] .tema .sol{display:block}
+:root[data-tema="light"] .tema .luna{display:block}
+:root[data-tema="light"] .tema .sol{display:none}
+
+/* el marco del curso: los niveles y el examen al que lleva. Discreto a
+   propósito —es un respaldo, no un reclamo— y con el acento solo en el nombre
+   del examen. */
+.marco{font-size:.9rem;color:var(--tenue);border-inline-start:3px solid var(--celeste);
+  padding-inline-start:.8rem;margin:1rem 0}
+/* los huecos que se rellenan pulsando una ficha. Las fichas arriba y los
+   huecos debajo, que es el orden en que se usa: eliges la palabra y luego
+   dónde va. */
+.fichas{display:flex;flex-wrap:wrap;gap:.45rem;margin:.9rem 0}
+.ficha{padding:.35rem .8rem;border:1px solid var(--linea);border-radius:999px;
+  background:var(--tarjeta);color:inherit;cursor:pointer;font:inherit;font-size:.9rem}
+.ficha:hover{border-color:var(--acento)}
+.ficha[aria-pressed="true"]{background:var(--acento);color:#fff;border-color:var(--acento)}
+.ficha.gastada{opacity:.35;pointer-events:none}
+/* El hueco vacío es una raya; lleno, una pastilla. Con un ancho mínimo para
+   que la frase no baile al rellenarse. */
+.hueco{display:inline-block;min-width:5.5rem;padding:0 .35rem;cursor:pointer;
+  border-bottom:2px solid var(--acento);text-align:center;font-weight:600}
+.hueco:empty::before{content:" "}
+.hueco.bien{border-color:#2e7d4f;color:#2e7d4f}
+.hueco.mal{border-color:#b3332b;color:#b3332b}
+/* Y el hueco que se ESCRIBE, que son casi todos: 1.398 de los 1.587. No
+   lleva ficha que pulsar porque su ejercicio no trae banco de palabras, así
+   que se teclea. Sigue pareciendo la raya que sustituye —sin caja, solo el
+   subrayado— para que la frase se lea igual que en papel. */
+/* El ancho se fija y no se deja al navegador: un `<input>` sin ancho mide
+   lo que su `size` por defecto —unos 230 px— y partía en dos los renglones
+   que llevan dos huecos. El guion lo hace crecer al teclear. */
+.hueco-escribir{display:inline-block;width:5.5rem;max-width:100%;
+  padding:0 .3rem;border:0;border-bottom:2px solid var(--acento);
+  background:transparent;color:var(--tinta);font:inherit;font-weight:600;
+  text-align:center;border-radius:0}
+.hueco-escribir:focus{outline:none;background:var(--acento-suave)}
+.huecos-pie{display:flex;align-items:center;gap:.8rem;margin:.9rem 0}
+.marcador{font-size:.9rem;color:var(--tenue)}
+/* compartir: tres botones iguales al pie de la lección. Discretos —son una
+   oferta y no el siguiente paso, que es la lección de al lado— y del mismo
+   tamaño entre sí, para que ninguno parezca el principal. */
+.compartir{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin:1.8rem 0 0;
+  padding-top:1.1rem;border-top:1px solid var(--linea)}
+.compartir .de-que{font-size:.85rem;color:var(--tenue);margin-inline-end:.2rem}
+.red{display:inline-block;padding:.4rem .85rem;border:1px solid var(--linea);
+  border-radius:999px;background:transparent;color:var(--acento);cursor:pointer;
+  font:inherit;font-size:.85rem;text-decoration:none}
+.red:hover{border-color:var(--acento)}
+.seguir{margin:.5rem 0 0;font-size:.85rem}
+/* el respaldo del progreso: un código que el alumno se lleva. Los dos campos
+   a ancho completo porque el código son 64 caracteres y en el móvil, en un
+   campo corto, no se ve si está entero. */
+.respaldo{margin:.9rem 0 0}
+.respaldo input{display:block;width:100%;margin:.6rem 0;padding:.55rem .7rem;
+  border:1px solid var(--linea);border-radius:8px;background:var(--fondo);
+  color:inherit;font-family:ui-monospace,monospace;font-size:.85rem}
+.respaldo .enlace{background:none;border:0;padding:0;margin-inline-start:.6rem;
+  color:var(--acento);text-decoration:underline;cursor:pointer;font:inherit}
+.aviso-chico{margin:.4rem 0 0;font-size:.82rem;color:var(--tenue)}
+/* la baraja de tarjetas: dos descargas, la de Anki primero. En tarjeta y no
+   en una lista suelta porque es una oferta, no un apartado del curso. */
+.baraja{margin:2rem 0;padding:1.1rem 1.2rem;border:1px solid var(--linea);
+  border-radius:12px;background:var(--tarjeta)}
+.baraja h2{margin:0 0 .4rem;font-size:1.05rem}
+.baraja>p{margin:0 0 .9rem}
+.baraja .bajar{display:flex;flex-wrap:wrap;gap:.6rem}
+.baraja .bajar a{flex:1 1 15rem}
+.baraja .nota{margin:.35rem 0 0;font-size:.82rem;color:var(--tenue)}
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
+/* La clave: el enlace donde se acaban los ejercicios y la caja plegada al
+   final. El enlace se ve como un paso más y no como un botón: lo que manda en
+   la lección es hacer el ejercicio, no mirar la respuesta. */
+.a-la-clave{margin:1.2rem 0 0;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.92rem}
+.a-la-clave a{text-decoration:none;border-bottom:1px solid var(--linea);padding-bottom:1px}
+.a-la-clave a:hover{border-color:var(--acento)}
+#clave-boton{margin:2rem 0 .5rem}
+#clave{border-top:1px solid var(--linea);padding-top:.2rem}
+/* audio: un ▶ al lado de cada frase española que esté locutada */
+.suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
+  font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
+.suena:hover,.suena:focus-visible{opacity:1}
+.suena[aria-pressed="true"]{opacity:1;color:var(--acento)}
+@media(hover:none){.suena{opacity:.9}}
+
+/* Test de nivel */
+.test-caja{background:var(--tarjeta);border:1px solid var(--linea);border-radius:12px;
+  padding:1.2rem 1.3rem;margin:1.4rem 0;font-family:ui-sans-serif,system-ui,sans-serif}
+.test-cuenta{font-size:.78rem;color:var(--tenue);letter-spacing:.04em;margin-bottom:.5rem}
+.test-pregunta{font-size:1.08rem;font-weight:600;color:var(--tinta);margin:0 0 1rem;line-height:1.45}
+.test-ops{display:flex;flex-direction:column;gap:.5rem}
+.test-ops button{text-align:start;font:inherit;font-size:.98rem;color:var(--tinta);
+  background:var(--papel);border:1.5px solid var(--linea);border-radius:9px;
+  padding:.6rem .8rem;cursor:pointer;transition:border-color .12s,background .12s}
+.test-ops button:hover{border-color:var(--acento)}
+.test-ops button[disabled]{cursor:default;opacity:.75}
+.test-ops button.bien{border-color:#1d7a4f;opacity:1;font-weight:600}
+.test-ops button.mal{border-color:var(--acento);opacity:1}
+.test-seg{float:inline-end;font-variant-numeric:tabular-nums;color:var(--tenue);font-weight:600}
+.test-reloj{height:3px;border-radius:999px;background:var(--linea);overflow:hidden;margin:0 0 .9rem}
+.test-reloj i{display:block;height:100%;background:var(--acento);opacity:.55}
+.test-tarde{display:block;color:var(--acento);font-weight:600;font-size:.84rem}
+.test-barra{height:4px;border-radius:999px;background:var(--linea);overflow:hidden;margin-top:1rem}
+.test-barra i{display:block;height:100%;background:var(--acento);transition:width .2s}
+.test-fallo{border-inline-start:3px solid var(--acento);padding:.1rem 0 .1rem .8rem;margin:.7rem 0}
+.test-fallo b{display:block;color:var(--tinta);font-size:.94rem}
+.test-fallo span{font-size:.88rem;color:var(--tenue)}
+
+/* El mapa de unidades: 24 tarjetas en vez de 365 filas.
+   El indice crudo medía 21.482 px de alto, o sea 24 pantallas de scroll, y
+   nadie navega eso. Las tarjetas dan una vista de todo el ano en una o dos. */
+.mapa{display:grid;gap:.85rem;margin:1.4rem 0 2.2rem;
+  grid-template-columns:repeat(auto-fill,minmax(13rem,1fr));
+  /* Se sale de la columna de prosa, como la cabecera y por lo mismo: un mapa
+     no se lee renglon a renglon. Encerrado en los 44rem del texto solo caben
+     dos columnas y el mapa medía 1.806 px, que es tan ilegible como la lista
+     que viene a sustituir. Centrado sobre la ventana y no sobre el padre, que
+     asi no hace falta saber cuanto mide el padre. */
+  width:min(60rem,calc(100vw - 2.5rem));position:relative;left:50%;translate:-50%}
+/* Columna y no bloque: la rejilla estira las tarjetas de una fila a la misma
+   altura, pero el pie quedaba pegado al texto, asi que las barras de dos
+   tarjetas vecinas salian a distinta altura segun si el titulo ocupaba una
+   linea o dos. Con margin-top:auto en el pie, todas se alinean abajo. */
+.u-tarjeta{display:flex;flex-direction:column;text-decoration:none;color:inherit;background:var(--tarjeta);
+  border:1px solid var(--linea);border-radius:12px;padding:.85rem .95rem;
+  font-family:ui-sans-serif,system-ui,sans-serif;transition:border-color .12s,transform .12s}
+.u-tarjeta:hover{border-color:var(--acento);transform:translateY(-2px)}
+.u-tarjeta .alto{display:flex;align-items:baseline;gap:.5rem;margin-bottom:.3rem}
+.u-tarjeta .num{font-size:1.45rem;font-weight:700;color:var(--acento);
+  font-feature-settings:"tnum";line-height:1}
+.u-tarjeta .nivel{margin-inline-start:auto;font-size:.68rem;font-weight:700;letter-spacing:.06em;
+  color:var(--celeste);border:1px solid var(--celeste);border-radius:999px;padding:.05rem .4rem}
+.u-tarjeta .tit{font-weight:600;font-size:.94rem;color:var(--tinta);line-height:1.3;
+  display:block;margin-bottom:.4rem}
+.u-tarjeta .serie{font-size:.78rem;color:var(--tenue);font-style:italic;
+  display:block;margin-bottom:.5rem}
+.u-tarjeta .pie{display:flex;align-items:center;gap:.5rem;font-size:.74rem;color:var(--tenue);
+  margin-top:auto;padding-top:.15rem}
+.u-tarjeta .mini{flex:1;height:4px;border-radius:999px;background:var(--linea);overflow:hidden}
+.u-tarjeta .mini i{display:block;height:100%;background:var(--acento);border-radius:999px}
+.u-tarjeta.vacia{opacity:.62}
+.u-tarjeta.vacia:hover{border-color:var(--linea);transform:none}
+
+/* progreso del lector */
+/* El [hidden] del navegador pierde contra .boton{display:inline-block}, así que
+   «continuar» se vería como un botón naranja vacío en la primera visita. */
+[hidden]{display:none!important}
+.boton.marcar{margin:1.6rem 0 0}
+.boton.destacado{box-shadow:0 0 0 3px var(--acento-suave)}
+ul.dias li.hecha .num::after{content:"✓";color:var(--acento);font-weight:700;margin-inline-start:.25rem}
+ul.dias li.hecha a{color:var(--tenue)}
+#mio{margin-top:.9rem;padding-top:.9rem;border-top:1px dashed var(--linea)}
+.puerta{font-size:.9rem;color:var(--tenue);margin:-.6rem 0 0}
+.puerta a{color:var(--acento);font-weight:600}
+.progreso-nota{font-size:.84rem;color:var(--tenue);font-family:ui-sans-serif,system-ui,sans-serif;margin-top:.5rem}
+#borrar-progreso{background:none;border:0;padding:0;color:var(--tenue);text-decoration:underline;
+  cursor:pointer;font:inherit;font-size:.84rem}
+@media(min-width:40rem){
+  header.sitio nav.paginas{order:0;flex:0 1 auto;margin-inline-start:auto}
+  /* En escritorio el titulo NO crece: con flex:1 1 auto se comia el hueco que
+     la nav reclama con su margen automatico. */
+  header.sitio .marca{flex:0 1 auto}
+  /* Y la barra usa mas ancho que el texto. Una columna de lectura tiene que
+     ser estrecha; una barra de navegacion no. Metida en los mismos 704 px, el
+     titulo + los tres enlaces + los tres idiomas + la luna sumaban 708 y el
+     boton del tema caia a una segunda fila con 700 px de pantalla libres al
+     lado. Se vio midiendo los hijos, no mirando: fallaba por cuatro pixeles. */
+  header.sitio .envoltorio{max-width:60rem}
+}
+
+main{padding-bottom:3.5rem}
+
+/* ---- tipografía ---- */
+h1{font-size:clamp(1.65rem,5.2vw,2.3rem);line-height:1.15;letter-spacing:-.022em;margin:1.6rem 0 .25rem;font-weight:650}
+h1 .segunda{display:block;color:var(--acento);font-weight:400}
+h2{font-size:clamp(1.08rem,3.2vw,1.22rem);margin:2.6rem 0 .7rem;padding-top:.9rem;
+  border-top:1px solid var(--linea);font-weight:650;letter-spacing:-.012em}
+h3{font-size:1rem;margin:1.6rem 0 .45rem;font-weight:650}
+h2,h3{font-family:ui-sans-serif,system-ui,-apple-system,sans-serif}
+p{margin:.75rem 0}
+a{color:var(--acento);text-underline-offset:2px}
+strong{font-weight:650}
+
+/* ---- portada ---- */
+.heroe{padding:2rem 0 .5rem}
+.heroe .lema{font-size:clamp(1.02rem,3.4vw,1.2rem);color:var(--tenue);margin:.5rem 0 1.1rem;font-style:italic}
+.botones{display:flex;flex-wrap:wrap;gap:.65rem;margin:1.4rem 0}
+.boton{display:inline-block;background:var(--acento);color:#fff;padding:.7rem 1.35rem;border-radius:8px;
+  text-decoration:none;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.97rem;font-weight:550;
+  box-shadow:var(--sombra);transition:transform .12s ease}
+.boton:hover{transform:translateY(-1px)}
+.boton.secundario{background:transparent;color:var(--acento);border:1.5px solid var(--acento);box-shadow:none}
+
+/* La vitrina de la portada: doce palabras con su dibujo. La rejilla es de 3,
+   4 o 6 columnas según el ancho, y por eso son doce: en los tres casos quedan
+   filas enteras. El dibujo manda aquí —al revés que en la tabla de la
+   lección— porque lo que hace es enseñar de qué va el curso de un vistazo. */
+.muestra{margin:2.2rem 0}
+.muestra h2{margin-bottom:.3rem}
+.muestra>p{margin:0 0 1rem;color:var(--tenue);font-size:.92rem}
+.vitrina{list-style:none;padding:0;margin:0;display:grid;gap:.6rem;
+  grid-template-columns:repeat(3,1fr)}
+@media(min-width:30rem){.vitrina{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:52rem){.vitrina{grid-template-columns:repeat(6,1fr)}}
+.vitrina li{background:var(--tarjeta);border:1px solid var(--linea);border-radius:11px;
+  padding:.6rem .3rem .55rem;text-align:center;box-shadow:var(--sombra);
+  font-family:ui-sans-serif,system-ui,sans-serif;transition:transform .12s ease}
+@media(hover:hover){.vitrina li:hover{transform:translateY(-2px)}}
+/* La ficha ENTERA es el boton que suena, asi que hay que quitarle el cromo
+   del navegador: sin esto sale un boton gris con su borde dentro de la
+   tarjeta. El <span> es la misma ficha cuando esa palabra no esta locutada. */
+.vitrina .ficha{display:block;width:100%;background:none;border:0;padding:0;
+  margin:0;color:inherit;font:inherit;text-align:center}
+.vitrina button.ficha{cursor:pointer}
+.vitrina button.ficha[aria-pressed="true"] b{color:var(--acento)}
+.vitrina img{display:block;width:72px;height:72px;margin:0 auto .4rem;border-radius:8px}
+.vitrina b{display:block;font-size:.84rem;font-weight:600}
+.vitrina .ru{display:block;font-size:.78rem;color:var(--tenue);margin-top:.1rem}
+
+.progreso{margin:1.5rem 0;font-family:ui-sans-serif,system-ui,sans-serif}
+.progreso .cifras{display:flex;align-items:baseline;gap:.45rem;font-size:.88rem;color:var(--tenue)}
+.progreso .n{font-size:1.5rem;font-weight:700;color:var(--tinta);font-feature-settings:"tnum"}
+.barra{height:7px;border-radius:999px;background:var(--linea);overflow:hidden;margin-top:.45rem}
+.barra i{display:block;height:100%;background:linear-gradient(90deg,var(--acento),var(--celeste));border-radius:999px}
+
+/* ---- bloque de contraste: la firma del curso ---- */
+.contraste{background:var(--acento-suave);border:1px solid color-mix(in srgb,var(--acento) 22%,transparent);
+  border-radius:10px;padding:1rem 1.1rem;margin:1.3rem 0}
+.contraste>h3:first-child{margin-top:0;color:var(--acento)}
+.contraste p:last-child{margin-bottom:0}
+del{text-decoration-line:line-through;text-decoration-color:var(--acento);
+  text-decoration-thickness:2px;opacity:.75}
+.mal{color:var(--acento)}
+.bien{color:#1d7a4f}
+@media(prefers-color-scheme:dark){:root:not([data-tema="light"]) .bien{color:#5fc48f}}
+:root[data-tema="dark"] .bien{color:#5fc48f}
+
+blockquote{margin:1.2rem 0;padding:.85rem 1.1rem;background:var(--tarjeta);
+  border-inline-start:3px solid var(--celeste);border-radius:0 8px 8px 0}
+blockquote p:first-child{margin-top:0}blockquote p:last-child{margin-bottom:0}
+
+/* ---- tablas ---- */
+.tabla-env{overflow-x:auto;margin:.9rem 0;border:1px solid var(--linea);border-radius:9px;background:var(--papel)}
+table{border-collapse:collapse;width:100%;font-size:.92rem;font-family:ui-sans-serif,system-ui,sans-serif}
+th,td{padding:.45rem .65rem;text-align:start;vertical-align:top;border-bottom:1px solid var(--linea)}
+tr:last-child td{border-bottom:none}
+th{background:var(--tarjeta);font-weight:600;position:sticky;top:0}
+code{font-size:.88em;background:var(--tarjeta);padding:.1em .32em;border-radius:4px;
+  font-family:ui-monospace,"SF Mono",Menlo,monospace}
+
+/* ---- tarjetas y listas ---- */
+.rejilla{display:grid;gap:.85rem;grid-template-columns:1fr;margin:1rem 0}
+@media(min-width:36rem){.rejilla{grid-template-columns:1fr 1fr}}
+.tarjeta{border:1px solid var(--linea);border-radius:10px;padding:.95rem 1.1rem;background:var(--tarjeta);box-shadow:var(--sombra)}
+.tarjeta h3{margin:0 0 .3rem;font-size:.88rem;text-transform:uppercase;letter-spacing:.05em;color:var(--acento)}
+.tarjeta p{margin:0;font-size:.95rem}
+
+ul.dias{list-style:none;padding:0;margin:.5rem 0}
+ul.dias li{display:flex;gap:.6rem;align-items:baseline;padding:.4rem .2rem;border-bottom:1px solid var(--linea)}
+ul.dias li:last-child{border-bottom:none}
+ul.dias .num{font-family:ui-sans-serif,system-ui,sans-serif;font-size:.78rem;color:var(--tenue);
+  min-width:2.6rem;font-feature-settings:"tnum"}
+ul.dias a{text-decoration:none}ul.dias a:hover{text-decoration:underline}
+ul.dias .falta{color:var(--tenue)}
+.tipo{font-family:ui-sans-serif,system-ui,sans-serif;font-size:.67rem;color:var(--celeste);
+  text-transform:uppercase;letter-spacing:.07em;border:1px solid var(--linea);border-radius:999px;
+  padding:.05rem .4rem;white-space:nowrap}
+.unidad-cab{display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;margin-top:2.4rem}
+details{margin:.5rem 0;font-size:.93rem}
+summary{cursor:pointer;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.86rem;color:var(--tenue)}
+details ul{margin:.5rem 0}
+
+/* ---- lección ---- */
+.leccion-cab{display:flex;flex-wrap:wrap;gap:.45rem;align-items:center;margin:1.3rem 0 .2rem;
+  font-family:ui-sans-serif,system-ui,sans-serif;font-size:.78rem;color:var(--tenue)}
+.leccion-cab .n{background:var(--acento);color:#fff;border-radius:999px;padding:.12rem .6rem;font-weight:600}
+.aviso{background:var(--realce);border:1px solid var(--linea);border-radius:8px;padding:.6rem .85rem;
+  font-size:.88rem;font-family:ui-sans-serif,system-ui,sans-serif;margin:1rem 0}
+nav.pasos{display:flex;justify-content:space-between;gap:.8rem;margin:2.5rem 0 0;padding-top:1rem;
+  border-top:1px solid var(--linea);font-family:ui-sans-serif,system-ui,sans-serif;font-size:.86rem}
+nav.pasos a{text-decoration:none;padding:.4rem .7rem;border:1px solid var(--linea);border-radius:7px}
+nav.pasos a:hover{border-color:var(--acento)}
+input[type=checkbox]{margin-inline-end:.45rem}
+
+/* ---- anuncios, pie, cookies ---- */
+.anuncio{margin:2rem 0;text-align:center;min-height:1px}
+.anuncio::before{content:attr(data-etiqueta);display:block;font-family:ui-sans-serif,system-ui,sans-serif;
+  font-size:.64rem;color:var(--tenue);text-transform:uppercase;letter-spacing:.09em;margin-bottom:.3rem}
+footer.sitio{border-top:1px solid var(--linea);padding:1.6rem 0 3rem;
+  font-family:ui-sans-serif,system-ui,sans-serif;font-size:.83rem;color:var(--tenue)}
+footer.sitio a{color:var(--tenue)}
+footer.sitio p{margin:.35rem 0}
+#cookies{position:fixed;inset-inline:0;bottom:0;background:var(--tarjeta);border-top:1px solid var(--linea);
+  padding:.85rem 20px;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.85rem;display:flex;
+  flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:center;z-index:30}
+</style>
+<script>try{var t=localStorage.getItem('tema');if(t)document.documentElement.dataset.tema=t}catch(e){}</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6339208855562328" crossorigin="anonymous"></script>
+</head>
+<body>
+<header class="sitio"><div class="envoltorio">
+<a class="marca" href="../index.html">Испанский с нуля для русскоговорящих</a>
+<nav class="paginas"><a href="../kurs.html">Все уроки</a><a href="../o-kurse.html">О курсе</a><a href="../kontakt.html">Контакты</a></nav>
+<div class="idiomas" title="Язык"><span lang="ru" aria-current="true">ru</span><button type="button" class="apagado" lang="es" data-portada="../es/index.html" data-idioma="Español">es</button><button type="button" class="apagado" lang="en" data-portada="../en/index.html" data-idioma="English">en</button></div>
+<button class="tema" id="tema" type="button" title="Светлая или тёмная тема" aria-label="Светлая или тёмная тема"><svg class="luna" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sol" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.5 1.5M17.9 17.9l1.5 1.5M2.5 12h2M19.5 12h2M4.6 19.4l1.5-1.5M17.9 6.1l1.5-1.5"/></svg></button>
+<p class="sin-idioma" id="sin-idioma" hidden>Эта страница есть только на русском. <a href="" data-ir="Открыть главную страницу"></a></p>
+</div></header>
+<main><div class="envoltorio">
+<article data-leccion="149"><div class="leccion-cab"><span class="n">Урок 149</span><span>из 365</span><span class="tipo">пробный экзамен</span><span>неделя 22 · уровень A1</span></div><p class="aviso">Черновик: урок написан, но преподаватель его ещё не вычитал.</p><h1 id="semana-22-dia-2-simulacro-a1-expresion-oral">Semana 22 · Día 2 — Simulacro A1: expresión oral</h1>
+<h1 id="22-2-a1">Неделя 22 · День 2 — Пробный экзамен A1: устная речь</h1>
+<blockquote>
+<p><strong>Сегодня вы</strong></p>
+<ul>
+<li>пройдёте устный экзамен из трёх частей и запишете себя;</li>
+<li>оцените запись по рубрике с пятым критерием — произношением;</li>
+<li>найдёте три звука, которые выдают русский акцент именно у вас.</li>
+</ul>
+</blockquote>
+<h2 id="1-03">1. Инструкция (0–3 мин)</h2>
+<ul>
+<li>Нужен телефон с диктофоном. <strong>Запись обязательна</strong>: без неё вы не услышите
+  того, что слышит экзаменатор.</li>
+<li>Три части: <strong>представление (1 мин, 5 баллов)</strong>, <strong>описание фото (1,5 мин,
+  5 баллов)</strong>, <strong>диалог (1,5 мин, 5 баллов)</strong>. Всего 15.</li>
+<li><strong>Готовиться нельзя дольше минуты на каждую часть.</strong> На настоящем DELE A1
+  дают 10 минут на подготовку всех трёх, и это меньше, чем кажется.</li>
+<li><strong>Не пишите текст и не читайте с листа.</strong> Можно выписать пять слов — и всё.</li>
+<li>Проходной — <strong>60 %</strong>, то есть <strong>9 из 15</strong>.</li>
+</ul>
+<h2 id="2-318">2. Задания (3–18 мин)</h2>
+<h3 id="1-5">Часть 1 (5 баллов). Представление. Одна минута.</h3>
+<p>Расскажите о себе. Обязательно: <strong>имя, откуда вы, возраст, чем занимаетесь,
+семья, что вам нравится, один план на будущее.</strong></p>
+<p>Семь пунктов за минуту — это примерно по восемь секунд на каждый. Не
+задерживайтесь.</p>
+<p><strong>Начните так:</strong> <em>Hola, me llamo… Soy de… Tengo… años.</em></p>
+<h3 id="2-5">Часть 2 (5 баллов). Описание фото. Полторы минуты.</h3>
+<p>Возьмите <strong>любую фотографию</strong> с людьми: из телефона, из журнала, из
+интернета. Опишите её.</p>
+<div class="tabla-env"><table>
+<thead>
+<tr>
+<th>Что сказать</th>
+<th>Чем</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>сколько людей и кто они</td>
+<td><em>En la foto hay…</em></td>
+</tr>
+<tr>
+<td>где это</td>
+<td><em>Están en…</em></td>
+</tr>
+<tr>
+<td>что они делают сейчас</td>
+<td><em>Están + gerundio</em></td>
+</tr>
+<tr>
+<td>как они выглядят</td>
+<td><em>Lleva…</em> · <em>Tiene el pelo…</em></td>
+</tr>
+<tr>
+<td>какая погода / время</td>
+<td><em>Hace…</em> · <em>Es por la…</em></td>
+</tr>
+<tr>
+<td>что вам кажется</td>
+<td><em>Creo que…</em> · <em>Parece…</em></td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Три обязательные конструкции:</strong> <em>hay</em>, <em>está/están</em>, <em>está + gerundio</em>.
+Это ровно то, что проверяет эта часть.</p>
+<h3 id="3-5">Часть 3 (5 баллов). Диалог. Полторы минуты.</h3>
+<p>Разыграйте за двоих. Ситуация: <strong>вы в аптеке</strong>.</p>
+<blockquote>
+<p>Экзаменатор: — Buenos días, ¿qué desea?
+Вы: … (скажите, что болит, с какого времени)
+Экзаменатор: — ¿Tiene receta?
+Вы: … (ответьте и спросите что-нибудь без рецепта)
+Экзаменатор: — Este jarabe. Una cucharada antes de dormir.
+Вы: … (спросите цену и ещё одну вещь)
+Экзаменатор: — Son seis euros con cincuenta.
+Вы: … (заплатите и попрощайтесь)</p>
+</blockquote>
+<p><strong>Четыре ваши реплики.</strong> Каждая — минимум две фразы, не одно слово.</p>
+<p><strong>Запишите все три части подряд, без остановки записи между ними.</strong> Четыре
+минуты одним файлом.</p>
+<p><strong>Всего: <input type="text" class="hueco-escribir" autocomplete="off" autocapitalize="off" spellcheck="false" size="8" aria-label="1"> / 15</strong> · Представление <input type="text" class="hueco-escribir" autocomplete="off" autocapitalize="off" spellcheck="false" size="8" aria-label="2"> / 5 · Фото <input type="text" class="hueco-escribir" autocomplete="off" autocapitalize="off" spellcheck="false" size="8" aria-label="3"> / 5 · Диалог <input type="text" class="hueco-escribir" autocomplete="off" autocapitalize="off" spellcheck="false" size="8" aria-label="4"> / 5</p>
+<p class="a-la-clave"><a href="#clave">Проверить себя по ключу ↓</a></p><h2 id="3-1823">3. Ключи и подсчёт (18–23 мин)</h2>
+<p><strong>Послушайте запись целиком, не останавливая.</strong> Потом второй раз — с
+рубрикой.</p>
+<div class="tabla-env"><table>
+<thead>
+<tr>
+<th>Критерий</th>
+<th>3</th>
+<th>2</th>
+<th>1</th>
+<th>0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Соответствие</strong></td>
+<td>сказали всё, что просили, уложились во время</td>
+<td>не хватает одного пункта</td>
+<td>не хватает двух и больше</td>
+<td>задание не выполнено</td>
+</tr>
+<tr>
+<td><strong>Связность</strong></td>
+<td>говорите кусками по две-три фразы, со связками</td>
+<td>паузы, но мысль доходит</td>
+<td>одиночные фразы</td>
+<td>не следить за мыслью</td>
+</tr>
+<tr>
+<td><strong>Правильность</strong></td>
+<td>ошибки редкие</td>
+<td>ошибки частые, смысл доходит</td>
+<td>системные ошибки уровня</td>
+<td>не понять</td>
+</tr>
+<tr>
+<td><strong>Охват</strong></td>
+<td>разные конструкции, в том числе <em>hay</em>, <em>estar + gerundio</em>, <em>me gusta</em></td>
+<td>только базовое</td>
+<td>три конструкции по кругу</td>
+<td>не уровень</td>
+</tr>
+<tr>
+<td><strong>Произношение</strong></td>
+<td>понятно без усилия</td>
+<td>понятно с усилием</td>
+<td>приходится переспрашивать</td>
+<td>не разобрать</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Произношение на A1 оценивают не по красоте, а по понятности.</strong> Акцент
+нормален и останется навсегда; важно, чтобы слово не превращалось в другое.</p>
+<p><strong>Пять интерференций, которые слышно в записи русскоговорящего</strong> — отметьте
+свои:</p>
+<div class="tabla-env"><table>
+<thead>
+<tr>
+<th></th>
+<th>Что слышно</th>
+<th>Чем это плохо</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>☐</td>
+<td>безударное <strong>o</strong> звучит как «а»: <em>tome</em> → «тома»</td>
+<td>вежливое превращается в фамильярное</td>
+</tr>
+<tr>
+<td>☐</td>
+<td><strong>b</strong> и <strong>v</strong> как русское «в»: <em>vino</em> → «вино»</td>
+<td>не критично, но слышно сразу</td>
+</tr>
+<tr>
+<td>☐</td>
+<td><strong>h</strong> произносится: <em>hola</em> → «хола»</td>
+<td>слово становится чужим</td>
+</tr>
+<tr>
+<td>☐</td>
+<td><strong>r</strong> раскатывается везде: <em>pero</em> → <em>perro</em></td>
+<td>«но» превращается в «собаку»</td>
+</tr>
+<tr>
+<td>☐</td>
+<td>оглушение конца: <em>Madrid</em> → «Мадрит»</td>
+<td>мелочь, но добавляется ко всему</td>
+</tr>
+</tbody>
+</table></div>
+<p>Последняя строка самая важная: <strong>каждая по отдельности — мелочь, вместе —
+то, что заставляет переспрашивать.</strong></p>
+<p><strong>Всего <input type="text" class="hueco-escribir" autocomplete="off" autocapitalize="off" spellcheck="false" size="8" aria-label="5"> / 15.</strong> Проходной — 9.</p>
+<h2 id="4-2330">4. Разбор ошибок (23–30 мин)</h2>
+<p><strong>Три звука, которые выдают именно вас.</strong> Из пяти строк таблицы отметьте те,
+что услышали у себя, и выберите <strong>три</strong>. На них будете работать до конца
+курса — не на всех сразу.</p>
+<div class="tabla-env"><table>
+<thead>
+<tr>
+<th>Мой звук</th>
+<th>Слово-тренажёр</th>
+<th>Где в курсе</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p>Слова-тренажёры: <em>tome / toma</em> (неделя 20), <em>vino / bino</em> (неделя 20),
+<em>hola, hora, hombre</em> (неделя 1), <em>pero / perro</em> (неделя 19), <em>Madrid, usted,
+verdad</em> (неделя 14).</p>
+<p><strong>Послушайте запись ещё раз и посчитайте паузы дольше трёх секунд.</strong> На A1
+допустимы две-три за четыре минуты. Если их больше шести, проблема не в
+грамматике, а в том, что вы ищете идеальное слово вместо простого.</p>
+<p>Главный навык этого уровня: <strong>сказать проще, а не замолчать.</strong></p>
+<div class="tabla-env"><table>
+<thead>
+<tr>
+<th>Хотели сказать</th>
+<th>Не нашли слово</th>
+<th>Скажите вместо</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>«Он разочарован»</td>
+<td><em>decepcionado</em></td>
+<td><em>No está contento.</em></td>
+</tr>
+<tr>
+<td>«Я подрабатываю»</td>
+<td>—</td>
+<td><em>Trabajo pocas horas.</em></td>
+</tr>
+<tr>
+<td>«Это удобно»</td>
+<td><em>cómodo</em> забыли</td>
+<td><em>Está bien así.</em></td>
+</tr>
+</tbody>
+</table></div>
+<p>Запишите <strong>три свои</strong> такие пары. Это упражнение полезнее, чем выучить три
+новых слова.</p>
+<div class="botones" id="clave-boton" hidden><button type="button" class="boton secundario" data-ver="Показать ответы" data-ocultar="Скрыть ответы">Показать ответы</button></div><div id="clave"><h2 id="_1">Ответы</h2>
+<p><strong>Образец части 1 (представление, 55 секунд):</strong></p>
+<blockquote>
+<p><em>Hola, me llamo Iván. Soy ruso, de Moscú, pero ahora vivo en Valencia desde
+enero. Tengo treinta años. Soy profesor de matemáticas, aunque aquí todavía
+no trabajo: estudio español por las mañanas. Mi familia no es grande: tengo
+una hermana y mis padres viven en Moscú. Me gusta mucho leer y andar por la
+ciudad, y no me gusta nada el frío. El año que viene voy a buscar trabajo
+aquí.</em></p>
+</blockquote>
+<p>Семь пунктов, четыре связки, два <em>me gusta</em>, один <em>voy a</em>. Ровно то, что
+просят.</p>
+<p><strong>Образец части 2 (описание фото):</strong></p>
+<blockquote>
+<p><em>En la foto hay tres personas: dos mujeres y un hombre. Están en un parque,
+creo, porque hay árboles. Están tomando café y hablando. La mujer de la
+izquierda lleva un abrigo rojo y tiene el pelo largo. El hombre lleva gafas.
+Hace sol pero parece que hace frío, porque todos llevan abrigo. Es por la
+mañana, me parece. Están contentos: están riéndose.</em></p>
+</blockquote>
+<p>Три обязательные конструкции на месте: <em>hay</em>, <em>están en</em>, <em>están + gerundio</em>.</p>
+<p><strong>Образец части 3 (диалог, ваши реплики):</strong></p>
+<blockquote>
+<p>— <em>Buenos días. Me duele mucho la garganta desde el domingo y tengo tos.</em>
+— <em>No, no tengo receta. ¿Tiene algo para la tos sin receta?</em>
+— <em>Vale. ¿Cuánto es? ¿Y tiene algo para el dolor de cabeza?</em>
+— <em>Aquí tiene. Muchas gracias, hasta luego.</em></p>
+</blockquote>
+<p>Каждая реплика — две фразы. В первой есть <em>desde cuándo</em> без вопроса, то есть
+вы ответили на то, о чём ещё не спросили: на экзамене это считается плюсом по
+критерию «Охват».</p></div><script>(function(){
+  var caja=document.getElementById('clave'), zona=document.getElementById('clave-boton');
+  if(!caja||!zona)return;
+  var b=zona.querySelector('button');
+  function pon(abierta){
+    caja.hidden=!abierta;
+    b.textContent=abierta?b.dataset.ocultar:b.dataset.ver;
+    b.setAttribute('aria-expanded',abierta?'true':'false');
+  }
+  pon(false); zona.hidden=false;
+  b.addEventListener('click',function(){pon(caja.hidden)});
+  document.querySelectorAll('a[href="#clave"]').forEach(function(a){
+    a.addEventListener('click',function(){pon(true)});
+  });
+  if(location.hash==='#clave')pon(true);
+})();</script><div id="marcar-caja"></div><div class="compartir"><span class="de-que">Поделиться уроком</span><a class="red" href="https://t.me/share/url?url=https%3A%2F%2Fespanoldesderuso.com%2Fsemana-22%2Fdia-2.html&text=%D0%98%D1%81%D0%BF%D0%B0%D0%BD%D1%81%D0%BA%D0%B8%D0%B9%20%D1%81%20%D0%BD%D1%83%D0%BB%D1%8F%20%D0%B4%D0%BB%D1%8F%20%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D1%80%D1%8F%D1%89%D0%B8%D1%85" target="_blank" rel="noopener">Telegram</a><a class="red" href="https://wa.me/?text=%D0%98%D1%81%D0%BF%D0%B0%D0%BD%D1%81%D0%BA%D0%B8%D0%B9%20%D1%81%20%D0%BD%D1%83%D0%BB%D1%8F%20%D0%B4%D0%BB%D1%8F%20%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D1%80%D1%8F%D1%89%D0%B8%D1%85%20https%3A%2F%2Fespanoldesderuso.com%2Fsemana-22%2Fdia-2.html" target="_blank" rel="noopener">WhatsApp</a><button type="button" class="red" id="copiar-enlace" data-url="https://espanoldesderuso.com/semana-22/dia-2.html" data-ok="Ссылка скопирована">Скопировать ссылку</button></div><nav class="pasos"><a href="../semana-22/dia-1.html">← Урок 148</a><a href="../kurs.html">Все уроки</a><a id="enlace-siguiente" href="../semana-22/dia-3.html">Урок 150 →</a></nav></article>
+</div></main>
+<footer class="sitio"><div class="envoltorio">
+<p><a href="../test.html">Тест на уровень</a> · <a href="../o-kurse.html">О курсе</a> · <a href="../kontakt.html">Контакты</a> · <a href="../privacy.html">Политика конфиденциальности</a></p>
+<p>Материалы курса можно свободно использовать для учёбы.</p>
+
+</div></footer>
+<div id="cookies"><span>Мы используем файлы cookie для показа рекламы и статистики посещений. <a href="../privacy.html">Подробнее</a>.</span><button class="boton" style="padding:.4rem 1rem;font-size:.85rem" onclick="try{localStorage.setItem('cookies','1')}catch(e){};this.parentNode.remove()">Понятно</button></div><script>try{if(localStorage.getItem('cookies')){var b=document.getElementById('cookies');b&&b.remove()}}catch(e){}</script>
+<script>(function(){var b=document.getElementById('tema');if(!b)return;function actual(){var r=document.documentElement;return r.dataset.tema||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}b.addEventListener('click',function(){var n=actual()==='dark'?'light':'dark';document.documentElement.dataset.tema=n;try{localStorage.setItem('tema',n)}catch(e){}});})();</script>
+<script>(function(){
+  var aviso=document.getElementById('sin-idioma'); if(!aviso)return;
+  document.querySelectorAll('.idiomas .apagado').forEach(function(b){
+    b.addEventListener('click',function(){
+      var a=aviso.querySelector('a');
+      a.href=b.dataset.portada;
+      a.textContent=a.dataset.ir+' ('+b.dataset.idioma+') →';
+      aviso.hidden=false;
+    });
+  });
+})();</script>
+<script>window.CURSO_TEXTOS={"continuar": "Продолжить: урок", "empezar": "Начать сначала", "marcar": "Отметить урок пройденным", "hecho": "Урок пройден", "siguiente": "Следующий урок", "tuyo": "пройдено вами", "titulo": "Ваш прогресс", "aviso": "Прогресс хранится только в этом браузере, на этом устройстве. Регистрации нет, и никуда он не отправляется. Если вы очистите данные браузера или откроете курс на другом телефоне, отметки не перенесутся.", "borrar": "Сбросить прогресс", "confirmar": "Сбросить все отметки?", "copiar": "Сохранить мой прогресс", "copiado": "Код скопирован — вставьте его себе в заметки или в «Избранное» в Telegram", "restaurar": "Восстановить по коду", "pegar": "Вставьте сюда ваш код", "aplicar": "Восстановить", "cancelar": "Отмена", "malo": "Это не похоже на код прогресса. Ничего не изменено.", "menos": "В этом коде меньше уроков, чем отмечено сейчас (%a% вместо %b%). Всё равно восстановить?", "hecho_restaurar": "Готово: восстановлено уроков — %n%", "antes": "Перед тем как очистить браузер или сменить телефон, сохраните код."};window.CURSO_RAIZ="..";window.CURSO_PUBLICADAS=154;window.CURSO_DIAS={"1":"semana-01/dia-1.html","2":"semana-01/dia-2.html","3":"semana-01/dia-3.html","4":"semana-01/dia-4.html","5":"semana-01/dia-5.html","6":"semana-01/dia-6.html","7":"semana-01/dia-7.html","8":"semana-02/dia-1.html","9":"semana-02/dia-2.html","10":"semana-02/dia-3.html","11":"semana-02/dia-4.html","12":"semana-02/dia-5.html","13":"semana-02/dia-6.html","14":"semana-02/dia-7.html","15":"semana-03/dia-1.html","16":"semana-03/dia-2.html","17":"semana-03/dia-3.html","18":"semana-03/dia-4.html","19":"semana-03/dia-5.html","20":"semana-03/dia-6.html","21":"semana-03/dia-7.html","22":"semana-04/dia-1.html","23":"semana-04/dia-2.html","24":"semana-04/dia-3.html","25":"semana-04/dia-4.html","26":"semana-04/dia-5.html","27":"semana-04/dia-6.html","28":"semana-04/dia-7.html","29":"semana-05/dia-1.html","30":"semana-05/dia-2.html","31":"semana-05/dia-3.html","32":"semana-05/dia-4.html","33":"semana-05/dia-5.html","34":"semana-05/dia-6.html","35":"semana-05/dia-7.html","36":"semana-06/dia-1.html","37":"semana-06/dia-2.html","38":"semana-06/dia-3.html","39":"semana-06/dia-4.html","40":"semana-06/dia-5.html","41":"semana-06/dia-6.html","42":"semana-06/dia-7.html","43":"semana-07/dia-1.html","44":"semana-07/dia-2.html","45":"semana-07/dia-3.html","46":"semana-07/dia-4.html","47":"semana-07/dia-5.html","48":"semana-07/dia-6.html","49":"semana-07/dia-7.html","50":"semana-08/dia-1.html","51":"semana-08/dia-2.html","52":"semana-08/dia-3.html","53":"semana-08/dia-4.html","54":"semana-08/dia-5.html","55":"semana-08/dia-6.html","56":"semana-08/dia-7.html","57":"semana-09/dia-1.html","58":"semana-09/dia-2.html","59":"semana-09/dia-3.html","60":"semana-09/dia-4.html","61":"semana-09/dia-5.html","62":"semana-09/dia-6.html","63":"semana-09/dia-7.html","64":"semana-10/dia-1.html","65":"semana-10/dia-2.html","66":"semana-10/dia-3.html","67":"semana-10/dia-4.html","68":"semana-10/dia-5.html","69":"semana-10/dia-6.html","70":"semana-10/dia-7.html","71":"semana-11/dia-1.html","72":"semana-11/dia-2.html","73":"semana-11/dia-3.html","74":"semana-11/dia-4.html","75":"semana-11/dia-5.html","76":"semana-11/dia-6.html","77":"semana-11/dia-7.html","78":"semana-12/dia-1.html","79":"semana-12/dia-2.html","80":"semana-12/dia-3.html","81":"semana-12/dia-4.html","82":"semana-12/dia-5.html","83":"semana-12/dia-6.html","84":"semana-12/dia-7.html","85":"semana-13/dia-1.html","86":"semana-13/dia-2.html","87":"semana-13/dia-3.html","88":"semana-13/dia-4.html","89":"semana-13/dia-5.html","90":"semana-13/dia-6.html","91":"semana-13/dia-7.html","92":"semana-14/dia-1.html","93":"semana-14/dia-2.html","94":"semana-14/dia-3.html","95":"semana-14/dia-4.html","96":"semana-14/dia-5.html","97":"semana-14/dia-6.html","98":"semana-14/dia-7.html","99":"semana-15/dia-1.html","100":"semana-15/dia-2.html","101":"semana-15/dia-3.html","102":"semana-15/dia-4.html","103":"semana-15/dia-5.html","104":"semana-15/dia-6.html","105":"semana-15/dia-7.html","106":"semana-16/dia-1.html","107":"semana-16/dia-2.html","108":"semana-16/dia-3.html","109":"semana-16/dia-4.html","110":"semana-16/dia-5.html","111":"semana-16/dia-6.html","112":"semana-16/dia-7.html","113":"semana-17/dia-1.html","114":"semana-17/dia-2.html","115":"semana-17/dia-3.html","116":"semana-17/dia-4.html","117":"semana-17/dia-5.html","118":"semana-17/dia-6.html","119":"semana-17/dia-7.html","120":"semana-18/dia-1.html","121":"semana-18/dia-2.html","122":"semana-18/dia-3.html","123":"semana-18/dia-4.html","124":"semana-18/dia-5.html","125":"semana-18/dia-6.html","126":"semana-18/dia-7.html","127":"semana-19/dia-1.html","128":"semana-19/dia-2.html","129":"semana-19/dia-3.html","130":"semana-19/dia-4.html","131":"semana-19/dia-5.html","132":"semana-19/dia-6.html","133":"semana-19/dia-7.html","134":"semana-20/dia-1.html","135":"semana-20/dia-2.html","136":"semana-20/dia-3.html","137":"semana-20/dia-4.html","138":"semana-20/dia-5.html","139":"semana-20/dia-6.html","140":"semana-20/dia-7.html","141":"semana-21/dia-1.html","142":"semana-21/dia-2.html","143":"semana-21/dia-3.html","144":"semana-21/dia-4.html","145":"semana-21/dia-5.html","146":"semana-21/dia-6.html","147":"semana-21/dia-7.html","148":"semana-22/dia-1.html","149":"semana-22/dia-2.html","150":"semana-22/dia-3.html","151":"semana-22/dia-4.html","152":"semana-22/dia-5.html","153":"semana-22/dia-6.html","154":"semana-22/dia-7.html"};</script>
+<script src="../progreso.js" defer></script>
+
+
+
+
+<script>(function(){
+  var cajas=document.querySelectorAll('.hueco-escribir');
+  if(!cajas.length)return;
+  function ancho(c){ c.style.width=Math.max(5.5,(c.value.length+1)*0.62)+'rem' }
+  cajas.forEach(function(c){ c.addEventListener('input',function(){ancho(c)}) });
+})();</script>
+</body>
+</html>

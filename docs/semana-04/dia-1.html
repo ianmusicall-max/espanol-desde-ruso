@@ -106,6 +106,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 .hueco:empty::before{content:" "}
 .hueco.bien{border-color:#2e7d4f;color:#2e7d4f}
 .hueco.mal{border-color:#b3332b;color:#b3332b}
+/* Y el hueco que se ESCRIBE, que son casi todos: 1.398 de los 1.587. No
+   lleva ficha que pulsar porque su ejercicio no trae banco de palabras, así
+   que se teclea. Sigue pareciendo la raya que sustituye —sin caja, solo el
+   subrayado— para que la frase se lea igual que en papel. */
+/* El ancho se fija y no se deja al navegador: un `<input>` sin ancho mide
+   lo que su `size` por defecto —unos 230 px— y partía en dos los renglones
+   que llevan dos huecos. El guion lo hace crecer al teclear. */
+.hueco-escribir{display:inline-block;width:5.5rem;max-width:100%;
+  padding:0 .3rem;border:0;border-bottom:2px solid var(--acento);
+  background:transparent;color:var(--tinta);font:inherit;font-weight:600;
+  text-align:center;border-radius:0}
+.hueco-escribir:focus{outline:none;background:var(--acento-suave)}
 .huecos-pie{display:flex;align-items:center;gap:.8rem;margin:.9rem 0}
 .marcador{font-size:.9rem;color:var(--tenue)}
 /* compartir: tres botones iguales al pie de la lección. Discretos —son una
@@ -563,30 +575,30 @@ hay agua, hay tijeras</em>. Это не «он есть» и не «они ес�
 английском так нельзя, в русском и испанском — нужно. Это бесплатное правило.</p>
 </section><h2 id="4-1626">4. Практика (16–26 мин)</h2>
 <h3 id="-">Упражнение А. Дополните фразы. В скобках — что сказать по-русски.</h3>
-<p>Модель: En el estuche ______ (линейка). → En el estuche <strong>hay una regla</strong>.</p>
+<p>Модель: En el estuche <input type="text" class="hueco-escribir" autocomplete="off" autocapitalize="off" spellcheck="false" size="8" aria-label="1"> (линейка). → En el estuche <strong>hay una regla</strong>.</p>
 <ol>
-<li>En mi mochila ______ (тетрадь).</li>
-<li>En el estuche ______ (ножниц нет).</li>
-<li>¿______ (вода) en la botella?</li>
-<li>En la mesa ______ (три карандаша).</li>
-<li>En la clase ______ (двадцать стульев).</li>
-<li>Hoy en la mochila de Pablo ______ (ничего нет).</li>
-<li>¿______ (зарядка) aquí?</li>
-<li>En la pared ______ (карта Испании, впервые).</li>
-<li>En la carpeta ______ (бумаги, без счёта).</li>
-<li>¿Cuántos libros ______ en tu mochila? — ______ (четыре).</li>
+<li>En mi mochila <input type="text" class="hueco-escribir" autocomplete="off" autocapitalize="off" spellcheck="false" size="8" aria-label="2"> (тетрадь).</li>
+<li>En el estuche <input type="text" class="hueco-escribir" autocomplete="off" autocapitalize="off" spellcheck="false" size="8" aria-label="3"> (ножниц нет).</li>
+<li>¿<input type="text" class="hueco-escribir" autocomplete="off" autocapitalize="off" spellcheck="false" size="8" aria-label="4"> (вода) en la botella?</li>
+<li>En la mesa <input type="text" class="hueco-escribir" autocomplete="off" autocapitalize="off" spellcheck="false" size="8" aria-label="5"> (три карандаша).</li>
+<li>En la clase <input type="text" class="hueco-escribir" autocomplete="off" autocapitalize="off" spellcheck="false" size="8" aria-label="6"> (двадцать стульев).</li>
+<li>Hoy en la mochila de Pablo <input type="text" class="hueco-escribir" autocomplete="off" autocapitalize="off" spellcheck="false" size="8" aria-label="7"> (ничего нет).</li>
+<li>¿<input type="text" class="hueco-escribir" autocomplete="off" autocapitalize="off" spellcheck="false" size="8" aria-label="8"> (зарядка) aquí?</li>
+<li>En la pared <input type="text" class="hueco-escribir" autocomplete="off" autocapitalize="off" spellcheck="false" size="8" aria-label="9"> (карта Испании, впервые).</li>
+<li>En la carpeta <input type="text" class="hueco-escribir" autocomplete="off" autocapitalize="off" spellcheck="false" size="8" aria-label="10"> (бумаги, без счёта).</li>
+<li>¿Cuántos libros <input type="text" class="hueco-escribir" autocomplete="off" autocapitalize="off" spellcheck="false" size="8" aria-label="11"> en tu mochila? — <input type="text" class="hueco-escribir" autocomplete="off" autocapitalize="off" spellcheck="false" size="8" aria-label="12"> (четыре).</li>
 </ol>
 <h3 id="_4">Упражнение Б. Дополните диалог. Банк слов (каждое — в один пропуск):</h3>
 <blockquote>
 <p>hay · Hay · ¿Hay · no hay · una · unos · cuántas · tampoco · nada</p>
 </blockquote>
-<p>— Buenos días. ¿Qué ______ en la mesa?
-— ______ una carpeta, ______ papeles y un estuche.
-— ______ tijeras en el estuche?
-— No, ______ tijeras. Hay ______ regla.
-— ¿Y ______ gomas hay?
-— Dos. Pero no hay bolígrafos y ______ hay lápices.
-— Entonces en el estuche no hay ______ para escribir.</p>
+<p>— Buenos días. ¿Qué <input type="text" class="hueco-escribir" autocomplete="off" autocapitalize="off" spellcheck="false" size="8" aria-label="13"> en la mesa?
+— <input type="text" class="hueco-escribir" autocomplete="off" autocapitalize="off" spellcheck="false" size="8" aria-label="14"> una carpeta, <input type="text" class="hueco-escribir" autocomplete="off" autocapitalize="off" spellcheck="false" size="8" aria-label="15"> papeles y un estuche.
+— <input type="text" class="hueco-escribir" autocomplete="off" autocapitalize="off" spellcheck="false" size="8" aria-label="16"> tijeras en el estuche?
+— No, <input type="text" class="hueco-escribir" autocomplete="off" autocapitalize="off" spellcheck="false" size="8" aria-label="17"> tijeras. Hay <input type="text" class="hueco-escribir" autocomplete="off" autocapitalize="off" spellcheck="false" size="8" aria-label="18"> regla.
+— ¿Y <input type="text" class="hueco-escribir" autocomplete="off" autocapitalize="off" spellcheck="false" size="8" aria-label="19"> gomas hay?
+— Dos. Pero no hay bolígrafos y <input type="text" class="hueco-escribir" autocomplete="off" autocapitalize="off" spellcheck="false" size="8" aria-label="20"> hay lápices.
+— Entonces en el estuche no hay <input type="text" class="hueco-escribir" autocomplete="off" autocapitalize="off" spellcheck="false" size="8" aria-label="21"> para escribir.</p>
 <h3 id="_5">Упражнение В. Переведите на испанский.</h3>
 <ol>
 <li>На столе есть книга и две ручки.</li>
@@ -729,7 +741,7 @@ tijeras</strong>; в 4 «тоже нет» — это <strong>tampoco</strong>, 
     });
   });
 })();</script>
-<script>window.CURSO_TEXTOS={"continuar": "Продолжить: урок", "empezar": "Начать сначала", "marcar": "Отметить урок пройденным", "hecho": "Урок пройден", "siguiente": "Следующий урок", "tuyo": "пройдено вами", "titulo": "Ваш прогресс", "aviso": "Прогресс хранится только в этом браузере, на этом устройстве. Регистрации нет, и никуда он не отправляется. Если вы очистите данные браузера или откроете курс на другом телефоне, отметки не перенесутся.", "borrar": "Сбросить прогресс", "confirmar": "Сбросить все отметки?", "copiar": "Сохранить мой прогресс", "copiado": "Код скопирован — вставьте его себе в заметки или в «Избранное» в Telegram", "restaurar": "Восстановить по коду", "pegar": "Вставьте сюда ваш код", "aplicar": "Восстановить", "cancelar": "Отмена", "malo": "Это не похоже на код прогресса. Ничего не изменено.", "menos": "В этом коде меньше уроков, чем отмечено сейчас (%a% вместо %b%). Всё равно восстановить?", "hecho_restaurar": "Готово: восстановлено уроков — %n%", "antes": "Перед тем как очистить браузер или сменить телефон, сохраните код."};window.CURSO_RAIZ="..";window.CURSO_PUBLICADAS=126;window.CURSO_DIAS={"1":"semana-01/dia-1.html","2":"semana-01/dia-2.html","3":"semana-01/dia-3.html","4":"semana-01/dia-4.html","5":"semana-01/dia-5.html","6":"semana-01/dia-6.html","7":"semana-01/dia-7.html","8":"semana-02/dia-1.html","9":"semana-02/dia-2.html","10":"semana-02/dia-3.html","11":"semana-02/dia-4.html","12":"semana-02/dia-5.html","13":"semana-02/dia-6.html","14":"semana-02/dia-7.html","15":"semana-03/dia-1.html","16":"semana-03/dia-2.html","17":"semana-03/dia-3.html","18":"semana-03/dia-4.html","19":"semana-03/dia-5.html","20":"semana-03/dia-6.html","21":"semana-03/dia-7.html","22":"semana-04/dia-1.html","23":"semana-04/dia-2.html","24":"semana-04/dia-3.html","25":"semana-04/dia-4.html","26":"semana-04/dia-5.html","27":"semana-04/dia-6.html","28":"semana-04/dia-7.html","29":"semana-05/dia-1.html","30":"semana-05/dia-2.html","31":"semana-05/dia-3.html","32":"semana-05/dia-4.html","33":"semana-05/dia-5.html","34":"semana-05/dia-6.html","35":"semana-05/dia-7.html","36":"semana-06/dia-1.html","37":"semana-06/dia-2.html","38":"semana-06/dia-3.html","39":"semana-06/dia-4.html","40":"semana-06/dia-5.html","41":"semana-06/dia-6.html","42":"semana-06/dia-7.html","43":"semana-07/dia-1.html","44":"semana-07/dia-2.html","45":"semana-07/dia-3.html","46":"semana-07/dia-4.html","47":"semana-07/dia-5.html","48":"semana-07/dia-6.html","49":"semana-07/dia-7.html","50":"semana-08/dia-1.html","51":"semana-08/dia-2.html","52":"semana-08/dia-3.html","53":"semana-08/dia-4.html","54":"semana-08/dia-5.html","55":"semana-08/dia-6.html","56":"semana-08/dia-7.html","57":"semana-09/dia-1.html","58":"semana-09/dia-2.html","59":"semana-09/dia-3.html","60":"semana-09/dia-4.html","61":"semana-09/dia-5.html","62":"semana-09/dia-6.html","63":"semana-09/dia-7.html","64":"semana-10/dia-1.html","65":"semana-10/dia-2.html","66":"semana-10/dia-3.html","67":"semana-10/dia-4.html","68":"semana-10/dia-5.html","69":"semana-10/dia-6.html","70":"semana-10/dia-7.html","71":"semana-11/dia-1.html","72":"semana-11/dia-2.html","73":"semana-11/dia-3.html","74":"semana-11/dia-4.html","75":"semana-11/dia-5.html","76":"semana-11/dia-6.html","77":"semana-11/dia-7.html","78":"semana-12/dia-1.html","79":"semana-12/dia-2.html","80":"semana-12/dia-3.html","81":"semana-12/dia-4.html","82":"semana-12/dia-5.html","83":"semana-12/dia-6.html","84":"semana-12/dia-7.html","85":"semana-13/dia-1.html","86":"semana-13/dia-2.html","87":"semana-13/dia-3.html","88":"semana-13/dia-4.html","89":"semana-13/dia-5.html","90":"semana-13/dia-6.html","91":"semana-13/dia-7.html","92":"semana-14/dia-1.html","93":"semana-14/dia-2.html","94":"semana-14/dia-3.html","95":"semana-14/dia-4.html","96":"semana-14/dia-5.html","97":"semana-14/dia-6.html","98":"semana-14/dia-7.html","99":"semana-15/dia-1.html","100":"semana-15/dia-2.html","101":"semana-15/dia-3.html","102":"semana-15/dia-4.html","103":"semana-15/dia-5.html","104":"semana-15/dia-6.html","105":"semana-15/dia-7.html","106":"semana-16/dia-1.html","107":"semana-16/dia-2.html","108":"semana-16/dia-3.html","109":"semana-16/dia-4.html","110":"semana-16/dia-5.html","111":"semana-16/dia-6.html","112":"semana-16/dia-7.html","113":"semana-17/dia-1.html","114":"semana-17/dia-2.html","115":"semana-17/dia-3.html","116":"semana-17/dia-4.html","117":"semana-17/dia-5.html","118":"semana-17/dia-6.html","119":"semana-17/dia-7.html","120":"semana-18/dia-1.html","121":"semana-18/dia-2.html","122":"semana-18/dia-3.html","123":"semana-18/dia-4.html","124":"semana-18/dia-5.html","125":"semana-18/dia-6.html","126":"semana-18/dia-7.html"};</script>
+<script>window.CURSO_TEXTOS={"continuar": "Продолжить: урок", "empezar": "Начать сначала", "marcar": "Отметить урок пройденным", "hecho": "Урок пройден", "siguiente": "Следующий урок", "tuyo": "пройдено вами", "titulo": "Ваш прогресс", "aviso": "Прогресс хранится только в этом браузере, на этом устройстве. Регистрации нет, и никуда он не отправляется. Если вы очистите данные браузера или откроете курс на другом телефоне, отметки не перенесутся.", "borrar": "Сбросить прогресс", "confirmar": "Сбросить все отметки?", "copiar": "Сохранить мой прогресс", "copiado": "Код скопирован — вставьте его себе в заметки или в «Избранное» в Telegram", "restaurar": "Восстановить по коду", "pegar": "Вставьте сюда ваш код", "aplicar": "Восстановить", "cancelar": "Отмена", "malo": "Это не похоже на код прогресса. Ничего не изменено.", "menos": "В этом коде меньше уроков, чем отмечено сейчас (%a% вместо %b%). Всё равно восстановить?", "hecho_restaurar": "Готово: восстановлено уроков — %n%", "antes": "Перед тем как очистить браузер или сменить телефон, сохраните код."};window.CURSO_RAIZ="..";window.CURSO_PUBLICADAS=154;window.CURSO_DIAS={"1":"semana-01/dia-1.html","2":"semana-01/dia-2.html","3":"semana-01/dia-3.html","4":"semana-01/dia-4.html","5":"semana-01/dia-5.html","6":"semana-01/dia-6.html","7":"semana-01/dia-7.html","8":"semana-02/dia-1.html","9":"semana-02/dia-2.html","10":"semana-02/dia-3.html","11":"semana-02/dia-4.html","12":"semana-02/dia-5.html","13":"semana-02/dia-6.html","14":"semana-02/dia-7.html","15":"semana-03/dia-1.html","16":"semana-03/dia-2.html","17":"semana-03/dia-3.html","18":"semana-03/dia-4.html","19":"semana-03/dia-5.html","20":"semana-03/dia-6.html","21":"semana-03/dia-7.html","22":"semana-04/dia-1.html","23":"semana-04/dia-2.html","24":"semana-04/dia-3.html","25":"semana-04/dia-4.html","26":"semana-04/dia-5.html","27":"semana-04/dia-6.html","28":"semana-04/dia-7.html","29":"semana-05/dia-1.html","30":"semana-05/dia-2.html","31":"semana-05/dia-3.html","32":"semana-05/dia-4.html","33":"semana-05/dia-5.html","34":"semana-05/dia-6.html","35":"semana-05/dia-7.html","36":"semana-06/dia-1.html","37":"semana-06/dia-2.html","38":"semana-06/dia-3.html","39":"semana-06/dia-4.html","40":"semana-06/dia-5.html","41":"semana-06/dia-6.html","42":"semana-06/dia-7.html","43":"semana-07/dia-1.html","44":"semana-07/dia-2.html","45":"semana-07/dia-3.html","46":"semana-07/dia-4.html","47":"semana-07/dia-5.html","48":"semana-07/dia-6.html","49":"semana-07/dia-7.html","50":"semana-08/dia-1.html","51":"semana-08/dia-2.html","52":"semana-08/dia-3.html","53":"semana-08/dia-4.html","54":"semana-08/dia-5.html","55":"semana-08/dia-6.html","56":"semana-08/dia-7.html","57":"semana-09/dia-1.html","58":"semana-09/dia-2.html","59":"semana-09/dia-3.html","60":"semana-09/dia-4.html","61":"semana-09/dia-5.html","62":"semana-09/dia-6.html","63":"semana-09/dia-7.html","64":"semana-10/dia-1.html","65":"semana-10/dia-2.html","66":"semana-10/dia-3.html","67":"semana-10/dia-4.html","68":"semana-10/dia-5.html","69":"semana-10/dia-6.html","70":"semana-10/dia-7.html","71":"semana-11/dia-1.html","72":"semana-11/dia-2.html","73":"semana-11/dia-3.html","74":"semana-11/dia-4.html","75":"semana-11/dia-5.html","76":"semana-11/dia-6.html","77":"semana-11/dia-7.html","78":"semana-12/dia-1.html","79":"semana-12/dia-2.html","80":"semana-12/dia-3.html","81":"semana-12/dia-4.html","82":"semana-12/dia-5.html","83":"semana-12/dia-6.html","84":"semana-12/dia-7.html","85":"semana-13/dia-1.html","86":"semana-13/dia-2.html","87":"semana-13/dia-3.html","88":"semana-13/dia-4.html","89":"semana-13/dia-5.html","90":"semana-13/dia-6.html","91":"semana-13/dia-7.html","92":"semana-14/dia-1.html","93":"semana-14/dia-2.html","94":"semana-14/dia-3.html","95":"semana-14/dia-4.html","96":"semana-14/dia-5.html","97":"semana-14/dia-6.html","98":"semana-14/dia-7.html","99":"semana-15/dia-1.html","100":"semana-15/dia-2.html","101":"semana-15/dia-3.html","102":"semana-15/dia-4.html","103":"semana-15/dia-5.html","104":"semana-15/dia-6.html","105":"semana-15/dia-7.html","106":"semana-16/dia-1.html","107":"semana-16/dia-2.html","108":"semana-16/dia-3.html","109":"semana-16/dia-4.html","110":"semana-16/dia-5.html","111":"semana-16/dia-6.html","112":"semana-16/dia-7.html","113":"semana-17/dia-1.html","114":"semana-17/dia-2.html","115":"semana-17/dia-3.html","116":"semana-17/dia-4.html","117":"semana-17/dia-5.html","118":"semana-17/dia-6.html","119":"semana-17/dia-7.html","120":"semana-18/dia-1.html","121":"semana-18/dia-2.html","122":"semana-18/dia-3.html","123":"semana-18/dia-4.html","124":"semana-18/dia-5.html","125":"semana-18/dia-6.html","126":"semana-18/dia-7.html","127":"semana-19/dia-1.html","128":"semana-19/dia-2.html","129":"semana-19/dia-3.html","130":"semana-19/dia-4.html","131":"semana-19/dia-5.html","132":"semana-19/dia-6.html","133":"semana-19/dia-7.html","134":"semana-20/dia-1.html","135":"semana-20/dia-2.html","136":"semana-20/dia-3.html","137":"semana-20/dia-4.html","138":"semana-20/dia-5.html","139":"semana-20/dia-6.html","140":"semana-20/dia-7.html","141":"semana-21/dia-1.html","142":"semana-21/dia-2.html","143":"semana-21/dia-3.html","144":"semana-21/dia-4.html","145":"semana-21/dia-5.html","146":"semana-21/dia-6.html","147":"semana-21/dia-7.html","148":"semana-22/dia-1.html","149":"semana-22/dia-2.html","150":"semana-22/dia-3.html","151":"semana-22/dia-4.html","152":"semana-22/dia-5.html","153":"semana-22/dia-6.html","154":"semana-22/dia-7.html"};</script>
 <script src="../progreso.js" defer></script>
 <script>(function(){
   var sonando=null, reproductor=new Audio();
@@ -751,5 +763,11 @@ tijeras</strong>; в 4 «тоже нет» — это <strong>tampoco</strong>, 
 
 
 
+<script>(function(){
+  var cajas=document.querySelectorAll('.hueco-escribir');
+  if(!cajas.length)return;
+  function ancho(c){ c.style.width=Math.max(5.5,(c.value.length+1)*0.62)+'rem' }
+  cajas.forEach(function(c){ c.addEventListener('input',function(){ancho(c)}) });
+})();</script>
 </body>
 </html>

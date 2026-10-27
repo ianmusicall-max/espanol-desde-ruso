@@ -2091,6 +2091,135 @@ class TestCompartir(unittest.TestCase):
             self.assertEqual("", (url or "").strip(), f"redes.{clave}")
 
 
+class TestLasCasillasParaEscribir(unittest.TestCase):
+    """Las rayas que no son fichas se vuelven casillas donde se escribe.
+
+    Lo trajo el profesor mirando la lección 1-1 en el móvil: «por ejemplo
+    estos espacios vacios, no hay nada para completar». En papel una raya es
+    donde escribes; en una pantalla era una raya y nada más.
+
+    Las fichas pulsables cubren los ejercicios que traen banco de palabras Y
+    una clave que se casa sin ninguna duda. El resto —la gran mayoría, porque
+    la mayoría de los ejercicios piden escribir la forma correcta y no elegir
+    una ficha— se quedaba inerte."""
+
+    LECCIONES = sorted((RAIZ / "docs").glob("semana-*/dia-*.html"))
+
+    def setUp(self):
+        if not self.LECCIONES:
+            self.skipTest("todavía no se ha construido el sitio")
+
+    @staticmethod
+    def _sin_guiones(html_: str) -> str:
+        """La página sin sus `<script>`: dentro va el propio guion de las
+        casillas, que NOMBRA la clase, y contarlo sería contarse a sí mismo."""
+        return re.sub(r"<script\b.*?</script>", "", html_, flags=re.S)
+
+    def test_ninguna_raya_se_queda_sin_casilla(self):
+        """Si el Markdown escribió un hueco, en la página hay dónde escribir:
+        o una ficha que se pulsa o una casilla que se teclea."""
+        cal = plan.cargar()
+        revisadas = 0
+        for d in plan.dias(cal):
+            if not d.ruta.exists():
+                continue
+            cuerpo = validar.frontmatter(d.ruta.read_text(encoding="utf-8"))[1]
+            antes_de_la_clave = cuerpo.split("## Ответы")[0]
+            esperados = len(re.findall(r"_{3,}", antes_de_la_clave))
+            if not esperados:
+                continue
+            revisadas += 1
+            pagina = self._sin_guiones(
+                (RAIZ / "docs" / f"semana-{d.semana:02d}" / f"dia-{d.dia}.html")
+                .read_text(encoding="utf-8"))
+            # Una raya en crudo NO cuenta: es justo lo que se viene a
+            # arreglar. Solo cuentan las dos cosas donde se puede escribir.
+            hay = (pagina.count('class="hueco-escribir"')
+                   + len(re.findall(r'<span class="hueco" ', pagina)))
+            self.assertGreaterEqual(hay, esperados,
+                                    f"semana {d.semana} día {d.dia}: faltan huecos")
+            self.assertEqual(0, len(re.findall(r"_{3,}", pagina.split(">Ответы<")[0])),
+                             f"semana {d.semana} día {d.dia}: una raya sin convertir")
+        self.assertGreater(revisadas, 80, "casi todas las lecciones tienen huecos")
+
+    def test_la_clave_conserva_sus_rayas(self):
+        """Dentro de `## Ответы` una raya es parte de una respuesta, no un
+        sitio donde escribir. Hay una así en la lección 5-2."""
+        con_raya = 0
+        for p in self.LECCIONES:
+            texto = self._sin_guiones(p.read_text(encoding="utf-8"))
+            if ">Ответы<" not in texto:
+                continue
+            clave = texto.split(">Ответы<", 1)[1]
+            self.assertNotIn("hueco-escribir", clave, p.name)
+            con_raya += len(re.findall(r"_{3,}", clave))
+        self.assertEqual(1, con_raya,
+                         "la clave de la 5-2 trae una raya: si cambia, revisar por qué")
+
+    def test_se_escribe_sin_javascript(self):
+        """Es el único trozo interactivo del sitio que nace encendido, y a
+        propósito: un `<input>` se teclea sin guion ninguno. El guion solo le
+        ajusta el ancho mientras escribes, que es cosmético.
+
+        Por eso aquí no vale el patrón de «nace oculto»: esconder la casilla
+        hasta que arranque el guion la rompería para quien no lo tenga."""
+        texto = self._sin_guiones(
+            (RAIZ / "docs" / "semana-01" / "dia-1.html").read_text(encoding="utf-8"))
+        casillas = re.findall(r"<input[^>]*hueco-escribir[^>]*>", texto)
+        self.assertGreaterEqual(len(casillas), 6)
+        for c in casillas:
+            self.assertIn('type="text"', c)
+            self.assertNotIn("disabled", c)
+            self.assertNotIn("readonly", c)
+            self.assertNotIn("hidden", c)
+
+    def test_el_corrector_del_navegador_esta_apagado(self):
+        """El corrector va en el idioma del lector, que es ruso: encendido,
+        subraya en rojo cada palabra española que se escriba."""
+        texto = (RAIZ / "docs" / "semana-01" / "dia-1.html").read_text(encoding="utf-8")
+        casillas = re.findall(r"<input[^>]*hueco-escribir[^>]*>", texto)
+        self.assertGreaterEqual(len(casillas), 6, "sin casillas la prueba no prueba nada")
+        for c in casillas:
+            self.assertIn('spellcheck="false"', c)
+            self.assertIn('autocapitalize="off"', c)
+
+    def test_el_ancho_no_se_deja_al_navegador(self):
+        """Un `<input>` sin ancho mide lo que su `size` por defecto —unos
+        230 px— y eso parte en dos los renglones que llevan dos huecos. Se
+        vio midiéndolo en el navegador, no leyendo el código."""
+        regla = re.search(r"\.hueco-escribir\{([^}]*)\}", construir_sitio.CSS)
+        self.assertIsNotNone(regla)
+        self.assertRegex(regla.group(1), r"\bwidth:",
+                         "sin width, el navegador le pone el suyo")
+        self.assertNotRegex(regla.group(1), r"\bmin-width:\s*5\.5rem;(?![^}]*\bwidth:)",
+                            "min-width sola no limita el ancho de un input")
+
+    def test_un_ejercicio_de_fichas_no_lleva_casillas(self):
+        """Los dos mecanismos no pueden convivir en el mismo ejercicio: la
+        conversión va DESPUÉS de las fichas justamente para que aquellas ya se
+        hayan llevado sus `______`."""
+        cal = plan.cargar()
+        comprobadas = 0
+        for d in plan.dias(cal):
+            if not d.ruta.exists():
+                continue
+            cuerpo = validar.frontmatter(d.ruta.read_text(encoding="utf-8"))[1]
+            ejercicios = huecos.leer(cuerpo)
+            if not ejercicios:
+                continue
+            texto = (RAIZ / "docs" / f"semana-{d.semana:02d}" / f"dia-{d.dia}.html"
+                     ).read_text(encoding="utf-8")
+            for e in ejercicios:
+                trozo = re.split(rf"<h3[^>]*>\s*{re.escape(e.titulo)}\s*</h3>", texto)
+                if len(trozo) < 2:
+                    continue
+                cuerpo_ej = re.split(r"<h[23][\s>]", trozo[1])[0]
+                self.assertNotIn("hueco-escribir", cuerpo_ej,
+                                 f"semana {d.semana} día {d.dia}: {e.titulo}")
+                comprobadas += 1
+        self.assertGreater(comprobadas, 20)
+
+
 class TestLosHuecosInteractivos(unittest.TestCase):
     """Rellenar los ______ pulsando una ficha del banco de palabras.
 
@@ -2499,7 +2628,11 @@ class TestLaClaveDeLosEjercicios(unittest.TestCase):
         Y las tres formas del curso cuentan: lección, repaso y cultura."""
         mirados = 0
         for d in self.dias:
-            if d.tipo == "prueba":
+            # Los tres tipos sin ejercicios quedan fuera, cada uno por su
+            # motivo (ver `CON_CLAVE_DE_EJERCICIOS`). La lista se lee del
+            # generador y no se copia aquí: dos copias de la misma regla es
+            # como se descubre tarde que una de las dos se quedó vieja.
+            if d.tipo not in construir_sitio.CON_CLAVE_DE_EJERCICIOS:
                 continue
             cuerpo = validar.frontmatter(d.ruta.read_text(encoding="utf-8"))[1]
             if "## Ответы" not in cuerpo:
@@ -2513,6 +2646,25 @@ class TestLaClaveDeLosEjercicios(unittest.TestCase):
                 self.assertLess(p.index('<a href="#clave">'), p.index('<div id="clave">'),
                                 "el enlace tiene que ir ANTES de la clave")
         self.assertGreater(mirados, 80, "casi todas las lecciones llevan clave")
+
+    def test_los_dias_sin_ejercicios_no_pliegan_la_clave(self):
+        """Un `examen` lleva la clave dentro de su apartado de corrección y un
+        `proyecto` no tiene ejercicios: su `## Ответы` es un modelo, no una
+        respuesta. Plegarlos dejaría un botón que abre algo a lo que no apunta
+        ningún enlace, porque el enlace no se coloca donde no hay ejercicios.
+
+        Lo cazó la suite al estrenarse los tres tipos en la unidad 11."""
+        vistos = []
+        for d in self.dias:
+            if d.tipo in construir_sitio.CON_CLAVE_DE_EJERCICIOS:
+                continue
+            p = self._pagina(d)
+            vistos.append(d.tipo)
+            with self.subTest(dia=d.numero, tipo=d.tipo):
+                if d.tipo != "prueba":
+                    self.assertNotIn('<div id="clave">', p)
+                self.assertNotIn('<a href="#clave">', p)
+        self.assertEqual({"prueba", "examen", "proyecto"}, set(vistos))
 
     def test_el_enlace_cae_donde_se_acaban_los_ejercicios(self):
         """Y no al final del todo. Se busca por el CONTENIDO y no por el nombre

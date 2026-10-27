@@ -106,6 +106,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 .hueco:empty::before{content:" "}
 .hueco.bien{border-color:#2e7d4f;color:#2e7d4f}
 .hueco.mal{border-color:#b3332b;color:#b3332b}
+/* Y el hueco que se ESCRIBE, que son casi todos: 1.398 de los 1.587. No
+   lleva ficha que pulsar porque su ejercicio no trae banco de palabras, así
+   que se teclea. Sigue pareciendo la raya que sustituye —sin caja, solo el
+   subrayado— para que la frase se lea igual que en papel. */
+/* El ancho se fija y no se deja al navegador: un `<input>` sin ancho mide
+   lo que su `size` por defecto —unos 230 px— y partía en dos los renglones
+   que llevan dos huecos. El guion lo hace crecer al teclear. */
+.hueco-escribir{display:inline-block;width:5.5rem;max-width:100%;
+  padding:0 .3rem;border:0;border-bottom:2px solid var(--acento);
+  background:transparent;color:var(--tinta);font:inherit;font-weight:600;
+  text-align:center;border-radius:0}
+.hueco-escribir:focus{outline:none;background:var(--acento-suave)}
 .huecos-pie{display:flex;align-items:center;gap:.8rem;margin:.9rem 0}
 .marcador{font-size:.9rem;color:var(--tenue)}
 /* compartir: tres botones iguales al pie de la lección. Discretos —son una
@@ -406,6 +418,7 @@ footer.sitio p{margin:.35rem 0}
 
 <script>window.CURSO_TEXTOS={"continuar": "Continue: lesson", "empezar": "Start from the beginning", "marcar": "Mark this lesson as done", "hecho": "Lesson done", "siguiente": "Next lesson", "tuyo": "done by you", "titulo": "Your progress", "aviso": "Progress is stored in this browser on this device only. There is no sign-up and nothing is sent anywhere. If you clear your browser data or open the course on another phone, your marks do not come with you.", "borrar": "Reset progress", "confirmar": "Clear all marks?", "copiar": "Save my progress", "copiado": "Code copied — paste it into your notes or a message to yourself", "restaurar": "Restore from a code", "pegar": "Paste your code here", "aplicar": "Restore", "cancelar": "Cancel", "malo": "That does not look like a progress code. Nothing was changed.", "menos": "That code has fewer lessons than you have marked (%a% instead of %b%). Restore anyway?", "hecho_restaurar": "Done: %n% lessons restored", "antes": "Before clearing your browser or switching phones, save your code."};window.CURSO_RAIZ="..";window.CURSO_PUBLICADAS=0;window.CURSO_DIAS={};</script>
 <script src="../progreso.js" defer></script>
+
 
 
 

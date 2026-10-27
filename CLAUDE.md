@@ -1576,6 +1576,59 @@ día de prueba: el discurso sobre los errores solo enseña DESPUÉS de contestar
   contestable y la clave al terminar. Dos mecanismos sobre la misma clave se
   pisarían.
 
+## «No hay nada para completar»: 1.467 rayas que no se podían rellenar (2026-10-27)
+
+Lo trajo el profesor con una captura de la lección 1-1 en el móvil: el
+ejercicio Б pide partir palabras en sílabas y ofrece seis rayas —**y no se
+podía escribir en ninguna**—.
+
+Tenía razón y el fallo era de los que no se ven leyendo el código: **en papel
+una raya es donde escribes; en una pantalla es una raya y nada más.** Los
+huecos pulsables del mismo día cubrían los ejercicios con banco de palabras
+—41 lecciones, 333 huecos—, y los otros **1.467** se quedaban inertes. Son la
+mayoría porque la mayoría de los ejercicios no piden elegir una ficha sino
+escribir la forma correcta.
+
+Ahora toda raya fuera de la clave es un `<input>`.
+
+- **Es el único trozo interactivo del sitio que nace encendido**, y a
+  propósito: un `<input>` se teclea sin JavaScript. El guion solo le ajusta el
+  ancho mientras escribes. Aquí el patrón de «nace oculto y lo enciende el
+  navegador» rompería la casilla para quien no tenga guion.
+- **No se corrigen, y es deliberado.** Para las fichas el banco es la red: la
+  respuesta sale de un conjunto cerrado y corto, así que una clave desalineada
+  se cae sola. Aquí no hay red — la clave de la 1-5 responde «usted: ¿Cómo se
+  llama?», con el rótulo dentro, y quien escribiera «¿Cómo se llama?» tendría
+  razón y se le diría que no. La clave está a un botón desde esta misma mañana,
+  al final de los ejercicios. Decirle a alguien que falló cuando acertó es lo
+  que este proyecto no hace.
+- **La clave conserva sus rayas**: ahí una raya es parte de una respuesta
+  —pasa una vez, en la 5-2—, no un sitio donde escribir.
+- **El ancho se fija en el CSS.** Un `<input>` sin `width` mide lo que su
+  `size` por defecto, unos 230 px, y eso parte en dos los renglones con dos
+  huecos. Se vio midiéndolo en el navegador, no razonándolo.
+- **`spellcheck="false"`**: el corrector va en el idioma del lector, que es
+  ruso, y subrayaría en rojo cada palabra española que se escriba.
+
+### Y la prueba encontró un fallo que llevaba meses publicado
+
+La prueba nueva exige que ninguna raya del Markdown se quede sin sitio donde
+escribir, y se puso en rojo en la lección **14-4**: nueve escritas, siete en la
+página.
+
+**Markdown se comía dos.** Seis guiones bajos sueltos pasan intactos —por eso
+esto no se vio nunca—, pero `¿Tiene ______?` y `¿______?` se emparejaron entre
+sí y Python-Markdown escribió `<strong><strong><strong>` abriendo en un
+renglón y cerrando tres más abajo: **dos huecos desaparecidos y tres réplicas
+del diálogo en negrita**, así desde que se escribió la lección.
+
+`_rayas_a_salvo` las escapa antes de convertir. Conserva la longitud del hueco
+y no toca nada más; ninguna lección mete un `______` dentro de un bloque de
+código, que es el único sitio donde `\_` se vería tal cual.
+
+Es el patrón de siempre: la regla era correcta («seis guiones bajos no son
+énfasis») y el caso que no la cumple no estaba contemplado.
+
 ## Terminar el curso: unidades 8 y 9 (2026-10-27)
 
 El profesor lo pidió así: «termina todo el curso hoy». Faltaban **260
@@ -1639,6 +1692,146 @@ nada dependa de llegar al final.
 `OPENAI_API_KEY`; van 4.166 frases y 1,57 USD para todo lo escrito), los
 dibujos y el `.apkg` de 22 MB. Los tres son comandos aparte y se hacen por
 tandas, no por lección.
+
+## La unidad 11: el nivel A1 cerrado (días 141-154)
+
+Catorce lecciones, semanas 21 y 22. El curso pasa de 140 a **154 de 365**, y
+con ellas **termina el nivel A1**: unidades 1 a 11, 1.316 tarjetas de
+vocabulario.
+
+**Esta unidad no enseña nada nuevo, y por eso fue distinta de escribir.** Son
+cinco días de repaso, tres de simulacro, dos de proyecto y un examen. No hay
+ni una palabra de vocabulario nuevo en los días de repaso: lo que hay es el
+material de veintidós semanas puesto en tablas de decisión.
+
+**Tres tipos de día que nunca se habían escrito** —`simulacro`, `proyecto`,
+`examen`— y que `validar.py` **no sabía comprobar**: `APARTADOS` no los tenía,
+así que un día de examen pasaba la validación con cualquier forma. Es el
+agujero de siempre (lo escrito y lo que corre dejando de coincidir) y el
+momento de cerrarlo es el primer uso. Ahora:
+
+- **simulacro**: Инструкция · Задания · Ключи и подсчёт · Разбор ошибок.
+- **examen**: Инструкция · Экзамен · Ключи и подсчёт · **Решение** — el
+  último apartado no es un análisis sino la decisión de pasar de nivel, que
+  es lo que distingue un examen de un simulacro.
+- **proyecto**: Разминка · Подготовка · Работа · Итог. No se corrige: se
+  prepara y se entrega.
+
+Lo que decidió el contenido:
+
+- **El día 146 es un simulacro de comprensión, y aquí no hay audio.** En vez
+  de fingirlo, la instrucción dice la verdad: lea el texto en voz alta **una
+  vez**, ciérrelo y conteste de memoria. Es más difícil que escuchar, no más
+  fácil, y se dice así.
+- **El corto del día 147 va con `[VERIFICAR]`** (regla 7). Desde este
+  contenedor no se puede comprobar qué cortos están disponibles ni con qué
+  subtítulos, así que el título lo pone el profesor. Lo que sí se escribió es
+  el **método de los tres visionados** y el vocabulario de cine, que no
+  depende de ninguna película, y una nota para que el día funcione igual si
+  hoy no hay corto.
+- **La rúbrica de los simulacros es la de `evaluacion.md`**, no una inventada,
+  y el oral añade el quinto criterio —pronunciación— con la lista de
+  interferencias de `contrastiva-ru-es.md` §1.
+- **Las cinco interferencias se evalúan por lo que cuestan, no por lo que
+  suenan.** La *o* átona convierte *tome* en *toma*, o sea lo cortés en
+  familiar; la *r* múltiple convierte *pero* en *perro*. El acento se queda
+  para siempre y eso se dice; lo que importa es que la palabra no se vuelva
+  otra.
+- **El día 150 es la lista negra entera**, los diez errores de
+  `contrastiva-ru-es.md` §8 con el texto donde están todos, y la técnica de
+  los **tres pasos** antes de entregar cualquier texto (artículos, ser/estar,
+  *yo* de más). Es la única técnica de examen que seguro se amortiza.
+- **El proyecto se parte en dos días a propósito**: el jueves el guion y el
+  borrador, el viernes la grabación con **seis palabras** delante y nada más.
+  Leer de un papel se oye, y no sirve para el lunes siguiente.
+- **El examen son 45 puntos y el 60 % son 27**, que es la regla escrita en
+  `evaluacion.md`. La tabla de decisión manda a un día concreto por grupo
+  perdido, no a «repasar».
+- **El domingo cierra con la lista can-do de 22 puntos** y con lo que cambia
+  en A2, que es una sola cosa: **el pasado**. El ruso distingue aspecto
+  («ел» / «съел») y el español distingue tiempo; es otro eje, y se avisa aquí
+  porque la unidad 12 entera va sobre eso.
+
+**El episodio de Ana e Iván del día 154 cierra el arco de A1** y es el del
+YAML («Lo ha resuelto él»). Termina con la frase que abre el nivel siguiente:
+*—¿Y eso cuándo se aprende? —A partir del lunes.*
+
+**Y la suite encontró dos cosas al estrenarse los tres tipos**, las dos del
+mismo sitio —el plegado de la clave, que es de esta misma mañana—:
+
+- **Un `examen` y un `proyecto` no tienen ejercicios**, así que el enlace «ir
+  a la clave» no se colocaba (no hay dónde) y la clave se plegaba igual: un
+  botón que abre algo a lo que nada apunta. `CON_CLAVE_DE_EJERCICIOS` deja
+  fuera los tres tipos sin ejercicios, cada uno por su motivo: `prueba` tiene
+  su propio envoltorio, `examen` lleva la clave dentro del apartado de
+  corrección porque hace falta ahí para decidir el nivel, y `proyecto` tiene
+  un modelo, no una respuesta. La lista la lee también la prueba, en vez de
+  copiarla.
+- **«Задания» en plural no lo cubría «Задание» en singular** —la última letra
+  es otra, así que no es subcadena— y los dos simulacros de comprensión se
+  quedaban sin enlace a su clave.
+
+**Lección de método, que costó dos suites de 8 minutos:** no se corre
+`tests.test_curso` mientras se escriben lecciones. `test_docs_esta_al_dia` y
+`test_los_tsv_de_anki_estan_al_dia` comparan el disco con lo construido, así
+que una lección nueva a mitad de la corrida las pone en rojo por una razón
+que no es un fallo. Se construye y se exporta **antes**, y la suite se corre
+**al cerrar la unidad**.
+
+## La unidad 10 entera: salud, cuerpo y médico (días 127-140)
+
+Catorce lecciones, semanas 19 y 20. El curso pasa de 126 a **140 de 365**.
+
+**Lo que se comprobó antes de escribir, y cambió el plan:** `tener que`, `hay
+que` y `deber` **ya estaban enseñados** (semana 17, día 5, en el aeropuerto).
+El calendario pone el día 131 como «tener que, hay que, deber», pero su foco
+dice «matices de los tres», así que ese día no introduce nada: compara. Su
+vocabulario nuevo es de consejo y de salud, no de gramática.
+
+Lo que decidió el contenido:
+
+- **El artículo en vez del posesivo es el hilo de las dos semanas.** *Me duele
+  **la** cabeza*, no *mi cabeza*. Se abre el lunes, se repite en los síntomas,
+  en urgencias (*se ha roto **el** brazo*) y en el test. Es el error nº 4 de la
+  lista negra y el que más dura.
+- **Las cuatro palabras que el ruso junta**: *el brazo* + *la mano* = «рука»;
+  *la pierna* + *el pie* = «нога». No es un matiz: decir *me duele el pie* en
+  la consulta hace que le miren el otro extremo de la pierna.
+- **Tres verbos para un «холодно»**: *hace frío* (tiempo), *tengo frío* (yo),
+  *está frío* (la cosa). Los tres ya existían sueltos; aquí se ponen juntos.
+- **`no tienes que` NO es «нельзя»** sino «no estás obligado». El prohibitivo
+  es *no debes*. Es la trampa del día 131 y una pregunta del test.
+- **El imperativo de usted cambia la vocal «al revés»** (-ar → -e, -er/-ir →
+  -a) y no hay lógica que ayude: se aprende como hecho. La forma de tú, en
+  cambio, es la de «él/ella», que ya se sabe desde la semana 4 — o sea que la
+  mitad del lunes es recordar, no aprender.
+- **La tilde de `tómalo` se explica contando sílabas**: dos, no; tres o más,
+  sí. Y el acento no se mueve nunca, que es lo que la tilde está sosteniendo.
+- **El 112 es uno y no tres.** En Rusia hay tres números; en España el
+  operador decide. Y la dirección se dice la primera, porque si se corta la
+  llamada la ayuda sale igual.
+- **Nada de lo que se come cura nada** (regla 7). El domingo habla de la dieta
+  mediterránea y del mate como costumbres, con el aviso explícito, y los datos
+  son los verificables sin cifra inventada: la declaración de la UNESCO de
+  2010, los horarios de las comidas y cómo se ceba un mate.
+
+**Seis entradas se habían colado por duplicado** y las cazó
+`revisar_lexico.py` al cerrar cada semana: `regular`, `quedarse en casa`,
+`avisar`, `la ventana`, `caminar`, `correr`, y las tres de frecuencia (`a
+veces`, `casi siempre`, `una vez / dos veces`). Las últimas tres importan más
+que las otras: **toda la frecuencia se enseñó en la semana 10, día 3**, así que
+el día 136 dejó de presentarla como nueva y la usa como material conocido, que
+es lo que pide `metodologia.md`. Quedan los 13 duplicados de siempre, todos de
+las semanas 1 a 14.
+
+**La prueba del día 139 se escribió para que `pruebas.py` la lea**, no solo
+para imprimirla: 15 preguntas en tres bloques, clave con «нед. N, день N» en
+cada respuesta. Comprobado ejecutando el analizador — las 15 se leen y cada una
+enlaza a su lección.
+
+**Lo que NO se regenera por unidad, y es deliberado**: el audio (hace falta
+`OPENAI_API_KEY`; ya van 4.404 frases y 1,67 USD para todo lo escrito), los
+dibujos y el `.apkg` de 22 MB. Los TSV sí, porque hay una prueba que lo exige.
 
 ## La Red de Publicidad de Yandex, cableada y apagada (2026-10-27)
 
@@ -1761,9 +1954,9 @@ de verdad.
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.
-- **126 lecciones escritas** (semanas 1-18 enteras): unidades 1 a 9 completas,
-  1.155 entradas de vocabulario. Las 21 primeras revisadas; el resto son
-  borradores.
+- **154 lecciones escritas** (semanas 1-22 enteras): **el nivel A1 completo**,
+  unidades 1 a 11, 1.316 tarjetas de vocabulario. Las 21 primeras revisadas; el
+  resto son borradores.
 - Sitio público en `docs/` con portada, índice, test de nivel, «О курсе»,
   contacto y política de privacidad. Tres idiomas (ru/es/en) —el test solo en
   ruso, como las lecciones—, tema claro y oscuro, y progreso del lector

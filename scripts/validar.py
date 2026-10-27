@@ -39,6 +39,19 @@ APARTADOS = {
     "repaso": ["Разминка", "Повторение", "Мини-тест", "Разбор ошибок", "Итог"],
     "prueba": ["Инструкция", "Тест", "Ключи и подсчёт", "Разбор ошибок"],
     "cultura": ["Разминка", "Материал", "Слова", "Задание", "Итог"],
+    # Los tres tipos de la unidad 11, que es la primera que los usa. Hasta
+    # aquí no estaban definidos, así que un día de examen pasaba la validación
+    # con cualquier forma: es el agujero de siempre —lo escrito y lo que corre
+    # dejando de coincidir— y el momento de cerrarlo es el primer uso.
+    #
+    # Un simulacro es una prueba del DELE partida en sesiones de 30 minutos:
+    # instrucciones, las tareas, la corrección y el análisis. Un examen es lo
+    # mismo pero decide si se pasa de nivel, así que su último apartado no es
+    # «разбор», sino la decisión. Un proyecto no se corrige: se prepara y se
+    # entrega.
+    "simulacro": ["Инструкция", "Задания", "Ключи и подсчёт", "Разбор ошибок"],
+    "examen": ["Инструкция", "Экзамен", "Ключи и подсчёт", "Решение"],
+    "proyecto": ["Разминка", "Подготовка", "Работа", "Итог"],
 }
 
 

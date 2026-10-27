@@ -187,6 +187,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 .hueco:empty::before{content:" "}
 .hueco.bien{border-color:#2e7d4f;color:#2e7d4f}
 .hueco.mal{border-color:#b3332b;color:#b3332b}
+/* Y el hueco que se ESCRIBE, que son casi todos: 1.398 de los 1.587. No
+   lleva ficha que pulsar porque su ejercicio no trae banco de palabras, así
+   que se teclea. Sigue pareciendo la raya que sustituye —sin caja, solo el
+   subrayado— para que la frase se lea igual que en papel. */
+/* El ancho se fija y no se deja al navegador: un `<input>` sin ancho mide
+   lo que su `size` por defecto —unos 230 px— y partía en dos los renglones
+   que llevan dos huecos. El guion lo hace crecer al teclear. */
+.hueco-escribir{display:inline-block;width:5.5rem;max-width:100%;
+  padding:0 .3rem;border:0;border-bottom:2px solid var(--acento);
+  background:transparent;color:var(--tinta);font:inherit;font-weight:600;
+  text-align:center;border-radius:0}
+.hueco-escribir:focus{outline:none;background:var(--acento-suave)}
 .huecos-pie{display:flex;align-items:center;gap:.8rem;margin:.9rem 0}
 .marcador{font-size:.9rem;color:var(--tenue)}
 /* compartir: tres botones iguales al pie de la lección. Discretos —son una
@@ -1313,6 +1325,7 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
 {f'<script>window.CURSO_TEST={json.dumps(test, ensure_ascii=False)};{TEST_JS}</script>' if test else ""}
 {f'<script>window.CURSO_PRUEBA={json.dumps(prueba, ensure_ascii=False)};{PRUEBA_JS}</script>' if prueba else ""}
 {f'<script>window.CURSO_HUECOS={json.dumps({"ejercicios": huecos, "t": t["huecos"]}, ensure_ascii=False)};{HUECOS_JS}</script>' if huecos else ""}
+{f'<script>{CASILLA_JS}</script>' if 'hueco-escribir' in cuerpo else ""}
 </body>
 </html>"""
 
@@ -1887,6 +1900,77 @@ def _envolver_huecos(html_: str, ejercicios, t) -> tuple[str, list | None]:
     return html_, (datos or None)
 
 
+def _rayas_a_salvo(cuerpo: str) -> str:
+    r"""Escapa los `______` para que Markdown no los lea como cursiva.
+
+    Seis guiones bajos sueltos pasan intactos, y por eso esto no se vio en dos
+    años: lo que no pasa es un `______` pegado a un signo. En la lección 14-4,
+    `¿Tiene ______?` y `¿______?` se emparejaron entre sí y
+    Python-Markdown escribió `<strong><strong><strong>` abriendo en una línea
+    y cerrando tres renglones más abajo: **dos huecos desaparecidos y tres
+    réplicas del diálogo en negrita**, publicados así desde que se escribió la
+    lección.
+
+    El escape conserva la longitud del hueco y no toca nada más. Ninguna
+    lección mete un `______` dentro de un bloque de código, que es el único
+    sitio donde `\_` se vería tal cual."""
+    return re.sub(r"_{3,}", lambda m: "\\_" * len(m.group(0)), cuerpo)
+
+
+# Un hueco que se escribe. Se deja `type="text"` y nada más: un `<input>`
+# funciona SIN JavaScript, así que este es el único trozo interactivo del
+# sitio que nace encendido. El guion solo le ajusta el ancho mientras se
+# teclea, que es cosmético.
+CASILLA_JS = r"""(function(){
+  var cajas=document.querySelectorAll('.hueco-escribir');
+  if(!cajas.length)return;
+  function ancho(c){ c.style.width=Math.max(5.5,(c.value.length+1)*0.62)+'rem' }
+  cajas.forEach(function(c){ c.addEventListener('input',function(){ancho(c)}) });
+})();"""
+
+
+def _casillas_para_escribir(html_: str) -> str:
+    """Las rayas que quedan se vuelven casillas donde se escribe.
+
+    Lo trajo el profesor mirando la lección 1-3 en el móvil: «por ejemplo
+    estos espacios vacios, no hay nada para completar». Tenía razón y el
+    fallo era de los que no se ven leyendo el código: en papel una raya es
+    donde escribes, en una pantalla es una raya y nada más.
+
+    `_envolver_huecos` ya había convertido en fichas pulsables los ejercicios
+    que traen banco de palabras Y una clave que se casa con los huecos sin
+    ninguna duda: **23 lecciones y 189 huecos**. Los otros **1.398** —el 88%—
+    se quedaban inertes, y son la mayoría del curso porque la mayoría de los
+    ejercicios no son de elegir una ficha sino de escribir la forma correcta.
+
+    **No se corrigen, y es deliberado.** Para las fichas el banco es la red:
+    la respuesta sale de un conjunto cerrado y corto, así que una clave
+    desalineada se cae sola. Aquí no hay red —la clave de la 1-5 responde
+    «usted: ¿Cómo se llama?», con el rótulo dentro, y quien escribiera
+    «¿Cómo se llama?» tendría razón y se le diría que no—. La clave está a un
+    botón desde el 2026-10-27, al final de los ejercicios. Decirle a alguien
+    que falló cuando acertó es exactamente lo que este proyecto no hace.
+
+    **La clave queda fuera** de la conversión: ahí una raya es parte de una
+    respuesta, no un sitio donde escribir."""
+    cabecera = next((m for m in re.finditer(r"<h2[^>]*>(.*?)</h2>", html_, re.S)
+                     if re.sub("<[^>]+>", "", m.group(1)).strip() == "Ответы"), None)
+    fin = cabecera.start() if cabecera else len(html_)
+    cuenta = [0]
+
+    def casilla(m):
+        cuenta[0] += 1
+        return ('<input type="text" class="hueco-escribir" autocomplete="off" '
+                # El corrector del navegador está en el idioma del lector, que
+                # es ruso: sin esto subraya en rojo cada palabra española.
+                # `size` para que el ancho sea razonable aunque el CSS no
+                # llegue (correo, modo lectura, una hoja impresa).
+                'autocapitalize="off" spellcheck="false" size="8" '
+                f'aria-label="{cuenta[0]}">')
+
+    return re.sub(r"_{3,}", casilla, html_[:fin]) + html_[fin:]
+
+
 def _firma(autor: dict) -> str:
     """El autor del curso: nombre y descripción, o solo la descripción.
 
@@ -2194,7 +2278,26 @@ def _pregunta_al_navegador(q, todos) -> dict:
 # `validar.problemas` para exigir que haya clave, y por lo mismo: es lo que de
 # verdad distingue un ejercicio de una explicación, en las tres formas que
 # tienen los días del curso.
-MARCAS_DE_EJERCICIO = ("Упражнение", "Мини-тест", "Правда или неправда", "Задание")
+# «Задания» en plural es el apartado de los simulacros, y no lo cubre
+# «Задание» en singular: la última letra es otra, así que no es subcadena. Sin
+# él, los días 146 y 149 se quedaban sin enlace a su clave.
+MARCAS_DE_EJERCICIO = ("Упражнение", "Мини-тест", "Правда или неправда",
+                       "Задание", "Задания")
+
+# Qué tipos de día tienen ejercicios cuya clave se pliega y se enlaza. Los
+# otros tres NO, y cada uno por su motivo:
+#
+#   `prueba`   tiene su propio envoltorio, con el test contestable y la clave
+#              al terminar; dos mecanismos sobre la misma clave se pisarían.
+#   `examen`   lleva la clave DENTRO del apartado «Ключи и подсчёт», porque
+#              hace falta ahí mismo para decidir si se pasa de nivel. Lo que
+#              queda en `## Ответы` es el comentario de los fallos típicos.
+#   `proyecto` no tiene ejercicios: se prepara y se entrega. Su `## Ответы` es
+#              un modelo para comparar, no una respuesta.
+#
+# Sin esta lista, el enlace no se colocaba —no hay dónde— y la clave se
+# plegaba igual: un botón que abre algo a lo que nada apunta.
+CON_CLAVE_DE_EJERCICIOS = ("leccion", "repaso", "cultura", "simulacro")
 
 CLAVE_SCRIPT = """<script>(function(){
   var caja=document.getElementById('clave'), zona=document.getElementById('clave-boton');
@@ -2313,19 +2416,23 @@ def construir_leccion(d, cfg, t, idiomas, destino, cal, todos, audio=None,
     siguiente = next((x for x in todos[i + 1:] if x.ruta.exists()), None)
     L = t["leccion"]
 
-    html_cuerpo = _botones_de_audio(md(cuerpo), audio or {}, "..")
+    html_cuerpo = _botones_de_audio(md(_rayas_a_salvo(cuerpo)), audio or {}, "..")
     html_cuerpo = _dibujos_en_el_vocabulario(html_cuerpo, dibujos or {}, "..")
 
     # Los ejercicios de rellenar huecos, si su clave se puede casar con los
     # huecos sin ninguna duda. `huecos.leer` descarta los que no, y entonces
     # la página se queda exactamente como está hoy.
     html_cuerpo, datos_huecos = _envolver_huecos(html_cuerpo, huecos.leer(cuerpo), t)
+    # Y las rayas que quedan —las de los ejercicios sin banco de palabras, que
+    # son el 88%— se vuelven casillas donde se escribe. Va DESPUÉS de las
+    # fichas: aquellas ya se han llevado sus `______` y no hay que tocarlas.
+    html_cuerpo = _casillas_para_escribir(html_cuerpo)
     html_cuerpo = _anuncios_en_la_leccion(_marcar_contraste(_tablas_envueltas(html_cuerpo)), cfg)
 
     # Los días de tipo `prueba` traen quince preguntas con su clave, ya escritas
     # y revisadas por el profesor. Si se pueden leer con seguridad, se ofrecen
     # para contestar; si no, la página se queda exactamente como está.
-    if d.tipo != "prueba":
+    if d.tipo in CON_CLAVE_DE_EJERCICIOS:
         html_cuerpo = _envolver_clave(html_cuerpo, t)
 
     datos_prueba = None
