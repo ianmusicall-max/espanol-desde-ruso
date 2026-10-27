@@ -630,6 +630,10 @@ class TestLaPublicidad(unittest.TestCase):
         cfg = copy.deepcopy(self.cfg)
         cfg["adsense"] = {"cliente": "", "bloques": {}}
         cfg["analitica"] = {"google": ""}
+        # Y Yandex, por el mismo motivo: el día que el profesor pegue un
+        # identificador en `web/sitio.yaml`, estas pruebas no pueden cambiar de
+        # significado sin que nadie haya tocado el generador.
+        cfg["yandex"] = {"bloques": {}}
         cfg.update(cambios)
         destino = pathlib.Path(tempfile.mkdtemp())
         construir_sitio.construir(destino, cfg, self.textos)
@@ -2434,3 +2438,91 @@ class TestLaClaveDeLosEjercicios(unittest.TestCase):
         p = self._pagina(plan.dia(CAL, 15, 2))
         self.assertIn(f'data-ver="{html.escape(L["clave_ver"])}"', p)
         self.assertIn(f'data-ocultar="{html.escape(L["clave_ocultar"])}"', p)
+
+
+class TestLaRedDeYandex(unittest.TestCase):
+    """РСЯ, la otra mitad del público.
+
+    AdSense no sirve anuncios a usuarios dentro de Rusia desde marzo de 2022 y
+    este curso está escrito en ruso, así que una parte grande de los lectores
+    cae justo en ese hueco. Lo que estas pruebas vigilan no es el dinero sino
+    las dos cosas que se rompen en silencio: que se cargue algo de terceros
+    cuando la política de privacidad dice que no, y que dos redes se peleen por
+    el mismo hueco."""
+
+    BLOQUE = "R-A-20290424-1"
+
+    def setUp(self):
+        self.textos = construir_sitio.cargar_textos()
+        self.cfg = construir_sitio.cargar_config()
+
+    def _con(self, yandex=None, adsense=None):
+        cfg = copy.deepcopy(self.cfg)
+        cfg["adsense"] = adsense or {"cliente": "", "bloques": {}}
+        cfg["analitica"] = {"google": ""}
+        cfg["yandex"] = {"bloques": yandex or {}}
+        destino = pathlib.Path(tempfile.mkdtemp())
+        construir_sitio.construir(destino, cfg, self.textos)
+        return destino
+
+    def test_apagado_no_carga_nada_de_yandex(self):
+        """Vacío = cero scripts de terceros, que es lo que deja que la política
+        de privacidad diga la verdad."""
+        p = (self._con() / "semana-01" / "dia-1.html").read_text(encoding="utf-8")
+        for rastro in ("context.js", "yaContextCb", "yandex_rtb"):
+            self.assertNotIn(rastro, p, rastro)
+
+    def test_el_cargador_va_una_sola_vez_aunque_haya_tres_bloques(self):
+        """`context.js` se instala una vez por página y sirve para todos los
+        huecos. Tres copias serían tres descargas del mismo guion."""
+        p = (self._con({"cabecera": self.BLOQUE, "dentro": self.BLOQUE,
+                        "pie": self.BLOQUE}) / "semana-01" / "dia-1.html").read_text(encoding="utf-8")
+        self.assertEqual(p.count("ads/system/context.js"), 1)
+        self.assertEqual(p.count('class="anuncio"'), 3)
+
+    def test_el_contenedor_y_el_render_apuntan_al_mismo_id(self):
+        """Si el `renderTo` no casa con el id del `<div>`, Yandex no pinta nada
+        y la página se queda con un hueco mudo: no falla, no avisa."""
+        p = (self._con({"pie": self.BLOQUE}) / "semana-01" / "dia-1.html").read_text(encoding="utf-8")
+        destino = f"yandex_rtb_{self.BLOQUE}"
+        self.assertIn(f'<div id="{destino}"></div>', p)
+        self.assertIn(f'"renderTo":"{destino}"', p)
+        self.assertIn(f'"blockId":"{self.BLOQUE}"', p)
+
+    def test_un_hueco_una_red(self):
+        """Dos anuncios en el mismo contenedor no es una opción. Con los dos
+        identificadores puestos manda Yandex, porque AdSense funciona en
+        anuncios automáticos y no usa estas tres ranuras."""
+        destino = self._con({"pie": self.BLOQUE},
+                            adsense={"cliente": "ca-pub-1", "bloques": {"pie": "333"}})
+        p = (destino / "semana-01" / "dia-1.html").read_text(encoding="utf-8")
+        self.assertIn("yandex_rtb", p)
+        self.assertNotIn('data-ad-slot="333"', p)
+
+    def test_enciende_el_aviso_de_cookies_y_la_politica(self):
+        """Cargar una red de publicidad y no decirlo es exactamente la forma de
+        que la política de privacidad mienta."""
+        destino = self._con({"pie": self.BLOQUE})
+        self.assertIn('id="cookies"', (destino / "index.html").read_text(encoding="utf-8"))
+        priv = (destino / "es" / "privacy.html").read_text(encoding="utf-8")
+        self.assertIn(self.textos["es"]["privacidad"]["anuncios_yandex"][:40], priv)
+        self.assertIn("yandex.ru/support", priv, "hace falta el enlace para desactivar")
+        sin = (self._con() / "es" / "privacy.html").read_text(encoding="utf-8")
+        self.assertNotIn("Yandex", sin)
+
+    def test_el_identificador_no_puede_inyectar_codigo(self):
+        """El identificador sale de un YAML que edita una persona a mano y se
+        escribe DENTRO de un `<script>`, donde `html.escape` no protege de
+        nada: una comilla cerraría la llamada. Por eso se limpia a lo que un
+        bloque de РСЯ puede ser."""
+        sucio = construir_sitio._anuncio_yandex('R-A-1"});alert(1);//<script>')
+        # Las letras sobreviven y no pasa nada: lo que no puede sobrevivir es
+        # un carácter que cierre la cadena, la llamada o la etiqueta.
+        for malo in ('"', "'", "}", ")", ";", "/", "<", ">", " "):
+            self.assertNotIn(malo, sucio.split('"blockId":"')[1].split('"')[0],
+                             f"el identificador deja pasar {malo!r}")
+        self.assertEqual(sucio.count("<script>"), 1, "no se puede abrir un segundo script")
+
+    def test_los_tres_idiomas_tienen_el_texto_de_la_politica(self):
+        for i in ("ru", "es", "en"):
+            self.assertTrue(self.textos[i]["privacidad"]["anuncios_yandex"].strip(), i)

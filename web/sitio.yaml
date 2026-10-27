@@ -41,6 +41,33 @@ adsense:
     dentro: ""         # entre la teoría y los ejercicios
     pie: ""            # al final del texto
 
+# La Red de Publicidad de Yandex (РСЯ). Vacío = no se carga nada de Yandex.
+#
+# POR QUÉ ADEMÁS DE ADSENSE: AdSense no sirve anuncios a usuarios dentro de
+# Rusia desde marzo de 2022, y este curso está en ruso. РСЯ cubre justo ese
+# hueco; las dos redes no compiten, se reparten el mapa.
+#
+# UN HUECO, UNA RED. Si una ranura tiene identificador de Yandex, manda Yandex;
+# si no, AdSense. AdSense funciona hoy en anuncios automáticos, que se colocan
+# solos y no usan estas tres ranuras, así que dárselas a Yandex no le quita
+# nada.
+#
+# Aquí NO hay un identificador de cuenta: cada bloque trae el suyo entero
+# (`R-A-20290424-1`), y el cargador se pone solo en cuanto haya uno.
+#
+# El bloque creado el 2026-10-27 para espanoldesderuso.com (ID de sitio
+# 20290424), tipo Banner, tamaño adaptativo:  R-A-20290424-1
+#
+# SIGUE APAGADO A PROPÓSITO: el sitio está en revisión de AdSense y su revisor
+# abre la web en vivo. Encontrarse otra red a media revisión es pedir un
+# rechazo. En cuanto llegue el veredicto, se pega el identificador en la ranura
+# que se quiera y se reconstruye.
+yandex:
+  bloques:
+    cabecera: ""       # el bloque de arriba, debajo del título
+    dentro: ""         # entre la teoría y los ejercicios
+    pie: ""            # al final del texto
+
 # Google Analytics. Vacío = sin analítica y sin cookies.
 analitica:
   google: ""           # G-XXXXXXXXXX

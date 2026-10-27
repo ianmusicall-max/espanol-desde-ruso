@@ -1640,6 +1640,52 @@ nada dependa de llegar al final.
 dibujos y el `.apkg` de 22 MB. Los tres son comandos aparte y se hacen por
 tandas, no por lección.
 
+## La Red de Publicidad de Yandex, cableada y apagada (2026-10-27)
+
+El profesor se dio de alta en РСЯ y creó el primer bloque. **Por qué además de
+AdSense, y no en vez de**: AdSense no sirve anuncios a usuarios dentro de Rusia
+desde marzo de 2022, y este curso está escrito en ruso. Las dos redes no
+compiten, se reparten el mapa.
+
+- **Se enciende por BLOQUE, no por cuenta**, al revés que AdSense: no hay un
+  `ca-pub-…` que valga para todo, cada hueco trae su identificador entero
+  (`R-A-20290424-1`). Por eso `hay_yandex` mira si hay ALGÚN bloque puesto.
+- **Un hueco, una red.** Dos anuncios en el mismo contenedor no es una opción,
+  así que si la ranura tiene id de Yandex manda Yandex y si no, AdSense. No es
+  arbitrario: AdSense funciona hoy en **anuncios automáticos**, que se colocan
+  solos y no usan estas tres ranuras, así que dárselas a Yandex no le quita
+  nada.
+- **El cargador va una vez por página** (`context.js` en el `<head>`) y sirve
+  para los tres huecos. `yaContextCb` es una cola, así que el orden entre el
+  `<head>` y el cuerpo da igual y no hace falta esperar al `DOMContentLoaded`.
+- **El identificador se limpia a `[A-Za-z0-9_-]`**, y esto no es paranoia de
+  más: se escribe DENTRO de un `<script>`, donde `html.escape` no protege de
+  nada —una comilla cerraría la llamada—. Sale de un YAML que edita una
+  persona a mano. Hay una prueba que mete comillas y llaves.
+- **Enciende el aviso de cookies y un párrafo propio en la política**, con el
+  enlace de exclusión de Yandex. Cargar una red y no decirlo es exactamente la
+  forma de que la política mienta, y la de aquí presume de no cargar nada de
+  terceros cuando está vacía.
+
+**Sigue APAGADO a propósito** (`web/sitio.yaml`, `yandex.bloques` vacío): el
+sitio está en revisión de AdSense y su revisor abre la web en vivo.
+Encontrarse otra red a media revisión es pedir un rechazo. En cuanto llegue el
+veredicto es pegar el identificador en la ranura que se quiera y reconstruir.
+
+**De paso, `TestLaPublicidad._con()` apaga ahora también Yandex**, por la misma
+razón que ya tenía escrita para AdSense: el día que el profesor pegue un
+identificador, esas pruebas no pueden cambiar de significado sin que nadie haya
+tocado el generador.
+
+**Lo que no se resolvió y es del profesor**: con qué estatus puede ser partner
+de РСЯ. Es ciudadano peruano con visa de estudiante viviendo en Rusia; el
+estatus «физлицо» está cerrado a partners nuevos residentes, самозанятый
+(НПД) solo lo pueden pedir ciudadanos de la UEEA y de Ucrania, e ИП pide РВП o
+ВНЖ. Queda preguntar a soporte de Yandex y a un contable: 183 días en Rusia lo
+hacen residente fiscal ruso aunque no tenga permiso de residencia, y eso toca
+también su AdSense (Google cerró las cuentas de editores rusos en agosto de
+2024).
+
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.

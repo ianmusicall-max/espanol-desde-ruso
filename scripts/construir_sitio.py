@@ -1044,12 +1044,62 @@ def cargar_test(ruta: pathlib.Path = TEST) -> dict:
 
 def hay_anuncios(cfg): return bool((cfg.get("adsense") or {}).get("cliente"))
 def hay_analitica(cfg): return bool((cfg.get("analitica") or {}).get("google"))
-def necesita_cookies(cfg): return hay_anuncios(cfg) or hay_analitica(cfg)
+
+
+def hay_yandex(cfg):
+    """La Red de Publicidad de Yandex (РСЯ), que es la otra mitad del público.
+
+    AdSense **no sirve anuncios a usuarios dentro de Rusia** desde marzo de
+    2022, y este curso está escrito en ruso: una parte grande de los lectores
+    cae justo en ese hueco. РСЯ lo cubre.
+
+    Se enciende por BLOQUE y no por cuenta, al revés que AdSense: aquí no hay
+    un identificador de editor que valga para todo, cada hueco tiene el suyo
+    (`R-A-…-1`). Así que basta con que uno esté puesto para que haga falta el
+    cargador y el aviso de cookies."""
+    return any((cfg.get("yandex") or {}).get("bloques", {}).values())
+
+
+def necesita_cookies(cfg):
+    return hay_anuncios(cfg) or hay_analitica(cfg) or hay_yandex(cfg)
 
 
 # ------------------------------------------------------------------- fragmentos
+def _anuncio_yandex(bloque: str) -> str:
+    """Un bloque de РСЯ. El identificador ya trae dentro la cuenta y el sitio.
+
+    El contenedor y la llamada van juntos, como los pide Yandex: un `<div>` con
+    un id derivado del bloque y un `render` que apunta a ese id. El cargador
+    (`context.js`) va una sola vez en el `<head>`, en `cabeza_terceros`.
+
+    `yaContextCb` es una cola: el guion se carga `async`, así que la llamada se
+    encola y Yandex la ejecuta cuando el cargador llega. Por eso el orden entre
+    el `<head>` y el cuerpo no importa y no hace falta `defer` ni esperar al
+    `DOMContentLoaded`."""
+    seguro = re.sub(r"[^A-Za-z0-9_-]", "", bloque)
+    destino = f"yandex_rtb_{seguro}"
+    return (f'<div class="anuncio" data-etiqueta="Ads">'
+            f'<div id="{destino}"></div>'
+            f"<script>window.yaContextCb.push(()=>{{"
+            f'Ya.Context.AdvManager.render({{"blockId":"{seguro}","renderTo":"{destino}"}})'
+            f"}})</script></div>")
+
+
 def anuncio(cfg: dict, ranura: str) -> str:
-    """Un bloque de AdSense, o nada. Sin cliente no se escribe ni el contenedor."""
+    """Un bloque de publicidad en ese hueco, o nada.
+
+    **Un hueco, una red.** Dos anuncios en el mismo contenedor no es una
+    opción, así que si el hueco tiene identificador de Yandex manda Yandex, y
+    si no, AdSense. No es un orden arbitrario: AdSense funciona hoy en
+    **anuncios automáticos**, que se colocan solos y no usan estos tres huecos,
+    mientras que un bloque de РСЯ solo existe donde se le pone. Dárselos a
+    Yandex no le quita nada a AdSense.
+
+    Sin identificador no se escribe ni el contenedor: un `<div>` vacío
+    reservando alto dejaría un agujero en mitad de la lección."""
+    yan = ((cfg.get("yandex") or {}).get("bloques") or {}).get(ranura)
+    if yan:
+        return _anuncio_yandex(str(yan))
     cliente = (cfg.get("adsense") or {}).get("cliente")
     bloque = ((cfg.get("adsense") or {}).get("bloques") or {}).get(ranura)
     if not cliente or not bloque:
@@ -1065,6 +1115,10 @@ def cabeza_terceros(cfg: dict) -> str:
     if hay_anuncios(cfg):
         c = html.escape(cfg["adsense"]["cliente"])
         partes.append(f'<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={c}" crossorigin="anonymous"></script>')
+    if hay_yandex(cfg):
+        # Una sola vez por página, y sirve para los tres huecos.
+        partes.append('<script>window.yaContextCb=window.yaContextCb||[]</script>'
+                      '<script src="https://yandex.ru/ads/system/context.js" async></script>')
     if hay_analitica(cfg):
         m = html.escape(cfg["analitica"]["google"])
         partes.append(f'<script async src="https://www.googletagmanager.com/gtag/js?id={m}"></script>'
@@ -1923,6 +1977,13 @@ def construir_estaticas(cfg, t, idiomas, idioma, destino, cal, raiz) -> None:
     bloques = [f"<h1>{html.escape(pr['titulo'])}</h1>",
                f"<p>{html.escape(pr['actualizado'])}: {dt.date.today().isoformat()}.</p>",
                f"<h2>{html.escape(pr['propio'])}</h2><p>{html.escape(pr['propio_texto'])}</p>"]
+    if hay_yandex(cfg):
+        # Si carga Yandex hay que decirlo, y con su propio enlace de exclusión:
+        # la política no puede hablar solo de Google cuando el lector ruso ve
+        # anuncios de otra red.
+        bloques += [f"<h2>{html.escape(pr['anuncios'])}</h2><p>{html.escape(pr['anuncios_yandex'])}</p>",
+                    f'<p><a href="https://yandex.ru/support/partner2/web/behavioral-advertising.html" '
+                    f'rel="nofollow noopener">yandex.ru</a></p>']
     if hay_anuncios(cfg):
         bloques += [f"<h2>{html.escape(pr['anuncios'])}</h2><p>{html.escape(pr['anuncios_texto'])}</p>",
                     f'<p>{html.escape(pr["anuncios_optar"])} '
