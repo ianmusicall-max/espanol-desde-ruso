@@ -35,7 +35,7 @@ autor:
 # El alta se pide en adsense.google.com; dan el identificador ca-pub-… y
 # después los identificadores de cada bloque.
 adsense:
-  cliente: ""          # ca-pub-0000000000000000
+  cliente: "ca-pub-6339208855562328"   # la cuenta estándar del profesor
   bloques:
     cabecera: ""       # el bloque de arriba, debajo del título
     dentro: ""         # entre la teoría y los ejercicios

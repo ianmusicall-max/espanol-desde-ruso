@@ -310,6 +310,41 @@ partir de 100 USD acumulados. Un rechazo no penaliza y se puede volver a pedir.
 O sea que **solicitar el alta hoy es gratis**, y lo único de toda esta lista que
 cuesta dinero es el dominio.
 
+### AdSense encendido (2026-10-27)
+
+El dominio se compró en Cloudflare Registrar (`espanoldesderuso.com`, 10,46
+USD/año al coste) y con él `scripts/revisar_adsense.py` pasa a **10 listo · 0
+falta**. Lo que queda son las tres cosas que no se pueden comprobar desde este
+contenedor: que la web cargue, el candado y el CMP.
+
+**La cuenta del profesor es UNA, estándar, `ca-pub-6339208855562328`.** Esto
+costó un rodeo que conviene no repetir: la primera pantalla que se vio decía
+«No se aprobó su cuenta — cierre su otra cuenta», y se leyó como que había dos
+cuentas en conflicto. **Era una lectura equivocada**: esa pantalla es la
+sección *AdSense para YouTube*, que dentro de la MISMA cuenta tiene su propio
+problema de duplicados. La parte de webs estaba sana —Sitios, Anuncios, Pagos
+con la información ya dada—, y el identificador es el mismo en las dos.
+
+La señal que lo resuelve: si la barra lateral enseña **Sitios**, **Anuncios** y
+**Pagos**, es la cuenta estándar completa, aunque la sección de YouTube se
+queje. El `pub-…` de la URL es el mismo para las dos.
+
+**Los tres bloques siguen vacíos a propósito.** `anuncio()` no escribe el
+contenedor sin el id de bloque, así que hoy el sitio lleva el script de la
+cabecera y el `ads.txt` y nada más: eso es suficiente para los **anuncios
+automáticos**, que es lo que AdSense coloca mientras el profesor no cree
+bloques manuales. Si algún día los crea, van en `adsense.bloques` y aparecen
+los tres huecos (arriba, entre teoría y ejercicios, y al pie).
+
+**De paso, una prueba que dependía de producción.** `TestLaPublicidad._con()`
+partía del `web/sitio.yaml` real, así que `_con()` sin argumentos significaba
+«sin anuncios» **por casualidad**: funcionaba solo mientras ese fichero
+estuviera vacío. Al poner el identificador, las dos pruebas del caso «sin
+anuncios» se pusieron en rojo sin que nadie hubiera tocado el generador. Ahora
+el ayudante apaga la publicidad y la analítica a mano, y la prueba que quiera
+anuncios los pide. Es el mismo error de siempre con otra cara: lo que se prueba
+y lo que corre tienen que ser lo que la prueba DICE, no lo que había ese día.
+
 ### El dominio: precios buscados el 2026-10-26
 
 El usuario pidió «el más barato de todos». La respuesta corta es que **el

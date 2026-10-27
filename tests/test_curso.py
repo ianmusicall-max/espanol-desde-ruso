@@ -592,7 +592,19 @@ class TestLaPublicidad(unittest.TestCase):
         self.cfg = construir_sitio.cargar_config()
 
     def _con(self, **cambios):
+        """Construye con la publicidad APAGADA salvo que la prueba la encienda.
+
+        Antes partía del `web/sitio.yaml` real tal cual, y eso funcionó solo
+        mientras ese fichero estuvo vacío: `_con()` significaba «sin anuncios»
+        por casualidad, no por decisión. El día que el profesor puso su
+        identificador de AdSense, las dos pruebas del caso «sin anuncios»
+        se pusieron en rojo sin que nadie hubiera tocado el generador.
+
+        Una prueba no puede depender de un valor de producción: aquí se apagan
+        a mano, y la que quiera anuncios los pide con `adsense=...`."""
         cfg = copy.deepcopy(self.cfg)
+        cfg["adsense"] = {"cliente": "", "bloques": {}}
+        cfg["analitica"] = {"google": ""}
         cfg.update(cambios)
         destino = pathlib.Path(tempfile.mkdtemp())
         construir_sitio.construir(destino, cfg, self.textos)
