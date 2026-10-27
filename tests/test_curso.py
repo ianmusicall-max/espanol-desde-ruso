@@ -1450,6 +1450,41 @@ class TestElTestDeNivel(unittest.TestCase):
         self.assertIn("<noscript>", pagina)
         self.assertEqual(revisar_adsense.enlaces_rotos(otro), [])
 
+    # ---- el cronómetro
+    def test_el_cronometro_es_por_pregunta_y_viaja_al_navegador(self):
+        """Por pregunta y no global: un reloj para todo el test solo mete
+        prisa, y lo que hace falta es que no dé tiempo a buscar la respuesta en
+        el diccionario. Quien lo busca queda colocado más adelante de lo que
+        sabe y se pierde en la primera lección."""
+        self.assertEqual(self._datos()["segundos"],
+                         self.preguntas["segundos_por_pregunta"])
+        self.assertGreater(self.preguntas["segundos_por_pregunta"], 0)
+
+    def test_al_agotarse_cuenta_como_fallada_y_pasa(self):
+        """`responder(-1)` es «se acabó el tiempo», y entra en `fallos` como
+        cualquier otra: para colocar a alguien, lo que no sabe en treinta
+        segundos no lo sabe."""
+        self.assertIn("responder(-1)", construir_sitio.TEST_JS)
+        self.assertIn("tarde:true", construir_sitio.TEST_JS)
+
+    def test_se_puede_apagar_desde_el_yaml_sin_tocar_codigo(self):
+        """El profesor ajusta los segundos —o los pone a 0— sin que nadie
+        tenga que abrir el generador."""
+        self.assertIn("if(!D.segundos)return", construir_sitio.TEST_JS)
+        datos = {"preguntas": self.lista, "segundos_por_pregunta": 0}
+        otro = pathlib.Path(tempfile.mkdtemp())
+        construir_sitio.construir(otro, construir_sitio.cargar_config(),
+                                  construir_sitio.cargar_textos(), preguntas=datos)
+        pagina = (otro / "test.html").read_text(encoding="utf-8")
+        m = re.search(r"window\.CURSO_TEST=(\{.*?\});\(function", pagina, re.S)
+        self.assertEqual(json.loads(m.group(1))["segundos"], 0)
+
+    def test_el_reloj_se_para_al_contestar_y_al_terminar(self):
+        """Sin pararlo, el de la pregunta anterior seguiría corriendo y
+        mandaría un `responder(-1)` encima de la siguiente."""
+        self.assertIn("function responder(n){\n    parar();", construir_sitio.TEST_JS)
+        self.assertIn("function resultado(){\n    parar();", construir_sitio.TEST_JS)
+
     def test_el_test_esta_en_el_sitemap_una_sola_vez(self):
         cfg = dict(construir_sitio.cargar_config(), dominio="https://ejemplo.com")
         destino = pathlib.Path(tempfile.mkdtemp())

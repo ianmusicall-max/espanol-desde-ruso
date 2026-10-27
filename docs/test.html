@@ -94,6 +94,10 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
   background:var(--papel);border:1.5px solid var(--linea);border-radius:9px;
   padding:.6rem .8rem;cursor:pointer;transition:border-color .12s,background .12s}
 .test-ops button:hover{border-color:var(--acento)}
+.test-seg{float:inline-end;font-variant-numeric:tabular-nums;color:var(--tenue);font-weight:600}
+.test-reloj{height:3px;border-radius:999px;background:var(--linea);overflow:hidden;margin:0 0 .9rem}
+.test-reloj i{display:block;height:100%;background:var(--acento);opacity:.55}
+.test-tarde{display:block;color:var(--acento);font-weight:600;font-size:.84rem}
 .test-barra{height:4px;border-radius:999px;background:var(--linea);overflow:hidden;margin-top:1rem}
 .test-barra i{display:block;height:100%;background:var(--acento);transition:width .2s}
 .test-fallo{border-inline-start:3px solid var(--acento);padding:.1rem 0 .1rem .8rem;margin:.7rem 0}
@@ -292,18 +296,43 @@ footer.sitio p{margin:.35rem 0}
 <script>window.CURSO_TEXTOS={"continuar": "Продолжить: урок", "empezar": "Начать сначала", "marcar": "Отметить урок пройденным", "hecho": "Урок пройден", "siguiente": "Следующий урок", "tuyo": "пройдено вами", "titulo": "Ваш прогресс", "aviso": "Прогресс хранится только в этом браузере, на этом устройстве. Регистрации нет, и никуда он не отправляется. Если вы очистите данные браузера или откроете курс на другом телефоне, отметки не перенесутся.", "borrar": "Сбросить прогресс", "confirmar": "Сбросить все отметки?"};window.CURSO_RAIZ=".";window.CURSO_PUBLICADAS=0;window.CURSO_DIAS={};</script>
 <script src="./progreso.js" defer></script>
 
-<script>window.CURSO_TEST={"preguntas": [{"pregunta": "Ана — врач.", "opciones": ["Ana médica.", "Ana es médica.", "Ana está médica."], "correcta": 1, "unidad": 1, "error": "В русском в настоящем времени связки нет, в испанском глагол не опускается никогда."}, {"pregunta": "На столе книга.", "opciones": ["Hay el libro en la mesa.", "Hay un libro en la mesa.", "Está un libro en la mesa."], "correcta": 1, "unidad": 2, "error": "После «hay» никогда не ставится el / la: что-то существует, но ещё не известно какое именно."}, {"pregunta": "Мне тридцать лет.", "opciones": ["Soy treinta años.", "Tengo treinta años.", "Estoy treinta años."], "correcta": 1, "unidad": 3, "error": "Возраст по-испански «имеют», а не «являются». Русский здесь не подсказывает ничего."}, {"pregunta": "Мой брат дома.", "opciones": ["Mi hermano es en casa.", "Mi hermano está en casa.", "Mi hermano hay en casa."], "correcta": 1, "unidad": 4, "error": "Место — это «estar»: где кто-то находится сейчас, а не кто он такой."}, {"pregunta": "Я встаю в семь.", "opciones": ["Me levanto a las siete.", "Levanto me a las siete.", "Yo levanto a las siete."], "correcta": 0, "unidad": 5, "error": "Русское -ся стоит в конце, а испанское местоимение — ПЕРЕД глаголом."}, {"pregunta": "Мне нравится кофе.", "opciones": ["Yo gusto el café.", "Me gusta el café.", "Me gusto café."], "correcta": 1, "unidad": 6, "error": "При «gustar» подлежащее — то, что нравится, а не человек. Как в «мне нравится»."}, {"pregunta": "Я вижу своего брата.", "opciones": ["Veo mi hermano.", "Veo a mi hermano.", "Veo el mi hermano."], "correcta": 1, "unidad": 7, "error": "Предлог «a» перед человеком в роли дополнения не имеет русского аналога, и его забывают."}, {"pregunta": "Завтра я буду работать.", "opciones": ["Mañana voy a trabajar.", "Mañana voy trabajar.", "Mañana voy a trabajo."], "correcta": 0, "unidad": 8, "error": "«ir a + инфинитив» всегда с предлогом, как «собираться + инфинитив»."}, {"pregunta": "Сегодня я уже поел.", "opciones": ["Hoy ya comí.", "Hoy ya he comido.", "Hoy ya como."], "correcta": 1, "unidad": 9, "error": "Со словами «сегодня, на этой неделе, уже» в Испании нужен perfecto. 🌎 В Латинской Америке говорят «hoy ya comí»."}, {"pregunta": "Эта рубашка мне велика.", "opciones": ["Esta camisa me queda grande.", "Esta camisa es grande para mí.", "Esta camisa me está grande."], "correcta": 0, "unidad": 11, "error": "«Quedar» работает как «gustar» и это обычный способ говорить о размере одежды."}, {"pregunta": "Вчера я ходил в кино.", "opciones": ["Ayer he ido al cine.", "Ayer fui al cine.", "Ayer iba al cine."], "correcta": 1, "unidad": 12, "error": "«Ayer» закрывает прошедшее: нужен indefinido, а не perfecto."}, {"pregunta": "В детстве я много читал.", "opciones": ["De pequeño leí mucho.", "De pequeño leía mucho.", "De pequeño he leído mucho."], "correcta": 1, "unidad": 13, "error": "Привычка в прошлом — imperfecto, как русский несовершенный вид."}, {"pregunta": "Если будет дождь, я останусь дома.", "opciones": ["Si lloverá, me quedo en casa.", "Si llueve, me quedaré en casa.", "Si llueva, me quedaré en casa."], "correcta": 1, "unidad": 17, "error": "После «si» в реальном условии не бывает ни будущего, ни subjuntivo: только présente."}, {"pregunta": "Этот город больше, чем мой.", "opciones": ["Esta ciudad es más grande que la mía.", "Esta ciudad es más grande como la mía.", "Esta ciudad es la más grande que mía."], "correcta": 0, "unidad": 19, "error": "Сравнение по-испански — «más… que»; «como» только для равенства."}], "inicios": {"1": {"n": 1, "url": "./semana-01/dia-1.html"}, "2": {"n": 15, "url": "./semana-03/dia-1.html"}, "3": {"n": 29, "url": "./semana-05/dia-1.html"}, "4": {"n": 43, "url": "./semana-07/dia-1.html"}, "5": {"n": 57, "url": "./semana-09/dia-1.html"}, "6": {"n": 71, "url": "./semana-11/dia-1.html"}, "7": {"n": 85, "url": "./semana-13/dia-1.html"}, "8": {"n": 99, "url": "./semana-15/dia-1.html"}}, "ultima": {"n": 100, "url": "./semana-15/dia-2.html"}, "t": {"titulo": "Тест на уровень", "subtitulo": "Две минуты, четырнадцать вопросов", "entrada": "Если вы уже что-то знаете по-испански, не начинайте с алфавита. Ответьте на несколько вопросов, и мы скажем, с какого урока начать.", "empezar": "Начать тест", "instruccion": "Как сказать это по-испански?", "de": "из", "resultado": "Ваш результат", "aciertos": "правильных ответов", "empieza_en": "Начните с урока", "ir": "Открыть этот урок", "repetir": "Пройти заново", "todo_bien": "Вы ответили верно на всё. Начните с последнего написанного урока — или с первого, если хотите повторить.", "errores": "Что стоит посмотреть", "borrador": "Вопросы ещё не проверены преподавателем.", "sin_js": "Для теста нужен JavaScript. Без него начните с первого урока."}};(function(){
+<script>window.CURSO_TEST={"preguntas": [{"pregunta": "Ана — врач.", "opciones": ["Ana médica.", "Ana es médica.", "Ana está médica."], "correcta": 1, "unidad": 1, "error": "В русском в настоящем времени связки нет, в испанском глагол не опускается никогда."}, {"pregunta": "На столе книга.", "opciones": ["Hay el libro en la mesa.", "Hay un libro en la mesa.", "Está un libro en la mesa."], "correcta": 1, "unidad": 2, "error": "После «hay» никогда не ставится el / la: что-то существует, но ещё не известно какое именно."}, {"pregunta": "Мне тридцать лет.", "opciones": ["Soy treinta años.", "Tengo treinta años.", "Estoy treinta años."], "correcta": 1, "unidad": 3, "error": "Возраст по-испански «имеют», а не «являются». Русский здесь не подсказывает ничего."}, {"pregunta": "Мой брат дома.", "opciones": ["Mi hermano es en casa.", "Mi hermano está en casa.", "Mi hermano hay en casa."], "correcta": 1, "unidad": 4, "error": "Место — это «estar»: где кто-то находится сейчас, а не кто он такой."}, {"pregunta": "Я встаю в семь.", "opciones": ["Me levanto a las siete.", "Levanto me a las siete.", "Yo levanto a las siete."], "correcta": 0, "unidad": 5, "error": "Русское -ся стоит в конце, а испанское местоимение — ПЕРЕД глаголом."}, {"pregunta": "Мне нравится кофе.", "opciones": ["Yo gusto el café.", "Me gusta el café.", "Me gusto café."], "correcta": 1, "unidad": 6, "error": "При «gustar» подлежащее — то, что нравится, а не человек. Как в «мне нравится»."}, {"pregunta": "Я вижу своего брата.", "opciones": ["Veo mi hermano.", "Veo a mi hermano.", "Veo el mi hermano."], "correcta": 1, "unidad": 7, "error": "Предлог «a» перед человеком в роли дополнения не имеет русского аналога, и его забывают."}, {"pregunta": "Завтра я буду работать.", "opciones": ["Mañana voy a trabajar.", "Mañana voy trabajar.", "Mañana voy a trabajo."], "correcta": 0, "unidad": 8, "error": "«ir a + инфинитив» всегда с предлогом, как «собираться + инфинитив»."}, {"pregunta": "Сегодня я уже поел.", "opciones": ["Hoy ya comí.", "Hoy ya he comido.", "Hoy ya como."], "correcta": 1, "unidad": 9, "error": "Со словами «сегодня, на этой неделе, уже» в Испании нужен perfecto. 🌎 В Латинской Америке говорят «hoy ya comí»."}, {"pregunta": "Эта рубашка мне велика.", "opciones": ["Esta camisa me queda grande.", "Esta camisa es grande para mí.", "Esta camisa me está grande."], "correcta": 0, "unidad": 11, "error": "«Quedar» работает как «gustar» и это обычный способ говорить о размере одежды."}, {"pregunta": "Вчера я ходил в кино.", "opciones": ["Ayer he ido al cine.", "Ayer fui al cine.", "Ayer iba al cine."], "correcta": 1, "unidad": 12, "error": "«Ayer» закрывает прошедшее: нужен indefinido, а не perfecto."}, {"pregunta": "В детстве я много читал.", "opciones": ["De pequeño leí mucho.", "De pequeño leía mucho.", "De pequeño he leído mucho."], "correcta": 1, "unidad": 13, "error": "Привычка в прошлом — imperfecto, как русский несовершенный вид."}, {"pregunta": "Если будет дождь, я останусь дома.", "opciones": ["Si lloverá, me quedo en casa.", "Si llueve, me quedaré en casa.", "Si llueva, me quedaré en casa."], "correcta": 1, "unidad": 17, "error": "После «si» в реальном условии не бывает ни будущего, ни subjuntivo: только présente."}, {"pregunta": "Этот город больше, чем мой.", "opciones": ["Esta ciudad es más grande que la mía.", "Esta ciudad es más grande como la mía.", "Esta ciudad es la más grande que mía."], "correcta": 0, "unidad": 19, "error": "Сравнение по-испански — «más… que»; «como» только для равенства."}], "inicios": {"1": {"n": 1, "url": "./semana-01/dia-1.html"}, "2": {"n": 15, "url": "./semana-03/dia-1.html"}, "3": {"n": 29, "url": "./semana-05/dia-1.html"}, "4": {"n": 43, "url": "./semana-07/dia-1.html"}, "5": {"n": 57, "url": "./semana-09/dia-1.html"}, "6": {"n": 71, "url": "./semana-11/dia-1.html"}, "7": {"n": 85, "url": "./semana-13/dia-1.html"}, "8": {"n": 99, "url": "./semana-15/dia-1.html"}}, "ultima": {"n": 100, "url": "./semana-15/dia-2.html"}, "segundos": 30, "t": {"titulo": "Тест на уровень", "subtitulo": "Две минуты, четырнадцать вопросов", "entrada": "Если вы уже что-то знаете по-испански, не начинайте с алфавита. Ответьте на несколько вопросов, и мы скажем, с какого урока начать.", "empezar": "Начать тест", "instruccion": "Как сказать это по-испански?", "segundos": "с", "tiempo_fuera": "Не успели ответить", "de": "из", "resultado": "Ваш результат", "aciertos": "правильных ответов", "empieza_en": "Начните с урока", "ir": "Открыть этот урок", "repetir": "Пройти заново", "todo_bien": "Вы ответили верно на всё. Начните с последнего написанного урока — или с первого, если хотите повторить.", "errores": "Что стоит посмотреть", "borrador": "Вопросы ещё не проверены преподавателем.", "sin_js": "Для теста нужен JavaScript. Без него начните с первого урока."}};(function(){
   var D=window.CURSO_TEST; if(!D)return;
   var caja=document.getElementById('test'); if(!caja)return;
-  var i=0, fallos=[], aciertos=0;
+  var i=0, fallos=[], aciertos=0, reloj=null, queda=0;
 
   function esc(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML}
+
+  // Un cronometro POR PREGUNTA, no para todo el test. Al agotarse cuenta como
+  // fallada y pasa, que es lo que significa para colocar a alguien: lo que no
+  // sabes en treinta segundos no lo sabes. `D.segundos` a 0 lo apaga.
+  function parar(){if(reloj){clearInterval(reloj);reloj=null}}
+
+  function arrancar(){
+    parar();
+    if(!D.segundos)return;
+    queda=D.segundos;
+    pinta();
+    reloj=setInterval(function(){
+      queda-=0.1;
+      if(queda<=0){parar();responder(-1);return}
+      pinta();
+    },100);
+  }
+
+  function pinta(){
+    var n=caja.querySelector('.test-reloj i'), s=caja.querySelector('.test-seg');
+    if(n)n.style.width=(queda*100/D.segundos)+'%';
+    if(s)s.textContent=Math.ceil(queda)+' '+D.t.segundos;
+  }
 
   function pregunta(){
     var q=D.preguntas[i];
     caja.innerHTML='<div class="test-caja">'
       +'<div class="test-cuenta">'+(i+1)+' '+esc(D.t.de)+' '+D.preguntas.length
-      +' · '+esc(D.t.instruccion)+'</div>'
+      +' · '+esc(D.t.instruccion)
+      +(D.segundos?'<b class="test-seg"></b>':'')+'</div>'
+      +(D.segundos?'<div class="test-reloj"><i></i></div>':'')
       +'<p class="test-pregunta">'+esc(q.pregunta)+'</p>'
       +'<div class="test-ops">'+q.opciones.map(function(o,n){
           return '<button type="button" data-n="'+n+'">'+esc(o)+'</button>'}).join('')+'</div>'
@@ -311,16 +340,22 @@ footer.sitio p{margin:.35rem 0}
     caja.querySelectorAll('button').forEach(function(b){
       b.addEventListener('click',function(){responder(parseInt(b.dataset.n,10))});
     });
+    arrancar();
   }
 
+  // n === -1 es «se acabó el tiempo». Se anota aparte para poder decirlo en el
+  // resultado: no es lo mismo equivocarse que no llegar.
   function responder(n){
+    parar();
     var q=D.preguntas[i];
-    if(n===q.correcta){aciertos++}else{fallos.push(q)}
+    if(n===q.correcta){aciertos++}
+    else{fallos.push(n===-1?Object.assign({},q,{tarde:true}):q)}
     i++;
     if(i<D.preguntas.length){pregunta()}else{resultado()}
   }
 
   function resultado(){
+    parar();
     // Se empieza donde se acaba lo que ya se sabe: la unidad de la PRIMERA
     // fallada. Y si esa unidad aun no esta escrita -el curso tiene 100
     // lecciones de 365-, la ultima escrita, que no es un parche: si ya sabe
@@ -340,6 +375,7 @@ footer.sitio p{margin:.35rem 0}
       h+='<p class="test-cuenta" style="margin-top:1.2rem">'+esc(D.t.errores)+'</p>';
       fallos.forEach(function(q){
         h+='<div class="test-fallo"><b>'+esc(q.opciones[q.correcta])+'</b>'
+          +(q.tarde?'<span class="test-tarde">'+esc(D.t.tiempo_fuera)+'</span>':'')
           +'<span>'+esc(q.error)+'</span></div>';
       });
     }

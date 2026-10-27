@@ -824,6 +824,24 @@ que caza los 404 de verdad -215 del conmutador de idioma, y los del mapa de
 unidades-, asi que hay una segunda prueba que exige que un roto autentico siga
 saliendo: un revisor ciego seria peor que uno que se equivoca.
 
+### El cronómetro, por pregunta (2026-10-27)
+
+Lo pidió el profesor. Se puso **por pregunta y no para todo el test**, que no
+es lo mismo: un reloj global solo mete prisa, y lo que hace falta es que no dé
+tiempo a buscar la respuesta. **Quien la busca queda colocado más adelante de
+lo que sabe y se pierde en la primera lección**, o sea que el test le haría más
+daño que no existir.
+
+- **30 segundos**, en `segundos_por_pregunta` del YAML para que se ajuste sin
+  tocar código; a 0 se apaga y una prueba lo comprueba construyendo el sitio
+  con esa configuración.
+- **Al agotarse cuenta como fallada y pasa**, que es lo que significa para
+  colocar a alguien. Se anota aparte (`tarde`) y el resultado lo dice —«Не
+  успели ответить»— porque no es lo mismo equivocarse que no llegar.
+- **`parar()` al contestar y al terminar.** Sin eso, el reloj de la pregunta
+  anterior seguiría corriendo y dispararía un `responder(-1)` encima de la
+  siguiente. Hay prueba de las dos llamadas.
+
 **Pendiente**: las catorce preguntas estan en `revisado: false` y la pagina lo
 avisa. Lo que el profesor tiene que comprobar es que cada distractor sea de
 verdad el error que dice, y que la unidad asignada sea donde el curso lo

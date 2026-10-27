@@ -30,6 +30,19 @@
 # pone la página una sola vez (`test.instruccion` en `web/textos.yaml`). Así
 # las catorce son la frase rusa y nada más, y traducirla no toca este fichero.
 #
+# EL CRONÓMETRO, que es por pregunta y no para todo el test:
+#
+# Un reloj global solo mete prisa. Uno por pregunta hace lo que de verdad hace
+# falta: si alguien busca cada respuesta en el diccionario, el test lo coloca
+# más adelante de lo que sabe y se pierde en la primera lección. Treinta
+# segundos miden lo que SABE, no lo que encuentra. Al agotarse cuenta como
+# fallada y pasa, que es justo lo que significa para colocar a alguien.
+#
+# Treinta y no menos: hay que leer una frase rusa y comparar tres frases
+# españolas parecidas. Medido sobre la pregunta más larga, sobra tiempo para
+# quien lo sabe y no da para abrir un diccionario. Ponerlo a 0 lo apaga.
+segundos_por_pregunta: 30
+
 # revisado: lo pone el profesor en true cuando haya comprobado las catorce.
 # Mientras esté en false, la página lo avisa, igual que las lecciones borrador.
 revisado: false

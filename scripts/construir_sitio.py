@@ -148,6 +148,10 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
   background:var(--papel);border:1.5px solid var(--linea);border-radius:9px;
   padding:.6rem .8rem;cursor:pointer;transition:border-color .12s,background .12s}
 .test-ops button:hover{border-color:var(--acento)}
+.test-seg{float:inline-end;font-variant-numeric:tabular-nums;color:var(--tenue);font-weight:600}
+.test-reloj{height:3px;border-radius:999px;background:var(--linea);overflow:hidden;margin:0 0 .9rem}
+.test-reloj i{display:block;height:100%;background:var(--acento);opacity:.55}
+.test-tarde{display:block;color:var(--acento);font-weight:600;font-size:.84rem}
 .test-barra{height:4px;border-radius:999px;background:var(--linea);overflow:hidden;margin-top:1rem}
 .test-barra i{display:block;height:100%;background:var(--acento);transition:width .2s}
 .test-fallo{border-inline-start:3px solid var(--acento);padding:.1rem 0 .1rem .8rem;margin:.7rem 0}
@@ -466,15 +470,40 @@ AUDIO_JS = r"""(function(){
 TEST_JS = r"""(function(){
   var D=window.CURSO_TEST; if(!D)return;
   var caja=document.getElementById('test'); if(!caja)return;
-  var i=0, fallos=[], aciertos=0;
+  var i=0, fallos=[], aciertos=0, reloj=null, queda=0;
 
   function esc(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML}
+
+  // Un cronometro POR PREGUNTA, no para todo el test. Al agotarse cuenta como
+  // fallada y pasa, que es lo que significa para colocar a alguien: lo que no
+  // sabes en treinta segundos no lo sabes. `D.segundos` a 0 lo apaga.
+  function parar(){if(reloj){clearInterval(reloj);reloj=null}}
+
+  function arrancar(){
+    parar();
+    if(!D.segundos)return;
+    queda=D.segundos;
+    pinta();
+    reloj=setInterval(function(){
+      queda-=0.1;
+      if(queda<=0){parar();responder(-1);return}
+      pinta();
+    },100);
+  }
+
+  function pinta(){
+    var n=caja.querySelector('.test-reloj i'), s=caja.querySelector('.test-seg');
+    if(n)n.style.width=(queda*100/D.segundos)+'%';
+    if(s)s.textContent=Math.ceil(queda)+' '+D.t.segundos;
+  }
 
   function pregunta(){
     var q=D.preguntas[i];
     caja.innerHTML='<div class="test-caja">'
       +'<div class="test-cuenta">'+(i+1)+' '+esc(D.t.de)+' '+D.preguntas.length
-      +' · '+esc(D.t.instruccion)+'</div>'
+      +' · '+esc(D.t.instruccion)
+      +(D.segundos?'<b class="test-seg"></b>':'')+'</div>'
+      +(D.segundos?'<div class="test-reloj"><i></i></div>':'')
       +'<p class="test-pregunta">'+esc(q.pregunta)+'</p>'
       +'<div class="test-ops">'+q.opciones.map(function(o,n){
           return '<button type="button" data-n="'+n+'">'+esc(o)+'</button>'}).join('')+'</div>'
@@ -482,16 +511,22 @@ TEST_JS = r"""(function(){
     caja.querySelectorAll('button').forEach(function(b){
       b.addEventListener('click',function(){responder(parseInt(b.dataset.n,10))});
     });
+    arrancar();
   }
 
+  // n === -1 es «se acabó el tiempo». Se anota aparte para poder decirlo en el
+  // resultado: no es lo mismo equivocarse que no llegar.
   function responder(n){
+    parar();
     var q=D.preguntas[i];
-    if(n===q.correcta){aciertos++}else{fallos.push(q)}
+    if(n===q.correcta){aciertos++}
+    else{fallos.push(n===-1?Object.assign({},q,{tarde:true}):q)}
     i++;
     if(i<D.preguntas.length){pregunta()}else{resultado()}
   }
 
   function resultado(){
+    parar();
     // Se empieza donde se acaba lo que ya se sabe: la unidad de la PRIMERA
     // fallada. Y si esa unidad aun no esta escrita -el curso tiene 100
     // lecciones de 365-, la ultima escrita, que no es un parche: si ya sabe
@@ -511,6 +546,7 @@ TEST_JS = r"""(function(){
       h+='<p class="test-cuenta" style="margin-top:1.2rem">'+esc(D.t.errores)+'</p>';
       fallos.forEach(function(q){
         h+='<div class="test-fallo"><b>'+esc(q.opciones[q.correcta])+'</b>'
+          +(q.tarde?'<span class="test-tarde">'+esc(D.t.tiempo_fuera)+'</span>':'')
           +'<span>'+esc(q.error)+'</span></div>';
       });
     }
@@ -1012,6 +1048,7 @@ def construir_test(cfg, t, idiomas, destino, cal, preguntas) -> None:
             "inicios": inicios_de_unidad(cal, raiz),
             "ultima": {"n": ultima.numero,
                        "url": f"{raiz}/semana-{ultima.semana:02d}/dia-{ultima.dia}.html"},
+            "segundos": preguntas.get("segundos_por_pregunta") or 0,
             "t": k,
         }
     destino.joinpath("test.html").write_text(
