@@ -1312,6 +1312,79 @@ interactivos sin escribir ni uno.
 clave no se casa con los huecos sin ninguna duda, ese ejercicio se queda como
 está hoy. Decirle a alguien que acertó cuando falló es peor que no ofrecerlo.
 
+## Los huecos se rellenan pulsando (2026-10-27)
+
+El profesor lo pidió así: «mover palabras, dar click y colocar palabras en los
+casilleros vacíos». **Es la quinta vez que el contenido ya existía**, y por eso
+se contó antes de escribir nada.
+
+**Pero la cuenta que se le dio primero estaba mal, y conviene que quede
+escrito.** Se dijo «61 ejercicios listos» contando los que traen banco de
+palabras. Al analizarlos de verdad, **23 tienen una clave que se puede casar
+con los huecos sin ninguna duda**; los otros 38 llevan claves con frases
+enteras —«Es una goma» contra un banco de «una goma»— o sea que son OTRO tipo
+de ejercicio: el alumno escribe la frase, no coloca una ficha. Contar la
+materia prima no es lo mismo que contar lo utilizable.
+
+Quedan **189 huecos interactivos en 23 lecciones**, y 0 de contenido escrito.
+
+### `scripts/huecos.py`
+
+El contrato es uno y vale para las dos formas que hay escritas —los renglones
+numerados y los diálogos—: **tantos huecos como respuestas, en el mismo orden,
+y cada respuesta dentro del banco.**
+
+**El orden manda y no la numeración.** La mitad de los ejercicios son diálogos
+sin numerar y su clave da las respuestas seguidas («días · tal · gracias ·
+tú»). La numeración de los otros es decoración y se quita.
+
+**La comprobación del banco es la que de verdad protege**: los bancos son
+cortos y concretos, así que una clave desalineada deja fuera alguna palabra
+casi siempre. Es lo que descarta los 38 que no encajan, sin tener que
+entenderlos.
+
+**Y falla de forma segura**, como `pruebas.py`: a la mínima duda el ejercicio
+se descarta y su página se queda exactamente como hoy.
+
+### Los tres bugs que costaron la mitad de los ejercicios
+
+Los tres eran míos y los tres se vieron midiendo, no leyendo. Con el primer
+analizador salían **2 de 61**; con los tres arreglados, 23.
+
+1. **Juntar las líneas destruía el salto de párrafo.** `re.sub(r"\n(?!\n)", " ")`
+   convierte un `\n\n` en `\n `, así que el `(?=\n\n)` que cerraba el bloque
+   de la clave ya no casaba y seguía leyendo el párrafo siguiente: en la
+   lección 1-3 se llevaba por delante la tabla de sonidos y salían 12
+   respuestas para 5 huecos. Ahora el párrafo se marca ANTES de juntar.
+2. **El corte del comentario se comía la numeración.** La clave acaba a menudo
+   en «… · es. Carmen говорит **encantada**…», así que se corta en el primer
+   «. ». Puesto ANTES de quitar el «1. », un «1. aquí» se quedaba en «1», que
+   no está en ningún banco. El orden de esas dos líneas vale 8 ejercicios.
+3. **`content:"\00a0"` en el CSS escribía un byte NUL** en las 125 páginas:
+   Python lee `\0` como escape octal. Los navegadores lo sirven igual y
+   `grep` empieza a decir «binary file matches», que es la única señal.
+   Ahora va el espacio duro literal. Hay una prueba que recorre las 125.
+
+### Cómo queda en la página
+
+- **Sin JavaScript no cambia nada**: los huecos siguen siendo rayas y la clave
+  sigue abajo, para leer o imprimir.
+- **La cita del banco se esconde desde el GUION y no al construir.** Las
+  fichas y la cita son las mismas palabras dos veces, pero quitar la cita al
+  construir dejaría sin banco a quien no tenga JavaScript, que es justo para
+  quien esa cita es lo único que dice qué palabras hay.
+- **Dos formas de rellenar**, porque en el móvil arrastrar es incómodo: pulsas
+  la ficha y luego el hueco, o al revés. **Pulsar un hueco lleno lo vacía** y
+  devuelve la ficha, que es como se corrige uno sin empezar de cero.
+- **Los huecos responden al teclado** (Enter y espacio): son `role="button"`,
+  así que tienen que hacer con el teclado lo mismo que con el dedo.
+- **El envoltorio se hace sobre el HTML ya convertido**, como la prueba de
+  unidad. Los `______` sobreviven a Markdown —seis guiones bajos no son
+  énfasis—, y hay una comprobación extra: si el HTML no trae tantos huecos
+  como el Markdown, ese ejercicio no se toca.
+- **La corrección compara sin acentos ni mayúsculas**, porque la clave escribe
+  «Aquí» al empezar frase y el banco «aquí».
+
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.

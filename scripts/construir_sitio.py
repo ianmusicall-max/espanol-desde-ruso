@@ -37,6 +37,7 @@ RAIZ = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(RAIZ / "scripts"))
 import plan  # noqa: E402
 import pruebas  # noqa: E402
+import huecos  # noqa: E402
 import validar  # noqa: E402
 # Se importa por `limpiar`: la palabra del índice de imágenes está limpia de
 # negritas, del 🌎 y de la barra de variantes, así que aquí hay que limpiar la
@@ -160,6 +161,24 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
    del examen. */
 .marco{font-size:.9rem;color:var(--tenue);border-inline-start:3px solid var(--celeste);
   padding-inline-start:.8rem;margin:1rem 0}
+/* los huecos que se rellenan pulsando una ficha. Las fichas arriba y los
+   huecos debajo, que es el orden en que se usa: eliges la palabra y luego
+   dónde va. */
+.fichas{display:flex;flex-wrap:wrap;gap:.45rem;margin:.9rem 0}
+.ficha{padding:.35rem .8rem;border:1px solid var(--linea);border-radius:999px;
+  background:var(--tarjeta);color:inherit;cursor:pointer;font:inherit;font-size:.9rem}
+.ficha:hover{border-color:var(--acento)}
+.ficha[aria-pressed="true"]{background:var(--acento);color:#fff;border-color:var(--acento)}
+.ficha.gastada{opacity:.35;pointer-events:none}
+/* El hueco vacío es una raya; lleno, una pastilla. Con un ancho mínimo para
+   que la frase no baile al rellenarse. */
+.hueco{display:inline-block;min-width:5.5rem;padding:0 .35rem;cursor:pointer;
+  border-bottom:2px solid var(--acento);text-align:center;font-weight:600}
+.hueco:empty::before{content:" "}
+.hueco.bien{border-color:#2e7d4f;color:#2e7d4f}
+.hueco.mal{border-color:#b3332b;color:#b3332b}
+.huecos-pie{display:flex;align-items:center;gap:.8rem;margin:.9rem 0}
+.marcador{font-size:.9rem;color:var(--tenue)}
 /* compartir: tres botones iguales al pie de la lección. Discretos —son una
    oferta y no el siguiente paso, que es la lección de al lado— y del mismo
    tamaño entre sí, para que ninguno parezca el principal. */
@@ -762,6 +781,99 @@ IDIOMA_SCRIPT = """<script>(function(){
 })();</script>"""
 
 
+HUECOS_JS = r"""(function(){
+  var D=window.CURSO_HUECOS; if(!D)return;
+  var T=D.t||{};
+
+  // Dos formas de rellenar, porque en el móvil arrastrar es incómodo:
+  //   - pulsas una ficha y luego el hueco;
+  //   - o pulsas un hueco vacío y la ficha elegida cae ahí.
+  // Y pulsar un hueco lleno lo vacía y devuelve la ficha, que es como se
+  // corrige uno sin tener que empezar de cero.
+  var elegida = null;
+
+  // La cita del banco sobra en cuanto hay fichas: las mismas palabras dos
+  // veces seguidas. Se esconde desde aquí y no al construir, para que sin
+  // JavaScript la cita siga estando —ahí es lo único que dice qué palabras
+  // hay—.
+  document.querySelectorAll('.banco-escrito').forEach(function(q){ q.hidden = true; });
+
+  function fichasDe(ej){ return document.querySelectorAll('.ficha[data-ej="'+ej+'"]'); }
+  function huecosDe(ej){ return document.querySelectorAll('.hueco[data-ej="'+ej+'"]'); }
+
+  function repintarFichas(ej){
+    var usadas = {};
+    huecosDe(ej).forEach(function(h){ if(h.textContent) usadas[h.textContent] = (usadas[h.textContent]||0)+1; });
+    var vistas = {};
+    fichasDe(ej).forEach(function(f){
+      var n = f.textContent;
+      vistas[n] = (vistas[n]||0)+1;
+      // Una palabra puede repetirse en el banco y usarse varias veces: se
+      // apaga la ficha solo cuando ya no quedan copias libres.
+      f.classList.toggle('gastada', (usadas[n]||0) >= vistas[n] && (usadas[n]||0) > 0
+                                     && fichasDe(ej).length === Object.keys(vistas).length);
+    });
+  }
+
+  function soltar(h){
+    if(!h.textContent) return;
+    h.textContent = '';
+    h.classList.remove('bien','mal');
+    repintarFichas(h.dataset.ej);
+  }
+
+  document.addEventListener('click', function(e){
+    var f = e.target.closest('.ficha');
+    if(f){
+      if(elegida === f){ elegida = null; f.setAttribute('aria-pressed','false'); return; }
+      if(elegida) elegida.setAttribute('aria-pressed','false');
+      elegida = f; f.setAttribute('aria-pressed','true');
+      return;
+    }
+    var h = e.target.closest('.hueco');
+    if(h){
+      if(h.textContent){ soltar(h); return; }
+      if(!elegida || elegida.dataset.ej !== h.dataset.ej) return;
+      h.textContent = elegida.textContent;
+      h.classList.remove('bien','mal');
+      elegida.setAttribute('aria-pressed','false');
+      elegida = null;
+      repintarFichas(h.dataset.ej);
+      return;
+    }
+    var c = e.target.closest('.comprobar');
+    if(c) comprobar(c.dataset.ej);
+  });
+
+  // El teclado: un hueco es un botón, así que Enter y espacio tienen que
+  // hacer lo mismo que el dedo.
+  document.addEventListener('keydown', function(e){
+    if(e.key !== 'Enter' && e.key !== ' ') return;
+    var h = e.target.closest && e.target.closest('.hueco');
+    if(!h) return;
+    e.preventDefault();
+    h.click();
+  });
+
+  function plano(x){
+    return (x||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();
+  }
+
+  function comprobar(ej){
+    var datos = D.ejercicios[ej]; if(!datos) return;
+    var huecos = huecosDe(ej), bien = 0;
+    huecos.forEach(function(h, i){
+      var ok = plano(h.textContent) === plano(datos.respuestas[i]);
+      h.classList.toggle('bien', ok);
+      h.classList.toggle('mal', !ok);
+      if(ok) bien++;
+    });
+    var m = document.querySelector('.marcador[data-ej="'+ej+'"]');
+    if(m) m.textContent = (T.resultado||'').replace('%a%', bien).replace('%b%', huecos.length);
+  }
+})();"""
+
+
 PRUEBA_JS = r"""(function(){
   var D=window.CURSO_PRUEBA; if(!D)return;
   var caja=document.getElementById('prueba'); if(!caja)return;
@@ -925,6 +1037,7 @@ def _marcar_contraste(cuerpo: str) -> str:
 # ------------------------------------------------------------------------ shell
 def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id="", raiz=".",
            jsonld="", publicadas=0, mapa_dias="{}", traducida=True, con_audio=False, test=None,
+           huecos=None,
            prueba=None) -> str:
     """El armazón de toda página: cabecera con menú y cambio de idioma, cuerpo, pie."""
     dominio = cfg["dominio"]
@@ -1034,6 +1147,7 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
 {f'<script>{AUDIO_JS}</script>' if con_audio else ""}
 {f'<script>window.CURSO_TEST={json.dumps(test, ensure_ascii=False)};{TEST_JS}</script>' if test else ""}
 {f'<script>window.CURSO_PRUEBA={json.dumps(prueba, ensure_ascii=False)};{PRUEBA_JS}</script>' if prueba else ""}
+{f'<script>window.CURSO_HUECOS={json.dumps({"ejercicios": huecos, "t": t["huecos"]}, ensure_ascii=False)};{HUECOS_JS}</script>' if huecos else ""}
 </body>
 </html>"""
 
@@ -1329,6 +1443,65 @@ def _seguir(t, cfg, raiz: str) -> str:
         return ""
     return (f'<p class="seguir">{html.escape(t["compartir"]["seguir"])}: '
             + " · ".join(enlaces) + "</p>")
+
+
+def _envolver_huecos(html_: str, ejercicios, t) -> tuple[str, list | None]:
+    """Convierte los ______ de un ejercicio en casillas que se rellenan.
+
+    Se hace sobre el HTML YA convertido y no sobre el Markdown, igual que la
+    prueba de unidad: envolver Markdown en un `<div>` haría que
+    Python-Markdown lo pasara tal cual. Los `______` sobreviven a la
+    conversión —seis guiones bajos no son énfasis—, así que aquí solo hay que
+    sustituirlos.
+
+    **Sin JavaScript la página no cambia**: los huecos siguen siendo rayas y
+    la clave sigue abajo, para leer o imprimir. Es el guion el que las vuelve
+    casillas cuando de verdad puede ofrecer algo mejor."""
+    if not ejercicios:
+        return html_, None
+
+    datos = []
+    for i, e in enumerate(ejercicios):
+        # El ejercicio empieza en su <h3> y acaba en el siguiente título.
+        cabeza = re.search(rf"<h3[^>]*>\s*{re.escape(e.titulo)}\s*</h3>", html_)
+        if not cabeza:
+            continue
+        resto = html_[cabeza.end():]
+        corte = re.search(r"<h[23][\s>]", resto)
+        cuerpo = resto[: corte.start()] if corte else resto
+
+        n_huecos = len(re.findall(r"_{3,}", cuerpo))
+        if n_huecos != len(e.respuestas):
+            continue   # el HTML no dice lo mismo que el Markdown: no se toca
+
+        cuenta = [0]
+
+        def casilla(_m):
+            k = cuenta[0]
+            cuenta[0] += 1
+            return (f'<span class="hueco" data-ej="{i}" data-n="{k}" '
+                    f'tabindex="0" role="button"></span>')
+
+        nuevo_cuerpo = re.sub(r"_{3,}", casilla, cuerpo)
+        # El banco sale dos veces: como fichas pulsables y como la cita
+        # original del Markdown. Se marca la cita para que el GUION la
+        # esconda; quitarla aquí dejaría sin banco a quien no tenga
+        # JavaScript, que es justo para quien la cita sigue siendo útil.
+        nuevo_cuerpo = nuevo_cuerpo.replace(
+            "<blockquote>", '<blockquote class="banco-escrito">', 1)
+        fichas = "".join(f'<button type="button" class="ficha" data-ej="{i}">'
+                         f'{html.escape(w)}</button>' for w in e.banco)
+        barra = (f'<div class="fichas" data-ej="{i}">{fichas}</div>'
+                 f'<div class="huecos-pie">'
+                 f'<button type="button" class="boton secundario comprobar" data-ej="{i}">'
+                 f'{html.escape(t["huecos"]["comprobar"])}</button>'
+                 f'<span class="marcador" data-ej="{i}"></span></div>')
+
+        html_ = (html_[: cabeza.end()] + barra + nuevo_cuerpo
+                 + (resto[corte.start():] if corte else ""))
+        datos.append({"respuestas": e.respuestas})
+
+    return html_, (datos or None)
 
 
 def _firma(autor: dict) -> str:
@@ -1637,6 +1810,11 @@ def construir_leccion(d, cfg, t, idiomas, destino, cal, todos, audio=None,
 
     html_cuerpo = _botones_de_audio(md(cuerpo), audio or {}, "..")
     html_cuerpo = _dibujos_en_el_vocabulario(html_cuerpo, dibujos or {}, "..")
+
+    # Los ejercicios de rellenar huecos, si su clave se puede casar con los
+    # huecos sin ninguna duda. `huecos.leer` descarta los que no, y entonces
+    # la página se queda exactamente como está hoy.
+    html_cuerpo, datos_huecos = _envolver_huecos(html_cuerpo, huecos.leer(cuerpo), t)
     html_cuerpo = _anuncios_en_la_leccion(_marcar_contraste(_tablas_envueltas(html_cuerpo)), cfg)
 
     # Los días de tipo `prueba` traen quince preguntas con su clave, ya escritas
@@ -1682,7 +1860,8 @@ def construir_leccion(d, cfg, t, idiomas, destino, cal, todos, audio=None,
         pagina(cfg, t, idiomas, "ru", titulo, cuerpo_final, descripcion=descripcion,
                pagina_id=f"semana-{d.semana:02d}/dia-{d.dia}.html", raiz="..",
                publicadas=len(escritas(cal)), mapa_dias=mapa_de_dias(cal), traducida=False,
-               con_audio='class="suena"' in cuerpo_final, prueba=datos_prueba),
+               con_audio='class="suena"' in cuerpo_final, prueba=datos_prueba,
+               huecos=datos_huecos),
         encoding="utf-8")
 
 

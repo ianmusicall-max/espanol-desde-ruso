@@ -90,6 +90,24 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
    del examen. */
 .marco{font-size:.9rem;color:var(--tenue);border-inline-start:3px solid var(--celeste);
   padding-inline-start:.8rem;margin:1rem 0}
+/* los huecos que se rellenan pulsando una ficha. Las fichas arriba y los
+   huecos debajo, que es el orden en que se usa: eliges la palabra y luego
+   dónde va. */
+.fichas{display:flex;flex-wrap:wrap;gap:.45rem;margin:.9rem 0}
+.ficha{padding:.35rem .8rem;border:1px solid var(--linea);border-radius:999px;
+  background:var(--tarjeta);color:inherit;cursor:pointer;font:inherit;font-size:.9rem}
+.ficha:hover{border-color:var(--acento)}
+.ficha[aria-pressed="true"]{background:var(--acento);color:#fff;border-color:var(--acento)}
+.ficha.gastada{opacity:.35;pointer-events:none}
+/* El hueco vacío es una raya; lleno, una pastilla. Con un ancho mínimo para
+   que la frase no baile al rellenarse. */
+.hueco{display:inline-block;min-width:5.5rem;padding:0 .35rem;cursor:pointer;
+  border-bottom:2px solid var(--acento);text-align:center;font-weight:600}
+.hueco:empty::before{content:" "}
+.hueco.bien{border-color:#2e7d4f;color:#2e7d4f}
+.hueco.mal{border-color:#b3332b;color:#b3332b}
+.huecos-pie{display:flex;align-items:center;gap:.8rem;margin:.9rem 0}
+.marcador{font-size:.9rem;color:var(--tenue)}
 /* compartir: tres botones iguales al pie de la lección. Discretos —son una
    oferta y no el siguiente paso, que es la lección de al lado— y del mismo
    tamaño entre sí, para que ninguno parezca el principal. */
@@ -573,5 +591,6 @@ poder, jugar), и в двух из шести поставьте <strong>nosotro
     boton.addEventListener('click',function(){arranque.hidden=true;pregunta()});
   }
 })();</script>
+
 </body>
 </html>

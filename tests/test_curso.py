@@ -24,6 +24,7 @@ import yaml  # noqa: E402
 import construir_sitio  # noqa: E402
 import generar_audio  # noqa: E402
 import generar_imagenes  # noqa: E402
+import huecos  # noqa: E402
 import exportar_apkg  # noqa: E402
 import poner_dominio  # noqa: E402
 import revisar_adsense  # noqa: E402
@@ -2036,3 +2037,95 @@ class TestCompartir(unittest.TestCase):
         existe antes de aflojar la prueba."""
         for clave, url in (self.cfg.get("redes") or {}).items():
             self.assertEqual("", (url or "").strip(), f"redes.{clave}")
+
+
+class TestLosHuecosInteractivos(unittest.TestCase):
+    """Rellenar los ______ pulsando una ficha del banco de palabras.
+
+    Hay 1.488 huecos escritos en 89 de las 100 lecciones y 61 ejercicios con
+    banco. De esos, **23 tienen una clave que se puede casar con los huecos sin
+    ninguna duda** y son los que se vuelven interactivos; los otros 38 llevan
+    claves con frases enteras («Es una goma» contra un banco de «una goma»), o
+    sea que son otro tipo de ejercicio y se quedan como están."""
+
+    EJEMPLO = """### Упражнение Б. Дополните. Банк слов:
+
+> aquí · ahí · cerca de · del
+
+1. Mi móvil está ______, en la mesa.
+2. Mi casa está ______ el centro.
+3. Está al lado ______ parque, ______.
+
+## Ответы
+
+**Б.** 1. aquí · 2. cerca de · 3. del / ahí.
+"""
+
+    def test_lee_el_ejercicio_y_casa_la_clave(self):
+        e = huecos.leer(self.EJEMPLO)
+        self.assertEqual(1, len(e))
+        self.assertEqual(["aquí", "ahí", "cerca de", "del"], e[0].banco)
+        self.assertEqual(["aquí", "cerca de", "del", "ahí"], e[0].respuestas)
+
+    def test_el_orden_manda_y_no_la_numeracion(self):
+        """La mitad de los ejercicios son diálogos SIN numerar, y su clave da
+        las respuestas seguidas: «días · tal · gracias · tú». Lo que ata una
+        respuesta a su hueco es el orden en que salen."""
+        dialogo = self.EJEMPLO.replace("**Б.** 1. aquí · 2. cerca de · 3. del / ahí.",
+                                       "**Б.** aquí · cerca de · del · ahí.")
+        self.assertEqual(["aquí", "cerca de", "del", "ahí"],
+                         huecos.leer(dialogo)[0].respuestas)
+
+    def test_si_la_cuenta_no_cuadra_el_ejercicio_se_descarta(self):
+        """Cuatro huecos y tres respuestas: no hay forma de saber cuál falta,
+        así que no se adivina. Decirle a alguien que acertó cuando falló es
+        mucho peor que no ofrecerle el ejercicio."""
+        corta = self.EJEMPLO.replace("3. del / ahí.", "3. del.")
+        self.assertEqual([], huecos.leer(corta))
+
+    def test_una_respuesta_fuera_del_banco_descarta_el_ejercicio(self):
+        """Es la comprobación que de verdad protege: los bancos son cortos y
+        concretos, así que una clave desalineada deja fuera alguna palabra casi
+        siempre. Es lo que descarta los 38 ejercicios cuya clave da frases."""
+        otra = self.EJEMPLO.replace("2. cerca de", "2. Es una goma")
+        self.assertEqual([], huecos.leer(otra))
+
+    def test_sin_clave_no_hay_ejercicio(self):
+        self.assertEqual([], huecos.leer(self.EJEMPLO.split("## Ответы")[0]))
+
+    def test_el_comentario_ruso_no_se_cuela_como_respuesta(self):
+        """En la lección 1-3 la clave acaba en «… · es. Carmen говорит
+        **encantada**…»: sin cortar ahí, la última respuesta sería esa frase
+        entera, no estaría en el banco y el ejercicio se perdía."""
+        self.assertEqual("del", huecos._respuestas("1. del. Carmen говорит algo")[0])
+        self.assertEqual("del", huecos._respuestas("1. del (у вас)")[0])
+
+    def test_el_bloque_de_la_clave_no_se_come_el_parrafo_siguiente(self):
+        """Juntando las líneas primero, un «\n\n» se volvía «\n » y el bloque
+        seguía leyendo: en la lección 1-3 salían 12 respuestas para 5 huecos."""
+        clave = "## Ответы\n\n**Б.** uno · dos.\n\n**Выход:** tres · cuatro · cinco."
+        self.assertEqual(["uno", "dos"], huecos._respuestas(
+            huecos._bloque_de_la_clave(clave, "Б")))
+
+    def test_en_el_sitio_salen_las_fichas_y_los_huecos(self):
+        destino = pathlib.Path(tempfile.mkdtemp())
+        construir_sitio.construir(destino, construir_sitio.cargar_config(),
+                                  construir_sitio.cargar_textos())
+        con = [p for p in (destino).rglob("semana-*/dia-*.html")
+               if 'class="hueco"' in p.read_text(encoding="utf-8")]
+        self.assertGreaterEqual(len(con), 20, "se perdieron ejercicios por el camino")
+
+        uno = (destino / "semana-06" / "dia-2.html").read_text(encoding="utf-8")
+        self.assertIn('class="ficha"', uno)
+        self.assertIn("CURSO_HUECOS", uno)
+        # El banco escrito se marca para que lo esconda el navegador, y NO se
+        # borra: sin JavaScript es lo único que dice qué palabras hay.
+        self.assertIn('class="banco-escrito"', uno)
+
+    def test_ninguna_pagina_trae_un_byte_nulo(self):
+        """El CSS llevaba `content:"\00a0"`, que Python lee como escape octal
+        y escribía un NUL en las 125 páginas. Un HTML con un NUL lo sirven los
+        navegadores pero `grep` lo trata como binario, y es la clase de cosa
+        que no se ve mirando la página."""
+        for pagina in (RAIZ / "docs").rglob("*.html"):
+            self.assertNotIn(b"\x00", pagina.read_bytes(), str(pagina.name))

@@ -161,6 +161,10 @@ ru:
     copiar: "Скопировать ссылку"
     copiado: "Ссылка скопирована"
     seguir: "Курс в соцсетях"
+  huecos:
+    comprobar: "Проверить"
+    resultado: "Верно: %a% из %b%"
+    otra: "Ещё раз"
   progreso:
     continuar: "Продолжить: урок"
     empezar: "Начать сначала"
@@ -322,6 +326,10 @@ es:
     copiar: "Copiar el enlace"
     copiado: "Enlace copiado"
     seguir: "El curso en redes"
+  huecos:
+    comprobar: "Comprobar"
+    resultado: "Aciertos: %a% de %b%"
+    otra: "Otra vez"
   progreso:
     continuar: "Continuar: lección"
     empezar: "Empezar de cero"
@@ -483,6 +491,10 @@ en:
     copiar: "Copy the link"
     copiado: "Link copied"
     seguir: "The course on social media"
+  huecos:
+    comprobar: "Check"
+    resultado: "Correct: %a% of %b%"
+    otra: "Try again"
   progreso:
     continuar: "Continue: lesson"
     empezar: "Start from the beginning"
