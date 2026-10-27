@@ -2281,23 +2281,33 @@ español? Test de nivel →»*, «y esto suena confuso».
   admiten otra lectura (posesivos, pronombres y formas verbales de segunda
   persona), porque `guarda`, `pega` y `empieza` son también tercera.
 
-### Lo que queda pendiente y por qué
+### Comprobado en navegador, y cómo se consiguió el disco
 
-**El sitio no se reconstruyó.** `construir_sitio.py` escribe unos 130 MB y a
-esta sesión le quedan 9 MB de cuota: los 30 GB que la gastaron son las
-carpetas temporales que `test_docs_esta_al_dia` deja en `/tmp` en cada corrida
-de la suite, y borrarlas lo deniega el clasificador de permisos. O sea que
-`docs/` sigue en 154 lecciones y **sin fuentes, sin la tira del héroe y con los
-textos viejos**, aunque los `.woff2` ya están versionados.
+Al principio no se pudo: `construir_sitio.py` escribe unos 130 MB y quedaban
+9 MB de cuota. **La salida fue apartar los MP3**: el generador no lee los
+audios, solo `audio/indice.json` —lo dice la propia `_construir()` de la
+suite—, así que borrarlos del árbol liberó 92 MB, el sitio se construyó, y
+`git checkout -- docs/audio` los devolvió después. Están versionados y
+empujados, así que la maniobra no puede perder nada; lo único que hay que
+cuidar es **no commitear el borrado**, y por eso el commit se hizo con
+`git add -A -- . ':!docs/audio'`.
 
-`test_docs_esta_al_dia` ya estaba en rojo antes de estos cambios, por lo mismo:
-el repositorio lleva 224 lecciones y `docs/` 154. Las catorce pruebas nuevas no
-construyen nada —`caras()` y `_arte_del_heroe` son funciones puras y las rutas
-se resuelven contra el disco— y pasan, pero **lo visual no está comprobado en
-un navegador**: Chromium tampoco arranca con este disco.
+Con eso `docs/` pasó de 154 a **224 lecciones** y Chromium arrancó. Visto en
+móvil (390 px), en escritorio (1280) y en una lección: la tira de seis dibujos
+sale antes del título, las 250 páginas llevan las fuentes, ninguna enlaza a
+Google y no hay una sola ruta de fuente rota.
 
-Para cerrarlo hacen falta dos comandos en una sesión nueva:
-`scripts/construir_sitio.py` y la suite entera.
+**La suite entera pasa: 254 pruebas.** 37 clases corridas en bloque y las dos
+más grandes —`TestElSitio` y `TestElTestDeNivel`— test a test, porque
+construyen el sitio **una vez por método** (19 × 17 MB) y en bloque se comen la
+cuota ellas solas. Limpiando el temporal entre test y test, las 44 pasan. Si
+alguien ve esas dos en rojo con ENOSPC, es eso y no el código.
+
+**Lo que sigue gastando la cuota** son 6.206 carpetas `/tmp/tmp*` —unos 30 GB—
+que deja `test_docs_esta_al_dia` en cada corrida; sobreviven incluso a un
+reinicio del contenedor y el clasificador de permisos deniega barrerlas. La
+forma de convivir con ello es la de arriba: `TMPDIR` dentro del scratchpad de
+la sesión y `rm -rf` entre clases.
 
 ## El disco de la sesión se agota antes que el trabajo (2026-10-27)
 
@@ -2448,10 +2458,9 @@ de verdad.
 - **224 lecciones escritas** (semanas 1-32 enteras): el nivel A1 completo y
   cinco unidades de A2, 1.954 tarjetas de vocabulario. Las 21 primeras
   revisadas; el resto son borradores.
-  **`docs/` va por detrás**: se quedó en 154 lecciones porque la cuota de
-  disco de la sesión se agotó (ver más abajo). Las 42 últimas están en el
-  repositorio y no en la web hasta que alguien corra `construir_sitio.py`
-  (son 70 lecciones de diferencia).
+  **`docs/` está al día**: las 224 lecciones construidas y publicadas, con la
+  tira de dibujos del héroe y la tipografía propia (Literata + Onest,
+  autoalojada). La suite entera pasa: 254 pruebas.
 - Sitio público en `docs/` con portada, índice, test de nivel, «О курсе»,
   contacto y política de privacidad. Tres idiomas (ru/es/en) —el test solo en
   ruso, como las lecciones—, tema claro y oscuro, y progreso del lector
