@@ -1250,6 +1250,68 @@ memoria y dice «cotejar». La frase publicada se limita a los niveles A1–A2 y
 DELE —que es el objetivo declarado del curso— y no nombra el PCIC, justamente
 para no apoyarse en lo que aún no está comprobado.
 
+## Compartir, y las redes (2026-10-27)
+
+El profesor preguntó si se puede llevar el contenido a Instagram, YouTube,
+Telegram y compañía «para monetizar». **Lo primero que hubo que separar: los
+botones no monetizan, distribuyen.** El camino es contenido en redes → gente
+que entra → AdSense. Hoy el sitio es bueno y no lo conoce nadie; ese es el
+cuello de botella, no la falta de botones.
+
+**Lo que se hizo**: compartir al pie de las 100 lecciones (Telegram, WhatsApp,
+copiar enlace) y un hueco en `web/sitio.yaml` para los perfiles, que sale en el
+pie de las 125 páginas.
+
+- **Enlaces normales y NUNCA los widgets oficiales.** El botón «Compartir» de
+  Facebook carga el SDK de Meta, que rastrea al lector; la política de
+  privacidad de aquí dice que sin AdSense no se carga nada de terceros, y un
+  widget la volvería mentira. `t.me/share/url?…` hace lo mismo y no carga nada.
+  Hay una prueba que recorre las 125 páginas buscando los SDK de las cuatro
+  plataformas.
+- **Telegram y WhatsApp, y no más.** Son las dos por las que un rusohablante
+  fuera de Rusia manda algo a un amigo. Una fila de ocho iconos no se usa más,
+  se mira menos.
+- **Al pie de la lección y no arriba**: se comparte lo que ya has leído.
+- **Sin dominio configurado no sale nada**: un enlace que apunta a `file:///`
+  no le sirve a nadie.
+- **Un perfil vacío no sale**, en vez de un botón que lleva a una cuenta que no
+  existe. Hoy los cuatro están vacíos y hay una prueba que lo fija: si se pone
+  en rojo es que alguien escribió un perfil a mano, y hay que comprobar que
+  exista antes de aflojarla.
+
+**Lo que se le dijo sobre monetizar en cada plataforma**, con los umbrales
+buscados (todos de fuentes de terceros, conviene cotejar): YouTube pide 1.000
+suscriptores y 4.000 horas vistas —y sube a 8.000 horas en febrero de 2027—;
+Telegram pide 1.000 suscriptores y reparte al 50%, pagando en Toncoin.
+**Telegram es su canal**: es donde vive el público rusohablante fuera de Rusia
+y el umbral es alcanzable.
+
+**Y el hallazgo que ahorra el trabajo**: ya tiene con qué alimentar un canal
+sin escribir nada nuevo —300 dibujos, 3.543 audios y 908 palabras con ejemplo y
+traducción—. Una «palabra del día» automática son tres años de publicaciones
+diarias sacadas de lo que ya está pagado y en disco. Queda propuesto, sin
+hacer, a la espera de que exista el canal.
+
+### Lo que quedó medido para los huecos interactivos
+
+El profesor pidió además «mover palabras, dar click y colocar palabras en los
+casilleros vacíos». Antes de proponer nada se contó lo que ya hay escrito, y es
+la quinta vez que el contenido ya existía:
+
+    huecos ______ escritos            1.488
+    lecciones con huecos                 89 de 100
+    ejercicios con BANCO DE PALABRAS     61
+    lecciones con clave (Ответы)        100 de 100
+
+El banco de palabras es literalmente lo que pide —`> aquí · ahí · allí · cerca
+de · lejos de`— y la clave dice qué va en cada hueco, con ` / ` separando los
+varios de un mismo renglón. O sea que son 61 ejercicios listos para volverse
+interactivos sin escribir ni uno.
+
+**Cuando se haga, tiene que fallar de forma segura como `pruebas.py`**: si la
+clave no se casa con los huecos sin ninguna duda, ese ejercicio se queda como
+está hoy. Decirle a alguien que acertó cuando falló es peor que no ofrecerlo.
+
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.

@@ -27,6 +27,7 @@ import json
 import pathlib
 import re
 import shutil
+import urllib.parse
 import sys
 
 import markdown
@@ -159,6 +160,17 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
    del examen. */
 .marco{font-size:.9rem;color:var(--tenue);border-inline-start:3px solid var(--celeste);
   padding-inline-start:.8rem;margin:1rem 0}
+/* compartir: tres botones iguales al pie de la lección. Discretos —son una
+   oferta y no el siguiente paso, que es la lección de al lado— y del mismo
+   tamaño entre sí, para que ninguno parezca el principal. */
+.compartir{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin:1.8rem 0 0;
+  padding-top:1.1rem;border-top:1px solid var(--linea)}
+.compartir .de-que{font-size:.85rem;color:var(--tenue);margin-inline-end:.2rem}
+.red{display:inline-block;padding:.4rem .85rem;border:1px solid var(--linea);
+  border-radius:999px;background:transparent;color:var(--acento);cursor:pointer;
+  font:inherit;font-size:.85rem;text-decoration:none}
+.red:hover{border-color:var(--acento)}
+.seguir{margin:.5rem 0 0;font-size:.85rem}
 /* el respaldo del progreso: un código que el alumno se lleva. Los dos campos
    a ancho completo porque el código son 64 caracteres y en el móvil, en un
    campo corto, no se ve si está entero. */
@@ -583,6 +595,18 @@ PROGRESO_JS = r"""(function(){
     });
   }
 
+  // --- copiar el enlace de la lección ---
+  // Sin widget y sin librería: el navegador ya sabe copiar. Si el portapapeles
+  // no está disponible, el botón no miente: se queda como estaba.
+  var copiarEnlace = document.getElementById('copiar-enlace');
+  if(copiarEnlace && navigator.clipboard && navigator.clipboard.writeText){
+    copiarEnlace.addEventListener('click', function(){
+      navigator.clipboard.writeText(copiarEnlace.dataset.url).then(function(){
+        copiarEnlace.textContent = copiarEnlace.dataset.ok;
+      });
+    });
+  }
+
   // --- borrar el progreso ---
   var borrar=document.getElementById('borrar-progreso');
   if(borrar){
@@ -1000,6 +1024,7 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
 <footer class="sitio"><div class="envoltorio">
 <p><a href="{raiz}/test.html">{html.escape(t['test']['titulo'])}</a> · <a href="{raiz}/o-kurse.html">{html.escape(t['menu']['sobre'])}</a> · <a href="{raiz}/kontakt.html">{html.escape(t['menu']['contacto'])}</a> · <a href="{raiz}/privacy.html">{html.escape(t['privacidad']['titulo'])}</a></p>
 <p>{html.escape(t['pie'])}</p>
+{_seguir(t, cfg, raiz)}
 </div></footer>
 {banda_cookies(cfg, t, raiz)}
 {TEMA_SCRIPT}
@@ -1253,6 +1278,57 @@ def _bloque_de_la_baraja(t, destino: pathlib.Path, raiz: str) -> str:
 
     return (f'<section class="baraja"><h2>{html.escape(b["titulo"])}</h2>'
             f'<p>{texto}</p><div class="bajar">{"".join(enlaces)}</div></section>')
+
+
+# Los nombres que se enseñan, en el orden en que salen. El valor vacío en
+# `web/sitio.yaml` deja el enlace fuera: un botón a una cuenta que no existe es
+# peor que no tener botón.
+REDES = (("telegram", "Telegram"), ("instagram", "Instagram"),
+         ("youtube", "YouTube"), ("facebook", "Facebook"))
+
+
+def _compartir(t, cfg, canonica: str) -> str:
+    """Compartir la lección, y seguir el curso.
+
+    **Enlaces normales y NUNCA los widgets oficiales.** El botón «Compartir»
+    de Facebook carga el SDK de Meta, que rastrea al lector; la política de
+    privacidad de este sitio dice que sin AdSense no se carga nada de terceros
+    y un widget la volvería mentira. `t.me/share/url?…` hace lo mismo y no
+    carga nada.
+
+    Telegram y WhatsApp y no más: son las dos por las que un rusohablante
+    fuera de Rusia manda algo a un amigo. Una fila de ocho iconos no se usa
+    más, se mira menos.
+
+    Sin `canonica` —o sea, sin dominio configurado— no sale nada: un enlace
+    para compartir que apunta a `file:///` no le sirve a nadie."""
+    if not canonica:
+        return ""
+    c = t["compartir"]
+    u = urllib.parse.quote(canonica, safe="")
+    titulo = urllib.parse.quote(t["titulo_sitio"], safe="")
+    enlaces = [
+        f'<a class="red" href="https://t.me/share/url?url={u}&text={titulo}" '
+        f'target="_blank" rel="noopener">{html.escape(c["telegram"])}</a>',
+        f'<a class="red" href="https://wa.me/?text={titulo}%20{u}" '
+        f'target="_blank" rel="noopener">{html.escape(c["whatsapp"])}</a>',
+        f'<button type="button" class="red" id="copiar-enlace" '
+        f'data-url="{html.escape(canonica)}" data-ok="{html.escape(c["copiado"])}">'
+        f'{html.escape(c["copiar"])}</button>',
+    ]
+    return (f'<div class="compartir"><span class="de-que">{html.escape(c["titulo"])}</span>'
+            f'{"".join(enlaces)}</div>')
+
+
+def _seguir(t, cfg, raiz: str) -> str:
+    """Los perfiles del curso, en el pie. Solo los que estén rellenos."""
+    redes = cfg.get("redes") or {}
+    enlaces = [f'<a href="{html.escape(redes[clave])}" target="_blank" rel="noopener">{nombre}</a>'
+               for clave, nombre in REDES if (redes.get(clave) or "").strip()]
+    if not enlaces:
+        return ""
+    return (f'<p class="seguir">{html.escape(t["compartir"]["seguir"])}: '
+            + " · ".join(enlaces) + "</p>")
 
 
 def _firma(autor: dict) -> str:
@@ -1592,8 +1668,12 @@ def construir_leccion(d, cfg, t, idiomas, destino, cal, todos, audio=None,
            f'<span>{L["semana"]} {d.semana} · {L["nivel"]} {html.escape(d.nivel)}</span></div>')
     # El botón de marcar lo pone el navegador y no el generador: sin JavaScript
     # no haría nada, y un botón muerto es peor que ninguno.
+    # Compartir va al PIE y no arriba: se comparte lo que ya has leído y te ha
+    # gustado, no lo que acabas de abrir.
+    canonica = f"{cfg['dominio']}/semana-{d.semana:02d}/dia-{d.dia}.html" if cfg.get("dominio") else ""
     cuerpo_final = (f'<article data-leccion="{d.numero}">' + cab + aviso
                     + html_cuerpo + anuncio(cfg, "pie") + '<div id="marcar-caja"></div>'
+                    + _compartir(t, cfg, canonica)
                     + f'<nav class="pasos">{"".join(pasos)}</nav></article>')
 
     salida = destino / f"semana-{d.semana:02d}" / f"dia-{d.dia}.html"

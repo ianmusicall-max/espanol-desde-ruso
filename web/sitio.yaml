@@ -44,3 +44,16 @@ adsense:
 # Google Analytics. Vacío = sin analítica y sin cookies.
 analitica:
   google: ""           # G-XXXXXXXXXX
+
+# Los perfiles del curso en redes. Vacío = no sale el enlace, en vez de un
+# botón que lleva a una cuenta que no existe.
+#
+# Son ENLACES NORMALES y nunca los widgets oficiales: el botón «Compartir» de
+# Facebook carga el SDK de Meta, que rastrea al lector. La política de
+# privacidad de este sitio dice que sin AdSense no se carga nada de terceros, y
+# un widget la volvería mentira. Un enlace hace lo mismo y no carga nada.
+redes:
+  telegram: ""      # https://t.me/…
+  instagram: ""     # https://instagram.com/…
+  youtube: ""       # https://youtube.com/@…
+  facebook: ""      # https://facebook.com/…

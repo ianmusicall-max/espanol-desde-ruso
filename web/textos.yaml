@@ -154,6 +154,13 @@ ru:
     anki_nota: "Один файл, открывается одним щелчком. Anki бесплатен на компьютере и Android; на iPhone — платное приложение или бесплатный AnkiWeb в браузере."
     tsv: "Скачать таблицей (TSV)"
     tsv_nota: "Для Excel, Google Таблиц, Quizlet и любого другого приложения."
+  compartir:
+    titulo: "Поделиться уроком"
+    telegram: "Telegram"
+    whatsapp: "WhatsApp"
+    copiar: "Скопировать ссылку"
+    copiado: "Ссылка скопирована"
+    seguir: "Курс в соцсетях"
   progreso:
     continuar: "Продолжить: урок"
     empezar: "Начать сначала"
@@ -308,6 +315,13 @@ es:
     anki_nota: "Un solo archivo, se abre de un clic. Anki es gratis en ordenador y Android; en iPhone, la app es de pago o se usa AnkiWeb en el navegador."
     tsv: "Descargar como tabla (TSV)"
     tsv_nota: "Para Excel, Google Sheets, Quizlet y cualquier otra app."
+  compartir:
+    titulo: "Compartir esta lección"
+    telegram: "Telegram"
+    whatsapp: "WhatsApp"
+    copiar: "Copiar el enlace"
+    copiado: "Enlace copiado"
+    seguir: "El curso en redes"
   progreso:
     continuar: "Continuar: lección"
     empezar: "Empezar de cero"
@@ -462,6 +476,13 @@ en:
     anki_nota: "One file, opens in a click. Anki is free on desktop and Android; on iPhone the app is paid, or use AnkiWeb in the browser."
     tsv: "Download as a table (TSV)"
     tsv_nota: "For Excel, Google Sheets, Quizlet and any other app."
+  compartir:
+    titulo: "Share this lesson"
+    telegram: "Telegram"
+    whatsapp: "WhatsApp"
+    copiar: "Copy the link"
+    copiado: "Link copied"
+    seguir: "The course on social media"
   progreso:
     continuar: "Continue: lesson"
     empezar: "Start from the beginning"

@@ -90,6 +90,17 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
    del examen. */
 .marco{font-size:.9rem;color:var(--tenue);border-inline-start:3px solid var(--celeste);
   padding-inline-start:.8rem;margin:1rem 0}
+/* compartir: tres botones iguales al pie de la lección. Discretos —son una
+   oferta y no el siguiente paso, que es la lección de al lado— y del mismo
+   tamaño entre sí, para que ninguno parezca el principal. */
+.compartir{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin:1.8rem 0 0;
+  padding-top:1.1rem;border-top:1px solid var(--linea)}
+.compartir .de-que{font-size:.85rem;color:var(--tenue);margin-inline-end:.2rem}
+.red{display:inline-block;padding:.4rem .85rem;border:1px solid var(--linea);
+  border-radius:999px;background:transparent;color:var(--acento);cursor:pointer;
+  font:inherit;font-size:.85rem;text-decoration:none}
+.red:hover{border-color:var(--acento)}
+.seguir{margin:.5rem 0 0;font-size:.85rem}
 /* el respaldo del progreso: un código que el alumno se lleva. Los dos campos
    a ancho completo porque el código son 64 caracteres y en el móvil, en un
    campo corto, no se ve si está entero. */
@@ -676,6 +687,7 @@ columna <code>cultura</code> de cada unidad del calendario.</p>
 <footer class="sitio"><div class="envoltorio">
 <p><a href="../test.html">Test de nivel</a> · <a href="../o-kurse.html">El curso</a> · <a href="../kontakt.html">Contacto</a> · <a href="../privacy.html">Política de privacidad</a></p>
 <p>El material del curso puede usarse libremente para estudiar.</p>
+
 </div></footer>
 <div id="cookies"><span>Usamos cookies para la publicidad y la estadística de visitas. <a href="../privacy.html">Más información</a>.</span><button class="boton" style="padding:.4rem 1rem;font-size:.85rem" onclick="try{localStorage.setItem('cookies','1')}catch(e){};this.parentNode.remove()">De acuerdo</button></div><script>try{if(localStorage.getItem('cookies')){var b=document.getElementById('cookies');b&&b.remove()}}catch(e){}</script>
 <script>(function(){var b=document.getElementById('tema');if(!b)return;function actual(){var r=document.documentElement;return r.dataset.tema||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}b.addEventListener('click',function(){var n=actual()==='dark'?'light':'dark';document.documentElement.dataset.tema=n;try{localStorage.setItem('tema',n)}catch(e){}});})();</script>

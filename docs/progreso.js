@@ -170,6 +170,18 @@
     });
   }
 
+  // --- copiar el enlace de la lección ---
+  // Sin widget y sin librería: el navegador ya sabe copiar. Si el portapapeles
+  // no está disponible, el botón no miente: se queda como estaba.
+  var copiarEnlace = document.getElementById('copiar-enlace');
+  if(copiarEnlace && navigator.clipboard && navigator.clipboard.writeText){
+    copiarEnlace.addEventListener('click', function(){
+      navigator.clipboard.writeText(copiarEnlace.dataset.url).then(function(){
+        copiarEnlace.textContent = copiarEnlace.dataset.ok;
+      });
+    });
+  }
+
   // --- borrar el progreso ---
   var borrar=document.getElementById('borrar-progreso');
   if(borrar){

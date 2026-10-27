@@ -1987,3 +1987,52 @@ class TestLaFirmaDelAutor(unittest.TestCase):
             self.assertNotIn("<strong></strong>", pagina.read_text(encoding="utf-8"),
                              str(pagina.relative_to(destino)))
 
+
+class TestCompartir(unittest.TestCase):
+    """Los botones de compartir al pie de cada lección, y los perfiles en el pie."""
+
+    def setUp(self):
+        self.textos = construir_sitio.cargar_textos()
+        self.cfg = construir_sitio.cargar_config()
+
+    def test_son_enlaces_normales_y_no_widgets(self):
+        """El botón «Compartir» de Facebook carga el SDK de Meta, que rastrea
+        al lector. La política de privacidad de este sitio dice que sin AdSense
+        no se carga NADA de terceros, y un widget la volvería mentira."""
+        destino = pathlib.Path(tempfile.mkdtemp())
+        construir_sitio.construir(destino, self.cfg, self.textos)
+        for pagina in destino.rglob("*.html"):
+            texto = pagina.read_text(encoding="utf-8")
+            for sdk in ("connect.facebook.net", "platform.twitter.com",
+                        "platform.linkedin.com", "apis.google.com"):
+                self.assertNotIn(sdk, texto, f"{pagina.name} carga {sdk}")
+
+    def test_sin_dominio_no_se_ofrece_compartir(self):
+        """Un enlace para compartir que apunta a `file:///` no le sirve a
+        nadie, así que es mejor no ofrecerlo."""
+        sin = dict(self.cfg, dominio="")
+        self.assertEqual("", construir_sitio._compartir(self.textos["ru"], sin, ""))
+
+    def test_el_enlace_lleva_a_ESTA_leccion_y_no_a_la_portada(self):
+        destino = pathlib.Path(tempfile.mkdtemp())
+        construir_sitio.construir(destino, self.cfg, self.textos)
+        leccion = (destino / "semana-01" / "dia-1.html").read_text(encoding="utf-8")
+        self.assertIn("semana-01%2Fdia-1.html", leccion, "comparte la página equivocada")
+        self.assertIn('data-url="https://espanoldesderuso.com/semana-01/dia-1.html"', leccion)
+
+    def test_una_red_sin_rellenar_no_sale(self):
+        """Un botón que lleva a una cuenta que no existe es peor que ninguno."""
+        vacio = dict(self.cfg, redes={"telegram": "", "instagram": "  "})
+        self.assertEqual("", construir_sitio._seguir(self.textos["ru"], vacio, "."))
+
+        con = dict(self.cfg, redes={"telegram": "https://t.me/x", "instagram": ""})
+        pie = construir_sitio._seguir(self.textos["ru"], con, ".")
+        self.assertIn("https://t.me/x", pie)
+        self.assertNotIn("Instagram", pie)
+
+    def test_las_redes_del_repo_estan_vacias(self):
+        """Hasta que el profesor dé sus URLs, ninguna sale. Si un día esto se
+        pone en rojo es que alguien escribió un perfil a mano: comprobar que
+        existe antes de aflojar la prueba."""
+        for clave, url in (self.cfg.get("redes") or {}).items():
+            self.assertEqual("", (url or "").strip(), f"redes.{clave}")
