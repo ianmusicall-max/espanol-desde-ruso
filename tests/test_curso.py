@@ -1896,3 +1896,94 @@ class TestLaBarajaDeTarjetas(unittest.TestCase):
             self.assertIn('class="baraja"', texto, pagina)
             self.assertIn(f'href="{prefijo}/vocabulario/', texto, pagina)
 
+
+class TestElRespaldoDelProgreso(unittest.TestCase):
+    """El código que el alumno se lleva, para no perder el avance.
+
+    El progreso vive en `localStorage`, que se va con «limpiar datos del
+    navegador» y no viaja a otro teléfono. Cuentas de verdad costarían un
+    servicio, datos personales y soporte; un código que el alumno guarda donde
+    quiera no cuesta nada y no deja nada nuestro en ningún sitio."""
+
+    def setUp(self):
+        self.textos = construir_sitio.cargar_textos()
+        self.destino = pathlib.Path(tempfile.mkdtemp())
+        construir_sitio.construir(self.destino, construir_sitio.cargar_config(), self.textos)
+        self.indice = (self.destino / "kurs.html").read_text(encoding="utf-8")
+
+    def test_restaurar_se_ve_aunque_no_haya_ningun_progreso(self):
+        """Es el fallo que tuvo la primera versión y el más fácil de repetir.
+
+        El recuadro `#mio` se oculta cuando no hay nada hecho. Con el botón de
+        restaurar dentro, era invisible EXACTAMENTE para quien lo necesita: el
+        que acaba de limpiar el navegador o de estrenar móvil y no tiene nada.
+        Se vio probándolo en el navegador, no leyendo el código."""
+        mio = re.search(r'<div class="progreso" id="mio".*?(?=<div class="respaldo")',
+                        self.indice, re.S)
+        self.assertIsNotNone(mio, "ya no hay un bloque .respaldo después de #mio")
+        self.assertNotIn("restaurar-progreso", mio.group(0),
+                         "«Restaurar» no puede vivir dentro del recuadro que se oculta")
+        self.assertIn('class="respaldo"', self.indice)
+
+    def test_guardar_nace_oculto_y_restaurar_no(self):
+        """Sin nada hecho no hay nada que copiar, así que «Guardar» lo enciende
+        el navegador. «Restaurar» siempre está, por lo de arriba."""
+        guardar = re.search(r'<button[^>]*id="copiar-progreso"[^>]*>', self.indice).group(0)
+        restaurar = re.search(r'<button[^>]*id="restaurar-progreso"[^>]*>', self.indice).group(0)
+        self.assertIn("hidden", guardar)
+        self.assertNotIn("hidden", restaurar)
+
+    def test_el_html_y_el_guion_hablan_de_los_mismos_ids(self):
+        """El contrato son seis ids. Cambiar uno no rompe ninguna página: deja
+        de funcionar el respaldo en silencio, que es el fallo que esta suite ya
+        caza para el resto del progreso."""
+        for id_ in ("copiar-progreso", "restaurar-progreso", "restaurar-caja",
+                    "restaurar-codigo", "restaurar-aplicar", "codigo-mio"):
+            self.assertIn(f'id="{id_}"', self.indice, f"falta {id_} en el HTML")
+            self.assertIn(f"'{id_}'", construir_sitio.PROGRESO_JS, f"el guion no busca {id_}")
+
+    def test_un_codigo_invalido_no_puede_borrar_nada(self):
+        """`deCodigo` devuelve null ante cualquier duda y quien lo llama se va
+        sin tocar `localStorage`. Restaurar nunca puede ser destructivo: un
+        código cortado a medias al pegarlo no puede costarle el curso a nadie."""
+        js = construir_sitio.PROGRESO_JS
+        cuerpo = js[js.index("function deCodigo"):js.index("var copiar =")]
+        self.assertGreaterEqual(cuerpo.count("return null"), 3)
+        self.assertIn("catch(e){ return null; }", cuerpo)
+        # Y el que llama se va ANTES de escribir nada.
+        self.assertIn("if(!datos){ di(T.malo); return; }", js)
+
+    def test_los_textos_estan_en_los_tres_idiomas(self):
+        for clave in ("copiar", "copiado", "restaurar", "pegar", "aplicar",
+                      "malo", "menos", "hecho_restaurar", "antes"):
+            for idioma in ("ru", "es", "en"):
+                valor = self.textos[idioma]["progreso"].get(clave, "")
+                self.assertTrue(valor.strip(), f"falta progreso.{clave} en {idioma}")
+
+    def test_el_aviso_dice_que_guarde_el_codigo_antes(self):
+        """Previene en vez de reparar: quien lee «tu progreso vive solo aquí»
+        tiene que leer en la misma frase qué hacer al respecto."""
+        self.assertIn(self.textos["ru"]["progreso"]["antes"], self.indice)
+
+
+class TestLaFirmaDelAutor(unittest.TestCase):
+    """El nombre del autor puede ir vacío, y entonces no se escribe el hueco."""
+
+    def test_sin_nombre_no_queda_un_strong_vacio_ni_un_punto_suelto(self):
+        """Un «. Преподаватель с магистратурой…» de entrada delata que algo se
+        borró a medias."""
+        solo = construir_sitio._firma({"nombre": "", "descripcion": "Профессор."})
+        self.assertEqual("Профессор.", solo)
+        self.assertNotIn("<strong>", solo)
+
+        con = construir_sitio._firma({"nombre": "Ana", "descripcion": "Профессор."})
+        self.assertEqual("<strong>Ana</strong>. Профессор.", con)
+
+    def test_el_sitio_construido_no_trae_un_strong_vacio(self):
+        destino = pathlib.Path(tempfile.mkdtemp())
+        construir_sitio.construir(destino, construir_sitio.cargar_config(),
+                                  construir_sitio.cargar_textos())
+        for pagina in destino.rglob("*.html"):
+            self.assertNotIn("<strong></strong>", pagina.read_text(encoding="utf-8"),
+                             str(pagina.relative_to(destino)))
+

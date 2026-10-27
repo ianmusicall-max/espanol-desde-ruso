@@ -85,6 +85,21 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* el marco del curso: los niveles y el examen al que lleva. Discreto a
+   propósito —es un respaldo, no un reclamo— y con el acento solo en el nombre
+   del examen. */
+.marco{font-size:.9rem;color:var(--tenue);border-inline-start:3px solid var(--celeste);
+  padding-inline-start:.8rem;margin:1rem 0}
+/* el respaldo del progreso: un código que el alumno se lleva. Los dos campos
+   a ancho completo porque el código son 64 caracteres y en el móvil, en un
+   campo corto, no se ve si está entero. */
+.respaldo{margin:.9rem 0 0}
+.respaldo input{display:block;width:100%;margin:.6rem 0;padding:.55rem .7rem;
+  border:1px solid var(--linea);border-radius:8px;background:var(--fondo);
+  color:inherit;font-family:ui-monospace,monospace;font-size:.85rem}
+.respaldo .enlace{background:none;border:0;padding:0;margin-inline-start:.6rem;
+  color:var(--acento);text-decoration:underline;cursor:pointer;font:inherit}
+.aviso-chico{margin:.4rem 0 0;font-size:.82rem;color:var(--tenue)}
 /* la baraja de tarjetas: dos descargas, la de Anki primero. En tarjeta y no
    en una lista suelta porque es una oferta, no un apartado del curso. */
 .baraja{margin:2rem 0;padding:1.1rem 1.2rem;border:1px solid var(--linea);
@@ -380,7 +395,7 @@ versionan (derechos de autor): quedan fuera del repositorio.</p>
     });
   });
 })();</script>
-<script>window.CURSO_TEXTOS={"continuar": "Continuar: lección", "empezar": "Empezar de cero", "marcar": "Marcar la lección como hecha", "hecho": "Lección hecha", "siguiente": "Siguiente lección", "tuyo": "hechas por usted", "titulo": "Su progreso", "aviso": "El progreso se guarda solo en este navegador y en este aparato. No hay registro y no se envía a ninguna parte. Si borra los datos del navegador o abre el curso en otro teléfono, las marcas no viajan con usted.", "borrar": "Borrar el progreso", "confirmar": "¿Borrar todas las marcas?"};window.CURSO_RAIZ="..";window.CURSO_PUBLICADAS=0;window.CURSO_DIAS={};</script>
+<script>window.CURSO_TEXTOS={"continuar": "Continuar: lección", "empezar": "Empezar de cero", "marcar": "Marcar la lección como hecha", "hecho": "Lección hecha", "siguiente": "Siguiente lección", "tuyo": "hechas por usted", "titulo": "Su progreso", "aviso": "El progreso se guarda solo en este navegador y en este aparato. No hay registro y no se envía a ninguna parte. Si borra los datos del navegador o abre el curso en otro teléfono, las marcas no viajan con usted.", "borrar": "Borrar el progreso", "confirmar": "¿Borrar todas las marcas?", "copiar": "Guardar mi progreso", "copiado": "Código copiado — pégalo en tus notas o en un mensaje a ti mismo", "restaurar": "Restaurar con un código", "pegar": "Pega aquí tu código", "aplicar": "Restaurar", "cancelar": "Cancelar", "malo": "Esto no parece un código de progreso. No se ha cambiado nada.", "menos": "Ese código trae menos lecciones de las que tienes marcadas (%a% en vez de %b%). ¿Restaurar igualmente?", "hecho_restaurar": "Listo: %n% lecciones restauradas", "antes": "Antes de limpiar el navegador o cambiar de móvil, guarda tu código."};window.CURSO_RAIZ="..";window.CURSO_PUBLICADAS=0;window.CURSO_DIAS={};</script>
 <script src="../progreso.js" defer></script>
 
 

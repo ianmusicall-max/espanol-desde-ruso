@@ -154,6 +154,21 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* el marco del curso: los niveles y el examen al que lleva. Discreto a
+   propósito —es un respaldo, no un reclamo— y con el acento solo en el nombre
+   del examen. */
+.marco{font-size:.9rem;color:var(--tenue);border-inline-start:3px solid var(--celeste);
+  padding-inline-start:.8rem;margin:1rem 0}
+/* el respaldo del progreso: un código que el alumno se lleva. Los dos campos
+   a ancho completo porque el código son 64 caracteres y en el móvil, en un
+   campo corto, no se ve si está entero. */
+.respaldo{margin:.9rem 0 0}
+.respaldo input{display:block;width:100%;margin:.6rem 0;padding:.55rem .7rem;
+  border:1px solid var(--linea);border-radius:8px;background:var(--fondo);
+  color:inherit;font-family:ui-monospace,monospace;font-size:.85rem}
+.respaldo .enlace{background:none;border:0;padding:0;margin-inline-start:.6rem;
+  color:var(--acento);text-decoration:underline;cursor:pointer;font:inherit}
+.aviso-chico{margin:.4rem 0 0;font-size:.82rem;color:var(--tenue)}
 /* la baraja de tarjetas: dos descargas, la de Anki primero. En tarjeta y no
    en una lista suelta porque es una oferta, no un apartado del curso. */
 .baraja{margin:2rem 0;padding:1.1rem 1.2rem;border:1px solid var(--linea);
@@ -474,6 +489,98 @@ PROGRESO_JS = r"""(function(){
         filas[i].classList.add('hecha');
       }
     }
+  }
+
+  // --- el código de respaldo ---
+  //
+  // El progreso vive en localStorage, que se va con «limpiar datos del
+  // navegador» y no viaja a otro teléfono. Cuentas de verdad costarían un
+  // servicio, datos personales y soporte; un código que el alumno guarda
+  // DONDE QUIERA no cuesta nada y no deja nada nuestro en ningún sitio.
+  //
+  // Un bit por lección: las 365 caben en 46 bytes, o sea 64 caracteres en
+  // base64, y el código NO crece según se avanza. Eso es lo que lo hace
+  // pegable en un mensaje de Telegram, que es donde lo va a guardar la gente.
+  var BYTES = 46;                       // 365 lecciones / 8, redondeado
+  var MARCA = 'ESR1';                   // para reconocer un código nuestro
+
+  function aCodigo(lista, ultima){
+    var b = new Uint8Array(2 + BYTES);
+    b[0] = (ultima >> 8) & 255; b[1] = ultima & 255;
+    for(var i=0;i<lista.length;i++){
+      var n = lista[i] - 1;
+      if(n >= 0 && n < BYTES*8) b[2 + (n>>3)] |= 1 << (n & 7);
+    }
+    var cad=''; for(var j=0;j<b.length;j++) cad += String.fromCharCode(b[j]);
+    return MARCA + btoa(cad).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+  }
+
+  function deCodigo(texto){
+    // Devuelve null ante CUALQUIER duda. Restaurar nunca puede destruir lo
+    // que el alumno ya tiene por un código mal pegado o cortado a medias.
+    try{
+      texto = String(texto||'').replace(/\s+/g,'');
+      if(texto.slice(0,4) !== MARCA) return null;
+      var cad = atob(texto.slice(4).replace(/-/g,'+').replace(/_/g,'/'));
+      if(cad.length !== 2 + BYTES) return null;
+      var ultima = (cad.charCodeAt(0) << 8) | cad.charCodeAt(1);
+      var lista = [];
+      for(var i=0;i<BYTES;i++){
+        var v = cad.charCodeAt(2+i);
+        for(var bit=0;bit<8;bit++) if(v & (1<<bit)) lista.push(i*8 + bit + 1);
+      }
+      if(ultima < 0 || ultima > BYTES*8) return null;
+      return {hechas: lista, ultima: ultima};
+    }catch(e){ return null; }
+  }
+
+  var copiar = document.getElementById('copiar-progreso');
+  if(copiar){
+    copiar.hidden = !hechasAhora.length;
+    copiar.addEventListener('click', function(){
+      var codigo = aCodigo(hechasAhora, leer(CLAVE_ULTIMA,0)||0);
+      var aviso = document.getElementById('codigo-aviso');
+      function mostrarAviso(){
+        if(aviso){ aviso.textContent = T.copiado; aviso.hidden = false; }
+      }
+      // El portapapeles puede no estar (http, permisos, navegador viejo). Si
+      // falla, el código se enseña en un campo para copiarlo a mano: quedarse
+      // sin él sería lo único imperdonable aquí.
+      function aMano(c){
+        var campo = document.getElementById('codigo-mio');
+        if(campo){ campo.hidden=false; campo.value=c; campo.select(); }
+        mostrarAviso();
+      }
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(codigo).then(mostrarAviso, function(){ aMano(codigo); });
+      } else { aMano(codigo); }
+    });
+  }
+
+  var restaurar = document.getElementById('restaurar-progreso');
+  var cajaRest = document.getElementById('restaurar-caja');
+  if(restaurar && cajaRest){
+    restaurar.addEventListener('click', function(){ cajaRest.hidden = !cajaRest.hidden; });
+    var aplicar = document.getElementById('restaurar-aplicar');
+    if(aplicar) aplicar.addEventListener('click', function(){
+      var campo = document.getElementById('restaurar-codigo');
+      var aviso = document.getElementById('restaurar-aviso');
+      var datos = deCodigo(campo && campo.value);
+      function di(t){ if(aviso){ aviso.textContent=t; aviso.hidden=false; } }
+      if(!datos){ di(T.malo); return; }
+      // Un código viejo trae menos lecciones: se pregunta antes de pisar.
+      if(datos.hechas.length < hechasAhora.length){
+        // Los huecos que rellena el navegador van con %…% y no con {…}: así
+        // se distinguen de un vistazo de los que rellena Python, y la prueba
+        // que caza un «{n}» sin sustituir en la página sigue cazándolo.
+        var q = (T.menos||'').replace('%a%', datos.hechas.length).replace('%b%', hechasAhora.length);
+        if(!window.confirm(q)) return;
+      }
+      guardar(CLAVE_HECHAS, datos.hechas);
+      if(datos.ultima) guardar(CLAVE_ULTIMA, datos.ultima);
+      di((T.hecho_restaurar||'').replace('%n%', datos.hechas.length));
+      location.reload();
+    });
   }
 
   // --- borrar el progreso ---
@@ -996,6 +1103,7 @@ def construir_portada(cfg, t, idiomas, idioma, destino, cal, raiz) -> None:
 <h1>{html.escape(p['titulo'])}<span class="segunda">{html.escape(p['titulo2'])}</span></h1>
 <p class="lema">{html.escape(p['lema'])}</p>
 <p>{html.escape(p['entrada'])}</p>
+<p class="marco">{html.escape(p['marco'])}</p>
 <div class="botones">
 <a class="boton" id="continuar" href="{enlace}" hidden></a>
 <a class="boton" id="empezar" href="{enlace}">{html.escape(p['boton'])}</a>
@@ -1147,6 +1255,19 @@ def _bloque_de_la_baraja(t, destino: pathlib.Path, raiz: str) -> str:
             f'<p>{texto}</p><div class="bajar">{"".join(enlaces)}</div></section>')
 
 
+def _firma(autor: dict) -> str:
+    """El autor del curso: nombre y descripción, o solo la descripción.
+
+    El nombre puede ir vacío a propósito —`web/sitio.yaml`— y entonces no se
+    escribe ni el `<strong>` ni el punto que lo separaba: un «. Преподаватель
+    с магистратурой…» de entrada delata que algo se borró a medias."""
+    nombre = html.escape(autor.get("nombre", "") or "").strip()
+    descripcion = html.escape(autor.get("descripcion", "") or "").strip()
+    if not nombre:
+        return descripcion
+    return f"<strong>{nombre}</strong>. {descripcion}".strip()
+
+
 def construir_indice_curso(cfg, t, idiomas, idioma, destino, cal, raiz,
                            sitio=None) -> None:
     """`destino` es la carpeta del idioma y `sitio` la raíz del sitio.
@@ -1158,13 +1279,37 @@ def construir_indice_curso(cfg, t, idiomas, idioma, destino, cal, raiz,
     c, pr = t["curso"], t["progreso"]
     partes = [f'<h1>{html.escape(c["titulo"])}<span class="segunda">{html.escape(c["subtitulo"])}</span></h1>',
               f'<p>{html.escape(c["entrada"])}</p>',
+              f'<p class="marco">{html.escape(t["portada"]["marco"])}</p>',
               # Oculto hasta que el navegador diga que hay algo hecho: en blanco
               # no dice nada y un «0 / 100» de bienvenida desanima.
               f'<div class="progreso" id="mio" hidden>'
               f'<div class="cifras"><span class="n">0</span><span class="texto"></span></div>'
               f'<div class="barra"><i style="width:1%"></i></div>'
               f'<p class="progreso-nota">{html.escape(pr["aviso"])} '
-              f'<button type="button" id="borrar-progreso" hidden>{html.escape(pr["borrar"])}</button></p></div>',
+              f'<strong>{html.escape(pr["antes"])}</strong> '
+              f'<button type="button" id="borrar-progreso" hidden>{html.escape(pr["borrar"])}</button></p></div>'
+              # El respaldo va FUERA del recuadro de progreso, y eso no es
+              # colocación: ese recuadro se oculta cuando no hay nada hecho, y
+              # quien más necesita «Restaurar» es justo el que no tiene nada
+              # —acaba de limpiar el navegador o de estrenar móvil—. Dentro,
+              # el botón era invisible exactamente cuando hacía falta. Se vio
+              # probándolo en el navegador, no leyendo el código.
+              #
+              # «Guardar» sí nace oculto y lo enciende el navegador cuando hay
+              # progreso: sin nada hecho no hay nada que copiar.
+              f'<div class="respaldo">'
+              f'<button type="button" class="boton secundario" id="copiar-progreso" hidden>'
+              f'{html.escape(pr["copiar"])}</button>'
+              f'<button type="button" class="enlace" id="restaurar-progreso">'
+              f'{html.escape(pr["restaurar"])}</button>'
+              f'<input type="text" id="codigo-mio" readonly hidden>'
+              f'<p class="aviso-chico" id="codigo-aviso" hidden></p>'
+              f'<div id="restaurar-caja" hidden>'
+              f'<input type="text" id="restaurar-codigo" placeholder="{html.escape(pr["pegar"])}" '
+              f'autocomplete="off" spellcheck="false">'
+              f'<button type="button" class="boton" id="restaurar-aplicar">'
+              f'{html.escape(pr["aplicar"])}</button>'
+              f'<p class="aviso-chico" id="restaurar-aviso" hidden></p></div></div>',
               f'<p class="puerta">{html.escape(t["portada"]["ya_sabe"])} '
               f'<a href="{raiz}/test.html">{html.escape(t["test"]["titulo"])} →</a></p>',
               anuncio(cfg, "cabecera")]
@@ -1287,7 +1432,7 @@ def construir_estaticas(cfg, t, idiomas, idioma, destino, cal, raiz) -> None:
 <h1>{html.escape(s['titulo'])}</h1>
 {anuncio(cfg, "cabecera")}
 <h2>{html.escape(s['quien'])}</h2>
-<p><strong>{html.escape(autor.get('nombre', ''))}</strong>. {html.escape(autor.get('descripcion', ''))}</p>
+<p>{_firma(autor)}</p>
 <h2>{html.escape(s['porque'])}</h2>
 <p>{s['porque_texto']}</p>
 <p>{html.escape(s['porque_texto2'])}</p>
@@ -1313,7 +1458,7 @@ def construir_estaticas(cfg, t, idiomas, idioma, destino, cal, raiz) -> None:
 {contacto}
 <p>{html.escape(k['error'])}</p>
 <h2>{html.escape(k['autor'])}</h2>
-<p><strong>{html.escape(autor.get('nombre', ''))}</strong>. {html.escape(autor.get('descripcion', ''))}</p>
+<p>{_firma(autor)}</p>
 """
     destino.joinpath("kontakt.html").write_text(
         pagina(cfg, t, idiomas, idioma, f"{k['titulo']} — {t['titulo_sitio']}", cuerpo,

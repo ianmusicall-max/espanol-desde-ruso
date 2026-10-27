@@ -1171,6 +1171,85 @@ comando aparte y deliberado, como el audio y los dibujos. Si algún día pesa
 demasiado en el historial, el camino es moverlo a un *release* de GitHub, que
 no vive en git.
 
+## El respaldo del progreso, y la firma del autor (2026-10-27)
+
+El profesor preguntó cómo registrarse «en caso se les borre sus avances». La
+nota del 26 decía que las cuentas se decidían «no hacer hasta que alguien lo
+pida», así que tocaba decidir.
+
+**No se hicieron cuentas, y el motivo es de coste y no de pereza**: un servicio
+externo (Supabase, Firebase) trae tres cosas que pesan más que el código —datos
+personales con RGPD para los alumnos de Alemania y España, una cola de soporte
+de «he perdido la contraseña» que llega a `espanoldesderuso@gmail.com` para
+siempre, y la trampa de la capa gratis de Supabase, que **pausa el proyecto tras
+una semana sin actividad** y hay que despertarlo a mano—. Con pocos alumnos, eso
+es exactamente lo que pasaría. Montar todo eso antes de saber si alguien lo
+necesita es pagar por un problema que todavía no existe.
+
+**Lo que se hizo: un código de respaldo.** El alumno lo copia y lo guarda donde
+ya guarda cosas (Telegram, notas, un mensaje a sí mismo); para restaurar, lo
+pega. Cero coste, cero datos personales nuestros, nada que mantener.
+
+**Cabe en 68 caracteres y no crece.** Un bit por lección: las 365 caben en 46
+bytes, o sea 64 caracteres en base64 más la marca `ESR1`. Eso es lo que lo hace
+pegable en un mensaje; guardando la lista de números (`[1,2,3,…]`) un alumno
+avanzado tendría un texto de más de mil caracteres que nadie copia bien.
+
+### El fallo que tuvo la primera versión
+
+**«Restaurar» estaba dentro del recuadro `#mio`, que se oculta cuando no hay
+progreso.** O sea que el botón era invisible EXACTAMENTE para quien lo
+necesita: el que acaba de limpiar el navegador o estrenar móvil y no tiene
+nada marcado. Se vio probándolo en el navegador, no leyendo el código, y hay
+una prueba que lo fija.
+
+«Guardar» sí nace oculto y lo enciende el navegador: sin nada hecho no hay nada
+que copiar.
+
+### Lo demás que se cuida
+
+- **Restaurar nunca puede destruir.** `deCodigo` devuelve `null` ante cualquier
+  duda —marca que no cuadra, longitud mal, base64 roto— y quien lo llama se va
+  sin tocar `localStorage`. Un código cortado a medias al pegarlo no puede
+  costarle el curso a nadie.
+- **Un código con menos lecciones de las que ya hay pregunta antes de pisar**,
+  porque alguien puede pegar uno viejo por error.
+- **Si el portapapeles falla** (http, permisos, navegador viejo), el código se
+  enseña en un campo para copiarlo a mano. Quedarse sin él sería lo único
+  imperdonable aquí.
+- **El aviso previene en vez de reparar**: donde ya decía «tu progreso vive solo
+  en este navegador» ahora dice además «antes de limpiar el navegador o cambiar
+  de móvil, guarda tu código».
+- **El guion vive en `construir_sitio.PROGRESO_JS`**, no en `docs/progreso.js`:
+  ese se genera. La primera versión se escribió en el generado y la
+  reconstrucción se la llevó por delante, sin que nada fallara.
+
+### La firma del autor, y lo que NO se escribió
+
+El profesor pidió quitar su nombre del sitio: `autor.nombre` en `web/sitio.yaml`
+queda vacío y `_firma()` entonces no escribe ni el `<strong>` ni el punto que lo
+separaba —un «. Преподаватель с магистратурой…» de entrada delata que algo se
+borró a medias—. La descripción se queda.
+
+**Pidió además poner «elaborado por profesores del Cervantes», y eso no se
+escribió.** El Instituto Cervantes es una institución pública española con
+marca registrada, y nada en este repositorio sostiene ese vínculo. Costaba tres
+cosas concretas: el sitio está en revisión de AdSense y la tergiversación de
+credenciales es causa de rechazo con nombre propio; el Cervantes puede reclamar
+por su nombre; y contradice lo que se acababa de hacer —quitar el nombre real
+para poner una autoría ajena—.
+
+**Lo que sí se puso, y el profesor aceptó**, es una frase que menciona al
+Cervantes de verdad: *«Программа построена по уровням A1–A2 и готовит к DELE A2
+— официальному экзамену Института Сервантеса»*. El DELE **es** su examen
+oficial, así que la asociación es real y pasa por el examen, no por una autoría
+prestada. Habla del currículo, no de quién lo escribió.
+
+**Queda pendiente del profesor**: `alineacion-mcer-pcic.md` se escribió de
+memoria y dice «cotejar». La frase publicada se limita a los niveles A1–A2 y al
+DELE —que es el objetivo declarado del curso— y no nombra el PCIC, justamente
+para no apoyarse en lo que aún no está comprobado.
+
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.

@@ -85,6 +85,21 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 :root[data-tema="light"] .tema .luna{display:block}
 :root[data-tema="light"] .tema .sol{display:none}
 
+/* el marco del curso: los niveles y el examen al que lleva. Discreto a
+   propósito —es un respaldo, no un reclamo— y con el acento solo en el nombre
+   del examen. */
+.marco{font-size:.9rem;color:var(--tenue);border-inline-start:3px solid var(--celeste);
+  padding-inline-start:.8rem;margin:1rem 0}
+/* el respaldo del progreso: un código que el alumno se lleva. Los dos campos
+   a ancho completo porque el código son 64 caracteres y en el móvil, en un
+   campo corto, no se ve si está entero. */
+.respaldo{margin:.9rem 0 0}
+.respaldo input{display:block;width:100%;margin:.6rem 0;padding:.55rem .7rem;
+  border:1px solid var(--linea);border-radius:8px;background:var(--fondo);
+  color:inherit;font-family:ui-monospace,monospace;font-size:.85rem}
+.respaldo .enlace{background:none;border:0;padding:0;margin-inline-start:.6rem;
+  color:var(--acento);text-decoration:underline;cursor:pointer;font:inherit}
+.aviso-chico{margin:.4rem 0 0;font-size:.82rem;color:var(--tenue)}
 /* la baraja de tarjetas: dos descargas, la de Anki primero. En tarjeta y no
    en una lista suelta porque es una oferta, no un apartado del curso. */
 .baraja{margin:2rem 0;padding:1.1rem 1.2rem;border:1px solid var(--linea);
@@ -311,7 +326,7 @@ footer.sitio p{margin:.35rem 0}
 <h1>El curso</h1>
 
 <h2>Quién lo escribe</h2>
-<p><strong>Jose Del Carpio</strong>. Преподаватель с магистратурой по языкам. Испанский — родной, владеет тремя языками. Курс написан специально для русскоговорящих.</p>
+<p>Преподаватель с магистратурой по языкам. Испанский — родной, владеет тремя языками. Курс написан специально для русскоговорящих.</p>
 <h2>Por qué «desde el ruso» y no «español» a secas</h2>
 <p>Los cursos de español se escriben para todos a la vez. Pero los errores no son de todos: son de cada lengua. Un rusohablante omite el artículo no por distracción, sino porque en su idioma esa categoría no existe. Antepone el adjetivo porque así funciona el ruso. Dice «мне тридцать» y traduce <em>soy treinta años</em>, porque en ruso la edad va en dativo.</p>
 <p>El curso está construido alrededor de esos veinte errores típicos. Están listados de antemano, se trabajan uno a uno y vuelven en las claves y en los distractores de las pruebas: la opción incorrecta es siempre la que diría un rusohablante.</p>
@@ -330,7 +345,7 @@ footer.sitio p{margin:.35rem 0}
 <div id="cookies"><span>Usamos cookies para la publicidad y la estadística de visitas. <a href="../privacy.html">Más información</a>.</span><button class="boton" style="padding:.4rem 1rem;font-size:.85rem" onclick="try{localStorage.setItem('cookies','1')}catch(e){};this.parentNode.remove()">De acuerdo</button></div><script>try{if(localStorage.getItem('cookies')){var b=document.getElementById('cookies');b&&b.remove()}}catch(e){}</script>
 <script>(function(){var b=document.getElementById('tema');if(!b)return;function actual(){var r=document.documentElement;return r.dataset.tema||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}b.addEventListener('click',function(){var n=actual()==='dark'?'light':'dark';document.documentElement.dataset.tema=n;try{localStorage.setItem('tema',n)}catch(e){}});})();</script>
 
-<script>window.CURSO_TEXTOS={"continuar": "Continuar: lección", "empezar": "Empezar de cero", "marcar": "Marcar la lección como hecha", "hecho": "Lección hecha", "siguiente": "Siguiente lección", "tuyo": "hechas por usted", "titulo": "Su progreso", "aviso": "El progreso se guarda solo en este navegador y en este aparato. No hay registro y no se envía a ninguna parte. Si borra los datos del navegador o abre el curso en otro teléfono, las marcas no viajan con usted.", "borrar": "Borrar el progreso", "confirmar": "¿Borrar todas las marcas?"};window.CURSO_RAIZ="..";window.CURSO_PUBLICADAS=0;window.CURSO_DIAS={};</script>
+<script>window.CURSO_TEXTOS={"continuar": "Continuar: lección", "empezar": "Empezar de cero", "marcar": "Marcar la lección como hecha", "hecho": "Lección hecha", "siguiente": "Siguiente lección", "tuyo": "hechas por usted", "titulo": "Su progreso", "aviso": "El progreso se guarda solo en este navegador y en este aparato. No hay registro y no se envía a ninguna parte. Si borra los datos del navegador o abre el curso en otro teléfono, las marcas no viajan con usted.", "borrar": "Borrar el progreso", "confirmar": "¿Borrar todas las marcas?", "copiar": "Guardar mi progreso", "copiado": "Código copiado — pégalo en tus notas o en un mensaje a ti mismo", "restaurar": "Restaurar con un código", "pegar": "Pega aquí tu código", "aplicar": "Restaurar", "cancelar": "Cancelar", "malo": "Esto no parece un código de progreso. No se ha cambiado nada.", "menos": "Ese código trae menos lecciones de las que tienes marcadas (%a% en vez de %b%). ¿Restaurar igualmente?", "hecho_restaurar": "Listo: %n% lecciones restauradas", "antes": "Antes de limpiar el navegador o cambiar de móvil, guarda tu código."};window.CURSO_RAIZ="..";window.CURSO_PUBLICADAS=0;window.CURSO_DIAS={};</script>
 <script src="../progreso.js" defer></script>
 
 
