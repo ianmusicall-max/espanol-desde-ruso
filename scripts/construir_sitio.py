@@ -231,6 +231,14 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 .dibujo{display:block;width:56px;height:56px;border-radius:8px;
   margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
 @media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
+/* La clave: el enlace donde se acaban los ejercicios y la caja plegada al
+   final. El enlace se ve como un paso más y no como un botón: lo que manda en
+   la lección es hacer el ejercicio, no mirar la respuesta. */
+.a-la-clave{margin:1.2rem 0 0;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.92rem}
+.a-la-clave a{text-decoration:none;border-bottom:1px solid var(--linea);padding-bottom:1px}
+.a-la-clave a:hover{border-color:var(--acento)}
+#clave-boton{margin:2rem 0 .5rem}
+#clave{border-top:1px solid var(--linea);padding-top:.2rem}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
@@ -693,7 +701,35 @@ AUDIO_JS = r"""(function(){
 TEST_JS = r"""(function(){
   var D=window.CURSO_TEST; if(!D)return;
   var caja=document.getElementById('test'); if(!caja)return;
-  var i=0, fallos=[], aciertos=0, reloj=null, queda=0;
+  var i=0, fallos=[], aciertos=0, reloj=null, queda=0, preguntas=[];
+
+  // El test cambia en cada partida: de cada unidad se escoge UNA pregunta de
+  // las que hay en el banco, y las tres opciones se barajan. Asi repetirlo no
+  // premia la memoria de la pantalla anterior.
+  //
+  // Lo que NO se baraja es el orden de los grupos: vienen ordenados por unidad
+  // y asi se quedan, porque la recomendacion sale de la unidad de la PRIMERA
+  // fallada. Desordenadas, fallar la ultima colocaria antes que fallar la
+  // primera y nada avisaria.
+  function barajar(q){
+    // Se copia la pregunta: barajando sobre el original, la segunda partida
+    // encontraria las opciones ya movidas de la primera y `correcta` apuntando
+    // a otra cosa. Es el fallo que diria «has fallado» a quien acerto.
+    var ops=q.opciones.slice(), orden=[], n;
+    for(n=0;n<ops.length;n++)orden.push(n);
+    for(n=orden.length-1;n>0;n--){
+      var j=Math.floor(Math.random()*(n+1)), t=orden[n]; orden[n]=orden[j]; orden[j]=t;
+    }
+    return {pregunta:q.pregunta, unidad:q.unidad, error:q.error,
+            opciones:orden.map(function(k){return ops[k]}),
+            correcta:orden.indexOf(q.correcta)};
+  }
+
+  function repartir(){
+    preguntas=(D.grupos||[]).map(function(g){
+      return barajar(g[Math.floor(Math.random()*g.length)]);
+    });
+  }
 
   function esc(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML}
 
@@ -721,16 +757,16 @@ TEST_JS = r"""(function(){
   }
 
   function pregunta(){
-    var q=D.preguntas[i];
+    var q=preguntas[i];
     caja.innerHTML='<div class="test-caja">'
-      +'<div class="test-cuenta">'+(i+1)+' '+esc(D.t.de)+' '+D.preguntas.length
+      +'<div class="test-cuenta">'+(i+1)+' '+esc(D.t.de)+' '+preguntas.length
       +' · '+esc(D.t.instruccion)
       +(D.segundos?'<b class="test-seg"></b>':'')+'</div>'
       +(D.segundos?'<div class="test-reloj"><i></i></div>':'')
       +'<p class="test-pregunta">'+esc(q.pregunta)+'</p>'
       +'<div class="test-ops">'+q.opciones.map(function(o,n){
           return '<button type="button" data-n="'+n+'">'+esc(o)+'</button>'}).join('')+'</div>'
-      +'<div class="test-barra"><i style="width:'+(i*100/D.preguntas.length)+'%"></i></div></div>';
+      +'<div class="test-barra"><i style="width:'+(i*100/preguntas.length)+'%"></i></div></div>';
     caja.querySelectorAll('button').forEach(function(b){
       b.addEventListener('click',function(){responder(parseInt(b.dataset.n,10))});
     });
@@ -741,11 +777,11 @@ TEST_JS = r"""(function(){
   // resultado: no es lo mismo equivocarse que no llegar.
   function responder(n){
     parar();
-    var q=D.preguntas[i];
+    var q=preguntas[i];
     if(n===q.correcta){aciertos++}
     else{fallos.push(n===-1?Object.assign({},q,{tarde:true}):q)}
     i++;
-    if(i<D.preguntas.length){pregunta()}else{resultado()}
+    if(i<preguntas.length){pregunta()}else{resultado()}
   }
 
   function resultado(){
@@ -759,7 +795,7 @@ TEST_JS = r"""(function(){
     var u=fallos.length?fallos[0].unidad:null;
     var dest=(u&&D.inicios[u])||D.ultima;
     var h='<div class="test-caja"><div class="test-cuenta">'+esc(D.t.resultado)+'</div>'
-      +'<p class="test-pregunta">'+aciertos+' / '+D.preguntas.length+' '+esc(D.t.aciertos)+'</p>';
+      +'<p class="test-pregunta">'+aciertos+' / '+preguntas.length+' '+esc(D.t.aciertos)+'</p>';
     if(dest){
       h+='<p>'+esc(D.t.empieza_en)+' <b>'+dest.n+'</b>.</p>'
         +'<p><a class="boton" href="'+dest.url+'">'+esc(D.t.ir)+'</a></p>';
@@ -777,7 +813,7 @@ TEST_JS = r"""(function(){
       +esc(D.t.repetir)+'</button></p></div>';
     caja.innerHTML=h;
     var r=document.getElementById('otra-vez');
-    if(r)r.addEventListener('click',function(){i=0;fallos=[];aciertos=0;pregunta()});
+    if(r)r.addEventListener('click',function(){i=0;fallos=[];aciertos=0;repartir();pregunta()});
   }
 
   // El boton nace oculto y lo enciende el navegador, como el resto del sitio:
@@ -789,7 +825,7 @@ TEST_JS = r"""(function(){
   var boton=document.getElementById('test-empezar');
   if(arranque&&boton){
     arranque.hidden=false;
-    boton.addEventListener('click',function(){arranque.hidden=true;pregunta()});
+    boton.addEventListener('click',function(){arranque.hidden=true;repartir();pregunta()});
   }
 })();"""
 
@@ -919,29 +955,29 @@ PRUEBA_JS = r"""(function(){
   if(clave)clave.hidden=true;
 
   function pregunta(){
-    var q=D.preguntas[i];
+    var q=preguntas[i];
     caja.innerHTML='<div class="test-caja">'
-      +'<div class="test-cuenta">'+(i+1)+' '+esc(D.t.de)+' '+D.preguntas.length
+      +'<div class="test-cuenta">'+(i+1)+' '+esc(D.t.de)+' '+preguntas.length
       +' · '+esc(q.bloque)+'</div>'
       +'<p class="test-pregunta">'+esc(q.enunciado)+'</p>'
       +'<div class="test-ops">'+q.opciones.map(function(o,n){
           return '<button type="button" data-n="'+n+'">'+esc(o)+'</button>'}).join('')+'</div>'
-      +'<div class="test-barra"><i style="width:'+(i*100/D.preguntas.length)+'%"></i></div></div>';
+      +'<div class="test-barra"><i style="width:'+(i*100/preguntas.length)+'%"></i></div></div>';
     caja.querySelectorAll('button').forEach(function(b){
       b.addEventListener('click',function(){responder(parseInt(b.dataset.n,10))});
     });
   }
 
   function responder(n){
-    var q=D.preguntas[i];
+    var q=preguntas[i];
     if(n===q.correcta){aciertos++}else{fallos.push(q)}
     i++;
-    if(i<D.preguntas.length){pregunta()}else{resultado()}
+    if(i<preguntas.length){pregunta()}else{resultado()}
   }
 
   function resultado(){
     var h='<div class="test-caja"><div class="test-cuenta">'+esc(D.t.resultado)+'</div>'
-      +'<p class="test-pregunta">'+aciertos+' / '+D.preguntas.length+' '+esc(D.t.aciertos)+'</p>';
+      +'<p class="test-pregunta">'+aciertos+' / '+preguntas.length+' '+esc(D.t.aciertos)+'</p>';
     if(!fallos.length){h+='<p>'+esc(D.t.sin_fallos)+'</p>'}
     else{
       h+='<p class="test-cuenta" style="margin-top:1.2rem">'+esc(D.t.errores)+'</p>';
@@ -959,7 +995,7 @@ PRUEBA_JS = r"""(function(){
       +'<button type="button" class="boton secundario" id="ver-clave">'+esc(D.t.clave)+'</button></p></div>';
     caja.innerHTML=h;
     var r=document.getElementById('otra-vez');
-    if(r)r.addEventListener('click',function(){i=0;fallos=[];aciertos=0;pregunta()});
+    if(r)r.addEventListener('click',function(){i=0;fallos=[];aciertos=0;repartir();pregunta()});
     var v=document.getElementById('ver-clave');
     // El discurso sobre los distractores que cierra la clave es lo mejor del
     // dia, y solo ensena DESPUES de contestar: antes seria la respuesta.
@@ -1747,6 +1783,31 @@ def construir_indice_curso(cfg, t, idiomas, idioma, destino, cal, raiz,
         encoding="utf-8")
 
 
+def grupos_por_unidad(lista: list) -> list[list[dict]]:
+    """Las preguntas del test agrupadas por unidad, en orden ascendente.
+
+    De cada grupo el navegador escoge una al azar, así que el banco puede
+    crecer sin tocar ni el generador ni el guion: basta con añadir otra
+    pregunta con su `unidad` en `programa/test-nivel.yaml`.
+
+    **El orden de los GRUPOS no se baraja nunca**, y esa es la diferencia que
+    importa. La recomendación sale de la unidad de la PRIMERA pregunta fallada,
+    o sea de donde se acaba lo que el alumno ya sabe; desordenadas, fallar la
+    última colocaría antes que fallar la primera y nada avisaría. Por eso aquí
+    se ordena por unidad en vez de confiar en el orden del fichero.
+
+    Al navegador va `error_ru` y no `error_es`: lo lee un principiante ruso, y
+    explicarle su propio error en el idioma que viene a aprender no le enseña
+    nada. El español se queda en el YAML, que es donde el profesor revisa."""
+    grupos: dict[int, list[dict]] = {}
+    for q in lista:
+        grupos.setdefault(q["unidad"], []).append(
+            {"pregunta": q["pregunta"], "opciones": q["opciones"],
+             "correcta": q["correcta"], "unidad": q["unidad"],
+             "error": q["error_ru"]})
+    return [grupos[u] for u in sorted(grupos)]
+
+
 def construir_test(cfg, t, idiomas, destino, cal, preguntas) -> None:
     """La segunda puerta del sitio: por qué lección empezar si ya sabe algo.
 
@@ -1800,10 +1861,11 @@ def construir_test(cfg, t, idiomas, destino, cal, preguntas) -> None:
             # ruso, y explicarle su propio error en el idioma que viene a
             # aprender no le enseña nada. El español se queda en el YAML, que
             # es donde el profesor revisa.
-            "preguntas": [{"pregunta": q["pregunta"], "opciones": q["opciones"],
-                           "correcta": q["correcta"], "unidad": q["unidad"],
-                           "error": q["error_ru"]}
-                          for q in lista],
+            # Agrupadas por unidad y en el orden en que aparecen: el
+            # navegador escoge UNA de cada grupo, así que repetir el test no da
+            # el mismo test. Lo que no se toca es el orden de los grupos; ver
+            # `grupos_por_unidad`.
+            "grupos": grupos_por_unidad(lista),
             "inicios": inicios_de_unidad(cal, raiz),
             "ultima": {"n": ultima.numero,
                        "url": f"{raiz}/semana-{ultima.semana:02d}/dia-{ultima.dia}.html"},
@@ -1914,6 +1976,95 @@ def _pregunta_al_navegador(q, todos) -> dict:
     return salida
 
 
+# El guion de la clave: diez líneas, y solo en las páginas que la tienen, así
+# que va en línea como el de los idiomas. Lo importante no es plegar la clave
+# sino que el ENLACE la abra: un ancla que apunta a algo escondido no hace
+# nada, y el lector se queda mirando la misma pantalla creyendo que está roto.
+# Cómo se reconoce un apartado con ejercicios. Son las mismas marcas que mira
+# `validar.problemas` para exigir que haya clave, y por lo mismo: es lo que de
+# verdad distingue un ejercicio de una explicación, en las tres formas que
+# tienen los días del curso.
+MARCAS_DE_EJERCICIO = ("Упражнение", "Мини-тест", "Правда или неправда", "Задание")
+
+CLAVE_SCRIPT = """<script>(function(){
+  var caja=document.getElementById('clave'), zona=document.getElementById('clave-boton');
+  if(!caja||!zona)return;
+  var b=zona.querySelector('button');
+  function pon(abierta){
+    caja.hidden=!abierta;
+    b.textContent=abierta?b.dataset.ocultar:b.dataset.ver;
+    b.setAttribute('aria-expanded',abierta?'true':'false');
+  }
+  pon(false); zona.hidden=false;
+  b.addEventListener('click',function(){pon(caja.hidden)});
+  document.querySelectorAll('a[href="#clave"]').forEach(function(a){
+    a.addEventListener('click',function(){pon(true)});
+  });
+  if(location.hash==='#clave')pon(true);
+})();</script>"""
+
+
+def _envolver_clave(html_: str, t: dict) -> str:
+    """La clave (`## Ответы`) detrás de un botón, y un enlace a ella desde los
+    ejercicios.
+
+    Antes estaba abierta al final de la página, DEBAJO de la tabla de
+    vocabulario, y eso fallaba por los dos lados a la vez: quien la buscaba no
+    la encontraba —es lo último de todo, después del diccionario del día— y
+    quien no la buscaba se la encontraba de paso, con las respuestas a la vista
+    antes de hacer el ejercicio. Lo preguntó el profesor: «¿y las respuestas a
+    los ejercicios? ¿dónde ver si es correcto?».
+
+    Ahora el enlace sale **donde se acaban los ejercicios**, que es donde se
+    busca, y la clave está plegada hasta que se pulsa. Es lo mismo que ya hacía
+    el día de prueba desde el 2026-10-27: el discurso sobre los errores solo
+    enseña DESPUÉS de contestar; antes es la respuesta.
+
+    **Sin JavaScript la página se queda exactamente como estaba**: la clave
+    abierta y el enlace llevando a ella. Por eso aquí nace visible y es el
+    navegador el que la pliega, al revés que el resto del sitio: la versión sin
+    guion tiene que ser la que sirve, y una clave escondida que no se puede
+    abrir sería una lección sin respuestas.
+
+    Los días de tipo `prueba` no pasan por aquí: tienen su propio envoltorio,
+    con el test contestable y la clave al terminar."""
+    cabeceras = [(m.start(), m.end(), re.sub("<[^>]+>", "", m.group(1)).strip())
+                 for m in re.finditer(r"<h2[^>]*>(.*?)</h2>", html_, re.S)]
+    inicio_clave = next((ini for ini, _f, texto in cabeceras if texto == "Ответы"), None)
+    if inicio_clave is None:
+        return html_
+    L = t["leccion"]
+    # El enlace va al final de los ejercicios, o sea justo antes del apartado
+    # que sigue al ÚLTIMO que los contiene. Se busca por el contenido y no por
+    # el nombre del apartado porque son tres formas distintas: «4. Практика» en
+    # una lección, «3. Мини-тест» en un repaso y «4. Задание» en un día de
+    # cultura. Si no se encuentra ninguno, no se pone enlace: mejor nada que un
+    # enlace en mitad de la teoría.
+    corte = None
+    for j, (_ini, fin, texto) in enumerate(cabeceras):
+        if fin >= inicio_clave:
+            break
+        siguiente = cabeceras[j + 1][0] if j + 1 < len(cabeceras) else inicio_clave
+        # El TÍTULO del apartado cuenta igual que su cuerpo: un repaso titula
+        # «3. Мини-тест» y dentro solo dice «выберите правильный ответ», así
+        # que mirando solo el cuerpo el enlace caía antes del mini-test, y en
+        # la semana 1 no caía en ninguna parte.
+        if any(m in texto or m in html_[fin:siguiente] for m in MARCAS_DE_EJERCICIO):
+            corte = siguiente
+    enlace = (f'<p class="a-la-clave"><a href="#clave">'
+              f'{html.escape(L["clave_ir"])} ↓</a></p>')
+    boton = (f'<div class="botones" id="clave-boton" hidden>'
+             f'<button type="button" class="boton secundario" '
+             f'data-ver="{html.escape(L["clave_ver"])}" '
+             f'data-ocultar="{html.escape(L["clave_ocultar"])}">'
+             f'{html.escape(L["clave_ver"])}</button></div>')
+    # De atrás adelante, porque cada inserción mueve lo que viene después.
+    salida = html_[:inicio_clave] + boton + '<div id="clave">' + html_[inicio_clave:] + "</div>"
+    if corte is not None and corte < inicio_clave:
+        salida = salida[:corte] + enlace + salida[corte:]
+    return salida + CLAVE_SCRIPT
+
+
 def _envolver_prueba(html_: str, t: dict) -> str:
     """Marca en el HTML qué parte es el test en papel y cuál la clave.
 
@@ -1964,6 +2115,9 @@ def construir_leccion(d, cfg, t, idiomas, destino, cal, todos, audio=None,
     # Los días de tipo `prueba` traen quince preguntas con su clave, ya escritas
     # y revisadas por el profesor. Si se pueden leer con seguridad, se ofrecen
     # para contestar; si no, la página se queda exactamente como está.
+    if d.tipo != "prueba":
+        html_cuerpo = _envolver_clave(html_cuerpo, t)
+
     datos_prueba = None
     if d.tipo == "prueba":
         preguntas = pruebas.leer(cuerpo)

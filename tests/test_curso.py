@@ -1433,6 +1433,53 @@ class TestElTestDeNivel(unittest.TestCase):
         unidades = [q["unidad"] for q in self.lista]
         self.assertEqual(unidades, sorted(unidades), unidades)
 
+    def test_el_navegador_recibe_un_grupo_por_unidad_y_en_orden(self):
+        """El test varía porque de cada unidad se escoge una pregunta al azar.
+        Lo que NO puede variar es el orden de los grupos: la recomendación sale
+        de la unidad de la primera fallada."""
+        grupos = self._datos()["grupos"]
+        unidades = [g[0]["unidad"] for g in grupos]
+        self.assertEqual(unidades, sorted(unidades), unidades)
+        self.assertEqual(len(unidades), len(set(unidades)), "una unidad en dos grupos")
+        for g in grupos:
+            self.assertEqual(len({q["unidad"] for q in g}), 1, "grupo con dos unidades")
+
+    def test_hay_mas_de_una_pregunta_por_unidad(self):
+        """Es lo que hace que el test varíe. Con una sola por unidad vuelve a
+        ser siempre el mismo test, y nadie se daría cuenta leyendo el código:
+        seguiría funcionando igual de bien la primera vez."""
+        for g in self._datos()["grupos"]:
+            self.assertGreaterEqual(len(g), 2, f"unidad {g[0]['unidad']}: una sola variante")
+
+    def test_las_variantes_de_una_unidad_no_repiten_el_mismo_error(self):
+        """Repetir el test tiene que enseñar algo nuevo, no premiar la memoria
+        de la pantalla anterior. Dos variantes con el mismo error serían la
+        misma pregunta con otras palabras."""
+        for g in self._datos()["grupos"]:
+            for clave in ("pregunta", "error"):
+                vistos = [q[clave] for q in g]
+                self.assertEqual(len(vistos), len(set(vistos)),
+                                 f"unidad {g[0]['unidad']}: {clave} repetido")
+
+    def test_agrupar_ordena_por_unidad_aunque_el_fichero_no_lo_esté(self):
+        grupos = construir_sitio.grupos_por_unidad([
+            {"unidad": 5, "pregunta": "b", "opciones": [], "correcta": 0, "error_ru": "x"},
+            {"unidad": 2, "pregunta": "a", "opciones": [], "correcta": 0, "error_ru": "y"},
+            {"unidad": 5, "pregunta": "c", "opciones": [], "correcta": 0, "error_ru": "z"},
+        ])
+        self.assertEqual([[q["pregunta"] for q in g] for g in grupos], [["a"], ["b", "c"]])
+
+    def test_barajar_copia_la_pregunta_y_recalcula_la_correcta(self):
+        """Barajando sobre el original, la segunda partida encontraría las
+        opciones ya movidas y `correcta` apuntando a otra cosa: le diría «has
+        fallado» a quien acertó. Comprobado además en navegador, jugando una
+        partida entera y pulsando siempre el botón cuyo TEXTO es el correcto."""
+        js = construir_sitio.TEST_JS
+        self.assertIn("q.opciones.slice()", js)
+        self.assertIn("orden.indexOf(q.correcta)", js)
+        # Y se reparte de nuevo al empezar y al repetir, que es donde se nota.
+        self.assertEqual(js.count("repartir()"), 3)
+
     def test_la_respuesta_correcta_es_una_de_las_opciones_y_no_se_repite(self):
         for q in self.lista:
             self.assertGreaterEqual(len(q["opciones"]), 3, q["pregunta"])
@@ -2277,3 +2324,113 @@ class TestLaTarjetaSocial(unittest.TestCase):
             self.assertIn(f'property="og:image" content="{dominio}/'
                           f'{construir_sitio.TARJETA_SOCIAL}"', texto, pagina)
             self.assertIn('name="twitter:card" content="summary_large_image"', texto, pagina)
+
+
+class TestLaClaveDeLosEjercicios(unittest.TestCase):
+    """Dónde se ven las respuestas y cuándo.
+
+    Lo preguntó el profesor: «¿y las respuestas a los ejercicios? ¿dónde ver si
+    es correcto?». Estaban abiertas al final de la página, DEBAJO de la tabla
+    de vocabulario, y eso fallaba por los dos lados: quien las buscaba no las
+    encontraba y quien no las buscaba se las encontraba de paso, con las
+    respuestas a la vista antes de hacer el ejercicio."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.destino = pathlib.Path(tempfile.mkdtemp())
+        construir_sitio.construir(cls.destino, construir_sitio.cargar_config(),
+                                  construir_sitio.cargar_textos())
+        cls.dias = [d for d in construir_sitio.escritas(CAL)]
+
+    def _pagina(self, d):
+        return (self.destino / f"semana-{d.semana:02d}" / f"dia-{d.dia}.html").read_text(encoding="utf-8")
+
+    def test_toda_leccion_con_clave_la_pliega_y_la_enlaza(self):
+        """El enlace donde se acaban los ejercicios, la clave plegada al final.
+        Y las tres formas del curso cuentan: lección, repaso y cultura."""
+        mirados = 0
+        for d in self.dias:
+            if d.tipo == "prueba":
+                continue
+            cuerpo = validar.frontmatter(d.ruta.read_text(encoding="utf-8"))[1]
+            if "## Ответы" not in cuerpo:
+                continue
+            mirados += 1
+            p = self._pagina(d)
+            with self.subTest(dia=d.numero):
+                self.assertIn('<div id="clave">', p)
+                self.assertIn('id="clave-boton"', p)
+                self.assertIn('<a href="#clave">', p)
+                self.assertLess(p.index('<a href="#clave">'), p.index('<div id="clave">'),
+                                "el enlace tiene que ir ANTES de la clave")
+        self.assertGreater(mirados, 80, "casi todas las lecciones llevan clave")
+
+    def test_el_enlace_cae_donde_se_acaban_los_ejercicios(self):
+        """Y no al final del todo. Se busca por el CONTENIDO y no por el nombre
+        del apartado, porque son tres: «Практика», «Мини-тест» y «Задание»."""
+        casos = [(15, 2, "4. Практика", "5. Выход"),
+                 (15, 6, "3. Мини-тест", "4. Разбор ошибок"),
+                 (1, 6, "3. Мини-тест", "4. Разбор ошибок"),
+                 (13, 7, "4. Задание", "5. Итог")]
+        for semana, dia, ejercicios, siguiente in casos:
+            p = self._pagina(plan.dia(CAL, semana, dia))
+            with self.subTest(dia=f"{semana}/{dia}"):
+                i = p.index('<p class="a-la-clave">')
+                self.assertLess(p.index(ejercicios), i,
+                                f"el enlace tiene que ir DESPUÉS de «{ejercicios}»")
+                self.assertLess(i, p.index(siguiente),
+                                f"y ANTES de «{siguiente}»")
+
+    def test_el_titulo_del_apartado_cuenta_como_marca(self):
+        """Un repaso titula «3. Мини-тест» y dentro solo dice «выберите
+        правильный ответ»: mirando solo el cuerpo, el enlace caía antes del
+        mini-test, y en la semana 1 no caía en ninguna parte."""
+        for d in self.dias:
+            if d.tipo != "repaso":
+                continue
+            p = self._pagina(d)
+            with self.subTest(dia=d.numero):
+                self.assertIn('<p class="a-la-clave">', p)
+                self.assertLess(p.index("Мини-тест"), p.index('<p class="a-la-clave">'))
+
+    def test_el_dia_de_prueba_no_pasa_por_aqui(self):
+        """Tiene su propio envoltorio: el test contestable y la clave al
+        terminar. Dos mecanismos sobre la misma clave se pisarían."""
+        for d in self.dias:
+            if d.tipo != "prueba":
+                continue
+            p = self._pagina(d)
+            with self.subTest(dia=d.numero):
+                self.assertNotIn('<div id="clave">', p)
+                self.assertIn('id="prueba-clave"', p)
+
+    def test_sin_javascript_la_clave_sigue_estando(self):
+        """La versión sin guion tiene que ser la que sirve: una clave escondida
+        que no se puede abrir sería una lección sin respuestas. Por eso nace
+        visible y es el navegador quien la pliega, al revés que el resto del
+        sitio."""
+        p = self._pagina(plan.dia(CAL, 15, 2))
+        self.assertNotIn('<div id="clave" hidden>', p)
+        self.assertIn("pon(false); zona.hidden=false;", construir_sitio.CLAVE_SCRIPT)
+        # Y el contenido de la clave sigue entero en el HTML.
+        self.assertIn("два инфинитива", p)
+
+    def test_el_enlace_abre_la_clave(self):
+        """Un ancla que apunta a algo escondido no hace nada, y el lector se
+        queda mirando la misma pantalla creyendo que está roto. Comprobado
+        además en navegador en las tres formas de día."""
+        self.assertIn('a[href="#clave"]', construir_sitio.CLAVE_SCRIPT)
+        self.assertIn("location.hash==='#clave'", construir_sitio.CLAVE_SCRIPT)
+
+    def test_una_pagina_sin_clave_no_se_toca(self):
+        textos = construir_sitio.cargar_textos()["ru"]
+        html_ = "<h2>1. Разминка (0–3 мин)</h2><p>Упражнение</p>"
+        self.assertEqual(html_, construir_sitio._envolver_clave(html_, textos))
+
+    def test_el_boton_lleva_los_dos_textos(self):
+        """Los dos van en el HTML y no en el guion: traducirlos no toca código,
+        y el botón dice la verdad desde el primer pintado."""
+        L = construir_sitio.cargar_textos()["ru"]["leccion"]
+        p = self._pagina(plan.dia(CAL, 15, 2))
+        self.assertIn(f'data-ver="{html.escape(L["clave_ver"])}"', p)
+        self.assertIn(f'data-ocultar="{html.escape(L["clave_ocultar"])}"', p)

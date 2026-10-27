@@ -8,12 +8,23 @@
 # - Cada pregunta lleva la UNIDAD que la enseña. De ahí sale la recomendación:
 #   se empieza en la unidad de la primera que se falla, o sea donde se acaba lo
 #   que ya se sabe. Una prueba exige que esas unidades existan y vayan en orden.
+# - HAY VARIAS PREGUNTAS POR UNIDAD y el navegador escoge una al azar cada vez,
+#   así que repetir el test no da el mismo test. Lo que NO se baraja es el orden
+#   de las unidades: la recomendación sale de la PRIMERA fallada, así que
+#   desordenarlas colocaría a alguien antes por fallar la última que por fallar
+#   la primera, y nada avisaría. Lo que también cambia en cada partida es el
+#   orden de las tres opciones.
+# - Las variantes de una misma unidad NO preguntan lo mismo con otras palabras:
+#   cada una es un error distinto de la lista negra de `contrastiva-ru-es.md`,
+#   para que repetir el test enseñe algo nuevo en vez de premiar la memoria.
 # - Los distractores NO son al azar: cada uno es un error predecible del
 #   rusohablante, sacado de `programa/contrastiva-ru-es.md`. Por eso el
 #   resultado puede decir POR QUÉ se falló y no solo cuántas van bien, y por eso
 #   el test enseña aunque se suspenda.
-# - Catorce preguntas: bastantes para discriminar entre 24 unidades, pocas para
-#   que nadie lo abandone a la mitad. Cuesta unos dos minutos.
+# - Catorce preguntas POR PARTIDA, una por unidad: bastantes para discriminar
+#   entre 24 unidades, pocas para que nadie lo abandone a la mitad. Cuesta unos
+#   dos minutos. El banco de donde salen es mayor y puede crecer sin tocar nada:
+#   basta con añadir aquí otra pregunta con su `unidad`.
 #
 # EL ERROR SE DICE DOS VECES, Y NO ES REDUNDANCIA:
 #
@@ -48,6 +59,7 @@ segundos_por_pregunta: 30
 revisado: false
 
 preguntas:
+  # ---- Unidad 1 · ser, llamarse, tener ----
   - unidad: 1
     pregunta: "Ана — врач."
     opciones: ["Ana médica.", "Ana es médica.", "Ana está médica."]
@@ -55,6 +67,14 @@ preguntas:
     error_ru: "В русском в настоящем времени связки нет, в испанском глагол не опускается никогда."
     error_es: "En ruso la cópula no se dice en presente; en español el verbo nunca falta."
 
+  - unidad: 1
+    pregunta: "Она учительница."
+    opciones: ["Ella es una profesora.", "Ella es profesora.", "Ella profesora."]
+    correcta: 1
+    error_ru: "Профессия после ser идёт БЕЗ артикля: es profesora, а не «es una profesora»."
+    error_es: "La profesión va sin artículo tras ser: «es profesora», no «es una profesora»."
+
+  # ---- Unidad 2 · género, artículo, concordancia del adjetivo ----
   - unidad: 2
     pregunta: "На столе книга."
     opciones: ["Hay el libro en la mesa.", "Hay un libro en la mesa.", "Está un libro en la mesa."]
@@ -62,6 +82,14 @@ preguntas:
     error_ru: "После «hay» никогда не ставится el / la: что-то существует, но ещё не известно какое именно."
     error_es: "«Hay» nunca va con el / la: existe algo, todavía no se sabe cuál."
 
+  - unidad: 2
+    pregunta: "Красная машина."
+    opciones: ["Un coche rojo.", "Un rojo coche.", "Una coche roja."]
+    correcta: 0
+    error_ru: "Прилагательное стоит ПОСЛЕ существительного, и el coche — мужского рода, хотя «машина» женского."
+    error_es: "El adjetivo va detrás del sustantivo, y «el coche» es masculino aunque «машина» sea femenino."
+
+  # ---- Unidad 3 · tener, posesivos, ser / estar + adjetivo ----
   - unidad: 3
     pregunta: "Мне тридцать лет."
     opciones: ["Soy treinta años.", "Tengo treinta años.", "Estoy treinta años."]
@@ -69,6 +97,14 @@ preguntas:
     error_ru: "Возраст по-испански «имеют», а не «являются». Русский здесь не подсказывает ничего."
     error_es: "La edad se tiene, no se es. El ruso aquí no da ninguna pista."
 
+  - unidad: 3
+    pregunta: "У меня есть брат."
+    opciones: ["Tengo un hermano.", "Tengo hermano.", "Yo tengo el hermano."]
+    correcta: 0
+    error_ru: "В русском артикля нет, поэтому его забывают: после tener нужен un / una."
+    error_es: "En ruso no hay artículo y por eso se olvida: tras «tener» hace falta un / una."
+
+  # ---- Unidad 4 · hay frente a estar, preposiciones de lugar ----
   - unidad: 4
     pregunta: "Мой брат дома."
     opciones: ["Mi hermano es en casa.", "Mi hermano está en casa.", "Mi hermano hay en casa."]
@@ -76,6 +112,14 @@ preguntas:
     error_ru: "Место — это «estar»: где кто-то находится сейчас, а не кто он такой."
     error_es: "El lugar es «estar»: dónde está algo ahora, no qué es."
 
+  - unidad: 4
+    pregunta: "Где банк?"
+    opciones: ["¿Dónde está el banco?", "¿Dónde es el banco?", "¿Dónde hay el banco?"]
+    correcta: 0
+    error_ru: "Про известный предмет спрашивают «dónde está». «Hay» не бывает с el / la никогда."
+    error_es: "De algo conocido se pregunta «dónde está». «Hay» nunca lleva el / la."
+
+  # ---- Unidad 5 · presente, reflexivos, la hora ----
   - unidad: 5
     pregunta: "Я встаю в семь."
     opciones: ["Me levanto a las siete.", "Levanto me a las siete.", "Yo levanto a las siete."]
@@ -83,6 +127,14 @@ preguntas:
     error_ru: "Русское -ся стоит в конце, а испанское местоимение — ПЕРЕД глаголом."
     error_es: "El -ся ruso va detrás; el pronombre español va DELANTE del verbo."
 
+  - unidad: 5
+    pregunta: "Во сколько ты встаёшь?"
+    opciones: ["¿A qué hora te levantas?", "¿A qué hora levantas?", "¿A qué hora tú levantas?"]
+    correcta: 0
+    error_ru: "Возвратное местоимение меняется по лицам: me levanto, te levantas. Без te глагол значит «поднимаешь что-то»."
+    error_es: "El pronombre reflexivo cambia con la persona: me levanto, te levantas. Sin «te», el verbo significa levantar algo."
+
+  # ---- Unidad 6 · gustar, muy / mucho ----
   - unidad: 6
     pregunta: "Мне нравится кофе."
     opciones: ["Yo gusto el café.", "Me gusta el café.", "Me gusto café."]
@@ -90,6 +142,14 @@ preguntas:
     error_ru: "При «gustar» подлежащее — то, что нравится, а не человек. Как в «мне нравится»."
     error_es: "Con «gustar» el sujeto es lo que gusta, no la persona."
 
+  - unidad: 6
+    pregunta: "Мне очень нравится этот город."
+    opciones: ["Me gusta mucho esta ciudad.", "Me gusta muy esta ciudad.", "Me mucho gusta esta ciudad."]
+    correcta: 0
+    error_ru: "«Очень» при глаголе — это mucho, а не muy. Muy ставится только перед прилагательным или наречием."
+    error_es: "«Очень» con un verbo es «mucho», no «muy»: «muy» solo va delante de adjetivo o adverbio."
+
+  # ---- Unidad 7 · a personal, lo / la / los / las ----
   - unidad: 7
     pregunta: "Я вижу своего брата."
     opciones: ["Veo mi hermano.", "Veo a mi hermano.", "Veo el mi hermano."]
@@ -97,6 +157,14 @@ preguntas:
     error_ru: "Предлог «a» перед человеком в роли дополнения не имеет русского аналога, и его забывают."
     error_es: "La «a personal» delante de persona no tiene equivalente ruso y se olvida."
 
+  - unidad: 7
+    pregunta: "Я его не вижу. (о свитере)"
+    opciones: ["No lo veo.", "No veo lo.", "Lo no veo."]
+    correcta: 0
+    error_ru: "Местоимение lo / la стоит перед спрягаемым глаголом, а «no» — перед ним самим: no + lo + veo."
+    error_es: "El pronombre lo / la va delante del verbo conjugado, y «no» delante de él: no + lo + veo."
+
+  # ---- Unidad 8 · ir a + infinitivo, el tiempo, la fecha ----
   - unidad: 8
     pregunta: "Завтра я буду работать."
     opciones: ["Mañana voy a trabajar.", "Mañana voy trabajar.", "Mañana voy a trabajo."]
@@ -104,6 +172,14 @@ preguntas:
     error_ru: "«ir a + инфинитив» всегда с предлогом, как «собираться + инфинитив»."
     error_es: "«ir a + infinitivo» lleva la preposición siempre, como собираться + inf."
 
+  - unidad: 8
+    pregunta: "Сегодня холодно."
+    opciones: ["Hoy hace frío.", "Hoy es frío.", "Hoy está frío."]
+    correcta: 0
+    error_ru: "О погоде говорят глаголом hacer: hace frío, hace calor. «Es frío» — это свойство предмета, а «tengo frío» — про человека."
+    error_es: "El tiempo atmosférico va con «hacer»: hace frío, hace calor. «Es frío» es una propiedad de una cosa y «tengo frío», de una persona."
+
+  # ---- Unidad 9 · transporte, estar + gerundio, pretérito perfecto ----
   - unidad: 9
     pregunta: "Сегодня я уже поел."
     opciones: ["Hoy ya comí.", "Hoy ya he comido.", "Hoy ya como."]
@@ -111,6 +187,14 @@ preguntas:
     error_ru: "Со словами «сегодня, на этой неделе, уже» в Испании нужен perfecto. 🌎 В Латинской Америке говорят «hoy ya comí»."
     error_es: "Con «hoy, esta semana, ya» España pide el perfecto. 🌎 En América se oye «hoy ya comí»."
 
+  - unidad: 9
+    pregunta: "Я еду на поезде."
+    opciones: ["Voy en tren.", "Voy por tren.", "Voy con tren."]
+    correcta: 0
+    error_ru: "Русский творительный падеж («поездом») по-испански передаётся предлогом en, а не por и не con."
+    error_es: "El instrumental ruso («поездом») se dice con «en», no con «por» ni «con»."
+
+  # ---- Unidad 11 · repaso del nivel A1 ----
   - unidad: 11
     pregunta: "Эта рубашка мне велика."
     opciones: ["Esta camisa me queda grande.", "Esta camisa es grande para mí.", "Esta camisa me está grande."]
@@ -118,6 +202,14 @@ preguntas:
     error_ru: "«Quedar» работает как «gustar» и это обычный способ говорить о размере одежды."
     error_es: "«Quedar» funciona como «gustar» y es la forma normal de hablar de tallas."
 
+  - unidad: 11
+    pregunta: "Мне нравятся эти туфли."
+    opciones: ["Me gustan estos zapatos.", "Me gusta estos zapatos.", "Me gustan estas zapatos."]
+    correcta: 0
+    error_ru: "Глагол согласуется с вещью, а вещей много → gustan. И zapatos — мужского рода: estos."
+    error_es: "El verbo concuerda con la cosa, y son varias → «gustan». Y «zapatos» es masculino: «estos»."
+
+  # ---- Unidad 12 · pretérito indefinido ----
   - unidad: 12
     pregunta: "Вчера я ходил в кино."
     opciones: ["Ayer he ido al cine.", "Ayer fui al cine.", "Ayer iba al cine."]
@@ -125,6 +217,14 @@ preguntas:
     error_ru: "«Ayer» закрывает прошедшее: нужен indefinido, а не perfecto."
     error_es: "«Ayer» cierra el pasado: indefinido, no perfecto."
 
+  - unidad: 12
+    pregunta: "В прошлом году я был в Мексике."
+    opciones: ["El año pasado estuve en México.", "El año pasado he estado en México.", "El año pasado era en México."]
+    correcta: 0
+    error_ru: "«El año pasado» — законченное время, значит indefinido. И «быть где-то» — это estar, а не ser."
+    error_es: "«El año pasado» es tiempo cerrado: indefinido. Y «estar en un sitio» es estar, no ser."
+
+  # ---- Unidad 13 · pretérito imperfecto ----
   - unidad: 13
     pregunta: "В детстве я много читал."
     opciones: ["De pequeño leí mucho.", "De pequeño leía mucho.", "De pequeño he leído mucho."]
@@ -132,6 +232,14 @@ preguntas:
     error_ru: "Привычка в прошлом — imperfecto, как русский несовершенный вид."
     error_es: "El hábito en el pasado es imperfecto, como el imperfectivo ruso."
 
+  - unidad: 13
+    pregunta: "Когда я был маленьким, у меня была собака."
+    opciones: ["Cuando era pequeño, tenía un perro.", "Cuando fui pequeño, tuve un perro.", "Cuando era pequeño, tuve un perro."]
+    correcta: 0
+    error_ru: "Описание и длительное состояние в прошлом — imperfecto в обеих частях фразы."
+    error_es: "La descripción y el estado duradero en el pasado van en imperfecto en las dos partes."
+
+  # ---- Unidad 17 · futuro simple, si + presente ----
   - unidad: 17
     pregunta: "Если будет дождь, я останусь дома."
     opciones: ["Si lloverá, me quedo en casa.", "Si llueve, me quedaré en casa.", "Si llueva, me quedaré en casa."]
@@ -139,9 +247,24 @@ preguntas:
     error_ru: "После «si» в реальном условии не бывает ни будущего, ни subjuntivo: только présente."
     error_es: "Tras «si» de condición real no va futuro ni subjuntivo: va presente."
 
+  - unidad: 17
+    pregunta: "Думаю, что завтра он придёт."
+    opciones: ["Creo que mañana vendrá.", "Creo que mañana venirá.", "Creo que mañana vendría."]
+    correcta: 0
+    error_ru: "У venir будущее неправильное: vendr- + окончание. «Vendría» — это условное наклонение, «пришёл бы»."
+    error_es: "El futuro de «venir» es irregular: vendr- + terminación. «Vendría» es condicional, «пришёл бы»."
+
+  # ---- Unidad 19 · comparativos y superlativo ----
   - unidad: 19
     pregunta: "Этот город больше, чем мой."
     opciones: ["Esta ciudad es más grande que la mía.", "Esta ciudad es más grande como la mía.", "Esta ciudad es la más grande que mía."]
     correcta: 0
     error_ru: "Сравнение по-испански — «más… que»; «como» только для равенства."
     error_es: "El comparativo español es «más… que»; «como» es solo para la igualdad."
+
+  - unidad: 19
+    pregunta: "Это самый большой город страны."
+    opciones: ["Es la ciudad más grande del país.", "Es la más grande ciudad del país.", "Es la ciudad la más grande del país."]
+    correcta: 0
+    error_ru: "В превосходной степени артикль стоит перед существительным, а «más» — после него: la ciudad más grande."
+    error_es: "En el superlativo el artículo va delante del sustantivo y «más» detrás: «la ciudad más grande»."

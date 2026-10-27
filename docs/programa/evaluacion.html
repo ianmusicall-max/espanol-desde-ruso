@@ -150,6 +150,14 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 .dibujo{display:block;width:56px;height:56px;border-radius:8px;
   margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
 @media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
+/* La clave: el enlace donde se acaban los ejercicios y la caja plegada al
+   final. El enlace se ve como un paso más y no como un botón: lo que manda en
+   la lección es hacer el ejercicio, no mirar la respuesta. */
+.a-la-clave{margin:1.2rem 0 0;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.92rem}
+.a-la-clave a{text-decoration:none;border-bottom:1px solid var(--linea);padding-bottom:1px}
+.a-la-clave a:hover{border-color:var(--acento)}
+#clave-boton{margin:2rem 0 .5rem}
+#clave{border-top:1px solid var(--linea);padding-top:.2rem}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
 .suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
   font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}

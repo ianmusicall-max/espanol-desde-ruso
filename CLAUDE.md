@@ -60,8 +60,9 @@ la documentación del programa, en español.
   Фонетика y la semana 10, Аудирование. La regla esta en `metodologia.md` §3 y
   dice que dentro de una unidad no se mezclan. Hay que elegir uno para las
   catorce sesiones.
-- **Once entradas de vocabulario se ensenan dos veces** en semanas distintas, de
-  528. `scripts/revisar_lexico.py` las lista con el dia de cada aparicion.
+- **Trece entradas de vocabulario se ensenan dos veces** en semanas distintas,
+  de 956, y todas son de las semanas 1 a 14. `scripts/revisar_lexico.py` las
+  lista con el dia de cada aparicion.
 - **Los titulos de ejercicio siguen en ruso en la unidad 7**, pero
   `metodologia.md` §6 pide «espanol + ruso» desde ahi. O se retocan las
   semanas 13-14 (dos lineas por leccion) o se corre la tabla de §6 hasta la
@@ -70,7 +71,7 @@ la documentación del programa, en español.
   2026-10-26) estan en `revisado: false` y la pagina lo avisa. Hay que
   comprobar que cada distractor sea de verdad el error que dice y que la unidad
   asignada sea donde el curso lo ensena.
-- **Las 69 lecciones de las semanas 4 en adelante son borradores**
+- **Las 84 lecciones de las semanas 4 en adelante son borradores**
   (`revisado: false`) y el sitio las marca como tales. Las 21 primeras estan
   revisadas.
 - **El orden de los pasados: se recomendo NO cambiarlo** (2026-10-26, de
@@ -1462,12 +1463,125 @@ la tarjeta son dibujos sin revisar (regla 6) y ahora son lo más visible del
 sitio. Son `la manzana, la casa, el perro, el libro, el café, el reloj, la
 camisa, el coche, las flores, el pescado, la guitarra, la silla`.
 
+## La semana 15, el test que varía y la clave plegada (2026-10-27)
+
+### Cinco lecciones más: días 101-105
+
+El curso se quedó en el día 100 (semana 15, día 2) y la semana 15 estaba a
+medias. Ahora está entera, o sea la primera mitad de la unidad 8:
+
+| Día | Tipo | Tema |
+|---|---|---|
+| 101 | lección | Meses, estaciones y la fecha |
+| 102 | lección | ¿Qué tiempo hace? |
+| 103 | lección | El clima de mi país y del mundo hispano |
+| 104 | repaso | Repaso de la semana 15 |
+| 105 | cultura | El fútbol y el domingo en familia |
+
+Lo que decidió el contenido, y que conviene saber si alguien las reescribe:
+
+- **El día 100 prometía una «странность» que no lo es.** Cerraba diciendo que
+  en español los meses se escriben con minúscula. En ruso TAMBIÉN, así que para
+  este lector no hay nada raro: la rareza es inglesa. La lección 101 lo dice
+  así en vez de repetir la promesa, que es lo que pide `metodologia.md` cuando
+  el ruso ayuda en vez de estorbar. El contraste de verdad es otro: la fecha va
+  en número **cardinal** (*el doce de marzo*), y el ruso usa ordinal
+  («двенадцатое марта»).
+- **Los doce meses no caben en la tabla de vocabulario** (el validador pide de
+  6 a 10 filas). Van en tres filas de cuatro, que es como la semana 9 metió los
+  días de la semana. No es un truco: son un conjunto cerrado, y se aprenden en
+  bloque.
+- **La tríada que el ruso colapsa en una palabra** es el centro del día 102:
+  *hace frío* (tiempo) · *tengo frío* (persona) · *está fría* (cosa). En ruso
+  las tres son «холодно / холодный».
+- **`muy` / `mucho` es el día 103 entero** porque es el error nº 11 de la lista
+  negra de `contrastiva-ru-es.md` y el que más dura.
+- **`la estación` no entra en el vocabulario del 101**: ya se enseñó en la
+  semana 7 como «вокзал». Se explica dentro de la lección como una palabra
+  conocida con un sentido nuevo, y la entrada nueva es `la estación del año`.
+  Lo comprobé con `revisar_lexico.py` antes de escribir: las cinco lecciones no
+  añaden ni un duplicado. (Los que hay son 13 y no 11 como decía esta nota, y
+  todos son de las semanas 1 a 14.)
+- **El día 105 no lleva episodio de Ana e Iván**: el episodio va en el día de
+  cultura de la SEGUNDA semana de cada unidad, o sea en el 112.
+- **Nada con cifras inventadas** (regla 7). Del fútbol se dice lo que es
+  verificable sin número: qué es el clásico, qué es el derbi, cómo se llaman
+  las canchas de Boca y River, y que en España se dice *aficionado* y *campo* y
+  en América *hincha* y *cancha* 🌎.
+
+**Lo que queda pendiente de estas cinco**: están en `revisado: false` como las
+otras 79, y **su audio no está generado** — son 167 frases nuevas, unos 0,07
+USD con `generar_audio.py`, y hace falta `OPENAI_API_KEY` en el entorno. La
+baraja `.apkg` tampoco se regeneró: son 22 MB de blob nuevo en git cada vez, así
+que conviene hacerlo por tandas y no por lección. Los TSV sí están al día,
+porque hay una prueba que lo exige.
+
+### El test de nivel ya no es siempre el mismo
+
+Lo pidió el profesor: «el test del comienzo puede variar siempre, que sea
+random». Ahora hay **dos preguntas por unidad** (28 en total) y el navegador
+escoge una de cada grupo, más el orden de las tres opciones barajado. Medido en
+navegador: **295 partidas distintas de 300**.
+
+Lo que NO se baraja, y es la línea que no se puede cruzar: **el orden de los
+grupos**. La recomendación sale de la unidad de la PRIMERA pregunta fallada, o
+sea de donde se acaba lo que el alumno ya sabe; desordenadas, fallar la última
+colocaría antes que fallar la primera y nada avisaría. `grupos_por_unidad`
+ordena por unidad en vez de confiar en el orden del fichero, y hay una prueba.
+
+- **Las variantes no son la misma pregunta con otras palabras.** Cada una es un
+  error distinto de la lista negra: la unidad 7 pregunta por la *a personal* en
+  una y por el sitio del clítico en la otra; la 6, por `gustar` y por
+  `muy/mucho`. Repetir el test tiene que enseñar algo nuevo, y hay una prueba
+  que falla si dos variantes de una unidad comparten el error.
+- **Barajar copia la pregunta** (`q.opciones.slice()`) y recalcula `correcta`
+  con `orden.indexOf`. Barajando sobre el original, la segunda partida
+  encontraría las opciones ya movidas y `correcta` apuntando a otra cosa: le
+  diría «has fallado» a quien acertó. Comprobado en navegador jugando una
+  partida entera y pulsando siempre el botón cuyo TEXTO es el correcto: 14/14,
+  y la correcta cayó en las tres posiciones.
+- **El banco puede crecer sin tocar código**: basta añadir otra pregunta con su
+  `unidad` en el YAML. Una prueba exige que ninguna unidad se quede con una
+  sola variante, porque entonces el test dejaría de variar y nadie lo notaría
+  leyendo el código: seguiría funcionando igual de bien la primera vez.
+
+### «¿Y las respuestas? ¿Dónde ver si es correcto?»
+
+Lo preguntó el profesor usando el sitio, y tenía razón por partida doble. La
+clave (`## Ответы`) estaba abierta al final de la página, **debajo de la tabla
+de vocabulario**: quien la buscaba no la encontraba —es lo último de todo— y
+quien no la buscaba se la encontraba de paso, con las respuestas a la vista
+antes de hacer el ejercicio.
+
+Ahora el enlace «Проверить себя по ключу ↓» sale **donde se acaban los
+ejercicios**, y la clave está plegada tras un botón. Es lo mismo que ya hacía el
+día de prueba: el discurso sobre los errores solo enseña DESPUÉS de contestar.
+
+- **Sin JavaScript la página se queda como estaba**: la clave abierta y el
+  enlace llevando a ella. Por eso aquí nace visible y es el navegador quien la
+  pliega, al revés que el resto del sitio: la versión sin guion tiene que ser la
+  que sirve, y una clave escondida que no se puede abrir sería una lección sin
+  respuestas.
+- **Lo importante no es plegarla sino que el ENLACE la abra.** Un ancla que
+  apunta a algo escondido no hace nada, y el lector se queda mirando la misma
+  pantalla creyendo que está roto.
+- **Dónde va el enlace se decide por el CONTENIDO y no por el nombre del
+  apartado**, porque son tres formas: «4. Практика» en una lección,
+  «3. Мини-тест» en un repaso y «4. Задание» en un día de cultura. Y el TÍTULO
+  cuenta igual que el cuerpo: un repaso titula «Мини-тест» y dentro solo dice
+  «выберите правильный ответ», así que mirando solo el cuerpo el enlace caía
+  antes del mini-test y en la semana 1 no caía en ninguna parte. Lo cazó la
+  prueba que recorre las 105.
+- **El día de prueba no pasa por aquí**: tiene su propio envoltorio, con el test
+  contestable y la clave al terminar. Dos mecanismos sobre la misma clave se
+  pisarían.
+
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.
-- **100 lecciones escritas** (semanas 1-14 enteras y los dos primeros días de
-  la 15): unidades 1 a 7 completas, 908 tarjetas de vocabulario. Las 21
-  primeras revisadas; el resto son borradores.
+- **105 lecciones escritas** (semanas 1-15 enteras): unidades 1 a 7 completas
+  y la primera mitad de la 8, 956 entradas de vocabulario. Las 21 primeras
+  revisadas; el resto son borradores.
 - Sitio público en `docs/` con portada, índice, test de nivel, «О курсе»,
   contacto y política de privacidad. Tres idiomas (ru/es/en) —el test solo en
   ruso, como las lecciones—, tema claro y oscuro, y progreso del lector
