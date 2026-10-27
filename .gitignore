@@ -18,3 +18,7 @@ capturas/
 
 # Muestras de voz para elegir; el audio bueno vive en docs/audio/
 muestras-voz/
+
+# Archivos de zona DNS para importar en el registrador: se generan al mudarse
+# de dominio y no son parte del sitio.
+dns-*.txt
