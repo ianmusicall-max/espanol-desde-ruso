@@ -248,20 +248,49 @@ página, no que esa página ESTUVIERA. Es la forma del error que más se repite 
 este tipo de sitios: la regla era correcta y el caso que no cumple la regla no
 estaba contemplado.
 
-- `pagina(..., traducida=False)` para esas dos familias: el conmutador lleva a
-  la **portada de ese idioma** —mejor que un 404, y el sitio sí está traducido
-  aunque la lección no— y el `hreflang` **desaparece**, no se redirige:
-  `hreflang` declara que dos URL son la misma página traducida, y apuntarlo a la
-  portada le cuenta a Google algo falso, que es peor que callarse.
+- `pagina(..., traducida=False)` para esas dos familias (y desde el 27 también
+  el test de nivel). El `hreflang` **desaparece**, no se redirige: `hreflang`
+  declara que dos URL son la misma página traducida, y apuntarlo a la portada
+  le cuenta a Google algo falso, que es peor que callarse.
+
 - El roto 215 era otro: un documento del programa citaba a otro por su nombre
   `.md`, correcto al leerlo en el repositorio y roto en la web.
   `_enlaces_entre_documentos` lo reescribe a `.html`, con el prefijo `ref-` si
   viene de `referencias/`.
 - Cuatro pruebas: ninguna página con un enlace roto, el conmutador de una
-  lección va a la portada, una página sin traducir no declara `hreflang`, y las
-  que SÍ están en tres idiomas conservan los suyos —el arreglo no podía
-  llevárselos por delante—.
+  lección no lleva a ninguna parte (ver abajo), una página sin traducir no
+  declara `hreflang`, y las que SÍ están en tres idiomas conservan los suyos
+  —el arreglo no podía llevárselos por delante—.
 
+### Y la portada tampoco servía: el conmutador, tercera versión (2026-10-27)
+
+Lo reportó el profesor en cuanto usó el sitio: **«cuando cambio el idioma se
+regresa a la página del inicio»**. La segunda versión mandaba a la portada de
+ese idioma en esas 108 páginas, y sobre el papel era razonable —mejor que un
+404—. En la mano no: pulsas «ES» esperando *esta* página en español y apareces
+en la portada, **habiendo perdido la lección que estabas leyendo**.
+
+Ahora, donde no hay gemela, **ninguno de los tres es un enlace**: los otros dos
+van apagados y con el motivo en el `title` («Эта страница есть только на
+русском»), y el activo se queda resaltado pero inerte.
+
+Tres cosas que importan si alguien lo toca:
+
+- **El idioma ACTIVO también era un enlace, y también movía.** Apuntaba a
+  `index.html` como los demás, así que pulsar «ru» desde una lección en ruso te
+  sacaba de la lección. Se vio al probarlo en navegador, no leyendo el código.
+- **Apagados y no escondidos**: el conmutador es la señal de que el sitio tiene
+  tres idiomas. Quitarlo en 108 de 125 páginas lo haría parecer monolingüe.
+- **El resaltado colgaba de `.idiomas a[aria-current]`**, con la `a` dentro. Al
+  dejar de ser un enlace, en esas 108 páginas no se veía cuál era el idioma
+  activo. Ahora el selector es `.idiomas [aria-current]`, y hay una prueba que
+  lo fija.
+
+La prueba que exigía el comportamiento anterior se reescribió, no se aflojó:
+ahora exige que el conmutador de una lección **no contenga ni un `<a>`**. Y hay
+otra nueva que exige lo contrario donde sí hay traducción —las cinco páginas de
+tres idiomas—, porque el arreglo no podía apagar el conmutador en todo el
+sitio.
 ### `scripts/revisar_adsense.py`
 
 Dice qué le falta al sitio para que lo aprueben, y **solo lee**. Separa tres

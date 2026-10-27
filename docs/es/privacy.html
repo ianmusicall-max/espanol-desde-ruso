@@ -56,9 +56,12 @@ header.sitio nav.paginas{display:flex;gap:.9rem;order:3;flex:1 0 100%;overflow-x
   scrollbar-width:none;padding-bottom:.1rem}
 header.sitio nav.paginas::-webkit-scrollbar{display:none}
 .idiomas{display:flex;gap:.2rem;flex:0 0 auto;border:1px solid var(--linea);border-radius:999px;padding:2px}
-.idiomas a{padding:.12rem .5rem;border-radius:999px;font-size:.75rem;font-weight:600;
+.idiomas a,.idiomas span{padding:.12rem .5rem;border-radius:999px;font-size:.75rem;font-weight:600;
   text-transform:uppercase;letter-spacing:.05em;line-height:1.5}
-.idiomas a[aria-current]{background:var(--acento);color:#fff}
+.idiomas [aria-current]{background:var(--acento);color:#fff}
+/* Los idiomas en los que esta página no existe: se ven, no se pulsan, y el
+   `title` dice por qué. Enlazarlos a la portada movía al lector de sitio. */
+.idiomas .apagado{color:var(--tenue);opacity:.45;cursor:default;user-select:none}
 .tema{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;
   width:30px;height:30px;padding:0;border:1px solid var(--linea);border-radius:999px;
   background:transparent;color:var(--tenue);cursor:pointer;-webkit-tap-highlight-color:transparent}

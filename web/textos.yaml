@@ -122,6 +122,7 @@ ru:
   cookies_ok: "Понятно"
   pie: "Материалы курса можно свободно использовать для учёбы."
   idioma: "Язык"
+  solo_este_idioma: "Эта страница есть только на русском"
   tema: "Светлая или тёмная тема"
   test:
     titulo: "Тест на уровень"
@@ -251,6 +252,7 @@ es:
   cookies_ok: "De acuerdo"
   pie: "El material del curso puede usarse libremente para estudiar."
   idioma: "Idioma"
+  solo_este_idioma: "Esta página solo existe en español"
   tema: "Tema claro u oscuro"
   test:
     titulo: "Test de nivel"
@@ -380,6 +382,7 @@ en:
   cookies_ok: "Got it"
   pie: "Course material may be used freely for study."
   idioma: "Language"
+  solo_este_idioma: "This page exists in one language only"
   tema: "Light or dark theme"
   test:
     titulo: "Level test"

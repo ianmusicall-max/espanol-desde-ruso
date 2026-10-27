@@ -110,9 +110,12 @@ header.sitio nav.paginas{display:flex;gap:.9rem;order:3;flex:1 0 100%;overflow-x
   scrollbar-width:none;padding-bottom:.1rem}
 header.sitio nav.paginas::-webkit-scrollbar{display:none}
 .idiomas{display:flex;gap:.2rem;flex:0 0 auto;border:1px solid var(--linea);border-radius:999px;padding:2px}
-.idiomas a{padding:.12rem .5rem;border-radius:999px;font-size:.75rem;font-weight:600;
+.idiomas a,.idiomas span{padding:.12rem .5rem;border-radius:999px;font-size:.75rem;font-weight:600;
   text-transform:uppercase;letter-spacing:.05em;line-height:1.5}
-.idiomas a[aria-current]{background:var(--acento);color:#fff}
+.idiomas [aria-current]{background:var(--acento);color:#fff}
+/* Los idiomas en los que esta página no existe: se ven, no se pulsan, y el
+   `title` dice por qué. Enlazarlos a la portada movía al lector de sitio. */
+.idiomas .apagado{color:var(--tenue);opacity:.45;cursor:default;user-select:none}
 .tema{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;
   width:30px;height:30px;padding:0;border:1px solid var(--linea);border-radius:999px;
   background:transparent;color:var(--tenue);cursor:pointer;-webkit-tap-highlight-color:transparent}
@@ -632,10 +635,20 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
     )
     # El cambio de idioma lleva a la MISMA página en el otro idioma, pero solo
     # cuando esa página existe de verdad en los tres. Las lecciones están solo
-    # en ruso —son el curso— y los documentos del programa solo en español, así
-    # que ahí el conmutador apuntaba a una URL que no existe: el lector pulsaba
-    # «ES» en una lección y le salía un 404. En esas páginas lleva a la portada
-    # de ese idioma, que es lo más cerca que hay de «este sitio en tu idioma».
+    # en ruso —son el curso—, los documentos del programa solo en español y el
+    # test de nivel solo en ruso, así que ahí no hay gemela a la que ir.
+    #
+    # La PRIMERA versión apuntaba a la gemela igual y daba 404 (215 enlaces
+    # rotos). La SEGUNDA mandaba a la portada de ese idioma, y eso tampoco
+    # servía: el lector pulsa «ES» esperando esta página en español y se
+    # encuentra en la portada, habiendo perdido la lección que estaba leyendo.
+    # Lo dijo el profesor en cuanto lo usó.
+    #
+    # Ahora, en esas 108 páginas, los otros idiomas NO son enlaces: se enseñan
+    # apagados y con el motivo en el `title`. Un botón que no se puede pulsar
+    # dice la verdad —esta página no está en tu idioma— y además no te mueve de
+    # donde estás, que es lo que de verdad molestaba. Apagarlos y no esconderlos
+    # porque el conmutador es la señal de que el sitio tiene tres idiomas.
     #
     # Y el hreflang desaparece, no se redirige: hreflang declara que dos URL son
     # la MISMA página traducida. Apuntarlo a la portada es decirle a Google algo
@@ -644,8 +657,18 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
     hreflangs = []
     for i in idiomas:
         prefijo = f"{raiz}/{i['carpeta']}".rstrip("/") if i["carpeta"] else raiz
+        actual_este = i["codigo"] == idioma
+        if not traducida:
+            # Ni siquiera el idioma ACTUAL es un enlace aquí: apuntaba también a
+            # la portada, así que pulsar «ru» desde una lección en ruso te sacaba
+            # de la lección. Ninguno de los tres mueve ya al lector.
+            clase = "" if actual_este else ' class="apagado"'
+            marca = ' aria-current="true"' if actual_este else ""
+            titulo = "" if actual_este else f' title="{html.escape(t["solo_este_idioma"])}"'
+            conmutador.append(f'<span{clase} lang="{i["html"]}"{marca}{titulo}>{i["codigo"]}</span>')
+            continue
         hoja = pagina_id if (traducida and pagina_id) else "index.html"
-        marca = ' aria-current="true"' if i["codigo"] == idioma else ""
+        marca = ' aria-current="true"' if actual_este else ""
         lengua = f' hreflang="{i["html"]}"' if traducida else ""
         conmutador.append(f'<a href="{prefijo}/{hoja}"{lengua} lang="{i["html"]}"{marca}>{i["codigo"]}</a>')
         if dominio and traducida:

@@ -753,19 +753,45 @@ class TestNingunEnlaceLlevaANingunaParte(unittest.TestCase):
 
     def setUp(self):
         self.destino = pathlib.Path(tempfile.mkdtemp())
-        construir_sitio.construir(self.destino, construir_sitio.cargar_config(),
-                                  construir_sitio.cargar_textos())
+        self.textos = construir_sitio.cargar_textos()
+        construir_sitio.construir(self.destino, construir_sitio.cargar_config(), self.textos)
 
     def test_no_hay_un_solo_enlace_interno_roto(self):
         rotos = revisar_adsense.enlaces_rotos(self.destino)
         self.assertEqual(rotos, [], f"{len(rotos)} rotos, p.ej. {rotos[:3]}")
 
-    def test_en_una_leccion_el_conmutador_lleva_a_la_portada_de_ese_idioma(self):
-        """Mejor la portada en tu idioma que un 404: la lección no está
-        traducida, pero el sitio sí."""
+    def test_en_una_leccion_el_conmutador_no_mueve_al_lector(self):
+        """Tercera versión de esto, y las dos anteriores estaban mal.
+
+        La 1.ª apuntaba a la gemela y daba 404 (215 enlaces rotos). La 2.ª
+        mandaba a la portada de ese idioma, y el profesor lo reportó en cuanto
+        lo usó: pulsas «ES» esperando esta página en español y apareces en la
+        portada, habiendo perdido la lección que leías. Ahora NINGUNO de los
+        tres es un enlace: los otros idiomas van apagados y con el motivo en el
+        `title`, y el propio también es inerte —era enlace a la portada, así
+        que pulsar «ru» desde una lección en ruso también te sacaba de ella—."""
         leccion = (self.destino / "semana-01" / "dia-1.html").read_text(encoding="utf-8")
-        self.assertIn('<a href="../es/index.html"', leccion)
+        conmutador = re.search(r'<div class="idiomas".*?</div>', leccion, re.S).group(0)
+        self.assertNotIn("<a ", conmutador, "el conmutador no puede llevar a ninguna parte")
+        self.assertIn('class="apagado"', conmutador)
+        self.assertIn(self.textos["ru"]["solo_este_idioma"], conmutador)
         self.assertNotIn("../es/semana-01", leccion)
+
+    def test_pero_donde_la_pagina_sí_esta_traducida_el_conmutador_funciona(self):
+        """El arreglo no podía apagar el conmutador en todo el sitio: en las
+        cinco páginas que sí están en tres idiomas tiene que llevar a la
+        gemela, no a la portada."""
+        for nombre in ("index.html", "kurs.html", "o-kurse.html", "kontakt.html", "privacy.html"):
+            pagina = (self.destino / nombre).read_text(encoding="utf-8")
+            conmutador = re.search(r'<div class="idiomas".*?</div>', pagina, re.S).group(0)
+            self.assertNotIn("apagado", conmutador, nombre)
+            self.assertIn(f'href="./es/{nombre}"', conmutador, nombre)
+            self.assertIn(f'href="./en/{nombre}"', conmutador, nombre)
+
+    def test_el_idioma_activo_se_resalta_tambien_cuando_es_un_span(self):
+        """El resaltado colgaba de `.idiomas a[aria-current]`. Al dejar de ser
+        un enlace, en 108 páginas no se veía cuál era el idioma activo."""
+        self.assertIn(".idiomas [aria-current]{background:var(--acento)", construir_sitio.CSS)
 
     def test_una_pagina_sin_traducir_no_declara_hreflang(self):
         """hreflang dice «esta URL es la MISMA página traducida». Apuntarlo a la
