@@ -34,45 +34,45 @@ revisado: false
 Прочитайте предложения и выберите правильный ответ.
 
 1. En el estuche hay una goma, un lápiz y unas ______.
-   а) gafas · б) tijeras · в) llaves · г) carpetas
+   а) tijeras · б) gafas · в) llaves · г) carpetas
 2. Lo contrario de **caro** es ______.
-   а) barato · б) viejo · в) feo · г) pesado
+   а) viejo · б) barato · в) feo · г) pesado
 3. Trabaja en un hospital. Es ______.
-   а) camarero · б) médico · в) ingeniero · г) dependiente
+   а) camarero · б) ingeniero · в) médico · г) dependiente
 4. Cien céntimos son ______.
-   а) un euro · б) cien euros · в) un céntimo · г) diez euros
+   а) diez euros · б) cien euros · в) un céntimo · г) un euro
 5. — ¿De qué color es el tomate? — Es ______.
-   а) verde · б) rojo · в) negro · г) gris
+   а) rojo · б) verde · в) negro · г) gris
 6. En la papelería, el dependiente dice: ______.
-   а) ¿Algo más? · б) ¿Cómo te llamas? · в) Hasta mañana · г) De nada
+   а) ¿Cómo te llamas? · б) ¿Algo más? · в) Hasta mañana · г) De nada
 
 ### 2. Грамматика (6 баллов)
 
 Прочитайте предложения и выберите правильный ответ.
 
 1. En la mesa ______ tres libros.
-   а) está · б) hay · в) son · г) están
+   а) está · б) son · в) hay · г) están
 2. ______ foto de la clase está en la pared.
-   а) El · б) La · в) Un · г) Unos
+   а) El · б) Unos · в) Un · г) La
 3. Множественное число от **la pared**:
-   а) las pareds · б) las paredes · в) los paredes · г) las pareces
+   а) las paredes · б) las pareds · в) los paredes · г) las pareces
 4. ______ mochila es nueva. («эта»)
    а) Esto · б) Esta · в) Este · г) Esos
 5. Выберите правильную фразу.
-   а) una roja carpeta · б) una carpeta roja · в) una carpeta rojo ·
-   г) unas carpeta rojas
+   а) una roja carpeta · б) una carpeta rojo · в) una carpeta roja · г)
+   unas carpeta rojas
 6. — ¿______ es tu móvil? — Es pequeño y moderno.
-   а) Qué · б) Cómo · в) Cuál · г) Quién
+   а) Qué · б) Quién · в) Cuál · г) Cómo
 
 ### 3. Орфография и произношение (3 балла)
 
 1. Какое слово написано правильно?
-   а) facil · б) fácil · в) fasil
+   а) fácil · б) facil · в) fasil
 2. Как звучит **d** между гласными в слове **nada**?
    а) как русское «д» · б) очень слабо, почти как английское *th* в *this* ·
    в) как [т]
 3. Чем на слух отличается **estas** от **esta**?
-   а) ударением · б) конечным звуком **-s** · в) ничем
+   а) ударением · б) ничем · в) конечным звуком **-s**
 
 **Всего: ___ / 15** · Лексика ___ / 6 · Грамматика ___ / 6 · Орфография ___ / 3
 
@@ -113,20 +113,20 @@ dos bolígrafos negros…*
 
 ## Ответы
 
-**1. Лексика:** 1 б (нед. 4, день 1) · 2 а (нед. 4, день 4) · 3 б (нед. 3,
-день 4) · 4 а (нед. 4, день 5) · 5 б (нед. 4, день 2) · 6 а (нед. 4, день 5).
+**1. Лексика:** 1 а (нед. 4, день 1) · 2 б (нед. 4, день 4) · 3 в (нед. 3,
+день 4) · 4 г (нед. 4, день 5) · 5 а (нед. 4, день 2) · 6 б (нед. 4, день 5).
 
-**2. Грамматика:** 1 б (**hay** — «имеется», и одна форма на любое число;
-нед. 4, день 1) · 2 б (**la foto**: на -o, но женского рода; нед. 3, день 1) ·
-3 б (согласная + **-es**; нед. 3, день 2) · 4 б (**esta** + существительное;
+**2. Грамматика:** 1 в (**hay** — «имеется», и одна форма на любое число;
+нед. 4, день 1) · 2 г (**la foto**: на -o, но женского рода; нед. 3, день 1) ·
+3 а (согласная + **-es**; нед. 3, день 2) · 4 б (**esta** + существительное;
 **esto** — «это» без рода, перед существительным не ставится; нед. 4,
-день 2) · 5 б (прилагательное **после** существительного и согласовано;
-нед. 4, день 3) · 6 б (**¿Cómo es?** = «какой он?»; *¿Qué es?* = «что это
+день 2) · 5 в (прилагательное **после** существительного и согласовано;
+нед. 4, день 3) · 6 г (**¿Cómo es?** = «какой он?»; *¿Qué es?* = «что это
 такое?»; нед. 4, день 4).
 
-**3. Орфография и произношение:** 1 б (слово кончается на согласную **-l**, а
+**3. Орфография и произношение:** 1 а (слово кончается на согласную **-l**, а
 ударение не на последнем слоге, значит нужна тильда: **fá**-cil; нед. 3,
-день 1) · 2 б (нед. 4, день 3) · 3 б (конечное **-s** —
+день 1) · 2 б (нед. 4, день 3) · 3 в (конечное **-s** —
 это и есть число; нед. 4, день 2).
 
 Дистракторы здесь не случайные. **а) está** в вопросе 1 (русское «на столе

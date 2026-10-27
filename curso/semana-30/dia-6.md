@@ -35,17 +35,17 @@ revisado: false
 Прочитайте предложения и выберите правильный ответ.
 
 1. Mi madre no trabaja para nadie: tiene su propia peluquería. Es ______.
-   а) asalariada · б) autónoma · в) desempleada · г) becaria
+   а) autónoma · б) asalariada · в) desempleada · г) becaria
 2. No encuentra trabajo desde enero: está ______.
-   а) de paro · б) sin paro · в) en paro · г) al paro
+   а) de paro · б) en paro · в) sin paro · г) al paro
 3. Estudié cinco años en la universidad: hice la ______ de Economía.
-   а) asignatura · б) academia · в) formación · г) carrera
+   а) asignatura · б) academia · в) carrera · г) formación
 4. Saqué un 9,5: un ______.
-   а) notable · б) sobresaliente · в) aprobado · г) suspenso
+   а) notable · б) suspenso · в) aprobado · г) sobresaliente
 5. En el anuncio pone «______ experiencia»: sin ella no te cogen.
-   а) se valora · б) se ofrece · в) imprescindible · г) se precisa
+   а) imprescindible · б) se ofrece · в) se valora · г) se precisa
 6. Gana 1.400 € ______, o sea unos 1.150 en la cuenta.
-   а) brutos · б) netos · в) extras · г) semanales
+   а) netos · б) brutos · в) extras · г) semanales
 
 ### 2. Грамматика (6 баллов)
 
@@ -54,29 +54,29 @@ revisado: false
 1. ¿______ a la nueva directora?
    а) Sabes · б) Sabe · в) Conoces · г) Conozco
 2. No ______ dónde está Recursos Humanos.
-   а) conozco · б) sé · в) puedo · г) se
+   а) conozco · б) se · в) puedo · г) sé
 3. ______ tres años trabajando aquí.
-   а) Hago · б) He llevado · в) Tengo · г) Llevo
+   а) Llevo · б) He llevado · в) Tengo · г) Hago
 4. Trabajo en esta empresa ______ dos años.
-   а) desde hace · б) desde · в) durante que · г) hace que
+   а) desde · б) desde hace · в) durante que · г) hace que
 5. Soy ingeniero, pero trabajo ______ camarero.
    а) en · б) para · в) de · г) como para
 6. Se ______ dos repartidores con carné B.
-   а) busca · б) buscan · в) buscamos · г) buscaba
+   а) busca · б) buscaba · в) buscamos · г) buscan
 
 ### 3. Выражения (3 балла)
 
 Выберите то, что сказал бы носитель.
 
 1. En una entrevista, lo más adecuado es:
-   а) Quiero trabajar aquí · б) Necesito este trabajo ·
-   в) Me gustaría trabajar con ustedes · г) ¿Me dan el puesto?
+   а) Me gustaría trabajar con ustedes · б) Necesito este trabajo · в)
+   Quiero trabajar aquí · г) ¿Me dan el puesto?
 2. Después de «Estimada señora» va:
    а) una coma · б) dos puntos y mayúscula ·
    в) un signo de exclamación · г) nada
 3. «Мне трудно рано вставать» es:
-   а) Me cuesta madrugar · б) Cuesto madrugar ·
-   в) Soy difícil de madrugar · г) Me cuesto madrugar
+   а) Soy difícil de madrugar · б) Cuesto madrugar · в) Me cuesta madrugar
+   · г) Me cuesto madrugar
 
 ## 3. Ключи и подсчёт (18–23 мин)
 
@@ -123,15 +123,15 @@ revisado: false
 
 ## Ответы
 
-**1. Лексика:** 1 б (нед. 29, день 1) · 2 в (нед. 29, день 1) · 3 г
-(нед. 29, день 5) · 4 б (нед. 29, день 5) · 5 в (нед. 30, день 1) · 6 а
+**1. Лексика:** 1 а (нед. 29, день 1) · 2 б (нед. 29, день 1) · 3 в
+(нед. 29, день 5) · 4 г (нед. 29, день 5) · 5 а (нед. 30, день 1) · 6 б
 (нед. 30, день 1).
 
-**2. Грамматика:** 1 в (нед. 29, день 2) · 2 б (нед. 29, день 2) · 3 г
-(нед. 29, день 3) · 4 а (нед. 29, день 3) · 5 в (нед. 29, день 1) · 6 б
+**2. Грамматика:** 1 в (нед. 29, день 2) · 2 г (нед. 29, день 2) · 3 а
+(нед. 29, день 3) · 4 б (нед. 29, день 3) · 5 в (нед. 29, день 1) · 6 г
 (нед. 30, день 1).
 
-**3. Выражения:** 1 в (нед. 30, день 2) · 2 б (нед. 30, день 3) · 3 а
+**3. Выражения:** 1 а (нед. 30, день 2) · 2 б (нед. 30, день 3) · 3 в
 (нед. 30, день 4).
 
 Шесть пунктов, которые стоит перечитать, если вы их потеряли:
@@ -149,6 +149,6 @@ revisado: false
   предлог *a* при неправильном глаголе: ловушка именно в этом, потому что
   *a* в предложении уже стоит и подталкивает выбрать что попало.
 - **Грамматика 2.** Дальше придаточное с *dónde*, значит *saber*. Вариант
-  г) *se* без тильды — вообще другое слово.
+  б) *se* без тильды — вообще другое слово.
 - **Выражения 3.** *Me cuesta* — безличная конструкция, как *gustar*.
   Подлежащее — *madrugar*, а не «я», поэтому ✗ *me cuesto*.

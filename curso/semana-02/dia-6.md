@@ -34,17 +34,17 @@ revisado: true
 Прочитайте предложения и выберите правильный ответ.
 
 1. — Gracias. — ______.
-   а) Por favor · б) De nada · в) Perdón · г) Vale
+   а) De nada · б) Por favor · в) Perdón · г) Vale
 2. En Madrid, a las 22:00, dices: ______.
-   а) Buenos días · б) Buenas tardes · в) Buenas noches · г) Hasta mañana
+   а) Buenos días · б) Buenas noches · в) Buenas tardes · г) Hasta mañana
 3. Marie es de Francia. Es ______.
-   а) francés · б) francesa · в) francia · г) francesas
+   а) francés · б) francia · в) francesa · г) francesas
 4. Dieciocho + dos = ______.
-   а) diecinueve · б) veinte · в) doce · г) dieciséis
+   а) diecinueve · б) dieciséis · в) doce · г) veinte
 5. No comprendo nada. → ______.
-   а) No sé · б) No entiendo · в) Lo siento · г) Claro
+   а) No entiendo · б) No sé · в) Lo siento · г) Claro
 6. — ¿Cómo se escribe «Ana»? — ______.
-   а) a, ene, a · б) a, eme, a · в) a, eñe, a · г) a, ele, a
+   а) a, eme, a · б) a, ene, a · в) a, eñe, a · г) a, ele, a
 
 ### 2. Грамматика (6 баллов)
 
@@ -53,22 +53,22 @@ revisado: true
 1. Yo ______ ruso.
    а) es · б) eres · в) soy · г) son
 2. ¿De dónde ______ usted?
-   а) eres · б) es · в) sois · г) soy
+   а) eres · б) soy · в) sois · г) es
 3. Petra y Hans ______ alemanes.
-   а) es · б) somos · в) sois · г) son
+   а) son · б) somos · в) sois · г) es
 4. — ¿Cuántos años ______? — Veinte.
    а) eres · б) tienes · в) es · г) tiene
 5. ______ te llamas?
-   а) ¿Qué · б) ¿Cómo · в) ¿Quién · г) ¿Dónde
+   а) ¿Qué · б) ¿Quién · в) ¿Cómo · г) ¿Dónde
 6. Nosotras ______ rusas.
-   а) somos · б) son · в) sois · г) es
+   а) es · б) son · в) sois · г) somos
 
 ### 3. Орфография и произношение (3 балла)
 
 1. Какое слово написано правильно?
-   а) musica · б) música · в) múzica
+   а) música · б) musica · в) múzica
 2. В каком слове **j** / **g** звучит как [х]?
-   а) gato · б) guitarra · в) gente
+   а) gato · б) gente · в) guitarra
 3. Какое слово лишнее по звуку первой буквы?
    а) vino · б) bueno · в) hola
 
@@ -100,17 +100,17 @@ hablo**, и прочитайте вслух. Завтра — последний
 
 ## Ответы
 
-**1. Лексика:** 1 б (нед. 2, день 5) · 2 в (нед. 1, день 2) · 3 б (нед. 2,
-день 1) · 4 б (нед. 2, день 3) · 5 б (нед. 2, день 5) · 6 а (нед. 1, день 4).
+**1. Лексика:** 1 а (нед. 2, день 5) · 2 б (нед. 1, день 2) · 3 в (нед. 2,
+день 1) · 4 г (нед. 2, день 3) · 5 а (нед. 2, день 5) · 6 б (нед. 1, день 4).
 
-**2. Грамматика:** 1 в · 2 б (usted → форма «он») · 3 г · 4 б (возраст —
-tener) · 5 б · 6 а (нед. 2, дни 1–4).
+**2. Грамматика:** 1 в · 2 г (usted → форма «он») · 3 а · 4 б (возраст —
+tener) · 5 в · 6 г (нед. 2, дни 1–4).
 
-**3. Орфография и произношение:** 1 б (нед. 1, день 4) · 2 в (**ge** = [х];
+**3. Орфография и произношение:** 1 а (нед. 1, день 4) · 2 б (**ge** = [х];
 нед. 1, день 3) · 3 в (**hola** начинается с молчащей h — звука нет; vino и
 bueno начинаются с одного звука [б]; нед. 1, день 1).
 
-Дистракторы в этом тесте — не случайные: **а) Por favor** в вопросе 1, **а)
+Дистракторы в этом тесте — не случайные: **б) Por favor** в вопросе 1, **а)
 francés** в вопросе 3, **а) eres** в вопросе 4 — это именно то, что говорит
 русскоговорящий. Если вы выбрали их, вы не «ошиблись случайно»: вы нашли
 свою ошибку. Это полезнее, чем 15 из 15.

@@ -34,44 +34,44 @@ revisado: false
 Прочитайте предложения и выберите правильный ответ.
 
 1. En el ______ jugábamos al fútbol en el patio.
-   а) examen · б) recreo · в) pupitre · г) alumno
+   а) recreo · б) examen · в) pupitre · г) alumno
 2. Teníamos muchos ______: dos horas cada tarde.
    а) deber · б) deberes · в) tareas · г) notas
 3. Jugaba ______ muñecas hasta los diez años.
    а) a · б) a las · в) con · г) de
 4. ______ fumo: lo dejé hace tres años.
-   а) Todavía · б) Ya no · в) Todavía no · г) Aún
+   а) Todavía · б) Aún · в) Todavía no · г) Ya no
 5. ______ ir al gimnasio tres veces por semana. (привычка)
    а) Solía · б) Usualmente iba · в) Suelo · г) Soy
 6. Mi abuelo ______ de mecánico toda su vida.
-   а) trabajaba de · б) trabajaba como mucho · в) era de · г) hacía de
+   а) trabajaba como mucho · б) trabajaba de · в) era de · г) hacía de
 
 ### 2. Грамматика (6 баллов)
 
 Прочитайте предложения и выберите правильный ответ.
 
 1. De pequeño ______ en Moscú. (vivir, yo)
-   а) viví · б) vivía · в) he vivido · г) vivo
+   а) viví · б) he vivido · в) vivía · г) vivo
 2. Siempre ______ niños en el patio.
-   а) había · б) habían · в) hubo · г) habrá
+   а) habrá · б) habían · в) hubo · г) había
 3. ______ muy pobres entonces. (ser, nosotros)
-   а) Fuimos · б) Éramos · в) Eramos · г) Estábamos
+   а) Éramos · б) Fuimos · в) Eramos · г) Estábamos
 4. Mientras ______, sonó el teléfono. (cenar, yo)
    а) cené · б) cenaba · в) he cenado · г) cenaría
 5. ______ toda la semana y no salimos del hotel. (llover)
-   а) Llovía · б) Llovió · в) Ha llovido · г) Llueve
+   а) Llovía · б) Ha llovido · в) Llovió · г) Llueve
 6. Todos los veranos ______ al pueblo, pero un verano ______ a la playa.
-   а) fuimos / íbamos · б) íbamos / fuimos · в) íbamos / íbamos ·
-   г) fuimos / fuimos
+   а) fuimos / íbamos · б) fuimos / fuimos · в) íbamos / íbamos · г)
+   íbamos / fuimos
 
 ### 3. Орфография и произношение (3 балла)
 
 1. ¿Cuál está bien escrito?
-   а) ibamos · б) íbamos · в) iwamos
+   а) íbamos · б) ibamos · в) iwamos
 2. ¿Cuántas sílabas tiene **vivía**?
    а) dos · б) tres · в) cuatro
 3. ¿Cuál está bien escrito?
-   а) habían muchos árboles · б) había muchos árboles · в) habia muchos
+   а) habían muchos árboles · б) habia muchos árboles · в) había muchos
    árboles
 
 **Всего: ___ / 15** · Лексика ___ / 6 · Грамматика ___ / 6 · Орфография ___ / 3
@@ -120,15 +120,15 @@ revisado: false
 
 ## Ответы
 
-**1. Лексика:** 1 б (нед. 25, день 4) · 2 б (нед. 25, день 4) · 3 в (нед. 25,
-день 4) · 4 б (нед. 25, день 3) · 5 а (нед. 25, день 3) · 6 а (нед. 26,
+**1. Лексика:** 1 а (нед. 25, день 4) · 2 б (нед. 25, день 4) · 3 в (нед. 25,
+день 4) · 4 г (нед. 25, день 3) · 5 а (нед. 25, день 3) · 6 б (нед. 26,
 день 4).
 
-**2. Грамматика:** 1 б (нед. 25, день 1) · 2 а (нед. 25, день 1) · 3 б
-(нед. 25, день 2) · 4 б (нед. 26, день 2) · 5 б (нед. 26, день 3) · 6 б
+**2. Грамматика:** 1 в (нед. 25, день 1) · 2 г (нед. 25, день 1) · 3 а
+(нед. 25, день 2) · 4 б (нед. 26, день 2) · 5 в (нед. 26, день 3) · 6 г
 (нед. 26, день 3).
 
-**3. Орфография:** 1 б (нед. 25, день 2) · 2 б (нед. 25, день 1) · 3 б
+**3. Орфография:** 1 а (нед. 25, день 2) · 2 б (нед. 25, день 1) · 3 в
 (нед. 25, день 1).
 
 Четыре вопроса, которые стоит перечитать, если вы их потеряли:

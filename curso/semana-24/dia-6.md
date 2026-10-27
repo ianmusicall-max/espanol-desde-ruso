@@ -34,15 +34,15 @@ revisado: false
 Прочитайте предложения и выберите правильный ответ.
 
 1. ______ dos días llegué a Valencia.
-   а) Desde · б) Hace · в) Hasta · г) Por
+   а) Hace · б) Desde · в) Hasta · г) Por
 2. Se casó ______ Mercedes en 1958.
    а) a · б) con · в) de · г) para
 3. Trabajó ______ periodista veinte años.
-   а) como mucho · б) de · в) para · г) en
+   а) como mucho · б) para · в) de · г) en
 4. ______ el tren de vuelta y llegamos de noche.
-   а) Perdimos · б) Dejamos · в) Olvidamos · г) Salimos
+   а) Salimos · б) Dejamos · в) Olvidamos · г) Perdimos
 5. ______ muy bien en Sevilla: cinco días perfectos.
-   а) Pasé · б) Lo pasé · в) Me pasé · г) Pasó
+   а) Lo pasé · б) Pasé · в) Me pasé · г) Pasó
 6. ¿Qué fue ______ de esos años? — Aprender a estar solo.
    а) el mejor · б) lo mejor · в) la mejor · г) mejor
 
@@ -51,27 +51,27 @@ revisado: false
 Прочитайте предложения и выберите правильный ответ.
 
 1. Ayer ______ con el jefe. (hablar, yo)
-   а) hablo · б) hablé · в) habló · г) he hablado
+   а) hablo · б) habló · в) hablé · г) he hablado
 2. No ______ venir el sábado. (poder, yo)
-   а) pudé · б) pude · в) podí · г) he podido
+   а) pudé · б) he podido · в) podí · г) pude
 3. ______ que no podían. (decir, ellos)
-   а) Dijieron · б) Dijeron · в) Dicieron · г) Decieron
+   а) Dijeron · б) Dijieron · в) Dicieron · г) Decieron
 4. ______ en 2014, en México. (morir, él)
    а) Morió · б) Murió · в) Muró · г) Ha muerto
 5. Nunca ______ en Perú. (estar, yo)
-   а) estuve · б) he estado · в) fui · г) estoy
+   а) estuve · б) fui · в) he estado · г) estoy
 6. En 2019 ______ en México. (estar, yo)
-   а) he estado · б) estuve · в) estoy · г) era
+   а) he estado · б) era · в) estoy · г) estuve
 
 ### 3. Орфография и произношение (3 балла)
 
 1. 1789 se lee:
-   а) mil sietecientos ochenta y nueve · б) mil setecientos ochenta y nueve ·
-   в) mil septecientos ochenta y nueve
+   а) mil setecientos ochenta y nueve · б) mil sietecientos ochenta y
+   nueve · в) mil septecientos ochenta y nueve
 2. ¿Cuál está bien escrito?
    а) Nació en el 1927 · б) Nació en 1927 · в) Nació en 1927 año
 3. ¿Cuál está bien escrito?
-   а) Tuvé que esperar · б) Tuve que esperar · в) Tubé que esperar
+   а) Tuvé que esperar · б) Tubé que esperar · в) Tuve que esperar
 
 **Всего: ___ / 15** · Лексика ___ / 6 · Грамматика ___ / 6 · Орфография ___ / 3
 
@@ -111,28 +111,28 @@ revisado: false
 
 ## Ответы
 
-**1. Лексика:** 1 б (нед. 23, день 2) · 2 б (нед. 23, день 5) · 3 б (нед. 23,
-день 5) · 4 а (нед. 24, день 4) · 5 б (нед. 24, день 4) · 6 б (нед. 24,
+**1. Лексика:** 1 а (нед. 23, день 2) · 2 б (нед. 23, день 5) · 3 в (нед. 23,
+день 5) · 4 г (нед. 24, день 4) · 5 а (нед. 24, день 4) · 6 б (нед. 24,
 день 5).
 
-**2. Грамматика:** 1 б (нед. 23, день 1) · 2 б (нед. 24, день 2) · 3 б
-(нед. 24, день 2) · 4 б (нед. 23, день 5) · 5 б (нед. 24, день 1) · 6 б
+**2. Грамматика:** 1 в (нед. 23, день 1) · 2 г (нед. 24, день 2) · 3 а
+(нед. 24, день 2) · 4 б (нед. 23, день 5) · 5 в (нед. 24, день 1) · 6 г
 (нед. 24, день 1).
 
-**3. Орфография:** 1 б (нед. 23, день 4) · 2 б (нед. 23, день 4) · 3 б
+**3. Орфография:** 1 а (нед. 23, день 4) · 2 б (нед. 23, день 4) · 3 в
 (нед. 23, день 3).
 
 Четыре вопроса, которые стоит перечитать, если вы их потеряли:
 
-- **Лексика 5 (а) *Pasé muy bien***: без *lo* фраза не значит ничего.
+- **Лексика 5 (б) *Pasé muy bien***: без *lo* фраза не значит ничего.
   *Lo* обязательно и незаменимо.
 - **Лексика 6 (а) *el mejor***: *lo* + прилагательное даёт «то, что
   лучшее». *El mejor* — это «лучший человек».
-- **Грамматика 3 (а) *dijieron***: корень на *j* съедает *i*. Так же
+- **Грамматика 3 (б) *dijieron***: корень на *j* съедает *i*. Так же
   *trajeron*, *condujeron*.
 - **Грамматика 5 и 6 вместе**: два вопроса об одной границе. *Nunca* —
   слева (perfecto), *en 2019* — справа (indefinido). Если вы ошиблись в
   обоих, перечитайте таблицу понедельника целиком: это главная ошибка всего
   A2.
-- **Орфография 3 (в) *tubé***: двойная ошибка — и тильда лишняя, и *b*
+- **Орфография 3 (б) *tubé***: двойная ошибка — и тильда лишняя, и *b*
   вместо *v*. Глагол *tener* даёт *tuve*, через *v*.

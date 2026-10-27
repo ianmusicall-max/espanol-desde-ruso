@@ -34,48 +34,48 @@ revisado: false
 Выберите правильный ответ.
 
 1. En la puerta del bar dice TIRAR. Significa que hay que ______.
-   а) empujar · б) tirar la basura · в) esperar · г) tirar de la puerta
+   а) tirar de la puerta · б) tirar la basura · в) esperar · г) empujar
 2. El ascensor no funciona: está ______.
-   а) fuera de servicio · б) cerrado por vacaciones · в) de obras ·
-   г) aforo completo
+   а) cerrado por vacaciones · б) fuera de servicio · в) de obras · г)
+   aforo completo
 3. Quiero ______ doscientos euros del cajero.
-   а) quitar · б) sacar · в) ingresar · г) anular
+   а) quitar · б) ingresar · в) sacar · г) anular
 4. Una carta con confirmación de entrega es una carta ______.
-   а) certificada · б) reservada · в) urgente · г) normal
+   а) normal · б) reservada · в) urgente · г) certificada
 5. Para que te atiendan en extranjería hace falta ______.
-   а) un justificante · б) el padrón · в) cita previa · г) una denuncia
+   а) cita previa · б) el padrón · в) un justificante · г) una denuncia
 6. Antes de freír las patatas hay que ______ y cortarlas.
-   а) batirlas · б) escurrirlas · в) removerlas · г) pelarlas
+   а) batirlas · б) pelarlas · в) removerlas · г) escurrirlas
 
 ### 2. Грамматика (6 баллов)
 
 Выберите правильную форму.
 
 1. Chicos, ______ aquí delante. *(sentarse, vosotros +)*
-   а) sentaos · б) sentados · в) sentad · г) os sentad
+   а) sentad · б) sentados · в) sentaos · г) os sentad
 2. No ______ eso ahora, hazlo mañana. *(hacer, tú −)*
-   а) haces · б) hace · в) hagas · г) haz
+   а) haces · б) hace · в) haz · г) hagas
 3. ¿Las llaves? ______ di a Ana ayer.
-   а) Le las · б) Las le · в) Se las · г) Le se
+   а) Se las · б) Las le · в) Le las · г) Le se
 4. ______, por favor: necesito el boli. *(dar + me + lo)*
    а) Da me lo · б) Dámelo · в) Dalo me · г) Me lo da
 5. Es un secreto: no ______ digas a nadie.
-   а) me lo · б) lo me · в) se lo · г) lo
+   а) se lo · б) lo me · в) me lo · г) lo
 6. Se ______ pisos en esta calle.
-   а) vende · б) venden · в) vendes · г) vendido
+   а) vende · б) vendido · в) vendes · г) venden
 
 ### 3. Выражения (3 балла)
 
 Выберите то, что сказал бы носитель.
 
 1. En el metro me abrieron el bolso y ya no tengo la cartera:
-   а) He perdido la cartera · б) Se me ha caído la cartera ·
-   в) Me han robado la cartera · г) Ellos han robado mi cartera
+   а) Me han robado la cartera · б) Se me ha caído la cartera · в) He
+   perdido la cartera · г) Ellos han robado mi cartera
 2. En un cartel oficial, «курить запрещено» es:
-   а) Es prohibido fumar · б) Está prohibido de fumar ·
-   в) No fumar se puede · г) Prohibido fumar
+   а) Es prohibido fumar · б) Prohibido fumar · в) No fumar se puede · г)
+   Está prohibido de fumar
 3. Al teléfono, en una oficina, contestan:
-   а) ¿Hola? · б) ¿Dígame? · в) ¿Quién es? · г) ¿Sí, por favor?
+   а) ¿Hola? · б) ¿Quién es? · в) ¿Dígame? · г) ¿Sí, por favor?
 
 ## 3. Ключи и подсчёт (18–23 мин)
 
@@ -103,7 +103,7 @@ revisado: false
 **Три ловушки, которые стоит посмотреть, даже если вы их не задели:**
 
 1. **Грамматика 1.** У *vosotros* возвратных **-d исчезает**: *sentad + os
-   → sentaos*. Вариант в) *sentad* — форма без местоимения, то есть
+   → sentaos*. Вариант а) *sentad* — форма без местоимения, то есть
    «посадите» кого-то другого.
 2. **Грамматика 3.** *Le las* не существует в языке. Если вы его выбрали,
    перечитайте таблицу превращения в день 4.
@@ -121,15 +121,15 @@ revisado: false
 
 ## Ответы
 
-**1. Лексика:** 1 г (нед. 31, день 5) · 2 а (нед. 31, день 5) · 3 б
-(нед. 32, день 1) · 4 а (нед. 32, день 1) · 5 в (нед. 31, день 7) · 6 г
+**1. Лексика:** 1 а (нед. 31, день 5) · 2 б (нед. 31, день 5) · 3 в
+(нед. 32, день 1) · 4 г (нед. 32, день 1) · 5 а (нед. 31, день 7) · 6 б
 (нед. 31, день 3).
 
-**2. Грамматика:** 1 а (нед. 31, день 1) · 2 в (нед. 31, день 2) · 3 в
-(нед. 31, день 4) · 4 б (нед. 31, день 1) · 5 а (нед. 31, день 4) · 6 б
+**2. Грамматика:** 1 в (нед. 31, день 1) · 2 г (нед. 31, день 2) · 3 а
+(нед. 31, день 4) · 4 б (нед. 31, день 1) · 5 в (нед. 31, день 4) · 6 г
 (нед. 31, день 5).
 
-**3. Выражения:** 1 в (нед. 32, день 3) · 2 г (нед. 31, день 5) · 3 б
+**3. Выражения:** 1 а (нед. 32, день 3) · 2 б (нед. 31, день 5) · 3 в
 (нед. 32, день 2).
 
 Пять пунктов, которые стоит перечитать, если вы их потеряли:
@@ -144,7 +144,7 @@ revisado: false
   и слитно, с тильдой. Вариант г) *Me lo da* — это не приказ, а
   утверждение «он мне это даёт».
 - **Грамматика 5.** Отрицательный императив уводит местоимения **вперёд**,
-  и порядок остаётся «кому — что»: *no **me lo** digas*. Вариант в) *se
+  и порядок остаётся «кому — что»: *no **me lo** digas*. Вариант а) *se
   lo* был бы «не говори этого **ему**», то есть другой смысл, а не ошибка:
   подсказка — *a nadie* в конце фразы относится к тому, кому говорят, и в
   паре с *me* он не работает.

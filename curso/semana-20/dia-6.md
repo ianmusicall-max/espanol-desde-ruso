@@ -34,15 +34,15 @@ revisado: false
 Прочитайте предложения и выберите правильный ответ.
 
 1. Me duele ______: no puedo tragar.
-   а) la boca · б) la garganta · в) el estómago · г) la lengua
+   а) la garganta · б) la boca · в) el estómago · г) la lengua
 2. «Рука» от плеча до кисти — это ______.
-   а) la mano · б) el dedo · в) el brazo · г) el hombro
+   а) la mano · б) el brazo · в) el dedo · г) el hombro
 3. En la farmacia: ¿tiene algo ______ la tos?
-   а) de · б) para · в) por · г) contra
+   а) de · б) por · в) para · г) contra
 4. Tome una pastilla ______ ocho horas.
-   а) todas · б) por · в) cada · г) en
+   а) todas · б) por · в) en · г) cada
 5. Me he caído y me he hecho ______ en la rodilla.
-   а) dolor · б) mal · в) daño · г) herida
+   а) daño · б) mal · в) dolor · г) herida
 6. En España el teléfono de emergencias es el ______.
    а) 03 · б) 112 · в) 911 · г) 061
 
@@ -51,24 +51,24 @@ revisado: false
 Прочитайте предложения и выберите правильный ответ.
 
 1. Me ______ los ojos.
-   а) duele · б) duelen · в) duelo · г) duelan
+   а) duele · б) duelo · в) duelen · г) duelan
 2. Me duele ______ cabeza desde ayer.
-   а) mi · б) la · в) una · г) su
+   а) mi · б) su · в) una · г) la
 3. ______ fiebre y estoy cansado.
-   а) Estoy · б) Soy · в) Tengo · г) Hago
+   а) Tengo · б) Soy · в) Estoy · г) Hago
 4. ______ beber dos litros de agua al día. (правило вообще)
    а) Tienes que · б) Hay que · в) Debes · г) Tengo que
 5. Con esa tos no ______ fumar.
    а) tienes que · б) hay que · в) debes · г) debe
 6. El médico le dice a usted: «______ la boca».
-   а) Abre · б) Abra · в) Abran · г) Abrir
+   а) Abre · б) Abrir · в) Abran · г) Abra
 
 ### 3. Орфография и произношение (3 балла)
 
 1. Как правильно пишется «прими это»?
-   а) tomalo · б) tómalo · в) toma lo
+   а) tómalo · б) tomalo · в) toma lo
 2. Где ударение в слове **duele**?
-   а) **due**-le · б) du-**e**-le · в) due-**le**
+   а) du-**e**-le · б) **due**-le · в) due-**le**
 3. Как правильно?
    а) Ponte lo el abrigo · б) Pon te lo · в) Póntelo
 
@@ -110,17 +110,17 @@ revisado: false
 
 ## Ответы
 
-**1. Лексика:** 1 б (нед. 19, день 1) · 2 в (нед. 19, день 1) · 3 б (нед. 19,
-день 4) · 4 в (нед. 19, день 4) · 5 в (нед. 20, день 4) · 6 б (нед. 19,
+**1. Лексика:** 1 а (нед. 19, день 1) · 2 б (нед. 19, день 1) · 3 в (нед. 19,
+день 4) · 4 г (нед. 19, день 4) · 5 а (нед. 20, день 4) · 6 б (нед. 19,
 день 7).
 
-**2. Грамматика:** 1 б (глагол смотрит на то, что болит; нед. 19, день 2) ·
-2 б (артикль вместо притяжательного; нед. 19, день 1) · 3 в (симптом через
+**2. Грамматика:** 1 в (глагол смотрит на то, что болит; нед. 19, день 2) ·
+2 г (артикль вместо притяжательного; нед. 19, день 1) · 3 а (симптом через
 *tener*; нед. 19, день 3) · 4 б (безлично, лицо не названо; нед. 19, день 5) ·
-5 в (запрет — *no debes*; нед. 19, день 5) · 6 б (на «Вы» у *-ir* гласная
+5 в (запрет — *no debes*; нед. 19, день 5) · 6 г (на «Вы» у *-ir* гласная
 *-a*; нед. 20, день 1).
 
-**3. Орфография:** 1 б (три слога — нужна тильда; нед. 20, день 2) · 2 а
+**3. Орфография:** 1 а (три слога — нужна тильда; нед. 20, день 2) · 2 б
 (дифтонг *ue*, ударение на *e*; нед. 19, день 2) · 3 в (два местоимения
 приклеиваются вместе и сзади; нед. 20, день 2).
 

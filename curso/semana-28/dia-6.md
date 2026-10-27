@@ -37,15 +37,15 @@ revisado: false
 Прочитайте предложения и выберите правильный ответ.
 
 1. ______ dos años cambié de puesto.
-   а) Desde · б) Hace · в) Llevo · г) Desde hace
+   а) Hace · б) Desde · в) Llevo · г) Desde hace
 2. Busco trabajo ______ cuatro meses.
    а) hace · б) desde hace · в) llevo · г) desde
 3. ______ dos años estudiando español.
    а) Hace · б) Desde hace · в) Llevo · г) Estoy
 4. Al entrar ______ nervioso.
-   а) fui · б) estaba · в) me puse · г) era
+   а) fui · б) estaba · в) era · г) me puse
 5. ______ en el metro: ahora estoy sin móvil.
-   а) He perdido · б) Me lo he dejado · в) He dejado · г) Lo he olvidado
+   а) Me lo he dejado · б) He perdido · в) He dejado · г) Lo he olvidado
 6. Estaba ______ cansado ______ se durmió enseguida.
    а) tanto / que · б) tan / que · в) muy / que · г) tan / como
 
@@ -54,26 +54,26 @@ revisado: false
 Прочитайте предложения и выберите правильный ответ.
 
 1. ______ durmiendo cuando sonó el teléfono.
-   а) Era · б) Estaba · в) Estuve · г) He estado
+   а) Era · б) Estuve · в) Estaba · г) He estado
 2. Mientras ______, sonó el despertador. (dormirse, yo)
-   а) me dormí · б) me dormía · в) me he dormido · г) me duermo
+   а) me dormí · б) me duermo · в) me he dormido · г) me dormía
 3. ______ una tarta enorme. (traer, ellos)
-   а) Trajieron · б) Trajeron · в) Traieron · г) Trayeron
+   а) Trajeron · б) Trajieron · в) Traieron · г) Trayeron
 4. Él ______ la carta y no dijo nada. (leer)
    а) leió · б) leyó · в) leía · г) leeyó
 5. Hoy ______ tres veces a objetos perdidos. (llamar, yo)
-   а) llamé · б) he llamado · в) llamaba · г) llamo
+   а) llamé · б) llamaba · в) he llamado · г) llamo
 6. La cerradura estaba rota ______ meses.
-   а) desde hace · б) desde hacía · в) hace · г) hacía
+   а) desde hace · б) hacía · в) hace · г) desde hacía
 
 ### 3. Выражения (3 балла)
 
 1. — Perdí el avión por cinco minutos. — ______
-   а) ¡Qué bien! · б) ¡Qué mala suerte! · в) ¡Me encanta!
+   а) ¡Qué mala suerte! · б) ¡Qué bien! · в) ¡Me encanta!
 2. ______ que no llevaba el pasaporte.
    а) Me di cuenta · б) Me di cuenta de · в) Me daba cuenta
 3. ______, que he perdido el móvil.
-   а) Pues nada · б) Pues nadie · в) Por nada
+   а) Por nada · б) Pues nadie · в) Pues nada
 
 **Всего: ___ / 15** · Лексика ___ / 6 · Грамматика ___ / 6 · Выражения ___ / 3
 
@@ -119,15 +119,15 @@ revisado: false
 
 ## Ответы
 
-**1. Лексика:** 1 б (нед. 28, день 1) · 2 б (нед. 28, день 1) · 3 в (нед. 28,
-день 1) · 4 в (нед. 28, день 2) · 5 б (нед. 28, день 4) · 6 б (нед. 28,
+**1. Лексика:** 1 а (нед. 28, день 1) · 2 б (нед. 28, день 1) · 3 в (нед. 28,
+день 1) · 4 г (нед. 28, день 2) · 5 а (нед. 28, день 4) · 6 б (нед. 28,
 день 3).
 
-**2. Грамматика:** 1 б (нед. 27, день 1) · 2 б (нед. 27, день 1) · 3 б
-(нед. 27, день 3) · 4 б (нед. 27, день 3) · 5 б (нед. 28, день 4) · 6 б
+**2. Грамматика:** 1 в (нед. 27, день 1) · 2 г (нед. 27, день 1) · 3 а
+(нед. 27, день 3) · 4 б (нед. 27, день 3) · 5 в (нед. 28, день 4) · 6 г
 (нед. 28, день 5).
 
-**3. Выражения:** 1 б (нед. 27, день 4) · 2 б (нед. 27, день 2) · 3 а
+**3. Выражения:** 1 а (нед. 27, день 4) · 2 б (нед. 27, день 2) · 3 в
 (нед. 28, день 4).
 
 Четыре вопроса, которые стоит перечитать, если вы их потеряли:

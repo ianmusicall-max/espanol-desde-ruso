@@ -36,17 +36,18 @@ revisado: false
 Прочитайте предложения и выберите правильный ответ.
 
 1. Son las 14:00. En España es la hora de ______.
-   а) el desayuno · б) la comida · в) la cena · г) la merienda
+   а) la comida · б) el desayuno · в) la cena · г) la merienda
 2. Los sábados Olga no trabaja: ______ hasta tarde.
-   а) duerme · б) se levanta · в) empieza · г) sale
+   а) se levanta · б) duerme · в) empieza · г) sale
 3. Javier compra pan, leche y fruta en el supermercado: ______.
-   а) va de compras · б) hace la compra · в) queda con amigos · г) pone la mesa
+   а) va de compras · б) queda con amigos · в) hace la compra · г) pone la
+   mesa
 4. Antes de cenar, Javier ______ para cuatro personas.
-   а) ve la tele · б) hace deporte · в) pone la mesa · г) sale de casa
+   а) ve la tele · б) hace deporte · в) sale de casa · г) pone la mesa
 5. — ¿______ vas al gimnasio? — Dos veces a la semana.
-   а) ¿Cuándo · б) ¿A qué hora · в) ¿Con qué frecuencia · г) ¿Cuántos
+   а) ¿Con qué frecuencia · б) ¿A qué hora · в) ¿Cuándo · г) ¿Cuántos
 6. Olga va al cine ______ al mes.
-   а) dos vez · б) segunda vez · в) dos horas · г) dos veces
+   а) dos vez · б) dos veces · в) dos horas · г) segunda vez
 
 ### 2. Грамматика (6 баллов)
 
@@ -55,21 +56,21 @@ revisado: false
 1. Yo ______ deporte tres veces a la semana.
    а) haco · б) hazo · в) hago · г) hace
 2. La clase ______ a las nueve en punto.
-   а) empeza · б) empieza · в) empiezo · г) empezo
+   а) empeza · б) empezo · в) empiezo · г) empieza
 3. Nosotros ______ a casa a las siete y media.
-   а) vuelvemos · б) volvemos · в) vuelven · г) vuelvo
+   а) volvemos · б) vuelvemos · в) vuelven · г) vuelvo
 4. ______ a las siete menos cuarto, de lunes a viernes.
-   а) Me siempre levanto · б) Yo me siempre levanto · в) Siempre levanto me ·
-г) Siempre me levanto
+   а) Me siempre levanto · б) Siempre me levanto · в) Siempre levanto me ·
+   г) Yo me siempre levanto
 5. — ¿Qué hora es? — ______.
-   а) Son la una · б) Es la una · в) Está la una · г) Es las una
+   а) Son la una · б) Está la una · в) Es la una · г) Es las una
 6. ______ veo la tele por la mañana: no tengo tiempo.
    а) Nunca no · б) No nunca · в) Nunca yo no · г) Nunca
 
 ### 3. Орфография и произношение (3 балла)
 
 1. Какое слово написано правильно?
-   а) empiézo · б) enpiezo · в) empiezo
+   а) empiezo · б) enpiezo · в) empiézo
 2. В какой форме есть дифтонг **ue**?
    а) volvemos · б) vuelve · в) dormimos
 3. Вы говорите с Хавьером на «ты». В какой фразе **-s** второго лица на месте?
@@ -106,16 +107,16 @@ poder, jugar), и в двух из шести поставьте **nosotros**. �
 
 ## Ответы
 
-**1. Лексика:** 1 **б** (нед. 9, день 7: в Испании обедают в два-три) ·
-2 **а** (*dormir hasta tarde*; нед. 10, день 4) · 3 **б** (нед. 10, день 4) ·
-4 **в** (*poner la mesa*; нед. 10, день 1) · 5 **в** (нед. 10, день 3) ·
-6 **г** (нед. 10, день 3).
+**1. Лексика:** 1 **а** (нед. 9, день 7: в Испании обедают в два-три) ·
+2 **б** (*dormir hasta tarde*; нед. 10, день 4) · 3 **в** (нед. 10, день 4) ·
+4 **г** (*poner la mesa*; нед. 10, день 1) · 5 **а** (нед. 10, день 3) ·
+6 **б** (нед. 10, день 3).
 
-**2. Грамматика:** 1 **в** · 2 **б** · 3 **б** · 4 **г** · 5 **б** ·
+**2. Грамматика:** 1 **в** · 2 **г** · 3 **а** · 4 **б** · 5 **в** ·
 6 **г**. (Дни: 1 — нед. 10, день 1; 2 и 3 — нед. 10, день 2; 4 — нед. 10,
 день 3 и нед. 9, день 3; 5 — нед. 9, день 1; 6 — нед. 10, день 3.)
 
-**3. Орфография и произношение:** 1 **в** (*em-pie-zo* кончается на гласную,
+**3. Орфография и произношение:** 1 **а** (*em-pie-zo* кончается на гласную,
 ударение на предпоследнем слоге — по правилу, тильда не нужна; а **n** перед
 **p** в испанском не пишется: только **m**; нед. 3, день 1) · 2 **б**
 (дифтонг только под ударением: *vu**e**lve*, но *volvemos*; нед. 10, день 2) ·

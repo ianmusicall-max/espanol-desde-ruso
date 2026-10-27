@@ -33,15 +33,15 @@ revisado: false
 Прочитайте предложения и выберите правильный ответ.
 
 1. El pan se compra en ______.
-   а) la carnicería · б) la panadería · в) la frutería · г) el estanco
+   а) la panadería · б) la carnicería · в) la frutería · г) el estanco
 2. Quiero probarme esta falda. ¿Dónde está ______?
-   а) el escaparate · б) la sección · в) el probador · г) la etiqueta
+   а) el escaparate · б) el probador · в) la sección · г) la etiqueta
 3. En enero hay ______: todo está más barato.
-   а) las rebajas · б) los gastos de envío · в) la garantía · г) el pedido
+   а) la garantía · б) los gastos de envío · в) las rebajas · г) el pedido
 4. El jersey está roto. Quiero ______.
-   а) envolverlo · б) reclamarlo · в) gastarlo · г) añadirlo
+   а) envolverlo · б) añadirlo · в) gastarlo · г) reclamarlo
 5. Es el cumpleaños de mi madre. ¿Puede ______, por favor?
-   а) buscarlo · б) devolverlo · в) envolverlo para regalo · г) llevárselo
+   а) envolverlo para regalo · б) devolverlo · в) buscarlo · г) llevárselo
 6. Compro por internet, pero el ______ tarda cinco días.
    а) descuento · б) envío · в) papel de regalo · г) cinturón
 
@@ -50,26 +50,26 @@ revisado: false
 Прочитайте предложения и выберите правильный ответ.
 
 1. — ¿Te gusta esta camisa? — Sí, ______ compro.
-   а) la · б) lo · в) le · г) compro la
+   а) le · б) lo · в) la · г) compro la
 2. Los zapatos son bonitos, pero no quiero ______.
-   а) los comprar · б) comprarlos · в) comprar los · г) lo comprar
+   а) los comprar · б) lo comprar · в) comprar los · г) comprarlos
 3. ______ chaqueta de aquí es más barata que aquella.
-   а) Esto · б) Este · в) Esta · г) Aquel
+   а) Esta · б) Este · в) Esto · г) Aquel
 4. ¿Qué tal me ______ los pantalones?
    а) queda · б) quedan · в) quedo · г) quedas
 5. Llevo una camisa ______.
    а) blanco · б) blancos · в) blanca · г) blancas
 6. Este abrigo es más caro ______ el otro.
-   а) de · б) que · в) como · г) a
+   а) de · б) a · в) como · г) que
 
 ### 3. Орфография и произношение (3 балла)
 
 1. Какое слово написано правильно?
-   а) jersei · б) jersey · в) gersey
+   а) jersey · б) jersei · в) gersey
 2. В каком слове буквы **ll** звучат как [й]?
    а) calcetines · б) llevarse · в) algodón
 3. Где ударение в слове **pantalones**?
-   а) pan-**ta**-lo-nes · б) pan-ta-**lo**-nes · в) pan-ta-lo-**nes**
+   а) pan-**ta**-lo-nes · б) pan-ta-lo-**nes** · в) pan-ta-**lo**-nes
 
 **Всего: ___ / 15** · Лексика ___ / 6 · Грамматика ___ / 6 · Орфография ___ / 3
 
@@ -106,15 +106,15 @@ revisado: false
 
 ## Ответы
 
-**1. Лексика:** 1 б (нед. 14, день 1) · 2 в (нед. 13, день 2) · 3 а (нед. 13,
-день 5) · 4 б (нед. 14, день 4) · 5 в (нед. 14, день 2) · 6 б (нед. 14, день 3).
+**1. Лексика:** 1 а (нед. 14, день 1) · 2 б (нед. 13, день 2) · 3 в (нед. 13,
+день 5) · 4 г (нед. 14, день 4) · 5 а (нед. 14, день 2) · 6 б (нед. 14, день 3).
 
-**2. Грамматика:** 1 а (*camisa* — женский род, значит **la**; нед. 13, день 3) ·
-2 б (нед. 13, день 3) · 3 в (нед. 13, день 2) · 4 б (нед. 13, день 4) ·
-5 в (нед. 13, день 1) · 6 б (нед. 13, день 5).
+**2. Грамматика:** 1 в (*camisa* — женский род, значит **la**; нед. 13, день 3) ·
+2 г (нед. 13, день 3) · 3 а (нед. 13, день 2) · 4 б (нед. 13, день 4) ·
+5 в (нед. 13, день 1) · 6 г (нед. 13, день 5).
 
-**3. Орфография и произношение:** 1 б · 2 б (в *calcetines* нет **ll**, а в
-*algodón* — **g**; нед. 1, день 3) · 3 б (кончается на -s → ударение на
+**3. Орфография и произношение:** 1 а · 2 б (в *calcetines* нет **ll**, а в
+*algodón* — **g**; нед. 1, день 3) · 3 в (кончается на -s → ударение на
 предпоследнем слоге; нед. 1, день 4).
 
 Неправильные варианты здесь — не случайные. **1.2 «los comprar»** и
