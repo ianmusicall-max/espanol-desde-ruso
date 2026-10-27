@@ -1993,6 +1993,77 @@ conocía. En su lugar entraron `dormirse` (que no es `dormir`, y ese contraste
 pasó al bloque de contraste del día), `junto a` y `el relato`. Quedan los 13
 de siempre, todos de las semanas 1 a 14.
 
+## La unidad 15: estudios y trabajo (días 197-210)
+
+Catorce lecciones, semanas 29 y 30. El curso pasa de 196 a **210 de 365** y
+**1.831 tarjetas**.
+
+**Lo que se comprobó antes de escribir, y cambió el plan**: `saber` **no
+estaba enseñado en ninguna parte**. Del volcado de las 1.257 entradas salía
+`conocer (conocí)` en S23D2, `poder (puedo)` en S10D2 y `podría (вежливая
+просьба)` en S18D5, pero de *saber* solo la frase hecha `sabes qué me pasó`
+(S27D4). O sea que el día más temido de la unidad —*saber* contra *conocer*—
+tenía de verdad material nuevo y no era un repaso.
+
+Lo que decidió el contenido:
+
+- **La regla operativa de `saber` / `conocer` es sintáctica y no semántica**:
+  mire la palabra que va DESPUÉS. Oración subordinada o infinitivo → *saber*;
+  sustantivo (persona, lugar, cosa) → *conocer*. Explicada como «hecho frente
+  a trato» falla en los casos difíciles; así acierta en los quince ítems del
+  test.
+- **`sé nadar` ≠ `puedo nadar`** es el segundo eje del mismo día, y aquí el
+  ruso ayuda («умею» / «могу» son dos verbos). Lo que no ayuda es el inglés.
+- **`llevo tres años aquí` es PRESENTE**, y es el error que más dura. El día
+  199 lo da con tres formas equivalentes (*llevo*, *llevo* + gerundio, *desde
+  hace*) y la regla de qué pide cada una: *desde* + punto, *desde hace* +
+  plazo.
+- **El currículum se escribe SIN verbo** (día 200). Una línea de CV es cargo,
+  sitio y ciudad; el verbo solo aparece en las funciones y en forma de
+  sustantivo (*Seguimiento de clientes*). Es un género, no gramática, y por
+  eso se enseña con un CV entero delante.
+- **El condicional entra como cinco fórmulas y no como tiempo verbal**
+  (*me gustaría*, *podría*, *preferiría*, *querría*, *le agradecería que*).
+  En A2 eso es lo que hace falta; el paradigma llega después.
+- **El correo formal lleva DOS PUNTOS después del saludo**, no coma: la coma
+  es inglesa y el signo de exclamación, ruso. Y no existe «Уважаемый Иван
+  Петрович»: no hay patronímico, se trata por apellido.
+- **El defecto se cuenta en dos partes**: *me cuesta* + lo que se está
+  haciendo al respecto. Sin la segunda parte es una queja.
+- **El domingo de la unidad avisa de lo que las historias de emprendedores
+  no cuentan**: por cada taller que acaba en Inditex hay miles que cierran, y
+  de esos no se escribe. Los dos retratos están para el español que usan, no
+  para la moraleja.
+
+**Nada con cifra inventada** (regla 7): de Amancio Ortega se dan los hechos
+estables y citados en todas partes (empezó de recadero a los catorce, el
+taller de 1963, la primera tienda de Zara en A Coruña en 1975) y ninguna
+cifra de facturación ni de patrimonio. El segundo retrato es explícitamente
+**un nombre inventado** para un caso corriente, y la lección lo dice en la
+primera línea: *María Elena Ruiz no existe*.
+
+**El test de la unidad** mantiene el tercer bloque «Выражения» que estrenó la
+unidad 14. Comprobado con `pruebas.py`: 15 preguntas, las 15 enlazan a su
+lección. La primera versión se escribió con los enunciados en **negrita y
+numeración 1–15 corrida**, y `pruebas.leer` devolvió `None` —su `INICIO`
+espera `^N. ` y la numeración **se reinicia en cada bloque**—. El fallo
+seguro hizo su trabajo: la unidad se habría quedado sin test interactivo en
+silencio. Y al rehacerlo apareció lo otro: **las quince respuestas correctas
+eran la а)**. Ahora son б×5, в×5, а×3, г×2.
+
+**Nueve entradas duplicadas** las cazó `revisar_lexico.py` al cerrar cada
+semana —`el ingeniero`, `el periodista` (S03D4), `el edificio` (S07D3),
+`alguna vez` (S18D2), `la fecha de nacimiento` (S23D4), `la asignatura`
+(S25D4), `la referencia` (S14D3), `el plazo` (S14D4) y `el asunto`
+(S14D5)—. Todas sustituidas por palabras que están en el cuerpo de su propia
+lección. Quedan los 13 de siempre.
+
+**De paso, un carácter cirílico dentro de una palabra española**:
+`**1. Ситуación**` en la semana 27, día 4, donde los tres rótulos de la tabla
+son términos españoles (*Situación*, *Problema*, *Desenlace*). Un barrido de
+las semanas 27 a 30 buscando tokens con letras de los dos alfabetos lo
+encontró; conviene repetirlo al cerrar cada unidad, porque a ojo no se ve.
+
 ## El disco de la sesión se agota antes que el trabajo (2026-10-27)
 
 Escribiendo la unidad 12 la máquina se quedó **sin cuota de disco**: `df`
@@ -2139,12 +2210,13 @@ de verdad.
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.
-- **196 lecciones escritas** (semanas 1-28 enteras): el nivel A1 completo y
-  tres unidades de A2, 1.704 tarjetas de vocabulario. Las 21 primeras
+- **210 lecciones escritas** (semanas 1-30 enteras): el nivel A1 completo y
+  cuatro unidades de A2, 1.831 tarjetas de vocabulario. Las 21 primeras
   revisadas; el resto son borradores.
   **`docs/` va por detrás**: se quedó en 154 lecciones porque la cuota de
   disco de la sesión se agotó (ver más abajo). Las 42 últimas están en el
-  repositorio y no en la web hasta que alguien corra `construir_sitio.py`.
+  repositorio y no en la web hasta que alguien corra `construir_sitio.py`
+  (son 56 lecciones de diferencia).
 - Sitio público en `docs/` con portada, índice, test de nivel, «О курсе»,
   contacto y política de privacidad. Tres idiomas (ru/es/en) —el test solo en
   ruso, como las lecciones—, tema claro y oscuro, y progreso del lector

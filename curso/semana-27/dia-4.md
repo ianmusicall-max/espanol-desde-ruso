@@ -72,7 +72,7 @@ pa-**só**?
 
 | Часть | Что в ней | Пример |
 |---|---|---|
-| **1. Ситуación** | где, когда, что вы делали — **imperfecto** | *Estaba solo en casa.* |
+| **1. Situación** | где, когда, что вы делали — **imperfecto** | *Estaba solo en casa.* |
 | **2. Problema** | что вдруг произошло — **indefinido** | *Oí un ruido. Era un gato.* |
 | **3. Desenlace** | чем кончилось — **indefinido** | *Al final se fue.* |
 
