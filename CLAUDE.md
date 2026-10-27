@@ -71,7 +71,7 @@ la documentación del programa, en español.
   2026-10-26) estan en `revisado: false` y la pagina lo avisa. Hay que
   comprobar que cada distractor sea de verdad el error que dice y que la unidad
   asignada sea donde el curso lo ensena.
-- **Las 84 lecciones de las semanas 4 en adelante son borradores**
+- **Las 98 lecciones de las semanas 4 en adelante son borradores**
   (`revisado: false`) y el sitio las marca como tales. Las 21 primeras estan
   revisadas.
 - **El orden de los pasados: se recomendo NO cambiarlo** (2026-10-26, de
@@ -1576,11 +1576,70 @@ día de prueba: el discurso sobre los errores solo enseña DESPUÉS de contestar
   contestable y la clave al terminar. Dos mecanismos sobre la misma clave se
   pisarían.
 
+## Terminar el curso: unidades 8 y 9 (2026-10-27)
+
+El profesor lo pidió así: «termina todo el curso hoy». Faltaban **260
+lecciones**, y se le dijo por delante que en una sesión no salen: cada una son
+unas 270 líneas de contenido contrastivo y se escriben de una en una. Lo que
+se hace es avanzar por unidades y **commitear al cerrar cada una**, para que
+nada dependa de llegar al final.
+
+### Qué se escribió
+
+- **Semana 16 (días 106-112)**, que cierra la **unidad 8**: planes con *ir a +
+  infinitivo*, invitar y rechazar, la agenda, mensajes de WhatsApp, el texto de
+  cien palabras, la prueba de unidad y el día de cultura con las fiestas.
+- **Semana 17 (días 113-119)**, primera mitad de la **unidad 9**: transporte,
+  la estación, *estar + gerundio*, el hotel, el aeropuerto, el repaso y el día
+  de cultura (Camino de Santiago y Machu Picchu).
+
+### Lo que decidió el contenido
+
+- **El primer episodio de Ana e Iván entra aquí** (día 112, «Dice que sí»). Es
+  el primero que cae en semana no escrita, así que no hubo retrofit: se copió
+  **tal cual está en `programa/historia.md`**, que es donde el profesor lo
+  aprobó. Copiarlo y no reescribirlo importa: hay una prueba que exige que el
+  .md y el calendario nombren los mismos episodios, y dos versiones del texto
+  serían la deriva de siempre.
+- **La prueba de la unidad 8 se escribió para que `pruebas.py` la lea**, no
+  solo para imprimirla: 15 preguntas en tres bloques y una clave con «нед. N,
+  день N» en cada respuesta. Se comprobó ejecutando el analizador, no leyendo
+  el archivo: las 15 se leen y cada una enlaza a su lección.
+- **Los distractores salen de la lista negra**, como en el test de nivel: *hay
+  nieva*, *muy calor*, *con mí*, *voy trabajar*, *Si* sin tilde. Cada uno es un
+  error que el rusohablante comete de verdad, no una opción de relleno.
+- **Las dos excepciones culturales de la regla 7.** Del fútbol y de las fiestas
+  se dice solo lo verificable sin cifra inventada: fechas de San Fermín, las
+  Fallas, el Día de Muertos y el Inti Raymi; los nombres de las canchas de Boca
+  y River; los 800 km del Camino Francés y los 2.430 m de Machu Picchu, que son
+  datos estables y citados en todas partes. Ni asistencias, ni records, ni años
+  de fundación.
+- **El léxico se comprueba ANTES de escribir, con el volcado de las 1.091
+  entradas.** Aun así se colaron cuatro duplicados (*temprano*, *descansar*,
+  *la mochila*, *el ruido*) y los cazó `revisar_lexico.py` al cerrar cada
+  semana. Quedan los 13 de siempre, todos de las semanas 1 a 14.
+
+### El orden de trabajo que funcionó, por si alguien retoma
+
+1. Leer la unidad entera del calendario (`gramatica`, `contraste_ru`,
+   `fonetica`, los siete días con su foco).
+2. Volcar el léxico ya enseñado a un fichero y comprobar los candidatos **en
+   bloque**, antes de escribir ni una lección.
+3. Escribir día a día, validando cada uno con `validar.py` al salir.
+4. Al cerrar la semana: `revisar_lexico.py` (duplicados), `exportar_anki.py`
+   (los TSV tienen prueba), `construir_sitio.py`, y la suite entera.
+5. Commit por unidad.
+
+**Lo que NO se regenera por lección, y es deliberado**: el audio (hace falta
+`OPENAI_API_KEY`; van 4.166 frases y 1,57 USD para todo lo escrito), los
+dibujos y el `.apkg` de 22 MB. Los tres son comandos aparte y se hacen por
+tandas, no por lección.
+
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.
-- **105 lecciones escritas** (semanas 1-15 enteras): unidades 1 a 7 completas
-  y la primera mitad de la 8, 956 entradas de vocabulario. Las 21 primeras
+- **119 lecciones escritas** (semanas 1-17 enteras): unidades 1 a 8 completas
+  y la primera mitad de la 9, 1.091 entradas de vocabulario. Las 21 primeras
   revisadas; el resto son borradores.
 - Sitio público en `docs/` con portada, índice, test de nivel, «О курсе»,
   contacto y política de privacidad. Tres idiomas (ru/es/en) —el test solo en

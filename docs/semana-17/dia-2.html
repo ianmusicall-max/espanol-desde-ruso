@@ -1,0 +1,853 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Урок 114: На вокзале: билеты и расписание — Испанский с нуля для русскоговорящих</title>
+<meta name="description" content="Урок 114: На вокзале: билеты и расписание. un billete de ida y vuelta, ¿a qué hora sale / llega?, el andén, el próximo tren, con retraso; horario de 24 h"><link rel="canonical" href="https://espanoldesderuso.com/semana-17/dia-2.html"><meta property="og:type" content="website"><meta property="og:locale" content="ru"><meta property="og:title" content="Урок 114: На вокзале: билеты и расписание — Испанский с нуля для русскоговорящих"><meta property="og:description" content="Урок 114: На вокзале: билеты и расписание. un billete de ida y vuelta, ¿a qué hora sale / llega?, el andén, el próximo tren, con retraso; horario de 24 h"><meta property="og:url" content="https://espanoldesderuso.com/semana-17/dia-2.html"><meta property="og:image" content="https://espanoldesderuso.com/img/tarjeta.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Урок 114: На вокзале: билеты и расписание — Испанский с нуля для русскоговорящих"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://espanoldesderuso.com/img/tarjeta.png">
+<style>
+/* Tres estados: lo que diga el sistema, o lo que el lector elija con el botón
+   de la luna. El atributo data-tema del <html> gana siempre sobre el sistema;
+   lo escribe un script de dos líneas en <head> para que no haya parpadeo. */
+:root{
+  color-scheme:light;
+  --papel:#fdfbf6; --tinta:#1b1e23; --tenue:#646c78; --linea:#e2dacb;
+  --acento:#b03f26; --acento-suave:#fbeee9; --celeste:#2f6b8f; --celeste-suave:#eaf2f7;
+  --realce:#fdf3d8; --tarjeta:#f7f2e6; --sombra:0 1px 2px rgba(27,30,35,.05);
+  --ancho:44rem;
+}
+@media(prefers-color-scheme:dark){:root:not([data-tema="light"]){
+  color-scheme:dark;
+  --papel:#14161a; --tinta:#e8e4da; --tenue:#9aa2ae; --linea:#333941;
+  --acento:#f0896a; --acento-suave:#2a1d19; --celeste:#7fb6d6; --celeste-suave:#162229;
+  --realce:#2a2718; --tarjeta:#1d2026; --sombra:none;
+}}
+:root[data-tema="dark"]{
+  color-scheme:dark;
+  --papel:#14161a; --tinta:#e8e4da; --tenue:#9aa2ae; --linea:#333941;
+  --acento:#f0896a; --acento-suave:#2a1d19; --celeste:#7fb6d6; --celeste-suave:#162229;
+  --realce:#2a2718; --tarjeta:#1d2026; --sombra:none;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--papel);color:var(--tinta);
+  font:400 17px/1.65 ui-serif,Georgia,"Times New Roman",serif;
+  -webkit-font-smoothing:antialiased;overflow-wrap:break-word}
+.sans{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.envoltorio{max-width:var(--ancho);margin:0 auto;padding:0 20px}
+
+/* ---- cabecera ---- */
+/* En el móvil la cabecera NO se queda pegada: ocupa dos filas y una lección es
+   una lectura larga, así que robaría una sexta parte de la pantalla todo el
+   rato. A partir de 40rem cabe en una fila y ahí sí se queda. */
+header.sitio{background:var(--papel);border-bottom:1px solid var(--linea)}
+@media(min-width:40rem){header.sitio{position:sticky;top:0;z-index:20;
+  background:color-mix(in srgb,var(--papel) 92%,transparent);backdrop-filter:saturate(1.6) blur(8px)}
+  html{scroll-padding-top:4rem}}
+header.sitio .envoltorio{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .9rem;padding-block:.5rem;
+  font-family:ui-sans-serif,system-ui,-apple-system,sans-serif;font-size:.86rem}
+header.sitio a{color:var(--tenue);text-decoration:none;white-space:nowrap}
+header.sitio a:hover,header.sitio nav.paginas a[aria-current]{color:var(--acento)}
+/* El título cede espacio antes que el selector de idioma: en un móvil
+   estrecho se recorta con puntos suspensivos, pero el selector no se sale. */
+header.sitio .marca{font-weight:650;color:var(--tinta);font-size:.95rem;letter-spacing:-.01em;
+  flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
+header.sitio nav.paginas{display:flex;gap:.9rem;order:3;flex:1 0 100%;overflow-x:auto;
+  scrollbar-width:none;padding-bottom:.1rem}
+header.sitio nav.paginas::-webkit-scrollbar{display:none}
+.idiomas{display:flex;gap:.2rem;flex:0 0 auto;border:1px solid var(--linea);border-radius:999px;padding:2px}
+.idiomas a,.idiomas span{padding:.12rem .5rem;border-radius:999px;font-size:.75rem;font-weight:600;
+  text-transform:uppercase;letter-spacing:.05em;line-height:1.5}
+.idiomas [aria-current]{background:var(--acento);color:#fff}
+/* Los idiomas en los que esta página no existe: se ven apagados, se pulsan y
+   lo que abren es el aviso de abajo. Enlazarlos movía al lector de sitio. */
+.idiomas .apagado{color:var(--tenue);opacity:.6;cursor:pointer;background:none;border:0;
+  font:inherit;font-size:.75rem;font-weight:600}
+.idiomas .apagado:hover{opacity:1}
+/* El aviso de «aquí no hay versión en ese idioma»: ocupa toda la fila de la
+   cabecera para que se lea, y nace oculto porque sin JavaScript los botones no
+   hacen nada y un aviso suelto no diría nada de nada. */
+.sin-idioma{flex:1 0 100%;order:4;margin:.3rem 0 0;font-size:.82rem;color:var(--tenue);
+  font-family:ui-sans-serif,system-ui,sans-serif}
+.sin-idioma a{color:var(--acento);font-weight:600}
+.tema{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;
+  width:30px;height:30px;padding:0;border:1px solid var(--linea);border-radius:999px;
+  background:transparent;color:var(--tenue);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.tema:hover{color:var(--acento);border-color:var(--acento)}
+.tema svg{display:block}
+/* De día se ve la luna (pulsa y se hace de noche); de noche, el sol. */
+.tema .sol{display:none}
+@media(prefers-color-scheme:dark){
+  :root:not([data-tema="light"]) .tema .luna{display:none}
+  :root:not([data-tema="light"]) .tema .sol{display:block}}
+:root[data-tema="dark"] .tema .luna{display:none}
+:root[data-tema="dark"] .tema .sol{display:block}
+:root[data-tema="light"] .tema .luna{display:block}
+:root[data-tema="light"] .tema .sol{display:none}
+
+/* el marco del curso: los niveles y el examen al que lleva. Discreto a
+   propósito —es un respaldo, no un reclamo— y con el acento solo en el nombre
+   del examen. */
+.marco{font-size:.9rem;color:var(--tenue);border-inline-start:3px solid var(--celeste);
+  padding-inline-start:.8rem;margin:1rem 0}
+/* los huecos que se rellenan pulsando una ficha. Las fichas arriba y los
+   huecos debajo, que es el orden en que se usa: eliges la palabra y luego
+   dónde va. */
+.fichas{display:flex;flex-wrap:wrap;gap:.45rem;margin:.9rem 0}
+.ficha{padding:.35rem .8rem;border:1px solid var(--linea);border-radius:999px;
+  background:var(--tarjeta);color:inherit;cursor:pointer;font:inherit;font-size:.9rem}
+.ficha:hover{border-color:var(--acento)}
+.ficha[aria-pressed="true"]{background:var(--acento);color:#fff;border-color:var(--acento)}
+.ficha.gastada{opacity:.35;pointer-events:none}
+/* El hueco vacío es una raya; lleno, una pastilla. Con un ancho mínimo para
+   que la frase no baile al rellenarse. */
+.hueco{display:inline-block;min-width:5.5rem;padding:0 .35rem;cursor:pointer;
+  border-bottom:2px solid var(--acento);text-align:center;font-weight:600}
+.hueco:empty::before{content:" "}
+.hueco.bien{border-color:#2e7d4f;color:#2e7d4f}
+.hueco.mal{border-color:#b3332b;color:#b3332b}
+.huecos-pie{display:flex;align-items:center;gap:.8rem;margin:.9rem 0}
+.marcador{font-size:.9rem;color:var(--tenue)}
+/* compartir: tres botones iguales al pie de la lección. Discretos —son una
+   oferta y no el siguiente paso, que es la lección de al lado— y del mismo
+   tamaño entre sí, para que ninguno parezca el principal. */
+.compartir{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin:1.8rem 0 0;
+  padding-top:1.1rem;border-top:1px solid var(--linea)}
+.compartir .de-que{font-size:.85rem;color:var(--tenue);margin-inline-end:.2rem}
+.red{display:inline-block;padding:.4rem .85rem;border:1px solid var(--linea);
+  border-radius:999px;background:transparent;color:var(--acento);cursor:pointer;
+  font:inherit;font-size:.85rem;text-decoration:none}
+.red:hover{border-color:var(--acento)}
+.seguir{margin:.5rem 0 0;font-size:.85rem}
+/* el respaldo del progreso: un código que el alumno se lleva. Los dos campos
+   a ancho completo porque el código son 64 caracteres y en el móvil, en un
+   campo corto, no se ve si está entero. */
+.respaldo{margin:.9rem 0 0}
+.respaldo input{display:block;width:100%;margin:.6rem 0;padding:.55rem .7rem;
+  border:1px solid var(--linea);border-radius:8px;background:var(--fondo);
+  color:inherit;font-family:ui-monospace,monospace;font-size:.85rem}
+.respaldo .enlace{background:none;border:0;padding:0;margin-inline-start:.6rem;
+  color:var(--acento);text-decoration:underline;cursor:pointer;font:inherit}
+.aviso-chico{margin:.4rem 0 0;font-size:.82rem;color:var(--tenue)}
+/* la baraja de tarjetas: dos descargas, la de Anki primero. En tarjeta y no
+   en una lista suelta porque es una oferta, no un apartado del curso. */
+.baraja{margin:2rem 0;padding:1.1rem 1.2rem;border:1px solid var(--linea);
+  border-radius:12px;background:var(--tarjeta)}
+.baraja h2{margin:0 0 .4rem;font-size:1.05rem}
+.baraja>p{margin:0 0 .9rem}
+.baraja .bajar{display:flex;flex-wrap:wrap;gap:.6rem}
+.baraja .bajar a{flex:1 1 15rem}
+.baraja .nota{margin:.35rem 0 0;font-size:.82rem;color:var(--tenue)}
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
+/* La clave: el enlace donde se acaban los ejercicios y la caja plegada al
+   final. El enlace se ve como un paso más y no como un botón: lo que manda en
+   la lección es hacer el ejercicio, no mirar la respuesta. */
+.a-la-clave{margin:1.2rem 0 0;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.92rem}
+.a-la-clave a{text-decoration:none;border-bottom:1px solid var(--linea);padding-bottom:1px}
+.a-la-clave a:hover{border-color:var(--acento)}
+#clave-boton{margin:2rem 0 .5rem}
+#clave{border-top:1px solid var(--linea);padding-top:.2rem}
+/* audio: un ▶ al lado de cada frase española que esté locutada */
+.suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
+  font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
+.suena:hover,.suena:focus-visible{opacity:1}
+.suena[aria-pressed="true"]{opacity:1;color:var(--acento)}
+@media(hover:none){.suena{opacity:.9}}
+
+/* Test de nivel */
+.test-caja{background:var(--tarjeta);border:1px solid var(--linea);border-radius:12px;
+  padding:1.2rem 1.3rem;margin:1.4rem 0;font-family:ui-sans-serif,system-ui,sans-serif}
+.test-cuenta{font-size:.78rem;color:var(--tenue);letter-spacing:.04em;margin-bottom:.5rem}
+.test-pregunta{font-size:1.08rem;font-weight:600;color:var(--tinta);margin:0 0 1rem;line-height:1.45}
+.test-ops{display:flex;flex-direction:column;gap:.5rem}
+.test-ops button{text-align:start;font:inherit;font-size:.98rem;color:var(--tinta);
+  background:var(--papel);border:1.5px solid var(--linea);border-radius:9px;
+  padding:.6rem .8rem;cursor:pointer;transition:border-color .12s,background .12s}
+.test-ops button:hover{border-color:var(--acento)}
+.test-seg{float:inline-end;font-variant-numeric:tabular-nums;color:var(--tenue);font-weight:600}
+.test-reloj{height:3px;border-radius:999px;background:var(--linea);overflow:hidden;margin:0 0 .9rem}
+.test-reloj i{display:block;height:100%;background:var(--acento);opacity:.55}
+.test-tarde{display:block;color:var(--acento);font-weight:600;font-size:.84rem}
+.test-barra{height:4px;border-radius:999px;background:var(--linea);overflow:hidden;margin-top:1rem}
+.test-barra i{display:block;height:100%;background:var(--acento);transition:width .2s}
+.test-fallo{border-inline-start:3px solid var(--acento);padding:.1rem 0 .1rem .8rem;margin:.7rem 0}
+.test-fallo b{display:block;color:var(--tinta);font-size:.94rem}
+.test-fallo span{font-size:.88rem;color:var(--tenue)}
+
+/* El mapa de unidades: 24 tarjetas en vez de 365 filas.
+   El indice crudo medía 21.482 px de alto, o sea 24 pantallas de scroll, y
+   nadie navega eso. Las tarjetas dan una vista de todo el ano en una o dos. */
+.mapa{display:grid;gap:.85rem;margin:1.4rem 0 2.2rem;
+  grid-template-columns:repeat(auto-fill,minmax(13rem,1fr));
+  /* Se sale de la columna de prosa, como la cabecera y por lo mismo: un mapa
+     no se lee renglon a renglon. Encerrado en los 44rem del texto solo caben
+     dos columnas y el mapa medía 1.806 px, que es tan ilegible como la lista
+     que viene a sustituir. Centrado sobre la ventana y no sobre el padre, que
+     asi no hace falta saber cuanto mide el padre. */
+  width:min(60rem,calc(100vw - 2.5rem));position:relative;left:50%;translate:-50%}
+/* Columna y no bloque: la rejilla estira las tarjetas de una fila a la misma
+   altura, pero el pie quedaba pegado al texto, asi que las barras de dos
+   tarjetas vecinas salian a distinta altura segun si el titulo ocupaba una
+   linea o dos. Con margin-top:auto en el pie, todas se alinean abajo. */
+.u-tarjeta{display:flex;flex-direction:column;text-decoration:none;color:inherit;background:var(--tarjeta);
+  border:1px solid var(--linea);border-radius:12px;padding:.85rem .95rem;
+  font-family:ui-sans-serif,system-ui,sans-serif;transition:border-color .12s,transform .12s}
+.u-tarjeta:hover{border-color:var(--acento);transform:translateY(-2px)}
+.u-tarjeta .alto{display:flex;align-items:baseline;gap:.5rem;margin-bottom:.3rem}
+.u-tarjeta .num{font-size:1.45rem;font-weight:700;color:var(--acento);
+  font-feature-settings:"tnum";line-height:1}
+.u-tarjeta .nivel{margin-inline-start:auto;font-size:.68rem;font-weight:700;letter-spacing:.06em;
+  color:var(--celeste);border:1px solid var(--celeste);border-radius:999px;padding:.05rem .4rem}
+.u-tarjeta .tit{font-weight:600;font-size:.94rem;color:var(--tinta);line-height:1.3;
+  display:block;margin-bottom:.4rem}
+.u-tarjeta .serie{font-size:.78rem;color:var(--tenue);font-style:italic;
+  display:block;margin-bottom:.5rem}
+.u-tarjeta .pie{display:flex;align-items:center;gap:.5rem;font-size:.74rem;color:var(--tenue);
+  margin-top:auto;padding-top:.15rem}
+.u-tarjeta .mini{flex:1;height:4px;border-radius:999px;background:var(--linea);overflow:hidden}
+.u-tarjeta .mini i{display:block;height:100%;background:var(--acento);border-radius:999px}
+.u-tarjeta.vacia{opacity:.62}
+.u-tarjeta.vacia:hover{border-color:var(--linea);transform:none}
+
+/* progreso del lector */
+/* El [hidden] del navegador pierde contra .boton{display:inline-block}, así que
+   «continuar» se vería como un botón naranja vacío en la primera visita. */
+[hidden]{display:none!important}
+.boton.marcar{margin:1.6rem 0 0}
+.boton.destacado{box-shadow:0 0 0 3px var(--acento-suave)}
+ul.dias li.hecha .num::after{content:"✓";color:var(--acento);font-weight:700;margin-inline-start:.25rem}
+ul.dias li.hecha a{color:var(--tenue)}
+#mio{margin-top:.9rem;padding-top:.9rem;border-top:1px dashed var(--linea)}
+.puerta{font-size:.9rem;color:var(--tenue);margin:-.6rem 0 0}
+.puerta a{color:var(--acento);font-weight:600}
+.progreso-nota{font-size:.84rem;color:var(--tenue);font-family:ui-sans-serif,system-ui,sans-serif;margin-top:.5rem}
+#borrar-progreso{background:none;border:0;padding:0;color:var(--tenue);text-decoration:underline;
+  cursor:pointer;font:inherit;font-size:.84rem}
+@media(min-width:40rem){
+  header.sitio nav.paginas{order:0;flex:0 1 auto;margin-inline-start:auto}
+  /* En escritorio el titulo NO crece: con flex:1 1 auto se comia el hueco que
+     la nav reclama con su margen automatico. */
+  header.sitio .marca{flex:0 1 auto}
+  /* Y la barra usa mas ancho que el texto. Una columna de lectura tiene que
+     ser estrecha; una barra de navegacion no. Metida en los mismos 704 px, el
+     titulo + los tres enlaces + los tres idiomas + la luna sumaban 708 y el
+     boton del tema caia a una segunda fila con 700 px de pantalla libres al
+     lado. Se vio midiendo los hijos, no mirando: fallaba por cuatro pixeles. */
+  header.sitio .envoltorio{max-width:60rem}
+}
+
+main{padding-bottom:3.5rem}
+
+/* ---- tipografía ---- */
+h1{font-size:clamp(1.65rem,5.2vw,2.3rem);line-height:1.15;letter-spacing:-.022em;margin:1.6rem 0 .25rem;font-weight:650}
+h1 .segunda{display:block;color:var(--acento);font-weight:400}
+h2{font-size:clamp(1.08rem,3.2vw,1.22rem);margin:2.6rem 0 .7rem;padding-top:.9rem;
+  border-top:1px solid var(--linea);font-weight:650;letter-spacing:-.012em}
+h3{font-size:1rem;margin:1.6rem 0 .45rem;font-weight:650}
+h2,h3{font-family:ui-sans-serif,system-ui,-apple-system,sans-serif}
+p{margin:.75rem 0}
+a{color:var(--acento);text-underline-offset:2px}
+strong{font-weight:650}
+
+/* ---- portada ---- */
+.heroe{padding:2rem 0 .5rem}
+.heroe .lema{font-size:clamp(1.02rem,3.4vw,1.2rem);color:var(--tenue);margin:.5rem 0 1.1rem;font-style:italic}
+.botones{display:flex;flex-wrap:wrap;gap:.65rem;margin:1.4rem 0}
+.boton{display:inline-block;background:var(--acento);color:#fff;padding:.7rem 1.35rem;border-radius:8px;
+  text-decoration:none;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.97rem;font-weight:550;
+  box-shadow:var(--sombra);transition:transform .12s ease}
+.boton:hover{transform:translateY(-1px)}
+.boton.secundario{background:transparent;color:var(--acento);border:1.5px solid var(--acento);box-shadow:none}
+
+/* La vitrina de la portada: doce palabras con su dibujo. La rejilla es de 3,
+   4 o 6 columnas según el ancho, y por eso son doce: en los tres casos quedan
+   filas enteras. El dibujo manda aquí —al revés que en la tabla de la
+   lección— porque lo que hace es enseñar de qué va el curso de un vistazo. */
+.muestra{margin:2.2rem 0}
+.muestra h2{margin-bottom:.3rem}
+.muestra>p{margin:0 0 1rem;color:var(--tenue);font-size:.92rem}
+.vitrina{list-style:none;padding:0;margin:0;display:grid;gap:.6rem;
+  grid-template-columns:repeat(3,1fr)}
+@media(min-width:30rem){.vitrina{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:52rem){.vitrina{grid-template-columns:repeat(6,1fr)}}
+.vitrina li{background:var(--tarjeta);border:1px solid var(--linea);border-radius:11px;
+  padding:.6rem .3rem .55rem;text-align:center;box-shadow:var(--sombra);
+  font-family:ui-sans-serif,system-ui,sans-serif;transition:transform .12s ease}
+@media(hover:hover){.vitrina li:hover{transform:translateY(-2px)}}
+.vitrina img{display:block;width:72px;height:72px;margin:0 auto .4rem;border-radius:8px}
+.vitrina b{display:block;font-size:.84rem;font-weight:600}
+.vitrina span{display:block;font-size:.78rem;color:var(--tenue);margin-top:.1rem}
+
+.progreso{margin:1.5rem 0;font-family:ui-sans-serif,system-ui,sans-serif}
+.progreso .cifras{display:flex;align-items:baseline;gap:.45rem;font-size:.88rem;color:var(--tenue)}
+.progreso .n{font-size:1.5rem;font-weight:700;color:var(--tinta);font-feature-settings:"tnum"}
+.barra{height:7px;border-radius:999px;background:var(--linea);overflow:hidden;margin-top:.45rem}
+.barra i{display:block;height:100%;background:linear-gradient(90deg,var(--acento),var(--celeste));border-radius:999px}
+
+/* ---- bloque de contraste: la firma del curso ---- */
+.contraste{background:var(--acento-suave);border:1px solid color-mix(in srgb,var(--acento) 22%,transparent);
+  border-radius:10px;padding:1rem 1.1rem;margin:1.3rem 0}
+.contraste>h3:first-child{margin-top:0;color:var(--acento)}
+.contraste p:last-child{margin-bottom:0}
+del{text-decoration-line:line-through;text-decoration-color:var(--acento);
+  text-decoration-thickness:2px;opacity:.75}
+.mal{color:var(--acento)}
+.bien{color:#1d7a4f}
+@media(prefers-color-scheme:dark){:root:not([data-tema="light"]) .bien{color:#5fc48f}}
+:root[data-tema="dark"] .bien{color:#5fc48f}
+
+blockquote{margin:1.2rem 0;padding:.85rem 1.1rem;background:var(--tarjeta);
+  border-inline-start:3px solid var(--celeste);border-radius:0 8px 8px 0}
+blockquote p:first-child{margin-top:0}blockquote p:last-child{margin-bottom:0}
+
+/* ---- tablas ---- */
+.tabla-env{overflow-x:auto;margin:.9rem 0;border:1px solid var(--linea);border-radius:9px;background:var(--papel)}
+table{border-collapse:collapse;width:100%;font-size:.92rem;font-family:ui-sans-serif,system-ui,sans-serif}
+th,td{padding:.45rem .65rem;text-align:start;vertical-align:top;border-bottom:1px solid var(--linea)}
+tr:last-child td{border-bottom:none}
+th{background:var(--tarjeta);font-weight:600;position:sticky;top:0}
+code{font-size:.88em;background:var(--tarjeta);padding:.1em .32em;border-radius:4px;
+  font-family:ui-monospace,"SF Mono",Menlo,monospace}
+
+/* ---- tarjetas y listas ---- */
+.rejilla{display:grid;gap:.85rem;grid-template-columns:1fr;margin:1rem 0}
+@media(min-width:36rem){.rejilla{grid-template-columns:1fr 1fr}}
+.tarjeta{border:1px solid var(--linea);border-radius:10px;padding:.95rem 1.1rem;background:var(--tarjeta);box-shadow:var(--sombra)}
+.tarjeta h3{margin:0 0 .3rem;font-size:.88rem;text-transform:uppercase;letter-spacing:.05em;color:var(--acento)}
+.tarjeta p{margin:0;font-size:.95rem}
+
+ul.dias{list-style:none;padding:0;margin:.5rem 0}
+ul.dias li{display:flex;gap:.6rem;align-items:baseline;padding:.4rem .2rem;border-bottom:1px solid var(--linea)}
+ul.dias li:last-child{border-bottom:none}
+ul.dias .num{font-family:ui-sans-serif,system-ui,sans-serif;font-size:.78rem;color:var(--tenue);
+  min-width:2.6rem;font-feature-settings:"tnum"}
+ul.dias a{text-decoration:none}ul.dias a:hover{text-decoration:underline}
+ul.dias .falta{color:var(--tenue)}
+.tipo{font-family:ui-sans-serif,system-ui,sans-serif;font-size:.67rem;color:var(--celeste);
+  text-transform:uppercase;letter-spacing:.07em;border:1px solid var(--linea);border-radius:999px;
+  padding:.05rem .4rem;white-space:nowrap}
+.unidad-cab{display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;margin-top:2.4rem}
+details{margin:.5rem 0;font-size:.93rem}
+summary{cursor:pointer;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.86rem;color:var(--tenue)}
+details ul{margin:.5rem 0}
+
+/* ---- lección ---- */
+.leccion-cab{display:flex;flex-wrap:wrap;gap:.45rem;align-items:center;margin:1.3rem 0 .2rem;
+  font-family:ui-sans-serif,system-ui,sans-serif;font-size:.78rem;color:var(--tenue)}
+.leccion-cab .n{background:var(--acento);color:#fff;border-radius:999px;padding:.12rem .6rem;font-weight:600}
+.aviso{background:var(--realce);border:1px solid var(--linea);border-radius:8px;padding:.6rem .85rem;
+  font-size:.88rem;font-family:ui-sans-serif,system-ui,sans-serif;margin:1rem 0}
+nav.pasos{display:flex;justify-content:space-between;gap:.8rem;margin:2.5rem 0 0;padding-top:1rem;
+  border-top:1px solid var(--linea);font-family:ui-sans-serif,system-ui,sans-serif;font-size:.86rem}
+nav.pasos a{text-decoration:none;padding:.4rem .7rem;border:1px solid var(--linea);border-radius:7px}
+nav.pasos a:hover{border-color:var(--acento)}
+input[type=checkbox]{margin-inline-end:.45rem}
+
+/* ---- anuncios, pie, cookies ---- */
+.anuncio{margin:2rem 0;text-align:center;min-height:1px}
+.anuncio::before{content:attr(data-etiqueta);display:block;font-family:ui-sans-serif,system-ui,sans-serif;
+  font-size:.64rem;color:var(--tenue);text-transform:uppercase;letter-spacing:.09em;margin-bottom:.3rem}
+footer.sitio{border-top:1px solid var(--linea);padding:1.6rem 0 3rem;
+  font-family:ui-sans-serif,system-ui,sans-serif;font-size:.83rem;color:var(--tenue)}
+footer.sitio a{color:var(--tenue)}
+footer.sitio p{margin:.35rem 0}
+#cookies{position:fixed;inset-inline:0;bottom:0;background:var(--tarjeta);border-top:1px solid var(--linea);
+  padding:.85rem 20px;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.85rem;display:flex;
+  flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:center;z-index:30}
+</style>
+<script>try{var t=localStorage.getItem('tema');if(t)document.documentElement.dataset.tema=t}catch(e){}</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6339208855562328" crossorigin="anonymous"></script>
+</head>
+<body>
+<header class="sitio"><div class="envoltorio">
+<a class="marca" href="../index.html">Испанский с нуля для русскоговорящих</a>
+<nav class="paginas"><a href="../kurs.html">Все уроки</a><a href="../o-kurse.html">О курсе</a><a href="../kontakt.html">Контакты</a></nav>
+<div class="idiomas" title="Язык"><span lang="ru" aria-current="true">ru</span><button type="button" class="apagado" lang="es" data-portada="../es/index.html" data-idioma="Español">es</button><button type="button" class="apagado" lang="en" data-portada="../en/index.html" data-idioma="English">en</button></div>
+<button class="tema" id="tema" type="button" title="Светлая или тёмная тема" aria-label="Светлая или тёмная тема"><svg class="luna" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sol" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.5 1.5M17.9 17.9l1.5 1.5M2.5 12h2M19.5 12h2M4.6 19.4l1.5-1.5M17.9 6.1l1.5-1.5"/></svg></button>
+<p class="sin-idioma" id="sin-idioma" hidden>Эта страница есть только на русском. <a href="" data-ir="Открыть главную страницу"></a></p>
+</div></header>
+<main><div class="envoltorio">
+<article data-leccion="114"><div class="leccion-cab"><span class="n">Урок 114</span><span>из 365</span><span class="tipo">урок</span><span>неделя 17 · уровень A1</span></div><p class="aviso">Черновик: урок написан, но преподаватель его ещё не вычитал.</p><h1 id="semana-17-dia-2-en-la-estacion-billetes-y-horarios">Semana 17 · Día 2 — En la estación: billetes y horarios</h1>
+<h1 id="17-2">Неделя 17 · День 2 — На вокзале: билеты и расписание</h1>
+<blockquote>
+<p><strong>Сегодня вы научитесь</strong></p>
+<ul>
+<li>купить билет: <strong>un billete de ida y vuelta para el AVE de las diez</strong>;</li>
+<li>читать расписание в 24-часовом формате, которого в русской речи нет;</li>
+<li>спрашивать про время и перрон: <strong>¿A qué hora sale? ¿De qué andén?</strong></li>
+</ul>
+</blockquote>
+<h2 id="1-03">1. Разминка (0–3 мин)</h2>
+<ul>
+<li>Карточки: 10 слов (вчерашние: el avión, el atasco, andando…).</li>
+<li>Вопрос по вчерашнему уроку: ¿Cómo vas al trabajo y cuánto tardas? Две фразы
+  вслух, с <strong>en</strong> и с <strong>tardar</strong>.</li>
+</ul>
+<h2 id="2-36">2. Фонетика (3–6 мин)</h2>
+<p><strong>r простое и rr раскатистое — и сегодня оба в каждом слове.</strong> Прочитайте
+вслух и запишите себя:</p>
+<blockquote>
+<p>el t<strong>r</strong>en · el <strong>r</strong>et<strong>r</strong>aso · ca<strong>rr</strong>o · ho<strong>r</strong>a<strong>r</strong>io ·
+<strong>r</strong>ápido · co<strong>rr</strong>eo · ida y vuelta · pe<strong>r</strong>der</p>
+</blockquote>
+<ol>
+<li><strong>В начале слова r всегда раскатистое</strong>, даже когда буква одна: <em>retraso</em>,
+   <em>rápido</em> — [<strong>рр</strong>е-<strong>тра</strong>-со]. Русское одиночное «р» слишком короткое.</li>
+<li><strong>Между гласными одна r — короткая</strong>, один удар языка: <em>horario</em>, <em>caro</em>.
+   А <strong>rr</strong> — раскатистая: <em>carro</em>, <em>correo</em>.</li>
+<li><strong>Пара, которая решает смысл</strong>: <em>caro</em> (дорогой) ↔ <em>carro</em> 🌎 (машина);
+   <em>pero</em> (но) ↔ <em>perro</em> (собака). Если не различать, «дорогой билет»
+   превращается в «билет на машину».</li>
+</ol>
+<p>Фраза дня: <strong>El t</strong>ren <strong>rá</strong>pido lle<strong>ga</strong> con <strong>r</strong>et<strong>r</strong>aso.</p>
+<h2 id="3-616">3. Новое (6–16 мин)</h2>
+<h3 id="_1">Пример</h3>
+<p>Елена покупает билет в Валенсию. <code>[AUDIO]</code></p>
+<div class="tabla-env"><table>
+<thead>
+<tr>
+<th>Español</th>
+<th>Русский</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Elena:</strong> Buenos días. ¿<strong>A qué hora sale</strong> el próximo tren para Valencia?</td>
+<td>Доброе утро. Во сколько ближайший поезд на Валенсию?</td>
+</tr>
+<tr>
+<td><strong>Taquillera:</strong> A las <strong>diez quince</strong>. Y hay otro a las <strong>doce cuarenta</strong>.</td>
+<td>В 10:15. И ещё один в 12:40.</td>
+</tr>
+<tr>
+<td><strong>Elena:</strong> ¿Y <strong>a qué hora llega</strong>?</td>
+<td>А во сколько приходит?</td>
+</tr>
+<tr>
+<td><strong>Taquillera:</strong> El de las diez llega a las <strong>doce treinta</strong>. <strong>Tarda</strong> dos horas y cuarto.</td>
+<td>Тот, что в десять, приходит в 12:30. Идёт два с четвертью.</td>
+</tr>
+<tr>
+<td><strong>Elena:</strong> Quería <strong>un billete de ida y vuelta</strong>, por favor.</td>
+<td>Я хотела бы билет туда и обратно, пожалуйста.</td>
+</tr>
+<tr>
+<td><strong>Taquillera:</strong> ¿Para <strong>cuándo</strong> la vuelta?</td>
+<td>На когда обратный?</td>
+</tr>
+<tr>
+<td><strong>Elena:</strong> Para el domingo <strong>por la tarde</strong>.</td>
+<td>На воскресенье, на вторую половину дня.</td>
+</tr>
+<tr>
+<td><strong>Taquillera:</strong> Son cuarenta y dos euros. <strong>¿Ventanilla o pasillo?</strong></td>
+<td>Сорок два евро. У окна или у прохода?</td>
+</tr>
+<tr>
+<td><strong>Elena:</strong> Ventanilla. ¿<strong>De qué andén</strong> sale?</td>
+<td>У окна. С какого перрона?</td>
+</tr>
+<tr>
+<td><strong>Taquillera:</strong> <strong>Del andén cuatro</strong>. Pero mire la pantalla: a veces hay <strong>retraso</strong>.</td>
+<td>С четвёртого. Но смотрите на табло: иногда бывают задержки.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Прочитайте диалог вслух за двоих. Потом посмотрите на часы: <strong>diez quince</strong>,
+<strong>doce cuarenta</strong>, <strong>doce treinta</strong>. Ни одного «утра» и ни одного «вечера».</p>
+<h3 id="_2">Объяснение</h3>
+<p><strong>Купить билет — четыре слова и один выбор:</strong></p>
+<div class="tabla-env"><table>
+<thead>
+<tr>
+<th>Español</th>
+<th>Русский</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>un billete <strong>de ida</strong></td>
+<td>билет в одну сторону</td>
+</tr>
+<tr>
+<td>un billete <strong>de ida y vuelta</strong></td>
+<td>билет туда и обратно</td>
+</tr>
+<tr>
+<td>un billete <strong>para</strong> Valencia / <strong>para</strong> el tren de las diez</td>
+<td>билет до Валенсии / на поезд в десять</td>
+</tr>
+<tr>
+<td>¿<strong>Ventanilla o pasillo</strong>?</td>
+<td>у окна или у прохода?</td>
+</tr>
+</tbody>
+</table></div>
+<p>🌎 В Латинской Америке билет — <strong>el boleto</strong> или <strong>el pasaje</strong>, а <em>ida y
+vuelta</em> — то же самое. В Испании — <em>el billete</em>.</p>
+<p><strong>Четыре вопроса, которые решают всё на вокзале:</strong></p>
+<blockquote>
+<p>¿<strong>A qué hora sale</strong> el próximo tren <strong>para</strong> Valencia?
+¿<strong>A qué hora llega</strong>?
+¿<strong>De qué andén</strong> sale?
+¿<strong>Cuánto tarda</strong>?</p>
+</blockquote>
+<p><strong>Расписание в 24 часах — и это главная трудность дня.</strong> В объявлениях, на
+табло и в кассе часы читаются от 0 до 24, без <em>de la mañana</em> и <em>de la tarde</em>:</p>
+<div class="tabla-env"><table>
+<thead>
+<tr>
+<th>Написано</th>
+<th>Читается</th>
+<th>По-русски</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10:15</td>
+<td>las <strong>diez quince</strong></td>
+<td>в десять пятнадцать</td>
+</tr>
+<tr>
+<td>12:40</td>
+<td>las <strong>doce cuarenta</strong></td>
+<td>в двенадцать сорок</td>
+</tr>
+<tr>
+<td>16:30</td>
+<td>las <strong>dieciséis treinta</strong></td>
+<td>в шестнадцать тридцать</td>
+</tr>
+<tr>
+<td>20:05</td>
+<td>las <strong>veinte cero cinco</strong></td>
+<td>в двадцать ноль пять</td>
+</tr>
+<tr>
+<td>00:50</td>
+<td>las <strong>cero cincuenta</strong></td>
+<td>в ноль пятьдесят</td>
+</tr>
+</tbody>
+</table></div>
+<p>В разговоре с другом остаётся обычная система из 9-й недели (<em>las cuatro y
+media de la tarde</em>), но в кассе и на вокзале — только эта.</p>
+<p><strong>Слова на табло:</strong></p>
+<blockquote>
+<p><strong>salidas</strong> (отправление) · <strong>llegadas</strong> (прибытие) · <strong>el andén</strong> (перрон) ·
+<strong>la vía</strong> (путь) · <strong>con retraso</strong> (с задержкой) · <strong>a su hora</strong> (вовремя) ·
+<strong>el próximo</strong> (ближайший) · <strong>destino</strong> (назначение)</p>
+</blockquote>
+<p><strong>И то, чего лучше избегать:</strong></p>
+<blockquote>
+<p><strong>perder el tren</strong> — опоздать на поезд (буквально «потерять»)
+<strong>llegar tarde</strong> — опоздать
+<strong>El tren sale a su hora.</strong> — Поезд отправляется вовремя.</p>
+</blockquote>
+<section class="contraste"><h3 id="_3">⚠️ Контраст с русским</h3>
+<ol>
+<li><strong>24-часовой формат по-русски не произносят, а по-испански произносят.</strong>
+   Русский говорит «в четыре» и «в полпятого», даже глядя на «16:30». Испанец
+   на вокзале скажет <em>las dieciséis treinta</em> ровно так, как написано, и
+   объявление в поезде скажет то же самое. Если вы переводите на «четыре
+   часа», вы теряете половину объявлений.</li>
+<li><strong>Минуты читаются просто числом, без «y» и без «menos».</strong> <em>Las diez
+   quince</em>, а не ✗ <em>las diez y cuarto</em> — это другой регистр. И ноль
+   произносится: <em>las veinte <strong>cero</strong> cinco</em>.</li>
+<li><strong>Perder el tren — «потерять», а не «пропустить».</strong> По-русски «потерять
+   поезд» звучит странно; по-испански это единственный нормальный способ.
+   ✗ <em>Pierdo el tren</em> как «теряю поезд из виду» никто не поймёт — поймут
+   «опаздываю».</li>
+<li><strong>Вы захотите сказать:</strong> ✗ <em>un billete a Valencia</em> · ✗ <em>¿A qué hora va el
+   tren?</em> · ✗ <em>las dieciséis y media</em> (в кассе) · ✗ <em>Llego el tren.</em> →
+   <strong>Правильно:</strong> ✅ <em>un billete <strong>para</strong> Valencia</em> · ✅ <em>¿A qué hora <strong>sale</strong>?</em> ·
+   ✅ <em>las dieciséis treinta</em> · ✅ <em>El tren <strong>llega</strong>.</em>
+   Первая — русское «в» вместо <em>para</em>; вторая — <em>ir</em> вместо <em>salir</em>; третья —
+   разговорный формат там, где нужен официальный; четвёртая — путаница
+   подлежащего: приходит поезд, а не вы.</li>
+</ol>
+<p>Проверка, которая работает всегда: <strong>в кассе читайте цифры как цифры.</strong> Если в
+голове получается «полпятого», вы уже перевели на русский.</p>
+</section><h2 id="4-1626">4. Практика (16–26 мин)</h2>
+<h3 id="_4">Упражнение А. Напишите время словами, как в кассе.</h3>
+<p>Модель: 10:15 → las <strong>diez quince</strong></p>
+<ol>
+<li>08:30</li>
+<li>14:45</li>
+<li>16:20</li>
+<li>19:05</li>
+<li>21:50</li>
+<li>00:40</li>
+<li>12:00</li>
+<li>23:59</li>
+</ol>
+<h3 id="el-dialogo">Упражнение Б. Дополните el diálogo. Банк слов:</h3><div class="fichas" data-ej="0"><button type="button" class="ficha" data-ej="0">sale</button><button type="button" class="ficha" data-ej="0">llega</button><button type="button" class="ficha" data-ej="0">ida</button><button type="button" class="ficha" data-ej="0">andén</button><button type="button" class="ficha" data-ej="0">retraso</button><button type="button" class="ficha" data-ej="0">próximo</button><button type="button" class="ficha" data-ej="0">tarda</button><button type="button" class="ficha" data-ej="0">billete</button></div><div class="huecos-pie"><button type="button" class="boton secundario comprobar" data-ej="0">Проверить</button><span class="marcador" data-ej="0"></span></div>
+<blockquote class="banco-escrito">
+<p>sale · llega · ida · andén · retraso · próximo · tarda · billete</p>
+</blockquote>
+<p><em>— Buenos días. ¿A qué hora (1) <span class="hueco" data-ej="0" data-n="0" tabindex="0" role="button"></span> el (2) <span class="hueco" data-ej="0" data-n="1" tabindex="0" role="button"></span> tren para Valencia?</em>
+<em>— A las diez quince.</em>
+<em>— ¿Y a qué hora (3) <span class="hueco" data-ej="0" data-n="2" tabindex="0" role="button"></span>?</em>
+<em>— A las doce treinta. (4) <span class="hueco" data-ej="0" data-n="3" tabindex="0" role="button"></span> dos horas y cuarto.</em>
+<em>— Quería un (5) <span class="hueco" data-ej="0" data-n="4" tabindex="0" role="button"></span> de (6) <span class="hueco" data-ej="0" data-n="5" tabindex="0" role="button"></span> y vuelta.</em>
+<em>— Son cuarenta y dos euros. Sale del (7) <span class="hueco" data-ej="0" data-n="6" tabindex="0" role="button"></span> cuatro.</em>
+<em>— Gracias. ¿Hay (8) <span class="hueco" data-ej="0" data-n="7" tabindex="0" role="button"></span> hoy?</em></p>
+<h3 id="_5">Упражнение В. Переведите на испанский.</h3>
+<ol>
+<li>Во сколько отправляется ближайший поезд на Валенсию?</li>
+<li>Билет туда и обратно, пожалуйста.</li>
+<li>Во сколько он приходит?</li>
+<li>Поезд идёт два часа.</li>
+<li>С какого перрона?</li>
+<li>Поезд опаздывает.</li>
+<li>У окна или у прохода?</li>
+<li>Я опоздал на поезд.</li>
+</ol>
+<p class="a-la-clave"><a href="#clave">Проверить себя по ключу ↓</a></p><h2 id="5-2629">5. Выход (26–29 мин)</h2>
+<p><strong>Сыграйте сцену в кассе — восемь реплик — и прочитайте расписание.</strong></p>
+<ol>
+<li><strong>Восемь реплик</strong>, по четыре на каждого: приветствие, вопрос о времени,
+   вопрос о прибытии, покупка билета, выбор места, перрон, цена, прощание.
+   Говорите за обоих и запишите себя.</li>
+<li><strong>Потом возьмите настоящее расписание</strong>: откройте сайт железной дороги
+   Испании (Renfe) или любого аэропорта и найдите три рейса. Запишите каждый
+   одной фразой:<blockquote>
+<p><em>El tren para Sevilla sale a las diecinueve cuarenta y llega a las
+veintidós quince. Tarda dos horas treinta y cinco.</em></p>
+</blockquote>
+</li>
+<li><strong>Прочитайте эти три фразы вслух</strong>, глядя только на цифры. Это и есть
+   навык дня.</li>
+</ol>
+<h2 id="6-2930">6. Итог (29–30 мин)</h2>
+<ul>
+<li>[ ] Я покупаю билет: <em>un billete de ida y vuelta para…</em></li>
+<li>[ ] Я спрашиваю <em>¿A qué hora sale / llega? ¿De qué andén?</em></li>
+<li>[ ] Я читаю часы от 0 до 24 так, как написано.</li>
+<li>[ ] Я различаю <em>salir</em> (отправляться) и <em>llegar</em> (прибывать).</li>
+<li>Добавьте слова дня в колоду. Завтра — что происходит прямо сейчас:
+  <em>estoy esperando</em>, <em>está durmiendo</em>.</li>
+</ul>
+<h2 id="_6">Словарь дня</h2>
+<div class="tabla-env"><table>
+<thead>
+<tr>
+<th>Español</th>
+<th>Русский</th>
+<th>Пример</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>de <strong>i</strong>da y <strong>vuel</strong>ta</td>
+<td>туда и обратно</td>
+<td>Un billete de ida y vuelta.</td>
+</tr>
+<tr>
+<td>la ta<strong>qui</strong>lla</td>
+<td>касса</td>
+<td>Compro el billete en la taquilla.</td>
+</tr>
+<tr>
+<td>sa<strong>lir</strong> ↔ lle<strong>gar</strong> (о транспорте)</td>
+<td>отправляться ↔ прибывать</td>
+<td>El tren sale a las diez y llega a las doce.</td>
+</tr>
+<tr>
+<td>el re<strong>tra</strong>so · con re<strong>tra</strong>so</td>
+<td>задержка · с опозданием</td>
+<td>El tren llega con retraso.</td>
+</tr>
+<tr>
+<td><strong>a</strong> <strong>su</strong> <strong>ho</strong>ra</td>
+<td>вовремя</td>
+<td>El avión sale a su hora.</td>
+</tr>
+<tr>
+<td>el <strong>pró</strong>ximo / la <strong>pró</strong>xima</td>
+<td>ближайший, следующий</td>
+<td>¿Cuándo es el próximo tren?</td>
+</tr>
+<tr>
+<td>la venta<strong>ni</strong>lla · el pa<strong>si</strong>llo</td>
+<td>место у окна · у прохода</td>
+<td>¿Ventanilla o pasillo?</td>
+</tr>
+<tr>
+<td>la <strong>ví</strong>a</td>
+<td>путь (железнодорожный)</td>
+<td>El tren sale de la vía 4.</td>
+</tr>
+<tr>
+<td>per<strong>der</strong> el <strong>tren</strong></td>
+<td>опоздать на поезд</td>
+<td>He perdido el tren.</td>
+</tr>
+<tr>
+<td>la pan<strong>ta</strong>lla</td>
+<td>экран, табло</td>
+<td>Mire la pantalla.</td>
+</tr>
+</tbody>
+</table></div>
+<div class="botones" id="clave-boton" hidden><button type="button" class="boton secundario" data-ver="Показать ответы" data-ocultar="Скрыть ответы">Показать ответы</button></div><div id="clave"><h2 id="_7">Ответы</h2>
+<p><strong>А.</strong> 1. las ocho treinta · 2. las catorce cuarenta y cinco · 3. las dieciséis
+veinte · 4. las diecinueve cero cinco · 5. las veintiuna cincuenta · 6. las
+cero cuarenta · 7. las doce · 8. las veintitrés cincuenta y nueve.</p>
+<p>Два места, где теряют баллы: <strong>4</strong> — ноль произносится (<em>cero cinco</em>), и
+<strong>5</strong> — перед <em>horas</em> женского рода число двадцать один становится
+<em>veintiuna</em>, а не <em>veintiuno</em>.</p>
+<p><strong>Б.</strong> 1. sale · 2. próximo · 3. llega · 4. Tarda · 5. billete · 6. ida ·
+7. andén · 8. retraso. — В 1-м и 3-м пара <em>salir / llegar</em>: один про
+отправление, другой про прибытие, и перепутать их — значит прийти на вокзал не
+в то время.</p>
+<p><strong>В.</strong> 1. <em>¿A qué hora sale el próximo tren para Valencia?</em> — ✗ <em>a Valencia</em>:
+с билетами и поездами идёт <strong>para</strong>. · 2. <em>Un billete de ida y vuelta, por
+favor.</em> — 🌎 <em>un boleto</em>. · 3. <em>¿A qué hora llega?</em> · 4. <em>El tren tarda dos
+horas.</em> · 5. <em>¿De qué andén sale?</em> — предлог <strong>de</strong>: «с какого». ·
+6. <em>El tren llega con retraso.</em> — или <em>El tren tiene retraso</em>; ✗ <em>El tren es
+tarde</em>. · 7. <em>¿Ventanilla o pasillo?</em> · 8. <em>He perdido el tren.</em> — это уже
+завтрашнее-послезавтрашнее время (perfecto); пока запомните фразу целиком.</p></div><script>(function(){
+  var caja=document.getElementById('clave'), zona=document.getElementById('clave-boton');
+  if(!caja||!zona)return;
+  var b=zona.querySelector('button');
+  function pon(abierta){
+    caja.hidden=!abierta;
+    b.textContent=abierta?b.dataset.ocultar:b.dataset.ver;
+    b.setAttribute('aria-expanded',abierta?'true':'false');
+  }
+  pon(false); zona.hidden=false;
+  b.addEventListener('click',function(){pon(caja.hidden)});
+  document.querySelectorAll('a[href="#clave"]').forEach(function(a){
+    a.addEventListener('click',function(){pon(true)});
+  });
+  if(location.hash==='#clave')pon(true);
+})();</script><div id="marcar-caja"></div><div class="compartir"><span class="de-que">Поделиться уроком</span><a class="red" href="https://t.me/share/url?url=https%3A%2F%2Fespanoldesderuso.com%2Fsemana-17%2Fdia-2.html&text=%D0%98%D1%81%D0%BF%D0%B0%D0%BD%D1%81%D0%BA%D0%B8%D0%B9%20%D1%81%20%D0%BD%D1%83%D0%BB%D1%8F%20%D0%B4%D0%BB%D1%8F%20%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D1%80%D1%8F%D1%89%D0%B8%D1%85" target="_blank" rel="noopener">Telegram</a><a class="red" href="https://wa.me/?text=%D0%98%D1%81%D0%BF%D0%B0%D0%BD%D1%81%D0%BA%D0%B8%D0%B9%20%D1%81%20%D0%BD%D1%83%D0%BB%D1%8F%20%D0%B4%D0%BB%D1%8F%20%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D1%80%D1%8F%D1%89%D0%B8%D1%85%20https%3A%2F%2Fespanoldesderuso.com%2Fsemana-17%2Fdia-2.html" target="_blank" rel="noopener">WhatsApp</a><button type="button" class="red" id="copiar-enlace" data-url="https://espanoldesderuso.com/semana-17/dia-2.html" data-ok="Ссылка скопирована">Скопировать ссылку</button></div><nav class="pasos"><a href="../semana-17/dia-1.html">← Урок 113</a><a href="../kurs.html">Все уроки</a><a id="enlace-siguiente" href="../semana-17/dia-3.html">Урок 115 →</a></nav></article>
+</div></main>
+<footer class="sitio"><div class="envoltorio">
+<p><a href="../test.html">Тест на уровень</a> · <a href="../o-kurse.html">О курсе</a> · <a href="../kontakt.html">Контакты</a> · <a href="../privacy.html">Политика конфиденциальности</a></p>
+<p>Материалы курса можно свободно использовать для учёбы.</p>
+
+</div></footer>
+<div id="cookies"><span>Мы используем файлы cookie для показа рекламы и статистики посещений. <a href="../privacy.html">Подробнее</a>.</span><button class="boton" style="padding:.4rem 1rem;font-size:.85rem" onclick="try{localStorage.setItem('cookies','1')}catch(e){};this.parentNode.remove()">Понятно</button></div><script>try{if(localStorage.getItem('cookies')){var b=document.getElementById('cookies');b&&b.remove()}}catch(e){}</script>
+<script>(function(){var b=document.getElementById('tema');if(!b)return;function actual(){var r=document.documentElement;return r.dataset.tema||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}b.addEventListener('click',function(){var n=actual()==='dark'?'light':'dark';document.documentElement.dataset.tema=n;try{localStorage.setItem('tema',n)}catch(e){}});})();</script>
+<script>(function(){
+  var aviso=document.getElementById('sin-idioma'); if(!aviso)return;
+  document.querySelectorAll('.idiomas .apagado').forEach(function(b){
+    b.addEventListener('click',function(){
+      var a=aviso.querySelector('a');
+      a.href=b.dataset.portada;
+      a.textContent=a.dataset.ir+' ('+b.dataset.idioma+') →';
+      aviso.hidden=false;
+    });
+  });
+})();</script>
+<script>window.CURSO_TEXTOS={"continuar": "Продолжить: урок", "empezar": "Начать сначала", "marcar": "Отметить урок пройденным", "hecho": "Урок пройден", "siguiente": "Следующий урок", "tuyo": "пройдено вами", "titulo": "Ваш прогресс", "aviso": "Прогресс хранится только в этом браузере, на этом устройстве. Регистрации нет, и никуда он не отправляется. Если вы очистите данные браузера или откроете курс на другом телефоне, отметки не перенесутся.", "borrar": "Сбросить прогресс", "confirmar": "Сбросить все отметки?", "copiar": "Сохранить мой прогресс", "copiado": "Код скопирован — вставьте его себе в заметки или в «Избранное» в Telegram", "restaurar": "Восстановить по коду", "pegar": "Вставьте сюда ваш код", "aplicar": "Восстановить", "cancelar": "Отмена", "malo": "Это не похоже на код прогресса. Ничего не изменено.", "menos": "В этом коде меньше уроков, чем отмечено сейчас (%a% вместо %b%). Всё равно восстановить?", "hecho_restaurar": "Готово: восстановлено уроков — %n%", "antes": "Перед тем как очистить браузер или сменить телефон, сохраните код."};window.CURSO_RAIZ="..";window.CURSO_PUBLICADAS=119;window.CURSO_DIAS={"1":"semana-01/dia-1.html","2":"semana-01/dia-2.html","3":"semana-01/dia-3.html","4":"semana-01/dia-4.html","5":"semana-01/dia-5.html","6":"semana-01/dia-6.html","7":"semana-01/dia-7.html","8":"semana-02/dia-1.html","9":"semana-02/dia-2.html","10":"semana-02/dia-3.html","11":"semana-02/dia-4.html","12":"semana-02/dia-5.html","13":"semana-02/dia-6.html","14":"semana-02/dia-7.html","15":"semana-03/dia-1.html","16":"semana-03/dia-2.html","17":"semana-03/dia-3.html","18":"semana-03/dia-4.html","19":"semana-03/dia-5.html","20":"semana-03/dia-6.html","21":"semana-03/dia-7.html","22":"semana-04/dia-1.html","23":"semana-04/dia-2.html","24":"semana-04/dia-3.html","25":"semana-04/dia-4.html","26":"semana-04/dia-5.html","27":"semana-04/dia-6.html","28":"semana-04/dia-7.html","29":"semana-05/dia-1.html","30":"semana-05/dia-2.html","31":"semana-05/dia-3.html","32":"semana-05/dia-4.html","33":"semana-05/dia-5.html","34":"semana-05/dia-6.html","35":"semana-05/dia-7.html","36":"semana-06/dia-1.html","37":"semana-06/dia-2.html","38":"semana-06/dia-3.html","39":"semana-06/dia-4.html","40":"semana-06/dia-5.html","41":"semana-06/dia-6.html","42":"semana-06/dia-7.html","43":"semana-07/dia-1.html","44":"semana-07/dia-2.html","45":"semana-07/dia-3.html","46":"semana-07/dia-4.html","47":"semana-07/dia-5.html","48":"semana-07/dia-6.html","49":"semana-07/dia-7.html","50":"semana-08/dia-1.html","51":"semana-08/dia-2.html","52":"semana-08/dia-3.html","53":"semana-08/dia-4.html","54":"semana-08/dia-5.html","55":"semana-08/dia-6.html","56":"semana-08/dia-7.html","57":"semana-09/dia-1.html","58":"semana-09/dia-2.html","59":"semana-09/dia-3.html","60":"semana-09/dia-4.html","61":"semana-09/dia-5.html","62":"semana-09/dia-6.html","63":"semana-09/dia-7.html","64":"semana-10/dia-1.html","65":"semana-10/dia-2.html","66":"semana-10/dia-3.html","67":"semana-10/dia-4.html","68":"semana-10/dia-5.html","69":"semana-10/dia-6.html","70":"semana-10/dia-7.html","71":"semana-11/dia-1.html","72":"semana-11/dia-2.html","73":"semana-11/dia-3.html","74":"semana-11/dia-4.html","75":"semana-11/dia-5.html","76":"semana-11/dia-6.html","77":"semana-11/dia-7.html","78":"semana-12/dia-1.html","79":"semana-12/dia-2.html","80":"semana-12/dia-3.html","81":"semana-12/dia-4.html","82":"semana-12/dia-5.html","83":"semana-12/dia-6.html","84":"semana-12/dia-7.html","85":"semana-13/dia-1.html","86":"semana-13/dia-2.html","87":"semana-13/dia-3.html","88":"semana-13/dia-4.html","89":"semana-13/dia-5.html","90":"semana-13/dia-6.html","91":"semana-13/dia-7.html","92":"semana-14/dia-1.html","93":"semana-14/dia-2.html","94":"semana-14/dia-3.html","95":"semana-14/dia-4.html","96":"semana-14/dia-5.html","97":"semana-14/dia-6.html","98":"semana-14/dia-7.html","99":"semana-15/dia-1.html","100":"semana-15/dia-2.html","101":"semana-15/dia-3.html","102":"semana-15/dia-4.html","103":"semana-15/dia-5.html","104":"semana-15/dia-6.html","105":"semana-15/dia-7.html","106":"semana-16/dia-1.html","107":"semana-16/dia-2.html","108":"semana-16/dia-3.html","109":"semana-16/dia-4.html","110":"semana-16/dia-5.html","111":"semana-16/dia-6.html","112":"semana-16/dia-7.html","113":"semana-17/dia-1.html","114":"semana-17/dia-2.html","115":"semana-17/dia-3.html","116":"semana-17/dia-4.html","117":"semana-17/dia-5.html","118":"semana-17/dia-6.html","119":"semana-17/dia-7.html"};</script>
+<script src="../progreso.js" defer></script>
+
+
+
+<script>window.CURSO_HUECOS={"ejercicios": [{"respuestas": ["sale", "próximo", "llega", "Tarda", "billete", "ida", "andén", "retraso"]}], "t": {"comprobar": "Проверить", "resultado": "Верно: %a% из %b%", "otra": "Ещё раз"}};(function(){
+  var D=window.CURSO_HUECOS; if(!D)return;
+  var T=D.t||{};
+
+  // Dos formas de rellenar, porque en el móvil arrastrar es incómodo:
+  //   - pulsas una ficha y luego el hueco;
+  //   - o pulsas un hueco vacío y la ficha elegida cae ahí.
+  // Y pulsar un hueco lleno lo vacía y devuelve la ficha, que es como se
+  // corrige uno sin tener que empezar de cero.
+  var elegida = null;
+
+  // La cita del banco sobra en cuanto hay fichas: las mismas palabras dos
+  // veces seguidas. Se esconde desde aquí y no al construir, para que sin
+  // JavaScript la cita siga estando —ahí es lo único que dice qué palabras
+  // hay—.
+  document.querySelectorAll('.banco-escrito').forEach(function(q){ q.hidden = true; });
+
+  function fichasDe(ej){ return document.querySelectorAll('.ficha[data-ej="'+ej+'"]'); }
+  function huecosDe(ej){ return document.querySelectorAll('.hueco[data-ej="'+ej+'"]'); }
+
+  function repintarFichas(ej){
+    var usadas = {};
+    huecosDe(ej).forEach(function(h){ if(h.textContent) usadas[h.textContent] = (usadas[h.textContent]||0)+1; });
+    var vistas = {};
+    fichasDe(ej).forEach(function(f){
+      var n = f.textContent;
+      vistas[n] = (vistas[n]||0)+1;
+      // Una palabra puede repetirse en el banco y usarse varias veces: se
+      // apaga la ficha solo cuando ya no quedan copias libres.
+      f.classList.toggle('gastada', (usadas[n]||0) >= vistas[n] && (usadas[n]||0) > 0
+                                     && fichasDe(ej).length === Object.keys(vistas).length);
+    });
+  }
+
+  function soltar(h){
+    if(!h.textContent) return;
+    h.textContent = '';
+    h.classList.remove('bien','mal');
+    repintarFichas(h.dataset.ej);
+  }
+
+  document.addEventListener('click', function(e){
+    var f = e.target.closest('.ficha');
+    if(f){
+      if(elegida === f){ elegida = null; f.setAttribute('aria-pressed','false'); return; }
+      if(elegida) elegida.setAttribute('aria-pressed','false');
+      elegida = f; f.setAttribute('aria-pressed','true');
+      return;
+    }
+    var h = e.target.closest('.hueco');
+    if(h){
+      if(h.textContent){ soltar(h); return; }
+      if(!elegida || elegida.dataset.ej !== h.dataset.ej) return;
+      h.textContent = elegida.textContent;
+      h.classList.remove('bien','mal');
+      elegida.setAttribute('aria-pressed','false');
+      elegida = null;
+      repintarFichas(h.dataset.ej);
+      return;
+    }
+    var c = e.target.closest('.comprobar');
+    if(c) comprobar(c.dataset.ej);
+  });
+
+  // El teclado: un hueco es un botón, así que Enter y espacio tienen que
+  // hacer lo mismo que el dedo.
+  document.addEventListener('keydown', function(e){
+    if(e.key !== 'Enter' && e.key !== ' ') return;
+    var h = e.target.closest && e.target.closest('.hueco');
+    if(!h) return;
+    e.preventDefault();
+    h.click();
+  });
+
+  function plano(x){
+    return (x||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();
+  }
+
+  function comprobar(ej){
+    var datos = D.ejercicios[ej]; if(!datos) return;
+    var huecos = huecosDe(ej), bien = 0;
+    huecos.forEach(function(h, i){
+      var ok = plano(h.textContent) === plano(datos.respuestas[i]);
+      h.classList.toggle('bien', ok);
+      h.classList.toggle('mal', !ok);
+      if(ok) bien++;
+    });
+    var m = document.querySelector('.marcador[data-ej="'+ej+'"]');
+    if(m) m.textContent = (T.resultado||'').replace('%a%', bien).replace('%b%', huecos.length);
+  }
+})();</script>
+</body>
+</html>

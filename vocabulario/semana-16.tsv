@@ -1,0 +1,69 @@
+espanol	ruso	ejemplo	etiquetas
+pasado mañana	послезавтра	Pasado mañana empiezo un curso.	S16 U8 A1 leccion
+la semana / el mes que viene	на следующей неделе / в следующем месяце	La semana que viene voy a Valencia.	S16 U8 A1 leccion
+el año que viene	в следующем году	El año que viene voy a estudiar más.	S16 U8 A1 leccion
+los planes · hacer planes	планы · строить планы	Tienes muchos planes.	S16 U8 A1 leccion
+pensar (pienso) + инф.	собираться что-то сделать	Pienso ir a Valencia.	S16 U8 A1 leccion
+pronto	скоро	Hasta pronto.	S16 U8 A1 leccion
+la excursión	поездка, экскурсия	¿Vais a hacer una excursión?	S16 U8 A1 leccion
+el puente	длинные выходные (праздник + выходные)	En diciembre hay un puente de cuatro días.	S16 U8 A1 leccion
+decidir	решать	Tengo que decidir hoy.	S16 U8 A1 leccion
+listo / lista	готов / готова	¿Estás lista? Vamos a salir.	S16 U8 A1 leccion
+quedar · ¿Quedamos?	договориться о встрече · Встретимся?	¿Quedamos a las ocho?	S16 U8 A1 leccion
+conmigo · contigo	со мной · с тобой	¿Vienes conmigo?	S16 U8 A1 leccion
+vale · de acuerdo	ладно · договорились	Vale, perfecto.	S16 U8 A1 leccion
+genial	здорово, отлично	¡Genial! Hasta el viernes.	S16 U8 A1 leccion
+me encantaría	с удовольствием	—¿Vamos al cine? —¡Me encantaría!	S16 U8 A1 leccion
+es que…	дело в том, что…	Es que el viernes trabajo.	S16 U8 A1 leccion
+te apetece (apetecer)	тебе хочется, есть настроение	¿Te apetece un café?	S16 U8 A1 leccion
+tener ganas de	очень хотеть	Tengo muchas ganas de ver esa película.	S16 U8 A1 leccion
+me viene bien	мне подходит	El sábado me viene bien.	S16 U8 A1 leccion
+otro día	в другой раз	No puedo hoy. ¿Otro día?	S16 U8 A1 leccion
+la cita · tener cita con	встреча; приём · быть записанным к	Tengo cita con el médico.	S16 U8 A1 leccion
+cambiar la cita	перенести встречу	¿Podemos cambiar la cita?	S16 U8 A1 leccion
+aplazar	отложить	Vamos a aplazar la reunión.	S16 U8 A1 leccion
+anular / cancelar	отменить	Tengo que anular la cita.	S16 U8 A1 leccion
+¿Te va bien?	тебе подходит?	¿Te va bien el miércoles?	S16 U8 A1 leccion
+me viene mal / fatal	мне не подходит / совсем не подходит	El martes me viene fatal.	S16 U8 A1 leccion
+mejor	лучше	Mejor por la mañana.	S16 U8 A1 leccion
+la parada (del autobús)	остановка	Quedamos en la parada del autobús.	S16 U8 A1 leccion
+la salida del metro	выход из метро	Te espero en la salida del metro.	S16 U8 A1 leccion
+avisar	предупредить	Si no puedo, te aviso.	S16 U8 A1 leccion
+el mensaje · mandar un mensaje	сообщение · отправить сообщение	Te mando un mensaje luego.	S16 U8 A1 leccion
+responder	отвечать	¿Por qué no respondes?	S16 U8 A1 leccion
+el finde (fin de semana)	выходные (разг.)	¿Haces algo este finde?	S16 U8 A1 leccion
+porfa (por favor)	пжлст	Mira el tiempo, porfa.	S16 U8 A1 leccion
+oye	слушай	Oye, ¿quedamos el sábado?	S16 U8 A1 leccion
+¿Qué tal si…?	а что если…?	¿Qué tal si vamos al parque?	S16 U8 A1 leccion
+¿Te parece?	как тебе? идёт?	Vamos al cine, ¿te parece?	S16 U8 A1 leccion
+igual (= quizá)	может быть, возможно	Igual llueve el domingo.	S16 U8 A1 leccion
+luego te digo	потом скажу	Luego te digo la hora.	S16 U8 A1 leccion
+el emoticono	смайлик	No pongas solo un emoticono.	S16 U8 A1 leccion
+en vez de	вместо	En vez del parque vamos al cine.	S16 U8 A1 leccion
+por fin	наконец-то	El domingo por fin descanso.	S16 U8 A1 leccion
+entonces	тогда, в таком случае	¿Llueve? Entonces vamos al cine.	S16 U8 A1 leccion
+tranquilo / tranquila	спокойный · не волнуйся	Va a ser un finde tranquilo.	S16 U8 A1 leccion
+venga	давай, ладно (Испания)	—¿Te lo cuento? —Venga.	S16 U8 A1 leccion
+contar (cuento)	рассказывать	¿Te cuento el plan?	S16 U8 A1 leccion
+pasarlo bien	хорошо провести время	Lo vamos a pasar bien.	S16 U8 A1 leccion
+especial	особенный	No es un día especial.	S16 U8 A1 leccion
+el examen	экзамен	La semana que viene tengo examen.	S16 U8 A1 leccion
+la fiesta popular	народный праздник		S16 U8 A1 cultura
+quemar	сжигать		S16 U8 A1 cultura
+el muñeco	кукла, фигура		S16 U8 A1 cultura
+el petardo	петарда		S16 U8 A1 cultura
+el cohete	ракета, салют		S16 U8 A1 cultura
+el pañuelo	платок		S16 U8 A1 cultura
+el toro	бык		S16 U8 A1 cultura
+peligroso / peligrosa	опасный / опасная		S16 U8 A1 cultura
+el herido	пострадавший		S16 U8 A1 cultura
+el altar	алтарь, домашний алтарь		S16 U8 A1 cultura
+el cementerio	кладбище		S16 U8 A1 cultura
+recordar	помнить, вспоминать		S16 U8 A1 cultura
+el muerto	умерший		S16 U8 A1 cultura
+el solsticio	солнцестояние		S16 U8 A1 cultura
+la campanada	удар колокола		S16 U8 A1 cultura
+la uva	виноградина		S16 U8 A1 cultura
+tragar	глотать		S16 U8 A1 cultura
+disfrazarse	наряжаться		S16 U8 A1 cultura
+el desfile	шествие, парад		S16 U8 A1 cultura

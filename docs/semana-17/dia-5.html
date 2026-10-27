@@ -1,0 +1,854 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Урок 117: В аэропорту: нужно сдать багаж — Испанский с нуля для русскоговорящих</title>
+<meta name="description" content="Урок 117: В аэропорту: нужно сдать багаж. facturar, la puerta de embarque, el pasaporte, la tarjeta de embarque, el equipaje de mano; hay que + infiniti"><link rel="canonical" href="https://espanoldesderuso.com/semana-17/dia-5.html"><meta property="og:type" content="website"><meta property="og:locale" content="ru"><meta property="og:title" content="Урок 117: В аэропорту: нужно сдать багаж — Испанский с нуля для русскоговорящих"><meta property="og:description" content="Урок 117: В аэропорту: нужно сдать багаж. facturar, la puerta de embarque, el pasaporte, la tarjeta de embarque, el equipaje de mano; hay que + infiniti"><meta property="og:url" content="https://espanoldesderuso.com/semana-17/dia-5.html"><meta property="og:image" content="https://espanoldesderuso.com/img/tarjeta.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Урок 117: В аэропорту: нужно сдать багаж — Испанский с нуля для русскоговорящих"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://espanoldesderuso.com/img/tarjeta.png">
+<style>
+/* Tres estados: lo que diga el sistema, o lo que el lector elija con el botón
+   de la luna. El atributo data-tema del <html> gana siempre sobre el sistema;
+   lo escribe un script de dos líneas en <head> para que no haya parpadeo. */
+:root{
+  color-scheme:light;
+  --papel:#fdfbf6; --tinta:#1b1e23; --tenue:#646c78; --linea:#e2dacb;
+  --acento:#b03f26; --acento-suave:#fbeee9; --celeste:#2f6b8f; --celeste-suave:#eaf2f7;
+  --realce:#fdf3d8; --tarjeta:#f7f2e6; --sombra:0 1px 2px rgba(27,30,35,.05);
+  --ancho:44rem;
+}
+@media(prefers-color-scheme:dark){:root:not([data-tema="light"]){
+  color-scheme:dark;
+  --papel:#14161a; --tinta:#e8e4da; --tenue:#9aa2ae; --linea:#333941;
+  --acento:#f0896a; --acento-suave:#2a1d19; --celeste:#7fb6d6; --celeste-suave:#162229;
+  --realce:#2a2718; --tarjeta:#1d2026; --sombra:none;
+}}
+:root[data-tema="dark"]{
+  color-scheme:dark;
+  --papel:#14161a; --tinta:#e8e4da; --tenue:#9aa2ae; --linea:#333941;
+  --acento:#f0896a; --acento-suave:#2a1d19; --celeste:#7fb6d6; --celeste-suave:#162229;
+  --realce:#2a2718; --tarjeta:#1d2026; --sombra:none;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--papel);color:var(--tinta);
+  font:400 17px/1.65 ui-serif,Georgia,"Times New Roman",serif;
+  -webkit-font-smoothing:antialiased;overflow-wrap:break-word}
+.sans{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.envoltorio{max-width:var(--ancho);margin:0 auto;padding:0 20px}
+
+/* ---- cabecera ---- */
+/* En el móvil la cabecera NO se queda pegada: ocupa dos filas y una lección es
+   una lectura larga, así que robaría una sexta parte de la pantalla todo el
+   rato. A partir de 40rem cabe en una fila y ahí sí se queda. */
+header.sitio{background:var(--papel);border-bottom:1px solid var(--linea)}
+@media(min-width:40rem){header.sitio{position:sticky;top:0;z-index:20;
+  background:color-mix(in srgb,var(--papel) 92%,transparent);backdrop-filter:saturate(1.6) blur(8px)}
+  html{scroll-padding-top:4rem}}
+header.sitio .envoltorio{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .9rem;padding-block:.5rem;
+  font-family:ui-sans-serif,system-ui,-apple-system,sans-serif;font-size:.86rem}
+header.sitio a{color:var(--tenue);text-decoration:none;white-space:nowrap}
+header.sitio a:hover,header.sitio nav.paginas a[aria-current]{color:var(--acento)}
+/* El título cede espacio antes que el selector de idioma: en un móvil
+   estrecho se recorta con puntos suspensivos, pero el selector no se sale. */
+header.sitio .marca{font-weight:650;color:var(--tinta);font-size:.95rem;letter-spacing:-.01em;
+  flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
+header.sitio nav.paginas{display:flex;gap:.9rem;order:3;flex:1 0 100%;overflow-x:auto;
+  scrollbar-width:none;padding-bottom:.1rem}
+header.sitio nav.paginas::-webkit-scrollbar{display:none}
+.idiomas{display:flex;gap:.2rem;flex:0 0 auto;border:1px solid var(--linea);border-radius:999px;padding:2px}
+.idiomas a,.idiomas span{padding:.12rem .5rem;border-radius:999px;font-size:.75rem;font-weight:600;
+  text-transform:uppercase;letter-spacing:.05em;line-height:1.5}
+.idiomas [aria-current]{background:var(--acento);color:#fff}
+/* Los idiomas en los que esta página no existe: se ven apagados, se pulsan y
+   lo que abren es el aviso de abajo. Enlazarlos movía al lector de sitio. */
+.idiomas .apagado{color:var(--tenue);opacity:.6;cursor:pointer;background:none;border:0;
+  font:inherit;font-size:.75rem;font-weight:600}
+.idiomas .apagado:hover{opacity:1}
+/* El aviso de «aquí no hay versión en ese idioma»: ocupa toda la fila de la
+   cabecera para que se lea, y nace oculto porque sin JavaScript los botones no
+   hacen nada y un aviso suelto no diría nada de nada. */
+.sin-idioma{flex:1 0 100%;order:4;margin:.3rem 0 0;font-size:.82rem;color:var(--tenue);
+  font-family:ui-sans-serif,system-ui,sans-serif}
+.sin-idioma a{color:var(--acento);font-weight:600}
+.tema{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;
+  width:30px;height:30px;padding:0;border:1px solid var(--linea);border-radius:999px;
+  background:transparent;color:var(--tenue);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.tema:hover{color:var(--acento);border-color:var(--acento)}
+.tema svg{display:block}
+/* De día se ve la luna (pulsa y se hace de noche); de noche, el sol. */
+.tema .sol{display:none}
+@media(prefers-color-scheme:dark){
+  :root:not([data-tema="light"]) .tema .luna{display:none}
+  :root:not([data-tema="light"]) .tema .sol{display:block}}
+:root[data-tema="dark"] .tema .luna{display:none}
+:root[data-tema="dark"] .tema .sol{display:block}
+:root[data-tema="light"] .tema .luna{display:block}
+:root[data-tema="light"] .tema .sol{display:none}
+
+/* el marco del curso: los niveles y el examen al que lleva. Discreto a
+   propósito —es un respaldo, no un reclamo— y con el acento solo en el nombre
+   del examen. */
+.marco{font-size:.9rem;color:var(--tenue);border-inline-start:3px solid var(--celeste);
+  padding-inline-start:.8rem;margin:1rem 0}
+/* los huecos que se rellenan pulsando una ficha. Las fichas arriba y los
+   huecos debajo, que es el orden en que se usa: eliges la palabra y luego
+   dónde va. */
+.fichas{display:flex;flex-wrap:wrap;gap:.45rem;margin:.9rem 0}
+.ficha{padding:.35rem .8rem;border:1px solid var(--linea);border-radius:999px;
+  background:var(--tarjeta);color:inherit;cursor:pointer;font:inherit;font-size:.9rem}
+.ficha:hover{border-color:var(--acento)}
+.ficha[aria-pressed="true"]{background:var(--acento);color:#fff;border-color:var(--acento)}
+.ficha.gastada{opacity:.35;pointer-events:none}
+/* El hueco vacío es una raya; lleno, una pastilla. Con un ancho mínimo para
+   que la frase no baile al rellenarse. */
+.hueco{display:inline-block;min-width:5.5rem;padding:0 .35rem;cursor:pointer;
+  border-bottom:2px solid var(--acento);text-align:center;font-weight:600}
+.hueco:empty::before{content:" "}
+.hueco.bien{border-color:#2e7d4f;color:#2e7d4f}
+.hueco.mal{border-color:#b3332b;color:#b3332b}
+.huecos-pie{display:flex;align-items:center;gap:.8rem;margin:.9rem 0}
+.marcador{font-size:.9rem;color:var(--tenue)}
+/* compartir: tres botones iguales al pie de la lección. Discretos —son una
+   oferta y no el siguiente paso, que es la lección de al lado— y del mismo
+   tamaño entre sí, para que ninguno parezca el principal. */
+.compartir{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin:1.8rem 0 0;
+  padding-top:1.1rem;border-top:1px solid var(--linea)}
+.compartir .de-que{font-size:.85rem;color:var(--tenue);margin-inline-end:.2rem}
+.red{display:inline-block;padding:.4rem .85rem;border:1px solid var(--linea);
+  border-radius:999px;background:transparent;color:var(--acento);cursor:pointer;
+  font:inherit;font-size:.85rem;text-decoration:none}
+.red:hover{border-color:var(--acento)}
+.seguir{margin:.5rem 0 0;font-size:.85rem}
+/* el respaldo del progreso: un código que el alumno se lleva. Los dos campos
+   a ancho completo porque el código son 64 caracteres y en el móvil, en un
+   campo corto, no se ve si está entero. */
+.respaldo{margin:.9rem 0 0}
+.respaldo input{display:block;width:100%;margin:.6rem 0;padding:.55rem .7rem;
+  border:1px solid var(--linea);border-radius:8px;background:var(--fondo);
+  color:inherit;font-family:ui-monospace,monospace;font-size:.85rem}
+.respaldo .enlace{background:none;border:0;padding:0;margin-inline-start:.6rem;
+  color:var(--acento);text-decoration:underline;cursor:pointer;font:inherit}
+.aviso-chico{margin:.4rem 0 0;font-size:.82rem;color:var(--tenue)}
+/* la baraja de tarjetas: dos descargas, la de Anki primero. En tarjeta y no
+   en una lista suelta porque es una oferta, no un apartado del curso. */
+.baraja{margin:2rem 0;padding:1.1rem 1.2rem;border:1px solid var(--linea);
+  border-radius:12px;background:var(--tarjeta)}
+.baraja h2{margin:0 0 .4rem;font-size:1.05rem}
+.baraja>p{margin:0 0 .9rem}
+.baraja .bajar{display:flex;flex-wrap:wrap;gap:.6rem}
+.baraja .bajar a{flex:1 1 15rem}
+.baraja .nota{margin:.35rem 0 0;font-size:.82rem;color:var(--tenue)}
+/* vocabulario: el dibujo del sustantivo, ENCIMA de la palabra. Pequeño a
+   propósito —la palabra manda y el dibujo acompaña— y legible a 56 px porque
+   el estilo es plano y de contorno grueso; una foto a ese tamaño no se vería.
+   Crece al pasar por encima en escritorio, que sale gratis y no estorba.
+
+   En bloque y no en línea: a 420 px la columna española mide unos 110, así que
+   con el dibujo al lado le quedaban 50 a la palabra y «el marido» se partía
+   por la mitad. Encima, la palabra se lleva la columna entera. Se vio en una
+   captura del móvil, no razonándolo. */
+.dibujo{display:block;width:56px;height:56px;border-radius:8px;
+  margin:0 0 .3rem;background:var(--tarjeta);transition:transform .12s}
+@media(hover:hover){.dibujo:hover{transform:scale(2.2);position:relative;z-index:5}}
+/* La clave: el enlace donde se acaban los ejercicios y la caja plegada al
+   final. El enlace se ve como un paso más y no como un botón: lo que manda en
+   la lección es hacer el ejercicio, no mirar la respuesta. */
+.a-la-clave{margin:1.2rem 0 0;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.92rem}
+.a-la-clave a{text-decoration:none;border-bottom:1px solid var(--linea);padding-bottom:1px}
+.a-la-clave a:hover{border-color:var(--acento)}
+#clave-boton{margin:2rem 0 .5rem}
+#clave{border-top:1px solid var(--linea);padding-top:.2rem}
+/* audio: un ▶ al lado de cada frase española que esté locutada */
+.suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
+  font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
+.suena:hover,.suena:focus-visible{opacity:1}
+.suena[aria-pressed="true"]{opacity:1;color:var(--acento)}
+@media(hover:none){.suena{opacity:.9}}
+
+/* Test de nivel */
+.test-caja{background:var(--tarjeta);border:1px solid var(--linea);border-radius:12px;
+  padding:1.2rem 1.3rem;margin:1.4rem 0;font-family:ui-sans-serif,system-ui,sans-serif}
+.test-cuenta{font-size:.78rem;color:var(--tenue);letter-spacing:.04em;margin-bottom:.5rem}
+.test-pregunta{font-size:1.08rem;font-weight:600;color:var(--tinta);margin:0 0 1rem;line-height:1.45}
+.test-ops{display:flex;flex-direction:column;gap:.5rem}
+.test-ops button{text-align:start;font:inherit;font-size:.98rem;color:var(--tinta);
+  background:var(--papel);border:1.5px solid var(--linea);border-radius:9px;
+  padding:.6rem .8rem;cursor:pointer;transition:border-color .12s,background .12s}
+.test-ops button:hover{border-color:var(--acento)}
+.test-seg{float:inline-end;font-variant-numeric:tabular-nums;color:var(--tenue);font-weight:600}
+.test-reloj{height:3px;border-radius:999px;background:var(--linea);overflow:hidden;margin:0 0 .9rem}
+.test-reloj i{display:block;height:100%;background:var(--acento);opacity:.55}
+.test-tarde{display:block;color:var(--acento);font-weight:600;font-size:.84rem}
+.test-barra{height:4px;border-radius:999px;background:var(--linea);overflow:hidden;margin-top:1rem}
+.test-barra i{display:block;height:100%;background:var(--acento);transition:width .2s}
+.test-fallo{border-inline-start:3px solid var(--acento);padding:.1rem 0 .1rem .8rem;margin:.7rem 0}
+.test-fallo b{display:block;color:var(--tinta);font-size:.94rem}
+.test-fallo span{font-size:.88rem;color:var(--tenue)}
+
+/* El mapa de unidades: 24 tarjetas en vez de 365 filas.
+   El indice crudo medía 21.482 px de alto, o sea 24 pantallas de scroll, y
+   nadie navega eso. Las tarjetas dan una vista de todo el ano en una o dos. */
+.mapa{display:grid;gap:.85rem;margin:1.4rem 0 2.2rem;
+  grid-template-columns:repeat(auto-fill,minmax(13rem,1fr));
+  /* Se sale de la columna de prosa, como la cabecera y por lo mismo: un mapa
+     no se lee renglon a renglon. Encerrado en los 44rem del texto solo caben
+     dos columnas y el mapa medía 1.806 px, que es tan ilegible como la lista
+     que viene a sustituir. Centrado sobre la ventana y no sobre el padre, que
+     asi no hace falta saber cuanto mide el padre. */
+  width:min(60rem,calc(100vw - 2.5rem));position:relative;left:50%;translate:-50%}
+/* Columna y no bloque: la rejilla estira las tarjetas de una fila a la misma
+   altura, pero el pie quedaba pegado al texto, asi que las barras de dos
+   tarjetas vecinas salian a distinta altura segun si el titulo ocupaba una
+   linea o dos. Con margin-top:auto en el pie, todas se alinean abajo. */
+.u-tarjeta{display:flex;flex-direction:column;text-decoration:none;color:inherit;background:var(--tarjeta);
+  border:1px solid var(--linea);border-radius:12px;padding:.85rem .95rem;
+  font-family:ui-sans-serif,system-ui,sans-serif;transition:border-color .12s,transform .12s}
+.u-tarjeta:hover{border-color:var(--acento);transform:translateY(-2px)}
+.u-tarjeta .alto{display:flex;align-items:baseline;gap:.5rem;margin-bottom:.3rem}
+.u-tarjeta .num{font-size:1.45rem;font-weight:700;color:var(--acento);
+  font-feature-settings:"tnum";line-height:1}
+.u-tarjeta .nivel{margin-inline-start:auto;font-size:.68rem;font-weight:700;letter-spacing:.06em;
+  color:var(--celeste);border:1px solid var(--celeste);border-radius:999px;padding:.05rem .4rem}
+.u-tarjeta .tit{font-weight:600;font-size:.94rem;color:var(--tinta);line-height:1.3;
+  display:block;margin-bottom:.4rem}
+.u-tarjeta .serie{font-size:.78rem;color:var(--tenue);font-style:italic;
+  display:block;margin-bottom:.5rem}
+.u-tarjeta .pie{display:flex;align-items:center;gap:.5rem;font-size:.74rem;color:var(--tenue);
+  margin-top:auto;padding-top:.15rem}
+.u-tarjeta .mini{flex:1;height:4px;border-radius:999px;background:var(--linea);overflow:hidden}
+.u-tarjeta .mini i{display:block;height:100%;background:var(--acento);border-radius:999px}
+.u-tarjeta.vacia{opacity:.62}
+.u-tarjeta.vacia:hover{border-color:var(--linea);transform:none}
+
+/* progreso del lector */
+/* El [hidden] del navegador pierde contra .boton{display:inline-block}, así que
+   «continuar» se vería como un botón naranja vacío en la primera visita. */
+[hidden]{display:none!important}
+.boton.marcar{margin:1.6rem 0 0}
+.boton.destacado{box-shadow:0 0 0 3px var(--acento-suave)}
+ul.dias li.hecha .num::after{content:"✓";color:var(--acento);font-weight:700;margin-inline-start:.25rem}
+ul.dias li.hecha a{color:var(--tenue)}
+#mio{margin-top:.9rem;padding-top:.9rem;border-top:1px dashed var(--linea)}
+.puerta{font-size:.9rem;color:var(--tenue);margin:-.6rem 0 0}
+.puerta a{color:var(--acento);font-weight:600}
+.progreso-nota{font-size:.84rem;color:var(--tenue);font-family:ui-sans-serif,system-ui,sans-serif;margin-top:.5rem}
+#borrar-progreso{background:none;border:0;padding:0;color:var(--tenue);text-decoration:underline;
+  cursor:pointer;font:inherit;font-size:.84rem}
+@media(min-width:40rem){
+  header.sitio nav.paginas{order:0;flex:0 1 auto;margin-inline-start:auto}
+  /* En escritorio el titulo NO crece: con flex:1 1 auto se comia el hueco que
+     la nav reclama con su margen automatico. */
+  header.sitio .marca{flex:0 1 auto}
+  /* Y la barra usa mas ancho que el texto. Una columna de lectura tiene que
+     ser estrecha; una barra de navegacion no. Metida en los mismos 704 px, el
+     titulo + los tres enlaces + los tres idiomas + la luna sumaban 708 y el
+     boton del tema caia a una segunda fila con 700 px de pantalla libres al
+     lado. Se vio midiendo los hijos, no mirando: fallaba por cuatro pixeles. */
+  header.sitio .envoltorio{max-width:60rem}
+}
+
+main{padding-bottom:3.5rem}
+
+/* ---- tipografía ---- */
+h1{font-size:clamp(1.65rem,5.2vw,2.3rem);line-height:1.15;letter-spacing:-.022em;margin:1.6rem 0 .25rem;font-weight:650}
+h1 .segunda{display:block;color:var(--acento);font-weight:400}
+h2{font-size:clamp(1.08rem,3.2vw,1.22rem);margin:2.6rem 0 .7rem;padding-top:.9rem;
+  border-top:1px solid var(--linea);font-weight:650;letter-spacing:-.012em}
+h3{font-size:1rem;margin:1.6rem 0 .45rem;font-weight:650}
+h2,h3{font-family:ui-sans-serif,system-ui,-apple-system,sans-serif}
+p{margin:.75rem 0}
+a{color:var(--acento);text-underline-offset:2px}
+strong{font-weight:650}
+
+/* ---- portada ---- */
+.heroe{padding:2rem 0 .5rem}
+.heroe .lema{font-size:clamp(1.02rem,3.4vw,1.2rem);color:var(--tenue);margin:.5rem 0 1.1rem;font-style:italic}
+.botones{display:flex;flex-wrap:wrap;gap:.65rem;margin:1.4rem 0}
+.boton{display:inline-block;background:var(--acento);color:#fff;padding:.7rem 1.35rem;border-radius:8px;
+  text-decoration:none;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.97rem;font-weight:550;
+  box-shadow:var(--sombra);transition:transform .12s ease}
+.boton:hover{transform:translateY(-1px)}
+.boton.secundario{background:transparent;color:var(--acento);border:1.5px solid var(--acento);box-shadow:none}
+
+/* La vitrina de la portada: doce palabras con su dibujo. La rejilla es de 3,
+   4 o 6 columnas según el ancho, y por eso son doce: en los tres casos quedan
+   filas enteras. El dibujo manda aquí —al revés que en la tabla de la
+   lección— porque lo que hace es enseñar de qué va el curso de un vistazo. */
+.muestra{margin:2.2rem 0}
+.muestra h2{margin-bottom:.3rem}
+.muestra>p{margin:0 0 1rem;color:var(--tenue);font-size:.92rem}
+.vitrina{list-style:none;padding:0;margin:0;display:grid;gap:.6rem;
+  grid-template-columns:repeat(3,1fr)}
+@media(min-width:30rem){.vitrina{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:52rem){.vitrina{grid-template-columns:repeat(6,1fr)}}
+.vitrina li{background:var(--tarjeta);border:1px solid var(--linea);border-radius:11px;
+  padding:.6rem .3rem .55rem;text-align:center;box-shadow:var(--sombra);
+  font-family:ui-sans-serif,system-ui,sans-serif;transition:transform .12s ease}
+@media(hover:hover){.vitrina li:hover{transform:translateY(-2px)}}
+.vitrina img{display:block;width:72px;height:72px;margin:0 auto .4rem;border-radius:8px}
+.vitrina b{display:block;font-size:.84rem;font-weight:600}
+.vitrina span{display:block;font-size:.78rem;color:var(--tenue);margin-top:.1rem}
+
+.progreso{margin:1.5rem 0;font-family:ui-sans-serif,system-ui,sans-serif}
+.progreso .cifras{display:flex;align-items:baseline;gap:.45rem;font-size:.88rem;color:var(--tenue)}
+.progreso .n{font-size:1.5rem;font-weight:700;color:var(--tinta);font-feature-settings:"tnum"}
+.barra{height:7px;border-radius:999px;background:var(--linea);overflow:hidden;margin-top:.45rem}
+.barra i{display:block;height:100%;background:linear-gradient(90deg,var(--acento),var(--celeste));border-radius:999px}
+
+/* ---- bloque de contraste: la firma del curso ---- */
+.contraste{background:var(--acento-suave);border:1px solid color-mix(in srgb,var(--acento) 22%,transparent);
+  border-radius:10px;padding:1rem 1.1rem;margin:1.3rem 0}
+.contraste>h3:first-child{margin-top:0;color:var(--acento)}
+.contraste p:last-child{margin-bottom:0}
+del{text-decoration-line:line-through;text-decoration-color:var(--acento);
+  text-decoration-thickness:2px;opacity:.75}
+.mal{color:var(--acento)}
+.bien{color:#1d7a4f}
+@media(prefers-color-scheme:dark){:root:not([data-tema="light"]) .bien{color:#5fc48f}}
+:root[data-tema="dark"] .bien{color:#5fc48f}
+
+blockquote{margin:1.2rem 0;padding:.85rem 1.1rem;background:var(--tarjeta);
+  border-inline-start:3px solid var(--celeste);border-radius:0 8px 8px 0}
+blockquote p:first-child{margin-top:0}blockquote p:last-child{margin-bottom:0}
+
+/* ---- tablas ---- */
+.tabla-env{overflow-x:auto;margin:.9rem 0;border:1px solid var(--linea);border-radius:9px;background:var(--papel)}
+table{border-collapse:collapse;width:100%;font-size:.92rem;font-family:ui-sans-serif,system-ui,sans-serif}
+th,td{padding:.45rem .65rem;text-align:start;vertical-align:top;border-bottom:1px solid var(--linea)}
+tr:last-child td{border-bottom:none}
+th{background:var(--tarjeta);font-weight:600;position:sticky;top:0}
+code{font-size:.88em;background:var(--tarjeta);padding:.1em .32em;border-radius:4px;
+  font-family:ui-monospace,"SF Mono",Menlo,monospace}
+
+/* ---- tarjetas y listas ---- */
+.rejilla{display:grid;gap:.85rem;grid-template-columns:1fr;margin:1rem 0}
+@media(min-width:36rem){.rejilla{grid-template-columns:1fr 1fr}}
+.tarjeta{border:1px solid var(--linea);border-radius:10px;padding:.95rem 1.1rem;background:var(--tarjeta);box-shadow:var(--sombra)}
+.tarjeta h3{margin:0 0 .3rem;font-size:.88rem;text-transform:uppercase;letter-spacing:.05em;color:var(--acento)}
+.tarjeta p{margin:0;font-size:.95rem}
+
+ul.dias{list-style:none;padding:0;margin:.5rem 0}
+ul.dias li{display:flex;gap:.6rem;align-items:baseline;padding:.4rem .2rem;border-bottom:1px solid var(--linea)}
+ul.dias li:last-child{border-bottom:none}
+ul.dias .num{font-family:ui-sans-serif,system-ui,sans-serif;font-size:.78rem;color:var(--tenue);
+  min-width:2.6rem;font-feature-settings:"tnum"}
+ul.dias a{text-decoration:none}ul.dias a:hover{text-decoration:underline}
+ul.dias .falta{color:var(--tenue)}
+.tipo{font-family:ui-sans-serif,system-ui,sans-serif;font-size:.67rem;color:var(--celeste);
+  text-transform:uppercase;letter-spacing:.07em;border:1px solid var(--linea);border-radius:999px;
+  padding:.05rem .4rem;white-space:nowrap}
+.unidad-cab{display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;margin-top:2.4rem}
+details{margin:.5rem 0;font-size:.93rem}
+summary{cursor:pointer;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.86rem;color:var(--tenue)}
+details ul{margin:.5rem 0}
+
+/* ---- lección ---- */
+.leccion-cab{display:flex;flex-wrap:wrap;gap:.45rem;align-items:center;margin:1.3rem 0 .2rem;
+  font-family:ui-sans-serif,system-ui,sans-serif;font-size:.78rem;color:var(--tenue)}
+.leccion-cab .n{background:var(--acento);color:#fff;border-radius:999px;padding:.12rem .6rem;font-weight:600}
+.aviso{background:var(--realce);border:1px solid var(--linea);border-radius:8px;padding:.6rem .85rem;
+  font-size:.88rem;font-family:ui-sans-serif,system-ui,sans-serif;margin:1rem 0}
+nav.pasos{display:flex;justify-content:space-between;gap:.8rem;margin:2.5rem 0 0;padding-top:1rem;
+  border-top:1px solid var(--linea);font-family:ui-sans-serif,system-ui,sans-serif;font-size:.86rem}
+nav.pasos a{text-decoration:none;padding:.4rem .7rem;border:1px solid var(--linea);border-radius:7px}
+nav.pasos a:hover{border-color:var(--acento)}
+input[type=checkbox]{margin-inline-end:.45rem}
+
+/* ---- anuncios, pie, cookies ---- */
+.anuncio{margin:2rem 0;text-align:center;min-height:1px}
+.anuncio::before{content:attr(data-etiqueta);display:block;font-family:ui-sans-serif,system-ui,sans-serif;
+  font-size:.64rem;color:var(--tenue);text-transform:uppercase;letter-spacing:.09em;margin-bottom:.3rem}
+footer.sitio{border-top:1px solid var(--linea);padding:1.6rem 0 3rem;
+  font-family:ui-sans-serif,system-ui,sans-serif;font-size:.83rem;color:var(--tenue)}
+footer.sitio a{color:var(--tenue)}
+footer.sitio p{margin:.35rem 0}
+#cookies{position:fixed;inset-inline:0;bottom:0;background:var(--tarjeta);border-top:1px solid var(--linea);
+  padding:.85rem 20px;font-family:ui-sans-serif,system-ui,sans-serif;font-size:.85rem;display:flex;
+  flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:center;z-index:30}
+</style>
+<script>try{var t=localStorage.getItem('tema');if(t)document.documentElement.dataset.tema=t}catch(e){}</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6339208855562328" crossorigin="anonymous"></script>
+</head>
+<body>
+<header class="sitio"><div class="envoltorio">
+<a class="marca" href="../index.html">Испанский с нуля для русскоговорящих</a>
+<nav class="paginas"><a href="../kurs.html">Все уроки</a><a href="../o-kurse.html">О курсе</a><a href="../kontakt.html">Контакты</a></nav>
+<div class="idiomas" title="Язык"><span lang="ru" aria-current="true">ru</span><button type="button" class="apagado" lang="es" data-portada="../es/index.html" data-idioma="Español">es</button><button type="button" class="apagado" lang="en" data-portada="../en/index.html" data-idioma="English">en</button></div>
+<button class="tema" id="tema" type="button" title="Светлая или тёмная тема" aria-label="Светлая или тёмная тема"><svg class="luna" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sol" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.5 1.5M17.9 17.9l1.5 1.5M2.5 12h2M19.5 12h2M4.6 19.4l1.5-1.5M17.9 6.1l1.5-1.5"/></svg></button>
+<p class="sin-idioma" id="sin-idioma" hidden>Эта страница есть только на русском. <a href="" data-ir="Открыть главную страницу"></a></p>
+</div></header>
+<main><div class="envoltorio">
+<article data-leccion="117"><div class="leccion-cab"><span class="n">Урок 117</span><span>из 365</span><span class="tipo">урок</span><span>неделя 17 · уровень A1</span></div><p class="aviso">Черновик: урок написан, но преподаватель его ещё не вычитал.</p><h1 id="semana-17-dia-5-en-el-aeropuerto-hay-que-facturar">Semana 17 · Día 5 — En el aeropuerto: hay que facturar</h1>
+<h1 id="17-5">Неделя 17 · День 5 — В аэропорту: нужно сдать багаж</h1>
+<blockquote>
+<p><strong>Сегодня вы научитесь</strong></p>
+<ul>
+<li>проходить аэропорт по-испански: <strong>facturar</strong>, <strong>la puerta de embarque</strong>,
+  <strong>la tarjeta de embarque</strong>;</li>
+<li>пользоваться вчерашним <strong>hay que</strong> там, где оно живёт чаще всего — в
+  объявлениях и правилах;</li>
+<li>понимать объявление по громкой связи, в котором нет ни одного «вы».</li>
+</ul>
+</blockquote>
+<h2 id="1-03">1. Разминка (0–3 мин)</h2>
+<ul>
+<li>Карточки: 10 слов (вчерашние: reservar, la recepción, hay que…).</li>
+<li>Вопрос по вчерашнему уроку: забронируйте вслух номер одной длинной фразой —
+  что, какой, сколько ночей, с какого по какое.</li>
+</ul>
+<h2 id="2-36">2. Фонетика (3–6 мин)</h2>
+<p><strong>Группы mb, mp и nv: перед b и p пишется m, а не n.</strong> Сегодняшние слова
+держатся на этом, и ошибка слышна. Прочитайте вслух и запишите себя:</p>
+<blockquote>
+<p>el e<strong>mb</strong>arque · ta<strong>mb</strong>ién · el no<strong>mb</strong>re · co<strong>mp</strong>rar ·
+si<strong>emp</strong>re · i<strong>mp</strong>ortante · el e<strong>nv</strong>ío</p>
+</blockquote>
+<ol>
+<li><strong>mb и mp — обычное испанское сочетание</strong>: <em>embarque</em> [эм-<strong>бар</strong>-ке].
+   Русский слышит «нб» и пишет ✗ <em>enbarque</em>. Правило простое: <strong>перед b и p
+   всегда m</strong>.</li>
+<li><strong>nv пишется через n</strong> (не <em>mv</em>): <em>el envío</em>, <em>invierno</em>. Звучит похоже на
+   [мб], но буква другая. Исключений нет: <em>mv</em> в испанском не бывает.</li>
+<li><strong>qu — это [к], а u не читается</strong>: <em>embar<strong>qu</strong>e</em> [эм-<strong>бар</strong>-ке],
+   <em>¿<strong>qu</strong>é?</em> [ке]. ✗ Не [эм-<strong>бар</strong>-куэ].</li>
+</ol>
+<p>Фраза дня: <strong>Tam</strong>bién hay que lle<strong>var</strong> la tar<strong>je</strong>ta de em<strong>bar</strong>que.</p>
+<h2 id="3-616">3. Новое (6–16 мин)</h2>
+<h3 id="_1">Пример</h3>
+<p>Андрей первый раз летит из Мадрида, и Карлос объясняет ему порядок. <code>[AUDIO]</code></p>
+<div class="tabla-env"><table>
+<thead>
+<tr>
+<th>Español</th>
+<th>Русский</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Andréi:</strong> Carlos, nunca he volado desde Madrid. ¿<strong>Qué hay que hacer</strong>?</td>
+<td>Карлос, я никогда не летал из Мадрида. Что нужно делать?</td>
+</tr>
+<tr>
+<td><strong>Carlos:</strong> Primero <strong>hay que facturar</strong> la maleta, si la llevas grande.</td>
+<td>Сначала надо сдать чемодан, если он большой.</td>
+</tr>
+<tr>
+<td><strong>Andréi:</strong> La mía es pequeña. Es <strong>equipaje de mano</strong>.</td>
+<td>Мой маленький. Это ручная кладь.</td>
+</tr>
+<tr>
+<td><strong>Carlos:</strong> Entonces vas directo al <strong>control de seguridad</strong>. Allí <strong>hay que sacar</strong> el ordenador y los líquidos.</td>
+<td>Тогда идёшь прямо на досмотр. Там надо вынуть компьютер и жидкости.</td>
+</tr>
+<tr>
+<td><strong>Andréi:</strong> ¿Y el <strong>pasaporte</strong>?</td>
+<td>А паспорт?</td>
+</tr>
+<tr>
+<td><strong>Carlos:</strong> Dentro de la Unión Europea con el <strong>DNI</strong> basta, pero tú llevas pasaporte. <strong>Hay que enseñarlo</strong> en el control.</td>
+<td>Внутри Евросоюза хватает удостоверения, но у тебя паспорт. Его надо показать на контроле.</td>
+</tr>
+<tr>
+<td><strong>Andréi:</strong> ¿Y después?</td>
+<td>А потом?</td>
+</tr>
+<tr>
+<td><strong>Carlos:</strong> Miras la <strong>pantalla</strong>, buscas tu vuelo y vas a la <strong>puerta de embarque</strong>. Suelen abrirla <strong>media hora antes</strong>.</td>
+<td>Смотришь на табло, находишь свой рейс и идёшь к выходу на посадку. Его обычно открывают за полчаса.</td>
+</tr>
+<tr>
+<td><strong>Andréi:</strong> ¿Y la <strong>tarjeta de embarque</strong>?</td>
+<td>А посадочный талон?</td>
+</tr>
+<tr>
+<td><strong>Carlos:</strong> En el móvil. Pero <strong>llévala también en papel</strong>: el móvil se queda sin batería justo ese día.</td>
+<td>В телефоне. Но возьми и на бумаге: именно в этот день телефон сядет.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Прочитайте диалог вслух. Потом посчитайте <strong>hay que</strong>: их пять, и ни в одном
+не сказано, кто именно должен.</p>
+<h3 id="_2">Объяснение</h3>
+<p><strong>Аэропорт по порядку — шесть шагов:</strong></p>
+<div class="tabla-env"><table>
+<thead>
+<tr>
+<th>Español</th>
+<th>Русский</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. <strong>facturar</strong> (el equipaje)</td>
+<td>сдать багаж</td>
+</tr>
+<tr>
+<td>2. el <strong>control de seguridad</strong></td>
+<td>досмотр</td>
+</tr>
+<tr>
+<td>3. la <strong>pantalla</strong> de salidas</td>
+<td>табло вылетов</td>
+</tr>
+<tr>
+<td>4. la <strong>puerta de embarque</strong></td>
+<td>выход на посадку</td>
+</tr>
+<tr>
+<td>5. el <strong>embarque</strong></td>
+<td>посадка</td>
+</tr>
+<tr>
+<td>6. la <strong>recogida de equipajes</strong></td>
+<td>выдача багажа</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Что берут с собой:</strong></p>
+<blockquote>
+<p>el <strong>pasaporte</strong> · el <strong>DNI</strong> (удостоверение в Испании) · la <strong>tarjeta de
+embarque</strong> · el <strong>equipaje de mano</strong> · la <strong>maleta</strong> · la <strong>mochila</strong></p>
+</blockquote>
+<p><strong>Hay que — язык объявлений и правил.</strong> Вчера вы видели его в гостинице;
+аэропорт — его родная среда, потому что объявление обращается ко всем сразу:</p>
+<blockquote>
+<p><strong>Hay que</strong> facturar dos horas antes.
+<strong>Hay que</strong> sacar los líquidos del equipaje de mano.
+<strong>Hay que</strong> enseñar el pasaporte en el control.
+<strong>No hay que</strong> llevar más de cien mililitros de líquido.</p>
+</blockquote>
+<p>Сравните с личным:</p>
+<blockquote>
+<p><strong>Tengo que</strong> facturar: mi maleta es grande.
+<strong>Tienes que</strong> llegar a las seis.</p>
+</blockquote>
+<p><strong>Три глагола с похожим смыслом и разной формой:</strong></p>
+<div class="tabla-env"><table>
+<thead>
+<tr>
+<th>Español</th>
+<th>Кто должен</th>
+<th>Пример</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>hay que</strong> + инф.</td>
+<td>никто конкретно, все</td>
+<td>Hay que facturar.</td>
+</tr>
+<tr>
+<td><strong>tener que</strong> + инф.</td>
+<td>названный человек</td>
+<td>Tengo que facturar.</td>
+</tr>
+<tr>
+<td><strong>deber</strong> + инф.</td>
+<td>названный, но мягче, как совет</td>
+<td>Debes llegar pronto.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Объявление, которое вы услышите</strong>, — и в нём ни одного «вы»:</p>
+<blockquote>
+<p><em>Última llamada para los pasajeros del vuelo IB 3412 con destino a Valencia.
+<strong>Embarque por la puerta</strong> B-24. <strong>Se ruega</strong> a los señores pasajeros
+<strong>presentarse</strong> de inmediato.</em></p>
+</blockquote>
+<p>Узнавайте три слова: <strong>vuelo</strong>, <strong>destino</strong>, <strong>puerta</strong>. Остального достаточно
+понять по смыслу.</p>
+<section class="contraste"><h3 id="_3">⚠️ Контраст с русским</h3>
+<ol>
+<li><strong>Русский в объявлениях обращается к человеку, испанский — к ситуации.</strong>
+   «Пассажирам рейса… пройти на посадку», «необходимо предъявить документ» —
+   русский всё же называет, кому. Испанский строит фразу вообще: <em>hay que
+   facturar</em>, <em>se ruega presentarse</em>. Поэтому на слух кажется, что объявление
+   не про вас, — а оно именно про вас.</li>
+<li><strong>Facturar — «сдать багаж», а не «выставить счёт».</strong> Слово похоже на
+   «фактуру» и на русское «счёт-фактура», и это ложный друг: в аэропорту оно
+   значит только одно.</li>
+<li><strong>Equipaje — это «багаж» вообще, и слово в единственном числе.</strong> По-русски
+   «вещи», «чемоданы» — множественное. ✗ <em>los equipajes de mano</em> не говорят:
+   <em>el equipaje de mano</em>, один.</li>
+<li><strong>Вы захотите сказать:</strong> ✗ <em>Hay que yo facturar.</em> · ✗ <em>Tengo que la maleta
+   facturar.</em> · ✗ <em>¿Dónde está el enbarque?</em> · ✗ <em>Hay que llevar los equipajes
+   de mano.</em> → <strong>Правильно:</strong> ✅ <em>Tengo que facturar.</em> · ✅ <em>Tengo que facturar
+   la maleta.</em> · ✅ <em>¿Dónde está el e<strong>m</strong>barque?</em> · ✅ <em>…el equipaje de mano.</em>
+   Первая — «я» внутри безличного оборота; вторая — русский порядок слов, где
+   дополнение стоит перед глаголом; третья — буква; четвёртая — множественное
+   число там, где его нет.</li>
+</ol>
+<p>Проверка, которая работает всегда: <strong>если в фразе есть «я», «ты» или имя —
+tener que. Если нет никого — hay que.</strong></p>
+</section><h2 id="4-1626">4. Практика (16–26 мин)</h2>
+<h3 id="_4">Упражнение А. Поставьте шаги аэропорта по порядку.</h3>
+<p>Запишите цифры от 1 до 6.</p>
+<ul>
+<li>______ Ir a la puerta de embarque.</li>
+<li>______ Facturar la maleta.</li>
+<li>______ Recoger el equipaje al llegar.</li>
+<li>______ Pasar el control de seguridad.</li>
+<li>______ Mirar la pantalla y buscar el vuelo.</li>
+<li>______ Enseñar la tarjeta de embarque y subir al avión.</li>
+</ul>
+<h3 id="el-texto">Упражнение Б. Дополните el texto. Банк слов:</h3><div class="fichas" data-ej="0"><button type="button" class="ficha" data-ej="0">facturar</button><button type="button" class="ficha" data-ej="0">mano</button><button type="button" class="ficha" data-ej="0">seguridad</button><button type="button" class="ficha" data-ej="0">pasaporte</button><button type="button" class="ficha" data-ej="0">pantalla</button><button type="button" class="ficha" data-ej="0">puerta</button><button type="button" class="ficha" data-ej="0">embarque</button><button type="button" class="ficha" data-ej="0">antes</button></div><div class="huecos-pie"><button type="button" class="boton secundario comprobar" data-ej="0">Проверить</button><span class="marcador" data-ej="0"></span></div>
+<blockquote class="banco-escrito">
+<p>facturar · mano · seguridad · pasaporte · pantalla · puerta · embarque · antes</p>
+</blockquote>
+<p><em>En el aeropuerto hay que (1) <span class="hueco" data-ej="0" data-n="0" tabindex="0" role="button"></span> la maleta dos horas (2) <span class="hueco" data-ej="0" data-n="1" tabindex="0" role="button"></span> del vuelo.</em>
+<em>Si solo llevas equipaje de (3) <span class="hueco" data-ej="0" data-n="2" tabindex="0" role="button"></span>, vas directo al control de (4) <span class="hueco" data-ej="0" data-n="3" tabindex="0" role="button"></span>.</em>
+<em>Allí hay que enseñar el (5) <span class="hueco" data-ej="0" data-n="4" tabindex="0" role="button"></span>. Después miras la (6) <span class="hueco" data-ej="0" data-n="5" tabindex="0" role="button"></span>, buscas tu</em>
+<em>vuelo y vas a la (7) <span class="hueco" data-ej="0" data-n="6" tabindex="0" role="button"></span> de embarque. La tarjeta de (8) <span class="hueco" data-ej="0" data-n="7" tabindex="0" role="button"></span> puede estar</em>
+<em>en el móvil.</em></p>
+<h3 id="_5">Упражнение В. Переведите на испанский.</h3>
+<ol>
+<li>Что нужно делать?</li>
+<li>Сначала надо сдать чемодан.</li>
+<li>У меня только ручная кладь.</li>
+<li>На досмотре надо показать паспорт.</li>
+<li>Мне нужно прийти в шесть.</li>
+<li>Где выход на посадку?</li>
+<li>Посадочный талон в телефоне.</li>
+<li>Посадку обычно открывают за полчаса.</li>
+</ol>
+<p class="a-la-clave"><a href="#clave">Проверить себя по ключу ↓</a></p><h2 id="5-2629">5. Выход (26–29 мин)</h2>
+<p><strong>Напишите список из восьми дел в аэропорту — и два раза.</strong></p>
+<ol>
+<li><strong>Первый список — правила для всех</strong>, восемь фраз с <strong>hay que</strong>:<blockquote>
+<p><em>Hay que llegar dos horas antes.</em>
+<em>Hay que facturar la maleta grande.</em>
+<em>Hay que sacar los líquidos en el control.</em></p>
+</blockquote>
+</li>
+<li><strong>Второй список — ваш личный</strong>, те же восемь дел с <strong>tengo que</strong>:<blockquote>
+<p><em>Tengo que llegar a las seis.</em>
+<em>Tengo que facturar: mi maleta pesa veinte kilos.</em></p>
+</blockquote>
+</li>
+<li><strong>Прочитайте оба вслух подряд.</strong> Разница между ними — это и есть сегодняшнее
+   правило, и слышно её сразу.</li>
+<li><strong>Одна фраза сверху</strong>, с герундием вчерашнего дня: <em>Ahora mismo estoy
+   haciendo la maleta.</em></li>
+</ol>
+<h2 id="6-2930">6. Итог (29–30 мин)</h2>
+<ul>
+<li>[ ] Я знаю шесть шагов аэропорта и их названия.</li>
+<li>[ ] Я различаю <strong>hay que</strong> (всем) и <strong>tengo que</strong> (мне).</li>
+<li>[ ] Я узнаю в объявлении <em>vuelo</em>, <em>destino</em> и <em>puerta</em>.</li>
+<li>[ ] Я пишу e<strong>m</strong>barque через m.</li>
+<li>Добавьте слова дня в колоду. Завтра — повторение недели: транспорт, вокзал,
+  герундий и гостиница, диктант расписаний и мини-тест.</li>
+</ul>
+<h2 id="_6">Словарь дня</h2>
+<div class="tabla-env"><table>
+<thead>
+<tr>
+<th>Español</th>
+<th>Русский</th>
+<th>Пример</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>factu<strong>rar</strong></td>
+<td>сдать багаж</td>
+<td>Hay que facturar dos horas antes.</td>
+</tr>
+<tr>
+<td>el equi<strong>pa</strong>je de <strong>ma</strong>no</td>
+<td>ручная кладь</td>
+<td>Solo llevo equipaje de mano.</td>
+</tr>
+<tr>
+<td>la ma<strong>le</strong>ta</td>
+<td>чемодан</td>
+<td>Mi maleta pesa veinte kilos.</td>
+</tr>
+<tr>
+<td>el con<strong>trol</strong> de seguri<strong>dad</strong></td>
+<td>досмотр</td>
+<td>En el control hay que sacar los líquidos.</td>
+</tr>
+<tr>
+<td>la <strong>puer</strong>ta de em<strong>bar</strong>que</td>
+<td>выход на посадку</td>
+<td>La puerta de embarque es la B-24.</td>
+</tr>
+<tr>
+<td>la tar<strong>je</strong>ta de em<strong>bar</strong>que</td>
+<td>посадочный талон</td>
+<td>La tarjeta de embarque está en el móvil.</td>
+</tr>
+<tr>
+<td>el pasa<strong>por</strong>te · el DNI</td>
+<td>паспорт · удостоверение личности</td>
+<td>Hay que enseñar el pasaporte.</td>
+</tr>
+<tr>
+<td>el <strong>vue</strong>lo · el des<strong>ti</strong>no</td>
+<td>рейс · пункт назначения</td>
+<td>El vuelo con destino a Valencia.</td>
+</tr>
+<tr>
+<td>de<strong>ber</strong> + инф.</td>
+<td>следует, должен (совет)</td>
+<td>Debes llegar pronto.</td>
+</tr>
+<tr>
+<td>el a<strong>sien</strong>to</td>
+<td>место (в самолёте, поезде)</td>
+<td>Mi asiento es el 14C.</td>
+</tr>
+</tbody>
+</table></div>
+<div class="botones" id="clave-boton" hidden><button type="button" class="boton secundario" data-ver="Показать ответы" data-ocultar="Скрыть ответы">Показать ответы</button></div><div id="clave"><h2 id="_7">Ответы</h2>
+<p><strong>А.</strong> 2 — Ir a la puerta de embarque <strong>(4)</strong> · Facturar la maleta <strong>(1)</strong> ·
+Recoger el equipaje al llegar <strong>(6)</strong> · Pasar el control de seguridad <strong>(2)</strong> ·
+Mirar la pantalla y buscar el vuelo <strong>(3)</strong> · Enseñar la tarjeta de embarque y
+subir al avión <strong>(5)</strong>.</p>
+<p>Порядок такой: facturar → control de seguridad → pantalla → puerta de embarque
+→ embarque → recogida de equipajes.</p>
+<p><strong>Б.</strong> 1. facturar · 2. antes · 3. mano · 4. seguridad · 5. pasaporte ·
+6. pantalla · 7. puerta · 8. embarque. — Обратите внимание, что <em>embarque</em>
+встречается в тексте дважды в двух разных сочетаниях: <em>puerta de embarque</em> и
+<em>tarjeta de embarque</em>. Это не одно и то же.</p>
+<p><strong>В.</strong> 1. <em>¿Qué hay que hacer?</em> — ✗ <em>¿Qué tengo que hacer yo?</em> тоже верно, но
+спрашивают о правиле вообще. · 2. <em>Primero hay que facturar la maleta.</em> ·
+3. <em>Solo llevo equipaje de mano.</em> — единственное число: ✗ <em>los equipajes</em>. ·
+4. <em>En el control hay que enseñar el pasaporte.</em> · 5. <em>Tengo que llegar a las
+seis.</em> — здесь «мне», значит <em>tener que</em>. · 6. <em>¿Dónde está la puerta de
+embarque?</em> · 7. <em>La tarjeta de embarque está en el móvil.</em> — <em>está</em>, потому
+что это местонахождение. · 8. <em>Suelen abrir el embarque media hora antes.</em> —
+или проще: <em>El embarque empieza media hora antes.</em></p></div><script>(function(){
+  var caja=document.getElementById('clave'), zona=document.getElementById('clave-boton');
+  if(!caja||!zona)return;
+  var b=zona.querySelector('button');
+  function pon(abierta){
+    caja.hidden=!abierta;
+    b.textContent=abierta?b.dataset.ocultar:b.dataset.ver;
+    b.setAttribute('aria-expanded',abierta?'true':'false');
+  }
+  pon(false); zona.hidden=false;
+  b.addEventListener('click',function(){pon(caja.hidden)});
+  document.querySelectorAll('a[href="#clave"]').forEach(function(a){
+    a.addEventListener('click',function(){pon(true)});
+  });
+  if(location.hash==='#clave')pon(true);
+})();</script><div id="marcar-caja"></div><div class="compartir"><span class="de-que">Поделиться уроком</span><a class="red" href="https://t.me/share/url?url=https%3A%2F%2Fespanoldesderuso.com%2Fsemana-17%2Fdia-5.html&text=%D0%98%D1%81%D0%BF%D0%B0%D0%BD%D1%81%D0%BA%D0%B8%D0%B9%20%D1%81%20%D0%BD%D1%83%D0%BB%D1%8F%20%D0%B4%D0%BB%D1%8F%20%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D1%80%D1%8F%D1%89%D0%B8%D1%85" target="_blank" rel="noopener">Telegram</a><a class="red" href="https://wa.me/?text=%D0%98%D1%81%D0%BF%D0%B0%D0%BD%D1%81%D0%BA%D0%B8%D0%B9%20%D1%81%20%D0%BD%D1%83%D0%BB%D1%8F%20%D0%B4%D0%BB%D1%8F%20%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D1%80%D1%8F%D1%89%D0%B8%D1%85%20https%3A%2F%2Fespanoldesderuso.com%2Fsemana-17%2Fdia-5.html" target="_blank" rel="noopener">WhatsApp</a><button type="button" class="red" id="copiar-enlace" data-url="https://espanoldesderuso.com/semana-17/dia-5.html" data-ok="Ссылка скопирована">Скопировать ссылку</button></div><nav class="pasos"><a href="../semana-17/dia-4.html">← Урок 116</a><a href="../kurs.html">Все уроки</a><a id="enlace-siguiente" href="../semana-17/dia-6.html">Урок 118 →</a></nav></article>
+</div></main>
+<footer class="sitio"><div class="envoltorio">
+<p><a href="../test.html">Тест на уровень</a> · <a href="../o-kurse.html">О курсе</a> · <a href="../kontakt.html">Контакты</a> · <a href="../privacy.html">Политика конфиденциальности</a></p>
+<p>Материалы курса можно свободно использовать для учёбы.</p>
+
+</div></footer>
+<div id="cookies"><span>Мы используем файлы cookie для показа рекламы и статистики посещений. <a href="../privacy.html">Подробнее</a>.</span><button class="boton" style="padding:.4rem 1rem;font-size:.85rem" onclick="try{localStorage.setItem('cookies','1')}catch(e){};this.parentNode.remove()">Понятно</button></div><script>try{if(localStorage.getItem('cookies')){var b=document.getElementById('cookies');b&&b.remove()}}catch(e){}</script>
+<script>(function(){var b=document.getElementById('tema');if(!b)return;function actual(){var r=document.documentElement;return r.dataset.tema||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}b.addEventListener('click',function(){var n=actual()==='dark'?'light':'dark';document.documentElement.dataset.tema=n;try{localStorage.setItem('tema',n)}catch(e){}});})();</script>
+<script>(function(){
+  var aviso=document.getElementById('sin-idioma'); if(!aviso)return;
+  document.querySelectorAll('.idiomas .apagado').forEach(function(b){
+    b.addEventListener('click',function(){
+      var a=aviso.querySelector('a');
+      a.href=b.dataset.portada;
+      a.textContent=a.dataset.ir+' ('+b.dataset.idioma+') →';
+      aviso.hidden=false;
+    });
+  });
+})();</script>
+<script>window.CURSO_TEXTOS={"continuar": "Продолжить: урок", "empezar": "Начать сначала", "marcar": "Отметить урок пройденным", "hecho": "Урок пройден", "siguiente": "Следующий урок", "tuyo": "пройдено вами", "titulo": "Ваш прогресс", "aviso": "Прогресс хранится только в этом браузере, на этом устройстве. Регистрации нет, и никуда он не отправляется. Если вы очистите данные браузера или откроете курс на другом телефоне, отметки не перенесутся.", "borrar": "Сбросить прогресс", "confirmar": "Сбросить все отметки?", "copiar": "Сохранить мой прогресс", "copiado": "Код скопирован — вставьте его себе в заметки или в «Избранное» в Telegram", "restaurar": "Восстановить по коду", "pegar": "Вставьте сюда ваш код", "aplicar": "Восстановить", "cancelar": "Отмена", "malo": "Это не похоже на код прогресса. Ничего не изменено.", "menos": "В этом коде меньше уроков, чем отмечено сейчас (%a% вместо %b%). Всё равно восстановить?", "hecho_restaurar": "Готово: восстановлено уроков — %n%", "antes": "Перед тем как очистить браузер или сменить телефон, сохраните код."};window.CURSO_RAIZ="..";window.CURSO_PUBLICADAS=119;window.CURSO_DIAS={"1":"semana-01/dia-1.html","2":"semana-01/dia-2.html","3":"semana-01/dia-3.html","4":"semana-01/dia-4.html","5":"semana-01/dia-5.html","6":"semana-01/dia-6.html","7":"semana-01/dia-7.html","8":"semana-02/dia-1.html","9":"semana-02/dia-2.html","10":"semana-02/dia-3.html","11":"semana-02/dia-4.html","12":"semana-02/dia-5.html","13":"semana-02/dia-6.html","14":"semana-02/dia-7.html","15":"semana-03/dia-1.html","16":"semana-03/dia-2.html","17":"semana-03/dia-3.html","18":"semana-03/dia-4.html","19":"semana-03/dia-5.html","20":"semana-03/dia-6.html","21":"semana-03/dia-7.html","22":"semana-04/dia-1.html","23":"semana-04/dia-2.html","24":"semana-04/dia-3.html","25":"semana-04/dia-4.html","26":"semana-04/dia-5.html","27":"semana-04/dia-6.html","28":"semana-04/dia-7.html","29":"semana-05/dia-1.html","30":"semana-05/dia-2.html","31":"semana-05/dia-3.html","32":"semana-05/dia-4.html","33":"semana-05/dia-5.html","34":"semana-05/dia-6.html","35":"semana-05/dia-7.html","36":"semana-06/dia-1.html","37":"semana-06/dia-2.html","38":"semana-06/dia-3.html","39":"semana-06/dia-4.html","40":"semana-06/dia-5.html","41":"semana-06/dia-6.html","42":"semana-06/dia-7.html","43":"semana-07/dia-1.html","44":"semana-07/dia-2.html","45":"semana-07/dia-3.html","46":"semana-07/dia-4.html","47":"semana-07/dia-5.html","48":"semana-07/dia-6.html","49":"semana-07/dia-7.html","50":"semana-08/dia-1.html","51":"semana-08/dia-2.html","52":"semana-08/dia-3.html","53":"semana-08/dia-4.html","54":"semana-08/dia-5.html","55":"semana-08/dia-6.html","56":"semana-08/dia-7.html","57":"semana-09/dia-1.html","58":"semana-09/dia-2.html","59":"semana-09/dia-3.html","60":"semana-09/dia-4.html","61":"semana-09/dia-5.html","62":"semana-09/dia-6.html","63":"semana-09/dia-7.html","64":"semana-10/dia-1.html","65":"semana-10/dia-2.html","66":"semana-10/dia-3.html","67":"semana-10/dia-4.html","68":"semana-10/dia-5.html","69":"semana-10/dia-6.html","70":"semana-10/dia-7.html","71":"semana-11/dia-1.html","72":"semana-11/dia-2.html","73":"semana-11/dia-3.html","74":"semana-11/dia-4.html","75":"semana-11/dia-5.html","76":"semana-11/dia-6.html","77":"semana-11/dia-7.html","78":"semana-12/dia-1.html","79":"semana-12/dia-2.html","80":"semana-12/dia-3.html","81":"semana-12/dia-4.html","82":"semana-12/dia-5.html","83":"semana-12/dia-6.html","84":"semana-12/dia-7.html","85":"semana-13/dia-1.html","86":"semana-13/dia-2.html","87":"semana-13/dia-3.html","88":"semana-13/dia-4.html","89":"semana-13/dia-5.html","90":"semana-13/dia-6.html","91":"semana-13/dia-7.html","92":"semana-14/dia-1.html","93":"semana-14/dia-2.html","94":"semana-14/dia-3.html","95":"semana-14/dia-4.html","96":"semana-14/dia-5.html","97":"semana-14/dia-6.html","98":"semana-14/dia-7.html","99":"semana-15/dia-1.html","100":"semana-15/dia-2.html","101":"semana-15/dia-3.html","102":"semana-15/dia-4.html","103":"semana-15/dia-5.html","104":"semana-15/dia-6.html","105":"semana-15/dia-7.html","106":"semana-16/dia-1.html","107":"semana-16/dia-2.html","108":"semana-16/dia-3.html","109":"semana-16/dia-4.html","110":"semana-16/dia-5.html","111":"semana-16/dia-6.html","112":"semana-16/dia-7.html","113":"semana-17/dia-1.html","114":"semana-17/dia-2.html","115":"semana-17/dia-3.html","116":"semana-17/dia-4.html","117":"semana-17/dia-5.html","118":"semana-17/dia-6.html","119":"semana-17/dia-7.html"};</script>
+<script src="../progreso.js" defer></script>
+
+
+
+<script>window.CURSO_HUECOS={"ejercicios": [{"respuestas": ["facturar", "antes", "mano", "seguridad", "pasaporte", "pantalla", "puerta", "embarque"]}], "t": {"comprobar": "Проверить", "resultado": "Верно: %a% из %b%", "otra": "Ещё раз"}};(function(){
+  var D=window.CURSO_HUECOS; if(!D)return;
+  var T=D.t||{};
+
+  // Dos formas de rellenar, porque en el móvil arrastrar es incómodo:
+  //   - pulsas una ficha y luego el hueco;
+  //   - o pulsas un hueco vacío y la ficha elegida cae ahí.
+  // Y pulsar un hueco lleno lo vacía y devuelve la ficha, que es como se
+  // corrige uno sin tener que empezar de cero.
+  var elegida = null;
+
+  // La cita del banco sobra en cuanto hay fichas: las mismas palabras dos
+  // veces seguidas. Se esconde desde aquí y no al construir, para que sin
+  // JavaScript la cita siga estando —ahí es lo único que dice qué palabras
+  // hay—.
+  document.querySelectorAll('.banco-escrito').forEach(function(q){ q.hidden = true; });
+
+  function fichasDe(ej){ return document.querySelectorAll('.ficha[data-ej="'+ej+'"]'); }
+  function huecosDe(ej){ return document.querySelectorAll('.hueco[data-ej="'+ej+'"]'); }
+
+  function repintarFichas(ej){
+    var usadas = {};
+    huecosDe(ej).forEach(function(h){ if(h.textContent) usadas[h.textContent] = (usadas[h.textContent]||0)+1; });
+    var vistas = {};
+    fichasDe(ej).forEach(function(f){
+      var n = f.textContent;
+      vistas[n] = (vistas[n]||0)+1;
+      // Una palabra puede repetirse en el banco y usarse varias veces: se
+      // apaga la ficha solo cuando ya no quedan copias libres.
+      f.classList.toggle('gastada', (usadas[n]||0) >= vistas[n] && (usadas[n]||0) > 0
+                                     && fichasDe(ej).length === Object.keys(vistas).length);
+    });
+  }
+
+  function soltar(h){
+    if(!h.textContent) return;
+    h.textContent = '';
+    h.classList.remove('bien','mal');
+    repintarFichas(h.dataset.ej);
+  }
+
+  document.addEventListener('click', function(e){
+    var f = e.target.closest('.ficha');
+    if(f){
+      if(elegida === f){ elegida = null; f.setAttribute('aria-pressed','false'); return; }
+      if(elegida) elegida.setAttribute('aria-pressed','false');
+      elegida = f; f.setAttribute('aria-pressed','true');
+      return;
+    }
+    var h = e.target.closest('.hueco');
+    if(h){
+      if(h.textContent){ soltar(h); return; }
+      if(!elegida || elegida.dataset.ej !== h.dataset.ej) return;
+      h.textContent = elegida.textContent;
+      h.classList.remove('bien','mal');
+      elegida.setAttribute('aria-pressed','false');
+      elegida = null;
+      repintarFichas(h.dataset.ej);
+      return;
+    }
+    var c = e.target.closest('.comprobar');
+    if(c) comprobar(c.dataset.ej);
+  });
+
+  // El teclado: un hueco es un botón, así que Enter y espacio tienen que
+  // hacer lo mismo que el dedo.
+  document.addEventListener('keydown', function(e){
+    if(e.key !== 'Enter' && e.key !== ' ') return;
+    var h = e.target.closest && e.target.closest('.hueco');
+    if(!h) return;
+    e.preventDefault();
+    h.click();
+  });
+
+  function plano(x){
+    return (x||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();
+  }
+
+  function comprobar(ej){
+    var datos = D.ejercicios[ej]; if(!datos) return;
+    var huecos = huecosDe(ej), bien = 0;
+    huecos.forEach(function(h, i){
+      var ok = plano(h.textContent) === plano(datos.respuestas[i]);
+      h.classList.toggle('bien', ok);
+      h.classList.toggle('mal', !ok);
+      if(ok) bien++;
+    });
+    var m = document.querySelector('.marcador[data-ej="'+ej+'"]');
+    if(m) m.textContent = (T.resultado||'').replace('%a%', bien).replace('%b%', huecos.length);
+  }
+})();</script>
+</body>
+</html>

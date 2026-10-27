@@ -955,3 +955,138 @@ ser del Madrid	болеть за «Мадрид»		S15 U8 A1 cultura
 marcar un gol	забить гол		S15 U8 A1 cultura
 el entrenador	тренер		S15 U8 A1 cultura
 el jugador	игрок		S15 U8 A1 cultura
+pasado mañana	послезавтра	Pasado mañana empiezo un curso.	S16 U8 A1 leccion
+la semana / el mes que viene	на следующей неделе / в следующем месяце	La semana que viene voy a Valencia.	S16 U8 A1 leccion
+el año que viene	в следующем году	El año que viene voy a estudiar más.	S16 U8 A1 leccion
+los planes · hacer planes	планы · строить планы	Tienes muchos planes.	S16 U8 A1 leccion
+pensar (pienso) + инф.	собираться что-то сделать	Pienso ir a Valencia.	S16 U8 A1 leccion
+pronto	скоро	Hasta pronto.	S16 U8 A1 leccion
+la excursión	поездка, экскурсия	¿Vais a hacer una excursión?	S16 U8 A1 leccion
+el puente	длинные выходные (праздник + выходные)	En diciembre hay un puente de cuatro días.	S16 U8 A1 leccion
+decidir	решать	Tengo que decidir hoy.	S16 U8 A1 leccion
+listo / lista	готов / готова	¿Estás lista? Vamos a salir.	S16 U8 A1 leccion
+quedar · ¿Quedamos?	договориться о встрече · Встретимся?	¿Quedamos a las ocho?	S16 U8 A1 leccion
+conmigo · contigo	со мной · с тобой	¿Vienes conmigo?	S16 U8 A1 leccion
+vale · de acuerdo	ладно · договорились	Vale, perfecto.	S16 U8 A1 leccion
+genial	здорово, отлично	¡Genial! Hasta el viernes.	S16 U8 A1 leccion
+me encantaría	с удовольствием	—¿Vamos al cine? —¡Me encantaría!	S16 U8 A1 leccion
+es que…	дело в том, что…	Es que el viernes trabajo.	S16 U8 A1 leccion
+te apetece (apetecer)	тебе хочется, есть настроение	¿Te apetece un café?	S16 U8 A1 leccion
+tener ganas de	очень хотеть	Tengo muchas ganas de ver esa película.	S16 U8 A1 leccion
+me viene bien	мне подходит	El sábado me viene bien.	S16 U8 A1 leccion
+otro día	в другой раз	No puedo hoy. ¿Otro día?	S16 U8 A1 leccion
+la cita · tener cita con	встреча; приём · быть записанным к	Tengo cita con el médico.	S16 U8 A1 leccion
+cambiar la cita	перенести встречу	¿Podemos cambiar la cita?	S16 U8 A1 leccion
+aplazar	отложить	Vamos a aplazar la reunión.	S16 U8 A1 leccion
+anular / cancelar	отменить	Tengo que anular la cita.	S16 U8 A1 leccion
+¿Te va bien?	тебе подходит?	¿Te va bien el miércoles?	S16 U8 A1 leccion
+me viene mal / fatal	мне не подходит / совсем не подходит	El martes me viene fatal.	S16 U8 A1 leccion
+mejor	лучше	Mejor por la mañana.	S16 U8 A1 leccion
+la parada (del autobús)	остановка	Quedamos en la parada del autobús.	S16 U8 A1 leccion
+la salida del metro	выход из метро	Te espero en la salida del metro.	S16 U8 A1 leccion
+avisar	предупредить	Si no puedo, te aviso.	S16 U8 A1 leccion
+el mensaje · mandar un mensaje	сообщение · отправить сообщение	Te mando un mensaje luego.	S16 U8 A1 leccion
+responder	отвечать	¿Por qué no respondes?	S16 U8 A1 leccion
+el finde (fin de semana)	выходные (разг.)	¿Haces algo este finde?	S16 U8 A1 leccion
+porfa (por favor)	пжлст	Mira el tiempo, porfa.	S16 U8 A1 leccion
+oye	слушай	Oye, ¿quedamos el sábado?	S16 U8 A1 leccion
+¿Qué tal si…?	а что если…?	¿Qué tal si vamos al parque?	S16 U8 A1 leccion
+¿Te parece?	как тебе? идёт?	Vamos al cine, ¿te parece?	S16 U8 A1 leccion
+igual (= quizá)	может быть, возможно	Igual llueve el domingo.	S16 U8 A1 leccion
+luego te digo	потом скажу	Luego te digo la hora.	S16 U8 A1 leccion
+el emoticono	смайлик	No pongas solo un emoticono.	S16 U8 A1 leccion
+en vez de	вместо	En vez del parque vamos al cine.	S16 U8 A1 leccion
+por fin	наконец-то	El domingo por fin descanso.	S16 U8 A1 leccion
+entonces	тогда, в таком случае	¿Llueve? Entonces vamos al cine.	S16 U8 A1 leccion
+tranquilo / tranquila	спокойный · не волнуйся	Va a ser un finde tranquilo.	S16 U8 A1 leccion
+venga	давай, ладно (Испания)	—¿Te lo cuento? —Venga.	S16 U8 A1 leccion
+contar (cuento)	рассказывать	¿Te cuento el plan?	S16 U8 A1 leccion
+pasarlo bien	хорошо провести время	Lo vamos a pasar bien.	S16 U8 A1 leccion
+especial	особенный	No es un día especial.	S16 U8 A1 leccion
+el examen	экзамен	La semana que viene tengo examen.	S16 U8 A1 leccion
+la fiesta popular	народный праздник		S16 U8 A1 cultura
+quemar	сжигать		S16 U8 A1 cultura
+el muñeco	кукла, фигура		S16 U8 A1 cultura
+el petardo	петарда		S16 U8 A1 cultura
+el cohete	ракета, салют		S16 U8 A1 cultura
+el pañuelo	платок		S16 U8 A1 cultura
+el toro	бык		S16 U8 A1 cultura
+peligroso / peligrosa	опасный / опасная		S16 U8 A1 cultura
+el herido	пострадавший		S16 U8 A1 cultura
+el altar	алтарь, домашний алтарь		S16 U8 A1 cultura
+el cementerio	кладбище		S16 U8 A1 cultura
+recordar	помнить, вспоминать		S16 U8 A1 cultura
+el muerto	умерший		S16 U8 A1 cultura
+el solsticio	солнцестояние		S16 U8 A1 cultura
+la campanada	удар колокола		S16 U8 A1 cultura
+la uva	виноградина		S16 U8 A1 cultura
+tragar	глотать		S16 U8 A1 cultura
+disfrazarse	наряжаться		S16 U8 A1 cultura
+el desfile	шествие, парад		S16 U8 A1 cultura
+el avión	самолёт	Nunca viajo en avión.	S17 U9 A1 leccion
+la bici (la bicicleta)	велосипед	Va al instituto en bici.	S17 U9 A1 leccion
+la moto · el barco	мотоцикл · корабль	A Mallorca se va en barco.	S17 U9 A1 leccion
+el tranvía	трамвай	En Zaragoza hay tranvía.	S17 U9 A1 leccion
+el taxi	такси	Al aeropuerto vamos en taxi.	S17 U9 A1 leccion
+el atasco · la hora punta	пробка · час пик	En hora punta hay mucho atasco.	S17 U9 A1 leccion
+andando	пешком	Tengo que ir andando.	S17 U9 A1 leccion
+el / la pasajero / -a	пассажир	Los pasajeros esperan en el andén.	S17 U9 A1 leccion
+el conductor (✗ не «кондуктор»)	водитель	El conductor del autobús.	S17 U9 A1 leccion
+rápido / rápida · lento / lenta	быстрый · медленный	El tren es más rápido.	S17 U9 A1 leccion
+de ida y vuelta	туда и обратно	Un billete de ida y vuelta.	S17 U9 A1 leccion
+la taquilla	касса	Compro el billete en la taquilla.	S17 U9 A1 leccion
+salir ↔ llegar (о транспорте)	отправляться ↔ прибывать	El tren sale a las diez y llega a las doce.	S17 U9 A1 leccion
+el retraso · con retraso	задержка · с опозданием	El tren llega con retraso.	S17 U9 A1 leccion
+a su hora	вовремя	El avión sale a su hora.	S17 U9 A1 leccion
+el próximo / la próxima	ближайший, следующий	¿Cuándo es el próximo tren?	S17 U9 A1 leccion
+la ventanilla · el pasillo	место у окна · у прохода	¿Ventanilla o pasillo?	S17 U9 A1 leccion
+la vía	путь (железнодорожный)	El tren sale de la vía 4.	S17 U9 A1 leccion
+perder el tren	опоздать на поезд	He perdido el tren.	S17 U9 A1 leccion
+la pantalla	экран, табло	Mire la pantalla.	S17 U9 A1 leccion
+esperar	ждать	Estoy esperando en el andén.	S17 U9 A1 leccion
+en este momento	в данный момент	En este momento está comiendo.	S17 U9 A1 leccion
+estos días	в эти дни	Estos días estoy haciendo un curso.	S17 U9 A1 leccion
+charlar	болтать, разговаривать	Están charlando en la cafetería.	S17 U9 A1 leccion
+saludar	здороваться	Me está saludando desde el andén.	S17 U9 A1 leccion
+subir ↔ bajar (del tren)	садиться ↔ выходить (из поезда)	Suben al tren en Valencia.	S17 U9 A1 leccion
+hacer cola	стоять в очереди	Estamos haciendo cola en la taquilla.	S17 U9 A1 leccion
+el periódico	газета	Está leyendo el periódico.	S17 U9 A1 leccion
+el banco (de un parque)	скамейка	Carlos está durmiendo en un banco.	S17 U9 A1 leccion
+el altavoz	громкоговоритель, колонка	Están hablando por el altavoz.	S17 U9 A1 leccion
+reservar · la reserva	бронировать · бронь	Quería reservar una habitación.	S17 U9 A1 leccion
+la habitación doble / individual	двухместный / одноместный номер	Una habitación doble, por favor.	S17 U9 A1 leccion
+la recepción · el recepcionista	ресепшен · администратор	La recepción está abierta 24 horas.	S17 U9 A1 leccion
+el desayuno incluido	завтрак включён	Setenta euros con el desayuno incluido.	S17 U9 A1 leccion
+el aire acondicionado	кондиционер	¿La habitación tiene aire acondicionado?	S17 U9 A1 leccion
+completo	мест нет (всё занято)	En agosto el hotel está completo.	S17 U9 A1 leccion
+la toalla	полотенце	¿Puede traerme una toalla?	S17 U9 A1 leccion
+quería (вежливое «хотел бы»)	я хотел бы	Quería un billete de ida y vuelta.	S17 U9 A1 leccion
+hay que + инф.	нужно (вообще)	Hay que dejar la habitación a las doce.	S17 U9 A1 leccion
+a nombre de	на имя	A nombre de Elena Smirnova.	S17 U9 A1 leccion
+facturar	сдать багаж	Hay que facturar dos horas antes.	S17 U9 A1 leccion
+el equipaje de mano	ручная кладь	Solo llevo equipaje de mano.	S17 U9 A1 leccion
+la maleta	чемодан	Mi maleta pesa veinte kilos.	S17 U9 A1 leccion
+el control de seguridad	досмотр	En el control hay que sacar los líquidos.	S17 U9 A1 leccion
+la puerta de embarque	выход на посадку	La puerta de embarque es la B-24.	S17 U9 A1 leccion
+la tarjeta de embarque	посадочный талон	La tarjeta de embarque está en el móvil.	S17 U9 A1 leccion
+el pasaporte · el DNI	паспорт · удостоверение личности	Hay que enseñar el pasaporte.	S17 U9 A1 leccion
+el vuelo · el destino	рейс · пункт назначения	El vuelo con destino a Valencia.	S17 U9 A1 leccion
+deber + инф.	следует, должен (совет)	Debes llegar pronto.	S17 U9 A1 leccion
+el asiento	место (в самолёте, поезде)	Mi asiento es el 14C.	S17 U9 A1 leccion
+el camino	путь, дорога		S17 U9 A1 cultura
+el peregrino	паломник		S17 U9 A1 cultura
+andar	идти пешком		S17 U9 A1 cultura
+el albergue	приют, хостел		S17 U9 A1 cultura
+la flecha	стрелка		S17 U9 A1 cultura
+la concha	ракушка		S17 U9 A1 cultura
+la credencial	паспорт паломника		S17 U9 A1 cultura
+el paisaje	пейзаж		S17 U9 A1 cultura
+el desconocido	незнакомец		S17 U9 A1 cultura
+la selva	джунгли, сельва		S17 U9 A1 cultura
+la altura	высота		S17 U9 A1 cultura
+el mal de altura	горная болезнь		S17 U9 A1 cultura
+subir ↔ bajar	подниматься ↔ спускаться		S17 U9 A1 cultura
+el permiso	разрешение		S17 U9 A1 cultura
+la guagua 🌎	автобус (Канары, Куба)		S17 U9 A1 cultura
+el micro 🌎	автобус (Чили, Аргентина)		S17 U9 A1 cultura
+la combi 🌎	маршрутка (Перу, Мексика)		S17 U9 A1 cultura
