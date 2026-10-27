@@ -23,6 +23,7 @@ import yaml  # noqa: E402
 
 import construir_sitio  # noqa: E402
 import generar_audio  # noqa: E402
+import generar_imagenes  # noqa: E402
 import poner_dominio  # noqa: E402
 import revisar_adsense  # noqa: E402
 import exportar_wordpress  # noqa: E402
@@ -1642,3 +1643,77 @@ class TestLaPruebaDeUnidad(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestLasImagenesDelVocabulario(unittest.TestCase):
+    """`generar_imagenes.py`: dibuja los sustantivos del vocabulario.
+
+    Las 976 entradas no se pueden dibujar: 505 son saludos, adjetivos y
+    palabras funcionales —«hola», «muy», «mi/mis», «mayor»— y de las que
+    llevan artículo hay que quitar los abstractos. Lo que estas pruebas fijan
+    es ese filtro y la llave de la cache, que es donde esto cuesta dinero."""
+
+    def test_la_variante_americana_no_se_pega_a_la_de_espana(self):
+        """El 🌎 separa las dos formas: «la carta 🌎 el menú». Quitándolo sin
+        partir salía «la carta el menú», que no es ninguna palabra y se habría
+        pagado un dibujo de ella. Se queda la PRIMERA, que por la regla 8 es la
+        más extendida y la que el curso enseña."""
+        self.assertEqual("la carta", generar_imagenes.limpiar("la **car**ta 🌎 el me**nú**"))
+        self.assertEqual("el zumo", generar_imagenes.limpiar("el zumo 🌎 el jugo"))
+        # Y las otras dos formas de traer variantes siguen funcionando.
+        self.assertEqual("el sobrino", generar_imagenes.limpiar("el so**bri**no / la so**bri**na"))
+        self.assertEqual("el marido", generar_imagenes.limpiar("el ma**ri**do"))
+
+    def test_solo_se_dibuja_lo_que_tiene_dibujo(self):
+        """Sin artículo no es un sustantivo, y un abstracto no se dibuja sin
+        mentir. Un dibujo ahí sería decoración que roba sitio en 30 minutos."""
+        for si in ("la manzana", "el perro", "la casa", "los zapatos"):
+            self.assertTrue(generar_imagenes.es_dibujable(si), si)
+        for no in ("hola", "muy", "gracias", "mayor", "¿Y tú?",   # sin artículo
+                   "el IVA", "la fianza", "el huso horario",       # trámites
+                   "la tilde", "el patronímico", "la regla",       # gramática
+                   "la Península", "el Día del Padre"):            # sitios reales
+            self.assertFalse(generar_imagenes.es_dibujable(no), no)
+
+    def test_ningun_estilo_deja_escribir_texto_en_la_imagen(self):
+        """Los modelos escriben con faltas, y un dibujo de «la mesa» con «MEZA»
+        encima le enseña al alumno la falta. No es una preferencia: es lo único
+        del estilo que no se puede aflojar."""
+        for nombre, estilo in generar_imagenes.ESTILOS.items():
+            self.assertIn(generar_imagenes.SIN_TEXTO, estilo, nombre)
+
+    def test_cambiar_de_estilo_es_otro_archivo(self):
+        """Si no, probar un estilo pisaría el anterior y no se podrían
+        comparar —y el índice mezclaría dos—. Es lo mismo que la voz del audio."""
+        nombres = {generar_imagenes.nombre_de("la manzana", e)
+                   for e in generar_imagenes.ESTILOS}
+        self.assertEqual(len(nombres), len(generar_imagenes.ESTILOS))
+        # Y la misma palabra con el mismo estilo es SIEMPRE el mismo archivo:
+        # eso es lo que hace que no se pague dos veces.
+        self.assertEqual(generar_imagenes.nombre_de("la manzana"),
+                         generar_imagenes.nombre_de("la manzana"))
+
+    def test_la_muestra_no_juzga_el_estilo_con_palabras_dificiles(self):
+        """«El compadre» o «el centro comercial» salen mal por el modelo y no
+        por el estilo. Una muestra con ellas haría confundir «no entendió la
+        palabra» con «no me gusta el dibujo», que es lo que se decide."""
+        palabras = generar_imagenes.todas_las_palabras(plan.cargar())
+        muestra = generar_imagenes.muestra_de(palabras, 6)
+        self.assertEqual(6, len(muestra))
+        for w in muestra:
+            nucleo = generar_imagenes.ARTICULO.sub("", w)
+            self.assertEqual(1, len(nucleo.split()), f"«{w}» tiene más de una palabra")
+
+    def test_un_archivo_vacio_no_cuenta_como_dibujado(self):
+        """Una descarga cortada dejaría un webp de cero bytes que el sitio
+        serviría como bueno. Misma guarda que en el audio."""
+        with tempfile.TemporaryDirectory() as tmp:
+            carpeta = pathlib.Path(tmp)
+            (carpeta / generar_imagenes.nombre_de("la manzana")).write_bytes(b"")
+
+            self.assertEqual(["la manzana"], generar_imagenes.faltan(["la manzana"], carpeta))
+            self.assertEqual(0, generar_imagenes.escribir_indice(["la manzana"], carpeta))
+
+            indice = json.loads((carpeta / generar_imagenes.INDICE).read_text(encoding="utf-8"))
+            self.assertEqual({}, indice, "una imagen vacía no puede entrar en el índice")
+

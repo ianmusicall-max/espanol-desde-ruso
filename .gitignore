@@ -13,6 +13,13 @@ salida/
 # el `.parcial` de una descarga cortada, que no es un audio.
 docs/audio/*.parcial
 
+# Lo mismo para las imágenes del vocabulario: se versionan (GitHub Pages las
+# sirve) menos el `.parcial`, que es una descarga a medias y no un dibujo.
+docs/img/*.parcial
+
+# Muestras de estilo para elegir; los dibujos buenos viven en docs/img/
+muestras-img/
+
 # Capturas de pantalla para enseñar algo, no son del sitio
 capturas/
 
