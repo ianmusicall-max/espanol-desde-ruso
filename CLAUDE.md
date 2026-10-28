@@ -77,7 +77,7 @@ la documentación del programa, en español.
   2026-10-26) estan en `revisado: false` y la pagina lo avisa. Hay que
   comprobar que cada distractor sea de verdad el error que dice y que la unidad
   asignada sea donde el curso lo ensena.
-- **Las 259 lecciones de las semanas 4 en adelante son borradores**
+- **Las 273 lecciones de las semanas 4 en adelante son borradores**
   (`revisado: false`) y el sitio las marca como tales. Las 21 primeras estan
   revisadas.
 - **El orden de los pasados: se recomendo NO cambiarlo** (2026-10-26, de
@@ -3091,16 +3091,155 @@ domingo con una lección. No se reescribieron 50 domingos ya revisados por una
 lista que acaba de aparecer, y la regla del propio script sigue en pie: una
 repetición puede ser legítima y decide el profesor.
 
+## La unidad 21: la casa, y la unidad que ya estaba casi toda dada (días 281-294)
+
+Catorce lecciones, semanas 41 y 42. El curso pasa de 280 a **294 de 365** y
+**2.642 tarjetas**.
+
+**Es la unidad con más material previo de toda la serie, y de otra manera que
+la 20.** Allí eran seis días enteros ya dados; aquí lo que estaba repartido
+era el **aparato completo** de la unidad, pieza a pieza, por quince semanas
+distintas:
+
+| Lo que el calendario traía | Ya estaba en |
+|---|---|
+| *se alquila / se alquilan*, la fianza, amueblado, los gastos incluidos | **S08D2-D3** (la unidad de los anuncios de pisos) |
+| *no se puede*, *prohibido*, *se ruega*, *se vende*, *se habla español* | **S31D5** (carteles y normas) |
+| *hay que* · *tener que* / *deber* comparados | **S17D4** · **S20D1** |
+| los **ocho participios irregulares** | **S18D1**, para el perfecto |
+| *está roto*, *no funciona*, *la avería*, *el grifo*, *el técnico*, *quejarse* | **S14D4** y **S18D5** (la queja en recepción) |
+| *fregar los platos*, *la cerradura*, *el vecino de abajo* | **S28D5** |
+| *poner la mesa* · *planchar, barrer, lavar, cocinar* | **S10D1** · **S10D7** |
+| el casero, *mudarse*, *independizarse*, *compartir* | **S23D2** · **S23D5** · **S24D7** · **S25D1** |
+| el portal, la escalera, el ascensor, el patio, la azotea, la comunidad | **S07D3** y **S07D7** |
+| todo el aparato de la carta formal (*Estimado*, *quedo a la espera*, *Atentamente*, *adjuntar*, *en primer lugar*) | **S14D5** · **S30D3** · **S36D5** |
+
+**Y lo nuevo de verdad, que es lo que las catorce lecciones enseñan:**
+
+- **El participio con *estar*, y la agudeza es que contradice la unidad 9.**
+  Allí se enseñó —y el test de la unidad 9 lo preguntaba— que *«el participio
+  no cambia nunca»*: ✗ *María ha llegada*. Con *estar* **siempre** concuerda:
+  *las ventanas están abiert**as***. Dos reglas opuestas, las dos ciertas, y
+  lo que decide es el auxiliar. Aquí el ruso **ayuda** —«сломан / сломана /
+  сломаны» también concuerda— y la dificultad es la contraria: no llevarse el
+  acuerdo a las frases con *haber*. El noveno irregular es *muerto*, y hay
+  seis más gratis con prefijo (*devuelto*, *resuelto*, *descubierto*,
+  *descrito*, *compuesto*, *deshecho*).
+- ***Está roto* (estado) frente a *se ha roto* (suceso)**, que es el
+  `contraste_ru` declarado de la unidad: «сломан» / «сломался». S18D5 ya los
+  había puesto uno al lado del otro sin explicarlos («*se ha averiado* — или
+  *está averiado*», en su clave). Y de ahí sale la frase más útil de la
+  semana: ***se me ha roto el móvil***, la construcción de tres piezas que
+  S40D2 estrenó para el cuerpo (*se me hinchó el pie*). ⚠️ El verbo concuerda
+  con la cosa: *se me **han** perdido las llaves*.
+- ***Tocar*** («быть чьей-то очередью»), que funciona como *gustar* y como el
+  *molestar* del viernes: *me toca*, *¿a quién le toca?* Tres verbos de esa
+  familia en una semana, y el alumno ya tiene la máquina desde la unidad 6.
+- ***¿Te importa si…?* y la trampa del ANSWER, no de la pregunta.** «Нет» =
+  «можно». El ruso ayuda literalmente («ты не против?» → «нет»); el que se
+  pierde es quien piense en inglés. La lección pide contestar con dos
+  palabras (*no, no, ponla*) justamente porque la mitad del riesgo está ahí.
+- ***Gracias por* + infinitivo** frente al «спасибо, **что**…» ruso, con la
+  negación delante (*por no contestar*). Y ⚠️ ***perdón* no es *lo siento***:
+  si a alguien se le ha muerto un familiar se dice *lo siento mucho* y nunca
+  *perdón*, porque no es culpa suya. El ruso «извините» cubre los dos.
+- **El *se* impersonal frente a la pasiva refleja, con UNA prueba
+  operativa**: ¿qué hay justo detrás del verbo? Sustantivo sin *a* →
+  concuerda (*se alquil**an** pisos*). Nada, o *a* + persona → singular
+  siempre (*se dice que…*, *se busca **a** los dueños*). ⚠️ El ruso
+  «говорят» en plural es lo que produce el ✗ *se dicen que*. Y ***uno***,
+  porque dos *se* no caben: ✗ *se se levanta* → *uno se levanta*.
+
+**El hilo que de verdad recorre la unidad no es gramatical, y conviene no
+perderlo si alguien la reescribe: es a quién señala la frase.**
+
+| Día | La misma idea, otra situación |
+|---|---|
+| 41-5 | ***hay que*** (regla, nadie señalado) frente a ***tienes que*** (señala a él, y es el principio de una discusión) |
+| 42-3 | quejarse del **ruido** y no de la persona: ***se oye** mucho la música*, nunca *tú pones* |
+| 42-5 | una **regla**, no un reproche: el tercer movimiento de la conversación es *en eso tienes razón* |
+| 41-7 | comparar España y Rusia **sin decir dónde se vive mejor** |
+
+Por eso la clave de 42-5 señala cuatro palabras —*tú*, *vosotros*,
+*siempre*, *nunca*— como las que convierten un reparto de tareas en una
+pelea.
+
+**Decisiones de contenido:**
+
+- **La edad de emancipación va con `[VERIFICAR]` y sin número** (regla 7). El
+  fenómeno tiene nombre propio en la prensa española (*la emancipación
+  tardía*) y causas estructurales que sí se pueden contar (el alquiler frente
+  al primer sueldo, el contrato temporal, el aval); la cifra media cambia cada
+  año y no se da ninguna. Lo que sí se dice es lo cultural, que es lo que el
+  lector no espera: vivir con los padres a los veintiocho **no se lee como
+  fracaso**.
+- **Las horas de silencio no se inventan**: las escribe *la comunidad de
+  vecinos* y están colgadas en el portal. La lección enseña la pregunta
+  (*¿a partir de qué hora no se puede hacer ruido?*) en vez de un horario
+  nacional que no existe.
+- 🌎 **Dos avisos de la regla 8 que valen un anuncio entero.** *Fregar los
+  platos* es peninsular y en parte de América *fregar* significa «надоедать»,
+  así que *lavar* es más seguro en todas partes. Y sobre todo: **en media
+  América *el piso* es el suelo o la planta**, no la vivienda, así que
+  «сдаётся квартира» en México es *se renta departamento*. Toda la unidad va
+  de alquilar, y el sustantivo cambia.
+- **La casa latinoamericana se cuenta por su planta, no por adjetivos**:
+  calle → *zaguán* → *patio* → *corredor* → habitaciones, y de ahí salen
+  solas la reja (las ventanas dan al patio), la azotea útil y la hamaca como
+  cama en Yucatán y el Caribe.
+- **El episodio «Un año de contrato»** cierra pidiendo la persiana **antes**
+  de firmar y con Carmen escribiendo a mano que ya estaba rota: es la unidad
+  entera (*sigue rota*, *se rompió*, *¿podría?*) puesta a trabajar en el
+  único momento donde sirve. Y la última línea es el arco: no firmó para
+  quedarse un año, firmó porque ya había decidido quedarse.
+
+**Los dos tests, comprobados en navegador de verdad.** El Мини-тест de la
+semana 41 son 15 ítems (lo que pide el calendario) en **5/5/5**; el test de
+la unidad, en **4/4/4/3**. `scripts/probar_navegador.js` los añade a su lista
+y los contesta en Chromium eligiendo la opción por su TEXTO: 15/15 y 15/15,
+cero errores de JS.
+
+**Un subjuntivo entró y se quitó; otro se queda porque está declarado.** Se
+colaron *para que las tenga todas juntas* y un *que lo revisen* en el día
+42-5 (reescritos: *así las tiene juntas*, *que lo revisaran*). Lo que **sí**
+se queda es ***le agradecería que* + imperfecto de subjuntivo**, porque
+S30D3 lo enseña como fórmula hecha y con esas mismas formas (*que me
+indicara*, *que me enviara*): es la regla de la unidad 20 —un chunk
+declarado vale cuando no **contradice** una lección anterior—.
+
+**Los tres barridos, y lo que cazaron:** 0 duplicados de léxico en las dos
+semanas contra el curso entero (uno se corrigió: *equivocarse*, ya en
+**S35D4**, sustituido por *es culpa mía*); dos tokens de dos alfabetos
+(*нóмин* y *бóльшая*, las dos con una vocal **latina** dentro de una palabra
+rusa — es el tercer caso de esa forma exacta, y a ojo no se ve nunca); y 0
+formas no enseñadas después de los arreglos de arriba.
+
+### Y una advertencia de método que casi costó reenseñar seis palabras
+
+**El volcado del léxico hay que normalizarlo antes de buscar en él.** El
+primer barrido de esta unidad dijo que *la fianza*, *los gastos incluidos*,
+*amueblado* y *el casero* **no estaban enseñados** — y los cuatro lo están.
+El motivo es que las lecciones tempranas marcan la sílaba tónica **dentro**
+de la palabra (`la **fian**za`, `los **gas**tos in**clui**dos`), así que un
+`grep fianza` sobre el volcado crudo no encuentra nada. Hay que pasar cada
+entrada por `revisar_lexico.normalizar` —que quita negritas, artículo,
+acentos y mayúsculas— y buscar sobre eso.
+
+Es un falso negativo silencioso y del peor tipo: dice «esto es nuevo» de algo
+que el alumno ya sabe, y el resultado habría sido una lección que presenta
+como novedad la mitad de la unidad 4. El informe de repeticiones no lo habría
+cazado después, porque yo habría cambiado la redacción, no la entrada.
+
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.
-- **280 lecciones escritas** (semanas 1-40 enteras): el nivel A1 completo y
-  diez unidades de A2 —hasta la 20, consejos y bienestar—, 2.502 tarjetas de
+- **294 lecciones escritas** (semanas 1-42 enteras): el nivel A1 completo y
+  once unidades de A2 —hasta la 21, casa y convivencia—, 2.642 tarjetas de
   vocabulario. Las 21 primeras revisadas; el resto son borradores.
-  **`docs/` está al día**: las 280 lecciones construidas y publicadas, con la
+  **`docs/` está al día**: las 294 lecciones construidas y publicadas, con la
   tira de dibujos del héroe —la misma fila en el móvil y en el escritorio—,
   la guía de los seis pasos dentro de cada lección y la tipografía propia
-  (Literata + Onest, autoalojada). La suite entera pasa: 266 pruebas, una de
+  (Literata + Onest, autoalojada). La suite entera pasa: 267 pruebas, una de
   ellas en navegador de verdad.
 - Sitio público en `docs/` con portada, índice, test de nivel, «О курсе»,
   contacto y política de privacidad. Tres idiomas (ru/es/en) —el test solo en
@@ -3123,8 +3262,8 @@ repetición puede ser legítima y decide el profesor.
 - **El audio está hecho** (2026-10-26): 3.543 frases locutadas con la voz
   `shimmer`, 1,30 USD, 92 MB a 64 kbps, y 4.225 botones ▶ en 94 de las 100
   lecciones. Comprobado que suena en navegador.
-- Pendiente: **lecciones 281-365** (unidades 21-24 y la fase final: 85
-  lecciones), el audio de todo lo escrito desde la 101 —5.226 frases que
-  faltan de 8.769, **1,81 USD**, con `OPENAI_API_KEY` en el entorno—, más
+- Pendiente: **lecciones 295-365** (unidades 22-24 y la fase final: 71
+  lecciones), el audio de todo lo escrito desde la 101 —5.645 frases que
+  faltan de 9.188, **1,95 USD**, con `OPENAI_API_KEY` en el entorno—, más
   libros de referencia, y lo de
   «Pendiente de revision del profesor» de arriba.

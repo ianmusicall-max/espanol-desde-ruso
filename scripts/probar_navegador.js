@@ -32,6 +32,8 @@ const POR_DEFECTO = [
   'docs/semana-33/dia-6.html',       // repaso de producción: NO debe volverse test
   'docs/semana-37/dia-6.html',       // Мини-тест de 20 ítems, el más largo del curso
   'docs/semana-38/dia-6.html',       // test de unidad recién escrito
+  'docs/semana-41/dia-6.html',       // repaso de la unidad 21: Мини-тест de 15
+  'docs/semana-42/dia-6.html',       // test de la unidad 21
   'docs/semana-01/dia-1.html',       // lección normal: audio y huecos
 ];
 
