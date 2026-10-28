@@ -410,6 +410,38 @@ details ul{margin:.5rem 0}
 .leccion-cab{display:flex;flex-wrap:wrap;gap:.45rem;align-items:center;margin:1.3rem 0 .2rem;
   font-family:Onest,ui-sans-serif,system-ui,sans-serif;font-size:.78rem;color:var(--tenue)}
 .leccion-cab .n{background:var(--acento);color:#fff;border-radius:999px;padding:.12rem .6rem;font-weight:600}
+/* ---- la guia de los seis pasos ----
+   Pegada bajo la cabecera, que es pegajosa a partir de 40rem: el tope lo mide
+   el guion y lo deja en --alto-cabecera, porque escrito a mano se quedaria
+   viejo el dia que cambie el menu y la guia saldria tapada. z-index por debajo
+   de la cabecera (20) a proposito. */
+.guia{position:sticky;top:var(--alto-cabecera,0px);z-index:15;display:flex;align-items:center;
+  gap:.6rem;flex-wrap:wrap;margin:.6rem 0 1.2rem;padding:.5rem .7rem;background:var(--tarjeta);
+  border:1px solid var(--linea);border-radius:10px;box-shadow:var(--sombra);
+  font-family:Onest,ui-sans-serif,system-ui,sans-serif}
+.guia-barra{display:flex;gap:.3rem}
+.guia-punto{width:1.6rem;height:1.6rem;border-radius:50%;border:1px solid var(--linea);
+  background:var(--papel);color:var(--tenue);font:inherit;font-size:.74rem;line-height:1;
+  cursor:pointer;padding:0}
+.guia-punto:hover{border-color:var(--acento)}
+.guia-punto.hecho{background:var(--linea);color:var(--tinta)}
+.guia-punto.aqui{background:var(--acento);border-color:var(--acento);color:#fff;font-weight:600}
+.guia-ahora{flex:1 1 7rem;min-width:0;display:flex;flex-direction:column;line-height:1.25}
+.guia-ahora b{font-size:.86rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.guia-ahora span{font-size:.72rem;color:var(--tenue)}
+.guia-ir{border:1px solid var(--acento);background:transparent;color:var(--acento);
+  border-radius:7px;padding:.33rem .7rem;font:inherit;font-size:.8rem;cursor:pointer;white-space:nowrap}
+.guia-ir:hover{background:var(--acento);color:#fff}
+/* En el movil los seis numeros no caben en la misma fila que el nombre del
+   paso y el boton, y la barra se partia en dos: noventa pixeles pegados arriba
+   en una pantalla de 844. Puntos sin numero: cual es se lee en el nombre, que
+   esta al lado y dice mas. Medido en el navegador a 390 px. */
+@media(max-width:28rem){
+  .guia{gap:.45rem;padding:.45rem .55rem}
+  .guia-punto{width:.62rem;height:.62rem;font-size:0;border-width:1px}
+  .guia-ir{padding:.33rem .55rem}
+}
+@media print{.guia{display:none}}
 .aviso{background:var(--realce);border:1px solid var(--linea);border-radius:8px;padding:.6rem .85rem;
   font-size:.88rem;font-family:Onest,ui-sans-serif,system-ui,sans-serif;margin:1rem 0}
 nav.pasos{display:flex;justify-content:space-between;gap:.8rem;margin:2.5rem 0 0;padding-top:1rem;
@@ -458,7 +490,7 @@ footer.sitio p{margin:.35rem 0}
 <div id="cookies"><span>Мы используем файлы cookie для показа рекламы и статистики посещений. <a href="./privacy.html">Подробнее</a>.</span><button class="boton" style="padding:.4rem 1rem;font-size:.85rem" onclick="try{localStorage.setItem('cookies','1')}catch(e){};this.parentNode.remove()">Понятно</button></div><script>try{if(localStorage.getItem('cookies')){var b=document.getElementById('cookies');b&&b.remove()}}catch(e){}</script>
 <script>(function(){var b=document.getElementById('tema');if(!b)return;function actual(){var r=document.documentElement;return r.dataset.tema||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}b.addEventListener('click',function(){var n=actual()==='dark'?'light':'dark';document.documentElement.dataset.tema=n;try{localStorage.setItem('tema',n)}catch(e){}});})();</script>
 
-<script>window.CURSO_TEXTOS={"continuar": "Продолжить: урок", "empezar": "Начать сначала", "marcar": "Отметить урок пройденным", "hecho": "Урок пройден", "siguiente": "Следующий урок", "tuyo": "пройдено вами", "titulo": "Ваш прогресс", "aviso": "Прогресс хранится только в этом браузере, на этом устройстве. Регистрации нет, и никуда он не отправляется. Если вы очистите данные браузера или откроете курс на другом телефоне, отметки не перенесутся.", "borrar": "Сбросить прогресс", "confirmar": "Сбросить все отметки?", "copiar": "Сохранить мой прогресс", "copiado": "Код скопирован — вставьте его себе в заметки или в «Избранное» в Telegram", "restaurar": "Восстановить мой прогресс", "pegar": "Вставьте сюда ваш код", "aplicar": "Восстановить", "cancelar": "Отмена", "malo": "Это не похоже на код прогресса. Ничего не изменено.", "menos": "В этом коде меньше уроков, чем отмечено сейчас (%a% вместо %b%). Всё равно восстановить?", "hecho_restaurar": "Готово: восстановлено уроков — %n%", "antes": "Перед тем как очистить браузер или сменить телефон, сохраните код."};window.CURSO_RAIZ=".";window.CURSO_PUBLICADAS=0;window.CURSO_DIAS={};</script>
+<script>window.CURSO_TEXTOS={"continuar": "Продолжить: урок", "guia_paso": "Шаг {n} из {total}", "guia_siguiente": "Дальше", "guia_final": "Отметить и дальше", "guia_empezar": "Начать с первого шага", "empezar": "Начать сначала", "marcar": "Отметить урок пройденным", "hecho": "Урок пройден", "siguiente": "Следующий урок", "tuyo": "пройдено вами", "titulo": "Ваш прогресс", "aviso": "Прогресс хранится только в этом браузере, на этом устройстве. Регистрации нет, и никуда он не отправляется. Если вы очистите данные браузера или откроете курс на другом телефоне, отметки не перенесутся.", "borrar": "Сбросить прогресс", "confirmar": "Сбросить все отметки?", "copiar": "Сохранить мой прогресс", "copiado": "Код скопирован — вставьте его себе в заметки или в «Избранное» в Telegram", "restaurar": "Восстановить мой прогресс", "pegar": "Вставьте сюда ваш код", "aplicar": "Восстановить", "cancelar": "Отмена", "malo": "Это не похоже на код прогресса. Ничего не изменено.", "menos": "В этом коде меньше уроков, чем отмечено сейчас (%a% вместо %b%). Всё равно восстановить?", "hecho_restaurar": "Готово: восстановлено уроков — %n%", "antes": "Перед тем как очистить браузер или сменить телефон, сохраните код."};window.CURSO_RAIZ=".";window.CURSO_PUBLICADAS=0;window.CURSO_DIAS={};</script>
 <script src="./progreso.js" defer></script>
 
 

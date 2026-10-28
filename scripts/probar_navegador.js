@@ -40,6 +40,34 @@ async function unaPagina(b, rel) {
   await p.goto('file://' + path.resolve(rel));
 
   const r = { pagina: rel, test: null, aciertos: null, errores: [] };
+
+  // La guia de los pasos se recorre PRIMERO y desde arriba del todo. Puesta
+  // detras del test, arrancaba donde el test habia dejado el scroll y el
+  // recorrido salia corrido: el fallo era de esta comprobacion y no de la
+  // guia, que es justo el error que mas cuesta ver en una prueba.
+  const guia = p.locator('#guia');
+  if (await guia.count() && await guia.isVisible()) {
+    await p.evaluate(() => window.scrollTo(0, 0));
+    await p.waitForTimeout(350);
+    const pasos = await p.locator('.guia-punto').count();
+    const desde = parseInt(await p.locator('.guia-punto.aqui').first().getAttribute('data-i'), 10);
+    const recorrido = [];
+    for (let k = 0; k < pasos - 1; k++) {
+      await p.locator('.guia-ir').click();
+      await p.waitForTimeout(450);
+      recorrido.push(parseInt(await p.locator('.guia-punto.aqui').first().getAttribute('data-i'), 10));
+    }
+    r.guia = pasos;
+    r.guia_desde = desde;
+    r.guia_recorrido = recorrido;
+    // Cada clic avanza uno hasta el ultimo paso; alli «Дальше» ya no avanza,
+    // lleva al boton de marcar la leccion, asi que el indice se queda.
+    r.guia_avanza = desde === 0 && recorrido.every((v, i) => v === Math.min(i + 1, pasos - 1));
+    if (!r.guia_avanza) r.errores.push('la guia no avanza uno por clic: ' + desde + ' -> ' + recorrido.join(','));
+    await p.evaluate(() => window.scrollTo(0, 0));
+    await p.waitForTimeout(250);
+  }
+
   const hayTest = await p.evaluate(() => !!(window.CURSO_PRUEBA && window.CURSO_PRUEBA.preguntas));
   if (hayTest) {
     const correctas = await p.evaluate(() =>

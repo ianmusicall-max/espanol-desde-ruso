@@ -183,6 +183,10 @@ ru:
     otra: "Ещё раз"
   progreso:
     continuar: "Продолжить: урок"
+    guia_paso: "Шаг {n} из {total}"
+    guia_siguiente: "Дальше"
+    guia_final: "Отметить и дальше"
+    guia_empezar: "Начать с первого шага"
     empezar: "Начать сначала"
     marcar: "Отметить урок пройденным"
     hecho: "Урок пройден"
@@ -364,6 +368,10 @@ es:
     otra: "Otra vez"
   progreso:
     continuar: "Continuar: lección"
+    guia_paso: "Paso {n} de {total}"
+    guia_siguiente: "Siguiente"
+    guia_final: "Marcar y seguir"
+    guia_empezar: "Empezar por el primer paso"
     empezar: "Empezar de cero"
     marcar: "Marcar la lección como hecha"
     hecho: "Lección hecha"
@@ -545,6 +553,10 @@ en:
     otra: "Try again"
   progreso:
     continuar: "Continue: lesson"
+    guia_paso: "Step {n} of {total}"
+    guia_siguiente: "Next"
+    guia_final: "Mark and continue"
+    guia_empezar: "Start with step one"
     empezar: "Start from the beginning"
     marcar: "Mark this lesson as done"
     hecho: "Lesson done"

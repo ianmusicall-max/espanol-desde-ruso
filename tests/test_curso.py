@@ -1278,14 +1278,25 @@ class TestLaEntrada(unittest.TestCase):
         self.assertEqual(construir_sitio.meses_de(30, formas)[0], 2, "nunca baja de 2")
 
     def test_la_portada_lo_enseña_en_los_tres_idiomas(self):
+        """El hueco {n} tiene que quedar relleno EN LA PROSA.
+
+        Los `<script>` se quitan antes de mirar, igual que hace el revisor de
+        enlaces rotos desde el 2026-10-26 y por el mismo motivo: el JSON de
+        `window.CURSO_TEXTOS` lleva plantillas sin rellenar a propósito —«Шаг
+        {n} из {total}», que el navegador rellena al pintar la guía— y un
+        buscador de texto las acusaba de ser el hueco de los meses."""
         destino = pathlib.Path(tempfile.mkdtemp())
         construir_sitio.construir(destino, self.cfg, self.textos)
         for i in self.textos["idiomas"]:
             carpeta = destino / i["carpeta"] if i["carpeta"] else destino
-            portada = carpeta.joinpath("index.html").read_text(encoding="utf-8")
+            bruto = carpeta.joinpath("index.html").read_text(encoding="utf-8")
+            portada = re.sub(r"<script\b.*?</script>", "", bruto, flags=re.S)
             self.assertIn('class="progreso-nota"', portada, i["codigo"])
             self.assertNotIn("{n}", portada, f'{i["codigo"]}: quedó el hueco sin rellenar')
             self.assertNotIn("{meses}", portada, i["codigo"])
+            # Y la guarda de la guarda: que quitar los <script> no haya dejado
+            # la comprobación ciega.
+            self.assertIn("{n}", bruto, "la plantilla de la guía tiene que estar en el JSON")
 
     def test_el_boton_principal_lleva_a_la_primera_leccion(self):
         """La entrada tiene UN camino obvio, y no puede llevar a un 404."""
@@ -1619,6 +1630,66 @@ class TestElTestDeNivel(unittest.TestCase):
         self.assertEqual(mapa.count("/test.html</loc>"), 1)
 
 
+class TestLaGuiaDeLaLeccion(unittest.TestCase):
+    """Los seis pasos de los 30 minutos, visibles mientras se lee.
+
+    Lo pidió el profesor: «que sea un aprendizaje intuitivo, colocar algo más
+    guiado». Una lección es una página larga con seis apartados y sus franjas
+    de minutos escritas en los títulos, y hasta ahora el alumno tenía que ir
+    encontrándolos solo. Esto no añade materia: hace visible la que ya estaba.
+
+    Los pasos salen de los PROPIOS títulos y no de una lista en el código. Una
+    lista se queda vieja el día que un tipo de día use otros apartados —los de
+    examen, simulacro y proyecto ya lo hacen— y el síntoma sería una guía que
+    señala donde no es."""
+
+    # La misma expresión que usa el guion, traducida: «## 3. Новое (6–16 мин)».
+    FRANJA = re.compile(r"^\s*(\d+)\.\s*(.+?)\s*\((\d+)\s*[–—-]\s*(\d+)\s*мин\)\s*$")
+
+    def test_cada_leccion_lleva_su_hueco_y_nace_oculto(self):
+        """Sin JavaScript la página se queda exactamente como estaba: los seis
+        títulos con sus franjas, que es la versión que vale."""
+        paginas = sorted((RAIZ / "docs").glob("semana-*/dia-*.html"))
+        if not paginas:
+            self.skipTest("el sitio no está construido")
+        for ruta in paginas[:40]:
+            with self.subTest(pagina=ruta.parent.name + "/" + ruta.name):
+                self.assertIn('<div id="guia" class="guia" hidden>', ruta.read_text(encoding="utf-8"))
+        # y en ninguna otra página: la guía es de las lecciones
+        for otra in ("index.html", "kurs.html", "test.html"):
+            self.assertNotIn('id="guia"', (RAIZ / "docs" / otra).read_text(encoding="utf-8"))
+
+    def test_los_pasos_salen_de_los_titulos_de_cada_tipo_de_dia(self):
+        """Cada tipo de día tiene sus propios apartados y todos tienen que dar
+        al menos tres pasos; con menos, el guion no dibuja nada y la página se
+        queda como está, que es el fallo seguro."""
+        vistos = {}
+        for ruta in sorted((RAIZ / "curso").glob("semana-*/dia-*.md")):
+            datos, cuerpo = validar.frontmatter(ruta.read_text(encoding="utf-8"))
+            pasos = [m for linea in cuerpo.splitlines()
+                     if linea.startswith("## ") and (m := self.FRANJA.match(linea[3:]))]
+            vistos.setdefault(datos["tipo"], []).append(len(pasos))
+        self.assertGreaterEqual(len(vistos), 5, f"tipos vistos: {sorted(vistos)}")
+        for tipo, cuentas in sorted(vistos.items()):
+            with self.subTest(tipo=tipo):
+                self.assertGreaterEqual(min(cuentas), 3,
+                                        f"{tipo}: algún día da menos de tres pasos")
+
+    def test_el_tope_pegajoso_se_mide_y_no_se_escribe(self):
+        """La cabecera es pegajosa a partir de 40rem, así que la guía va debajo
+        de ella. Su alto lo mide el guion y lo deja en --alto-cabecera: escrito
+        a mano se quedaría viejo el día que cambie el menú, y el síntoma sería
+        la guía tapada —que es justo lo que ya pasó con la barra en octubre—."""
+        self.assertIn("--alto-cabecera", construir_sitio.GUIA_JS)
+        self.assertIn("top:var(--alto-cabecera,0px)", construir_sitio.CSS.replace(" ", ""))
+        self.assertIn("GUIA_JS", (RAIZ / "scripts" / "construir_sitio.py").read_text(encoding="utf-8"))
+
+    def test_el_guion_llega_al_navegador(self):
+        js = (RAIZ / "docs" / "progreso.js").read_text(encoding="utf-8")
+        self.assertIn("guia-barra", js)
+        self.assertIn("--alto-cabecera", js)
+
+
 class TestElNavegador(unittest.TestCase):
     """Lo único que caza un ReferenceError.
 
@@ -1652,6 +1723,9 @@ class TestElNavegador(unittest.TestCase):
         for pag in paginas:
             with self.subTest(pagina=pag["pagina"]):
                 self.assertEqual(pag["errores"], [], "errores de JavaScript")
+                if pag.get("guia"):
+                    self.assertTrue(pag["guia_avanza"],
+                                    f'la guía no avanza: {pag.get("guia_recorrido")}')
                 if pag["test"]:
                     self.assertEqual(pag["aciertos"], pag["test"],
                                      "no se pudieron contestar todas")

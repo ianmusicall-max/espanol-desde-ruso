@@ -530,6 +530,38 @@ details ul{margin:.5rem 0}
 .leccion-cab{display:flex;flex-wrap:wrap;gap:.45rem;align-items:center;margin:1.3rem 0 .2rem;
   font-family:Onest,ui-sans-serif,system-ui,sans-serif;font-size:.78rem;color:var(--tenue)}
 .leccion-cab .n{background:var(--acento);color:#fff;border-radius:999px;padding:.12rem .6rem;font-weight:600}
+/* ---- la guia de los seis pasos ----
+   Pegada bajo la cabecera, que es pegajosa a partir de 40rem: el tope lo mide
+   el guion y lo deja en --alto-cabecera, porque escrito a mano se quedaria
+   viejo el dia que cambie el menu y la guia saldria tapada. z-index por debajo
+   de la cabecera (20) a proposito. */
+.guia{position:sticky;top:var(--alto-cabecera,0px);z-index:15;display:flex;align-items:center;
+  gap:.6rem;flex-wrap:wrap;margin:.6rem 0 1.2rem;padding:.5rem .7rem;background:var(--tarjeta);
+  border:1px solid var(--linea);border-radius:10px;box-shadow:var(--sombra);
+  font-family:Onest,ui-sans-serif,system-ui,sans-serif}
+.guia-barra{display:flex;gap:.3rem}
+.guia-punto{width:1.6rem;height:1.6rem;border-radius:50%;border:1px solid var(--linea);
+  background:var(--papel);color:var(--tenue);font:inherit;font-size:.74rem;line-height:1;
+  cursor:pointer;padding:0}
+.guia-punto:hover{border-color:var(--acento)}
+.guia-punto.hecho{background:var(--linea);color:var(--tinta)}
+.guia-punto.aqui{background:var(--acento);border-color:var(--acento);color:#fff;font-weight:600}
+.guia-ahora{flex:1 1 7rem;min-width:0;display:flex;flex-direction:column;line-height:1.25}
+.guia-ahora b{font-size:.86rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.guia-ahora span{font-size:.72rem;color:var(--tenue)}
+.guia-ir{border:1px solid var(--acento);background:transparent;color:var(--acento);
+  border-radius:7px;padding:.33rem .7rem;font:inherit;font-size:.8rem;cursor:pointer;white-space:nowrap}
+.guia-ir:hover{background:var(--acento);color:#fff}
+/* En el movil los seis numeros no caben en la misma fila que el nombre del
+   paso y el boton, y la barra se partia en dos: noventa pixeles pegados arriba
+   en una pantalla de 844. Puntos sin numero: cual es se lee en el nombre, que
+   esta al lado y dice mas. Medido en el navegador a 390 px. */
+@media(max-width:28rem){
+  .guia{gap:.45rem;padding:.45rem .55rem}
+  .guia-punto{width:.62rem;height:.62rem;font-size:0;border-width:1px}
+  .guia-ir{padding:.33rem .55rem}
+}
+@media print{.guia{display:none}}
 .aviso{background:var(--realce);border:1px solid var(--linea);border-radius:8px;padding:.6rem .85rem;
   font-size:.88rem;font-family:Onest,ui-sans-serif,system-ui,sans-serif;margin:1rem 0}
 nav.pasos{display:flex;justify-content:space-between;gap:.8rem;margin:2.5rem 0 0;padding-top:1rem;
@@ -1484,8 +1516,122 @@ def inicios_de_unidad(cal: dict, raiz: str = ".") -> dict:
     return inicios
 
 
+GUIA_JS = r"""(function(){
+  // La guia de la leccion: los seis pasos de los 30 minutos, con el que toca
+  // marcado y un boton que lleva al siguiente.
+  //
+  // Por que. Una leccion es una pagina larga con seis apartados y sus franjas
+  // de minutos escritas en los titulos («## 3. Новое (6–16 мин)»), y hasta hoy
+  // el alumno tenia que ir encontrandolos solo entre el texto. El profesor lo
+  // pidio asi: «que sea un aprendizaje intuitivo, colocar algo mas guiado».
+  // Esto no anade materia: hace visible la que ya estaba.
+  //
+  // Los pasos salen de los PROPIOS titulos de la leccion y no de una lista en
+  // el codigo. Una lista se queda vieja el dia que un tipo de dia use otros
+  // apartados —los de examen, simulacro y proyecto ya lo hacen— y el sintoma
+  // seria una guia que señala donde no es.
+  var art=document.querySelector('article[data-leccion]');
+  var caja=document.getElementById('guia');
+  var T=window.CURSO_TEXTOS||{};
+  if(!art||!caja)return;
+
+  var FRANJA=/^\s*(\d+)\.\s*(.+?)\s*\((\d+)\s*[–—-]\s*(\d+)\s*мин\)\s*$/;
+  var pasos=[];
+  Array.prototype.forEach.call(art.querySelectorAll('h2'),function(h){
+    var m=(h.textContent||'').match(FRANJA);
+    if(m)pasos.push({el:h,nombre:m[2],a:+m[3],b:+m[4]});
+  });
+  // Menos de tres no es una leccion con sus franjas (la clave, por ejemplo, no
+  // es un paso: no se hace, se consulta). Sin guia, la pagina se queda igual.
+  if(pasos.length<3)return;
+
+  // La cabecera del sitio es pegajosa a partir de 40rem, asi que la guia tiene
+  // que pegarse DEBAJO de ella. Se mide, no se escribe: cambiar el menu movia
+  // el numero y nadie se enteraria hasta ver la guia tapada.
+  function altoCabecera(){
+    var h=document.querySelector('header.sitio');
+    if(!h)return 0;
+    return getComputedStyle(h).position==='sticky'?Math.round(h.getBoundingClientRect().height):0;
+  }
+  function ajustarTope(){
+    document.documentElement.style.setProperty('--alto-cabecera',altoCabecera()+'px');
+  }
+  ajustarTope();
+  window.addEventListener('resize',ajustarTope);
+
+  var barra=document.createElement('div');barra.className='guia-barra';
+  var puntos=pasos.map(function(p,i){
+    var b=document.createElement('button');
+    b.type='button';b.className='guia-punto';b.textContent=String(i+1);
+    b.setAttribute('data-i',String(i));
+    b.title=p.nombre;b.setAttribute('aria-label',p.nombre);
+    b.addEventListener('click',function(){irA(i)});
+    barra.appendChild(b);return b;
+  });
+  var ahora=document.createElement('div');ahora.className='guia-ahora';
+  var cual=document.createElement('b'), franja=document.createElement('span');
+  ahora.appendChild(cual);ahora.appendChild(franja);
+  var ir=document.createElement('button');
+  ir.type='button';ir.className='guia-ir';
+  ir.addEventListener('click',function(){
+    if(actual+1<pasos.length){irA(actual+1)}
+    else{
+      // En el ultimo paso la guia deja de guiar la leccion y lleva al boton de
+      // marcarla: es lo unico que queda por hacer, y es lo que encadena con el
+      // dia siguiente.
+      var m=document.getElementById('marcar-caja');
+      if(m)m.scrollIntoView({behavior:'smooth',block:'center'});
+    }
+  });
+  caja.appendChild(barra);caja.appendChild(ahora);caja.appendChild(ir);
+  caja.hidden=false;
+
+  var actual=-1, hasta=0;
+  function irA(i){
+    var tope=caja.getBoundingClientRect().height+altoCabecera()+10;
+    var y=pasos[i].el.getBoundingClientRect().top+window.pageYOffset-tope;
+    // Se pinta el paso YA y se bloquea al vigilante un momento. Sin esto, el
+    // desplazamiento suave todavia no ha terminado cuando `mirar()` vuelve a
+    // calcular, el titulo aun cae un pixel por debajo del corte y el paso se
+    // queda en el anterior: el siguiente clic repetia el mismo apartado. Se
+    // vio recorriendo la leccion en el navegador, no leyendo el codigo.
+    pintar(i); hasta=Date.now()+700;
+    window.scrollTo({top:Math.max(y,0),behavior:'smooth'});
+  }
+  function pintar(i){
+    if(i===actual)return;
+    actual=i;
+    for(var k=0;k<puntos.length;k++){
+      puntos[k].classList.toggle('aqui',k===i);
+      puntos[k].classList.toggle('hecho',k<i);
+    }
+    var p=pasos[i];
+    cual.textContent=p.nombre;
+    franja.textContent=p.a+'–'+p.b+' '+(T.guia_min||'мин');
+    ir.textContent=(i+1<pasos.length?(T.guia_siguiente||'Дальше'):(T.guia_final||''))+' ↓';
+    caja.setAttribute('aria-label',(T.guia_paso||'{n}/{total}')
+      .replace('{n}',i+1).replace('{total}',pasos.length));
+  }
+  function mirar(){
+    if(Date.now()<hasta)return;
+    var corte=altoCabecera()+caja.getBoundingClientRect().height+16;
+    var i=0;
+    for(var k=0;k<pasos.length;k++){
+      if(pasos[k].el.getBoundingClientRect().top<=corte)i=k;
+    }
+    pintar(i);
+  }
+  var esperando=false;
+  window.addEventListener('scroll',function(){
+    if(esperando)return;esperando=true;
+    requestAnimationFrame(function(){esperando=false;mirar()});
+  },{passive:true});
+  mirar();
+})();"""
+
+
 def escribir_progreso_js(destino: pathlib.Path) -> None:
-    destino.joinpath("progreso.js").write_text(PROGRESO_JS, encoding="utf-8")
+    destino.joinpath("progreso.js").write_text(PROGRESO_JS + "\n" + GUIA_JS, encoding="utf-8")
 
 
 # Las doce palabras que se enseñan en la portada, elegidas A MANO y en este
@@ -2620,6 +2766,10 @@ def construir_leccion(d, cfg, t, idiomas, destino, cal, todos, audio=None,
     # el paso siguiente es lo único que se quiere hacer después de marcar.
     pasos.append(f'<a id="enlace-siguiente" href="../semana-{siguiente.semana:02d}/dia-{siguiente.dia}.html">{L["siguiente"]} {siguiente.numero} →</a>' if siguiente else "<span></span>")
 
+    # La guia nace vacia y oculta, y la llena el navegador con los apartados de
+    # esta leccion. Sin JavaScript la pagina se queda exactamente como estaba:
+    # los seis titulos con sus franjas de minutos, que es la version que vale.
+    guia = '<div id="guia" class="guia" hidden></div>'
     cab = (f'<div class="leccion-cab"><span class="n">{L["urok"]} {d.numero}</span>'
            f'<span>{L["de"]} {len(todos)}</span><span class="tipo">{plan.TIPO_RU[d.tipo]}</span>'
            f'<span>{L["semana"]} {d.semana} · {L["nivel"]} {html.escape(d.nivel)}</span></div>')
@@ -2628,7 +2778,7 @@ def construir_leccion(d, cfg, t, idiomas, destino, cal, todos, audio=None,
     # Compartir va al PIE y no arriba: se comparte lo que ya has leído y te ha
     # gustado, no lo que acabas de abrir.
     canonica = f"{cfg['dominio']}/semana-{d.semana:02d}/dia-{d.dia}.html" if cfg.get("dominio") else ""
-    cuerpo_final = (f'<article data-leccion="{d.numero}">' + cab + aviso
+    cuerpo_final = (f'<article data-leccion="{d.numero}">' + cab + guia + aviso
                     + html_cuerpo + anuncio(cfg, "pie") + '<div id="marcar-caja"></div>'
                     + _compartir(t, cfg, canonica)
                     + f'<nav class="pasos">{"".join(pasos)}</nav></article>')

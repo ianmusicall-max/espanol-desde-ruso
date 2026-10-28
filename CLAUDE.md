@@ -2567,6 +2567,155 @@ forma de texto.
 quien llega; traer visitas sigue siendo lo de las redes, y el cuello de botella
 de verdad.
 
+## Los mini-tests se contestan, y el test de unidad no funcionaba (2026-10-28)
+
+Lo trajo el profesor usando el sitio: en el Мини-тест del sábado, «Ana ___ de
+Madrid → а) es · б) está · в) hay» salía con una **casilla para escribir** en
+vez de tres botones.
+
+Tenía razón y el hueco era el obvio: cuando los tests de unidad se hicieron
+contestables (2026-10-27) se quedaron fuera los mini-tests de repaso, aunque
+son la misma cosa. Lo que cambia es cómo están escritos:
+
+| | Test de unidad (`prueba`) | Мини-тест (`repaso`) |
+|---|---|---|
+| preguntas | en bloques `### 1. Лексика` | seguidas, sin bloques |
+| opciones | debajo, en su renglón | detrás de una flecha, en la misma línea |
+| clave | `**1. Лексика:** 1 в (нед. 2, день 5)` | `**Мини-тест:** 1 в (день 5)` o `1 — в` |
+
+`pruebas.leer_minitest` las lee con **el mismo contrato que `leer`**: a la
+mínima duda devuelve None y esa página se queda exactamente como está. De 22
+repasos escritos, **18 se vuelven pulsables**; los otros cuatro no son de
+opción múltiple —piden escribir la forma del verbo— y sus casillas son lo
+correcto.
+
+**No son sólo los sábados.** La primera cuenta dio 11 porque solo miró los
+`dia-6.md`; la unidad 11 (el cierre de A1) tiene **cinco repasos entre
+semana**, y el de la captura del profesor era uno de ellos (semana 21, día 2).
+La prueba recorre todos los días de tipo `repaso`.
+
+**En un repaso la clave NO se envuelve**, al revés que en un test de unidad.
+Su sección Ответы lleva también la del dictado y la del calentamiento, que el
+alumno necesita ANTES de llegar al mini-test, y además ya está plegada tras su
+botón desde el 2026-10-27. El botón de «ver la clave» abre ese plegado
+pulsando su botón de verdad, para que la etiqueta («ver» / «ocultar») no se
+quede mintiendo.
+
+### Y lo gordo: el test de unidad llevaba desde el primer día sin funcionar
+
+Al comprobarlo en un navegador —por primera vez— salió esto: pulsabas
+«empezar», la versión en papel se escondía, y **en su lugar no salía nada**.
+`pregunta()` leía una variable `preguntas` que nadie declaraba, y el test
+entero moría con `ReferenceError: preguntas is not defined`.
+
+Lo que la suite miraba era: que el lector en Python leyera las quince, que el
+JSON llegara bien a la página, y que el HTML tuviera sus etiquetas. Las tres
+cosas estaban bien. **Lo que faltaba era pulsar el botón.**
+
+`scripts/probar_navegador.js` es ahora esa comprobación: abre las páginas en
+Chromium, recorre la guía de pasos, contesta los tests eligiendo la opción
+correcta **por su texto** —no por su letra ni por su posición, que sería
+repetir la cuenta del propio generador— y exige cero errores de JS. Una prueba
+lo corre y se salta si no hay navegador.
+
+**Y el primer fallo que dio era de la propia comprobación**, no del sitio:
+recorría la guía DESPUÉS de contestar el test, con la página ya desplazada, y
+la guía arrancaba donde el test la había dejado. Ahora la recorre primero y
+desde arriba del todo. Conviene anotarlo porque es el error que más cuesta
+ver: una prueba en rojo que tiene razón en estar en rojo y se equivoca en el
+motivo.
+
+De paso, la prueba nueva encontró un ítem con **dos opciones idénticas**
+(semana 21, día 2: «а) queremos … в) queremos»), o sea una pregunta con dos
+respuestas correctas. Mismo fallo que apareció en la unidad 14.
+
+## La portada no se veía igual en el móvil y en la web (2026-10-28)
+
+Lo dijo el profesor así: «en la versión celular salen imágenes en la página
+principal y en la web no sale igual». Y no era que faltaran: eran **dos
+diseños distintos para la misma portada**.
+
+- Móvil: la tira de seis dibujos, una fila limpia de 52 px encima del título.
+- Escritorio: el héroe pasaba a dos columnas y los seis caían en una **rejilla
+  de 2×3 de 88 px** dentro de una columna de 185: ni fila ni columna,
+  descolgada del título, con un hueco muerto encima y con el recuadro de cada
+  ficha bien visible a ese tamaño.
+
+Ahora es la misma fila en los dos anchos, sólo que a 96 px en escritorio. **Se
+vio comparando las dos capturas en Chromium**, no razonándolo: en el HTML las
+dos versiones tienen exactamente las mismas seis etiquetas.
+
+### Y al verla grande: los 300 dibujos tenían cada uno su crema
+
+Medido: el libro en (242,233,218) y el perro en (255,248,236). Trece puntos de
+diferencia **entre dibujos**, que a 56 px en una tabla de vocabulario no se
+notan y a 96 px en fila se leen como que unas fichas están más sucias que
+otras.
+
+`scripts/igualar_dibujos.py` los lleva a los 300 al color de la ficha. La peor
+diferencia pasa de 35 puntos a 2. Tres cosas que importan si alguien lo toca:
+
+- **El fondo se mide con el percentil 70 de la banda del borde, no con la
+  mediana.** Ahí caen la sombra bajo el objeto y la viñeta, así que la mediana
+  tira hacia abajo y la corrección se queda corta justo en el centro, que es
+  donde se ve. Es la lección del proyecto hermano con las tarjetas de su
+  carrusel.
+- **Se desplaza la imagen ENTERA.** Mover sólo los píxeles parecidos al fondo
+  dejaría un halo en los bordes suavizados, y un salto de ocho a dieciocho
+  puntos no se distingue en un rojo o en un verde.
+- **El objetivo es `--tarjeta` y sale del CSS**, no escrito a mano aquí. Se
+  iguala a la ficha y no al papel porque cada dibujo va dentro de su ficha con
+  su borde: el ojo compara el interior de una ficha con el de la de al lado.
+
+**Se quedan opacos a propósito**, y eso contesta la propuesta del profesor de
+usar pictogramas minimalistas: con fondo transparente, en el tema oscuro un
+dibujo de línea negra sobre fondo oscuro desaparecería. Pictogramas de verdad
+—transparentes y legibles en los dos temas— son otro estilo y otra tanda:
+unos 1,50 USD, `OPENAI_API_KEY` en el entorno, y una muestra de seis antes,
+como se eligió la voz y como se eligió el estilo plano.
+
+## La guía de los seis pasos (2026-10-28)
+
+El profesor lo pidió dos veces, y la segunda lo dejó claro: «quiero decir que
+sea un aprendizaje intuitivo, colocar algo más guiado se puede?». O sea, que
+el sitio lleve de la mano; no un tutor.
+
+Por eso va **dentro de la lección**, que es donde se pasan los 30 minutos, y
+no sólo en la portada. Una lección es una página larga con seis apartados y
+sus franjas de minutos escritas en los títulos («## 3. Новое (6–16 мин)»), y
+hasta hoy el alumno tenía que ir encontrándolos solo entre el texto.
+
+Una barra pegada arriba con seis puntos, el apartado en el que estás con su
+franja, y un botón «Дальше ↓» que te lleva al siguiente. En el último paso el
+botón deja de guiar la lección y lleva al botón de marcarla, que es lo único
+que queda por hacer y lo que encadena con el día siguiente.
+
+**No añade materia: hace visible la que ya estaba.** Y los pasos salen de los
+PROPIOS títulos de la lección, no de una lista en el código: una lista se
+queda vieja el día que un tipo de día use otros apartados —los de examen,
+simulacro y proyecto ya lo hacen— y el síntoma sería una guía que señala donde
+no es.
+
+Cuatro cosas que lo rompen, y las cuatro tienen prueba:
+
+- **El tope pegajoso se mide, no se escribe.** La cabecera del sitio es
+  pegajosa a partir de 40rem, así que la guía tiene que pegarse DEBAJO de
+  ella: el guion mide su alto y lo deja en `--alto-cabecera`. Escrito a mano
+  se quedaría viejo el día que cambie el menú, y el síntoma sería la guía
+  tapada —que es justo lo que ya pasó con la barra en octubre, y falló por
+  cuatro píxeles—.
+- **Al pulsar «Дальше» se pinta el paso YA y se bloquea al vigilante 700 ms.**
+  Sin eso, el desplazamiento suave todavía no ha terminado cuando el vigilante
+  recalcula, el título aún cae un píxel por debajo del corte, y el paso se
+  queda en el anterior: el siguiente clic repetía el mismo apartado. Medido en
+  el navegador: `Фонетика → Новое → Новое → Новое → Практика`.
+- **Menos de tres franjas, no hay guía.** La clave no es un paso: no se hace,
+  se consulta. Y sin JavaScript la página se queda exactamente como estaba.
+- **En el móvil los puntos van sin número.** Con los seis números no cabían en
+  la misma fila que el nombre y el botón, y la barra se partía en dos:
+  noventa píxeles pegados arriba en una pantalla de 844. Cuál es se lee en el
+  nombre, que está al lado y dice más. Medido a 390 px.
+
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.
@@ -2574,8 +2723,10 @@ de verdad.
   siete unidades de A2 —hasta la 17, el futuro—, 2.087 tarjetas de
   vocabulario. Las 21 primeras revisadas; el resto son borradores.
   **`docs/` está al día**: las 238 lecciones construidas y publicadas (264
-  páginas), con la tira de dibujos del héroe y la tipografía propia (Literata
-  + Onest, autoalojada).
+  páginas), con la tira de dibujos del héroe —la misma fila en el móvil y en
+  el escritorio—, la guía de los seis pasos dentro de cada lección y la
+  tipografía propia (Literata + Onest, autoalojada). La suite entera pasa:
+  266 pruebas, una de ellas en navegador de verdad.
 - Sitio público en `docs/` con portada, índice, test de nivel, «О курсе»,
   contacto y política de privacidad. Tres idiomas (ru/es/en) —el test solo en
   ruso, como las lecciones—, tema claro y oscuro, y progreso del lector
