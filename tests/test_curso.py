@@ -5,6 +5,7 @@
 from __future__ import annotations
 
 import copy
+import dataclasses
 import html
 import json
 import pathlib
@@ -262,21 +263,25 @@ class TestElGeneradorCuidaLaCache(unittest.TestCase):
         self.assertEqual(a[1]["text"], b[1]["text"])
         self.assertIn("La familia y las personas", a[1]["text"])
 
-    def test_una_unidad_sin_lecciones_toma_un_modelo_del_mismo_tipo_de_la_unidad_1(self):
+    def test_un_tipo_sin_modelo_en_su_unidad_toma_el_de_la_unidad_1(self):
         """Sin un modelo propio de ese tipo, el prompt presta el de la unidad 1.
 
-        La unidad se busca en el momento, no se fija: a medida que se escriben
-        semanas, la primera unidad vacía se mueve, y un número escrito a mano
-        dejaría la prueba verde sin comprobar nada."""
-        vacia = next(
-            u for u in CAL["unidades"]
-            if not any(d.ruta.exists() for d in DIAS if d.unidad == u["numero"])
-        )
-        primera_semana = vacia["semanas"][0]
-        for dia_n, modelo in ((6, "curso/semana-01/dia-6.md"), (7, "curso/semana-01/dia-7.md")):
-            d = plan.dia(CAL, primera_semana, dia_n)
-            sistema, _ = escribir_leccion.armar_prompt(CAL, d)
-            self.assertIn(modelo, sistema[1]["text"], f"{d.etiqueta} ({d.tipo})")
+        Hasta el 2026-10-28 esto se comprobaba buscando la primera unidad
+        **sin ninguna lección escrita**, y con las 24 escritas eso dejó de
+        existir: la prueba se caía con un StopIteration en vez de comprobar
+        nada. El caso sigue existiendo por otro lado, y es estable porque es
+        una propiedad del calendario: **la unidad 24 es de repaso y no tiene
+        ni un día de tipo `leccion`**, así que un día de ese tipo en su semana
+        tiene que prestar el modelo de la unidad 1."""
+        # Se llama a `bloque_unidad`, que es exactamente lo que `armar_prompt`
+        # pone en `sistema[1]`, y no a `armar_prompt`: ése arma además el
+        # mensaje del día, que busca el día en la lista del calendario y con
+        # un día inventado se cae.
+        d = dataclasses.replace(plan.dia(CAL, 47, 1), tipo="leccion")
+        self.assertIn("curso/semana-01/dia-1.md", escribir_leccion.bloque_unidad(CAL, d))
+        # Y la otra mitad: lo que sí tiene modelo propio no presta nada.
+        propio, _ = escribir_leccion.armar_prompt(CAL, plan.dia(CAL, 47, 1))
+        self.assertNotIn("curso/semana-01/dia-1.md", propio[1]["text"])
 
     def test_el_dia_que_se_reescribe_sigue_en_el_bloque_cacheado(self):
         """Excluirlo haría que el bloque cambiara de un día a otro de la misma
@@ -1414,9 +1419,23 @@ class TestElMapaDeUnidades(unittest.TestCase):
                 self.assertTrue((self.destino / destino).exists(), destino)
 
     def test_las_unidades_sin_lecciones_se_ven_apagadas(self):
-        """Prometer una puerta que no abre es peor que enseñarla cerrada."""
-        html_ = self._indice()
-        self.assertIn("u-tarjeta vacia", html_)
+        """Prometer una puerta que no abre es peor que enseñarla cerrada.
+
+        Desde que están escritas las 24 unidades (2026-10-28) **el sitio real
+        no tiene ni una tarjeta apagada**, así que mirar el índice construido
+        dejó de comprobar nada: la prueba pasaba con el mecanismo borrado. Se
+        miran las dos cosas por separado, y el mecanismo se mira pasándole al
+        generador los días de la unidad 24 apuntando a una semana que no
+        existe —o sea, sin lecciones escritas—."""
+        self.assertNotIn("u-tarjeta vacia", self._indice(),
+                         "las 24 unidades están escritas: no debería quedar ninguna apagada")
+        dias = [dataclasses.replace(d, semana=99) if d.unidad == 24 else d
+                for d in plan.dias(self.cal)]
+        mapa = construir_sitio._mapa_de_unidades(
+            self.cal, dias, self.textos["ru"]["curso"], "ru", "")
+        self.assertIn("u-tarjeta vacia", mapa)
+        self.assertIn('href="#u24"', mapa,
+                      "y una unidad sin lecciones ancla a su sección, no a una lección")
 
     def test_el_mapa_se_sale_de_la_columna_de_prosa(self):
         """Mismo motivo que la cabecera: un mapa no se lee renglón a renglón.

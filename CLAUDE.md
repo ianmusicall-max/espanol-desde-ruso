@@ -77,7 +77,7 @@ la documentación del programa, en español.
   2026-10-26) estan en `revisado: false` y la pagina lo avisa. Hay que
   comprobar que cada distractor sea de verdad el error que dice y que la unidad
   asignada sea donde el curso lo ensena.
-- **Las 301 lecciones de las semanas 4 en adelante son borradores**
+- **Las 315 lecciones de las semanas 4 en adelante son borradores**
   (`revisado: false`) y el sitio las marca como tales. Las 21 primeras estan
   revisadas.
 - **El orden de los pasados: se recomendo NO cambiarlo** (2026-10-26, de
@@ -3573,14 +3573,138 @@ todos de ortografía, en **7/7/6**; el test de la unidad, en **4/4/4/3**.
 `scripts/probar_navegador.js` los añade a su lista y los contesta eligiendo la
 opción por su TEXTO: **20/20 y 15/15, cero errores de JS**.
 
+## La unidad 24: repaso integral de A2, y el nivel cerrado (días 323-336)
+
+Catorce lecciones, semanas 47 y 48. El curso pasa de 322 a **336 de 365** y
+**2.952 tarjetas**. **Aquí se acaba el material nuevo**: lo que queda son las
+semanas 49-52, que son simulacros, y el día 365.
+
+**Es la unidad más distinta de todas, y por una razón de forma:** de los
+catorce días, **once son de tipo `repaso`** y los otros tres son dos de
+`cultura` y uno de `prueba`. Un `repaso` no lleva `## Словарь дня`, así que
+esta unidad añade **solo 40 entradas de vocabulario** —las dos tablas de los
+domingos— contra las ~140 de una unidad normal. Y por lo mismo **no hay
+riesgo de duplicados**: el informe de léxico salió limpio sin tocar nada, que
+es la primera vez en diez unidades.
+
+### Cómo se reparte el repaso
+
+| Día | Qué consolida |
+|---|---|
+| **47-1** | presente irregular en cinco grupos · reflexivos · **la máquina del dativo**: los ocho verbos tipo *gustar* en una tabla |
+| **47-2** | los tres pasados en **dos preguntas**: ¿sigue abierto el tramo? y ¿suceso o fondo? |
+| **47-3** | futuro y condicional son **una sola tabla** (las once bases son las mismas) · las siete perífrasis con su preposición |
+| **47-4** | imperativo (cuatro personas × sí/no) · pronombres y *se lo* · **los tres *se*** |
+| **47-5** | los **cinco puntos de decisión**: *ser/estar/hay*, *por/para*, comparar, relativos, indefinidos |
+| **47-6** | los diez campos léxicos de A2 y **ocho falsos amigos nuevos** |
+| **47-7** | una película: tres fragmentos y por qué el español del cine no es el del curso |
+| **48-1 a 48-4** | las cuatro pruebas del DELE A2, una por día |
+| **48-5** | la lista negra entera, y **la lista personal** |
+| **48-6** | prueba integral: **40 ítems** en cuatro bloques |
+| **48-7** | qué hay después de A2, el plan de cinco recursos y el episodio «Se apunta» |
+
+### Las cuatro ideas que esta unidad añade, aunque sea repaso
+
+1. ⚠️ **De los veinte errores de la lista negra, los suyos son cinco o
+   seis** (48-5). Nadie comete los veinte. Trabajar la lista entera antes del
+   examen es repartir el tiempo donde no hay nada que ganar, y **cuáles son
+   los suyos se averigua contando en sus propios textos**, no recordando. Y
+   se ordenan **por lo que cuestan**, no por frecuencia: cinco de los veinte
+   *cambian el sentido* (*ser/estar*, *tener/ser* la edad, imperfecto por
+   indefinido, *saber/conocer*, *por/para*) y dos *delatan un texto
+   traducido* (el *yo* de más, la coma antes de *que*).
+2. ⚠️ **En la prueba de audio, la respuesta correcta casi nunca repite las
+   palabras del audio** (48-1), y la equivocada sí. Eso **no es oído**: es la
+   misma habilidad del día 2 de la нед. 45, y por eso el mini-test de ese día
+   son **transcripciones** —entrena la mitad del problema que se puede
+   entrenar sin audio, y lo dice—.
+3. ⚠️ **De los cuatro criterios de la rúbrica escrita, tres se suben
+   revisando y uno solo se sube ANTES de escribir** (48-4): *alcance*
+   consiste en decidir qué va a usar. Tres frases —dos tiempos verbales, un
+   conector poco frecuente, una estructura de alguna unidad— lo llevan de 1 a
+   3 sin una palabra difícil.
+4. ⚠️ **La meseta** (48-7): de A0 a A2 el avance se nota cada semana porque
+   se parte de cero; de A2 a B1 el avance es el mismo y **no se nota**,
+   porque cada palabra nueva es una entre dos mil. Lo que la rompe no es más
+   horas: es **medir otra cosa** —minutos que aguanta escuchando, frases
+   seguidas que dice, cuánto entiende de un capítulo la segunda vez—.
+
+**Y lo que B1 añade es UNA cosa: el subjuntivo.** El día 48-7 lo dice con la
+tabla de las salidas que este curso usó en su lugar (*creo que no vendrá*,
+*a lo mejor viene*, *quiero verte*, *cuando llegas*) y su versión de B1. Es
+**el único sitio del curso donde se escriben formas de subjuntivo a
+propósito**, y está explicado: son la columna «en B1».
+
+### Lo que hubo que comprobar, y una cosa que cambió el plan
+
+- **Los ocho verbos tipo *gustar* están todos enseñados**, repartidos:
+  *gustar* (U6), *encantar* (S11D4), *doler* (S19D2), *quedar bien/grande*
+  (S13D4), *interesar* (S15D2), *dar miedo* (S25D4), *poner nervioso*
+  (S39D3), *parecer* (S35D1). La unidad los junta por primera vez.
+- **Los falsos amigos de A1 ya se dieron** (S21D5: *la carta*, *el mapa*,
+  *la firma*, *embarazada*, *sensible*, *el éxito*, *el vaso*, *la
+  carpeta*…), y *largo* además en **S04D3**. El calendario pedía «constipado,
+  sensible, éxito, largo, vaso…» y tres de esos cinco estaban dados: el día
+  47-6 los presenta como repaso y enseña **ocho nuevos** (*constipado*,
+  *actualmente*, *realizar*, *asistir a*, *soportar*, *pretender*,
+  *educado*, *el disgusto*), de los cuales *soportar* y *asistir* vienen del
+  **inglés** y no del ruso: quien sabe inglés los falla más.
+- **El método de los tres visionados está en S21D7**, así que el domingo 47-7
+  no lo repite: enseña a **elegir tres fragmentos** (principio, conflicto,
+  final) con los que se resume la película entera, y la escucha selectiva
+  (nombres, números, la palabra que se repite).
+- **La estructura de las cuatro pruebas del examen sale de
+  `alineacion-mcer-pcic.md` §5**, que la verificó contra fuentes que citan la
+  guía oficial de 2020 y pide cotejarla. Las lecciones de la semana 48 la
+  citan y repiten el aviso: lo que no depende de eso son las estrategias.
+
+### El test integral: 40 ítems y el reparto de letras, generado
+
+El día 48-6 son **cuatro bloques de diez**, que es lo que `pruebas.leer`
+necesita (un `### N.` y un `**N. Título:**` por bloque). Con 40 ítems el
+reparto de la letra correcta **ya no se puede hacer a mano**: se generó con
+un script que exige **14/13/13**, ningún trío igual seguido y ninguna
+escalera (`абв` ni `вба`).
+
+**Y hacerlo así descubrió que cuatro de los mini-tests que yo había repartido
+a mano tenían escalera** —S47D1, S47D2, S47D4 (tres) y S48D1, que además
+estaba en 6/4/5 y no en 5/5/5—. Se arreglaron **reordenando las opciones**,
+sin cambiar ni un enunciado ni una respuesta. La comprobación es ahora un
+bucle de ocho líneas sobre los doce tests de la unidad, y conviene correrlo
+siempre: **la escalera no se ve leyendo la clave**, porque la clave se lee
+número a número y la escalera está entre tres números seguidos.
+
+### Los barridos
+
+- **Cero duplicados de léxico** (los `repaso` no tienen tabla) y **cero
+  tokens de dos alfabetos**.
+- **Once subjuntivos en prosa propia**, y **uno repetía un error ya corregido
+  dos días antes**: *«aunque la suma llegue a 7»*, que es el mismo
+  *aunque* + subjuntivo que se quitó de S46D5 y que **contradice la unidad
+  18**. Los otros: *haya servido*, *haya visto*, *aunque fuera en ruso*
+  (copiado de S21D7), *antes de que empiece*, *como si fuera* (dos veces),
+  *que escriba*, *donde haya*, *que estén*, *que ponga*. Todos reescritos sin
+  subjuntivo.
+- **Lo que SÍ se queda**: las formas de imperativo negativo y de *usted* (*no
+  hagas*, *no vayas*, *hable*, *escriba*, *puntúe*), que son material de la
+  unidad 16; los distractores marcados como incorrectos (*no venga* frente a
+  *no vendrá*); *¡venga!* como muletilla; y la columna «en B1» del día 48-7.
+
+### En navegador
+
+`scripts/probar_navegador.js` añade el Мини-тест de 20 de la semana 47 y el
+test integral de 40, que es **el test más largo del curso**: **20/20 y 40/40,
+cero errores de JS**. Si algún día el envoltorio se rompe con muchos ítems,
+se rompe ahí.
+
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.
-- **322 lecciones escritas** (semanas 1-46 enteras): el nivel A1 completo y
-  **trece unidades de A2 —hasta la 23, leer y escribir, que es la última con
-  material nuevo—**, 2.912 tarjetas de vocabulario. Las 21 primeras revisadas;
-  el resto son borradores.
-  **`docs/` está al día**: las 322 lecciones construidas y publicadas, con la
+- **336 lecciones escritas** (semanas 1-48 enteras): **el A1 y el A2
+  completos, las veinticuatro unidades**, 2.952 tarjetas de vocabulario. Aquí
+  se acaba el material nuevo: lo que queda son los simulacros. Las 21 primeras
+  están revisadas; el resto son borradores.
+  **`docs/` está al día**: las 336 lecciones construidas y publicadas, con la
   tira de dibujos del héroe —la misma fila en el móvil y en el escritorio—,
   la guía de los seis pasos dentro de cada lección y la tipografía propia
   (Literata + Onest, autoalojada). La suite entera pasa: 267 pruebas, una de
@@ -3606,7 +3730,7 @@ opción por su TEXTO: **20/20 y 15/15, cero errores de JS**.
 - **El audio está hecho** (2026-10-26): 3.543 frases locutadas con la voz
   `shimmer`, 1,30 USD, 92 MB a 64 kbps, y 4.225 botones ▶ en 94 de las 100
   lecciones. Comprobado que suena en navegador.
-- Pendiente: **lecciones 323-365** (unidad 24 y la fase final: 43
+- Pendiente: **lecciones 337-365** (la fase final: 29
   lecciones), el audio de todo lo escrito desde la 101, más
   libros de referencia, y lo de
   «Pendiente de revision del profesor» de arriba.

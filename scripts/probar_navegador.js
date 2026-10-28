@@ -38,6 +38,8 @@ const POR_DEFECTO = [
   'docs/semana-44/dia-6.html',       // test de la unidad 22
   'docs/semana-45/dia-6.html',       // repaso de la unidad 23: Мини-тест de 20 (ortografía)
   'docs/semana-46/dia-6.html',       // test de la unidad 23
+  'docs/semana-47/dia-5.html',       // repaso de la unidad 24: Мини-тест de 20
+  'docs/semana-48/dia-6.html',       // test de la unidad 24: 40 ítems, el más largo del curso
   'docs/semana-01/dia-1.html',       // lección normal: audio y huecos
 ];
 
