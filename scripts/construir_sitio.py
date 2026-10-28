@@ -1041,6 +1041,21 @@ PRUEBA_JS = r"""(function(){
   var caja=document.getElementById('prueba'); if(!caja)return;
   var papel=document.getElementById('prueba-papel');
   var clave=document.getElementById('prueba-clave');
+  // En un repaso la clave no se envuelve: ya esta plegada tras su boton, y
+  // lleva ademas las claves del dictado y del calentamiento. Asi que alli el
+  // boton de «ver la clave» abre ESE plegado, pulsando su boton de verdad para
+  // que la etiqueta («ver» / «ocultar») no se quede mintiendo.
+  var plegada=document.getElementById('clave');
+  // Las preguntas vienen del JSON que deja el generador, y NO se barajan: la
+  // clave impresa debajo las nombra por su letra («1 в»), asi que moverlas
+  // haria que la clave del profesor dejara de corresponder.
+  //
+  // Esta linea faltaba. Sin ella `pregunta()` referenciaba una variable que no
+  // existia, y el test entero moria con «preguntas is not defined» en cuanto se
+  // pulsaba empezar: el papel ya estaba escondido y no salia nada en su lugar.
+  // Llevaba asi desde que se publico, porque se comprobo el lector en Python y
+  // nadie llego a pulsar el boton en un navegador.
+  var preguntas=D.preguntas||[];
   var i=0, fallos=[], aciertos=0;
 
   function esc(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML}
@@ -1092,12 +1107,20 @@ PRUEBA_JS = r"""(function(){
       +'<button type="button" class="boton secundario" id="ver-clave">'+esc(D.t.clave)+'</button></p></div>';
     caja.innerHTML=h;
     var r=document.getElementById('otra-vez');
-    if(r)r.addEventListener('click',function(){i=0;fallos=[];aciertos=0;repartir();pregunta()});
+    // Sin `repartir()`: eso es del test de nivel, que escoge una variante de
+    // cada grupo. Aqui las quince preguntas son siempre las mismas.
+    if(r)r.addEventListener('click',function(){i=0;fallos=[];aciertos=0;pregunta()});
     var v=document.getElementById('ver-clave');
     // El discurso sobre los distractores que cierra la clave es lo mejor del
     // dia, y solo ensena DESPUES de contestar: antes seria la respuesta.
     if(v)v.addEventListener('click',function(){
       if(clave){clave.hidden=false;clave.scrollIntoView({behavior:'smooth'})}
+      else if(plegada){
+        var z=document.getElementById('clave-boton');
+        var bb=z&&z.querySelector('button');
+        if(bb&&plegada.hidden)bb.click();
+        plegada.scrollIntoView({behavior:'smooth'});
+      }
       v.hidden=true;
     });
   }
@@ -2496,7 +2519,7 @@ def _envolver_clave(html_: str, t: dict) -> str:
     return salida + CLAVE_SCRIPT
 
 
-def _envolver_prueba(html_: str, t: dict) -> str:
+def _envolver_prueba(html_: str, t: dict, es_minitest: bool = False) -> str:
     """Marca en el HTML qué parte es el test en papel y cuál la clave.
 
     Se trabaja sobre el HTML ya convertido y no sobre el Markdown a propósito:
@@ -2504,21 +2527,33 @@ def _envolver_prueba(html_: str, t: dict) -> str:
     sin convertirlo, y las quince preguntas saldrían en crudo.
 
     Los tres trozos se marcan de atrás adelante porque cada inserción mueve
-    todas las posiciones siguientes."""
+    todas las posiciones siguientes.
+
+    En un día de **repaso** el test es el `## 3. Мини-тест` y NO se envuelve la
+    clave: la sección `## Ответы` de un repaso lleva también la del dictado y la
+    del ejercicio de calentamiento, que el alumno necesita antes de llegar al
+    mini-test, y además ya está plegada por `_envolver_clave`. Envolverla aquí
+    escondería tres claves para esconder una."""
     cabeceras = [(m.start(), m.end(), re.sub("<[^>]+>", "", m.group(1)).strip())
                  for m in re.finditer(r"<h2[^>]*>(.*?)</h2>", html_, re.S)]
     inicio_test = fin_test = inicio_clave = None
     for j, (ini, fin, texto) in enumerate(cabeceras):
-        if texto.startswith("2.") and inicio_test is None:
+        suya = "Мини-тест" in texto if es_minitest else texto.startswith("2.")
+        if suya and inicio_test is None:
             inicio_test, fin_test = fin, (cabeceras[j + 1][0] if j + 1 < len(cabeceras) else len(html_))
         if texto == "Ответы":
             inicio_clave = ini
-    if inicio_test is None or inicio_clave is None:
+    if inicio_test is None:
         return html_
 
     boton = (f'<div class="botones" id="prueba-arranque" hidden>'
              f'<button type="button" class="boton" id="prueba-empezar">'
              f'{html.escape(t["test"]["empezar"])}</button></div><div id="prueba"></div>')
+    if es_minitest:
+        return "".join([html_[:inicio_test], boton, '<div id="prueba-papel">',
+                        html_[inicio_test:fin_test], "</div>", html_[fin_test:]])
+    if inicio_clave is None:
+        return html_
     trozos = [html_[:inicio_test], boton, '<div id="prueba-papel">', html_[inicio_test:fin_test],
               "</div>", html_[fin_test:inicio_clave], '<div id="prueba-clave">',
               html_[inicio_clave:], "</div>"]
@@ -2553,15 +2588,20 @@ def construir_leccion(d, cfg, t, idiomas, destino, cal, todos, audio=None,
     if d.tipo in CON_CLAVE_DE_EJERCICIOS:
         html_cuerpo = _envolver_clave(html_cuerpo, t)
 
+    # Un día de `prueba` trae el test de unidad; uno de `repaso`, el Мини-тест
+    # del sábado, que tiene la misma forma. Los dos se ofrecen para contestar si
+    # se pueden leer con seguridad; si no, la página se queda como está.
     datos_prueba = None
-    if d.tipo == "prueba":
-        preguntas = pruebas.leer(cuerpo)
+    if d.tipo in ("prueba", "repaso"):
+        es_mini = d.tipo == "repaso"
+        preguntas = (pruebas.leer_minitest(cuerpo, semana=d.semana) if es_mini
+                     else pruebas.leer(cuerpo))
         if preguntas:
             datos_prueba = {
                 "preguntas": [_pregunta_al_navegador(q, todos) for q in preguntas],
                 "t": t["test"],
             }
-            html_cuerpo = _envolver_prueba(html_cuerpo, t)
+            html_cuerpo = _envolver_prueba(html_cuerpo, t, es_minitest=es_mini)
 
     titulo = f"{L['urok']} {d.numero}: {d.tema_ru} — {t['titulo_sitio']}"
     descripcion = f"{L['urok']} {d.numero}: {d.tema_ru}. {d.foco[:110]}"

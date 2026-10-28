@@ -597,6 +597,21 @@ footer.sitio p{margin:.35rem 0}
   var caja=document.getElementById('prueba'); if(!caja)return;
   var papel=document.getElementById('prueba-papel');
   var clave=document.getElementById('prueba-clave');
+  // En un repaso la clave no se envuelve: ya esta plegada tras su boton, y
+  // lleva ademas las claves del dictado y del calentamiento. Asi que alli el
+  // boton de «ver la clave» abre ESE plegado, pulsando su boton de verdad para
+  // que la etiqueta («ver» / «ocultar») no se quede mintiendo.
+  var plegada=document.getElementById('clave');
+  // Las preguntas vienen del JSON que deja el generador, y NO se barajan: la
+  // clave impresa debajo las nombra por su letra («1 в»), asi que moverlas
+  // haria que la clave del profesor dejara de corresponder.
+  //
+  // Esta linea faltaba. Sin ella `pregunta()` referenciaba una variable que no
+  // existia, y el test entero moria con «preguntas is not defined» en cuanto se
+  // pulsaba empezar: el papel ya estaba escondido y no salia nada en su lugar.
+  // Llevaba asi desde que se publico, porque se comprobo el lector en Python y
+  // nadie llego a pulsar el boton en un navegador.
+  var preguntas=D.preguntas||[];
   var i=0, fallos=[], aciertos=0;
 
   function esc(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML}
@@ -648,12 +663,20 @@ footer.sitio p{margin:.35rem 0}
       +'<button type="button" class="boton secundario" id="ver-clave">'+esc(D.t.clave)+'</button></p></div>';
     caja.innerHTML=h;
     var r=document.getElementById('otra-vez');
-    if(r)r.addEventListener('click',function(){i=0;fallos=[];aciertos=0;repartir();pregunta()});
+    // Sin `repartir()`: eso es del test de nivel, que escoge una variante de
+    // cada grupo. Aqui las quince preguntas son siempre las mismas.
+    if(r)r.addEventListener('click',function(){i=0;fallos=[];aciertos=0;pregunta()});
     var v=document.getElementById('ver-clave');
     // El discurso sobre los distractores que cierra la clave es lo mejor del
     // dia, y solo ensena DESPUES de contestar: antes seria la respuesta.
     if(v)v.addEventListener('click',function(){
       if(clave){clave.hidden=false;clave.scrollIntoView({behavior:'smooth'})}
+      else if(plegada){
+        var z=document.getElementById('clave-boton');
+        var bb=z&&z.querySelector('button');
+        if(bb&&plegada.hidden)bb.click();
+        plegada.scrollIntoView({behavior:'smooth'});
+      }
       v.hidden=true;
     });
   }

@@ -58,6 +58,25 @@ MARCADOR = re.compile(r"(?:^|\s)([абвгд])\)\s")
 RESPUESTA = re.compile(r"\b(\d+)\s+\*{0,2}([абвгд])\*{0,2}(?!\w)")
 DE_DONDE = re.compile(r"нед\.\s*(\d+),\s*д(?:ень|ня)\s*(\d+)")
 
+# ----------------------------------------------------------- el Мини-тест del
+# sábado de repaso. Tiene la MISMA forma que un test de unidad —enunciado, tres
+# opciones, clave— pero escrita de otra manera, y por eso se quedó fuera cuando
+# los tests de unidad se hicieron contestables: sus opciones van en la misma
+# línea detrás de una flecha, no hay bloques `### `, y su clave va en un solo
+# renglón con «(день N)» en vez de «(нед. N, день N)», porque la lección que
+# responde está en esa misma semana.
+#
+# No todos los repasos son de opción múltiple: varios piden escribir la forma
+# del verbo. Ésos no tienen opciones, `leer_minitest` devuelve None y su página
+# se queda con las casillas para escribir, que es lo correcto.
+SECCION_MINI = re.compile(r"^## \d+\.\s*Мини-тест.*?(?=^## |\Z)", re.M | re.S)
+
+# En la clave del repaso la letra va suelta («1 б») o detrás de una raya
+# («1 — б»). Las dos formas están escritas en el curso, mitad y mitad.
+RESPUESTA_MINI = re.compile(r"\b(\d+)\s*[—–-]?\s*\*{0,2}([абвгд])\*{0,2}(?!\w)")
+CLAVE_MINI = re.compile(r"\*\*Мини-тест:?\*\*(.*?)(?=\n\n|\Z)", re.S)
+DE_DONDE_DIA = re.compile(r"д(?:ень|ня)\s*(\d+)")
+
 
 @dataclasses.dataclass
 class Pregunta:
@@ -153,28 +172,87 @@ def leer(texto: str) -> list[Pregunta] | None:
     return salida or None
 
 
+def leer_minitest(texto: str, semana: int | None = None) -> list[Pregunta] | None:
+    """Las preguntas del Мини-тест de un día de repaso, o None si no se puede.
+
+    Mismo contrato que `leer`: a la mínima duda devuelve None y esa página se
+    queda exactamente como está hoy. Decirle a alguien que acertó cuando falló
+    es mucho peor que no ofrecerle el test."""
+    seccion = SECCION_MINI.search(texto)
+    if not seccion:
+        return None
+    encontradas = _preguntas_del_bloque(seccion.group(0))
+    if not encontradas:
+        return None
+
+    bruto = CLAVE_MINI.search(texto)
+    if not bruto:
+        return None
+    clave = " ".join(bruto.group(1).split())
+    respuestas = RESPUESTA_MINI.findall(clave)
+    if len(encontradas) != len(respuestas):
+        return None
+    esperado = [str(i) for i in range(1, len(encontradas) + 1)]
+    if [n for n, _, _ in encontradas] != esperado:
+        return None
+    if [n for n, _ in respuestas] != esperado:
+        return None
+
+    cortes = [m.start() for m in RESPUESTA_MINI.finditer(clave)] + [len(clave)]
+    salida: list[Pregunta] = []
+    for i, ((_, enunciado, opciones), (_, letra)) in enumerate(zip(encontradas, respuestas)):
+        letras = [x for x, _ in opciones]
+        if letras != list(LETRAS[:len(letras)]) or letra not in letras:
+            return None
+        # El enunciado acaba en la flecha que anuncia las opciones.
+        enunciado = enunciado.strip().rstrip("→").strip()
+        if not enunciado:
+            return None
+        # La clave del repaso dice el día, no la semana: la lección que responde
+        # está en la misma semana que el repaso.
+        donde = DE_DONDE_DIA.search(clave[cortes[i]:cortes[i + 1]])
+        salida.append(Pregunta(
+            bloque="Мини-тест",
+            enunciado=enunciado,
+            opciones=[x for _, x in opciones],
+            correcta=letras.index(letra),
+            semana=semana if donde else None,
+            dia=int(donde.group(1)) if donde else None,
+        ))
+    return salida or None
+
+
 def de_la_leccion(ruta: pathlib.Path) -> list[Pregunta] | None:
-    _, cuerpo = validar.frontmatter(ruta.read_text(encoding="utf-8"))
+    """Las preguntas de un día, sea un test de unidad o el mini-test de un
+    repaso. Cuál de los dos lo dice el propio frontmatter."""
+    datos, cuerpo = validar.frontmatter(ruta.read_text(encoding="utf-8"))
+    if datos.get("tipo") == "repaso":
+        return leer_minitest(cuerpo, semana=datos.get("semana"))
     return leer(cuerpo)
 
 
 def main(argv=None) -> int:
     cal = plan.cargar()
-    dias = [d for d in plan.dias(cal) if d.tipo == "prueba"]
-    hechos = [d for d in dias if d.ruta.exists()]
-    print(f"{len(dias)} días de prueba en el calendario · {len(hechos)} escritos\n")
-    bien = 0
-    for d in hechos:
-        preguntas = de_la_leccion(d.ruta)
-        if preguntas:
-            bien += 1
-            con_origen = sum(1 for p in preguntas if p.semana)
-            print(f"  ✓ unidad {d.unidad:2} (día {d.numero:3}): {len(preguntas)} preguntas · "
-                  f"{con_origen} enlazan a su lección")
-        else:
-            print(f"  ✗ unidad {d.unidad:2} (día {d.numero:3}): no se puede leer con seguridad, "
-                  f"se queda como está")
-    print(f"\n{bien} de {len(hechos)} se pueden hacer interactivas")
+    total = 0
+    for tipo, etiqueta in (("prueba", "test de unidad"), ("repaso", "mini-test de repaso")):
+        dias = [d for d in plan.dias(cal) if d.tipo == tipo]
+        hechos = [d for d in dias if d.ruta.exists()]
+        print(f"{len(dias)} días de {tipo} en el calendario · {len(hechos)} escritos "
+              f"({etiqueta})\n")
+        bien = 0
+        for d in hechos:
+            preguntas = de_la_leccion(d.ruta)
+            if preguntas:
+                bien += 1
+                con_origen = sum(1 for p in preguntas if p.dia)
+                print(f"  ✓ unidad {d.unidad:2} (día {d.numero:3}): {len(preguntas)} preguntas · "
+                      f"{con_origen} enlazan a su lección")
+            else:
+                print(f"  ✗ unidad {d.unidad:2} (día {d.numero:3}): no se puede leer con "
+                      f"seguridad, se queda como está")
+        print(f"\n{bien} de {len(hechos)} se pueden hacer interactivas\n")
+        total += bien
+    print(f"{total} días contestables en total")
     return 0
 
 

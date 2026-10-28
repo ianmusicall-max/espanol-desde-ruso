@@ -10,6 +10,7 @@ import json
 import pathlib
 import re
 import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -1618,6 +1619,62 @@ class TestElTestDeNivel(unittest.TestCase):
         self.assertEqual(mapa.count("/test.html</loc>"), 1)
 
 
+class TestElNavegador(unittest.TestCase):
+    """Lo único que caza un ReferenceError.
+
+    Todo lo que este proyecto da por «comprobado en navegador» se comprobó a
+    mano, una vez, y nunca más: no había ni una prueba que abriera Chromium.
+    Así vivió el fallo del 2026-10-28, que es el peor que había: el test de
+    unidad **no funcionaba desde el día que se publicó**. `pregunta()` leía una
+    variable `preguntas` que nadie declaraba, así que al pulsar «empezar» el
+    papel se escondía y en su lugar no salía nada. El lector en Python estaba
+    probado, el JSON llegaba bien a la página y el HTML tenía las etiquetas
+    correctas: las tres cosas que la suite miraba. Lo que faltaba era pulsar.
+
+    `scripts/probar_navegador.js` abre las páginas, contesta los tests
+    eligiendo la opción correcta **por su texto** y exige cero errores de JS.
+    Elegir por posición sería repetir la cuenta del propio generador."""
+
+    GUION = RAIZ / "scripts" / "probar_navegador.js"
+
+    def test_las_paginas_se_usan_sin_un_solo_error_de_js(self):
+        if not (RAIZ / "docs" / "index.html").exists():
+            self.skipTest("el sitio no está construido")
+        try:
+            r = subprocess.run(["node", str(self.GUION)], cwd=RAIZ, capture_output=True,
+                               text=True, timeout=300)
+        except (FileNotFoundError, subprocess.TimeoutExpired) as e:
+            self.skipTest(f"sin navegador en este entorno: {e}")
+        if "Cannot find module" in r.stderr or "Executable doesn" in r.stderr:
+            self.skipTest("playwright o Chromium no están disponibles")
+        paginas = [json.loads(l) for l in r.stdout.splitlines() if l.startswith("{")]
+        self.assertTrue(paginas, f"el guion no dijo nada:\n{r.stderr[-800:]}")
+        for pag in paginas:
+            with self.subTest(pagina=pag["pagina"]):
+                self.assertEqual(pag["errores"], [], "errores de JavaScript")
+                if pag["test"]:
+                    self.assertEqual(pag["aciertos"], pag["test"],
+                                     "no se pudieron contestar todas")
+                    self.assertTrue(pag["dice_todo_bien"], pag.get("resultado"))
+                    self.assertTrue(pag["papel_escondido"],
+                                    "la versión en papel tenía que esconderse")
+        self.assertEqual(r.returncode, 0, r.stdout)
+
+    def test_el_guion_del_test_declara_lo_que_usa(self):
+        """La guarda barata, para cuando no hay navegador: `PRUEBA_JS` no puede
+        leer `preguntas` sin declararla, que es exactamente lo que pasó."""
+        # Sin los comentarios: el código explica por qué NO llama a `repartir()`,
+        # y un buscador de palabras acusaría a la explicación.
+        js = re.sub(r"^\s*//.*$", "", construir_sitio.PRUEBA_JS, flags=re.M)
+        self.assertIn("var preguntas=", js)
+        self.assertLess(js.index("var preguntas="), js.index("preguntas[i]"),
+                        "se usa antes de declararse")
+        # `repartir()` es del test de nivel, que escoge una variante de cada
+        # grupo; aquí las quince preguntas son siempre las mismas y llamarlo
+        # volvería a romper el botón de «otra vez».
+        self.assertNotIn("repartir()", js)
+
+
 class TestLaPruebaDeUnidad(unittest.TestCase):
     """Los días `prueba` se pueden contestar, no solo leer.
 
@@ -1690,6 +1747,72 @@ class TestLaPruebaDeUnidad(unittest.TestCase):
                              f"{ruta.parent.name}: tres respuestas seguidas con la misma letra")
             self.assertFalse(all((idx[i]+1) % 4 == idx[i+1] for i in range(len(idx)-1)),
                              f"{ruta.parent.name}: la secuencia es el ciclo а-б-в-г")
+
+    def test_los_minitests_de_repaso_se_leen(self):
+        """El Мини-тест del sábado de repaso tiene la MISMA forma que un test de
+        unidad —enunciado, tres opciones, clave— y se quedó fuera cuando los
+        tests de unidad se hicieron contestables (2026-10-27), porque sus
+        opciones van detrás de una flecha en la misma línea y su clave dice
+        «(день N)» en vez de «(нед. N, день N)». El resultado era una casilla
+        para escribir donde deberían salir tres botones, y así lo vio el
+        profesor usando el sitio."""
+        # No sólo los sábados: la unidad 11 (el cierre de A1) tiene cinco días
+        # de repaso entre semana, y el de la captura del profesor era uno de
+        # ellos (semana 21, día 1). Por eso se recorren TODOS los días de tipo
+        # repaso y no los `dia-6.md`.
+        repasos = [r for r in sorted((RAIZ / "curso").glob("semana-*/dia-*.md"))
+                   if validar.frontmatter(r.read_text(encoding="utf-8"))[0].get("tipo") == "repaso"]
+        self.assertEqual(len(repasos), 22)
+        leidos = [r for r in repasos if pruebas.de_la_leccion(r)]
+        # Los cuatro que faltan no son de opción múltiple: piden escribir la
+        # forma del verbo, así que sus casillas para escribir son lo correcto y
+        # `leer_minitest` devuelve None. El número se fija para que nadie los
+        # pierda en silencio.
+        self.assertEqual(len(leidos), 18,
+                         f"mini-tests pulsables: {[r.parent.name + '/' + r.stem for r in leidos]}")
+
+    def test_un_minitest_de_produccion_no_se_convierte(self):
+        """La semana 33 pide escribir las formas del futuro, sin opciones. Ahí
+        `leer_minitest` tiene que devolver None: inventarle opciones sería
+        corregir lo que nadie eligió."""
+        ruta = RAIZ / "curso" / "semana-33" / "dia-6.md"
+        self.assertIsNone(pruebas.de_la_leccion(ruta))
+
+    def test_la_clave_del_minitest_casa_con_las_opciones(self):
+        """Se vuelve a leer la clave con una expresión propia y se compara con
+        lo que devolvió `leer_minitest`: lo que se comprueba es la RELACIÓN, no
+        el contenido de ningún fichero, que es la lección del 2026-10-27."""
+        letras = "абвгд"
+        clave_re = re.compile(r"\*\*Мини-тест:?\*\*(.*?)(?=\n\n|\Z)", re.S)
+        suelta = re.compile(r"\b(\d+)\s*[—–-]?\s*\*{0,2}([абвгд])\*{0,2}(?!\w)")
+        vistos = 0
+        for ruta in sorted((RAIZ / "curso").glob("semana-*/dia-*.md")):
+            datos, cuerpo = validar.frontmatter(ruta.read_text(encoding="utf-8"))
+            if datos.get("tipo") != "repaso":
+                continue
+            preguntas = pruebas.leer_minitest(cuerpo, semana=datos["semana"])
+            if not preguntas:
+                continue
+            vistos += 1
+            bruto = clave_re.search(cuerpo)
+            esperado = [letras.index(l) for _, l in suelta.findall(" ".join(bruto.group(1).split()))]
+            self.assertEqual([q.correcta for q in preguntas], esperado, ruta.parent.name)
+            for q in preguntas:
+                self.assertIn(q.correcta, range(len(q.opciones)), q.enunciado)
+                self.assertEqual(len(set(q.opciones)), len(q.opciones),
+                                 f"dos opciones iguales: {q.enunciado}")
+                self.assertTrue(q.enunciado and not q.enunciado.endswith("→"), q.enunciado)
+        self.assertEqual(vistos, 18)
+
+    def test_una_clave_de_minitest_que_no_cuadra_lo_deja_como_esta(self):
+        """Fallo seguro: si sobra una respuesta, esa página se queda con sus
+        casillas en vez de corregir mal."""
+        ruta = RAIZ / "curso" / "semana-05" / "dia-6.md"
+        datos, cuerpo = validar.frontmatter(ruta.read_text(encoding="utf-8"))
+        self.assertIsNotNone(pruebas.leer_minitest(cuerpo, semana=5))
+        roto = cuerpo.replace("**Мини-тест:** 1 б", "**Мини-тест:** 0 а · 1 б", 1)
+        self.assertNotEqual(roto, cuerpo)
+        self.assertIsNone(pruebas.leer_minitest(roto, semana=5))
 
     def test_las_siete_pruebas_escritas_se_leen(self):
         """Dos no se leían al principio: en la unidad 4 una opción es una

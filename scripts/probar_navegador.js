@@ -1,0 +1,82 @@
+#!/usr/bin/env node
+/**
+ * Abre páginas del sitio ya construido en Chromium, las USA, y cuenta lo que
+ * pasa. Imprime una línea JSON por página.
+ *
+ *   node scripts/probar_navegador.js docs/semana-21/dia-2.html …
+ *   node scripts/probar_navegador.js            # unas cuantas representativas
+ *
+ * Por qué existe. Todo lo que este proyecto da por «comprobado en navegador»
+ * se comprobó a mano, una vez, y nunca más. Así es como el test de unidad
+ * estuvo roto desde el día que se publicó: `pregunta()` leía una variable
+ * `preguntas` que nadie declaraba, el papel se escondía al pulsar «empezar» y
+ * en su lugar no salía nada. El lector en Python estaba comprobado; el botón,
+ * no. Un ReferenceError no se ve leyendo el HTML ni contando etiquetas.
+ *
+ * Lo que mira, en este orden:
+ *  - errores de JavaScript en la página (cero, siempre);
+ *  - si hay un test contestable, lo CONTESTA ENTERO eligiendo la opción
+ *    correcta por su TEXTO —no por su letra ni por su posición— y exige que el
+ *    resultado sea todo aciertos. Comparar con la posición sería repetir la
+ *    cuenta del propio guion y no probaría nada;
+ *  - que la versión en papel quede escondida y el botón de empezar, visible.
+ */
+const { chromium } = require('playwright');
+const path = require('path');
+
+const POR_DEFECTO = [
+  'docs/index.html',                 // portada: vitrina, probador de tres preguntas
+  'docs/test.html',                  // test de nivel
+  'docs/semana-21/dia-2.html',       // repaso con Мини-тест pulsable
+  'docs/semana-32/dia-6.html',       // test de unidad
+  'docs/semana-33/dia-6.html',       // repaso de producción: NO debe volverse test
+  'docs/semana-01/dia-1.html',       // lección normal: audio y huecos
+];
+
+async function unaPagina(b, rel) {
+  const p = await b.newPage();
+  const errores = [];
+  p.on('pageerror', e => errores.push(String(e)));
+  await p.goto('file://' + path.resolve(rel));
+
+  const r = { pagina: rel, test: null, aciertos: null, errores: [] };
+  const hayTest = await p.evaluate(() => !!(window.CURSO_PRUEBA && window.CURSO_PRUEBA.preguntas));
+  if (hayTest) {
+    const correctas = await p.evaluate(() =>
+      window.CURSO_PRUEBA.preguntas.map(q => q.opciones[q.correcta]));
+    r.test = correctas.length;
+    r.papel_escondido = await p.locator('#prueba-papel').isHidden();
+    await p.locator('#prueba-empezar').click();
+    let bien = 0;
+    for (const texto of correctas) {
+      const bs = p.locator('#prueba .test-ops button');
+      const n = await bs.count();
+      let pulsado = false;
+      for (let k = 0; k < n; k++) {
+        if ((await bs.nth(k).textContent()).trim() === texto) { await bs.nth(k).click(); pulsado = true; bien++; break; }
+      }
+      if (!pulsado) { r.errores.push('no encontré la opción: ' + texto); break; }
+    }
+    r.aciertos = bien;
+    const txt = (await p.locator('#prueba').textContent()).replace(/\s+/g, ' ');
+    r.resultado = txt.slice(0, 80);
+    r.dice_todo_bien = txt.includes(bien + ' / ' + correctas.length);
+  }
+  r.errores = r.errores.concat(errores);
+  await p.close();
+  return r;
+}
+
+(async () => {
+  const paginas = process.argv.slice(2).length ? process.argv.slice(2) : POR_DEFECTO;
+  const b = await chromium.launch({ args: ['--no-sandbox'] });
+  let malas = 0;
+  for (const rel of paginas) {
+    const r = await unaPagina(b, rel);
+    const roto = r.errores.length || (r.test && (r.aciertos !== r.test || !r.dice_todo_bien));
+    if (roto) malas++;
+    console.log(JSON.stringify(r));
+  }
+  await b.close();
+  process.exit(malas ? 1 : 0);
+})();

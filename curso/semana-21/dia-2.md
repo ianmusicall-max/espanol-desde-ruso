@@ -104,7 +104,7 @@ estás…)*, *ir (voy, vas, va…)*, *tener (tengo, tienes, tiene…)*.
 7. ¿A qué hora ___ (vosotros) de casa? → а) salís · б) salen · в) salimos
 8. Yo ___ deporte dos veces a la semana. → а) haco · б) hago · в) hace
 9. Nosotros ___ volver pronto. (querer) → а) queremos · б) querimos · в)
-   queremos
+   quieremos
 10. Ella ___ a las once. (acostarse) → а) acuesta · б) se acuesta · в) se
     acosta
 11. Yo ___ un café, por favor. (pedir) → а) pedo · б) pido · в) pedio
