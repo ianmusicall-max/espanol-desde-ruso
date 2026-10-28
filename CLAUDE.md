@@ -59,9 +59,11 @@ la documentación del programa, en español.
 - **La unidad 5 mezcla los dos titulos del apartado 2**: la semana 9 usa
   Фонетика y la semana 10, Аудирование. La regla esta en `metodologia.md` §3 y
   dice que dentro de una unidad no se mezclan. Hay que elegir uno para las
-  catorce sesiones.
+  catorce sesiones. **Es el unico caso que queda**: las tres lecciones sueltas
+  que decian Аудирование (30-5, 32-2, 33-3) se renombraron el 2026-10-28,
+  porque ahi el desajuste era de una sesion y no de una semana entera.
 - **Trece entradas de vocabulario se ensenan dos veces** en semanas distintas,
-  de 956, y todas son de las semanas 1 a 14. `scripts/revisar_lexico.py` las
+  de 1.557, y todas son de las semanas 1 a 14. `scripts/revisar_lexico.py` las
   lista con el dia de cada aparicion.
 - **Los titulos de ejercicio siguen en ruso en la unidad 7**, pero
   `metodologia.md` §6 pide «espanol + ruso» desde ahi. O se retocan las
@@ -71,7 +73,7 @@ la documentación del programa, en español.
   2026-10-26) estan en `revisado: false` y la pagina lo avisa. Hay que
   comprobar que cada distractor sea de verdad el error que dice y que la unidad
   asignada sea donde el curso lo ensena.
-- **Las 105 lecciones de las semanas 4 en adelante son borradores**
+- **Las 217 lecciones de las semanas 4 en adelante son borradores**
   (`revisado: false`) y el sitio las marca como tales. Las 21 primeras estan
   revisadas.
 - **El orden de los pasados: se recomendo NO cambiarlo** (2026-10-26, de
@@ -2122,6 +2124,119 @@ informe compara entre lecciones, así que **un duplicado dentro de una sola
 tabla no lo detecta nadie**. Conviene mirar la tabla completa después de
 cada sustitución.
 
+## La unidad 17: el futuro, y el día que el apartado 2 dejó de mezclarse (días 225-238)
+
+Catorce lecciones, semanas 33 y 34. El curso pasa de 224 a **238 de 365** y
+**2.087 tarjetas** de vocabulario.
+
+**Toda la unidad es el futuro simple**, y su arco va de la forma al uso: el
+lunes las seis terminaciones, el martes los once irregulares, y de ahí en
+adelante lo que se hace con ellos — el pronóstico, las condiciones, los
+grados de certeza, las promesas y un texto de 150 palabras que los usa
+todos.
+
+Lo que decidió el contenido:
+
+- **Son ONCE irregulares y no diez**, y eso hubo que arreglarlo dentro de la
+  propia semana: el calendario lista diez (*tener, hacer, poder, salir,
+  poner, venir, decir, querer, saber, haber*) y la lección añadió *valer*
+  porque es el que falta para que «y son todos» sea verdad. El cuerpo del
+  día 33-2 ya decía once y su cabecera, su bloque de objetivos y su Выход
+  decían diez. Se alinearon a once, y la salida sigue pidiendo **diez de los
+  once**: *valdré* vive casi solo en *valdrá la pena*, así que en un relato
+  de un día no entra.
+- **Después de *si*, nunca futuro** (día 33-4) es la interferencia más dura
+  de la unidad, porque el ruso pone futuro en las dos mitades («если пойдёт
+  дождь, мы не пойдём»). Vuelve en el test y en las dos listas de errores.
+- **La escala de certeza entera va con indicativo** (día 34-1), y ésa es la
+  noticia buena del día. Lo que no va es *no creo que*: pide subjuntivo, que
+  este curso no ha enseñado, así que la regla operativa es **mover la
+  negación a la segunda mitad** — *creo que no vendrá* — y de *no creo que*
+  se dan dos trozos memorizados (*no creo que sea*, *no creo que pueda*) sin
+  analizarlos. Es lo que el calendario pedía con «solo como chunk».
+- **Por lo mismo se dejan fuera *quizá*, *quizás* y *tal vez***: admiten las
+  dos formas, así que habría que acertar cada vez. Para «может быть» queda
+  *a lo mejor*, que siempre va con indicativo, y *quizá* se reserva para el
+  respuesta corta.
+- **El día 34-2 mete la regla 7 dentro de la lección.** Es el único tema del
+  curso donde las cifras aparecen solas —grados, porcentajes de reciclaje— y
+  la lección lo dice con una tabla: *hará más calor que ahora*, no *subirá
+  dos grados*. Si el alumno quiere un número, pone `[VERIFICAR]`. Y por eso
+  la unidad no trae una sola cifra climática.
+- **Las promesas son dos cosas distintas y por eso dos construcciones**: un
+  *propósito* es para uno mismo (*este año haré…*) y una *promesa* es para
+  alguien (*te prometo que…*, con pronombre). En ruso las dos son
+  «обещание».
+- **La trampa más cara del miércoles es un *de*.** *Dejé de fumar* es «dejé
+  de fumar»; *le dejé fumar* es «le **permití** fumar». Una preposición
+  cambia el verbo, y la tabla lo pone con las tres formas juntas.
+- **El domingo no inventa nada**: *El Eternauta* (1957, Oesterheld y Solano
+  López), *La invención de Morel* (1940, Bioy Casares) y *Abre los ojos*
+  (1997, Amenábar) son obras comprobables, y el corto de ciencia ficción va
+  con `[VERIFICAR]` porque desde este contenedor no se puede saber qué hay
+  disponible ni con qué subtítulos —el mismo criterio que el día 147—. Para
+  que el día funcione igual sin película, el material es un microrrelato de
+  doce líneas escrito **entero en futuro**: más de veinte verbos, seis de
+  ellos de raíz irregular. Es la mejor demostración que tiene la unidad de
+  para qué servía la tabla del martes.
+- **El calendario de fiestas evita el solapamiento con el 33-7**: las uvas
+  ya estaban dadas, así que aquí van el 28 de diciembre (los Santos
+  Inocentes, que es el día de bromas y no el 1 de abril), el 6 de enero
+  (Reyes, que es cuando llegan los regalos) y el 2 de febrero (la
+  Candelaria, con los tamales de quien encontró la figurita) 🌎.
+
+**El test de la unidad** mantiene el bloque «Выражения» que estrenó la
+unidad 14, y se escribió ya repartido: **4/4/4/3**, sin tres iguales
+seguidas y sin el ciclo а-б-в-г. Comprobado ejecutando `pruebas.py` —las 15
+se leen, las 15 enlazan a su lección y las 15 claves señalan la opción que
+se quería—, no leyendo el archivo.
+
+**Cuatro formas que no se podían usar, y se colaron igual.** Las cuatro son
+del mismo tipo —gramática que el curso aún no ha dado, metida en un texto
+modelo— y las cuatro se encontraron barriendo, no releyendo:
+
+1. `habré terminado` (futuro perfecto) en el día 33-5, en un ejercicio que
+   además pedía al alumno producirlo.
+2. `para que salga bien` y `aunque no te apetezca` en el día 33-7: dos
+   subjuntivos en el modelo de horóscopo.
+3. `algo que no sirva` y `habré cambiado` en el texto de 150 palabras del
+   día 34-5.
+4. Y la peor, porque se contradecía con su propia unidad: el mismo texto
+   modelo decía **`no creo que gane`**, que es exactamente lo que el lunes
+   anterior prohíbe y que el ejercicio Б de ese mismo día corrige.
+
+La lección de método es que un texto modelo hay que barrerlo con un `grep`
+de formas prohibidas, igual que se barren los duplicados de léxico y los
+tokens de dos alfabetos. Un modelo que usa lo que la lección prohíbe enseña
+lo contrario de lo que dice, y nada se pone en rojo.
+
+**El apartado 2 ya no se mezcla dentro de una unidad.** `metodologia.md` §3
+dice que las catorce sesiones de una unidad llevan el mismo título —Фонетика
+si la unidad declara `fonetica`, Аудирование si no— y que el validador
+acepta los dos, así que esto no se pone en rojo solo. **Las 24 unidades
+declaran `fonetica`**, o sea que el título debería ser Фонетика en todas
+partes, y había **tres lecciones sueltas** que decían Аудирование: 30-5,
+32-2 y 33-3, una por unidad, las tres de esta serie de sesiones. Las tres
+son «lea en voz alta y grábese» y terminan con observaciones de prosodia, o
+sea que son fonética: se renombraron. La semana 10 entera se dejó como
+estaba, porque ahí el desajuste es de toda una semana y está anotado como
+pendiente del profesor desde antes: elegir uno de los dos es su decisión.
+
+**Ocho entradas duplicadas en la semana 33 y tres en la 34**, todas cazadas
+por `revisar_lexico.py` al cerrar cada semana. Las tres de la 34 cambiaron
+el diseño de dos lecciones, no sólo su tabla: *dejar de* estaba dado en la
+unidad 10, *volver a* en la 13 y *se ruega* en la 16, así que los días 34-3
+y 34-4 pasaron a presentarlos como material **conocido** —que es lo que pide
+`metodologia.md`— y lo nuevo quedó en *empezar a*, en *dejar a alguien* (el
+sentido de «permitir») y en *incumplir*. Quedan los 13 duplicados de
+siempre, todos de las semanas 1 a 14.
+
+**Y el disco: esta vez sí se pudo barrer.** Las 6.206 carpetas `/tmp/tmp*`
+que la nota del 2026-10-27 daba por imborrables —unos 30 GB— se fueron con
+un `rm -rf /tmp/tmp*` que tardó unos minutos en segundo plano. Con eso la
+cuota pasó de 135 MB libres a 30 GB, y la suite entera y la reconstrucción
+del sitio volvieron a correr de una vez, sin la maniobra de apartar los MP3.
+
 ## Los quince tests de unidad no medían nada (2026-10-27)
 
 Contadas las respuestas correctas de los quince días de `prueba`: en la
@@ -2455,12 +2570,12 @@ de verdad.
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.
-- **224 lecciones escritas** (semanas 1-32 enteras): el nivel A1 completo y
-  cinco unidades de A2, 1.954 tarjetas de vocabulario. Las 21 primeras
-  revisadas; el resto son borradores.
-  **`docs/` está al día**: las 224 lecciones construidas y publicadas, con la
-  tira de dibujos del héroe y la tipografía propia (Literata + Onest,
-  autoalojada). La suite entera pasa: 254 pruebas.
+- **238 lecciones escritas** (semanas 1-34 enteras): el nivel A1 completo y
+  siete unidades de A2 —hasta la 17, el futuro—, 2.087 tarjetas de
+  vocabulario. Las 21 primeras revisadas; el resto son borradores.
+  **`docs/` está al día**: las 238 lecciones construidas y publicadas (264
+  páginas), con la tira de dibujos del héroe y la tipografía propia (Literata
+  + Onest, autoalojada).
 - Sitio público en `docs/` con portada, índice, test de nivel, «О курсе»,
   contacto y política de privacidad. Tres idiomas (ru/es/en) —el test solo en
   ruso, como las lecciones—, tema claro y oscuro, y progreso del lector
