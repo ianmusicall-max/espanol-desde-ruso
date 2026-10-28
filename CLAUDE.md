@@ -73,7 +73,7 @@ la documentación del programa, en español.
   2026-10-26) estan en `revisado: false` y la pagina lo avisa. Hay que
   comprobar que cada distractor sea de verdad el error que dice y que la unidad
   asignada sea donde el curso lo ensena.
-- **Las 217 lecciones de las semanas 4 en adelante son borradores**
+- **Las 231 lecciones de las semanas 4 en adelante son borradores**
   (`revisado: false`) y el sitio las marca como tales. Las 21 primeras estan
   revisadas.
 - **El orden de los pasados: se recomendo NO cambiarlo** (2026-10-26, de
@@ -2567,6 +2567,99 @@ forma de texto.
 quien llega; traer visitas sigue siendo lo de las redes, y el cuello de botella
 de verdad.
 
+## La unidad 18: opinar, discutir y transmitir (días 239-252)
+
+Catorce lecciones, semanas 35 y 36. El curso pasa de 238 a **252 de 365** y
+**2.222 tarjetas**.
+
+**La unidad enseña a hablar CON alguien**, que es lo que faltaba: hasta aquí
+el alumno contaba cosas (unidades 12-14), se describía (15) y daba
+instrucciones (16). Aquí opina, no está de acuerdo, llama por teléfono y
+cuenta lo que dijo otro.
+
+**Lo que se comprobó antes de escribir, y cambió cuatro lecciones.** El
+calendario pide para esta unidad material que ya estaba dado, así que lo
+nuevo hubo que acotarlo:
+
+- **`creo que` y `me parece que` son de la unidad 17**, donde eran grados de
+  certeza sobre el futuro. En el día 35-1 son opinión sobre cualquier cosa, y
+  lo nuevo son las otras tres fórmulas y que las cinco se reparten en dos
+  formas: con `que` + verbo, o con coma + frase entera.
+- **`a mí también` / `a mí tampoco` son de la unidad 6**, con `gustar`. Lo
+  nuevo del día 35-2 son las otras dos casillas —`yo también` / `yo tampoco`
+  con verbos normales— y `sí` / `no` para el desacuerdo.
+- **`además` y `por eso` son de las unidades 3 y 5.** Lo nuevo del 35-3 son
+  oponer y **conceder**, que es el movimiento que falta en casi todo
+  argumento escrito.
+- **`¿Dígame?` y `¿De parte de quién?` son de la unidad 16**, de la llamada
+  para pedir cita. En el 35-4 se llama a una PERSONA, que puede no estar.
+
+Lo que decidió el contenido:
+
+- **La negación se muda, y es la regla operativa de la unidad.** *No creo que
+  venga* pide subjuntivo, que este curso no ha enseñado; la salida es
+  **`creo que no vendrá`**. Es la misma decisión que la unidad 17 tomó con
+  los grados de certeza, y aquí se repite porque vuelve a aparecer.
+- **⚠️ `si` no está donde está «ли».** La partícula rusa va DENTRO de la
+  frase, después de la primera palabra; el `si` español va en la **junta**,
+  antes de toda la segunda mitad. Es la única dificultad real del día 35-5 y
+  vuelve en el test.
+- **Y no hay coma.** Ni antes de `que`, ni de `si`, ni de `qué`. El ruso la
+  pone siempre y la mano la escribe sola: es de las pocas faltas que delatan
+  un texto traducido antes de leer qué dice.
+- **El pronombre de `me ha dicho` no es opcional** (día 36-1). El ruso dice
+  «Сказал, что…» sin nombrar a nadie; el español dice a quién, y sin el
+  pronombre la frase significa otra cosa.
+- **⚠️ `discutir` no es «дискутировать»** (día 35-7). Se acerca a
+  «ссориться»; lo neutro es `debatir` o `hablar de`. *Hemos discutido el
+  proyecto* dice que se pelearon por él.
+- **Cuatro verbos españoles para dos rusos**: `ver` / `mirar` y `oír` /
+  `escuchar` (día 36-4). La regla corta que funciona: la tele se *ve*, la
+  radio se *escucha*, una foto se *mira*, un ruido se *oye*. Y el quinto, que
+  es el que usa todo el mundo y no está en ningún libro: **`poner`** las
+  noticias.
+- **La `x` del chat es el signo de multiplicar** (día 36-7), y eso explica
+  medio diccionario de abreviaturas: `xq`, `xa`, `x fa`, `x cierto`. El resto
+  son consonantes sin vocales, que es como se escribían los SMS rusos.
+- **Las cuatro tildes que no se caen en un chat**: `sí`, `qué`, `mí`, `él`.
+  Lo demás se puede perder; esas cuatro son la palabra.
+
+**La tertulia es el día cultural que más cambia de expectativas** (35-7).
+Cuatro cosas descolocan al que viene de fuera y las cuatro son de pragmática,
+no de gramática: se habla a la vez y no es mala educación, se levanta la voz
+sin estar enfadado, la discusión no termina con un ganador, y `discutir`
+significa otra cosa. Y las ocho fórmulas que suavizan —*bueno…*, *ya,
+pero…*, *no sé…*— tienen en común que **ninguna niega lo que dijo el otro**.
+
+**El Мини-тест del repaso se escribió ya contestable** (35-6): desde el
+2026-10-28 `pruebas.leer_minitest` los lee, así que el formato importa —
+opciones detrás de una flecha, clave con «(день N)»— y el reparto también. Se
+escribió en 5/5/5 y salió 3/7/5 con tres `б` seguidas; se arregló moviendo
+dos opciones de sitio, no cambiando ninguna respuesta. **El test de la unidad
+está en 4/4/4/3** y comprobado con `pruebas.py`: las 15 se leen y las 15
+enlazan a su lección.
+
+**Seis formas que el curso aún no ha enseñado se colaron en textos modelo**, y
+las seis se encontraron barriendo con `grep`, no releyendo:
+
+| Dónde | Qué |
+|---|---|
+| 36-1, tabla de vocabulario | `Me dijo que **vendría** ese día` (condicional) |
+| 36-2, el correo modelo | `**sería** genial veros` |
+| 36-3, el texto de opinión | `depende de a quién **sigas**` |
+| 36-5, el debate modelo | `aunque **crea** que sí` y `¿lo **prohibirías**?` |
+| 35-6 y 35-7, prosa en español | `**pediría**`, `las **diría**` |
+
+Es exactamente lo que pasó en la unidad 17, y por eso ya hay un barrido fijo
+al cerrar cada unidad: dos alfabetos en una palabra, duplicados de léxico, y
+ahora también formas verbales que la lección prohíbe. **Un texto modelo que
+usa lo que la lección prohíbe enseña lo contrario de lo que dice, y nada se
+pone en rojo.**
+
+**Un duplicado de léxico en toda la unidad** —`repetir`, ya dado en S31D4—
+cazado por `revisar_lexico.py` al cerrar la semana 35. Quedan los 13 de
+siempre, todos de las semanas 1 a 14.
+
 ## Los mini-tests se contestan, y el test de unidad no funcionaba (2026-10-28)
 
 Lo trajo el profesor usando el sitio: en el Мини-тест del sábado, «Ana ___ de
@@ -2719,14 +2812,14 @@ Cuatro cosas que lo rompen, y las cuatro tienen prueba:
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.
-- **238 lecciones escritas** (semanas 1-34 enteras): el nivel A1 completo y
-  siete unidades de A2 —hasta la 17, el futuro—, 2.087 tarjetas de
+- **252 lecciones escritas** (semanas 1-36 enteras): el nivel A1 completo y
+  ocho unidades de A2 —hasta la 18, opinar y discutir—, 2.222 tarjetas de
   vocabulario. Las 21 primeras revisadas; el resto son borradores.
-  **`docs/` está al día**: las 238 lecciones construidas y publicadas (264
-  páginas), con la tira de dibujos del héroe —la misma fila en el móvil y en
-  el escritorio—, la guía de los seis pasos dentro de cada lección y la
-  tipografía propia (Literata + Onest, autoalojada). La suite entera pasa:
-  266 pruebas, una de ellas en navegador de verdad.
+  **`docs/` está al día**: las 252 lecciones construidas y publicadas, con la
+  tira de dibujos del héroe —la misma fila en el móvil y en el escritorio—,
+  la guía de los seis pasos dentro de cada lección y la tipografía propia
+  (Literata + Onest, autoalojada). La suite entera pasa: 266 pruebas, una de
+  ellas en navegador de verdad.
 - Sitio público en `docs/` con portada, índice, test de nivel, «О курсе»,
   contacto y política de privacidad. Tres idiomas (ru/es/en) —el test solo en
   ruso, como las lecciones—, tema claro y oscuro, y progreso del lector

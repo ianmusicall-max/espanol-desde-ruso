@@ -1836,14 +1836,18 @@ class TestLaPruebaDeUnidad(unittest.TestCase):
         # repaso y no los `dia-6.md`.
         repasos = [r for r in sorted((RAIZ / "curso").glob("semana-*/dia-*.md"))
                    if validar.frontmatter(r.read_text(encoding="utf-8"))[0].get("tipo") == "repaso"]
-        self.assertEqual(len(repasos), 22)
-        leidos = [r for r in repasos if pruebas.de_la_leccion(r)]
-        # Los cuatro que faltan no son de opción múltiple: piden escribir la
-        # forma del verbo, así que sus casillas para escribir son lo correcto y
-        # `leer_minitest` devuelve None. El número se fija para que nadie los
-        # pierda en silencio.
-        self.assertEqual(len(leidos), 18,
-                         f"mini-tests pulsables: {[r.parent.name + '/' + r.stem for r in leidos]}")
+        self.assertGreaterEqual(len(repasos), 23)
+        sin_leer = {r.parent.name + "/" + r.stem for r in repasos
+                    if not pruebas.de_la_leccion(r)}
+        # No se fija cuántos se leen —ese número sube con cada unidad nueva y
+        # la prueba se rompería sola—, sino CUÁLES no. Estos cuatro no son de
+        # opción múltiple: piden escribir la forma del verbo, así que sus
+        # casillas son lo correcto y `leer_minitest` devuelve None. Si mañana
+        # aparece otro en esta lista, es que un mini-test de opción múltiple
+        # dejó de leerse, y eso sí hay que mirarlo.
+        self.assertEqual(sin_leer, {"semana-09/dia-6", "semana-29/dia-6",
+                                    "semana-31/dia-6", "semana-33/dia-6"},
+                         "cambió qué mini-tests no se pueden leer")
 
     def test_un_minitest_de_produccion_no_se_convierte(self):
         """La semana 33 pide escribir las formas del futuro, sin opciones. Ahí
@@ -1876,7 +1880,9 @@ class TestLaPruebaDeUnidad(unittest.TestCase):
                 self.assertEqual(len(set(q.opciones)), len(q.opciones),
                                  f"dos opciones iguales: {q.enunciado}")
                 self.assertTrue(q.enunciado and not q.enunciado.endswith("→"), q.enunciado)
-        self.assertEqual(vistos, 18)
+        # Lo que se comprueba es la RELACIÓN entre la clave y las opciones, no
+        # cuántos hay: ese número crece con cada unidad.
+        self.assertGreaterEqual(vistos, 19)
 
     def test_una_clave_de_minitest_que_no_cuadra_lo_deja_como_esta(self):
         """Fallo seguro: si sobra una respuesta, esa página se queda con sus
