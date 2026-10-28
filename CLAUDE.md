@@ -77,7 +77,7 @@ la documentación del programa, en español.
   2026-10-26) estan en `revisado: false` y la pagina lo avisa. Hay que
   comprobar que cada distractor sea de verdad el error que dice y que la unidad
   asignada sea donde el curso lo ensena.
-- **Las 273 lecciones de las semanas 4 en adelante son borradores**
+- **Las 287 lecciones de las semanas 4 en adelante son borradores**
   (`revisado: false`) y el sitio las marca como tales. Las 21 primeras estan
   revisadas.
 - **El orden de los pasados: se recomendo NO cambiarlo** (2026-10-26, de
@@ -3230,13 +3230,188 @@ que el alumno ya sabe, y el resultado habría sido una lección que presenta
 como novedad la mitad de la unidad 4. El informe de repeticiones no lo habría
 cazado después, porque yo habría cambiado la redacción, no la entrada.
 
+## La unidad 22: fiestas y sentimientos, y el reparto al revés (días 295-308)
+
+Catorce lecciones, semanas 43 y 44. El curso pasa de 294 a **308 de 365** y
+**2.774 tarjetas**.
+
+**El reparto es el inverso del de la unidad 21, y eso cambió cómo se
+escribió.** Allí el aparato gramatical entero estaba dado y el léxico estaba
+libre; aquí es al contrario: **las perífrasis estaban casi todas dadas** y el
+léxico —fiestas, música, cine— estaba **libre entero**.
+
+| Lo que el calendario traía | Ya estaba en |
+|---|---|
+| *empezar a* · *dejar de* · *volver a* | **S34D3** · **S19D5** · **S26D5** |
+| ***seguir* + gerundio** | **S27D3** (ver abajo: lo cazó el informe de léxico) |
+| *ponerse a* + inf. | **S39D3** |
+| *llevar* + gerundio · *ya no* · *todavía* · *tener ganas de* | **S29** · **S20D5** · **S25D3** · **S16D2** |
+| *dar miedo* · *dar pena* · *dar vergüenza* · *dar igual* · *estar harto de* | **S25D4** · **S39D3** · **S28D2** · **S39D3** |
+| *ponerse* + adjetivo · *sentirse* + adjetivo | **S28D2** y **S39D3** |
+| **¡Que aproveche!** · ¡Felicidades! · *felicitar* · *invitar a* · *el brindis* | **S12D1** · **S06D7** · **S34D4** · **S12D7** |
+| las cuatro fiestas grandes, *la uva*, *la campanada*, *disfrazarse*, *el desfile* | **S16D7** |
+| la Nochevieja · los Reyes Magos · el roscón | **S33D7** · **S34D7** |
+| la película · la serie · el personaje · la trama · los subtítulos · *tratar de* · el final | **S21D7** (el domingo de cine) |
+| el capítulo · la temporada · el documental · *merecer la pena* | **S36D4** |
+| *se celebra* / *se come* / *se regala* | **S08D3**, **S31D5** y **S42D4**, de la semana pasada |
+
+**Lo nuevo de verdad:**
+
+- ***Acabar de* + infinitivo**, que es el `contraste_ru` declarado: «только
+  что» en ruso es un **adverbio**, en español es un **verbo**. Y la trampa
+  que vale una frase: *acabar de* significa «только что» **solo en
+  presente**; para «terminé de hacerlo» se usa *terminar de*.
+- **Los siete predlogi de la línea del tiempo en una tabla**: *estar a punto
+  de* → *empezar a* / *ponerse a* → *seguir* → *llevar* → *dejar de* →
+  *volver a* → *acabar de*. Tres con **a**, cuatro con **de**, y una sola
+  —*seguir*— con **gerundio**, que es justo donde el ruso empuja al
+  infinitivo («продолжаю учить»).
+- ***llevar* / *seguir* + *sin* + infinitivo**: *llevo diez meses **sin**
+  fumar*, *sigo **sin** entenderlo*. El ruso pone la negación en el verbo;
+  el español, una preposición.
+- **Las tres máquinas del sentimiento, y la elección es mecánica**: *me
+  **da*** + **sustantivo** (miedo, pena, rabia, asco), *me **pone*** +
+  **adjetivo** (nervioso, triste, de buen humor), *me **hace*** +
+  **adjetivo o infinitivo** (feliz, reír). ⚠️ Y la bifurcación del día:
+  ***me pongo* nervioso** (yo me pongo así) frente a ***me pone*
+  nervioso** (el ruido me pone así) — una letra, y cambia quién actúa. La
+  primera mitad venía de S39D3; la segunda es nueva.
+- **La escala de recomendar, ocho peldaños**, cuatro arriba (*se puede ver <
+  te la recomiendo < merece la pena < no te la pierdas*) y cuatro abajo, y
+  el más fuerte de los de abajo no es una opinión sino un hecho: ***la dejé
+  a la mitad***. Y el pronombre es obligatorio y concuerda (*no te **la**
+  pierdas* / *no te **lo** pierdas*).
+- ***No soy muy de…*** para los gustos, que no se traduce palabra por
+  palabra. Y ⚠️ *me suena* («me resulta conocido») frente a *suena a* («se
+  parece a»).
+
+**Los chunks con subjuntivo: el calendario los pide, y la lección pone el
+límite.** La unidad declara «fórmulas fijas con subjuntivo como chunks», así
+que el día 43-4 enseña seis (*¡Que aproveche!*, *¡Que te mejores!*, *¡Que
+tengas suerte!*, *¡Que lo pases bien!*, *¡Que descanses!*, *¡Que te vaya
+bien!*) más *ojalá*, **como palabras**, con la instrucción explícita de no
+fabricar una séptima. El mejor hallazgo del día: ***¡Que aproveche!* está en
+el curso desde la semana 12**, o sea que el alumno lleva dos meses usando un
+subjuntivo sin saberlo — y ésa es exactamente la forma en que debe saberlo en
+A2.
+
+⚠️ **Y escribí la séptima yo mismo.** El modelo de invitación cerraba con
+*¡Que no falte nadie!*, que no está entre las seis declaradas: la lección
+decía «no haga nuevas» y su propio ejemplo hacía una. Es el fallo de la
+unidad 17 con otra cara (ahí fue *no creo que gane* en un texto modelo).
+Reescrito a *¡Os espero!*
+
+**Decisiones de contenido:**
+
+- ⚠️ **El 8 de marzo no es la misma fiesta, y eso es lo más útil de la
+  unidad.** En Rusia es día de flores y felicitaciones; en España y América
+  es el **Día Internacional de la Mujer**, con manifestaciones y
+  reivindicación. Un *«¡Felicidades por el 8 de marzo!»* a una española puede
+  caer muy lejos de donde se apuntaba. La lección no prohíbe nada: enseña a
+  **describir** (*en mi país se regalan flores a las mujeres*) en vez de a
+  felicitar. Es la interculturalidad que `referencias/espana-en-vivo.md`
+  echaba en falta —contraste de costumbre, no de gramática—.
+- ⚠️ **«El flamenco no es el baile español»: es andaluz.** Decirle a un
+  gallego «vosotros los españoles bailáis flamenco» es como decirle a un ruso
+  que todos bailan kazachok. Y el domingo tiene una espina dorsal propia: los
+  tres bailes **no comparten geografía, comparten origen social** — flamenco
+  en las comunidades gitanas del sur, tango en los arrabales del puerto,
+  cumbia en la costa caribeña con raíz africana, indígena y europea. Los tres
+  nacieron abajo y hoy son lo que cada país enseña al mundo.
+- **Las dos únicas cifras de los días de música son las de la UNESCO**
+  (tango **2009**, flamenco **2010**), estables y citadas en todas partes —
+  el mismo criterio que la dieta mediterránea de S20D7—. Ventas, oyentes,
+  años de edición y puestos en listas van con `[VERIFICAR]`, y la tarea final
+  lo exige por escrito.
+- **El 9 de mayo frente al 8 de mayo**: un día de diferencia por la hora de
+  la firma, que es un hecho sobre relojes y no sobre política. La lección
+  cuenta **qué se hace** —el desfile, la foto del antepasado, los claveles en
+  el monumento— y qué significa para una familia, y **no da ni una cifra**:
+  las de pérdidas varían según la fuente y el país, y en A2 no hacen falta.
+- ⚠️ **Contar una fiesta invierte la proporción de la unidad 13.** Allí quedó
+  escrito que un relato de una vida lleva tres imperfectos por cada
+  indefinido. Una fiesta es lo contrario, y está contado sobre el texto
+  modelo: **7 imperfectos y 11 indefinidos**. El motivo no es estilístico: en
+  una fiesta pasan cosas. La técnica del día es **contar sus propios
+  tiempos** y, si ganan los imperfectos, buscar qué describió en vez de
+  contar.
+- ⚠️ **Una charla de dos minutos necesita MENOS palabras que el texto de
+  150, no más.** Leídas, 150 palabras duran un minuto; el resto del tiempo se
+  lo comen las pausas, el nombre repetido y mirar a la gente. Así que el oral
+  es un **recorte** del texto, no una ampliación — y va con un **esquema de
+  cinco palabras** delante, que es el método de la unidad 11 (нед. 22,
+  день 5).
+
+**Los dos tests, en Chromium.** El Мини-тест de la semana 43 son 15 ítems en
+**5/5/5**; el test de la unidad, en **4/4/4/3**.
+`scripts/probar_navegador.js` los añade a su lista y contesta por el TEXTO de
+la opción: 15/15 los dos, cero errores de JS.
+
+**Cuatro subjuntivos se colaron en textos modelo y se quitaron**, y dos de
+ellos **contradecían la unidad 18**, que enseña *aunque* + indicativo:
+*aunque parezca tonto* (44-1) y *aunque haga frío* (44-4) — el arreglo del
+segundo es la lección misma, *aunque **hace** frío*—; más *a cualquiera que
+quiera empezar* (44-2) y el *¡Que no falte nadie!* de arriba.
+
+### Lo que cazó el informe de léxico, y es un tipo nuevo de hallazgo
+
+Tres entradas repetidas, y una cambió una lección entera:
+
+| Entrada | Ya estaba en |
+|---|---|
+| ***seguir* + герундий** | **S27D3** |
+| *ponerse a* + инф. | **S39D3** |
+| *desde entonces* | **S24D5** |
+
+**La de *seguir* + gerundio es la que importa, porque estaba enseñada de
+paso.** S27D3 es la lección de los irregulares del indefinido (*leyó, oyó,
+durmió, pidió, trajo*), y dentro de ella, en el punto 5, hay una línea:
+«*Siguió durmiendo* — «продолжал спать». *Seguir* + герундий». O sea que la
+construcción **no es el tema de ninguna lección** y sin embargo está dada, y
+además con entrada en el vocabulario, que es lo que permitió cazarla.
+
+Es un caso distinto de los anteriores: no es material que una unidad vieja
+enseñó como suyo, es material que se colocó **dentro de otra cosa**.
+
+**Y al buscarle la pareja apareció la segunda, que el informe NO podía
+cazar: *a punto de* también estaba dado, en S27D5.** Ahí, en la lección de
+comprensión de noticias de la misma semana, hay *un turista que **estaba a
+punto de** volver a su país*, con su entrada (*a punto de* + инф.) y su
+punto de explicación («**A punto de** — «вот-вот»»). El informe no lo marcó
+porque mi entrada decía *estar a punto de* y la vieja *a punto de*: dos
+cadenas distintas, la misma construcción. Lo encontré con el volcado del
+léxico mientras corría la suite, no con el informe.
+
+**Así que los DOS titulares del día 43-2 estaban enseñados, los dos en la
+semana 27 y los dos de paso.** Tiene explicación: la semana 27 es la de
+narrar (unidad 14), y narrar necesita «siguió durmiendo» y «estaba a punto
+de salir», así que ambas entraron donde hacían falta. El día ahora lo dice
+en su punto 7, y lo que queda suyo son tres cosas: **la tabla de las siete
+perífrasis en un solo sitio** —la primera vez que se ven como sistema, y lo
+que pregunta el test—, las formas con ***sin*** (*llevo diez meses sin
+fumar*, *sigo sin entenderlo*), y la diferencia entre *llevo* y *sigo*.
+
+La lección de método es la del informe, afinada: **compara entradas, no
+construcciones**, así que una misma forma escrita de dos maneras pasa
+inadvertida. Antes de dar por nueva una perífrasis, hay que buscarla con
+`grep` sobre `curso/` **en todas sus formas** —*a punto de* y *estar a punto
+de*, *seguir* y *sigo*— y no solo en el volcado.
+
+**Y la advertencia de método de la unidad 21 volvió a morder, en otra
+forma.** Ayer quedó escrito que el volcado del léxico hay que normalizarlo
+antes de buscar. Hoy faltaba la otra mitad: ***normalizar* también quita el
+artículo**, así que `grep "la película"` sobre el volcado normalizado no
+encuentra nada y `grep "pelicula"` encuentra tres. Buscar siempre **sin
+artículo** y sin acentos; con el artículo delante, media docena de palabras
+de cine y de música parecían nuevas y no lo eran.
+
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.
-- **294 lecciones escritas** (semanas 1-42 enteras): el nivel A1 completo y
-  once unidades de A2 —hasta la 21, casa y convivencia—, 2.642 tarjetas de
-  vocabulario. Las 21 primeras revisadas; el resto son borradores.
-  **`docs/` está al día**: las 294 lecciones construidas y publicadas, con la
+- **308 lecciones escritas** (semanas 1-44 enteras): el nivel A1 completo y
+  doce unidades de A2 —hasta la 22, fiestas y sentimientos—, 2.774 tarjetas
+  de vocabulario. Las 21 primeras revisadas; el resto son borradores.
+  **`docs/` está al día**: las 308 lecciones construidas y publicadas, con la
   tira de dibujos del héroe —la misma fila en el móvil y en el escritorio—,
   la guía de los seis pasos dentro de cada lección y la tipografía propia
   (Literata + Onest, autoalojada). La suite entera pasa: 267 pruebas, una de
@@ -3262,8 +3437,7 @@ cazado después, porque yo habría cambiado la redacción, no la entrada.
 - **El audio está hecho** (2026-10-26): 3.543 frases locutadas con la voz
   `shimmer`, 1,30 USD, 92 MB a 64 kbps, y 4.225 botones ▶ en 94 de las 100
   lecciones. Comprobado que suena en navegador.
-- Pendiente: **lecciones 295-365** (unidades 22-24 y la fase final: 71
-  lecciones), el audio de todo lo escrito desde la 101 —5.645 frases que
-  faltan de 9.188, **1,95 USD**, con `OPENAI_API_KEY` en el entorno—, más
+- Pendiente: **lecciones 309-365** (unidades 23-24 y la fase final: 57
+  lecciones), el audio de todo lo escrito desde la 101, más
   libros de referencia, y lo de
   «Pendiente de revision del profesor» de arriba.
