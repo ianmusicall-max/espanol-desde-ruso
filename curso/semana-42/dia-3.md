@@ -56,7 +56,7 @@ revisado: false
 > **2.** *— Ah, hola.*
 > **3.** *— Perdona que te moleste a estas horas. **Es que se oye** mucho la
 > música y mañana entro a trabajar a las siete.*
-> **4.** *— Uy, no me había dado cuenta. ¿Se oye mucho?*
+> **4.** *— Uy, no me daba cuenta. ¿Se oye mucho?*
 > **5.** *— Bastante. Yo creo que es el bajo más que la música.*
 > **6.** *— Ahora mismo lo **bajamos**. Perdona, de verdad.*
 > **7.** *— Nada, nada. Y si otro día tenéis fiesta, avisadme y yo me

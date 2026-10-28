@@ -52,7 +52,7 @@ revisado: false
 | Español | Русский |
 |---|---|
 | **Médica:** Buenos días, siéntese. ¿Qué le pasa? | Здравствуйте, садитесь. Что с Вами? |
-| **Iván:** Vine hace una semana con anginas. Estoy mejor, pero **sigo con tos**. | Я был неделю назад с ангиной. Мне лучше, но кашель не проходит. |
+| **Iván:** He tenido anginas. Estoy mejor, pero **sigo con tos**. | Я был неделю назад с ангиной. Мне лучше, но кашель не проходит. |
 | **Médica:** ¿**Ha terminado** el antibiótico? | Антибиотик допили? |
 | **Iván:** Sí, los siete días. | Да, все семь дней. |
 | **Médica:** ¿**Le duele** al tragar? | Больно глотать? |
@@ -201,7 +201,7 @@ fiebre se pierde líquido.**
 | empeo**rar** | ухудшаться | Vuelva si empeora. |
 | du**rar** | длиться | La tos puede durar dos semanas. |
 | to**ser** (**to**so) | кашлять | Toso solo por la noche. |
-| las an**gi**nas | ангина | Vine con anginas. |
+| las an**gi**nas | ангина | He tenido anginas. |
 | **po**co a **po**co | потихоньку | Haga deporte poco a poco. |
 | el l**í**quido | жидкость | Con fiebre se pierde mucho líquido. |
 | as**í** | так, таким образом | Come verdura. Así no tendrás hambre. |

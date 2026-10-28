@@ -60,6 +60,10 @@ revisado: true
 > año y **14 pagas**: doce meses más dos **pagas extra**, en julio y en
 > diciembre. Agosto es el mes de vacaciones: muchas tiendas y empresas cierran.
 
+**Две формы из будущего**: *fue* («пошла») — это Pretérito indefinido
+(единица 12), а *veía* («видел») — Pretérito imperfecto (единица 13). В песенке
+их достаточно узнать на слух: оба — прошедшее время, и оба придут в A2.
+
 ## 3. Слова (15–20 мин)
 
 | Español | Русский | Español | Русский |

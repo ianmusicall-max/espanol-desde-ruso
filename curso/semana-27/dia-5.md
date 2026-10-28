@@ -51,14 +51,14 @@ ma-ra-**tón**.
 >
 > *Un niño de seis años **apareció** ayer por la tarde en la sierra de
 > Alicante después de pasar una noche fuera. Lo **encontró** un perro de
-> rescate a dos kilómetros del pueblo. El niño **se había perdido** el
+> rescate a dos kilómetros del pueblo. El niño **se perdió** el
 > sábado mientras paseaba con su familia. **Estaba** bien y solo **tenía**
 > frío. Los bomberos lo **llevaron** al hospital por precaución.*
 >
 > **2. El metro abre dos horas más los sábados**
 >
-> *Desde el 1 de marzo el metro de Valencia **cerrará** a las dos de la
-> madrugada los sábados. La medida **se aprobó** el lunes y **afectará** a
+> *Desde el 1 de marzo el metro de Valencia **va a cerrar** a las dos de la
+> madrugada los sábados. La medida **se aprobó** el lunes y **va a afectar** a
 > las cinco líneas. El año pasado **viajaron** en metro ciento veinte
 > millones de personas, un ocho por ciento más que el año anterior.*
 >
@@ -129,13 +129,13 @@ ma-ra-**tón**.
    euros*.
 3. **Por ciento, а не ✗ porciento.** Два слова. Хотя существительное *el
    porcentaje* — одно.
-4. **Afectar a — с предлогом**, даже если дальше вещь: *afectará **a** las
-   cinco líneas*.
+4. **Afectar a — с предлогом**, даже если дальше вещь: *va a afectar **a**
+   las cinco líneas*.
 5. **A punto de — «вот-вот».** *Estaba a punto de volver* — «собирался
    возвращаться», «вот-вот уезжал».
-6. **Вы захотите сказать:** ✗ *tres millones euros* · ✗ *afectará las
+6. **Вы захотите сказать:** ✗ *tres millones euros* · ✗ *va a afectar las
    líneas* · ✗ *dos miles personas* · ✗ *el cuarenta porciento*. →
-   **Правильно:** ✅ *tres millones **de** euros* · ✅ *afectará **a** las
+   **Правильно:** ✅ *tres millones **de** euros* · ✅ *va a afectar **a** las
    líneas* · ✅ *dos **mil** personas* · ✅ *el cuarenta **por ciento***.
 
 ## 4. Практика (16–26 мин)
@@ -204,7 +204,7 @@ ma-ra-**tón**.
 | apare**cer** (apare**ció**) | найтись, появиться | El niño apareció ayer. |
 | entre**gar** / devol**ver** | передать / вернуть | Entregó la cartera en la comisaría. |
 | locali**zar** | найти, установить | La policía localizó al dueño. |
-| afec**tar** **a** | затронуть | La medida afectará a cinco líneas. |
+| afec**tar** **a** | затронуть | La medida va a afectar a cinco líneas. |
 | apro**bar** u**na** me**di**da | принять меру | La medida se aprobó el lunes. |
 | por precau**ción** | на всякий случай | Lo llevaron al hospital por precaución. |
 | a **pun**to de + инф. | вот-вот | Estaba a punto de volver. |

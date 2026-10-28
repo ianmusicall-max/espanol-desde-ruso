@@ -126,7 +126,7 @@ revisado: false
 4. ¿______ (usted) cocinar?
 5. Ella ______ tres idiomas.
 6. ¿______ (vosotros) el libro de Marta Sanz?
-7. No ______ (yo) si vendrá.
+7. No ______ (yo) si viene.
 8. ______ (yo) a su hermana desde el colegio.
 
 ### Упражнение Б. Saber o poder? Банк слов:
@@ -177,7 +177,7 @@ revisado: false
 |---|---|---|
 | sa**ber** (**sé**) | знать (факт) | Sé que vive en Madrid. |
 | sa**ber** + инф. | уметь | Sé conducir. |
-| no **sé** si | не знаю, …ли | No sé si vendrá. |
+| no **sé** si | не знаю, …ли | No sé si viene. |
 | cono**cer** de **vis**ta | знать в лицо | La conozco de vista. |
 | Re**cur**sos Hu**ma**nos (RR. HH.) | отдел кадров | Pregunta en Recursos Humanos. |
 | la ofi**ci**na | офис, контора | ¿Sabes dónde está la oficina? |

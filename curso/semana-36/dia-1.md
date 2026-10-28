@@ -174,7 +174,7 @@ cuéntela a un tercero.
    *su*, *aquí* → *allí*.
 3. **Mínimo dos preguntas transmitidas**, una con *si* y otra con palabra
    interrogativa con tilde.
-4. **Una frase con *de él* o *de ella***, donde *su* dejaría duda.
+4. **Una frase con *de él* o *de ella***, donde *su* deja duda.
 5. **Ni una coma** delante de *que* o de *si*.
 
 **Проверка — tres preguntas:**

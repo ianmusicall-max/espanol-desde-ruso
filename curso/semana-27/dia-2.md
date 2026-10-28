@@ -238,5 +238,5 @@ mi-**ré**.
 a la una.* · 3. *Pero no oí el despertador.* · 4. *Entonces mi madre me
 llamó a las cinco.* · 5. *Me di cuenta de que no llevaba el pasaporte.* —
 ✗ *me di cuenta que*. · 6. *No había taxis, así que cogí el metro.* ·
-7. *Al final llegué a las siete y cinco.* · 8. *Volví porque me había
-olvidado el pasaporte.* — или проще: *porque no llevaba el pasaporte*.
+7. *Al final llegué a las siete y cinco.* · 8. *Volví porque no llevaba el
+pasaporte.*

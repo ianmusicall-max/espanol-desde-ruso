@@ -182,7 +182,6 @@ profesora*, *Son alemanes*. Никакого нового глагола сег�
 | Español | Русский | Пример |
 |---|---|---|
 | ¿**Có**mo es? / ¿**Có**mo son? | Какой он? / Какие они? | ¿Cómo es tu móvil? |
-| **gran**de | большой (одна форма в роде) | Un libro grande, una mesa grande. |
 | pe**que**ño / pe**que**ña | маленький / маленькая | La mochila es pequeña. |
 | **vie**jo / **vie**ja | старый / старая | Mi ordenador es viejo. |
 | bo**ni**to / bo**ni**ta | красивый / красивая | Una mochila bonita. |

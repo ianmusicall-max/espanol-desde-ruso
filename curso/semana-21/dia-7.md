@@ -83,6 +83,11 @@ revisado: false
 > Con estas seis se puede contar cualquier película en A1, y son las mismas
 > que pide el examen oral de la semana que viene.
 
+**Формы, которых вы ещё не проходили**: *era* — Pretérito imperfecto
+(единица 13), а *habrá* и *sabrá* — Futuro simple (единица 17). Они стоят в
+совете про русские субтитры: *al terminar sabrá la historia y no habrá
+aprendido una palabra*. Понять достаточно.
+
 ## 3. Слова (15–20 мин)
 
 | Español | Русский | Español | Русский |

@@ -59,7 +59,7 @@ revisado: false
 > que puedo asumir y lo que no.
 >
 > — **¿Qué sueldo le gustaría tener?**
-> — **Preferiría** conocer primero las funciones. Pero **estaría** en torno
+> — **Preferiría** conocer primero las funciones. Pero **está** en torno
 > a los 1.500 brutos.
 >
 > — **¿Tiene alguna pregunta?**

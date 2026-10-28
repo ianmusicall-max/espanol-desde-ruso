@@ -25,19 +25,7 @@ revisado: false
 - Вопрос вслух: *¿Qué haces por la tarde?* Ответьте тремя фразами со
   вчерашними глаголами.
 
-## 2. Аудирование (3–6 мин)
-
-**Одна минута аудио.** Послушайте (или прочитайте вслух и запишите себя) и
-ответьте на два вопроса.
-
-> `[AUDIO]` *Soy Olga. Los lunes empiezo a trabajar a las nueve, pero los
-> viernes empiezo a las ocho, porque quiero salir antes. Vuelvo a casa a las
-> seis y duermo media hora: en Moscú no hago eso, pero aquí la tarde es muy
-> larga. No puedo cenar a las diez como Javier. Los domingos juego al tenis
-> con mi hermana.*
-
-1. ¿A qué hora empieza a trabajar Olga los viernes, y por qué?
-2. ¿Qué hace los domingos?
+## 2. Фонетика (3–6 мин)
 
 **Дифтонги ie и ue: два звука в одном слоге, и согласная перед ними НЕ
 смягчается.** Это главная русская помеха в этом уроке: по-русски перед «е»
@@ -47,6 +35,18 @@ revisado: false
 согласной:
 
 > t**ie**ne · emp**ie**za · qu**ie**ro · d**ue**rme · p**ue**do · v**ue**lve · j**ue**go · alm**ue**rzo
+
+**А теперь минута речи с этими дифтонгами.** Послушайте (или прочитайте вслух
+и запишите себя) и ответьте на два вопроса.
+
+> `[AUDIO]` *Soy Olga. Los lunes empiezo a trabajar a las nueve, pero los
+> viernes empiezo a las ocho, porque quiero salir antes. Vuelvo a casa a las
+> seis y duermo media hora: en Moscú no hago eso, pero aquí la tarde es muy
+> larga. No puedo cenar a las diez como Javier. Los domingos juego al tenis
+> con mi hermana.*
+
+1. ¿A qué hora empieza a trabajar Olga los viernes, y por qué?
+2. ¿Qué hace los domingos?
 
 ## 3. Новое (6–16 мин)
 
@@ -220,7 +220,6 @@ al fútbol en el parque. ______ jugar todo el fin de semana, pero no ______.
 | el par**ti**do | матч | El partido empieza a las nueve. |
 | tem**pra**no | рано | Me levanto temprano. |
 | **tar**de | поздно | Vuelvo tarde. |
-| el gim**na**sio | спортзал | Juego al baloncesto en el gimnasio. |
 
 ## Ответы
 

@@ -70,11 +70,38 @@ def main(argv: list[str] | None = None) -> int:
     indice = lexico()
     repetidas = {k: v for k, v in indice.items() if len(v) > 1}
 
+    # Las dos tablas no son lo mismo, y meterlas en un número solo convierte
+    # un informe en un reproche: `Словарь дня` ENSEÑA diez palabras nuevas y el
+    # `3. Слова` de los domingos GLOSA las que usa su texto, nuevas o no. Una
+    # palabra glosada el domingo y enseñada el lunes no es un defecto: es
+    # exposición previa. Por eso el informe las separa, y lo único que de
+    # verdad hay que mirar son las de la tercera lista.
+    grupos = {"entre domingos": {}, "domingo y semana": {}, "dos veces como nueva": {}}
+    for clave, apariciones in repetidas.items():
+        tipos = [d.tipo for d, _ in apariciones]
+        if all(x == "cultura" for x in tipos):
+            grupos["entre domingos"][clave] = apariciones
+        elif any(x == "cultura" for x in tipos):
+            grupos["domingo y semana"][clave] = apariciones
+        else:
+            grupos["dos veces como nueva"][clave] = apariciones
+
     if repetidas:
-        print(f"Entradas que se enseñan como nuevas más de una vez: {len(repetidas)}\n")
-        for clave, apariciones in sorted(repetidas.items(), key=lambda kv: -len(kv[1])):
-            sitios = ", ".join(f"S{d.semana:02d}D{d.dia}" for d, _ in apariciones)
-            print(f"  {apariciones[0][1]:<34} {len(apariciones)}×  {sitios}")
+        print(f"Entradas que aparecen en más de una tabla: {len(repetidas)}")
+        print(f"  {len(grupos['entre domingos']):3} entre dos domingos "
+              "— su tabla glosa el texto del día, así que repetir es normal")
+        print(f"  {len(grupos['domingo y semana']):3} en un domingo y en una lección de semana "
+              "— exposición previa o nueva glosa")
+        print(f"  {len(grupos['dos veces como nueva']):3} DOS VECES en «Словарь дня» "
+              "— esto es lo que hay que mirar\n")
+        for nombre, grupo in grupos.items():
+            if not grupo:
+                continue
+            print(f"== {nombre} ({len(grupo)})")
+            for clave, apariciones in sorted(grupo.items(), key=lambda kv: -len(kv[1])):
+                sitios = ", ".join(f"S{d.semana:02d}D{d.dia}" for d, _ in apariciones)
+                print(f"  {apariciones[0][1]:<34} {len(apariciones)}×  {sitios}")
+            print()
     else:
         print("Ninguna entrada se repite.")
 

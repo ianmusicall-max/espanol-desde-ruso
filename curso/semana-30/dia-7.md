@@ -75,6 +75,10 @@ clientes que paguen a tiempo**.
 Lo que sí sirve de los dos retratos es el español que usan, y es el de toda
 esta unidad: contar qué sabe hacer, con qué experiencia y desde cuándo.
 
+**Две формы из будущего**: *decidirá* и *será* — это Futuro simple
+(единица 17). Фраза значит «решит не та история, которую вы прочли, а взнос,
+сроки и цифры». Понять достаточно.
+
 ## 3. Слова (15–20 мин)
 
 | Español | Русский | Español | Русский |

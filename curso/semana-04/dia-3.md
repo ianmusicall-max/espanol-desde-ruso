@@ -184,7 +184,6 @@ mochilas nuevas*.
 
 | Español | Русский | Пример |
 |---|---|---|
-| **mu**y | очень | Una mochila muy ligera. |
 | li**ge**ro / li**ge**ra | лёгкий / лёгкая (по весу) | Esta mochila es ligera. |
 | pe**sa**do / pe**sa**da | тяжёлый / тяжёлая | Dos libros pesados. |
 | **lar**go / **lar**ga | длинный / длинная (не «большой»!) | Una regla larga. |

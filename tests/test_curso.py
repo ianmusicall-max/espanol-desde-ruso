@@ -30,6 +30,7 @@ import huecos  # noqa: E402
 import exportar_apkg  # noqa: E402
 import poner_dominio  # noqa: E402
 import revisar_adsense  # noqa: E402
+import revisar_lexico  # noqa: E402
 import revisar_progresion  # noqa: E402
 import tarjeta_social  # noqa: E402
 import exportar_wordpress  # noqa: E402
@@ -3500,6 +3501,83 @@ class TestLaRevisionDelCurso(unittest.TestCase):
     LATINO = re.compile(r"[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]")
     TONICA = set("áéíóúÁÉÍÓÚ")
 
+    def test_ningun_patron_del_revisor_lleva_la_barra_doblada(self):
+        """`r"\\\\b(...)"` busca una contrabarra literal y **no encuentra nada
+        nunca**. El proyecto hermano tiene esto escrito como el defecto de
+        `GRAMOS`, que dejó una comparación sin correr durante semanas, y pasó
+        aquí el 2026-10-28 al añadir el pluscuamperfecto: la cola del parche
+        era una cadena *raw*, así que escribió `\\\\b` y el patrón del futuro
+        dejó de encontrar sus dieciséis formas. **Nada se puso en rojo**: el
+        informe salió con menos hallazgos, que es lo que uno espera después de
+        arreglar cosas.
+
+        La prueba es tonta a propósito: ningún patrón lleva dos contrabarras
+        seguidas, y todos compilan."""
+        barra = chr(92)
+        for nombre, patron in revisar_progresion.FORMAS.items():
+            self.assertNotIn(barra * 2, patron, f"el patrón de {nombre} lleva la barra doblada")
+            re.compile(patron)
+        for patron in revisar_progresion.DECLARA + (revisar_progresion.UNIDAD,):
+            self.assertNotIn(barra * 2, patron.pattern, patron.pattern)
+
+    def test_ninguna_unidad_mezcla_fonetica_y_audicion(self):
+        """`metodologia.md` §3: dentro de una unidad las catorce sesiones llevan
+        el mismo título en el apartado 2 —Фонетика si la ficha de la unidad trae
+        `fonetica`, Аудирование si no—. El documento decía que «el validador
+        acepta ambos, así que esto no se pone en rojo solo», y por eso la unidad
+        5 estuvo 5-5 desde que se escribió. Ahora sí se pone en rojo.
+
+        Y la condición es doble: no mezclar, y además coincidir con lo que la
+        unidad declara. Sin la segunda mitad, una unidad entera titulada
+        Аудирование con sus sonidos declarados pasaría por buena."""
+        titulos = {"Фонетика", "Аудирование"}
+        por_unidad = {}
+        for u in self.cal["unidades"]:
+            por_unidad[u["numero"]] = Counter()
+        for d in self.dias:
+            if d.unidad is None:
+                continue
+            cuerpo = validar.frontmatter(d.ruta.read_text(encoding="utf-8"))[1]
+            m = re.search(r"^## 2\.\s*(\S+)", cuerpo, re.M)
+            if m and m.group(1) in titulos:
+                por_unidad[d.unidad][m.group(1)] += 1
+        declara = {u["numero"]: bool(u.get("fonetica")) for u in self.cal["unidades"]}
+        for unidad, cuenta in sorted(por_unidad.items()):
+            if not cuenta:
+                continue
+            self.assertEqual(
+                1, len(cuenta), f"la unidad {unidad} mezcla los dos títulos: {dict(cuenta)}"
+            )
+            esperado = "Фонетика" if declara[unidad] else "Аудирование"
+            self.assertIn(
+                esperado, cuenta,
+                f"la unidad {unidad} declara fonetica={declara[unidad]} y titula {dict(cuenta)}",
+            )
+
+    def test_ninguna_palabra_se_ensena_dos_veces_como_nueva(self):
+        """Cero entradas en el `Словарь дня` de dos lecciones de semana.
+
+        El informe de léxico decía 135 repetidas y la lista de pendientes
+        hablaba de «96 que cruzan un domingo con una lección». Separadas por el
+        tipo de tabla, de las 135 solo **12** se enseñaban dos veces como
+        nuevas; las otras 123 son el artefacto de que haya DOS tablas:
+        `Словарь дня` enseña diez palabras y el `3. Слова` de los domingos
+        glosa las que usa su texto, nuevas o no. Una palabra glosada el domingo
+        y enseñada el lunes es exposición previa, no un defecto.
+
+        Las 12 se quitaron el 2026-10-28 dejando la PRIMERA enseñanza: la
+        segunda fila sobraba porque el alumno ya tenía esa tarjeta, así que no
+        hubo que inventar ninguna palabra nueva."""
+        dos_veces = []
+        for clave, apariciones in revisar_lexico.lexico().items():
+            if len(apariciones) < 2:
+                continue
+            if any(d.tipo == "cultura" for d, _ in apariciones):
+                continue
+            sitios = ", ".join(f"S{d.semana:02d}D{d.dia}" for d, _ in apariciones)
+            dos_veces.append(f"{apariciones[0][1]} ({sitios})")
+        self.assertEqual([], dos_veces, "entradas enseñadas dos veces como nuevas")
+
     def test_ninguna_palabra_mezcla_los_dos_alfabetos(self):
         """`Recetа` con а cirílica al final, `proходной`, `nед.`: cuatro veces
         en esta serie de sesiones, y a ojo no se ve ninguna. Rompe cualquier
@@ -3558,33 +3636,44 @@ class TestLaRevisionDelCurso(unittest.TestCase):
         paradigma."""
         semanas = revisar_progresion.semanas(self.cal)
         self.assertEqual(
-            {"perfecto": 18, "indefinido": 23, "imperfecto": 25,
-             "cortesía": 29, "futuro": 33, "condicional": 39},
+            {"perfecto": 18, "indefinido": 23, "imperfecto": 25, "cortesía": 29,
+             "futuro": 33, "condicional": 39,
+             # El pluscuamperfecto no lo ensena ninguna leccion: es B1.
+             "pluscuamperfecto": revisar_progresion.NUNCA},
             semanas,
         )
         for tiempo, semana in semanas.items():
+            if semana == revisar_progresion.NUNCA:
+                continue
             dias = [d for d in self.dias if d.semana == semana]
             self.assertTrue(dias, f"{tiempo}: la semana {semana} no está escrita")
 
-    def test_las_formas_usadas_antes_de_su_leccion_no_crecen(self):
-        """72 apariciones en 36 lecciones el 2026-10-28, listadas en
-        `revisiones/2026-10-28.md`: 32 en catorce domingos de cultura y 40
-        fuera de ellos. No se arreglaron las 72 —son borradores que el
-        profesor tiene que revisar de todos modos (regla 6)— pero el número no
-        puede subir sin que nadie se entere, que es como llegaron.
+    def test_ninguna_forma_se_usa_antes_de_su_leccion(self):
+        """Cero apariciones sin declarar, en las 365.
 
-        Si esto se pone en rojo, un texto nuevo usa un tiempo antes de su
-        lección: o se declara (la convención de S17D4) o se escribe con lo que
-        el alumno ya sabe."""
-        hs = revisar_progresion.hallazgos(self.cal)
-        sin = [h for h in hs if h[3] == revisar_progresion.SIN_DECLARAR]
-        self.assertLessEqual(len(sin), 72, "\n".join(
-            f"{d.etiqueta} {tiempo} [{forma}] {linea[:70]}" for d, tiempo, forma, _, linea in sin))
-        # Y los otros tres estados tienen que seguir existiendo: si el informe
-        # dejara de reconocer las formas declaradas y las del vocabulario,
-        # diría que hay cientos de defectos y nadie volvería a leerlo.
-        for estado in ("lexico", "declarada", "distractor"):
-            self.assertTrue(any(h[3] == estado for h in hs), f"ninguna {estado}")
+        El 2026-10-28 empezaron siendo 90: 72 de los seis tiempos del
+        calendario y 18 de pluscuamperfecto, que **no lo ensena ninguna
+        leccion** —es B1— y que por tanto nadie habia mirado nunca. Se cerraron
+        de tres maneras, y las tres son la convencion del curso:
+
+        - **ensenando la palabra**: una forma con entrada de vocabulario queda
+          ensenada desde ese dia (`quería`, `podría`, `me encantaría`);
+        - **declarandola**: el texto dice de que tiempo es y en que unidad
+          llega, o que no esta en el curso. Los 18 domingos de cultura llevan
+          ese aviso desde hoy;
+        - **reescribiendola** con lo que el alumno ya sabe, cuando la forma
+          estaba en material que produce o copia: `Mañana vas a estar mejor`
+          por `estarás`, `va a afectar` por `afectará`, `se perdió` por `se
+          había perdido`.
+
+        Por eso esto es una igualdad y no un tope: en cuanto vuelva a haber
+        una, hay que elegir una de las tres."""
+        sin = [
+            f"{d.etiqueta} {tiempo} [{forma}] {linea[:70]}"
+            for d, tiempo, forma, estado, linea in revisar_progresion.hallazgos(self.cal)
+            if estado == revisar_progresion.SIN_DECLARAR
+        ]
+        self.assertEqual([], sin, "formas usadas antes de la lección que las enseña")
 
     def test_el_subjuntivo_no_esta_en_lo_que_el_alumno_produce(self):
         """A2 no cubre el subjuntivo y el curso lo dice. Lo que se permite son

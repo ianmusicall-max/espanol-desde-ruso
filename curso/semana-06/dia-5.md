@@ -205,7 +205,6 @@ familia grande, pero estamos muy ______.
 | so**bre** **to**do | особенно, прежде всего | Mi familia es tranquila, sobre todo mi padre. |
 | ade**más** | кроме того, к тому же | Es enfermera y además estudia inglés. |
 | por **e**so | поэтому | Vive en Moscú, por eso no está aquí. |
-| en to**tal** | всего, в общей сложности | En total somos ocho. |
 | es**ta**mos u**ni**dos | мы дружные, мы близки | Somos pocos, pero estamos muy unidos. |
 | la fa**mi**lia nume**ro**sa | большая, многодетная семья | En España una familia numerosa tiene tres hijos o más. |
 

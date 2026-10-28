@@ -78,6 +78,10 @@ revisado: false
 > padre que enseña a dibujar; un niño que no crecía. Una biografía no es una
 > lista de éxitos: es qué pasó y qué hizo esa persona con lo que pasó.
 
+**Одна форма из будущего**: *iba a ganar* («собирался победить») — это
+Pretérito imperfecto (единица 13), и до него осталось две недели. Фраза значит
+«многие думали, что он никогда не победит».
+
 ## 3. Слова (15–20 мин)
 
 | Español | Русский | Español | Русский |

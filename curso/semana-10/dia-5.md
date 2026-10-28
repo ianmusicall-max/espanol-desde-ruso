@@ -24,10 +24,20 @@ revisado: false
 - Карточки: 10 слов недели (глаголы — с двумя формами, наречия частоты).
 - Вопрос вслух: *¿Qué haces los domingos?* Ответьте тремя фразами.
 
-## 2. Аудирование (3–6 мин)
+## 2. Фонетика (3–6 мин)
 
-**Одна минута аудио: кусок интервью.** Послушайте (или прочитайте вслух за
-двоих и запишите себя) и ответьте на два вопроса.
+**Вопрос поднимается, ответ опускается.** В русском вопрос без
+вопросительного слова тоже идёт вверх, но потом голос резко падает; в испанском
+подъём держится до самого конца фразы. Прочитайте вслух каждую пару — вверх,
+потом вниз:
+
+> ¿Te levan**tas** temprano? ↗ — Sí, a las **sie**te. ↘
+> ¿**Co**mes en **ca**sa? ↗ — No, en la ofi**ci**na. ↘
+> ¿Du**er**mes **o**cho **ho**ras? ↗ — **Ca**si **nun**ca. ↘
+> ¿**Sa**les con a**mi**gos? ↗ — Los **vier**nes. ↘
+
+**А теперь кусок интервью: вопрос — ответ, вопрос — ответ.** Послушайте (или
+прочитайте вслух за двоих и запишите себя) и ответьте на два вопроса.
 
 > `[AUDIO]` *— ¿A qué hora te levantas?*
 > *— A las siete menos cuarto. Me ducho, desayuno y salgo de casa a las ocho.*
@@ -40,16 +50,6 @@ revisado: false
 
 1. ¿A qué hora se levanta y a qué hora sale de casa?
 2. ¿Con qué frecuencia va al gimnasio?
-
-**Произношение: вопрос поднимается, ответ опускается.** В русском вопрос без
-вопросительного слова тоже идёт вверх, но потом голос резко падает; в испанском
-подъём держится до самого конца фразы. Прочитайте вслух каждую пару — вверх,
-потом вниз:
-
-> ¿Te levan**tas** temprano? ↗ — Sí, a las **sie**te. ↘
-> ¿**Co**mes en **ca**sa? ↗ — No, en la ofi**ci**na. ↘
-> ¿Du**er**mes **o**cho **ho**ras? ↗ — **Ca**si **nun**ca. ↘
-> ¿**Sa**les con a**mi**gos? ↗ — Los **vier**nes. ↘
 
 ## 3. Новое (6–16 мин)
 
@@ -228,8 +228,6 @@ noche*), наречиями частоты и союзами *y / pero*. Мин�
 | un **dí**a nor**mal** | обычный день | Escribo un texto: «Un día normal». |
 | **to**do el **dí**a | весь день | Los domingos descanso todo el día. |
 | por **e**so | поэтому | Vuelve tarde; por eso cena a las diez. |
-| ade**más** | кроме того | Además, los sábados juega al fútbol. |
-| **so**bre **to**do | главным образом | Descansa, sobre todo los domingos. |
 
 ## Ответы
 

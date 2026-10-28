@@ -227,7 +227,6 @@ revisado: false
 | la en**tre**ga | доставка (дата получения) | Entrega: del 14 al 16 de noviembre. |
 | tar**dar** | идти, занимать время | El pedido tarda tres días. |
 | devol**ver** | вернуть (товар) | Puedo devolverlo en treinta días. |
-| el pa**que**te | посылка; упаковка | El paquete es para la devolución. |
 | la refe**ren**cia (ref.) | артикул | Abrigo azul, ref. 4821. |
 
 ## Ответы

@@ -73,8 +73,16 @@ porque cada campo léxico nuevo trae sonidos nuevos (la **ll** de *paella*, la
 **z** de *cerveza*), y eso no se acaba en la semana 8.
 
 Dentro de una misma unidad los dos títulos no se mezclan: las catorce sesiones
-llevan el mismo. El validador acepta ambos, así que esto no se pone en rojo
-solo: hay que mirarlo al revisar la unidad.
+llevan el mismo, y es el que la ficha de la unidad pide. `validar.py` acepta
+los dos —trabaja lección a lección y esto es una invariante de la unidad
+entera—, así que lo comprueba la suite
+(`test_ninguna_unidad_mezcla_fonetica_y_audicion`). Antes no lo comprobaba
+nadie, y la unidad 5 estuvo 5-5 desde que se escribió hasta el 2026-10-28: la
+semana 9 hacía los dos sonidos declarados y la semana 10 los repetía al final
+de un bloque de escucha. Se arregló poniendo el sonido delante del minuto de
+audio en las cinco sesiones de la semana 10, que es lo que el apartado pide
+cuando la unidad trae `fonetica`: el audio no se fue, pasó a ser el sitio donde
+ese sonido se oye en una frase.
 
 Los números de los apartados y las franjas de minutos **van en los títulos**
 (`## 3. Новое (6–16 мин)`), y `scripts/validar.py` comprueba que empiecen en

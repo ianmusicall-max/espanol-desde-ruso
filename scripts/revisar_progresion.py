@@ -14,9 +14,13 @@ leccion y no su gramatica. Este guion es ese barrido, y SOLO LEE.
 No toda aparicion temprana es un defecto, y por eso el informe las separa:
 
   lexico      la forma tiene su propia entrada en el vocabulario de esa
-              leccion, o sea que se ensena como PALABRA y no como tiempo. Es
-              la convencion del curso para las cinco formulas de cortesia
-              (*me gustaría*, *podría*, *quería*…), declarada en la unidad 15.
+              leccion O DE UNA ANTERIOR, o sea que se ensena como PALABRA y no
+              como tiempo. Es la convencion del curso para las cinco formulas
+              de cortesia (*me gustaría*, *podría*, *quería*…), declarada en la
+              unidad 15. Mirando solo la leccion misma, el informe acusaba a
+              cada reaparicion de una palabra ya ensenada: `quería` sale en
+              S17D4 con su entrada y vuelve cuatro veces despues, y las cuatro
+              salian como defecto.
   declarada   la leccion nombra la unidad donde se ensena de verdad, o dice
               que la forma se aprende entera («Откуда эта форма — в 13-й
               единице; пока просто берите», S17D4).
@@ -51,6 +55,12 @@ TEMAS = {
     "condicional": r"\bcondicional\b",
 }
 
+# El pluscuamperfecto NO lo ensena ninguna leccion: es B1. Asi que su semana no
+# sale del calendario -no esta- y toda aparicion es temprana. Se mira igual que
+# los demas, de modo que un «pluscuamperfecto» declarado (S28D5 lo nombra en su
+# clave) sigue contando como declarado.
+NUNCA = 10 ** 9
+
 # El condicional entra DOS veces y por eso son dos tiempos y no uno: la unidad
 # 15 ensena cinco formulas de cortesia como vocabulario y la 20 el paradigma.
 # Contadas juntas, el informe acusaria de «temprana» cada `me gustaría` de las
@@ -77,6 +87,11 @@ FORMAS = {
     r"valdría|gustaría|encantaría|preferiría|iría|irían|compraría|hablaría|"
     r"comería|viviría|daría|pagaría|llevaría|dejaría|cambiaría|recomendaría|"
     r"diríamos|deberías|debería|podrías|gustaríamos)\b",
+    # habia + participio. La lista de participios es explicita a proposito: con
+    # «\w+ado» el existencial se cuela —`no había supermercado`, `había nada
+    # roto`— y el informe acusaria a la leccion que de verdad ensena `había`.
+    "pluscuamperfecto": r"\b(hab[ií]a|hab[ií]as|hab[ií]amos|hab[ií]ais|hab[ií]an)\s+"
+    r"(?:(?:ya|no|todav[ií]a|nunca|casi|siempre)\s+)?(hablado|comido|vivido|hecho|dicho|visto|escrito|puesto|vuelto|abierto|roto|muerto|ido|sido|estado|tenido|podido|querido|sabido|llegado|salido|terminado|quedado|empezado|cambiado|pasado|perdido|leído|oído|traído|olvidado|cerrado|firmado|decidido|estudiado|traducido|venido|dado|puesto|entendido|aprendido|trabajado|comprado|encontrado)\b",
     "futuro": r"\b(seré|será|serán|seremos|estaré|estará|estarás|estarán|tendré|"
     r"tendrá|tendrán|habrá|habrán|haré|hará|harán|podré|podrá|podrán|saldré|"
     r"saldrá|pondré|pondrá|vendré|vendrá|vendrán|diré|dirá|querré|sabré|sabrá|"
@@ -98,18 +113,29 @@ DECLARA = (
     re.compile(r"Это не ошибка"),
     re.compile(r"учат целиком"),
     re.compile(r"пока просто"),
+    # Nombrar el tiempo es declararlo: S28D5 lo hace en su clave.
+    re.compile(r"pluscuamperfecto", re.I),
 )
 
-# La referencia a una unidad SI declara la forma -«(это единица 12)»,
-# «придёт в единице 13»- pero solo si esta al lado: una leccion cualquiera
-# nombra un numero de unidad por su tarea final o por lo que viene la semana
-# que entra, y mirada en la leccion ENTERA esta referencia tapaba dieciseis
-# lecciones con defectos de verdad. Se mira en una ventana de renglones.
-UNIDAD = re.compile(r"\d+-(?:й|я|е|ой|м|го)\s+единиц|единиц\w*\s+\d+")
-VENTANA = 3
+# Una referencia a una unidad SI declara la forma -«(это единица 12)», «придёт
+# в единице 13», «в этом курсе его нет, он идёт на уровне B1»- pero la
+# declaracion vale para LA FORMA QUE NOMBRA, no para la leccion entera: un
+# domingo cualquiera nombra un numero de unidad por su tarea final o por lo que
+# viene la semana que entra, y mirado asi tapaba doce lecciones con defectos de
+# verdad. Asi que se buscan los PARRAFOS que declaran y se mira si el parrafo
+# nombra esta forma; con una ventana de renglones no alcanzaba, porque el aviso
+# del 2026-10-28 va al final del apartado y las formas estan en el texto.
+UNIDAD = re.compile(
+    r"\d+-(?:й|я|е|ой|м|го)\s+единиц|единиц\w*\s+\d+|уровне B1|pluscuamperfecto",
+    re.I,
+)
 
-# Un renglon donde la forma esta por incorrecta.
+# Un renglon donde la forma esta por incorrecta: marcada con ✗, en la lista de
+# «Вы захотите сказать», o entre las opciones de un test —ahi una forma que el
+# alumno no conoce es justamente un distractor, y no lleva ✗ porque la clave
+# dice aparte cual era la buena—.
 DISTRACTOR = ("✗", "Вы захотите сказать")
+OPCIONES = re.compile(r"(?:^|[·→|]\s*)[абвгд]\)")
 
 SIN_DECLARAR = "sin declarar"
 ESTADOS = ("lexico", "declarada", "distractor", SIN_DECLARAR)
@@ -127,6 +153,7 @@ def semanas(cal) -> dict[str, int]:
         if any(re.search(TEMA_CORTESIA, g, re.I) for g in u["gramatica"]):
             fuera["cortesía"] = min(u["semanas"])
             break
+    fuera["pluscuamperfecto"] = NUNCA
     return fuera
 
 
@@ -145,10 +172,14 @@ def _entradas(ruta: Path) -> str:
     return " | ".join(revisar_lexico.normalizar(f[0]) for f in filas if f)
 
 
-def _cerca(renglones: list[str], n: int) -> bool:
-    """Si una referencia a una unidad esta a VENTANA renglones de este."""
-    trozo = " ".join(renglones[max(0, n - VENTANA) : n + VENTANA + 1])
-    return bool(UNIDAD.search(trozo))
+def _formas_declaradas(cuerpo: str) -> str:
+    """Los parrafos de la leccion que declaran algo, en una sola cadena.
+
+    Un parrafo declara si nombra la unidad donde se ensena la forma o dice que
+    no esta en el curso. Lo que vale es lo que ESE parrafo nombra: asi el aviso
+    del final del apartado declara sus formas y no las demas."""
+    parrafos = [p for p in re.split(r"\n\s*\n", cuerpo) if UNIDAD.search(p)]
+    return " ".join(parrafos).lower()
 
 
 def hallazgos(cal=None):
@@ -156,6 +187,9 @@ def hallazgos(cal=None):
     cal = cal or plan.cargar()
     desde = semanas(cal)
     fuera = []
+    # El vocabulario se acumula: una palabra ensenada el lunes sigue ensenada
+    # el martes. Los dias se recorren en orden, que es el de `plan.dias`.
+    vocabulario = ""
     for d in plan.dias(cal):
         if not d.ruta.exists():
             continue
@@ -164,8 +198,8 @@ def hallazgos(cal=None):
         cuerpo = cuerpo.replace("*", "")
         seguido = re.sub(r"\s+", " ", re.sub(r"^\s*>\s?", "", cuerpo, flags=re.M))
         esta_declarado = any(p.search(seguido) for p in DECLARA)
-        vocabulario = _entradas(d.ruta)
-        renglones = cuerpo.split("\n")
+        vocabulario += " | " + _entradas(d.ruta)
+        declarado_en = _formas_declaradas(cuerpo)
         for tiempo, patron in FORMAS.items():
             if tiempo not in desde or d.semana >= desde[tiempo]:
                 continue
@@ -182,11 +216,11 @@ def hallazgos(cal=None):
                     tiempo = "cortesía"
                 linea = renglon(cuerpo, m.start())
                 plana = revisar_lexico.normalizar(forma)
-                if any(marca in linea for marca in DISTRACTOR):
+                if any(marca in linea for marca in DISTRACTOR) or OPCIONES.search(linea):
                     estado = "distractor"
                 elif plana and re.search(rf"\b{re.escape(plana)}\b", vocabulario):
                     estado = "lexico"
-                elif _cerca(renglones, cuerpo[: m.start()].count("\n")):
+                elif forma.lower() in declarado_en:
                     estado = "declarada"
                 elif esta_declarado:
                     estado = "declarada"

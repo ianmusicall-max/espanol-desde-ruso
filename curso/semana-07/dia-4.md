@@ -206,7 +206,6 @@ estación está al final ___(8) calle Nueva.
 | el supermer**ca**do | супермаркет | Voy al supermercado. |
 | la esta**ción** | вокзал, станция | La estación está al final de la calle. |
 | el **par**que | парк | El parque está detrás del hospital. |
-| el hospi**tal** | больница | El hospital está cerca del centro. |
 | co**rre**os | почта (отделение) | Correos está enfrente de la plaza. |
 | la **pla**za | площадь | La plaza está en el centro. |
 | en**fren**te de | напротив | Enfrente de mi casa hay un parque. |

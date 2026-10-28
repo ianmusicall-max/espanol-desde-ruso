@@ -47,7 +47,7 @@ otra mitad: **lo que se añadió de la единица 12 a la 23**.
 | **9. Fiestas, música y cine** | *la Nochevieja · disfrazarse · el estribillo · la trama · engancharse* |
 | **10. Leer y escribir** | *el titular · la idea principal · la tilde · el reembolso · el desenlace* |
 
-### Ocho falsos amigos que todavía no habían salido
+### Ocho falsos amigos nuevos
 
 | Español | Suena a | Y significa |
 |---|---|---|

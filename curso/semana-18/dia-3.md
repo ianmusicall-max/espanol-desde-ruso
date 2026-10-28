@@ -182,7 +182,7 @@ no.** Если между ними что-то влезло, порядок сл
    > *Luego he visitado la catedral: he hecho diez fotos.*
 2. **Две фразы — с возвратными глаголами** (*me he levantado*, *me he
    perdido*, *me he quedado*).
-3. **Одна фраза — отрицательная**: *No he comprado recuerdos porque todo era
+3. **Одна фраза — отрицательная**: *No he comprado recuerdos: todo es muy
    caro.*
 4. **И одна с todavía no**: *Todavía no he probado la paella.*
 5. **Прочитайте вслух**: ни одного [хе], местоимения слева, причастия без

@@ -24,10 +24,17 @@ revisado: false
 - Карточки: 10 слов, в том числе шкала частоты.
 - Вопрос вслух: *¿Con qué frecuencia sales con amigos?* Ответьте полной фразой.
 
-## 2. Аудирование (3–6 мин)
+## 2. Фонетика (3–6 мин)
 
-**Одна минута аудио.** Послушайте (или прочитайте вслух и запишите себя) и
-ответьте на два вопроса.
+**-s в формах «мы» и в множественном числе.** Сегодняшние слова
+почти все во множественном — *los sábados, los fines de semana, quedamos,
+vamos* — и в русском этот звук на конце слова ослабляется. Прочитайте вслух,
+держа **-s** до конца:
+
+> los **sá**bados · los do**min**gos · los **fi**nes de se**ma**na · que**da**mos · va**mos** · descan**sa**mos · de **com**pras · con a**mi**gos
+
+**А теперь минута речи, где почти всё во множественном.** Послушайте (или
+прочитайте вслух и запишите себя) и ответьте на два вопроса.
 
 > `[AUDIO]` *Mi fin de semana empieza el viernes por la noche: salgo con
 > amigos y vuelvo tarde. El sábado duermo hasta tarde, hasta las once o las
@@ -38,13 +45,6 @@ revisado: false
 
 1. ¿Qué hace el sábado por la tarde?
 2. ¿Qué hace el domingo?
-
-**Произношение: -s в формах «мы» и в множественном числе.** Сегодняшние слова
-почти все во множественном — *los sábados, los fines de semana, quedamos,
-vamos* — и в русском этот звук на конце слова ослабляется. Прочитайте вслух,
-держа **-s** до конца:
-
-> los **sá**bados · los do**min**gos · los **fi**nes de se**ma**na · que**da**mos · va**mos** · descan**sa**mos · de **com**pras · con a**mi**gos
 
 ## 3. Новое (6–16 мин)
 

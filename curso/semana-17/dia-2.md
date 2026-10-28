@@ -235,4 +235,9 @@ favor.* — 🌎 *un boleto*. · 3. *¿A qué hora llega?* · 4. *El tren tarda 
 horas.* · 5. *¿De qué andén sale?* — предлог **de**: «с какого». ·
 6. *El tren llega con retraso.* — или *El tren tiene retraso*; ✗ *El tren es
 tarde*. · 7. *¿Ventanilla o pasillo?* · 8. *He perdido el tren.* — это уже
-завтрашнее-послезавтрашнее время (perfecto); пока запомните фразу целиком.
+завтрашнее-послезавтрашнее время (Pretérito perfecto, единица 9); пока
+запомните фразу целиком.
+
+**И ещё две формы из будущего, обе в сегодняшнем диалоге.** *Quería* («я хотел
+бы») — вежливая форма от *quiero*, и её учат целиком: откуда она берётся, в
+четверг этой недели. *He perdido* — то же самое: фраза запоминается как есть.

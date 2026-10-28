@@ -24,10 +24,16 @@ revisado: false
 - Карточки: 10 слов, глаголы — с двумя формами (*empiezo / empezamos*).
 - Вопрос вслух: *¿Cuántas horas duermes entre semana? ¿Y los fines de semana?*
 
-## 2. Аудирование (3–6 мин)
+## 2. Фонетика (3–6 мин)
 
-**Одна минута аудио.** Послушайте (или прочитайте вслух и запишите себя) и
-ответьте на два вопроса.
+**-s второго лица в вопросах.** Весь сегодняшний урок — это
+вопросы на «ты», а в них **-s** несёт весь смысл. Прочитайте вслух, не
+ослабляя последний звук:
+
+> ¿fu**mas**? · ¿desayu**nas**? · ¿**ha**ces? · ¿du**er**mes? · ¿**sa**les? · ¿**vas**? · ¿v**uel**ves? · ¿ju**e**gas?
+
+**А теперь минута речи, вся на вопросах к «ты».** Послушайте (или прочитайте
+вслух и запишите себя) и ответьте на два вопроса.
 
 > `[AUDIO]` *— Olga, ¿con qué frecuencia haces deporte?*
 > *— Dos veces a la semana, los martes y los viernes. ¿Y tú?*
@@ -39,12 +45,6 @@ revisado: false
 
 1. ¿Con qué frecuencia hace deporte Javier?
 2. ¿Dónde desayuna Javier normalmente?
-
-**Произношение: -s второго лица в вопросах.** Весь сегодняшний урок — это
-вопросы на «ты», а в них **-s** несёт весь смысл. Прочитайте вслух, не
-ослабляя последний звук:
-
-> ¿fu**mas**? · ¿desayu**nas**? · ¿**ha**ces? · ¿du**er**mes? · ¿**sa**les? · ¿**vas**? · ¿v**uel**ves? · ¿ju**e**gas?
 
 ## 3. Новое (6–16 мин)
 
@@ -215,7 +215,6 @@ cena · volver tarde a casa · jugar a algo · ir al médico.
 | a **ve**ces | иногда | A veces como en la oficina. |
 | **ca**si **nun**ca | почти никогда | Casi nunca veo la tele. |
 | **nun**ca | никогда | Nunca fumo. |
-| **to**dos los **dí**as | каждый день | Todos los días voy a pie. |
 | una **vez** a la se**ma**na | раз в неделю | Juego al tenis una vez a la semana. |
 | dos **ve**ces al **mes** | два раза в месяц | Vamos al cine dos veces al mes. |
 

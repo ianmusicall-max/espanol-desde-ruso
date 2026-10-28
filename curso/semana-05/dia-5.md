@@ -221,7 +221,6 @@ tampoco.** В обоих случаях само слово «не» больш�
 | a**ma**ble | любезный, добрый | Mis tíos son muy amables. |
 | **muy** / bas**tan**te / un **po**co | очень / довольно / немного | muy alegre, un poco serio |
 | tam**bién** | тоже | Yo también. |
-| tam**po**co | тоже не | Yo tampoco. |
 
 ## Ответы
 

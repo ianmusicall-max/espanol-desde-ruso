@@ -200,7 +200,6 @@ Pável. ___ tío está casado y ___ mujer es profesora de inglés. Y tú, Carmen
 | ma**yor** | старший | Mi hermano mayor se llama Javier. |
 | me**nor** | младший | Mi hermana menor es Lucía. |
 | de **él** / de **e**lla | его / её (уточнение) | Es el coche de ella. |
-| el se**ñor** / la se**ño**ra | господин / госпожа | Señor López, ¿son sus nietos? |
 
 ## Ответы
 

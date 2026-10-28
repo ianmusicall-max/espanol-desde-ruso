@@ -59,8 +59,8 @@ revisado: false
 > me quedé con la sensación de que me faltaba algo. Ahora las veo casi sin
 > subtítulos.*
 >
-> **D.** *Me jubilé hace dos años y necesitaba algo que me ocupara la cabeza.
-> Elegí español porque de joven había estudiado francés y me pareció que se
+> **D.** *Me jubilé hace dos años y necesitaba algo para ocupar la cabeza.
+> Elegí español porque de joven estudié francés y me pareció que se
 > parecían bastante.*
 >
 > **E.** *Lo estudié en el colegio ocho años y no me acuerdo de nada. Lo he
@@ -75,7 +75,7 @@ revisado: false
 |---|---|---|
 | **14** | ¿Quién lo estudia por un viaje que todavía no ha hecho? | ______ |
 | **15** | ¿Quién lo estudia por su familia? | ______ |
-| **16** | ¿Quién ya lo había estudiado antes y lo ha vuelto a empezar? | ______ |
+| **16** | ¿Quién ya lo estudió antes y lo ha vuelto a empezar? | ______ |
 | **17** | ¿Quién empezó porque lo mandaron a otro país? | ______ |
 | **18** | ¿Quién lo comparó con otra lengua que ya sabía? | ______ |
 | **19** | ¿Quién empezó por una película? | ______ |

@@ -175,7 +175,7 @@ revisado: false
 **Б. Десять советов другу, который едет в Испанию.** Все десять
 отрицательные, на *tú*.
 
-> *No cenes a las seis: no habrá nadie. No pidas café con leche después de
+> *No cenes a las seis: no hay nadie. No pidas café con leche después de
 > comer…*
 
 **Проверьте три вещи:**

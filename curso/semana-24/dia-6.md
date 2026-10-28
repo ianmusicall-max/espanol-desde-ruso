@@ -54,7 +54,7 @@ revisado: false
    а) hablo · б) habló · в) he hablado · г) hablé
 2. No ______ venir el sábado. (poder, yo)
    а) pudé · б) he podido · в) pude · г) podí
-3. ______ que no podían. (decir, ellos)
+3. ______ que no pueden venir. (decir, ellos)
    а) Dijieron · б) Dijeron · в) Dicieron · г) Decieron
 4. ______ en 2014, en México. (morir, él)
    а) Morió · б) Muró · в) Murió · г) Ha muerto

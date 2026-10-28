@@ -60,7 +60,7 @@ revisado: false
 | **Iván:** **Tengo sueño** todo el día, pero por la noche no duermo. | Весь день клонит в сон, а ночью не сплю. |
 | **Ana:** Treinta y ocho y medio. **Tienes fiebre**, sí. | Тридцать восемь и пять. Да, температура. |
 | **Iván:** ¿Y **estoy** muy mal? | Я очень плохой? |
-| **Ana:** **Estás** regular. Mañana **estarás mejor**, ya verás. | Так себе. Завтра будет лучше, вот увидишь. |
+| **Ana:** **Estás** regular. Mañana **vas a estar mejor**, ya verás. | Так себе. Завтра будет лучше, вот увидишь. |
 
 Найдите в диалоге **шесть** выражений с *tener* и **три** с *estar*.
 

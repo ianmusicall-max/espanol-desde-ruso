@@ -75,6 +75,12 @@ revisado: false
 > Los Ángeles — y por eso el curso marca con 🌎 lo que cambia de un sitio a
 > otro.
 
+**Две формы из будущего, и одна из них не из этого курса.** *Había* —
+Pretérito imperfecto, и он начинается уже в понедельник. А *había estado*
+(«побывал раньше») — это pluscuamperfecto, прошедшее перед прошедшим: **в этом
+курсе его нет**, он идёт на уровне B1. Здесь достаточно понять фразу: он умер,
+так и не узнав точно, где был.
+
 ## 3. Слова (15–20 мин)
 
 | Español | Русский | Español | Русский |

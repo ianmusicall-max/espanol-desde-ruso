@@ -80,6 +80,10 @@ revisado: false
 > **Avianca** (avión, Colombia). *Chupa* viene de **chupar**, «сосать»: el
 > nombre es una instrucción.
 
+**Одна форма из будущего**: *había* («был, существовал») — это Pretérito
+imperfecto (единица 13), прошедшее от *hay*. Фраза *antes había otra moneda*
+значит «раньше была другая валюта»; сегодня достаточно её понять.
+
 ## 3. Слова (15–20 мин)
 
 | Español | Русский | Español | Русский |

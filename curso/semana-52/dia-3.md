@@ -80,7 +80,7 @@ marcados—:
 >
 > *El día que cambió algo fue en Málaga, en agosto. **(3)** Cogí un taxi, el
 > conductor me preguntó de dónde era y hablamos veinte minutos. Al bajarme me
-> di cuenta de que no había traducido ni una frase.*
+> di cuenta de que no traduje ni una frase.*
 >
 > *Ahora leo las noticias y veo series con subtítulos en español. **(4)** He
 > aprendido más de dos mil palabras y llevo once meses estudiando media hora al

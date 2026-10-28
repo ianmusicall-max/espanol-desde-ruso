@@ -66,6 +66,10 @@ revisado: false
 > juega un español. Pero el domingo por la tarde, en la radio y en la tele, se
 > habla sobre todo de una cosa.
 
+**Одна форма из будущего**: *era* («был») — это Pretérito imperfecto
+(единица 13). Во фразе *se es de un equipo porque lo era su padre* она значит
+«потому что им был его отец»: болеть за клуб — дело семейное.
+
 ## 3. Слова (15–20 мин)
 
 | Español | Русский | Español | Русский |

@@ -584,8 +584,16 @@ se llama Аудирование. Varias unidades de A2 siguen trayendo focos fó
 porque cada campo léxico nuevo trae sonidos nuevos (la <strong>ll</strong> de <em>paella</em>, la
 <strong>z</strong> de <em>cerveza</em>), y eso no se acaba en la semana 8.</p>
 <p>Dentro de una misma unidad los dos títulos no se mezclan: las catorce sesiones
-llevan el mismo. El validador acepta ambos, así que esto no se pone en rojo
-solo: hay que mirarlo al revisar la unidad.</p>
+llevan el mismo, y es el que la ficha de la unidad pide. <code>validar.py</code> acepta
+los dos —trabaja lección a lección y esto es una invariante de la unidad
+entera—, así que lo comprueba la suite
+(<code>test_ninguna_unidad_mezcla_fonetica_y_audicion</code>). Antes no lo comprobaba
+nadie, y la unidad 5 estuvo 5-5 desde que se escribió hasta el 2026-10-28: la
+semana 9 hacía los dos sonidos declarados y la semana 10 los repetía al final
+de un bloque de escucha. Se arregló poniendo el sonido delante del minuto de
+audio en las cinco sesiones de la semana 10, que es lo que el apartado pide
+cuando la unidad trae <code>fonetica</code>: el audio no se fue, pasó a ser el sitio donde
+ese sonido se oye en una frase.</p>
 <p>Los números de los apartados y las franjas de minutos <strong>van en los títulos</strong>
 (<code>## 3. Новое (6–16 мин)</code>), y <code>scripts/validar.py</code> comprueba que empiecen en
 0, sean contiguas y terminen en 30. No se puede escribir una lección de 45

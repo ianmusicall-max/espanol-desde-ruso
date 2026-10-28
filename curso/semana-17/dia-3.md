@@ -64,7 +64,7 @@ revisado: false
 | **Andréi:** ¿**Está lloviendo** ahí? | У вас дождь? |
 | **Elena:** Ahora no, pero **está nublado**. ¿Tú qué haces? | Сейчас нет, но пасмурно. А ты что? |
 | **Andréi:** **Estoy trabajando**. Bueno, **estoy mirando** el móvil, que no es lo mismo. | Работаю. Ну, то есть смотрю в телефон, что не одно и то же. |
-| **Elena:** ¿Y dónde **trabajas**? Nunca me lo has dicho. | А где ты работаешь? Ты мне так и не сказал. |
+| **Elena:** ¿Y dónde **trabajas**? Nunca me lo dices. | А где ты работаешь? Ты мне никогда не говоришь. |
 | **Andréi:** **Trabajo** en una escuela de idiomas. Pero esta semana **estoy haciendo** un curso. | Работаю в языковой школе. Но на этой неделе прохожу курсы. |
 | **Elena:** Ya llega el tren. **Te llamo** luego. | Уже поезд. Позвоню потом. |
 

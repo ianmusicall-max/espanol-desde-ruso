@@ -95,7 +95,7 @@ Estos dos hay que aprenderlos como son.
 el idioma. Comparado con los once irregulares del indefinido (unidad 12),
 esto es poco y además las terminaciones no cambian.
 
-**Y lo mejor: valen también para el condicional.** *Tendría*, *haría*,
+**Y lo mejor: valen también para el condicional (единица 20).** *Tendría*, *haría*,
 *podría* —que usted ya usa como fórmula de cortesía desde la unidad 15—
 salen de estas mismas raíces. Aprender esta tabla es aprender dos tiempos.
 

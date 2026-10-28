@@ -218,7 +218,6 @@ panadería* (куда) и ✅ *Compro el pan **en** la panadería* (где).
 | el es**tan**co | табачный киоск (табак и марки) | Los sellos se venden en el estanco. |
 | el **se**llo | почтовая марка | Quiero comprar sellos para una carta. |
 | la sec**ción** | отдел | La sección de pescadería. |
-| la **bol**sa | пакет, сумка | — ¿Quiere una bolsa? — Sí, por favor. |
 | ¿**Dón**de se **com**pra…? | Где покупают…? | ¿Dónde se compra el pan? |
 
 ## Ответы

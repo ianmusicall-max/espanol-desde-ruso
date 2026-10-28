@@ -52,8 +52,8 @@ revisado: false
 > *El **miércoles** por la **mañana** mi **tío** me **llamó** por **teléfono**
 > desde el **país** donde vive. Me **dijo** que **había** mucho **frío** y
 > que **sabía** que yo **estaba** mejor. **Él** siempre pregunta lo mismo:
-> «**¿Cómo** **está** tu **médico**?». Le **contesté** que **todavía** no
-> **había** ido, y que **a lo mejor** **iría** la semana que viene. **Más** tarde
+> «**¿Cómo** **está** tu **médico**?». Le **contesté** que **todavía** no, y
+> que **a lo mejor** **iría** la semana que viene. **Más** tarde
 > me **mandó** una foto del **jardín**: tres **árboles** y un **pájaro**.*
 
 ### Объяснение
@@ -259,7 +259,7 @@ revisado: false
 
 **В.** 1. *El miércoles por la mañana me llamó mi tío.* · 2. *Me dijo que
 hacía mucho frío.* · 3. *Sabía que yo estaba mejor.* · 4. *¿Cómo está tu
-médico?* · 5. *Le contesté que todavía no había ido.* · 6. *A lo mejor iría la
+médico?* · 5. *Le contesté que todavía no.* · 6. *A lo mejor iría la
 semana que viene.* · 7. *Más tarde me mandó una foto del jardín.* ·
 8. *Tres árboles y un pájaro.*
 
@@ -270,6 +270,6 @@ semana que viene.* · 7. *Más tarde me mandó una foto del jardín.* ·
 
 1. *El **miércoles** **llamó** mi **tío**.* 2. *Hacía mucho **frío** en el
 **país**.* 3. ***Sabía** que yo **estaba** mejor.* 4. *¿**Cómo** está tu
-**médico**?* 5. *Todavía no **había** ido.* 6. *A lo mejor **iría** la semana
+**médico**?* 5. *Todavía no.* 6. *A lo mejor **iría** la semana
 que viene.* 7. ***Más** tarde me **mandó** una foto del **jardín**.*
 8. *Tres **árboles** y un **pájaro**.*

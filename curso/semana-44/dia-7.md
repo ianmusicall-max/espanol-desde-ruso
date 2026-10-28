@@ -138,6 +138,11 @@ veces es verdad y las dos suenan distinto.
 > seis horas **sin** pensar en español ni en ruso: solo en patatas, en
 > música y en la gente.
 
+**Формы не из этого курса**: *había pasado* и *había dicho* — это
+pluscuamperfecto, прошедшее перед прошедшим; **в курсе его нет**, он идёт на
+уровне B1. Здесь он отделяет то, что было сказано, от того, что Иван понял
+потом.
+
 ## 3. Слова (15–20 мин)
 
 | Español | Русский | Español | Русский |

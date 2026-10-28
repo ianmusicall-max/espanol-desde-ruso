@@ -76,6 +76,12 @@ revisado: false
 >
 > Esa es toda la gramática de la semana, puesta a trabajar.
 
+**Одна форма не из этого курса**: *habían venido* («приехали раньше») —
+это pluscuamperfecto, прошедшее перед прошедшим. **В курсе его нет**: он идёт
+на уровне B1, и в последней единице вы увидите список того, что B1 добавляет.
+Здесь достаточно понять: *el sitio de donde habían venido los padres* — «место,
+откуда приехали родители».
+
 ## 3. Слова (15–20 мин)
 
 | Español | Русский | Español | Русский |

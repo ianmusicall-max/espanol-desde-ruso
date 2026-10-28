@@ -53,7 +53,7 @@ ver-**du**-ra.
 | Español | Русский |
 |---|---|
 | **Ana:** «¿**Llevas una vida sana**?» Pregunta uno: ¿**haces ejercicio**? | «Ведёшь ли ты здоровый образ жизни?» Вопрос один: занимаешься спортом? |
-| **Iván:** **Casi nunca**. Antes iba al gimnasio. | Почти никогда. Раньше ходил в зал. |
+| **Iván:** **Casi nunca**. He dejado el gimnasio. | Почти никогда. Раньше ходил в зал. |
 | **Ana:** Pregunta dos: ¿**duermes ocho horas**? | Вопрос два: спишь восемь часов? |
 | **Iván:** **A veces**. Entre semana, seis. | Иногда. В будни — шесть. |
 | **Ana:** ¿**Comes fruta y verdura** todos los días? | Ешь фрукты и овощи каждый день? |

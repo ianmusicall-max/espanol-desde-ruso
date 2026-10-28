@@ -102,7 +102,7 @@ revisado: false
 13. — Al final me devolvieron el dinero. — ___ → а) Menos mal. · б) ¡Qué
     rabia! · в) ¡Qué fuerte!
 14. Tres ___ de euros. → а) millones de · б) millones · в) millón
-15. La medida afectará ___ cinco líneas. → а) — · б) a · в) en
+15. La medida va a afectar ___ cinco líneas. → а) — · б) a · в) en
 
 **Всего: ___ / 15**
 
