@@ -71,6 +71,39 @@ revisado: false
 мать, а не как женщину. И «именины» у вас тоже есть, только почти вышли из
 употребления, как и испанский *santo*.
 
+### El episodio: «Las fotos»
+
+> **Ana:** ¿Esta es tu familia?
+>
+> **Iván:** Sí. Este es mi padre. Se llama Piotr y tiene sesenta y dos años.
+>
+> **Ana:** ¿Y esta señora?
+>
+> **Iván:** Es mi madre. Trabaja en un hospital.
+>
+> **Ana:** ¿Tienes hermanos?
+>
+> **Iván:** Una hermana. Lena. Tiene treinta años, está casada y tiene una
+> niña pequeña.
+>
+> **Ana:** ¿Cómo se llama la niña?
+>
+> **Iván:** Masha. Tiene dos años y habla mucho.
+>
+> **Ana:** ¿En ruso?
+>
+> **Iván:** En ruso. En español, no.
+>
+> **Ana:** Todavía.
+>
+> Otra vez la foto. Habla de cinco personas, de dos trabajos y de la edad de
+> todos, y nadie dice «¿cómo?».
+>
+> Es la primera vez.
+
+**Всё из третьей единицы, кроме 3 слов** — они в словаре ниже. Если
+остальное вы поняли без словаря, единица сработала.
+
 ## 3. Слова (15–20 мин)
 
 | Español | Русский | Español | Русский |
@@ -85,6 +118,8 @@ revisado: false
 | la fiesta | праздник | la canción | песня |
 | el ramo de flores | букет цветов | hecho a mano | сделанный своими руками |
 | el árbol genealógico | семейное древо | los bisabuelos | прадедушка и прабабушка |
+| la **fo**to | фотография | la e**dad** | возраст |
+| to**da**vía | пока ещё; всё ещё |  |  |
 
 Две ловушки: **la tarjeta** — открытка или карточка, а **la carta** — письмо
 (и меню в ресторане), но никогда не «карта» — карта это *el mapa*. И

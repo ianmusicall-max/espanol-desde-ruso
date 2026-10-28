@@ -72,6 +72,38 @@ revisado: false
 > diferencia está en **la acera y la terraza**: en España la vida se sienta en
 > la calle misma, de cara a los que pasan.
 
+### El episodio: «Perdido a tres calles»
+
+> **Iván:** Perdone, ¿dónde está la calle Mayor?
+>
+> **Un señor:** Todo recto, en el semáforo a la derecha, luego la
+> segunda a la izquierda, y ahí mismo, al lado de la farmacia, está la
+> parada; pero si vas a pie es mejor por detrás del mercado, porque…
+>
+> **Iván:** …
+>
+> **Un señor:** ¿Eh?
+>
+> **Iván:** Gracias. Muchas gracias.
+>
+> El señor se va contento. Iván entiende tres palabras: «derecha»,
+> «izquierda» y «mercado». Las tres están en su cuaderno.
+>
+> Tiene tres palabras y cuatro calles.
+>
+> Va a pie. A la derecha hay una farmacia, pero no hay parada. A la izquierda
+> hay un mercado, pero es otro mercado.
+>
+> Llega a su piso a las nueve.
+>
+> La calle Mayor está a tres calles de su portal.
+>
+> En el cuaderno escribe una cosa nueva, y no es una palabra: **«Más
+> despacio, por favor.»**
+
+**Всё из четвёртой единицы, кроме 2 слов** — они в словаре ниже. Если
+остальное вы поняли без словаря, единица сработала.
+
 ## 3. Слова (15–20 мин)
 
 Слова **el metro, la estación, la plaza, la terraza, el vecino** вы уже знаете
@@ -89,6 +121,7 @@ revisado: false
 | el banco (asiento) | скамейка (а не только банк!) | el quiosco | газетный киоск |
 | salir a la calle | выйти к людям, «на улицу» | el vecindario | соседи, округа |
 | el paseo | прогулка; бульвар | dar un paseo | гулять |
+| con**ten**to / con**ten**ta | довольный | el por**tal** | подъезд |
 
 ## 4. Задание (20–28 мин)
 

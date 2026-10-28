@@ -150,7 +150,16 @@ Y cuando el ruso AYUDA (gustar = «мне нравится», reflexivos = -ся
 imperfecto = несовершенный вид), se dice con la misma claridad: el paralelo es
 un atajo y hay que usarlo.
 
-## 6. El ruso se retira poco a poco
+## 6. El andamio en ruso, y la retirada que estaba planeada
+
+**Lo que el curso hace**: el andamio —la instrucción, la explicación y el
+rótulo del ejercicio— va en ruso de la unidad 1 a la 24, y el español ocupa
+todo lo que el alumno lee y produce: el ejemplo, la tabla de vocabulario, los
+ejercicios, su propia salida. El contraste con el ruso no desaparece nunca: es
+el valor del curso.
+
+**Lo que estaba planeado y no se hizo.** Este apartado prometía una retirada
+progresiva en cuatro bandas:
 
 | Unidades | Instrucciones | Explicación gramatical | Títulos de ejercicio |
 |---|---|---|---|
@@ -159,9 +168,21 @@ un atajo y hay que usarlo.
 | 12-18 | español + glosa en ruso | ruso | español |
 | 19-24 | español | español con el contraste en ruso | español |
 
-Al final del año el alumno lee instrucciones en español, que es lo que se va a
-encontrar en el DELE. El contraste con el ruso no desaparece nunca: es el
-valor del curso.
+Medido con `scripts/revisar_ruso.py` el 2026-10-28, **no ocurre en ninguna
+columna**: la proporción de renglones de instrucción en español es plana entre
+el 33 % y el 55 % de la unidad 1 a la 23 —sin pendiente— y el rótulo del
+ejercicio es `Упражнение` en **660** de los 697 encabezados. Los 35 `Tarea` son
+los simulacros y la unidad 24, o sea justo donde hace falta: es la palabra que
+usa el examen.
+
+La tabla se queda aquí porque la decisión es del profesor, y ahora tiene su
+precio delante: implementarla son las instrucciones de 220 lecciones reescritas
+en cuatro bandas distintas, y 660 encabezados con sus claves, porque la clave
+llama al ejercicio por su letra (А, Б, В) y las dos tienen que coincidir. Lo
+que el DELE pide —leer `Tarea 1` y entender el enunciado— ya está en los
+simulacros de las semanas 49 y 51 y en la unidad 24.
+
+Si algún día se hace, `scripts/revisar_ruso.py` dice por dónde va.
 
 ## 7. Pronunciación: el plan de ocho semanas
 

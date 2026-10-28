@@ -104,6 +104,40 @@ revisado: false
 Pretérito perfecto, и он придёт в единице 9. Здесь достаточно понять, что
 официант смотрит, закончили ли вы есть.
 
+### El episodio: «Nadie tiene prisa»
+
+> **Camarero:** Buenos días. ¿Qué va a tomar?
+>
+> **Iván:** Un café, por favor.
+>
+> **Camarero:** ¿Solo, cortado, con leche?
+>
+> **Iván:** …Con leche.
+>
+> **Camarero:** ¿Algo de comer? Hay tostadas.
+>
+> **Iván:** Una tostada. Gracias.
+>
+> El camarero se va. Iván ve el reloj: son las nueve y diez. A las nueve y
+> media empieza su reunión.
+>
+> El café llega a las nueve y cuarto. En la barra hay cuatro señores con su
+> café. Nadie ve el reloj.
+>
+> **Iván:** La cuenta, por favor.
+>
+> **Camarero:** Cuando quieras.
+>
+> Iván paga y sale.
+>
+> En la reunión es el primero. Hay café, y nadie empieza hasta las diez menos
+> veinte.
+>
+> Nadie tiene prisa. La prisa es suya.
+
+**Всё из шестой единицы, кроме 3 слов** — они в словаре ниже. Если
+остальное вы поняли без словаря, единица сработала.
+
 ## 3. Слова (15–20 мин)
 
 **Новые слова (десять пар).**
@@ -120,6 +154,8 @@ Pretérito perfecto, и он придёт в единице 9. Здесь дос
 | redondear | округлять (сумму) | obligatorio / obligatoria | обязательный |
 | el cortado | кофе с капелькой молока | el carajillo | кофе с ликёром |
 | el cubierto | столовый прибор; сбор за прибор (Арг.) | el discurso | речь |
+| la **pri**sa | спешка | la reu**nión** | совещание, встреча |
+| el re**loj** | часы |  |  |
 
 **А эти десять вы уже видели** — на этой неделе и на прошлой. Сегодня они
 просто вернулись в тексте: повторите их по карточкам, новых среди них нет.

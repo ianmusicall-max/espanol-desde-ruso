@@ -145,14 +145,35 @@ chaqueta»: el imperativo llega dos unidades más tarde.
 Ese es el ejercicio en cada episodio, y es lo que lo vuelve útil además de
 agradable: **si la escena se entiende sin diccionario, la unidad funcionó.**
 
-## Qué está hecho y qué no
+## Qué está hecho
 
-Los episodios **1 a 7** caen en semanas ya escritas y revisadas (1-14). No se
-han tocado: meterlos ahí es reescribir lecciones que el profesor ya dio por
-buenas, y eso lo decide él. Están aquí descritos por si los quiere.
+**Los 24 episodios están escritos** (los 1-7 el 2026-10-28, los demás con su
+lección). Cada uno vive en el día de cultura de la segunda semana de su unidad,
+detrás del material y antes de la tabla de palabras.
 
-Del **8 en adelante** (semana 15 en adelante) el curso aún no está escrito, así
-que el episodio entra con la lección, sin retrofit y sin coste.
+De los 1-7 se decía que caían «en semanas ya escritas y revisadas» y que por
+eso no se tocaban. Medido: de los siete, **solo el primero** (semana 2, día 7)
+está en una lección `revisado: true`; los otros seis eran borradores. O sea que
+la objeción valía para una lección, no para siete, y eso cambió la decisión.
+
+**Lo que costó escribirlos es la regla de cero vocabulario nuevo**, y en las
+unidades 1 a 7 el alumno tiene muy poco: la unidad 1 no conoce `hay`, ni
+`difícil`, ni una sola palabra de mobiliario, así que su episodio es casi
+íntegramente presentaciones — que es exactamente lo que esa unidad enseña. Se
+verificó palabra por palabra contra el léxico acumulado de cada unidad, no a
+ojo.
+
+Donde la escena necesitaba de verdad una palabra que no estaba, la palabra se
+glosa **en la tabla del domingo**, que es para lo que esa tabla existe: `3.
+Слова` glosa lo que usa su material. Son quince en total —de dos a tres por
+episodio, ninguna en el primero— y el cierre de cada episodio dice la verdad:
+«todo de la unidad N salvo estas tres, que están abajo», en vez de prometer
+cero.
+
+**Lo que queda del profesor** es el primero: la semana 2, día 7 es una lección
+que él ya dio por buena y ahora lleva un episodio más. Es aditivo —no cambia
+una línea de lo que había— pero es contenido nuevo dentro de algo aprobado, así
+que conviene que lo lea.
 
 ## Lo que esto no arregla
 

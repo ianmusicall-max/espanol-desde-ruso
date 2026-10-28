@@ -65,6 +65,47 @@ revisado: true
 eran…* — «пятьдесят лет назад самыми частыми были…». Строить такие формы самому
 пока не нужно.
 
+### El episodio: «Un portal, dos nombres»
+
+> **Ana:** Buenas tardes.
+>
+> **Iván:** Buenas tardes. Me llamo Iván.
+>
+> **Ana:** ¿Cómo se escribe?
+>
+> **Iván:** I-V-Á-N. Soy ruso, soy de Moscú.
+>
+> **Ana:** Encantada. Yo soy Ana.
+>
+> **Iván:** ¿Ana…?
+>
+> **Ana:** Ana Soler Gil. Soler es de mi padre y Gil es de mi madre.
+>
+> **Iván:** Yo tengo un nombre, un apellido y un patronímico.
+>
+> **Ana:** ¿Un patronímico?
+>
+> **Iván:** El nombre de mi padre. Mi padre es Piotr: yo soy Iván Petróvich.
+>
+> **Ana:** ¿Y cómo te llamo yo?
+>
+> **Iván:** Iván. Tutéame.
+>
+> **Ana:** Vale. ¿Cuántos años tienes, Iván?
+>
+> **Iván:** Veintinueve.
+>
+> **Ana:** Yo treinta y uno. Hasta mañana, Iván.
+>
+> **Iván:** Hasta mañana, Ana.
+>
+> Hoy Iván dice en español su nombre, su apellido y de dónde es. Nada más.
+>
+> Y ya está.
+
+**Ни одного слова вне первой единицы.** Если вы поняли всё без словаря —
+единица сработала.
+
 ## 3. Слова (15–20 мин)
 
 | Español | Русский | Español | Русский |

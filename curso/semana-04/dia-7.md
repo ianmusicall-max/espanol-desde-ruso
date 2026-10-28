@@ -84,6 +84,41 @@ revisado: false
 imperfecto (единица 13), прошедшее от *hay*. Фраза *antes había otra moneda*
 значит «раньше была другая валюта»; сегодня достаточно её понять.
 
+### El episodio: «La maleta»
+
+> En la mesa hay un cuaderno, un bolígrafo, una botella de agua, un cargador
+> y unas gafas. Al lado hay una mochila pequeña.
+>
+> **Ana:** ¿Y esto qué es?
+>
+> **Iván:** Mi cuaderno de español.
+>
+> **Ana:** ¿Cuántas palabras hay?
+>
+> **Iván:** Cinco. Hoy.
+>
+> **Ana:** ¿Y los libros?
+>
+> **Iván:** Dos. Son libros de la empresa. Soy ingeniero.
+>
+> **Ana:** ¿Y la otra mochila?
+>
+> **Iván:** No hay otra mochila. Esto es todo.
+>
+> En la mesa: un cuaderno nuevo, cinco palabras, dos libros viejos.
+>
+> **Ana:** ¿No es poco?
+>
+> **Iván:** Sí. Pero es mío.
+>
+> Trabaja en una empresa grande, habla con ingenieros de cuatro países y hoy
+> dice todo lo que es en cuatro palabras: «soy ingeniero», «trabajo aquí».
+>
+> Es poco. Pero no es difícil, y es verdad.
+
+**Всё из второй единицы, кроме 2 слов** — они в словаре ниже. Если
+остальное вы поняли без словаря, единица сработала.
+
 ## 3. Слова (15–20 мин)
 
 | Español | Русский | Español | Русский |
@@ -98,6 +133,7 @@ imperfecto (единица 13), прошедшее от *hay*. Фраза *antes
 | caro / barato | дорогой / дешёвый | gratis | бесплатно |
 | la tienda | магазин | el mercado | рынок |
 | el supermercado | супермаркет | los grandes almacenes | универмаг |
+| la ver**dad** | правда | **mí**o / **mí**a | мой / моя |
 
 ## 4. Задание (20–28 мин)
 

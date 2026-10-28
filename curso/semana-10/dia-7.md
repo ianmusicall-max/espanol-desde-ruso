@@ -95,6 +95,36 @@ revisado: false
 > tenía, lavaba* — это прошедшее время. Оно у вас будет через несколько
 > месяцев; сейчас достаточно узнать песенку на слух.
 
+### El episodio: «Cenar a las diez»
+
+> El lunes Iván sale del trabajo a las dos y va al supermercado. Está
+> cerrado.
+>
+> **Iván:** ¿Por qué cierra el supermercado a las tres?
+>
+> **Ana:** Porque es la hora de comer.
+>
+> **Iván:** ¿Toda la ciudad come a las tres?
+>
+> **Ana:** A las dos o a las tres. Y cena a las diez.
+>
+> **Iván:** ¿A las diez de la noche?
+>
+> **Ana:** A las diez.
+>
+> Iván no dice nada. En su ciudad cena a las seis, y a las diez duerme.
+>
+> El martes come a la una y a las cinco tiene hambre. El miércoles come a las
+> dos y a las ocho tiene hambre. El jueves come a las dos y media. El viernes,
+> a las tres.
+>
+> El viernes por la noche cena con Ana a las diez y cuarto.
+>
+> Antes no, y ahora sí.
+
+**Всё из пятой единицы, кроме 2 слов** — они в словаре ниже. Если
+остальное вы поняли без словаря, единица сработала.
+
 ## 3. Слова (15–20 мин)
 
 | Español | Русский | Español | Русский |
@@ -110,6 +140,7 @@ revisado: false
 | almorzar (almuerzo) 🌎 | обедать (Лат. Америка) | el almuerzo 🌎 | обед (Лат. Америка) |
 | planchar | гладить | coser | шить |
 | barrer | подметать | cocinar | готовить |
+| el **ham**bre | голод | cam**biar** | меняться; менять |
 
 Две последние строки — четыре дела из песенки: они нужны для задания В.
 

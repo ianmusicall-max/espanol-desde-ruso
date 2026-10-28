@@ -3579,6 +3579,118 @@ class TestLaRevisionDelCurso(unittest.TestCase):
         self.assertEqual([], dos_veces, "entradas enseñadas dos veces como nuevas")
 
     def test_ninguna_palabra_mezcla_los_dos_alfabetos(self):
+        """`Recetа` con а cirílica al final, `proходной`, `nед.`, `нóмин`:
+        cuatro veces en esta serie de sesiones, y a ojo no se ve ninguna. Rompe
+        cualquier búsqueda y el lector no lo nota.
+
+        La prueba no tiene excepciones, y poder escribirla así costó un
+        arreglo: el curso marcaba la sílaba tónica rusa de DOS maneras —una
+        vocal latina con tilde dentro de la palabra (`мóта`, 15 lecciones) y el
+        acento combinante U+0301 (`мо́та`, 11)—, y la primera produce justo la
+        firma del defecto. El 2026-10-28 se unificaron a U+0301, que es lo que
+        usa cualquier diccionario ruso, así que ahora una palabra con letras de
+        los dos alfabetos es siempre un error."""
+        malas = []
+        for d in self.dias:
+            cuerpo = validar.frontmatter(d.ruta.read_text(encoding="utf-8"))[1]
+            for token in re.findall(r"[^\s|·,.;:()\[\]«»\"'*>#—–-]+", cuerpo):
+                if self.CIRILICO.search(token) and self.LATINO.search(token):
+                    malas.append(f"{d.etiqueta}: {token!r}")
+        self.assertEqual([], malas, "palabras con los dos alfabetos")
+
+    def test_la_tonica_rusa_se_marca_de_una_sola_manera(self):
+        """Y la otra mitad del mismo arreglo: ninguna lección vuelve a marcar
+        la tónica con una vocal latina. Sin esto, la prueba de arriba tendría
+        que llevar la excepción de siempre —«vale si TODAS las latinas son
+        vocales con tilde»— que es exactamente la que se tragaba los cuatro
+        defectos de verdad."""
+        latina = re.compile(r"[\u0400-\u04FF][áéíóúÁÉÍÓÚ]|[áéíóúÁÉÍÓÚ][\u0400-\u04FF]")
+        malas = []
+        for d in self.dias:
+            cuerpo = validar.frontmatter(d.ruta.read_text(encoding="utf-8"))[1]
+            m = latina.search(cuerpo)
+            if m:
+                malas.append(f"{d.etiqueta}: {cuerpo[max(0, m.start() - 12):m.end() + 12]!r}")
+        self.assertEqual([], malas, "tónica rusa marcada con una vocal latina")
+
+    def test_ningun_patron_del_revisor_lleva_la_barra_doblada(self):
+        """`r"\\\\b(...)"` busca una contrabarra literal y **no encuentra nada
+        nunca**. El proyecto hermano tiene esto escrito como el defecto de
+        `GRAMOS`, que dejó una comparación sin correr durante semanas, y pasó
+        aquí el 2026-10-28 al añadir el pluscuamperfecto: la cola del parche
+        era una cadena *raw*, así que escribió `\\\\b` y el patrón del futuro
+        dejó de encontrar sus dieciséis formas. **Nada se puso en rojo**: el
+        informe salió con menos hallazgos, que es lo que uno espera después de
+        arreglar cosas.
+
+        La prueba es tonta a propósito: ningún patrón lleva dos contrabarras
+        seguidas, y todos compilan."""
+        barra = chr(92)
+        for nombre, patron in revisar_progresion.FORMAS.items():
+            self.assertNotIn(barra * 2, patron, f"el patrón de {nombre} lleva la barra doblada")
+            re.compile(patron)
+        for patron in revisar_progresion.DECLARA + (revisar_progresion.UNIDAD,):
+            self.assertNotIn(barra * 2, patron.pattern, patron.pattern)
+
+    def test_ninguna_unidad_mezcla_fonetica_y_audicion(self):
+        """`metodologia.md` §3: dentro de una unidad las catorce sesiones llevan
+        el mismo título en el apartado 2 —Фонетика si la ficha de la unidad trae
+        `fonetica`, Аудирование si no—. El documento decía que «el validador
+        acepta ambos, así que esto no se pone en rojo solo», y por eso la unidad
+        5 estuvo 5-5 desde que se escribió. Ahora sí se pone en rojo.
+
+        Y la condición es doble: no mezclar, y además coincidir con lo que la
+        unidad declara. Sin la segunda mitad, una unidad entera titulada
+        Аудирование con sus sonidos declarados pasaría por buena."""
+        titulos = {"Фонетика", "Аудирование"}
+        por_unidad = {}
+        for u in self.cal["unidades"]:
+            por_unidad[u["numero"]] = Counter()
+        for d in self.dias:
+            if d.unidad is None:
+                continue
+            cuerpo = validar.frontmatter(d.ruta.read_text(encoding="utf-8"))[1]
+            m = re.search(r"^## 2\.\s*(\S+)", cuerpo, re.M)
+            if m and m.group(1) in titulos:
+                por_unidad[d.unidad][m.group(1)] += 1
+        declara = {u["numero"]: bool(u.get("fonetica")) for u in self.cal["unidades"]}
+        for unidad, cuenta in sorted(por_unidad.items()):
+            if not cuenta:
+                continue
+            self.assertEqual(
+                1, len(cuenta), f"la unidad {unidad} mezcla los dos títulos: {dict(cuenta)}"
+            )
+            esperado = "Фонетика" if declara[unidad] else "Аудирование"
+            self.assertIn(
+                esperado, cuenta,
+                f"la unidad {unidad} declara fonetica={declara[unidad]} y titula {dict(cuenta)}",
+            )
+
+    def test_ninguna_palabra_se_ensena_dos_veces_como_nueva(self):
+        """Cero entradas en el `Словарь дня` de dos lecciones de semana.
+
+        El informe de léxico decía 135 repetidas y la lista de pendientes
+        hablaba de «96 que cruzan un domingo con una lección». Separadas por el
+        tipo de tabla, de las 135 solo **12** se enseñaban dos veces como
+        nuevas; las otras 123 son el artefacto de que haya DOS tablas:
+        `Словарь дня` enseña diez palabras y el `3. Слова` de los domingos
+        glosa las que usa su texto, nuevas o no. Una palabra glosada el domingo
+        y enseñada el lunes es exposición previa, no un defecto.
+
+        Las 12 se quitaron el 2026-10-28 dejando la PRIMERA enseñanza: la
+        segunda fila sobraba porque el alumno ya tenía esa tarjeta, así que no
+        hubo que inventar ninguna palabra nueva."""
+        dos_veces = []
+        for clave, apariciones in revisar_lexico.lexico().items():
+            if len(apariciones) < 2:
+                continue
+            if any(d.tipo == "cultura" for d, _ in apariciones):
+                continue
+            sitios = ", ".join(f"S{d.semana:02d}D{d.dia}" for d, _ in apariciones)
+            dos_veces.append(f"{apariciones[0][1]} ({sitios})")
+        self.assertEqual([], dos_veces, "entradas enseñadas dos veces como nuevas")
+
+    def test_ninguna_palabra_mezcla_los_dos_alfabetos(self):
         """`Recetа` con а cirílica al final, `proходной`, `nед.`: cuatro veces
         en esta serie de sesiones, y a ojo no se ve ninguna. Rompe cualquier
         búsqueda y el lector no lo nota.

@@ -251,6 +251,8 @@ la tienda	магазин		S04 U2 A1 cultura
 el mercado	рынок		S04 U2 A1 cultura
 el supermercado	супермаркет		S04 U2 A1 cultura
 los grandes almacenes	универмаг		S04 U2 A1 cultura
+la verdad	правда		S04 U2 A1 cultura
+mío / mía	мой / моя		S04 U2 A1 cultura
 la familia	семья	En mi familia somos seis.	S05 U3 A1 leccion
 tener	иметь; «у меня есть»	Tengo dos hermanos.	S05 U3 A1 leccion
 los padres	родители	Mis padres están en Rusia.	S05 U3 A1 leccion
@@ -376,6 +378,9 @@ el ramo de flores	букет цветов		S06 U3 A1 cultura
 hecho a mano	сделанный своими руками		S06 U3 A1 cultura
 el árbol genealógico	семейное древо		S06 U3 A1 cultura
 los bisabuelos	прадедушка и прабабушка		S06 U3 A1 cultura
+la foto	фотография		S06 U3 A1 cultura
+la edad	возраст		S06 U3 A1 cultura
+todavía	пока ещё; всё ещё		S06 U3 A1 cultura
 vivir	жить	¿Dónde vives? — Vivo en Moscú.	S07 U4 A1 leccion
 la casa	дом	Nikolái vive en una casa.	S07 U4 A1 leccion
 la habitación	комната	El piso tiene cuatro habitaciones.	S07 U4 A1 leccion
@@ -631,6 +636,8 @@ planchar	гладить		S10 U5 A1 cultura
 coser	шить		S10 U5 A1 cultura
 barrer	подметать		S10 U5 A1 cultura
 cocinar	готовить		S10 U5 A1 cultura
+el hambre	голод		S10 U5 A1 cultura
+cambiar	меняться; менять		S10 U5 A1 cultura
 tomar	пить; есть; брать	Tomo un café con leche.	S11 U6 A1 leccion
 el pan · la tostada	хлеб · тост	Una tostada con mantequilla.	S11 U6 A1 leccion
 la leche · la mantequilla	молоко · масло	Café con leche y pan con mantequilla.	S11 U6 A1 leccion
@@ -768,6 +775,8 @@ el cortado	кофе с капелькой молока		S12 U6 A1 cultura
 el carajillo	кофе с ликёром		S12 U6 A1 cultura
 el cubierto	столовый прибор; сбор за прибор (Арг.)		S12 U6 A1 cultura
 el discurso	речь		S12 U6 A1 cultura
+la prisa	спешка		S12 U6 A1 cultura
+la reunión	совещание, встреча		S12 U6 A1 cultura
 la cuenta	la cuenta · la nota		S12 U6 A1 cultura
 pagar a escote	pagar cada uno lo suyo		S12 U6 A1 cultura
 ¡Que aproveche!	¡Buen provecho!		S12 U6 A1 cultura
@@ -862,7 +871,6 @@ el cristal	стекло	El cristal del reloj está roto.	S14 U7 A1 leccion
 no funciona	не работает	Esta lámpara no funciona.	S14 U7 A1 leccion
 roto / rota	сломанный / разбитый	El reloj está roto.	S14 U7 A1 leccion
 es demasiado pequeño	слишком маленький	Este jersey es demasiado pequeño.	S14 U7 A1 leccion
-cambiar	обменять, поменять	¿Me lo puede cambiar por una talla M?	S14 U7 A1 leccion
 reclamar / la reclamación	предъявлять претензию / претензия	Quiero hacer una reclamación.	S14 U7 A1 leccion
 la hoja de reclamaciones	бланк жалобы, «книга жалоб»	¿Me da una hoja de reclamaciones?	S14 U7 A1 leccion
 la garantía	гарантия	Tiene dos años de garantía.	S14 U7 A1 leccion
@@ -888,6 +896,8 @@ el tianguis	рынок под открытым небом (Мексика)		S14 
 el vendedor	продавец		S14 U7 A1 cultura
 ¿Me hace precio?	Сделаете скидку?		S14 U7 A1 cultura
 todo el mundo	весь мир; все		S14 U7 A1 cultura
+el proyecto	проект		S14 U7 A1 cultura
+reírse	смеяться		S14 U7 A1 cultura
 el tiempo libre	свободное время	¿Qué haces en tu tiempo libre?	S15 U8 A1 leccion
 la afición	увлечение, хобби	Mi afición favorita es leer.	S15 U8 A1 leccion
 tocar	играть (на инструменте)	Toco la guitarra.	S15 U8 A1 leccion
@@ -1384,8 +1394,6 @@ esta semana / este mes	на этой неделе / в этом месяце	Est
 el mes pasado	в прошлом месяце	Lo terminé el mes pasado.	S24 U12 A2 leccion
 aquel día	в тот день	Aquel día hablé con él.	S24 U12 A2 leccion
 de verdad	правда, по-настоящему	Lo pasé bien, de verdad.	S24 U12 A2 leccion
-la reunión	совещание, встреча	He tenido tres reuniones.	S24 U12 A2 leccion
-el proyecto	проект	Empecé un proyecto nuevo.	S24 U12 A2 leccion
 el jefe / la jefa	начальник / начальница	Hablé con el jefe.	S24 U12 A2 leccion
 anterior	предыдущий	El proyecto anterior.	S24 U12 A2 leccion
 medio año	полгода	Duró medio año.	S24 U12 A2 leccion
@@ -1501,7 +1509,6 @@ el bloque	многоэтажка		S25 U13 A2 cultura
 el grito	крик		S25 U13 A2 cultura
 hacer falta	быть нужным		S25 U13 A2 cultura
 perderse algo	пропустить что-то		S25 U13 A2 cultura
-la edad	возраст		S25 U13 A2 cultura
 de mi edad	моего возраста		S25 U13 A2 cultura
 lo demás	остальное		S25 U13 A2 cultura
 casi todo	почти всё		S25 U13 A2 cultura
@@ -1861,7 +1868,6 @@ dejar reposar	дать постоять	Deja reposar cinco minutos.	S31 U16 A2 l
 explicar algo a alguien	объяснить что-то кому-то	Se lo expliqué a los clientes.	S31 U16 A2 leccion
 enseñar (= mostrar)	показать	Se las enseñé ayer.	S31 U16 A2 leccion
 repetir (repito)	повторить	Te lo repito: es el jueves.	S31 U16 A2 leccion
-la verdad	правда	Dime la verdad.	S31 U16 A2 leccion
 el secreto	секрет	Es un secreto: no se lo digas a nadie.	S31 U16 A2 leccion
 a nadie	никому	No se lo digas a nadie.	S31 U16 A2 leccion
 el boli (el bolígrafo)	ручка	¿Me dejas el boli?	S31 U16 A2 leccion

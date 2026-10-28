@@ -67,6 +67,45 @@ revisado: false
 рассказывают о прошлом — это удобно и нам: прошедшее время начинается только
 в двенадцатой единице.
 
+### El episodio: «Una camisa para una entrevista»
+
+> El jueves la empresa cierra el proyecto de Iván. El viernes no tiene
+> trabajo.
+>
+> **Ana:** ¿Y ahora?
+>
+> **Iván:** Ahora busco otro trabajo. Tengo tres entrevistas.
+>
+> **Ana:** ¿Cuándo?
+>
+> **Iván:** El lunes, el martes y el jueves.
+>
+> **Ana:** Entonces hoy vamos de compras.
+>
+> En la tienda hay camisas blancas y azules.
+>
+> **Dependienta:** ¿Qué talla tiene?
+>
+> **Iván:** No sé. En Rusia tengo la cincuenta.
+>
+> **Dependienta:** Aquí es la cuarenta. ¿Quiere esta azul?
+>
+> La camisa azul le queda bien. Cuesta veintinueve euros con noventa.
+>
+> **Iván:** Me la llevo.
+>
+> En la calle Ana mira la bolsa.
+>
+> **Ana:** Tres entrevistas y una camisa.
+>
+> **Iván:** La camisa es para el lunes. El martes y el jueves, la misma
+> camisa.
+>
+> Y los dos se ríen, porque es verdad.
+
+**Всё из седьмой единицы, кроме 3 слов** — они в словаре ниже. Если
+остальное вы поняли без словаря, единица сработала.
+
 ## 3. Слова (15–20 мин)
 
 | Español | Русский | Español | Русский |
@@ -81,6 +120,8 @@ revisado: false
 | regatear | торговаться | el centro comercial | торговый центр |
 | ¿Me hace precio? | Сделаете скидку? | el precio | цена |
 | el pueblo | посёлок, городок | todo el mundo | весь мир; все |
+| la entre**vis**ta | собеседование | el pro**yec**to | проект |
+| re**ír**se | смеяться |  |  |
 
 ## 4. Задание (20–28 мин)
 

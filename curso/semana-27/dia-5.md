@@ -34,7 +34,7 @@ revisado: false
 > el cua-**ren**-ta por **cien**-to · **dos** **mil** vein-ti-**séis**
 
 1. **Por ciento — два слова**: [пор-**сьен**-то]. Знак % читается именно так.
-2. **Millones — с двойной l, то есть [й]**: [ми-**йó**-нес]. И **de**
+2. **Millones — с двойной l, то есть [й]**: [ми-**йо́**-нес]. И **de**
    обязательно: *tres millones **de** euros*.
 3. **Mil не множественное**: *doce mil*, ✗ *doce miles*.
 

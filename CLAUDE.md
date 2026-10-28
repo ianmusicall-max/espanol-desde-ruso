@@ -56,25 +56,37 @@ la documentación del programa, en español.
 
 ## Pendiente de revision del profesor
 
-- **La unidad 5 mezcla los dos titulos del apartado 2**: la semana 9 usa
-  Фонетика y la semana 10, Аудирование. La regla esta en `metodologia.md` §3 y
-  dice que dentro de una unidad no se mezclan. **El reparto es 5-5**, medido
-  el 2026-10-28, y es la unica unidad que lo mezcla: en las demas la variacion
-  es por tipo de dia, que es lo correcto. Hay que elegir uno para las
-  catorce sesiones. **Es el unico caso que queda**: las tres lecciones sueltas
-  que decian Аудирование (30-5, 32-2, 33-3) se renombraron el 2026-10-28,
-  porque ahi el desajuste era de una sesion y no de una semana entera.
-- **135 entradas de vocabulario se ensenan dos veces**, de 2 992, y la
-  cifra salio al arreglar el informe el 2026-10-28 (antes decia 13, porque no
-  leia la tabla de los 50 domingos de cultura). 39 son entre dos domingos —y
-  ahi la repeticion es casi legitima, porque esa tabla glosa el texto del dia—
-  y **96 cruzan un domingo con una leccion de semana**, que son las que hay
-  que mirar. `scripts/revisar_lexico.py` las lista con el dia de cada
-  aparicion.
-- **Los titulos de ejercicio siguen en ruso en la unidad 7**, pero
-  `metodologia.md` §6 pide «espanol + ruso» desde ahi. O se retocan las
-  semanas 13-14 (dos lineas por leccion) o se corre la tabla de §6 hasta la
-  unidad 12, que es el salto de nivel y una frontera mas natural.
+- **La unidad 5 ya no mezcla los titulos del apartado 2** (arreglado el
+  2026-10-28). Estaba 5-5: la semana 9 decia Фонетика y la 10, Аудирование. Y
+  el problema no era solo el titulo — la semana 9 ya cubria los dos sonidos que
+  declara el calendario, y la 10 los repetia al final de un bloque de escucha—.
+  Las cinco sesiones de la semana 10 pasan a poner el sonido DELANTE del minuto
+  de audio, que es lo que el apartado pide cuando la unidad trae `fonetica`, y
+  no se perdio una linea de escucha. `test_ninguna_unidad_mezcla_fonetica_y_audicion`
+  lo exige ahora, y ademas que el titulo coincida con lo que la unidad declara.
+- **Ninguna entrada se ensena dos veces como nueva** (arreglado el 2026-10-28).
+  El informe decia 135 repetidas y la lista de pendientes hablaba de 96 que
+  cruzaban un domingo con una leccion. Separadas por tipo de tabla, solo **12**
+  se ensenaban dos veces en un `Словарь дня`; las otras son el artefacto de que
+  haya DOS tablas —`Словарь дня` ensena y el `3. Слова` del domingo glosa lo que
+  usa su texto, nuevo o no—, asi que una palabra glosada el domingo y ensenada
+  el lunes es exposicion previa y no un defecto. Las 12 se quitaron dejando la
+  PRIMERA ensenanza: la segunda fila sobraba porque el alumno ya tenia esa
+  tarjeta, asi que no hubo que inventar ninguna palabra. `revisar_lexico.py` lo
+  separa ahora en tres listas, para que el numero no se vuelva a leer como 123
+  defectos.
+- **La retirada progresiva del ruso no ocurre, y lo que estaba mal era la
+  tabla** (medido el 2026-10-28 con `scripts/revisar_ruso.py`). `metodologia.md`
+  §6 prometia cuatro bandas y tres columnas; la proporcion de instruccion en
+  espanol es **plana entre el 33% y el 55% de la unidad 1 a la 23**, sin
+  pendiente, y el rotulo del ejercicio es `Упражнение` en **660** de los 697
+  encabezados. Los 35 `Tarea` son los simulacros y la unidad 24, o sea justo
+  donde hace falta: es la palabra que usa el examen. §6 pasa a describir lo que
+  el curso hace —andamio en ruso de principio a fin, espanol en todo lo que el
+  alumno lee y produce— y deja la tabla con su precio al lado: implementarla son
+  las instrucciones de 220 lecciones y 660 encabezados con sus claves, porque la
+  clave llama al ejercicio por su letra. Es decision del profesor y ahora tiene
+  el numero delante.
 - **Las catorce preguntas del test de nivel** (`programa/test-nivel.yaml`,
   2026-10-26) estan en `revisado: false` y la pagina lo avisa. Hay que
   comprobar que cada distractor sea de verdad el error que dice y que la unidad
@@ -99,13 +111,21 @@ la documentación del programa, en español.
   propio tiempo. Se anadio la marca 🌎 («hoy comi» / «hoy he comido»). Las
   lecciones de la semana 18 aun no estaban escritas, asi que no costo nada.
   Queda abierto solo si el profesor discrepa del PCIC.
-- **Las tablas de conjugacion**: 19 lecciones las llevan completas. Nuzhdin las
-  evita y usa oposiciones minimas (1.ª/2.ª sg., 1.ª/3.ª sg., 3.ª sg./3.ª pl.).
-  Se puede dejar la tabla como consulta y practicar por oposiciones.
-- **La audionovela: hecha** (`programa/historia.md`, 2026-10-26). Queda que el
-  profesor decida si quiere los episodios 1-7, que caen en semanas ya
-  revisadas y pedirian reescribir lecciones dadas por buenas. Del 8 en
-  adelante entran con la leccion, sin retrofit.
+- **Las tablas de conjugacion: son 35 lecciones, no 19** (contado el
+  2026-10-28), y sus ejercicios recorren **las seis personas** en orden
+  aleatorio, no por oposiciones minimas. **No se cambio**, y el motivo es que
+  Nuzhdin ya esta atendido donde su argumento es mas fuerte: la oposicion
+  «он/она | ты» por la -s de segunda persona esta en S09D2 y vuelve en S10D1 y
+  S10D3, que es justo donde interfiere el ruso. Y la salida del curso es el
+  DELE A2, cuya expresion escrita pide producir yo, el y nosotros, asi que
+  recorrer el paradigma tiene para quien estudia solo un valor que la oposicion
+  no da. Convertir 35 ejercicios seria una reescritura de contenido sin
+  evidencia de que ayuda; si el profesor la quiere, el numero es 35.
+- **La audionovela: completa** (`programa/historia.md`). Los 24 episodios estan
+  escritos; los 1-7 se escribieron el 2026-10-28, cuando se midio que de los
+  siete **solo el primero** cae en una leccion `revisado: true` y no los siete,
+  que es lo que tenia parada la decision. Lo unico que queda del profesor es
+  leer esa: la semana 2, dia 7 lleva ahora un episodio que antes no tenia.
 
 ## Progreso del lector, sin registro (2026-10-26)
 
@@ -4108,13 +4128,129 @@ falta: dentro de una tabla `la suerte` («удача») y `¡Suerte!` («Уда�
 dos entradas a propósito, y con la llave floja salían como una repetición. Así
 queda en 0 sin ninguna excepción que mantener.
 
+## Las decisiones que quedaban, tomadas (2026-10-28)
+
+«revisalo tu has el 2 tambien y el 3 tambien». El 2 eran las siete decisiones
+pequenas del informe de revision y el 3, lo que cuesta dinero o una clave.
+
+### El hallazgo: el pluscuamperfecto, que no lo ensena ninguna leccion
+
+Aparecia en **once lecciones** y el curso no lo da en ninguna: es B1. Solo
+S28D5 lo declaraba, de paso en su clave. Nadie lo habia mirado nunca porque el
+revisor de progresion saca la semana de cada tiempo del calendario, y el
+pluscuamperfecto **no esta en el calendario**: su semana es `NUNCA`, asi que
+toda aparicion es temprana.
+
+Nueve sitios donde el alumno lo produce o copia se reescribieron con lo que ya
+sabe —`se perdio` por `se habia perdido`, `no me daba cuenta`, `todavia no`,
+`estudie`— y los que viven en un texto de lectura van declarados.
+
+**Y el patron necesita la lista de participios escrita a mano.** Con `\w+ado`
+entra el existencial: `no habia supermercado` y `no habia nada roto` salian
+como pluscuamperfecto, y el informe acusaba a la leccion que de verdad ensena
+`habia`. Es la misma leccion de `PROMESAS` y de `OTROS_ACEITES` en el proyecto
+hermano: las terminaciones mienten.
+
+### Las formas tempranas: de 90 a cero
+
+Eran 72 de los seis tiempos del calendario mas 18 de pluscuamperfecto. Se
+cerraron de tres maneras, y las tres son la convencion del curso:
+
+1. **ensenando la palabra**: una forma con entrada de vocabulario queda
+   ensenada desde ese dia;
+2. **declarandola**: el texto dice de que tiempo es y en que unidad llega, o
+   que no esta en el curso. Los **18 domingos de cultura** llevan ese aviso
+   desde hoy, cada uno con las formas que de verdad trae su texto;
+3. **reescribiendola** cuando estaba en material que el alumno produce o
+   copia: `vas a estar` por `estaras`, `va a afectar` por `afectara`, `He
+   dejado el gimnasio` por `Antes iba`, `No se si viene` por `vendra`.
+
+Por eso la prueba pasa a ser una **igualdad y no un tope**: en cuanto vuelva a
+haber una, hay que elegir una de las tres.
+
+**Y tres arreglos del propio revisor, los tres por dar falsos positivos:**
+
+- **el vocabulario se ACUMULA.** Una palabra ensenada el lunes sigue ensenada
+  el martes, y mirando solo la leccion misma el informe acusaba cada
+  reaparicion: `queria` sale en S17D4 con su entrada y vuelve cuatro veces.
+- **una declaracion vale para LA FORMA QUE NOMBRA**, no para la leccion entera
+  ni para tres renglones. Con la leccion entera tapaba doce lecciones con
+  defectos de verdad —cualquier domingo nombra un numero de unidad por su tarea
+  final—; con tres renglones no alcanzaba el aviso, que va al final del
+  apartado mientras las formas estan en el texto.
+- **una opcion de test es un distractor** aunque no lleve ✗.
+
+### Y un bug mio, el de `GRAMOS` con otra cara
+
+La cola de un parche era una cadena **raw**, asi que escribio `\b` doble: el
+patron del futuro buscaba una contrabarra literal y **dejo de encontrar sus
+dieciseis formas**. Nada se puso en rojo — el informe salio con MENOS
+hallazgos, que es exactamente lo que uno espera despues de arreglar cosas. Hay
+una prueba tonta que lo fija: ningun patron lleva dos contrabarras seguidas.
+
+### La unidad 5, y por que no era solo el titulo
+
+El reparto era 5-5 y el calendario declara `fonetica`, asi que tocaba Фонетика
+en las catorce. Pero al leerlas aparecio que **la semana 9 ya cubria los dos
+sonidos declarados** (los diptongos ie/ue y la -s de segunda persona) y la
+semana 10 los repetia al final de un bloque de escucha de verdad. O sea que
+renombrar a secas habria mentido sobre el contenido, y rehacer el contenido
+habria tirado cinco minutos de audio que ya estan locutados.
+
+Las cinco sesiones de la semana 10 **ya traian su punto fonico al final**, asi
+que el arreglo es de orden: el sonido delante, el minuto de audio detras, como
+el sitio donde ese sonido se oye en una frase. No se perdio una linea.
+
+### Los episodios 1-7, y la medida que desbloqueo la decision
+
+La nota decia que caian «en semanas ya revisadas y pedirian reescribir
+lecciones dadas por buenas». Medido: de los siete, **solo el primero** esta en
+una leccion `revisado: true`. La objecion valia para una leccion, no para
+siete.
+
+Escritos los siete, con la regla de cero vocabulario nuevo verificada **palabra
+por palabra** contra el lexico acumulado de cada unidad. En las unidades 1 a 7
+el alumno tiene muy poco: la unidad 1 no conoce `hay`, ni `dificil`, ni una
+palabra de mobiliario, asi que su episodio es casi todo presentaciones — que es
+lo que esa unidad ensena. Donde la escena necesitaba de verdad una palabra que
+no estaba, se glosa **en la tabla del domingo**, que es para lo que esa tabla
+existe. Son quince glosas, de dos a tres por episodio y ninguna en el primero,
+y el cierre de cada episodio dice la verdad («todo de la unidad N salvo estas
+tres, que estan abajo») en vez de prometer cero.
+
+**Lo que queda del profesor es uno**: la semana 2, dia 7 es una leccion que ya
+dio por buena y ahora lleva un episodio mas. Es aditivo, pero es contenido
+nuevo dentro de algo aprobado.
+
+### La retirada del ruso no ocurre, y la tabla era lo equivocado
+
+`metodologia.md` §6 prometia cuatro bandas y tres columnas. Medido con
+`scripts/revisar_ruso.py` (nuevo, solo lee): la proporcion de instruccion en
+espanol es **plana entre el 33% y el 55% de la unidad 1 a la 23** —sin
+pendiente— y el rotulo del ejercicio es `Упражнение` en **660** de los 697
+encabezados.
+
+§6 pasa a describir lo que el curso hace y deja la tabla con su precio al lado.
+Lo que el DELE pide —leer `Tarea 1` y entender el enunciado— ya esta donde
+hace falta: los 35 `Tarea` son los simulacros y la unidad 24.
+
+### El 3: la baraja si, el audio no
+
+- **La baraja se regenero**: de 908 palabras a **3001**, 25 subbarajas, 23 MB.
+  Es el comando aparte de siempre, porque cada regeneracion es un blob nuevo
+  entero en git.
+- **El audio no se puede hacer desde aqui**: `OPENAI_API_KEY` no esta en el
+  entorno. Son 7 779 frases y **2,84 USD**. Por eso la baraja tiene 913 con voz
+  de 3001, y el sitio lo dice con esos numeros en vez de prometer otra cosa.
+
 ## Estado (2026-10-28)
 
 - Programa anual completo (365 días) y documentación del método.
 - **EL CURSO ESTÁ ESCRITO ENTERO: 365 de 365 lecciones** (semanas 1-53), el A1
   y el A2 completos con sus veinticuatro unidades, la fase final con dos
   simulacros del DELE A2, el proyecto, el examen final y el día de reserva.
-  **2 992 tarjetas** de vocabulario. Las 21 primeras lecciones están revisadas;
+  **2 998 tarjetas** de vocabulario y los 24 episodios de Ana e Iván. Las 21
+  primeras lecciones están revisadas;
   **las 344 restantes son borradores** (`revisado: false`) y el sitio las marca
   como tales — la regla 6 sigue en pie y es ahora el trabajo grande que queda.
   **`docs/` está al día**: las 365 lecciones construidas y publicadas, con la
@@ -4149,19 +4285,23 @@ queda en 0 sin ninguna excepción que mantener.
 - **El audio está hecho** (2026-10-26): 3.543 frases locutadas con la voz
   `shimmer`, 1,30 USD, 92 MB a 64 kbps, y 4.225 botones ▶ en 94 de las 100
   lecciones. Comprobado que suena en navegador.
-- **La revisión mecánica del curso entero está hecha** (2026-10-28,
-  `revisiones/2026-10-28.md`): `validar.py` da 365 lecciones y 0 problemas, no
-  hay ítems con dos opciones iguales, ni palabras con letras de los dos
-  alfabetos, ni subjuntivos en lo que el alumno produce. Lo que encontró y no
-  arregló son **72 formas verbales usadas antes de su lección** en 36
-  lecciones, con su guarda en la suite para que el número no suba.
+- **La revisión mecánica del curso entero está hecha y sus hallazgos
+  cerrados** (2026-10-28, `revisiones/2026-10-28.md`): `validar.py` da 365
+  lecciones y 0 problemas, y están a **cero** los ítems con dos opciones
+  iguales, las palabras con letras de los dos alfabetos, los subjuntivos en lo
+  que el alumno produce, las entradas enseñadas dos veces como nuevas y las
+  **formas verbales usadas antes de su lección** —que empezaron siendo 90,
+  contando el pluscuamperfecto que no enseña ninguna lección—. Las nueve
+  guardas viven en `TestLaRevisionDelCurso`.
+- **La baraja está al día**: 3001 palabras, 25 subbarajas, 23 MB (regenerada el
+  2026-10-28; eran 908). Solo 913 llevan voz, porque el audio de la lección 101
+  en adelante sigue sin generar.
 - Pendiente, y ya no hay nada de contenido en la lista:
   - **la revisión del profesor de 344 lecciones** (regla 6), que es el trabajo
     grande que queda y no lo puede hacer nadie más;
-  - **el audio de todo lo escrito desde la lección 101**: van **3 543 frases
-    locutadas de 11 316**, y las 7 773 que faltan son **2,84 USD** medidos con
-    `generar_audio.py --ver` (hace falta `OPENAI_API_KEY` en el entorno);
-  - **la baraja `.apkg`**, que no se ha regenerado desde las 908 notas: son 22
-    MB de blob nuevo en git cada vez, así que se hace por tandas;
+  - **el audio de todo lo escrito desde la lección 101**: van **3 532 frases
+    locutadas de 11 311**, y las 7 779 que faltan son **2,84 USD** medidos con
+    `generar_audio.py --ver`. **Es lo único de la lista que no se puede hacer
+    desde aquí**: `OPENAI_API_KEY` no está en el entorno de esta sesión;
   - los **libros de referencia** que quedaron sin analizar y lo de «Pendiente
     de revision del profesor» de arriba.
