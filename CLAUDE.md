@@ -77,7 +77,7 @@ la documentación del programa, en español.
   2026-10-26) estan en `revisado: false` y la pagina lo avisa. Hay que
   comprobar que cada distractor sea de verdad el error que dice y que la unidad
   asignada sea donde el curso lo ensena.
-- **Las 287 lecciones de las semanas 4 en adelante son borradores**
+- **Las 301 lecciones de las semanas 4 en adelante son borradores**
   (`revisado: false`) y el sitio las marca como tales. Las 21 primeras estan
   revisadas.
 - **El orden de los pasados: se recomendo NO cambiarlo** (2026-10-26, de
@@ -3405,13 +3405,182 @@ encuentra nada y `grep "pelicula"` encuentra tres. Buscar siempre **sin
 artículo** y sin acentos; con el artículo delante, media docena de palabras
 de cine y de música parecían nuevas y no lo eran.
 
+## La unidad 23: leer y escribir, y el día que el informe de léxico no bastó (días 309-322)
+
+Catorce lecciones, semanas 45 y 46. El curso pasa de 308 a **322 de 365** y
+**2.912 tarjetas**. Es la última unidad con material nuevo: la 24 es repaso de
+todo el A2 y las semanas 49-52 son simulacros.
+
+**Lo que se comprobó antes de escribir, y cambió cinco de las siete lecciones
+de la semana 46:**
+
+| Lo que el calendario traía | Ya estaba en |
+|---|---|
+| los tres bloques del relato (Situación · Problema · Desenlace) y *Resulta que…* | **S27D4** y **S27D2** |
+| *solicitar*, *la solicitud*, *Le escribo para* + инф., *le agradecería que* | **S30D3** |
+| *el importe* (en el cajero) · *la firma* («подпись», no «фирма») | **S32D1** · **S21D5** |
+| *soleado* (con *estar*), *luminoso*, *metros **cuadrados*** | **S15D4** · **S07D3** · **S08D3** |
+| *el suelo*, *el techo*, *la persiana*, *acogedor*, *dar al patio* | **S41** · **S42D7** |
+| la lista negra entera, con un texto que trae los diez errores | **S22D3** |
+| *el recibo*, *el trastero*, *el buzón*, *hecho a mano*, *el impreso* | **S41D1-2** · **S06D7** · **S31D7** |
+
+Cada lección lo dice ahora en su primer punto y enseña solo lo que faltaba.
+
+### La lección de método: el informe de léxico no basta, y hay que grepear
+
+`revisar_lexico.py` compara **entradas de las tablas de vocabulario**. No ve
+nada de lo que se enseñó **dentro de una explicación** ni en una tabla de
+prosa. Tres casos de esta unidad, los tres encontrados con `grep` sobre
+`curso/` y **ninguno** por el informe:
+
+- **los tres bloques del relato** están en S27D4, en una tabla de la
+  explicación, con su tiempo verbal y todo;
+- **`la firma`** está en S21D5, en la tabla de falsos amigos
+  («la firma | фирма | подпись»), que es justamente donde se enseña de verdad;
+- **`soleado`** está en S15D4 y S33D3, como ejemplo de otra entrada.
+
+Así que antes de dar una palabra por nueva hay que grepear todo `curso/`, y
+el grep tiene **dos trampas** que costaron dos vueltas:
+
+1. **Sin artículo.** `normalizar` quita el artículo, así que `grep "la novela"`
+   no encuentra «su novela» de S23D5 y la palabra parece libre. Se busca
+   `novela`.
+2. **Descartando `tema_es:` y `# Semana`.** Los títulos en español de las
+   lecciones vienen del calendario y **no son léxico enseñado**: por ellos
+   «sustantivo», «adjetivo» y «artículo» salían como usados cuando el alumno
+   nunca los ha leído.
+
+Y una tercera, que es de criterio y no de patrón: los **términos gramaticales**
+(*el sustantivo*, *el adjetivo*, *la preposición*, *el artículo*) aparecen en
+las explicaciones rusas de todo el curso como etiquetas. Eso no es enseñarlos.
+El día 4 los enseña **como palabras**, y lo dice, porque la lista de control
+los necesita para funcionar.
+
+### Lo nuevo de verdad, día a día
+
+- **S45D1-2 · leer.** Dos formas de leer (*ojear* / a fondo) y el hábito que
+  ahorra la mitad del tiempo en el examen: **primero la pregunta, después el
+  texto**. Y los **tres tipos de respuesta incorrecta** —verdadera pero
+  pequeña, parecida pero cambiada, razonable pero no está—, que es el aparato
+  más reutilizable de la semana: vuelve en el domingo, en el mini-test y en el
+  test de la unidad.
+- **S45D3-4 · ortografía.** ⚠️ **La tilde no es el acento**: el acento está en
+  todas las palabras, la tilde solo donde la regla la pide, y las reglas son
+  tres. El día 4 es lo contrario: *b/v*, *h*, *g/j*, *c/z/s*, *ll/y* **no se
+  oyen**, así que son reglas cortas y listas. Más los signos que abren y la
+  coma que no va delante de *que*.
+- **S45D5 · el correo informal (DELE tarea 1).** La única forma segura de
+  suspender es no contestar a todas las preguntas: contarlas y tacharlas.
+- **S46D1 · el correo formal.** ⚠️ **La petición va PRONTO y es UNA**, en su
+  propio párrafo. En el oficio ruso el escrito expone largo y «просит» al
+  final; en español un correo que no pide una cosa concreta **no se puede
+  atender**. Y el *usted* no se suelta a mitad de camino: es el error que se ve
+  en una sola palabra.
+- **S46D2 · el texto narrativo (DELE tarea 2).** El reparto de los tres
+  tiempos —indefinido la cadena, imperfecto el fondo, perfecto solo el
+  desenlace— y **la proporción**, que es el dato nuevo: una anécdota de 75
+  palabras queda **casi mitad y mitad** (7 imperfectos y 6 indefinidos en el
+  texto modelo), entre los tres a uno de un relato de una vida (единица 13) y
+  el predominio del indefinido de una fiesta (единица 22). La técnica es
+  **contarlos**.
+- **S46D3 · el texto descriptivo.** ⚠️ ***Hay* nunca lleva artículo
+  determinado**: ✗ *hay la mesa*. Y la pareja que lo explica: *En el rincón
+  **hay una** alfombra* (nueva para el lector) frente a ***La** alfombra
+  **está** en el rincón* (ya la conoce). En ruso las dos frases se dicen casi
+  igual y **no hay artículo que lo marque**, así que la elección se hace a
+  mano cada vez. Más **el olor y el sonido**, los dos sentidos que nadie
+  escribe y los que convierten una lista de muebles en un sitio.
+- **S46D4 · la lista de control.** ⚠️ **Una pasada por cada tipo de error, no
+  una pasada buscando errores.** Leer una vez «buscando fallos» no encuentra
+  casi nada, porque la cabeza lee el sentido y rellena sola lo que falta; diez
+  pasadas de veinte segundos buscando **una palabra concreta** (los *yo*, los
+  *que*, las formas de pasado) encuentran casi todo. Son tres minutos y medio
+  y valen un punto entero de *corrección*.
+- **S46D5 · los dos textos en 45 minutos.** El reparto por minutos, el
+  borrador de **cinco palabras** —el borrador-texto de la escuela rusa no cabe
+  en este reloj— y la regla que más cuesta: **un criterio a cero suspende**
+  aunque la suma llegue a siete (`evaluacion.md`, §3), y el que se va a cero
+  es *adecuación*, por olvido y no por lengua.
+
+**El día 4 estaba previsto desde el principio y no se sabía.**
+`contrastiva-ru-es.md` §8 dice literalmente que la lista negra «se entrega en
+U1, se repasa en U11 y U24, y **la lista de control de U23 la usa para
+corregir textos**», y marca con **U23** justamente sus números 8 (tildes) y 20
+(la coma de *que* y *qué/que*). O sea que los dos errores que esta unidad
+añade a la lista estaban asignados a ella desde que se escribió el documento.
+
+### El test de la unidad: el tercer bloque es ortografía
+
+`evaluacion.md` §4 fija 6 + 6 + 3 y dice que desde la U14 el tercer bloque es
+«Выражения». Aquí es **«Орфография»**, y es la única unidad de A2 donde no es
+lo uno ni lo otro: lo pide el calendario (`foco`: «ortografía, conectores,
+comprensión de un texto») y además **la ortografía ES el material de la
+unidad**. La comprensión no va en un texto compartido sino en **dos ítems
+autocontenidos** del primer bloque, y eso no es estilo: `pruebas.leer` descarta
+lo que hay antes del ítem 1 de un bloque, así que un texto puesto ahí se vería
+en papel y **no** en la versión interactiva — el alumno tendría que contestar
+sobre un texto que no está.
+
+### Los derechos de autor, que en esta unidad había que decidir
+
+- **Lorca murió en 1936**, así que su obra es de dominio público en España: las
+  dos primeras estrofas de «El lagarto está llorando» se citan enteras.
+- **Monterroso (†2003) y Neruda (†1973) no lo son.** De Monterroso se **cita**
+  «El dinosaurio» —siete palabras, con autor y obra, como el ejemplo fundador
+  del género—; de Neruda **no se copia ni un verso**: se cuenta la idea de las
+  *Odas elementales* (odas al tomate, a la cebolla, a los calcetines), que es
+  justamente la lección del día. Y se dice en la lección por qué no se copia.
+- Los tres microcuentos de A2 y el capítulo de «La habitación de arriba» están
+  **escritos para el curso**. El año de las dos ediciones citadas va con
+  `[VERIFICAR]`, y las series de lecturas graduadas también: desde este
+  contenedor no se puede comprobar qué hay publicado ni qué tiene la biblioteca
+  de su ciudad.
+
+**Y el capítulo sirve de demostración**: doscientas palabras cuya gramática es
+entera de las единицы 12 a 23 —indefinido, imperfecto, un imperativo negativo,
+participios con *estar*, *hay/había*— sin una sola forma que el alumno no haya
+dado. Así se escribe una lectura graduada, y es el mejor argumento para que
+abra una.
+
+**El episodio «El correo difícil»** cierra la unidad con Iván escribiendo solo
+la carta de sus papeles: setenta y ocho palabras, los seis bloques del lunes,
+el esqueleto en el margen del viernes. Lo que ha cambiado en un año no es su
+español; es que ahora lo escribe él.
+
+### Los barridos
+
+- **Un duplicado de léxico**, `exagerar` (ya en S28D7, el domingo del humor),
+  sustituido por `afirmar`, que además es la palabra que el día 2 necesita para
+  distinguir hecho de opinión.
+- **Cero tokens de dos alfabetos** tras corregir uno en el test de la unidad
+  («вейсинос» por «соседи», que es la misma falla de transliteración de las
+  unidades 17 y 21 con otra cara).
+- **Siete subjuntivos en textos propios**, y **dos de ellos contradecían la
+  unidad 18**, que enseña *aunque* + indicativo: *aunque el texto sea
+  impecable* y *aunque la suma llegue a siete*. Los otros cinco: *vaya* en el
+  enunciado de la tarea del día 45-5, *quieren que abra* y *esté cerrada* en el
+  45-2, *que el fondo sea cero* en el 46-2, *de que llegue a la boca* y *que no
+  haya dado* en el 46-7. Lo que sí se queda es *le agradecería que* +
+  imperfecto de subjuntivo, que es el chunk declarado de S30D3.
+- **`quizá` fuera del día 45-3**: la единица 17 lo descartó a propósito —admite
+  los dos modos— y la forma del curso es *a lo mejor*. Se había colado tres
+  veces.
+
+### Los dos tests, en Chromium
+
+El Мини-тест de la semana 45 son **20 ítems** (lo que pide el calendario) y
+todos de ortografía, en **7/7/6**; el test de la unidad, en **4/4/4/3**.
+`scripts/probar_navegador.js` los añade a su lista y los contesta eligiendo la
+opción por su TEXTO: **20/20 y 15/15, cero errores de JS**.
+
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.
-- **308 lecciones escritas** (semanas 1-44 enteras): el nivel A1 completo y
-  doce unidades de A2 —hasta la 22, fiestas y sentimientos—, 2.774 tarjetas
-  de vocabulario. Las 21 primeras revisadas; el resto son borradores.
-  **`docs/` está al día**: las 308 lecciones construidas y publicadas, con la
+- **322 lecciones escritas** (semanas 1-46 enteras): el nivel A1 completo y
+  **trece unidades de A2 —hasta la 23, leer y escribir, que es la última con
+  material nuevo—**, 2.912 tarjetas de vocabulario. Las 21 primeras revisadas;
+  el resto son borradores.
+  **`docs/` está al día**: las 322 lecciones construidas y publicadas, con la
   tira de dibujos del héroe —la misma fila en el móvil y en el escritorio—,
   la guía de los seis pasos dentro de cada lección y la tipografía propia
   (Literata + Onest, autoalojada). La suite entera pasa: 267 pruebas, una de
@@ -3437,7 +3606,7 @@ de cine y de música parecían nuevas y no lo eran.
 - **El audio está hecho** (2026-10-26): 3.543 frases locutadas con la voz
   `shimmer`, 1,30 USD, 92 MB a 64 kbps, y 4.225 botones ▶ en 94 de las 100
   lecciones. Comprobado que suena en navegador.
-- Pendiente: **lecciones 309-365** (unidades 23-24 y la fase final: 57
+- Pendiente: **lecciones 323-365** (unidad 24 y la fase final: 43
   lecciones), el audio de todo lo escrito desde la 101, más
   libros de referencia, y lo de
   «Pendiente de revision del profesor» de arriba.
