@@ -1507,10 +1507,18 @@ def inicios_de_unidad(cal: dict, raiz: str = ".") -> dict:
     enlaces rotos.
 
     Solo las unidades con alguna lección escrita. Las demás no se rellenan a
-    propósito: el test cae entonces en la última escrita, que es la respuesta
-    honrada —si ya sabe todo lo que el curso cubre, ahí empieza—."""
+    propósito: el test cae entonces en la última escrita de una unidad, que es
+    la respuesta honrada —si ya sabe todo lo que el curso cubre, ahí empieza—.
+
+    **Y los días SIN unidad no entran.** Las semanas 49-52 son la fase final y
+    la 53 es el día de reserva: su `unidad` está vacía, así que agruparlas por
+    unidad metía una clave `null` en los datos que viajan al navegador. No
+    rompía nada —las preguntas del test se mapean a las unidades 1-24 y nadie
+    busca `null`— pero era un dato falso publicado en todas las visitas."""
     inicios: dict[int, dict] = {}
     for d in escritas(cal):
+        if d.unidad is None:
+            continue
         inicios.setdefault(d.unidad, {"n": d.numero,
                                       "url": f"{raiz}/semana-{d.semana:02d}/dia-{d.dia}.html"})
     return inicios
@@ -2435,7 +2443,13 @@ def construir_test(cfg, t, idiomas, destino, cal, preguntas) -> None:
 """
     datos = None
     if lista:
-        ultima = hechas[-1]
+        # La última lección **de una unidad**, y no la última escrita a secas.
+        # Con el curso entero eso último era el día 365, que es el de reserva:
+        # a quien acierta las catorce preguntas se le mandaba a una página que
+        # dice que hoy no hay nada que hacer. El destino honrado es el domingo
+        # de la unidad 24, que trata precisamente de qué hay después de A2.
+        de_unidad = [d for d in hechas if d.unidad is not None]
+        ultima = (de_unidad or hechas)[-1]
         datos = {
             # Al navegador va `error_ru` y no `error_es`: lo lee un principiante
             # ruso, y explicarle su propio error en el idioma que viene a
@@ -2646,7 +2660,7 @@ def _envolver_clave(html_: str, t: dict) -> str:
     # una lección, «3. Мини-тест» en un repaso y «4. Задание» en un día de
     # cultura. Si no se encuentra ninguno, no se pone enlace: mejor nada que un
     # enlace en mitad de la teoría.
-    corte = None
+    cortes = []
     for j, (_ini, fin, texto) in enumerate(cabeceras):
         if fin >= inicio_clave:
             break
@@ -2656,7 +2670,14 @@ def _envolver_clave(html_: str, t: dict) -> str:
         # que mirando solo el cuerpo el enlace caía antes del mini-test, y en
         # la semana 1 no caía en ninguna parte.
         if any(m in texto or m in html_[fin:siguiente] for m in MARCAS_DE_EJERCICIO):
-            corte = siguiente
+            cortes.append(siguiente)
+    # El ÚLTIMO corte que esté de verdad antes de la clave, no el último a
+    # secas: cuando el apartado de corrección menciona un ejercicio —«Задание
+    # 2, номер 11» en el análisis de un simulacro— el corte caía justo en la
+    # clave y entonces **el enlace no se ponía**, sin que nada fallara. En esos
+    # días el sitio correcto es donde acaban los ejercicios de verdad, que es
+    # el corte anterior.
+    corte = next((c for c in reversed(cortes) if c < inicio_clave), None)
     enlace = (f'<p class="a-la-clave"><a href="#clave">'
               f'{html.escape(L["clave_ir"])} ↓</a></p>')
     boton = (f'<div class="botones" id="clave-boton" hidden>'

@@ -121,7 +121,7 @@ def revisar(docs: pathlib.Path, cfg: dict, cal: dict) -> list[tuple[str, str, st
        "todas las páginas se adaptan al móvil" if not sin_movil else f"{len(sin_movil)} páginas sin viewport")
 
     di("LISTO" if (docs / "sitemap.xml").exists() else "MIRAR", "sitemap.xml",
-       "ayuda a que Google encuentre las 100 lecciones")
+       f"ayuda a que Google encuentre las {len(paginas)} páginas")
 
     # --- lo que no depende del código ---
     if propio:

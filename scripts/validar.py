@@ -52,6 +52,15 @@ APARTADOS = {
     "simulacro": ["Инструкция", "Задания", "Ключи и подсчёт", "Разбор ошибок"],
     "examen": ["Инструкция", "Экзамен", "Ключи и подсчёт", "Решение"],
     "proyecto": ["Разминка", "Подготовка", "Работа", "Итог"],
+    # El día 365, que es el único de su tipo y el último del curso. Mismo
+    # criterio que los tres de arriba: los apartados se definen el día que se
+    # usan por primera vez, porque mientras `APARTADOS` no conoce un tipo su
+    # validación no comprueba NADA y la lección pasa con cualquier forma.
+    #
+    # Un día de reserva no prepara ni corrige: mira qué quedó pendiente y lo
+    # hace. Por eso su segundo apartado no es «Подготовка» sino la lista de lo
+    # que falta, que es lo único que ese día tiene que decidir.
+    "reserva": ["Разминка", "Что осталось", "Работа", "Итог"],
 }
 
 

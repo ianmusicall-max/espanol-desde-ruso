@@ -40,7 +40,11 @@ const POR_DEFECTO = [
   'docs/semana-45/dia-6.html',       // repaso de la unidad 23: Мини-тест de 20 (ortografía)
   'docs/semana-46/dia-6.html',       // test de la unidad 23
   'docs/semana-47/dia-5.html',       // repaso de la unidad 24: Мини-тест de 20
-  'docs/semana-48/dia-6.html',       // test de la unidad 24: 40 ítems, el más largo del curso
+  'docs/semana-48/dia-6.html',       // test de la unidad 24: 40 ítems
+  'docs/semana-50/dia-6.html',       // el quiz de 50 ítems: el test más largo del curso
+  'docs/semana-52/dia-1.html',       // repaso de la fase final: sin unidad en el frontmatter
+  'docs/semana-49/dia-1.html',       // simulacro: el tipo de día que no es un test contestable
+  'docs/semana-53/dia-1.html',       // el día 365: `reserva`, único de su tipo en el curso
   'docs/semana-01/dia-1.html',       // lección normal: audio y huecos
 ];
 

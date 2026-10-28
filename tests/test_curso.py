@@ -1571,11 +1571,32 @@ class TestElTestDeNivel(unittest.TestCase):
         self.assertTrue((self.destino / datos["ultima"]["url"]).exists())
 
     def test_solo_se_listan_las_unidades_que_tienen_leccion_escrita(self):
-        """Las demás caen en la última escrita, que es la respuesta honrada: si
-        ya sabe todo lo que el curso cubre, ahí es donde empieza."""
+        """Las demás caen en la última escrita de una unidad, que es la
+        respuesta honrada: si ya sabe todo lo que el curso cubre, ahí es donde
+        empieza.
+
+        Y los días SIN unidad no cuentan: las semanas 49-52 son la fase final y
+        la 53 el día de reserva. Esta prueba se puso en rojo al escribirlas
+        —`int("null")`— y tenía razón: el generador estaba publicando una clave
+        `null` en los datos del test."""
         datos = self._datos()
-        escritas = {d.unidad for d in construir_sitio.escritas(CAL)}
+        escritas = {d.unidad for d in construir_sitio.escritas(CAL)
+                    if d.unidad is not None}
         self.assertEqual({int(u) for u in datos["inicios"]}, escritas)
+        self.assertNotIn("null", datos["inicios"],
+                         "la fase final no es una unidad: no puede salir en los inicios")
+
+    def test_la_ultima_del_test_de_nivel_no_es_el_dia_de_reserva(self):
+        """A quien acierta las catorce se le manda a `ultima`, y con el curso
+        entero la última lección escrita era el **día 365**, que es el de
+        reserva: una página que dice que hoy no hay nada que hacer. El destino
+        tiene que ser la última lección de una unidad."""
+        datos = self._datos()
+        n = datos["ultima"]["n"]
+        d = plan.por_numero(CAL, n)
+        self.assertIsNotNone(d.unidad, f"el día {n} no pertenece a ninguna unidad")
+        self.assertNotEqual(d.tipo, "reserva")
+        self.assertTrue((self.destino / datos["ultima"]["url"]).exists())
 
     def test_el_inicio_es_la_primera_leccion_de_la_unidad_y_no_una_del_medio(self):
         inicios = construir_sitio.inicios_de_unidad(CAL)
@@ -1899,6 +1920,33 @@ class TestLaPruebaDeUnidad(unittest.TestCase):
                                  f"{escaleras[:1]}")
         self.assertGreaterEqual(mirados, 38,
                                 "se están mirando menos días de los que tienen clave")
+
+    def test_el_examen_final_repite_los_cuarenta_del_examen_de_a1(self):
+        """El examen de A1 (нед. 22, день 6) acaba prometiendo que dentro de un
+        año se pasará el MISMO examen otra vez, y que «la diferencia entre las
+        dos hojas es la única nota que significa algo». El examen final cumple
+        esa promesa: sus ítems 1-40 son los 40 del bloque 1 de aquél, con las
+        mismas opciones en el mismo orden y la misma respuesta.
+
+        Hay que fijarlo porque se rompe en silencio: el día que alguien
+        reparta las letras de uno de los dos y no del otro, las dos hojas
+        dejan de poder compararse y las dos lecciones siguen diciendo que sí.
+        Pasó de verdad el 2026-10-28 —el reparto del examen de A1— y por eso
+        el final se escribió DESPUÉS y copiando."""
+        a1 = validar.frontmatter(
+            (RAIZ / "curso" / "semana-22" / "dia-6.md").read_text(encoding="utf-8"))[1]
+        fin = validar.frontmatter(
+            (RAIZ / "curso" / "semana-52" / "dia-6.md").read_text(encoding="utf-8"))[1]
+        qa, qb = pruebas.leer_examen(a1), pruebas.leer_examen(fin)
+        self.assertIsNotNone(qa, "el examen de A1 dejó de poder leerse")
+        self.assertIsNotNone(qb, "el examen final dejó de poder leerse")
+        self.assertGreaterEqual(len(qa), 40)
+        self.assertEqual(len(qb), 60, "el examen final son 60 ítems")
+        for i in range(40):
+            with self.subTest(item=i + 1):
+                self.assertEqual(qa[i].enunciado, qb[i].enunciado)
+                self.assertEqual(qa[i].opciones, qb[i].opciones)
+                self.assertEqual(qa[i].correcta, qb[i].correcta)
 
     def test_los_minitests_de_repaso_se_leen(self):
         """El Мини-тест del sábado de repaso tiene la MISMA forma que un test de
@@ -2988,7 +3036,15 @@ class TestLaClaveDeLosEjercicios(unittest.TestCase):
 
     def test_toda_leccion_con_clave_la_pliega_y_la_enlaza(self):
         """El enlace donde se acaban los ejercicios, la clave plegada al final.
-        Y las tres formas del curso cuentan: lección, repaso y cultura."""
+        Y las cuatro formas del curso cuentan: lección, repaso, cultura y
+        simulacro.
+
+        Los simulacros de la fase final estrenaron el caso que el generador no
+        contemplaba: su apartado de corrección **menciona** un ejercicio
+        («Задание 2, номер 11»), así que el corte caía en la clave misma y el
+        enlace **no se ponía**, sin que nada fallara. Esta prueba lo cazó en
+        tres días; el generador se arregló buscando el último corte que esté de
+        verdad antes de la clave."""
         mirados = 0
         for d in self.dias:
             # Los tres tipos sin ejercicios quedan fuera, cada uno por su
@@ -3016,7 +3072,11 @@ class TestLaClaveDeLosEjercicios(unittest.TestCase):
         respuesta. Plegarlos dejaría un botón que abre algo a lo que no apunta
         ningún enlace, porque el enlace no se coloca donde no hay ejercicios.
 
-        Lo cazó la suite al estrenarse los tres tipos en la unidad 11."""
+        Lo cazó la suite al estrenarse los tres tipos en la unidad 11, y otra
+        vez al estrenarse `reserva` en el día 365 — que es para lo que el
+        conjunto está fijado: un tipo nuevo no puede colarse sin que alguien
+        decida si su clave se pliega. El día 365 no tiene `## Ответы`, así que
+        no hay nada que plegar."""
         vistos = []
         for d in self.dias:
             if d.tipo in construir_sitio.CON_CLAVE_DE_EJERCICIOS:
@@ -3027,7 +3087,7 @@ class TestLaClaveDeLosEjercicios(unittest.TestCase):
                 if d.tipo != "prueba":
                     self.assertNotIn('<div id="clave">', p)
                 self.assertNotIn('<a href="#clave">', p)
-        self.assertEqual({"prueba", "examen", "proyecto"}, set(vistos))
+        self.assertEqual({"prueba", "examen", "proyecto", "reserva"}, set(vistos))
 
     def test_el_enlace_cae_donde_se_acaban_los_ejercicios(self):
         """Y no al final del todo. Se busca por el CONTENIDO y no por el nombre

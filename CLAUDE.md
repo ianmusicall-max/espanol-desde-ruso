@@ -62,7 +62,7 @@ la documentación del programa, en español.
   catorce sesiones. **Es el unico caso que queda**: las tres lecciones sueltas
   que decian Аудирование (30-5, 32-2, 33-3) se renombraron el 2026-10-28,
   porque ahi el desajuste era de una sesion y no de una semana entera.
-- **135 entradas de vocabulario se ensenan dos veces**, de unas 2.400, y la
+- **135 entradas de vocabulario se ensenan dos veces**, de 2 992, y la
   cifra salio al arreglar el informe el 2026-10-28 (antes decia 13, porque no
   leia la tabla de los 50 domingos de cultura). 39 son entre dos domingos —y
   ahi la repeticion es casi legitima, porque esa tabla glosa el texto del dia—
@@ -77,9 +77,10 @@ la documentación del programa, en español.
   2026-10-26) estan en `revisado: false` y la pagina lo avisa. Hay que
   comprobar que cada distractor sea de verdad el error que dice y que la unidad
   asignada sea donde el curso lo ensena.
-- **Las 315 lecciones de las semanas 4 en adelante son borradores**
+- **Las 344 lecciones de las semanas 4 en adelante son borradores**
   (`revisado: false`) y el sitio las marca como tales. Las 21 primeras estan
-  revisadas.
+  revisadas. Con el curso ya escrito entero, esta es la tarea grande que
+  queda, y la unica que no puede hacer nadie mas que el profesor.
 - **El orden de los pasados: se recomendo NO cambiarlo** (2026-10-26, de
   `referencias/espanol-en-vivo.md`). Nuzhdin pone el indefinido antes que el
   perfecto porque en casi toda Hispanoamerica el indefinido ocupa su lugar.
@@ -360,8 +361,10 @@ portada que ofrece exista de verdad.
 Dice qué le falta al sitio para que lo aprueben, y **solo lee**. Separa tres
 cosas que desde fuera se ven igual: lo comprobado contra el sitio construido
 (LISTO), lo que bloquea de verdad (FALTA) y lo que no se puede comprobar desde
-aquí (MIRAR). Hoy: 100 lecciones y 179.511 palabras listas; falta el correo de
-contacto y el dominio propio.
+aquí (MIRAR). Con el curso entero: **365 lecciones y 582 512 palabras en 391
+páginas**, y **10 listo · 0 falta**. El número de lecciones y el del sitemap los
+cuenta el propio revisor; cuando decían «100» a mano se quedaron viejos tres
+veces.
 
 Los dominios gratis de las cuatro plataformas —`github.io`, `netlify.app`,
 `vercel.app`, `wordpress.com`— se marcan por igual, y hay una prueba con las
@@ -3765,18 +3768,205 @@ cada una siga citando el texto que cita.
    se corrigió en su hermana, en el fichero de al lado. Ahora la avería se
    deriva del propio fichero.
 
-## Estado (2026-10-26)
+## La fase final: dos simulacros, el proyecto y el día 365 (días 337-365)
+
+Veintinueve lecciones, semanas 49 a 53. **El curso está escrito entero: 365 de
+365.**
+
+No son lecciones: son **cuatro tipos de día que el curso casi no había usado**
+—`simulacro` (14 días), `proyecto` (3), `reserva` (1) y los ocho `repaso` de las
+semanas 50 y 52—. Aquí no entra ni un punto de gramática nuevo; lo que entra es
+el examen.
+
+### Las dos semanas de simulacro, y por qué son dos
+
+| | Semana 49 | Semana 51 |
+|---|---|---|
+| lectura | T1 correo + T2 anuncios · T3 personas + T4 preguntas | T1 correo + T2 anuncios · T3 personas + **T4 con propuestas** |
+| audio | 6 diálogos + 6 avisos · 3 personas + 9 mensajes | igual, otro material |
+| escritura | correo 60-70 · **relato** 70-80 | correo 60-70 · **descripción** 70-80 |
+| oral | lámina «el tiempo libre» | lámina «un día de trabajo» |
+
+**Dos cosas cambian de forma a propósito, y las dos están explicadas en su
+Инструкция:**
+
+- **la tarea 4 de lectura** pasa de preguntas de comprensión a **texto con seis
+  propuestas**, que es la forma del DELE real. Y con eso cambia la estrategia:
+  «primero las preguntas» no sirve donde no hay preguntas, y lo que sirve es
+  leer el texto entero sin pararse, porque media propuesta se resuelve con lo
+  que viene **después**.
+- **la tarea 2 de escritura** pasa de relato a descripción, y con ella la
+  proporción de tiempos: un relato es indefinido con fondo de imperfecto, una
+  descripción es presente con un *antes había* / *ahora hay*.
+
+**No hay audio de verdad y se dice así.** Las frases van en **tablas**, que es
+lo que `generar_audio.frases_de` recoge, así que cada una sale con su ▶. Y la
+Инструкción avisa de lo que eso no es: esa voz **lee** —despacio, sin ruido y
+sin solapes— y el examen de verdad es **más difícil**, no menos. Las
+grabaciones reales van con `[VERIFICAR]` a los modelos del Cervantes.
+
+### Lo que decidió el contenido
+
+- ⚠️ **El aprobado es por GRUPO y no por suma**, y los cuatro días de
+  corrección lo repiten: lectura + escritura = 50 con **30** necesarios, audio
+  + oral = 50 con **30**. Sesenta y cinco en uno y veinticinco en el otro son
+  noventa de cien y **es un no apto**. Por eso en ninguna tabla de la fase
+  final aparece el total de cien: en este examen no existe.
+- **La semana 50 son cuatro refuerzos y un juego.** Los refuerzos salen del
+  resultado, no de una lista: el día dice a qué volver según qué prueba se
+  cayó. Y el sábado es el **quiz de 50 preguntas** en cinco rondas, con una
+  lectura que no es el total: **la ronda más baja** es la que dice dónde
+  trabajar. Treinta de cincuenta es el 60 %, el mismo aprobado del DELE, para
+  que el número de hoy se lea con la vara de mañana.
+- ⚠️ **Una sola cifra por grabación.** El domingo de la semana 51 pide elegir
+  **el número que salió peor** el viernes anterior y no mirar los otros tres:
+  cinco objetivos a la vez son cero objetivos.
+- ⚠️ **La película completa es otro ejercicio que el corto** (нед. 50, день 7).
+  Cien minutos no se ven tres veces, así que lo que se persigue no son las
+  palabras sino **el hilo**, con un número: el **60 %** es un éxito a este
+  nivel. Seis reglas, y la segunda es la que cuesta aceptar — **subtítulos en
+  español, nunca en ruso**: el ojo lee la lengua materna sin esfuerzo y
+  entonces **el oído se apaga solo**.
+- **El proyecto son tres días y el texto se decide antes de escribirse**: ocho
+  formas elegidas el martes, el texto el miércoles con las diez pasadas de la
+  unidad 23, y el jueves la grabación **sin leer**. Y eso último no es una
+  regla de estilo: leído, el ejercicio no mide nada, porque lo que hay que
+  poder hacer en mayo es hablar tres minutos sin papel.
+- ⚠️ **Tres minutos hablando son MENOS palabras de las que uno cree.** El texto
+  del proyecto son 174 palabras y leído dura poco más de un minuto: el audio no
+  es el texto dicho en voz alta, es el mismo contenido con más aire. Y si se
+  acaba a los dos minutos, el único bloque que aguanta crecer es la anécdota.
+- **El día 365 existe desde el calendario**, y su mejor uso puede ser **no
+  usarlo**: 52 × 7 son 364, y el que sobra se reservó para lo que se quedara
+  sin hacer en la última semana, que es donde se acumula. Si no quedó nada,
+  dejarlo en blanco es una decisión.
+
+### El examen final reutiliza los 40 del examen de A1, y eso era una promesa
+
+El examen de A1 (нед. 22, день 6) termina diciendo que **dentro de un año se
+pasará el mismo examen otra vez** y que «la diferencia entre las dos hojas es
+la única nota que significa algo». Así que el examen final son **60 ítems: los
+40 de aquel, literalmente los mismos**, más 20 de A2 (pasados, futuro y
+condicional, imperativo y pronombres, léxico y construcciones). La tabla de
+puntuación tiene por eso **dos columnas**, y el día dice cuál de los dos
+números importa: no el total, sino el «Итого A1» contra el de la semana 22.
+
+Y avisa de algo que descoloca: **esos cuarenta pueden salir peor de lo que se
+espera**, porque hace un año *ser* y *estar* se estudiaban **esa semana**. Un
+bajón ahí no es haber olvidado el idioma: es una tema que no se toca desde
+hace meses, y eso es justo lo que hay que saber antes de mayo.
+
+### `validar.py` no sabía comprobar un día de reserva
+
+`APARTADOS` no tenía `reserva`, y mientras no conoce un tipo **su validación no
+comprueba nada**: el día 365 habría pasado con cualquier forma. Es el agujero
+que ya se cerró en la unidad 11 con `simulacro`, `examen` y `proyecto`, y el
+momento de cerrarlo es el primer uso. Un día de reserva no prepara ni corrige,
+así que su segundo apartado no es «Подготовка» sino **«Что осталось»**, que es
+lo único que ese día decide.
+
+### Los barridos
+
+- **Cero duplicados de léxico** contra el curso entero. La fase final solo
+  añade **40 entradas** —las dos tablas de los domingos de las semanas 50 y 52—
+  porque un simulacro, un proyecto y un repaso no llevan `Словарь дня`. Total
+  del curso: **2 992 tarjetas**. Los 135 duplicados que quedan son los de
+  siempre, todos de antes de la semana 49.
+- **Dos tokens con los dos alfabetos**, los dos del mismo tipo que ya apareció
+  en las unidades 17, 21 y 23: una letra latina dentro de una palabra rusa
+  (`proходной`, `nед.`). A ojo no se ven nunca.
+- **Veintiséis formas de subjuntivo en prosa propia**, y **cuatro eran
+  `aunque` + subjuntivo**, que **contradice la unidad 18**. Es la cuarta
+  unidad seguida en la que aparece ese mismo error, así que conviene decirlo
+  sin rodeos: *aunque* es el que se escribe solo. Lo que **sí** se queda, porque está enseñado o
+  declarado: el **imperativo de usted** (*lea*, *escriba*, *haga*, *ponga*…,
+  unidad 16), *o sea* y *fuera de* —los dos usados en quince y doce lecciones
+  anteriores—, *cuando quiera* (chunk declarado en la unidad 20) y los
+  distractores marcados como incorrectos. Y `lo que sea` se reescribió
+  justamente porque **no** aparecía antes en ninguna lección.
+
+### El enlace a la clave se perdía en tres días, y nadie lo habría visto
+
+`_envolver_clave` pone el enlace «ir a la clave» detrás del **último** apartado
+que contiene una marca de ejercicio. En un simulacro el apartado de corrección
+**menciona** un ejercicio —«Задание 2, номер 11: решает «sin gluten»»—, así que
+el último apartado con marca era el de corrección, el corte caía **en la clave
+misma** y entonces `corte < inicio_clave` era falso y **el enlace no se
+ponía**. Sin error, sin aviso y sin diferencia visible salvo que falta un
+enlace.
+
+Arreglado donde estaba el defecto y no en las tres lecciones: ahora se busca el
+**último corte que esté de verdad antes de la clave**, que en esos días es
+donde acaban los ejercicios. Solo cambia el resultado donde antes no había
+enlace. Lo cazó `test_toda_leccion_con_clave_la_pliega_y_la_enlaza`, que ya
+existía: lo que faltaba era un tipo de día que lo provocara.
+
+### El test de nivel mandaba al día de reserva a quien lo aprobaba
+
+Dos defectos del mismo sitio, los dos destapados por tener días **sin
+unidad** (las semanas 49-52 son la fase final y la 53 el día de reserva):
+
+- **`inicios_de_unidad` agrupaba por `d.unidad` sin mirar si existe**, así que
+  publicaba una clave **`"null"`** en los datos que viajan al navegador. No
+  rompía nada —las preguntas se mapean a las unidades 1-24 y nadie busca
+  `null`— pero era un dato falso servido en cada visita.
+- **`ultima` era la última lección escrita a secas**, y con el curso entero eso
+  es el **día 365**. O sea que a quien acertaba las catorce preguntas del test
+  de nivel se le mandaba a una página que dice que **hoy no hay nada que
+  hacer**. Ahora es la última lección **de una unidad**: el domingo de la
+  unidad 24, que trata precisamente de qué hay después de A2 — que es la
+  respuesta a «ya sé todo lo que el curso cubre».
+
+Las dos las cazó la suite —`int("null")` en una prueba que ya existía— y hay
+una nueva que fija el destino: `test_la_ultima_del_test_de_nivel_no_es_el_dia_de_reserva`.
+
+**Y el texto del resultado decía lo que ya no es verdad**: «empiece por la
+última lección **escrita**», que con el curso entero es el día 365 y no es a
+donde va el botón. Ahora dice «la última lección **del curso**, que trata
+precisamente de qué hay después de A2», en los tres idiomas. Comprobado en
+navegador contestando las catorce bien: 14/14 y el botón a `semana-48/dia-7`.
+
+### Y una trampa del `grep` que faltaba por escribir
+
+La unidad 21 dejó dicho que **el volcado del léxico hay que normalizarlo antes
+de buscar en él** y la 22 que hay que **buscar sin artículo**. Faltaba la otra
+mitad, y esta vez dio seis falsos negativos seguidos: **el texto del curso que
+se registra también lleva las marcas dentro de las palabras.** `ro**dar**`,
+`la car**te**lera`, `el fotogra**ma**`: un `grep rodar` sobre `curso/` no
+encuentra nada y la palabra parece libre cuando llevaba una semana enseñada.
+
+Hay que normalizar **las dos partes**: el `grep` va contra una copia del curso
+con los asteriscos quitados (`tr -d '*'`), y además sin las líneas `tema_es:` y
+`# Semana`, que son títulos del calendario en español y no léxico enseñado.
+
+### En navegador
+
+`scripts/probar_navegador.js` añade el **quiz de 50 ítems** —que pasa a ser el
+test contestable más largo del curso— y un **repaso de la fase final**, que
+sirve de guarda propia: esos días **no tienen `unidad` en el frontmatter**, y
+ya hubo un sitio (`pruebas.main`) donde eso reventaba. 50/50 y 15/15, cero
+errores de JS.
+
+## Estado (2026-10-28)
 
 - Programa anual completo (365 días) y documentación del método.
-- **336 lecciones escritas** (semanas 1-48 enteras): **el A1 y el A2
-  completos, las veinticuatro unidades**, 2.952 tarjetas de vocabulario. Aquí
-  se acaba el material nuevo: lo que queda son los simulacros. Las 21 primeras
-  están revisadas; el resto son borradores.
-  **`docs/` está al día**: las 336 lecciones construidas y publicadas, con la
+- **EL CURSO ESTÁ ESCRITO ENTERO: 365 de 365 lecciones** (semanas 1-53), el A1
+  y el A2 completos con sus veinticuatro unidades, la fase final con dos
+  simulacros del DELE A2, el proyecto, el examen final y el día de reserva.
+  **2 992 tarjetas** de vocabulario. Las 21 primeras lecciones están revisadas;
+  **las 344 restantes son borradores** (`revisado: false`) y el sitio las marca
+  como tales — la regla 6 sigue en pie y es ahora el trabajo grande que queda.
+  **`docs/` está al día**: las 365 lecciones construidas y publicadas, con la
   tira de dibujos del héroe —la misma fila en el móvil y en el escritorio—,
   la guía de los seis pasos dentro de cada lección y la tipografía propia
   (Literata + Onest, autoalojada). La suite entera pasa: 267 pruebas, una de
   ellas en navegador de verdad.
+- **68 días son contestables o legibles con su clave**: 23 tests de unidad, 43
+  mini-tests de repaso (de 47 — los otros cuatro piden escribir la forma, no
+  elegir) y los 2 exámenes de nivel. El más largo es el quiz de 50 ítems de la
+  semana 50; el examen final son 60, de los cuales **40 son literalmente los
+  del examen de A1**, para que la comparación que aquel día prometió se pueda
+  hacer de verdad.
 - Sitio público en `docs/` con portada, índice, test de nivel, «О курсе»,
   contacto y política de privacidad. Tres idiomas (ru/es/en) —el test solo en
   ruso, como las lecciones—, tema claro y oscuro, y progreso del lector
@@ -3798,7 +3988,13 @@ cada una siga citando el texto que cita.
 - **El audio está hecho** (2026-10-26): 3.543 frases locutadas con la voz
   `shimmer`, 1,30 USD, 92 MB a 64 kbps, y 4.225 botones ▶ en 94 de las 100
   lecciones. Comprobado que suena en navegador.
-- Pendiente: **lecciones 337-365** (la fase final: 29
-  lecciones), el audio de todo lo escrito desde la 101, más
-  libros de referencia, y lo de
-  «Pendiente de revision del profesor» de arriba.
+- Pendiente, y ya no hay nada de contenido en la lista:
+  - **la revisión del profesor de 344 lecciones** (regla 6), que es el trabajo
+    grande que queda y no lo puede hacer nadie más;
+  - **el audio de todo lo escrito desde la lección 101**: van **3 543 frases
+    locutadas de 11 316**, y las 7 773 que faltan son **2,84 USD** medidos con
+    `generar_audio.py --ver` (hace falta `OPENAI_API_KEY` en el entorno);
+  - **la baraja `.apkg`**, que no se ha regenerado desde las 908 notas: son 22
+    MB de blob nuevo en git cada vez, así que se hace por tandas;
+  - los **libros de referencia** que quedaron sin analizar y lo de «Pendiente
+    de revision del profesor» de arriba.
