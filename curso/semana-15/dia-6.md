@@ -117,21 +117,21 @@ gusta mucho* → *no me gusta nada*. Плюс **me interesa** (устроен т
 
 Выберите правильный ответ. По одному баллу.
 
-1. ___ al fútbol los domingos. → а) Juego · б) Juego a · в) Toco
+1. ___ al fútbol los domingos. → а) Juego a · б) Toco · в) Juego
 2. Mi hermana ___ la guitarra. → а) juega · б) juega a · в) toca
 3. Me ___ leer y viajar. → а) gusta · б) gustan · в) gusto
-4. A Mateo le ___ los deportes. → а) gusta · б) gustan · в) gustas
-5. ___ nadar, no correr. → а) Me prefiero · б) Prefiero · в) Me prefiere
+4. A Mateo le ___ los deportes. → а) gustan · б) gusta · в) gustas
+5. ___ nadar, no correr. → а) Me prefiero · б) Me prefiere · в) Prefiero
 6. Mi cumpleaños es ___ tres de abril. → а) en · б) el · в) — (ничего)
-7. Hoy es el doce ___ marzo. → а) de · б) en · в) — (ничего)
-8. ___ marzo llueve mucho. → а) El · б) En · в) A
-9. Hoy ___ frío. → а) es · б) está · в) hace
+7. Hoy es el doce ___ marzo. → а) en · б) — (ничего) · в) de
+8. ___ marzo llueve mucho. → а) En · б) El · в) A
+9. Hoy ___ frío. → а) es · б) hace · в) está
 10. Por la mañana ___ niebla. → а) hace · б) hay · в) está
 11. En Moscú ___ desde noviembre. → а) nieva · б) hace nieve · в) hay nieva
-12. El cielo ___ nublado. → а) hace · б) hay · в) está
-13. Yo ___ frío, ¿cierras la ventana? → а) hago · б) tengo · в) soy
+12. El cielo ___ nublado. → а) está · б) hace · в) hay
+13. Yo ___ frío, ¿cierras la ventana? → а) hago · б) soy · в) tengo
 14. En agosto hace ___ calor. → а) muy · б) mucho · в) mucha
-15. El clima de Canarias es ___ suave. → а) muy · б) mucho · в) mucha
+15. El clima de Canarias es ___ suave. → а) mucho · б) muy · в) mucha
 
 **Всего: ___ / 15**
 
@@ -185,10 +185,10 @@ siete de junio · el treinta de abril.
 mucho frío. · Mañana **llueve** y el cielo **está** nublado. · Hoy es **el**
 doce **de** marzo. · No, **no me** gusta nada. Prefiero **la** primavera.
 
-**Мини-тест:** 1 а (день 1) · 2 в (день 1) · 3 а (день 2) · 4 б (день 2) ·
-5 б (день 2) · 6 б (день 3) · 7 а (день 3) · 8 б (день 3) · 9 в (день 4) ·
-10 б (день 4) · 11 а (день 4) · 12 в (день 4) · 13 б (день 4) · 14 б (день 5) ·
-15 а (день 5).
+**Мини-тест:** 1 в (день 1) · 2 в (день 1) · 3 а (день 2) · 4 а (день 2) ·
+5 в (день 2) · 6 б (день 3) · 7 в (день 3) · 8 а (день 3) · 9 б (день 4) ·
+10 б (день 4) · 11 а (день 4) · 12 а (день 4) · 13 в (день 4) · 14 б (день 5) ·
+15 б (день 5).
 
 Неправильные варианты здесь не случайные. **1 «Juego a»** без артикля — на
 полпути к *al*. **3 «gustan»** — согласование из прошлой единицы, перенесённое

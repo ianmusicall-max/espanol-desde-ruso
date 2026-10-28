@@ -109,22 +109,22 @@ lo / la / los / las, queda / quedan):
 
 1. — ¿Quieres el jersey? — Sí, ___ quiero. → а) lo · б) le · в) la
 2. — ¿Compras las zapatillas? — No, no ___ compro. → а) la · б) las · в) los
-3. Quiero probar la camisa. = → а) La quiero probar. · б) Quiero la probar. ·
+3. Quiero probar la camisa. = → а) Quiero la probar. · б) La quiero probar. ·
    в) Quiero probar la.
 4. ¿Puedes buscar los zapatos? = → а) Puedes buscarlos. · б) Puedes los
    buscar. · в) Puedes buscar los.
-5. No ___ necesito, gracias. (el abrigo) → а) la · б) lo · в) los
-6. ___ jersey del escaparate, allí al fondo. → а) Este · б) Ese · в) Aquel
-7. ___ camisa que tengo en la mano. → а) Esta · б) Esa · в) Aquella
+5. No ___ necesito, gracias. (el abrigo) → а) la · б) los · в) lo
+6. ___ jersey del escaparate, allí al fondo. → а) Este · б) Aquel · в) Ese
+7. ___ camisa que tengo en la mano. → а) Esa · б) Esta · в) Aquella
 8. ___ chaquetas de allí. → а) Estas · б) Esas · в) Aquellas
-9. Me ___ bien los pantalones. → а) queda · б) quedan · в) gusto
+9. Me ___ bien los pantalones. → а) quedan · б) queda · в) gusto
 10. Por la mañana ___ la camiseta. → а) pongo · б) me pongo · в) ponemos
-11. Hoy ___ una camiseta gris. (быть одетым) → а) me pongo · б) llevo ·
-    в) pongo
-12. ¿Cuánto ___ los zapatos? → а) cuesta · б) cuestan · в) cuesto
-13. Este abrigo es más caro ___ aquel. → а) de · б) que · в) como
-14. La camisa está ___. → а) rebajado · б) rebajada · в) rebajadas
-15. Unos pantalones ___. → а) negras · б) negros · в) negro
+11. Hoy ___ una camiseta gris. (быть одетым) → а) llevo · б) me pongo · в)
+    pongo
+12. ¿Cuánto ___ los zapatos? → а) cuesta · б) cuesto · в) cuestan
+13. Este abrigo es más caro ___ aquel. → а) que · б) de · в) como
+14. La camisa está ___. → а) rebajado · б) rebajadas · в) rebajada
+15. Unos pantalones ___. → а) negros · б) negras · в) negro
 
 **Всего: ___ / 15**
 
@@ -175,10 +175,10 @@ la chaqueta de algodón · los calcetines amarillos · la camiseta naranja (не
 pantalones · **Los** quiero probar · ¿Me **quedan** bien? · Te **quedan** un
 poco estrechos · ¿Y **ese** jersey que tienes tú ahí? · **Lo** compro.
 
-**Мини-тест:** 1 а (день 3) · 2 б (день 3) · 3 а (день 3) · 4 а (день 3) ·
-5 б (день 3) · 6 в (день 2) · 7 а (день 2) · 8 в (день 2) · 9 б (день 4) ·
-10 б (день 4) · 11 б (день 4) · 12 б (день 5) · 13 б (день 5) · 14 б (день 5) ·
-15 б (день 1).
+**Мини-тест:** 1 а (день 3) · 2 б (день 3) · 3 б (день 3) · 4 а (день 3) ·
+5 в (день 3) · 6 б (день 2) · 7 б (день 2) · 8 в (день 2) · 9 а (день 4) ·
+10 б (день 4) · 11 а (день 4) · 12 в (день 5) · 13 а (день 5) · 14 в (день 5) ·
+15 а (день 1).
 
 Если 13–15 — неделя закрыта. Если 9–12 — перечитайте среду (lo / la / los /
 las): это самый важный день единицы, и на следующей неделе он работает в каждом

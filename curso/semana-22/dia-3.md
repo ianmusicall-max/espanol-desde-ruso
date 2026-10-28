@@ -65,22 +65,22 @@ revisado: false
 
 Выберите правильный ответ. По одному баллу.
 
-1. ___ profesora en una escuela. → а) Soy una · б) Soy · в) Estoy
-2. Quiero una ___. → а) roja camisa · б) camisa roja · в) camisa roj
+1. ___ profesora en una escuela. → а) Soy · б) Soy una · в) Estoy
+2. Quiero una ___. → а) camisa roja · б) roja camisa · в) camisa roj
 3. Mi padre ___ en el salón. → а) es · б) está · в) hay
 4. ___ problema es difícil. → а) La · б) El · в) Una
-5. — ¿Dónde vives? — ___ en Valencia. → а) Yo vivo · б) Vivo · в) Me vivo
-6. ¿El libro? ___ tengo aquí. → а) Lo · б) Le · в) Él
-7. Dame ___. (его) → а) lo · б) le · в) ló (слитно: dámelo)
+5. — ¿Dónde vives? — ___ en Valencia. → а) Vivo · б) Yo vivo · в) Me vivo
+6. ¿El libro? ___ tengo aquí. → а) Le · б) Él · в) Lo
+7. Dame ___. (его) → а) ló (слитно: dámelo) · б) lo · в) le
 8. Esta sopa está ___ buena. → а) mucho · б) muy · в) mucha
 9. Me gusta ___. → а) muy · б) mucho · в) muy mucho
-10. Veo ___ mi hermana todos los días. → а) — (ничего) · б) a · в) de
-11. ___ veinticinco años. → а) Soy · б) Tengo · в) Estoy
+10. Veo ___ mi hermana todos los días. → а) a · б) — (ничего) · в) de
+11. ___ veinticinco años. → а) Soy · б) Estoy · в) Tengo
 12. Con esta tos ___ frío. (мне) → а) soy · б) tengo · в) hace
 13. ___ a las siete todos los días. (я встаю) → а) Levanto · б) Me levanto ·
     в) Se levanto
-14. Hoy ___ mucho frío en la calle. → а) tengo · б) hace · в) está
-15. ¿Cómo se lee **hola**? → а) [хола] · б) [ола] · в) [гола]
+14. Hoy ___ mucho frío en la calle. → а) tengo · б) está · в) hace
+15. ¿Cómo se lee **hola**? → а) [хола] · б) [гола] · в) [ола]
 
 **Всего: ___ / 15**
 
@@ -142,10 +142,10 @@ revisado: false
 рядом в одной фразе, и это не ошибка, а правило — погода через *hacer*,
 человек через *tener*.
 
-**Мини-тест:** 1 — б (№1) · 2 — б (№2) · 3 — б (№3) · 4 — б (№4) · 5 — б
-(№5) · 6 — а (№6) · 7 — в (№6) · 8 — б (№7) · 9 — б (№7) · 10 — б (№8) ·
-11 — б (№9) · 12 — б (№9) · 13 — б (№10) · 14 — б (№9, но наоборот: о погоде
-*hacer*) · 15 — б (№12).
+**Мини-тест:** 1 — а (№1) · 2 — а (№2) · 3 — б (№3) · 4 — б (№4) · 5 — а
+(№5) · 6 — в (№6) · 7 — а (№6) · 8 — б (№7) · 9 — б (№7) · 10 — а (№8) ·
+11 — в (№9) · 12 — б (№9) · 13 — б (№10) · 14 — в (№9, но наоборот: о погоде
+*hacer*) · 15 — в (№12).
 
 Две пары, которые стоит перечитать рядом:
 

@@ -81,24 +81,24 @@ revisado: false
 
 Выберите правильный ответ. По одному баллу.
 
-1. He escrito una ___ a mi madre. (письмо) → а) carta · б) mapa · в) carpeta
-2. Necesito su ___ aquí, por favor. (подпись) → а) firma · б) empresa · в)
-   nombre
-3. Mi hermana está ___: va a tener un niño. → а) avergonzada · б) embarazada
-   · в) sensible
-4. Trabajo en una ___ de informática. → а) firma · б) empresa · в) oficina
-5. ¿Me das un ___ de agua? → а) vaso · б) jarrón · в) plato
+1. He escrito una ___ a mi madre. (письмо) → а) mapa · б) carpeta · в) carta
+2. Necesito su ___ aquí, por favor. (подпись) → а) empresa · б) nombre · в)
+   firma
+3. Mi hermana está ___: va a tener un niño. → а) embarazada · б) avergonzada ·
+   в) sensible
+4. Trabajo en una ___ de informática. → а) empresa · б) firma · в) oficina
+5. ¿Me das un ___ de agua? → а) jarrón · б) vaso · в) plato
 6. Un billete de ida y ___. → а) venida · б) vuelta · в) salida
-7. ¿Tienes la ___ del museo? → а) entrada · б) billete · в) boleto
+7. ¿Tienes la ___ del museo? → а) billete · б) boleto · в) entrada
 8. Me duele ___ derecho. (от плеча) → а) la mano · б) el brazo · в) el pie
-9. Dos ___ a la semana. (раза) → а) tiempos · б) veces · в) horas
+9. Dos ___ a la semana. (раза) → а) tiempos · б) horas · в) veces
 10. Hablo tres ___. (языков) → а) lenguas · б) idiomas · в) оба верны
-11. El ___ es la estación más fría. → а) invierno · б) otoño · в) verano
+11. El ___ es la estación más fría. → а) otoño · б) invierno · в) verano
 12. Quiero cambiar esta camisa: no es mi ___. → а) precio · б) talla · в)
     cuenta
-13. ¿Me trae la ___, por favor? (в ресторане) → а) carta · б) cuenta · в)
-    оба верны, в разные моменты
-14. El tren sale del ___ cuatro. → а) andén · б) vagón · в) asiento
+13. ¿Me trae la ___, por favor? (в ресторане) → а) оба верны, в разные моменты
+    · б) carta · в) cuenta
+14. El tren sale del ___ cuatro. → а) vagón · б) asiento · в) andén
 15. Hoy ___ sol y no ___ frío. → а) hace / hace · б) está / tiene · в) es /
     hay
 
@@ -126,10 +126,10 @@ revisado: false
 
 ## Ответы
 
-**Мини-тест:** 1 — а (нед. 14) · 2 — а (нед. 14) · 3 — б (нед. 6) · 4 — б
-(нед. 7) · 5 — а (нед. 11) · 6 — б (нед. 17) · 7 — а (нед. 18) · 8 — б
-(нед. 19) · 9 — б (нед. 10) · 10 — в (нед. 14) · 11 — а (нед. 15) · 12 — б
-(нед. 14) · 13 — в (нед. 11) · 14 — а (нед. 17) · 15 — а (нед. 15).
+**Мини-тест:** 1 — в (нед. 14) · 2 — в (нед. 14) · 3 — а (нед. 6) · 4 — а
+(нед. 7) · 5 — б (нед. 11) · 6 — б (нед. 17) · 7 — в (нед. 18) · 8 — б
+(нед. 19) · 9 — в (нед. 10) · 10 — в (нед. 14) · 11 — б (нед. 15) · 12 — б
+(нед. 14) · 13 — а (нед. 11) · 14 — в (нед. 17) · 15 — а (нед. 15).
 
 Три, которые стоит перечитать:
 

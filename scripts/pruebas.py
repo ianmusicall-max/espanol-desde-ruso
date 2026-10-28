@@ -78,6 +78,23 @@ CLAVE_MINI = re.compile(r"\*\*Мини-тест:?\*\*(.*?)(?=\n\n|\Z)", re.S)
 DE_DONDE_DIA = re.compile(r"д(?:ень|ня)\s*(\d+)")
 
 
+# ------------------------------------------------------------ el examen final
+# de nivel. Tiene la misma forma que un test de unidad —enunciado, tres
+# opciones, clave— pero su clave vive en el apartado 3 («**Ключ:** > **1** а ·
+# …»), porque un examen la necesita justo después de hacerlo y no al final de
+# la página, y su numeración es CONTINUA entre sus dos bloques. Por eso `leer`
+# no lo lee, y por eso durante mucho tiempo la prueba del reparto de letras no
+# lo miraba: medido el 2026-10-28, 27 de las 45 respuestas del examen de A1
+# eran la б), que es exactamente el 60 % con el que se aprueba el nivel.
+#
+# Esto NO lo hace contestable en la web: `construir_sitio` solo ofrece los días
+# `prueba` y `repaso`. Sirve para que el reparto se pueda comprobar y para que
+# `main()` lo cuente, que es lo que faltaba.
+SECCION_EXAMEN = re.compile(r"^## 2\..*?(?=^## |\Z)", re.M | re.S)
+CLAVE_EXAMEN = re.compile(r"\*\*Ключ:\*\*\s*\n\n((?:>.*\n)+)")
+RESPUESTA_EXAMEN = re.compile(r"\*\*(\d+)\*\*\s*\*{0,2}([абвгд])\*{0,2}(?!\w)")
+
+
 @dataclasses.dataclass
 class Pregunta:
     bloque: str
@@ -222,19 +239,66 @@ def leer_minitest(texto: str, semana: int | None = None) -> list[Pregunta] | Non
     return salida or None
 
 
+def leer_examen(texto: str) -> list[Pregunta] | None:
+    """Las preguntas del examen final de un nivel, o None si no se puede.
+
+    Mismo contrato que `leer` y `leer_minitest`: a la mínima duda, None."""
+    sec = SECCION_EXAMEN.search(texto)
+    if not sec:
+        return None
+    encontradas = _preguntas_del_bloque(sec.group(0))
+    if not encontradas:
+        return None
+    bruto = CLAVE_EXAMEN.search(texto)
+    if not bruto:
+        return None
+    respuestas = RESPUESTA_EXAMEN.findall(" ".join(bruto.group(1).split()))
+    esperado = [str(i) for i in range(1, len(encontradas) + 1)]
+    if [n for n, _, _ in encontradas] != esperado:
+        return None
+    if [n for n, _ in respuestas] != esperado:
+        return None
+    salida: list[Pregunta] = []
+    for (_, enunciado, opciones), (_, letra) in zip(encontradas, respuestas):
+        letras = [x for x, _ in opciones]
+        if letras != list(LETRAS[:len(letras)]) or letra not in letras:
+            return None
+        enunciado = enunciado.strip().rstrip("\u2192").strip()
+        if not enunciado:
+            return None
+        salida.append(Pregunta(
+            bloque="Экзамен",
+            enunciado=enunciado,
+            opciones=[t for _, t in opciones],
+            correcta=letras.index(letra),
+        ))
+    return salida or None
+
+
 def de_la_leccion(ruta: pathlib.Path) -> list[Pregunta] | None:
-    """Las preguntas de un día, sea un test de unidad o el mini-test de un
-    repaso. Cuál de los dos lo dice el propio frontmatter."""
+    """Las preguntas de un día: el test de una unidad, el mini-test de un
+    repaso o el examen final de un nivel. Cuál de los tres lo dice el propio
+    frontmatter."""
     datos, cuerpo = validar.frontmatter(ruta.read_text(encoding="utf-8"))
     if datos.get("tipo") == "repaso":
         return leer_minitest(cuerpo, semana=datos.get("semana"))
+    if datos.get("tipo") == "examen":
+        return leer_examen(cuerpo)
     return leer(cuerpo)
+
+
+def _donde(d) -> str:
+    """«unidad 7» o «fase final»: los días de las semanas 49-52 no tienen
+    unidad, así que formatear `d.unidad` revienta."""
+    return f"unidad {d.unidad:2}" if d.unidad else "fase final"
 
 
 def main(argv=None) -> int:
     cal = plan.cargar()
     total = 0
-    for tipo, etiqueta in (("prueba", "test de unidad"), ("repaso", "mini-test de repaso")):
+    for tipo, etiqueta in (("prueba", "test de unidad"),
+                           ("repaso", "mini-test de repaso"),
+                           ("examen", "examen de nivel")):
         dias = [d for d in plan.dias(cal) if d.tipo == tipo]
         hechos = [d for d in dias if d.ruta.exists()]
         print(f"{len(dias)} días de {tipo} en el calendario · {len(hechos)} escritos "
@@ -245,14 +309,18 @@ def main(argv=None) -> int:
             if preguntas:
                 bien += 1
                 con_origen = sum(1 for p in preguntas if p.dia)
-                print(f"  ✓ unidad {d.unidad:2} (día {d.numero:3}): {len(preguntas)} preguntas · "
+                print(f"  ✓ {_donde(d)} (día {d.numero:3}): {len(preguntas)} preguntas · "
                       f"{con_origen} enlazan a su lección")
             else:
-                print(f"  ✗ unidad {d.unidad:2} (día {d.numero:3}): no se puede leer con "
+                print(f"  ✗ {_donde(d)} (día {d.numero:3}): no se puede leer con "
                       f"seguridad, se queda como está")
-        print(f"\n{bien} de {len(hechos)} se pueden hacer interactivas\n")
+        # «interactivas» solo vale para los dos tipos que el sitio ofrece para
+        # contestar: `construir_sitio` no envuelve los exámenes, y decir que sí
+        # sería mentir en el único sitio donde se mira esto.
+        que = "se leen con seguridad" if tipo == "examen" else "se pueden hacer interactivas"
+        print(f"\n{bien} de {len(hechos)} {que}\n")
         total += bien
-    print(f"{total} días contestables en total")
+    print(f"{total} días con su clave leída sin dudas")
     return 0
 
 

@@ -59,21 +59,23 @@ revisado: true
 
 Выберите или напишите правильный ответ. По одному баллу.
 
-1. ___ problema es difícil. → а) La · б) El · в) Un
-2. ___ mano de Iván. → а) El · б) La · в) Un
-3. En la mesa ___ un libro. → а) está · б) hay · в) es
+1. ___ problema es difícil. → а) El · б) La · в) Un
+2. ___ mano de Iván. → а) El · б) Un · в) La
+3. En la mesa ___ un libro. → а) hay · б) está · в) es
 4. El libro ___ en la mesa. → а) hay · б) está · в) son
-5. Множественное от **el lápiz**: → а) los lápizes · б) los lápices · в) las lápices
-6. Множественное от **la ciudad**: → а) las ciudads · б) las ciudades · в) los ciudades
+5. Множественное от **el lápiz**: → а) los lápices · б) los lápizes · в) las
+   lápices
+6. Множественное от **la ciudad**: → а) las ciudads · б) los ciudades · в) las
+   ciudades
 7. — ¿Qué es esto? — ___ una goma. → а) Está · б) Es · в) Hay
-8. Soy ___ médico. → а) un · б) el · в) — (ничего)
-9. Mi hermana es ___. → а) ingeniero · б) ingeniera · в) la ingeniera
-10. ¿En qué ___ tú? → а) trabajo · б) trabajas · в) trabaja
+8. Soy ___ médico. → а) un · б) — (ничего) · в) el
+9. Mi hermana es ___. → а) ingeniero · б) la ingeniera · в) ingeniera
+10. ¿En qué ___ tú? → а) trabajo · б) trabaja · в) trabajas
 11. Nosotros ___ en una empresa. → а) trabajamos · б) trabajáis · в) trabajan
 12. 35 → а) treinta cinco · б) treinta y cinco · в) treintaicinco
 13. 25 → а) veinte y cinco · б) veinticinco · в) veinti cinco
-14. Tengo treinta y ___ años. → а) uno · б) un · в) una
-15. ___ foto de la clase está en la pared. → а) El · б) La · в) Un
+14. Tengo treinta y ___ años. → а) uno · б) una · в) un
+15. ___ foto de la clase está en la pared. → а) El · б) Un · в) La
 
 **Всего: ___ / 15**
 
@@ -115,10 +117,10 @@ revisado: true
 
 **Диктант:** 23 · 47 · 61 · 89 · 94 · 100 · 31 años · 21 sillas.
 
-**Мини-тест:** 1 б (день 1) · 2 б (день 1) · 3 б (день 3) · 4 б (день 3) ·
-5 б (день 2) · 6 б (день 2) · 7 б (день 2) · 8 в (день 4) · 9 б (день 4) ·
-10 б (день 4) · 11 а (день 4) · 12 б (день 5) · 13 б (день 5) · 14 б (день 5) ·
-15 б (день 1).
+**Мини-тест:** 1 а (день 1) · 2 в (день 1) · 3 а (день 3) · 4 б (день 3) ·
+5 а (день 2) · 6 в (день 2) · 7 б (день 2) · 8 б (день 4) · 9 в (день 4) ·
+10 в (день 4) · 11 а (день 4) · 12 б (день 5) · 13 б (день 5) · 14 в (день 5) ·
+15 в (день 1).
 
 Если 12–15 — неделя закрыта. Если 8–11 — перечитайте среду (el / un): это
 самый важный день месяца. Если меньше 8 — повторите дни 1 и 3 целиком перед

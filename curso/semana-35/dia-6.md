@@ -88,21 +88,27 @@ en la primera—.
 
 Выберите правильный ответ. По одному баллу.
 
-1. ___, el teletrabajo es lo mejor de estos años. → а) Por mí · б) Para mí · в) Por mi
+1. ___, el teletrabajo es lo mejor de estos años. → а) Por mí · б) Por mi · в)
+   Para mí
 2. Yo ___ que se trabaja peor en casa. → а) pienso · б) pienso de · в) piensa
-3. Я не думаю, что он придёт. → а) No creo que vendrá · б) No pienso que viene · в) Creo que no vendrá
-4. — Yo no bebo café. — ___ . (вы тоже нет) → а) Yo también · б) Yo tampoco · в) Yo sí
-5. — A mí me gusta el invierno. — ___ . (а вам нет) → а) Yo no · б) A mí tampoco · в) A mí no
+3. Я не думаю, что он придёт. → а) No creo que vendrá · б) No pienso que viene
+   · в) Creo que no vendrá
+4. — Yo no bebo café. — ___ . (вы тоже нет) → а) Yo también · б) Yo tampoco ·
+   в) Yo sí
+5. — A mí me gusta el invierno. — ___ . (а вам нет) → а) Yo no · б) A mí no ·
+   в) A mí tampoco
 6. ___ totalmente de acuerdo contigo. → а) Estoy · б) Soy · в) Tengo
-7. En eso ___ razón. → а) eres · б) estás · в) tienes
+7. En eso ___ razón. → а) tienes · б) eres · в) estás
 8. Es caro. ___ , lo voy a comprar. → а) Por eso · б) Aun así · в) Ya que
-9. No salimos ___ llueve. → а) ya que · б) por eso · в) sin embargo
+9. No salimos ___ llueve. → а) por eso · б) ya que · в) sin embargo
 10. ___ es caro, lo compro. → а) A pesar de · б) Sin embargo · в) Aunque
-11. — ¿Está Marta? — ¿___ ? → а) De parte de quién · б) Quién eres · в) De quién parte
-12. — ¿Quién es? — ___ Iván. → а) Es · б) Soy · в) Está
-13. Perdone, ___ de número. → а) me he equivocado · б) he equivocado · в) se ha equivocado yo
-14. «¿Vienes?» → Pregunta ___ vengo. → а) que · б) qué · в) si
-15. «¿Dónde está?» → Pregunta ___ está. → а) que · б) dónde · в) donde
+11. — ¿Está Marta? — ¿___ ? → а) Quién eres · б) De quién parte · в) De parte
+    de quién
+12. — ¿Quién es? — ___ Iván. → а) Soy · б) Es · в) Está
+13. Perdone, ___ de número. → а) he equivocado · б) se ha equivocado yo · в)
+    me he equivocado
+14. «¿Vienes?» → Pregunta ___ vengo. → а) si · б) que · в) qué
+15. «¿Dónde está?» → Pregunta ___ está. → а) que · б) donde · в) dónde
 
 **Всего: ___ / 15**
 
@@ -150,10 +156,10 @@ en la primera—.
 cierre), **ha salido** (dos palabras: *haber* + participio), **dígale** (tres
 sílabas, tilde en la primera porque el acento quedó tercero por el final).
 
-**Мини-тест:** 1 б (день 1) · 2 а (день 1) · 3 в (день 1) · 4 б (день 2) ·
-5 в (день 2) · 6 а (день 2) · 7 в (день 2) · 8 б (день 3) · 9 а (день 3) ·
-10 в (день 3) · 11 а (день 4) · 12 б (день 4) · 13 а (день 4) · 14 в
-(день 5) · 15 б (день 5).
+**Мини-тест:** 1 в (день 1) · 2 а (день 1) · 3 в (день 1) · 4 б (день 2) ·
+5 б (день 2) · 6 а (день 2) · 7 а (день 2) · 8 б (день 3) · 9 б (день 3) ·
+10 в (день 3) · 11 в (день 4) · 12 а (день 4) · 13 в (день 4) · 14 а
+(день 5) · 15 в (день 5).
 
 Si sacó 13–15, la semana está cerrada. Si 9–12, mire en qué bloque están las
 pérdidas: casi siempre es uno solo. Si menos de 9, los días 2 y 5 son los que

@@ -1851,21 +1851,54 @@ class TestLaPruebaDeUnidad(unittest.TestCase):
         Tampoco vale el reparto perfecto а-б-в-г-а-б-в-г, que fue la primera
         corrección: equilibrado en el recuento y trivial de aprender. Por eso
         aquí se exige además que no haya tres iguales seguidos ni una escalera
-        ascendente completa."""
-        for ruta in sorted((RAIZ / "curso").glob("semana-*/dia-6.md")):
-            datos, cuerpo = validar.frontmatter(ruta.read_text(encoding="utf-8"))
-            if datos.get("tipo") != "prueba":
-                continue
-            preguntas = pruebas.leer(cuerpo)
+        ascendente completa.
+
+        Y se recorren los TRES tipos que tienen preguntas con clave, no solo
+        los tests de unidad. La corrección de 2026-10-27 arregló los quince
+        `prueba` y dejó fuera los mini-tests de repaso —que son contestables en
+        la web desde el 28— y los dos exámenes de nivel. Medido entonces: 23 de
+        los 23 mini-tests legibles estaban mal, uno con 14 de 15 respuestas en
+        la б), y el examen de A1 tenía 27 de 45, que es exactamente el 60 % con
+        el que se aprueba el nivel: marcando todo б se pasaba a A2 sin saber
+        nada. Los días de la fase final no tienen unidad, así que esto recorre
+        el calendario y no un glob de `dia-6.md`."""
+        dias = [d for d in plan.dias(plan.cargar())
+                if d.tipo in ("prueba", "repaso", "examen") and d.ruta.exists()]
+        self.assertGreaterEqual(len(dias), 38)
+        mirados = 0
+        for d in dias:
+            preguntas = pruebas.de_la_leccion(d.ruta)
+            if not preguntas:
+                continue    # los repasos que piden escribir la forma, no elegir
+            mirados += 1
+            donde = f"{d.ruta.parent.name}/{d.ruta.stem} ({d.tipo})"
             idx = [q.correcta for q in preguntas]
             veces = Counter(idx)
             self.assertLessEqual(max(veces.values()), len(idx) * 0.45,
-                                 f"{ruta.parent.name}: la letra más repetida se lleva "
+                                 f"{donde}: la letra más repetida se lleva "
                                  f"{max(veces.values())} de {len(idx)}")
             self.assertFalse(any(idx[i] == idx[i+1] == idx[i+2] for i in range(len(idx)-2)),
-                             f"{ruta.parent.name}: tres respuestas seguidas con la misma letra")
+                             f"{donde}: tres respuestas seguidas con la misma letra")
             self.assertFalse(all((idx[i]+1) % 4 == idx[i+1] for i in range(len(idx)-1)),
-                             f"{ruta.parent.name}: la secuencia es el ciclo а-б-в-г")
+                             f"{donde}: la secuencia es el ciclo а-б-в-г")
+            # Y ninguna escalera de tres —абв o вба seguidas—, que es el
+            # reparto que más se cuela porque en la clave, leída número a
+            # número, no se ve.
+            #
+            # Solo donde los ítems tienen TRES opciones, y eso no es para que
+            # la prueba pase: con tres, абв son las tres letras en orden, o sea
+            # un patrón completo y visible; con cuatro son tres de cuatro y no
+            # predicen la г). Medido: trece de los veintitrés tests de unidad
+            # —que son de cuatro opciones— tienen una, que es más o menos lo
+            # que da el azar en quince ítems, y reordenarlos no ganaría nada.
+            if all(len(q.opciones) == 3 for q in preguntas):
+                escaleras = [i + 1 for i in range(len(idx) - 2)
+                             if idx[i:i+3] in ([0, 1, 2], [2, 1, 0])]
+                self.assertFalse(escaleras,
+                                 f"{donde}: escalera de tres letras en el ítem "
+                                 f"{escaleras[:1]}")
+        self.assertGreaterEqual(mirados, 38,
+                                "se están mirando menos días de los que tienen clave")
 
     def test_los_minitests_de_repaso_se_leen(self):
         """El Мини-тест del sábado de repaso tiene la MISMA forma que un test de
@@ -1931,11 +1964,24 @@ class TestLaPruebaDeUnidad(unittest.TestCase):
 
     def test_una_clave_de_minitest_que_no_cuadra_lo_deja_como_esta(self):
         """Fallo seguro: si sobra una respuesta, esa página se queda con sus
-        casillas en vez de corregir mal."""
+        casillas en vez de corregir mal.
+
+        La avería se DERIVA del fichero y no se escribe a mano: la primera
+        versión rompía la clave con un `.replace("**Мини-тест:** 1 б", …)`, y el
+        día que se repartieron las letras de los mini-tests —porque veintitrés
+        de veintitrés estaban desequilibrados— ese `replace` se quedó en nada y
+        la prueba comprobaba un fichero intacto. Es el mismo error que ya se
+        corrigió en `test_una_clave_que_no_cuadra_no_genera_test`."""
         ruta = RAIZ / "curso" / "semana-05" / "dia-6.md"
         datos, cuerpo = validar.frontmatter(ruta.read_text(encoding="utf-8"))
         self.assertIsNotNone(pruebas.leer_minitest(cuerpo, semana=5))
-        roto = cuerpo.replace("**Мини-тест:** 1 б", "**Мини-тест:** 0 а · 1 б", 1)
+        marca = pruebas.CLAVE_MINI.search(cuerpo)
+        self.assertIsNotNone(marca, "la clave del mini-test cambió de forma")
+        # una respuesta de más delante de la primera: sobra una y no se lee
+        primera = pruebas.RESPUESTA_MINI.search(marca.group(1))
+        self.assertIsNotNone(primera)
+        corte = marca.start(1) + primera.start()
+        roto = cuerpo[:corte] + "0 а · " + cuerpo[corte:]
         self.assertNotEqual(roto, cuerpo)
         self.assertIsNone(pruebas.leer_minitest(roto, semana=5))
 

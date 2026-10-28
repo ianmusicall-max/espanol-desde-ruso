@@ -108,21 +108,21 @@ revisado: false
 Выберите правильный ответ. По одному баллу.
 
 1. Me duele ___ cabeza. → а) mi · б) la · в) una
-2. Me ___ los ojos. → а) duele · б) duelen · в) duelo
+2. Me ___ los ojos. → а) duelen · б) duele · в) duelo
 3. «Рука» от плеча до кисти: → а) la mano · б) el brazo · в) la pierna
-4. ___ fiebre desde ayer. → а) Estoy · б) Soy · в) Tengo
-5. ___ frío, ponte el abrigo. (тебе) → а) Hace · б) Tienes · в) Estás
+4. ___ fiebre desde ayer. → а) Tengo · б) Estoy · в) Soy
+5. ___ frío, ponte el abrigo. (тебе) → а) Hace · б) Estás · в) Tienes
 6. Hoy ___ mejor, gracias. → а) tengo · б) estoy · в) soy
-7. Tengo ___ tos por la noche. → а) mucho · б) mucha · в) muy
-8. ¿Tiene algo ___ el dolor de cabeza? → а) de · б) para · в) por
-9. Una pastilla ___ ocho horas. → а) cada · б) todas · в) por
-10. El médico dice: «___ la boca». → а) Abre · б) Abra · в) Abrir
+7. Tengo ___ tos por la noche. → а) mucho · б) muy · в) mucha
+8. ¿Tiene algo ___ el dolor de cabeza? → а) para · б) de · в) por
+9. Una pastilla ___ ocho horas. → а) todas · б) por · в) cada
+10. El médico dice: «___ la boca». → а) Abre · б) Abrir · в) Abra
 11. Las pastillas, ___ comer. → а) después de · б) después · в) después que
-12. ___ beber dos litros al día. (правило вообще) → а) Tienes que · б) Hay
-    que · в) Debes
-13. Con esa tos no ___ fumar. → а) tienes que · б) debes · в) hay que
+12. ___ beber dos litros al día. (правило вообще) → а) Tienes que · б) Debes ·
+    в) Hay que
+13. Con esa tos no ___ fumar. → а) tienes que · б) hay que · в) debes
 14. Me duele ___ oído derecho. → а) el · б) la · в) un
-15. ___ alérgico a los antibióticos. → а) Estoy · б) Tengo · в) Soy
+15. ___ alérgico a los antibióticos. → а) Estoy · б) Soy · в) Tengo
 
 **Всего: ___ / 15**
 
@@ -172,10 +172,10 @@ la nariz · el estómago · los dientes · el pie · la mano.
 ¿**Tienes** fiebre? — Sí, treinta y ocho. · ¿**Desde** cuándo? — Desde el
 domingo. · ¿Tiene algo **para** la tos? · **Hay** que beber mucha agua.
 
-**Мини-тест:** 1 — б (день 1) · 2 — б (день 2) · 3 — б (день 1) ·
-4 — в (день 3) · 5 — б (день 3) · 6 — б (день 3) · 7 — б (день 3) ·
-8 — б (день 4) · 9 — а (день 4) · 10 — б (день 4) · 11 — а (день 4) ·
-12 — б (день 5) · 13 — б (день 5) · 14 — а (день 2) · 15 — в (день 4).
+**Мини-тест:** 1 — б (день 1) · 2 — а (день 2) · 3 — б (день 1) ·
+4 — а (день 3) · 5 — в (день 3) · 6 — б (день 3) · 7 — в (день 3) ·
+8 — а (день 4) · 9 — в (день 4) · 10 — в (день 4) · 11 — а (день 4) ·
+12 — в (день 5) · 13 — в (день 5) · 14 — а (день 2) · 15 — б (день 4).
 
 Три, которые стоит перечитать, если вы их выбрали неправильно:
 

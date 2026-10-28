@@ -90,26 +90,36 @@ revisado: false
 
 Выберите правильный ответ. По одному баллу.
 
-1. Moscú es ___ grande que Madrid. → а) más de · б) más · в) tan
-2. Moscú es más grande ___ Madrid. → а) que · б) como · в) de
-3. Tiene más ___ tres millones de habitantes. → а) que · б) como · в) de
+1. Moscú es ___ grande que Madrid. → а) más · б) más de · в) tan
+2. Moscú es más grande ___ Madrid. → а) como · б) de · в) que
+3. Tiene más ___ tres millones de habitantes. → а) de · б) que · в) como
 4. Este piso es ___ grande como el otro. → а) más · б) tan · в) tanto
-5. Tiene ___ habitaciones como el otro: tres y tres. → а) tan · б) tanta · в) tantas
+5. Tiene ___ habitaciones como el otro: tres y tres. → а) tan · б) tantas · в)
+   tanta
 6. Estudio ___ como antes. → а) tanto · б) tan · в) tanta
-7. Этот дом лучше. → а) Esta casa es más buena · б) Esta casa es más mejor · в) Esta casa es mejor
-8. Mi hermano es ___ que yo: tiene treinta y dos años. → а) más grande · б) mayor · в) más mayor
-9. Esta casa es ___ que la otra. (о размере) → а) más grande · б) mayor · в) tan grande
+7. Этот дом лучше. → а) Esta casa es más buena · б) Esta casa es más mejor ·
+   в) Esta casa es mejor
+8. Mi hermano es ___ que yo: tiene treinta y dos años. → а) mayor · б) más
+   grande · в) más mayor
+9. Esta casa es ___ que la otra. (о размере) → а) mayor · б) más grande · в)
+   tan grande
 10. Es el chico más alto ___ la clase. → а) de · б) en · в) que
 11. Es la ciudad más alta ___ mundo. → а) de · б) de el · в) del
-12. ___ museo de Madrid es el Prado. → а) El más mejor · б) El mejor · в) Lo mejor
-13. ___ de todo es el metro a las ocho. → а) Lo peor · б) El peor · в) La peor
-14. *caro* → очень-очень дорогой. → а) muy carísimo · б) carisimo · в) carísimo
-15. *rico* → очень вкусный. → а) ricísimo · б) riquísimo · в) muy riquísimo
-16. Moscú es ___ más grande: la diferencia es enorme. → а) muy · б) tan · в) mucho
-17. ___ al clima, la diferencia se nota en seguida. → а) En cuanto · б) En cuanto de · в) Cuanto
-18. La ___ del campo es la calma. → а) desventaja · б) ventaja · в) inconveniente
-19. Prefiero el campo ___ la ciudad. → а) a · б) que · в) de
-20. ___ que la ciudad gana en posibilidades. → а) Reconoco · б) Reconosco · в) Reconozco
+12. ___ museo de Madrid es el Prado. → а) El más mejor · б) Lo mejor · в) El
+    mejor
+13. ___ de todo es el metro a las ocho. → а) El peor · б) Lo peor · в) La peor
+14. *caro* → очень-очень дорогой. → а) muy carísimo · б) carísimo · в)
+    carisimo
+15. *rico* → очень вкусный. → а) ricísimo · б) muy riquísimo · в) riquísimo
+16. Moscú es ___ más grande: la diferencia es enorme. → а) muy · б) mucho · в)
+    tan
+17. ___ al clima, la diferencia se nota en seguida. → а) En cuanto de · б) En
+    cuanto · в) Cuanto
+18. La ___ del campo es la calma. → а) ventaja · б) desventaja · в)
+    inconveniente
+19. Prefiero el campo ___ la ciudad. → а) que · б) de · в) a
+20. ___ que la ciudad gana en posibilidades. → а) Reconoco · б) Reconozco · в)
+    Reconosco
 
 **Всего: ___ / 20**
 
@@ -164,11 +174,11 @@ revisado: false
 
 ## Ответы
 
-**Мини-тест:** 1 б (день 1) · 2 а (день 1) · 3 в (день 1) · 4 б (день 2) ·
-5 в (день 2) · 6 а (день 2) · 7 в (день 2) · 8 б (день 2) · 9 а (день 2) ·
-10 а (день 3) · 11 в (день 3) · 12 б (день 3) · 13 а (день 3) · 14 в
-(день 3) · 15 б (день 3) · 16 в (день 4) · 17 а (день 4) · 18 б (день 5) ·
-19 а (день 5) · 20 в (день 5).
+**Мини-тест:** 1 а (день 1) · 2 в (день 1) · 3 а (день 1) · 4 б (день 2) ·
+5 б (день 2) · 6 а (день 2) · 7 в (день 2) · 8 а (день 2) · 9 б (день 2) ·
+10 а (день 3) · 11 в (день 3) · 12 в (день 3) · 13 б (день 3) · 14 б
+(день 3) · 15 в (день 3) · 16 б (день 4) · 17 б (день 4) · 18 а (день 5) ·
+19 в (день 5) · 20 б (день 5).
 
 Si sacó 17–20, la semana está cerrada. Si 12–16, mire en qué bloque están
 las pérdidas: casi siempre es uno solo, y lo más frecuente es el bloque

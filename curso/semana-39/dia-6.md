@@ -79,26 +79,33 @@ a pensar*.
 
 Выберите правильный ответ. По одному баллу.
 
-1. ¿______ decirme cuánto tengo que esperar? → а) Podría · б) Podia · в) Puedría
+1. ¿______ decirme cuánto tengo que esperar? → а) Podia · б) Podría · в)
+   Puedría
 2. Yo ______ dos cosas antes de decidir. → а) hacería · б) haría · в) hacía
-3. Mis padres ______ encantados de ayudar. *(были бы рады)* → а) estarián · б) estarían · в) estarán
-4. ______ que preguntarlo antes. *(надо бы)* → а) Habría · б) Habrá · в) Habia
-5. ¿Por qué no ______ antes? *(о совете)* → а) te acostarías · б) acostarte · в) te acuestas
-6. ______ tú, yo dejaría el móvil fuera. → а) Yo como · б) Yo que · в) Yo de
-7. ______ acostarte antes. *(тебе следовало бы)* → а) Debes · б) Deberás · в) Deberías
-8. Lo mejor es ______ el lunes a primera hora. → а) contestar · б) contestas · в) que contestas
-9. — Tienes razón. ______. → а) Intentaré · б) Lo intentaba · в) Lo intentaré
-10. Hoy ______ bien, gracias. *(самоощущение)* → а) soy · б) me siento · в) me pongo
-11. En cuanto empiezo, ______ rojo. → а) me pongo · б) estoy · в) me siento
-12. Mi hermano ______ nervioso: es su carácter. → а) está · б) es · в) se pone
-13. ______ miedo los exámenes orales. → а) Me dan · б) Me da · в) Doy
+3. Mis padres ______ encantados de ayudar. *(были бы рады)* → а) estarían · б)
+   estarián · в) estarán
+4. ______ que preguntarlo antes. *(надо бы)* → а) Habrá · б) Habría · в) Habia
+5. ¿Por qué no ______ antes? *(о совете)* → а) te acostarías · б) te acuestas
+   · в) acostarte
+6. ______ tú, yo dejaría el móvil fuera. → а) Yo que · б) Yo como · в) Yo de
+7. ______ acostarte antes. *(тебе следовало бы)* → а) Deberías · б) Debes · в)
+   Deberás
+8. Lo mejor es ______ el lunes a primera hora. → а) contestas · б) que
+   contestas · в) contestar
+9. — Tienes razón. ______. → а) Intentaré · б) Lo intentaré · в) Lo intentaba
+10. Hoy ______ bien, gracias. *(самоощущение)* → а) soy · б) me pongo · в) me
+    siento
+11. En cuanto empiezo, ______ rojo. → а) estoy · б) me siento · в) me pongo
+12. Mi hermano ______ nervioso: es su carácter. → а) es · б) está · в) se pone
+13. ______ miedo los exámenes orales. → а) Me da · б) Doy · в) Me dan
 14. ______ vergüenza hablar en público. → а) Tengo · б) Soy · в) Me da
-15. Me he apuntado a clases ______ mi trabajo. *(причина)* → а) para · б) por · в) por que
-16. Estudio ______ hablar con los clientes. → а) para · б) por · в) para que
-17. Un regalo ______ ti. → а) por · б) a · в) para
+15. Me he apuntado a clases ______ mi trabajo. *(причина)* → а) por · б) para
+    · в) por que
+16. Estudio ______ hablar con los clientes. → а) por · б) para · в) para que
+17. Un regalo ______ ti. → а) para · б) por · в) a
 18. Lo hice ______ ti, porque me lo pediste. → а) para · б) por · в) de
-19. Gracias ______ tu ayuda. → а) para · б) de · в) por
-20. ¿______ qué sirve esto? → а) Para · б) Por · в) Porque
+19. Gracias ______ tu ayuda. → а) para · б) por · в) de
+20. ¿______ qué sirve esto? → а) Por · б) Porque · в) Para
 
 **Всего: ___ / 20**
 
@@ -164,11 +171,11 @@ a la misma hora.* 8. *Estoy ago**bia**do de trabajo.*
 Три места, где ошибаются: **vergüenza** (две точки), **me dan** (множественное
 число) и **acuéstate** (тильда, потому что слог прибавился).
 
-**Мини-тест:** 1 а (день 1) · 2 б (день 1) · 3 б (день 1) · 4 а (день 1) ·
-5 в (день 2) · 6 б (день 2) · 7 в (день 2) · 8 а (день 2) · 9 в (день 2) ·
-10 б (день 3) · 11 а (день 3) · 12 б (день 3) · 13 а (день 3) · 14 в
-(день 3) · 15 б (день 4) · 16 а (день 4) · 17 в (день 4) · 18 б (день 4) ·
-19 в (день 4) · 20 а (день 4).
+**Мини-тест:** 1 б (день 1) · 2 б (день 1) · 3 а (день 1) · 4 б (день 1) ·
+5 б (день 2) · 6 а (день 2) · 7 а (день 2) · 8 в (день 2) · 9 б (день 2) ·
+10 в (день 3) · 11 в (день 3) · 12 а (день 3) · 13 в (день 3) · 14 в
+(день 3) · 15 а (день 4) · 16 б (день 4) · 17 а (день 4) · 18 б (день 4) ·
+19 б (день 4) · 20 в (день 4).
 
 Si sacó 17–20, la semana está cerrada. Si 12–16, mire en qué bloque están
 las pérdidas: lo más frecuente es el bloque 15–18, porque *por* y *para* se

@@ -105,27 +105,27 @@ llegadas · con retraso · a su hora*.
 
 Выберите правильный ответ. По одному баллу.
 
-1. Voy al trabajo ___ metro. → а) con · б) en · в) por
-2. Cuando hace sol voy ___. → а) en pie · б) a pie · в) de pie
-3. ___ veinte minutos en llegar. → а) Tardo · б) Llego tarde · в) Pierdo
-4. Un billete ___ ida y vuelta, por favor. → а) por · б) para · в) de
+1. Voy al trabajo ___ metro. → а) con · б) por · в) en
+2. Cuando hace sol voy ___. → а) a pie · б) en pie · в) de pie
+3. ___ veinte minutos en llegar. → а) Llego tarde · б) Pierdo · в) Tardo
+4. Un billete ___ ida y vuelta, por favor. → а) por · б) de · в) para
 5. ¿A qué hora ___ el tren? (отправляется) → а) llega · б) sale · в) va
-6. El tren de las 16:30 se lee: → а) las cuatro y media · б) las dieciséis
-   treinta · в) las dieciséis y media
-7. ¡No hagas ruido! El niño ___. → а) duerme · б) está durmiendo · в) va a
+6. El tren de las 16:30 se lee: → а) las dieciséis treinta · б) las cuatro y
+   media · в) las dieciséis y media
+7. ¡No hagas ruido! El niño ___. → а) está durmiendo · б) duerme · в) va a
    dormir
-8. — ¿Dónde ___? — En un banco. → а) estás trabajando · б) trabajas · в) vas
-   a trabajar
+8. — ¿Dónde ___? — En un banco. → а) estás trabajando · б) trabajas · в) vas a
+   trabajar
 9. El gerundio de **leer** es: → а) leendo · б) leyendo · в) leiendo
-10. Mañana ___ a Madrid. → а) estoy yendo · б) voy a ir · в) estoy ir
-11. ___ reservar una habitación, por favor. (вежливо) → а) Quiero · б) Quería
-    · в) Querré
-12. Una habitación ___ dos personas. → а) por · б) para · в) de
-13. ___ facturar dos horas antes. (правило) → а) Tengo que · б) Hay que ·
-    в) Debo
-14. ___ llegar a las seis: mi vuelo sale a las ocho. → а) Hay que · б) Tengo
+10. Mañana ___ a Madrid. → а) estoy yendo · б) estoy ir · в) voy a ir
+11. ___ reservar una habitación, por favor. (вежливо) → а) Quiero · б) Querré
+    · в) Quería
+12. Una habitación ___ dos personas. → а) para · б) por · в) de
+13. ___ facturar dos horas antes. (правило) → а) Tengo que · б) Debo · в) Hay
+    que
+14. ___ llegar a las seis: mi vuelo sale a las ocho. → а) Tengo que · б) Hay
     que · в) Se puede
-15. El equipaje de ___ no se factura. → а) mano · б) manos · в) la mano
+15. El equipaje de ___ no se factura. → а) manos · б) la mano · в) mano
 
 **Всего: ___ / 15**
 
@@ -177,10 +177,10 @@ quince, del **andén** cuatro. · ¿Qué **estás** haciendo? — **Estoy** espe
 en el andén. · Quería **reservar** una habitación doble **para** tres noches. ·
 En el aeropuerto **hay** que facturar dos horas antes.
 
-**Мини-тест:** 1 б (день 1) · 2 б (день 1) · 3 а (день 1) · 4 в (день 2) ·
-5 б (день 2) · 6 б (день 2) · 7 б (день 3) · 8 б (день 3) · 9 б (день 3) ·
-10 б (день 3) · 11 б (день 4) · 12 б (день 4) · 13 б (день 5) · 14 б
-(день 5) · 15 а (день 5).
+**Мини-тест:** 1 в (день 1) · 2 а (день 1) · 3 в (день 1) · 4 б (день 2) ·
+5 б (день 2) · 6 а (день 2) · 7 а (день 3) · 8 б (день 3) · 9 б (день 3) ·
+10 в (день 3) · 11 в (день 4) · 12 а (день 4) · 13 в (день 5) · 14 а
+(день 5) · 15 в (день 5).
 
 Неправильные варианты здесь не случайные. **1 «con»** — русский предлог «с».
 **2 «en pie»** — калька, которая значит «стоя». **3 «llego tarde»** — другое

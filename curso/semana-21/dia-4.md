@@ -111,23 +111,23 @@ nunca*.
 
 Выберите правильный ответ. По одному баллу.
 
-1. Me ___ los libros de historia. → а) gusta · б) gustan · в) gusto
+1. Me ___ los libros de historia. → а) gustan · б) gusta · в) gusto
 2. A mí me ___ bailar. → а) encanta · б) encantan · в) encanto
-3. ___ duele la cabeza. (ему) → а) Me · б) Te · в) Le
-4. Me ___ bien esta camisa. → а) queda · б) quedan · в) quedo
-5. Mañana ___ trabajar. → а) voy · б) voy a · в) voy para
-6. ¿Qué ___ hacer este fin de semana? → а) vas · б) vas a · в) va a
-7. Hoy ___ veinte fotos. → а) he hacido · б) he hecho · в) hago
+3. ___ duele la cabeza. (ему) → а) Me · б) Le · в) Te
+4. Me ___ bien esta camisa. → а) quedan · б) queda · в) quedo
+5. Mañana ___ trabajar. → а) voy a · б) voy · в) voy para
+6. ¿Qué ___ hacer este fin de semana? → а) vas · б) va a · в) vas a
+7. Hoy ___ veinte fotos. → а) he hecho · б) he hacido · в) hago
 8. María ___ a las dos. → а) ha llegada · б) ha llegado · в) es llegada
 9. No ___ visto todavía. (его) → а) he lo · б) lo he · в) he le
-10. ___ en el centro. (я заблудился) → а) He me perdido · б) Me he perdido ·
+10. ___ en el centro. (я заблудился) → а) Me he perdido · б) He me perdido ·
     в) Me perdido he
-11. ___ la boca, por favor. (врач — Вам) → а) Abre · б) Abra · в) Abren
-12. ___ esta pastilla ahora. (другу, «прими её») → а) Tomala · б) Tómala ·
-    в) Toma la
+11. ___ la boca, por favor. (врач — Вам) → а) Abre · б) Abren · в) Abra
+12. ___ esta pastilla ahora. (другу, «прими её») → а) Tomala · б) Tómala · в)
+    Toma la
 13. ___ aquí un momento. (другу: «иди сюда») → а) Viene · б) Ven · в) Vene
-14. Nunca ___ en México. → а) he estado · б) he sido · в) estoy
-15. ___ te levantes todavía. → а) No · б) Non · в) Nada
+14. Nunca ___ en México. → а) he sido · б) estoy · в) he estado
+15. ___ te levantes todavía. → а) Non · б) Nada · в) No
 
 **Всего: ___ / 15**
 
@@ -156,10 +156,10 @@ nunca*.
 
 ## Ответы
 
-**Мини-тест:** 1 — б (нед. 12) · 2 — а (нед. 12) · 3 — в (нед. 19) · 4 — а
-(нед. 14) · 5 — б (нед. 16) · 6 — б (нед. 16) · 7 — б (нед. 18) · 8 — б
-(нед. 18) · 9 — б (нед. 18) · 10 — б (нед. 18) · 11 — б (нед. 20) · 12 — б
-(нед. 20) · 13 — б (нед. 20) · 14 — а (нед. 18) · 15 — а (нед. 20).
+**Мини-тест:** 1 — а (нед. 12) · 2 — а (нед. 12) · 3 — б (нед. 19) · 4 — б
+(нед. 14) · 5 — а (нед. 16) · 6 — в (нед. 16) · 7 — а (нед. 18) · 8 — б
+(нед. 18) · 9 — б (нед. 18) · 10 — а (нед. 18) · 11 — в (нед. 20) · 12 — б
+(нед. 20) · 13 — б (нед. 20) · 14 — в (нед. 18) · 15 — в (нед. 20).
 
 Четыре, которые стоит перечитать:
 

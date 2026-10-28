@@ -81,27 +81,27 @@ revisado: false
 
 Выберите правильный ответ. По одному баллу.
 
-1. ___ durmiendo cuando sonó el teléfono. → а) Era · б) Estaba · в) Estuve
+1. ___ durmiendo cuando sonó el teléfono. → а) Era · б) Estuve · в) Estaba
 2. Estaba leyendo cuando ___ la luz. → а) se iba · б) se fue · в) se ha ido
-3. Mientras ___, sonó el despertador. → а) me dormí · б) me dormía ·
-   в) me he dormido
-4. No había taxis, ___ cogí el metro. → а) porque · б) así que · в) aunque
-5. Volví a casa ___ no llevaba el pasaporte. → а) porque · б) así que ·
-   в) por eso
-6. Me di cuenta ___ que no tenía dinero. → а) — · б) de · в) en
-7. Él ___ la carta y no dijo nada. (leer) → а) leió · б) leyó · в) leía
-8. Nadie ___ nada. (oír) → а) oió · б) oyó · в) oía
-9. ___ una tarta enorme. (traer, ellos) → а) Trajieron · б) Trajeron ·
-   в) Traieron
-10. ___ la siesta hasta las ocho. (dormir, él) → а) Dormió · б) Durmió ·
-    в) Dormía
-11. ___ no probar el plato. (preferir, ella) → а) Preferió · б) Prefirió ·
-    в) Prefería
-12. — Perdí el avión. — ___ → а) ¡Qué bien! · б) ¡Qué mala suerte! ·
-    в) ¡Me encanta!
-13. — Al final me devolvieron el dinero. — ___ → а) ¡Qué rabia! ·
-    б) Menos mal. · в) ¡Qué fuerte!
-14. Tres ___ de euros. → а) millones · б) millones de · в) millón
+3. Mientras ___, sonó el despertador. → а) me dormí · б) me dormía · в) me he
+   dormido
+4. No había taxis, ___ cogí el metro. → а) así que · б) porque · в) aunque
+5. Volví a casa ___ no llevaba el pasaporte. → а) así que · б) por eso · в)
+   porque
+6. Me di cuenta ___ que no tenía dinero. → а) — · б) en · в) de
+7. Él ___ la carta y no dijo nada. (leer) → а) leyó · б) leió · в) leía
+8. Nadie ___ nada. (oír) → а) oyó · б) oió · в) oía
+9. ___ una tarta enorme. (traer, ellos) → а) Trajieron · б) Trajeron · в)
+   Traieron
+10. ___ la siesta hasta las ocho. (dormir, él) → а) Durmió · б) Dormió · в)
+    Dormía
+11. ___ no probar el plato. (preferir, ella) → а) Preferió · б) Prefería · в)
+    Prefirió
+12. — Perdí el avión. — ___ → а) ¡Qué bien! · б) ¡Me encanta! · в) ¡Qué mala
+    suerte!
+13. — Al final me devolvieron el dinero. — ___ → а) Menos mal. · б) ¡Qué
+    rabia! · в) ¡Qué fuerte!
+14. Tres ___ de euros. → а) millones de · б) millones · в) millón
 15. La medida afectará ___ cinco líneas. → а) — · б) a · в) en
 
 **Всего: ___ / 15**
@@ -144,19 +144,19 @@ revisado: false
 **Упражнение-разминка:** ¿Sabes **qué** me pasó…? · ¡No me **digas**! ·
 **Estaba** durmiendo… · ¿Y qué **hiciste**? · **Al** final… · **Menos** mal.
 
-**Мини-тест:** 1 — б (день 1) · 2 — б (день 1) · 3 — б (день 1) · 4 — б
-(день 2) · 5 — а (день 2) · 6 — б (день 2) · 7 — б (день 3) · 8 — б (день 3) ·
-9 — б (день 3) · 10 — б (день 3) · 11 — б (день 3) · 12 — б (день 4) ·
-13 — б (день 4) · 14 — б (день 5) · 15 — б (день 5).
+**Мини-тест:** 1 — в (день 1) · 2 — б (день 1) · 3 — б (день 1) · 4 — а
+(день 2) · 5 — в (день 2) · 6 — в (день 2) · 7 — а (день 3) · 8 — а (день 3) ·
+9 — б (день 3) · 10 — а (день 3) · 11 — в (день 3) · 12 — в (день 4) ·
+13 — а (день 4) · 14 — а (день 5) · 15 — б (день 5).
 
 Четыре, которые стоит перечитать:
 
-- **1 (в) *estuve durmiendo***: такая форма есть, но значит «я проспал
+- **1 (б) *estuve durmiendo***: такая форма есть, но значит «я проспал
   какое-то время» как законченный отрезок. Для фона нужен **estaba**.
 - **4 и 5 рядом**: одна и та же мысль с двух концов. После *porque* идёт
   причина, после *así que* — следствие. Если вы ошиблись в обоих, перечитайте
   вторник.
 - **9 (а) *trajieron***: корень на *j* съедает *i*. Это уже третий глагол с
   таким правилом после *dijeron*.
-- **14 (а) *millones***: нужен предлог *de*. Без него ✗ *tres millones
+- **14 (б) *millones***: нужен предлог *de*. Без него ✗ *tres millones
   euros*.

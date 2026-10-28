@@ -94,23 +94,23 @@ estás…)*, *ir (voy, vas, va…)*, *tener (tengo, tienes, tiene…)*.
 
 Выберите правильный ответ. По одному баллу.
 
-1. Yo ___ en una oficina. → а) trabajo · б) trabaja · в) trabajas
+1. Yo ___ en una oficina. → а) trabaja · б) trabajo · в) trabajas
 2. Nosotros ___ a las ocho. → а) comemos · б) comimos · в) comamos
-3. ¿___ (tú) español? → а) Hablas · б) Habla · в) Hablan
+3. ¿___ (tú) español? → а) Habla · б) Hablas · в) Hablan
 4. Yo ___ a las siete todos los días. → а) levanto · б) me levanto · в) se
    levanto
-5. Ellos ___ en Valencia. → а) vive · б) viven · в) vivimos
-6. Yo no ___ dónde está. → а) sabo · б) sé · в) sabe
-7. ¿A qué hora ___ (vosotros) de casa? → а) salís · б) salen · в) salimos
-8. Yo ___ deporte dos veces a la semana. → а) haco · б) hago · в) hace
-9. Nosotros ___ volver pronto. (querer) → а) queremos · б) querimos · в)
+5. Ellos ___ en Valencia. → а) vive · б) vivimos · в) viven
+6. Yo no ___ dónde está. → а) sé · б) sabo · в) sabe
+7. ¿A qué hora ___ (vosotros) de casa? → а) salen · б) salimos · в) salís
+8. Yo ___ deporte dos veces a la semana. → а) haco · б) hace · в) hago
+9. Nosotros ___ volver pronto. (querer) → а) querimos · б) queremos · в)
    quieremos
-10. Ella ___ a las once. (acostarse) → а) acuesta · б) se acuesta · в) se
-    acosta
-11. Yo ___ un café, por favor. (pedir) → а) pedo · б) pido · в) pedio
+10. Ella ___ a las once. (acostarse) → а) acuesta · б) se acosta · в) se
+    acuesta
+11. Yo ___ un café, por favor. (pedir) → а) pido · б) pedo · в) pedio
 12. ¿___ (ustedes) de Rusia? → а) Son · б) Sois · в) Están
-13. Yo ___ la mesa todos los días. (poner) → а) pono · б) pongo · в) pone
-14. Nosotros ___ al fútbol los domingos. (jugar) → а) juegamos · б) jugamos ·
+13. Yo ___ la mesa todos los días. (poner) → а) pono · б) pone · в) pongo
+14. Nosotros ___ al fútbol los domingos. (jugar) → а) jugamos · б) juegamos ·
     в) jugemos
 15. Él ___ que es tarde. (decir) → а) dice · б) dece · в) dici
 
@@ -153,16 +153,16 @@ levanta.
 Если вы уложились в две минуты и ошиблись меньше трёх раз — настоящее время
 закрыто.
 
-**Мини-тест:** 1 — а (нед. 4) · 2 — а (нед. 4) · 3 — а (нед. 4) · 4 — б
-(нед. 9) · 5 — б (нед. 4) · 6 — б (нед. 8) · 7 — а (нед. 4) · 8 — б (нед. 8) ·
-9 — а (нед. 7) · 10 — б (нед. 9) · 11 — б (нед. 11) · 12 — а (нед. 2) ·
-13 — б (нед. 8) · 14 — б (нед. 7) · 15 — а (нед. 8).
+**Мини-тест:** 1 — б (нед. 4) · 2 — а (нед. 4) · 3 — б (нед. 4) · 4 — б
+(нед. 9) · 5 — в (нед. 4) · 6 — а (нед. 8) · 7 — в (нед. 4) · 8 — в (нед. 8) ·
+9 — б (нед. 7) · 10 — в (нед. 9) · 11 — а (нед. 11) · 12 — а (нед. 2) ·
+13 — в (нед. 8) · 14 — а (нед. 7) · 15 — а (нед. 8).
 
 Три, которые стоит перечитать:
 
 - **9 и 14**: форма *nosotros* — это остров. *Queremos*, а не ✗ *querimos*;
   *jugamos*, а не ✗ *juegamos*. Корень там как в инфинитиве.
-- **10 (в) *se acosta***: *acostarse* меняет корень *o → ue*, значит *se
+- **10 (б) *se acosta***: *acostarse* меняет корень *o → ue*, значит *se
   ac**ue**sta*. Возвратность и смена корня работают одновременно.
 - **12**: *ustedes* — это «Вы» во множественном, и глагол у него как у
   *ellos*: *son*. ✗ *Sois* — это *vosotros*, то есть «вы» на «ты».

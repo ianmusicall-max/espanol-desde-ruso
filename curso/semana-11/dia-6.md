@@ -82,20 +82,23 @@ encantan / muy / mucho):
 
 Выберите правильный ответ. По одному баллу.
 
-1. ___ gusta el café. → а) Yo · б) Me · в) A mí
-2. Me ___ los huevos. → а) gusta · б) gustan · в) gustas
-3. Me gusta ___ pescado. → а) — (ничего) · б) el · в) un
+1. ___ gusta el café. → а) Me · б) Yo · в) A mí
+2. Me ___ los huevos. → а) gusta · б) gustas · в) gustan
+3. Me gusta ___ pescado. → а) el · б) — (ничего) · в) un
 4. A Paula ___ gusta cocinar. → а) — (ничего) · б) le · в) se
-5. — No me gusta el té. — ___ → а) A mí también · б) A mí tampoco · в) A mí no
-6. — Me gusta el chocolate. — ___ (вы не согласны) → а) A mí tampoco · б) A mí sí · в) A mí no
-7. ___ gustan las tapas. (нам) → а) Nos · б) Os · в) Les
-8. El flan es ___ dulce. → а) mucho · б) muy · в) much
-9. Me gusta ___ la paella. → а) muy · б) mucho · в) muy mucho
-10. ✅ или ✗: *Me encanta mucho el flan.* → а) ✅ · б) ✗
-11. Me ___ las galletas de mi abuela. (обожаю) → а) encanta · б) encantan · в) encanto
+5. — No me gusta el té. — ___ → а) A mí tampoco · б) A mí también · в) A mí no
+6. — Me gusta el chocolate. — ___ (вы не согласны) → а) A mí tampoco · б) A mí
+   no · в) A mí sí
+7. ___ gustan las tapas. (нам) → а) Os · б) Nos · в) Les
+8. El flan es ___ dulce. → а) mucho · б) much · в) muy
+9. Me gusta ___ la paella. → а) mucho · б) muy · в) muy mucho
+10. ✅ или ✗: *Me encanta mucho el flan.* → а) ✗ · б) ✅
+11. Me ___ las galletas de mi abuela. (обожаю) → а) encanta · б) encanto · в)
+    encantan
 12. Yo ___ un café con leche. → а) quero · б) quiero · в) queiro
-13. Nosotros ___ cenar tarde. (preferir) → а) prefierimos · б) preferimos · в) preferemos
-14. ¿Cuánto es? — ___ ocho euros. → а) Es · б) Son · в) Hay
+13. Nosotros ___ cenar tarde. (preferir) → а) prefierimos · б) preferemos · в)
+    preferimos
+14. ¿Cuánto es? — ___ ocho euros. → а) Son · б) Es · в) Hay
 15. Mi comida ___ es la tortilla. → а) favorito · б) favorita · в) favoritas
 
 **Всего: ___ / 15**
@@ -146,10 +149,10 @@ tortilla de patatas, porque está **muy** buena. A mí me **encanta** cocinar, y
 a mi hermano le **gustan** los dulces. — Все шесть слов банка использованы по
 разу.
 
-**Мини-тест:** 1 б (день 2) · 2 б (день 3) · 3 б (день 2) · 4 б (день 2) ·
-5 б (день 3) · 6 в (день 3) · 7 а (день 3) · 8 б (день 4) · 9 б (день 4) ·
-10 б — ✗, правильно *Me encanta el flan* (день 4) · 11 б (день 4) ·
-12 б (день 5) · 13 б (день 5) · 14 б (день 5) · 15 б (день 4).
+**Мини-тест:** 1 а (день 2) · 2 в (день 3) · 3 а (день 2) · 4 б (день 2) ·
+5 а (день 3) · 6 б (день 3) · 7 б (день 3) · 8 в (день 4) · 9 а (день 4) ·
+10 а — ✗, правильно *Me encanta el flan* (день 4) · 11 в (день 4) ·
+12 б (день 5) · 13 в (день 5) · 14 а (день 5) · 15 б (день 4).
 
 Пояснения к самым коварным: в 1 **a mí** не ошибка, но одного *a mí* мало —
 нужно *a mí me gusta*, поэтому правильный ответ **me**. В 6 «а мне нет» после

@@ -85,21 +85,27 @@ come**n** doce uvas* / *se celebra el 6 de enero* (после глагола
 
 Выберите правильный ответ. По одному баллу.
 
-1. Empecé ______ estudiar español. → а) de · б) que · в) a
-2. Dejé ______ fumar en enero. → а) de · б) a · в) que
-3. ______ de comer: hace cinco minutos. *(только что)* → а) Terminé · б) Acabé · в) Acabo
+1. Empecé ______ estudiar español. → а) de · б) a · в) que
+2. Dejé ______ fumar en enero. → а) a · б) que · в) de
+3. ______ de comer: hace cinco minutos. *(только что)* → а) Terminé · б) Acabo
+   · в) Acabé
 4. Leo ______ más en español. → а) todo el tiempo · б) cada vez · в) cada hora
-5. Sigo ______ español. → а) estudiar · б) estudiando · в) a estudiar
-6. El tren está a punto ______ salir. → а) de · б) a · в) para
-7. Llevo diez meses ______ fumar. → а) no · б) de · в) sin
-8. En Nochevieja se ______ doce uvas. → а) come · б) comen · в) comiendo
-9. La Semana Santa se ______ en marzo o en abril. → а) celebra · б) celebran · в) celebrando
+5. Sigo ______ español. → а) estudiando · б) estudiar · в) a estudiar
+6. El tren está a punto ______ salir. → а) a · б) de · в) para
+7. Llevo diez meses ______ fumar. → а) sin · б) no · в) de
+8. En Nochevieja se ______ doce uvas. → а) come · б) comiendo · в) comen
+9. La Semana Santa se ______ en marzo o en abril. → а) celebra · б) celebran ·
+   в) celebrando
 10. Se disfraza ______ pirata. → а) como · б) de un · в) de
-11. Ha aprobado la oposición. Lo más propio es ______ → а) ¡Felicidades! · б) ¡Enhorabuena! · в) ¡Que tengas suerte!
-12. —¡Que aproveche! —Gracias, ______ → а) igualmente · б) lo mismo a ti · в) ojalá
-13. Mañana tiene un examen: ______ → а) ¡Que tengas suerte! · б) ¡Que te mejores! · в) ¡Enhorabuena!
-14. Cuando llegamos ya ______ mucha gente. → а) habían · б) hubieron · в) había
-15. ______ día siguiente tenía resaca. → а) En el · б) Al · в) Para el
+11. Ha aprobado la oposición. Lo más propio es ______ → а) ¡Felicidades! · б)
+    ¡Que tengas suerte! · в) ¡Enhorabuena!
+12. —¡Que aproveche! —Gracias, ______ → а) igualmente · б) lo mismo a ti · в)
+    ojalá
+13. Mañana tiene un examen: ______ → а) ¡Que te mejores! · б) ¡Enhorabuena! ·
+    в) ¡Que tengas suerte!
+14. Cuando llegamos ya ______ mucha gente. → а) había · б) habían · в)
+    hubieron
+15. ______ día siguiente tenía resaca. → а) En el · б) Para el · в) Al
 
 **Всего: ___ / 15**
 
@@ -153,7 +159,7 @@ mucha gente.*
 (не *no*), se **comen** / se **celebra** (две разные концовки в соседних
 фразах) и **había** (единственное число).
 
-**Мини-тест:** 1 в (день 1) · 2 а (день 1) · 3 в (день 1) · 4 б (день 1) ·
-5 б (день 2) · 6 а (день 2) · 7 в (день 2) · 8 б (день 3) · 9 а (день 3) ·
-10 в (день 3) · 11 б (день 4) · 12 а (день 4) · 13 а (день 4) · 14 в
-(день 5) · 15 б (день 5).
+**Мини-тест:** 1 б (день 1) · 2 в (день 1) · 3 б (день 1) · 4 б (день 1) ·
+5 а (день 2) · 6 б (день 2) · 7 а (день 2) · 8 в (день 3) · 9 а (день 3) ·
+10 в (день 3) · 11 в (день 4) · 12 а (день 4) · 13 в (день 4) · 14 а
+(день 5) · 15 в (день 5).

@@ -103,23 +103,23 @@ médico* (пошёл) против *fue **un día** tranquilo* (был).
 
 Выберите правильный ответ. По одному баллу.
 
-1. Ayer ___ con Ana. (hablar, yo) → а) hablo · б) hablé · в) habló
-2. Él ___ a las dos. (comer) → а) comio · б) comió · в) comí
+1. Ayer ___ con Ana. (hablar, yo) → а) hablé · б) hablo · в) habló
+2. Él ___ a las dos. (comer) → а) comio · б) comí · в) comió
 3. ___ que esperar una hora. (tener, yo) → а) Tuvé · б) Tuve · в) Tengo
 4. Ayer ___ al médico. (ir, yo) → а) fue · б) fui · в) fuí
 5. ¿Qué ___ el viernes? (hacer, tú) → а) hiciste · б) haciste · в) hizaste
 6. Ella ___ la compra. (hacer) → а) hico · б) hizo · в) hació
 7. ___ dos días llegué. → а) Hace · б) Hacen · в) Desde
-8. ___ tres días en un hotel. (vivir, nosotros) → а) Vivimos · б) Vivemos ·
-   в) Viviamos
-9. ___ en 1995. (nacer, yo) → а) Nacé · б) Nací · в) Nacío
-10. Nació ___ 1927. → а) en · б) en el · в) el
-11. Nació ___ 12 de marzo. → а) en · б) el · в) en el
-12. 1789 se lee: → а) mil sietecientos… · б) mil setecientos… · в) mil
-    septecientos…
-13. Se casó ___ Mercedes. → а) a · б) con · в) de
-14. ___ en 2014. (morir, él) → а) Morió · б) Murió · в) Murio
-15. Trabajó ___ periodista. → а) de · б) por · в) —(ничего)
+8. ___ tres días en un hotel. (vivir, nosotros) → а) Vivemos · б) Viviamos ·
+   в) Vivimos
+9. ___ en 1995. (nacer, yo) → а) Nací · б) Nacé · в) Nacío
+10. Nació ___ 1927. → а) en el · б) en · в) el
+11. Nació ___ 12 de marzo. → а) el · б) en · в) en el
+12. 1789 se lee: → а) mil sietecientos… · б) mil septecientos… · в) mil
+    setecientos…
+13. Se casó ___ Mercedes. → а) con · б) a · в) de
+14. ___ en 2014. (morir, él) → а) Morió · б) Murio · в) Murió
+15. Trabajó ___ periodista. → а) por · б) —(ничего) · в) de
 
 **Всего: ___ / 15**
 
@@ -166,10 +166,10 @@ médico* (пошёл) против *fue **un día** tranquilo* (был).
 ¿**Tuviste** que esperar? · ¿Cuándo **naciste**? · **Hace** dos días llegué. ·
 Se **casó** con Mercedes.
 
-**Мини-тест:** 1 — б (день 1) · 2 — б (день 2) · 3 — б (день 3) · 4 — б
-(день 3) · 5 — а (день 3) · 6 — б (день 3) · 7 — а (день 2) · 8 — а (день 2) ·
-9 — б (день 4) · 10 — а (день 4) · 11 — б (день 4) · 12 — б (день 4) ·
-13 — б (день 5) · 14 — б (день 5) · 15 — а (день 5).
+**Мини-тест:** 1 — а (день 1) · 2 — в (день 2) · 3 — б (день 3) · 4 — б
+(день 3) · 5 — а (день 3) · 6 — б (день 3) · 7 — а (день 2) · 8 — в (день 2) ·
+9 — а (день 4) · 10 — б (день 4) · 11 — а (день 4) · 12 — в (день 4) ·
+13 — а (день 5) · 14 — в (день 5) · 15 — в (день 5).
 
 Четыре, которые стоит перечитать:
 

@@ -81,21 +81,25 @@ compuesto, deshecho*.
 
 Выберите правильный ответ. По одному баллу.
 
-1. Llamo ______ el anuncio del piso. → а) para · б) por · в) de
-2. ¿El piso ______ disponible? → а) sigue · б) queda · в) está todavía
-3. Piden las dos últimas ______. *(бумаги о зарплате)* → а) avales · б) fianzas · в) nóminas
+1. Llamo ______ el anuncio del piso. → а) por · б) para · в) de
+2. ¿El piso ______ disponible? → а) queda · б) está todavía · в) sigue
+3. Piden las dos últimas ______. *(бумаги о зарплате)* → а) avales · б)
+   nóminas · в) fianzas
 4. La persiana del salón está ______. → а) roto · б) rota · в) rompida
 5. Las ventanas están ______. → а) abiertas · б) abierto · в) abiertos
-6. María ha ______ a las dos. → а) llegada · б) llegadas · в) llegado
-7. El problema de la humedad está ______. *(решён)* → а) resolvido · б) resuelto · в) resolvado
+6. María ha ______ a las dos. → а) llegada · б) llegado · в) llegadas
+7. El problema de la humedad está ______. *(решён)* → а) resuelto · б)
+   resolvido · в) resolvado
 8. Esta mañana ______ roto la persiana. → а) está · б) ha · в) se ha
 9. ______ ha roto el móvil. *(у меня)* → а) Se me · б) Me se · в) Mi
-10. No ______ agua caliente desde el lunes. → а) es · б) está · в) hay
-11. Hoy ______ sacar la basura. *(твоя очередь)* → а) tú tocas · б) te toca · в) te tocas
-12. Yo ______ la lavadora los martes. → а) pongo · б) enciendo · в) hago
-13. ______ la aspiradora los sábados. → а) Limpio · б) Hago · в) Paso
-14. ______ sacar la basura todos los días: es la norma. → а) Hay que · б) Tienes que · в) Debes de
-15. Me ______ el ruido de la calle. → а) molesto · б) molesta · в) molestan
+10. No ______ agua caliente desde el lunes. → а) es · б) hay · в) está
+11. Hoy ______ sacar la basura. *(твоя очередь)* → а) te toca · б) tú tocas ·
+    в) te tocas
+12. Yo ______ la lavadora los martes. → а) enciendo · б) hago · в) pongo
+13. ______ la aspiradora los sábados. → а) Paso · б) Limpio · в) Hago
+14. ______ sacar la basura todos los días: es la norma. → а) Tienes que · б)
+    Debes de · в) Hay que
+15. Me ______ el ruido de la calle. → а) molesto · б) molestan · в) molesta
 
 **Всего: ___ / 15**
 
@@ -150,7 +154,7 @@ fregar el mismo día.* 7. *Deja la cocina **limpia**.* 8. *El lavabo está
 (согласование с *las camas*), **se me han** (множественное — по ключам) и
 **hay** (а не *es*).
 
-**Мини-тест:** 1 б (день 1) · 2 а (день 1) · 3 в (день 1) · 4 б (день 2) ·
-5 а (день 2) · 6 в (день 2) · 7 б (день 2) · 8 в (день 3) · 9 а (день 3) ·
-10 в (день 3) · 11 б (день 4) · 12 а (день 4) · 13 в (день 4) · 14 а
-(день 5) · 15 б (день 5).
+**Мини-тест:** 1 а (день 1) · 2 в (день 1) · 3 б (день 1) · 4 б (день 2) ·
+5 а (день 2) · 6 б (день 2) · 7 а (день 2) · 8 в (день 3) · 9 а (день 3) ·
+10 б (день 3) · 11 а (день 4) · 12 в (день 4) · 13 а (день 4) · 14 в
+(день 5) · 15 в (день 5).

@@ -3697,6 +3697,74 @@ test integral de 40, que es **el test más largo del curso**: **20/20 y 40/40,
 cero errores de JS**. Si algún día el envoltorio se rompe con muchos ítems,
 se rompe ahí.
 
+## El reparto de letras no llegaba a los mini-tests ni a los exámenes (2026-10-28)
+
+La corrección del 2026-10-27 repartió la letra correcta de los **quince tests
+de unidad**. Al ir a escribir los dos mini-tests de la semana 52 se midieron
+los demás días con clave, y el agujero era mayor que el que se había tapado:
+
+| | Estado antes | Lo peor |
+|---|---|---|
+| 15 `prueba` (test de unidad) | repartidos el 27 | — |
+| **23 `repaso`** (Мини-тест) | **los 23 mal** | S27D6: **14 de 15** en la б) |
+| **1 `examen`** (final de A1) | **mal** | **27 de 45** en la б) |
+
+**El del examen de A1 es el que duele**: 27 de 45 es exactamente el 60 % con
+el que se aprueba el nivel, así que **marcando todo б se pasaba a A2 sin saber
+nada**. Y los mini-tests son contestables en la web desde el 2026-10-28, o sea
+desde el día anterior: el alumno se puntúa con ellos.
+
+**Por qué la prueba no los veía**, que es lo de siempre: `test_la_letra_correcta_esta_repartida`
+hacía `glob("semana-*/dia-6.md")` y se quedaba solo con `tipo == "prueba"`. Los
+mini-tests de repaso quedaban fuera por el tipo —y cinco de ellos además por el
+nombre, porque la unidad 11 tiene repasos entre semana— y el examen por las dos
+cosas y por una tercera: **`pruebas.leer` no sabe leerlo**.
+
+Cómo quedó:
+
+- **`pruebas.leer_examen`**, porque la clave de un examen vive en el apartado 3
+  («> **1** а · **2** б …») y su numeración es continua entre sus dos bloques.
+  **No lo hace contestable**: `construir_sitio` sigue ofreciendo solo `prueba` y
+  `repaso`, y el informe de `pruebas.py` lo dice con otras palabras («se leen
+  con seguridad») para no prometer lo que no hay.
+- **La prueba recorre el CALENDARIO y los tres tipos**, no un glob: los días de
+  la fase final no tienen `unidad` ni caen todos en el día 6.
+- **La escalera de tres (абв / вба) se exige solo donde hay TRES opciones**, y
+  eso no es para que la prueba pase: con tres, абв son las tres letras en orden,
+  o sea un patrón completo; con cuatro son tres de cuatro y no predicen la г).
+  Medido: trece de los veintitrés tests de unidad tienen una, que es lo que da
+  el azar en quince ítems.
+- `pruebas.main()` **ya no revienta con `d.unidad` vacío**: los días de las
+  semanas 49-52 no tienen unidad, y formatear `None` es un `TypeError`.
+
+**Lo que se cambió de las lecciones es el ORDEN de las opciones y nada más.**
+Ni un enunciado, ni un texto de opción, ni una respuesta. Los dos guiones del
+reparto (`repartir_mini.py` y `repartir_examen.py`, en el scratchpad de la
+sesión) leen la clave como fuente de verdad, permutan, reescriben **solo la
+letra** de la clave —el «(день N)» se conserva: es lo que hace que el resultado
+enlace a su lección— y al terminar vuelven a leer el fichero y comprueban ítem a
+ítem que el TEXTO de la respuesta marcada es el mismo.
+
+**Y remapean las referencias de la prosa**, que es donde esto se rompe sin
+avisar: once renglones del tipo «**7 (а) *mucho tos***» nombran la letra de un
+distractor. En la corrección del 27 esas quince referencias se arreglaron **a
+mano**; aquí se derivan de la permutación, y una comprobación aparte exige que
+cada una siga citando el texto que cita.
+
+**Dos tropiezos del camino que vale anotar:**
+
+1. **El span de un ítem no puede comerse el salto de línea que lo separa del
+   siguiente.** Al reescribir el ítem en una línea, dos ítems se pegaron y el
+   segundo desapareció — y lo peor es que `leer_minitest` **seguía leyendo
+   quince**, con el enunciado del primero y las opciones del segundo. Un fallo
+   que no se pone en rojo.
+2. **`test_una_clave_de_minitest_que_no_cuadra_lo_deja_como_esta` se puso en
+   rojo y tenía razón**: rompía la clave con un `.replace()` de una cadena
+   literal, así que al cambiar las letras el `replace` se quedó en nada y la
+   prueba comprobaba un fichero intacto. Es **exactamente** el error que el 27
+   se corrigió en su hermana, en el fichero de al lado. Ahora la avería se
+   deriva del propio fichero.
+
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.

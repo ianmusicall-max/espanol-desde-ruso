@@ -82,21 +82,24 @@ tengo hermanos.*
 
 Выберите правильный ответ. По одному баллу.
 
-1. Yo ___ dos hermanos. → а) tiene · б) tengo · в) tienes
-2. Mis abuelos ___ nueve nietos. → а) tienen · б) tenemos · в) tiene
+1. Yo ___ dos hermanos. → а) tengo · б) tiene · в) tienes
+2. Mis abuelos ___ nueve nietos. → а) tenemos · б) tiene · в) tienen
 3. ___ hermanas se llaman Lucía y Ana. (мои) → а) Mi · б) Mis · в) Mía
 4. Mis padres y ___ casa. (их) → а) sus · б) su · в) suyos
-5. ___ madre es profesora. (наша) → а) Nuestro · б) Nuestra · в) Nuestras
-6. ¿Y ___ hijos? (ваши, в Испании) → а) vuestro · б) vuestras · в) vuestros
-7. «Его жена» → а) suya mujer · б) su mujer · в) la su mujer
-8. Mi hermano ___ casado con Marta. → а) es · б) está · в) tiene
-9. Mi hermana no está casada: está ___ . → а) soltero · б) soltera · в) solteras
-10. ___ el pelo largo y los ojos verdes. → а) Es · б) Lleva · в) Tiene
+5. ___ madre es profesora. (наша) → а) Nuestra · б) Nuestro · в) Nuestras
+6. ¿Y ___ hijos? (ваши, в Испании) → а) vuestro · б) vuestros · в) vuestras
+7. «Его жена» → а) su mujer · б) suya mujer · в) la su mujer
+8. Mi hermano ___ casado con Marta. → а) es · б) tiene · в) está
+9. Mi hermana no está casada: está ___ . → а) soltera · б) soltero · в)
+   solteras
+10. ___ el pelo largo y los ojos verdes. → а) Es · б) Tiene · в) Lleva
 11. Mi padre ___ gafas y barba. → а) lleva · б) tiene el · в) es
-12. «У неё голубые глаза» → а) Tiene sus ojos azules · б) Tiene los ojos azules · в) Sus ojos tiene azules
-13. Mi prima es muy ___ . → а) trabajador · б) trabajadora · в) trabajadores
-14. **Dmitri:** No soy tímido. **Carmen:** ___ . → а) Yo también · б) Yo también no · в) Yo tampoco
-15. Es ___ serio: no habla mucho. → а) muy mucho · б) un poco · в) mucho
+12. «У неё голубые глаза» → а) Tiene sus ojos azules · б) Sus ojos tiene
+    azules · в) Tiene los ojos azules
+13. Mi prima es muy ___ . → а) trabajadora · б) trabajador · в) trabajadores
+14. **Dmitri:** No soy tímido. **Carmen:** ___ . → а) Yo también · б) Yo
+    también no · в) Yo tampoco
+15. Es ___ serio: no habla mucho. → а) muy mucho · б) mucho · в) un poco
 
 **Всего: ___ / 15**
 
@@ -147,10 +150,10 @@ padre **lleva** gafas y **es** muy trabajador. **Mi** hermana **tiene** veinte
 años y **está** soltera. **Nuestra** casa está en Valencia. Mis abuelos tienen
 cuatro nietos: **sus** nietos somos nosotros y **nuestros** primos.
 
-**Мини-тест:** 1 б (день 1) · 2 а (день 1) · 3 б (день 2) · 4 б (день 2: дом
-один → **su**) · 5 б (день 3) · 6 в (день 3) · 7 б (день 2) · 8 б (день 3) ·
-9 б (день 3) · 10 в (день 4) · 11 а (день 4) · 12 б (день 4) · 13 б (день 5) ·
-14 в (день 5) · 15 б (день 5).
+**Мини-тест:** 1 а (день 1) · 2 в (день 1) · 3 б (день 2) · 4 б (день 2: дом
+один → **su**) · 5 а (день 3) · 6 б (день 3) · 7 а (день 2) · 8 в (день 3) ·
+9 а (день 3) · 10 б (день 4) · 11 а (день 4) · 12 в (день 4) · 13 а (день 5) ·
+14 в (день 5) · 15 в (день 5).
 
 Если 13–15 — неделя закрыта, идите в воскресенье спокойно. Если 9–12 —
 перечитайте день 2 и день 4: притяжательные и артикль с частями тела

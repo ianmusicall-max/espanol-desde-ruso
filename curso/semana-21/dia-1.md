@@ -93,21 +93,21 @@ revisado: false
 
 Выберите правильный ответ. По одному баллу.
 
-1. Ana ___ de Madrid. → а) es · б) está · в) hay
-2. Ana ___ en Madrid ahora. → а) es · б) está · в) hay
-3. ___ una farmacia en esta calle. → а) Es · б) Está · в) Hay
-4. La farmacia ___ al lado del banco. → а) es · б) está · в) hay
+1. Ana ___ de Madrid. → а) está · б) hay · в) es
+2. Ana ___ en Madrid ahora. → а) es · б) hay · в) está
+3. ___ una farmacia en esta calle. → а) Hay · б) Es · в) Está
+4. La farmacia ___ al lado del banco. → а) es · б) hay · в) está
 5. ___ veinticinco años. → а) Soy · б) Estoy · в) Tengo
 6. Mi hermano ___ muy simpático. → а) es · б) está · в) tiene
-7. Hoy ___ contenta: he aprobado. → а) soy · б) estoy · в) tengo
-8. ___ frío, ponte el abrigo. → а) Hace · б) Tengo · в) Estoy (о себе)
-9. La paella ___ buenísima. (вкусная) → а) es · б) está · в) hay
+7. Hoy ___ contenta: he aprobado. → а) estoy · б) soy · в) tengo
+8. ___ frío, ponte el abrigo. → а) Hace · б) Estoy (о себе) · в) Tengo
+9. La paella ___ buenísima. (вкусная) → а) está · б) es · в) hay
 10. Mi padre ___ enfermo esta semana. → а) es · б) está · в) tiene
-11. En la nevera ___ leche. → а) es · б) está · в) hay
+11. En la nevera ___ leche. → а) es · б) hay · в) está
 12. ___ que estudiar más. → а) Hay · б) Es · в) Está
-13. El café ___ frío: no me lo tomo. → а) es · б) está · в) hay
-14. ___ las ocho de la tarde. → а) Son · б) Están · в) Hay
-15. ¿Cuántos alumnos ___ en clase? → а) son · б) están · в) hay
+13. El café ___ frío: no me lo tomo. → а) está · б) es · в) hay
+14. ___ las ocho de la tarde. → а) Están · б) Son · в) Hay
+15. ¿Cuántos alumnos ___ en clase? → а) son · б) hay · в) están
 
 **Всего: ___ / 15**
 
@@ -147,11 +147,11 @@ médica. · 8. **Tengo** dos hermanos. · 9. La sopa **está** fría. ·
 Обратите внимание на пару 3 и 5: слова почти те же, а глаголы разные, и решает
 артикль — *un banco* против *el banco*.
 
-**Мини-тест:** 1 — а (нед. 2) · 2 — б (нед. 3) · 3 — в (нед. 3) · 4 — б
-(нед. 3) · 5 — в (нед. 2) · 6 — а (нед. 4) · 7 — б (нед. 6) · 8 — б (нед. 19,
-о себе — *tener*) · 9 — б (нед. 11, о вкусе — *estar*) · 10 — б (нед. 19) ·
-11 — в (нед. 3) · 12 — а (нед. 17) · 13 — б (нед. 11) · 14 — а (нед. 5) ·
-15 — в (нед. 3).
+**Мини-тест:** 1 — в (нед. 2) · 2 — в (нед. 3) · 3 — а (нед. 3) · 4 — в
+(нед. 3) · 5 — в (нед. 2) · 6 — а (нед. 4) · 7 — а (нед. 6) · 8 — в (нед. 19,
+о себе — *tener*) · 9 — а (нед. 11, о вкусе — *estar*) · 10 — б (нед. 19) ·
+11 — б (нед. 3) · 12 — а (нед. 17) · 13 — а (нед. 11) · 14 — б (нед. 5) ·
+15 — б (нед. 3).
 
 Четыре, которые стоит перечитать, если вы их потеряли:
 

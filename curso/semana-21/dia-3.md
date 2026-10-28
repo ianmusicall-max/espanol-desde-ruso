@@ -115,16 +115,16 @@ revisado: false
 Выберите правильный ответ. По одному баллу.
 
 1. Soy ___ profesor. → а) un · б) el · в) — (ничего)
-2. ___ lunes tengo clase. → а) El · б) En el · в) — (ничего)
+2. ___ lunes tengo clase. → а) En el · б) El · в) — (ничего)
 3. Me duele ___ cabeza. → а) mi · б) la · в) una
-4. Son ___ tres de la tarde. → а) los · б) las · в) — (ничего)
-5. Me gusta ___ foto. → а) el · б) la · в) las
-6. ___ problema es difícil. → а) La · б) El · в) Un
+4. Son ___ tres de la tarde. → а) las · б) los · в) — (ничего)
+5. Me gusta ___ foto. → а) el · б) las · в) la
+6. ___ problema es difícil. → а) El · б) La · в) Un
 7. Quiero un coche ___. → а) rojo · б) roja · в) rojos
 8. Unas casas ___. → а) blanco · б) blancas · в) blanca
 9. ___ libros son míos. (рядом со мной) → а) Estos · б) Esos · в) Aquellos
-10. ___ hermanos viven en Moscú. (мои) → а) Mi · б) Mis · в) Míos
-11. ¿Ves el coche? — Sí, ___ veo. → а) le · б) lo · в) la
+10. ___ hermanos viven en Moscú. (мои) → а) Mi · б) Míos · в) Mis
+11. ¿Ves el coche? — Sí, ___ veo. → а) le · б) la · в) lo
 12. ¿Conoces ___ María? → а) — (ничего) · б) a · в) de
 13. Hay ___ agua en la botella. → а) un · б) una · в) — (ничего)
 14. ___ español es fácil. → а) — (ничего) · б) El · в) Un
@@ -182,9 +182,9 @@ revisado: false
 15. *Soy médica… **Me llamo** Ana* — согласование рода: если Ana, то *médica*,
     а не *médico*.
 
-**Мини-тест:** 1 — в (нед. 2) · 2 — а (нед. 9) · 3 — б (нед. 19) · 4 — б
-(нед. 5) · 5 — б (нед. 2) · 6 — б (нед. 2) · 7 — а (нед. 4) · 8 — б (нед. 4) ·
-9 — а (нед. 12) · 10 — б (нед. 6) · 11 — б (нед. 13) · 12 — б (нед. 13) ·
+**Мини-тест:** 1 — в (нед. 2) · 2 — б (нед. 9) · 3 — б (нед. 19) · 4 — а
+(нед. 5) · 5 — в (нед. 2) · 6 — а (нед. 2) · 7 — а (нед. 4) · 8 — б (нед. 4) ·
+9 — а (нед. 12) · 10 — в (нед. 6) · 11 — в (нед. 13) · 12 — б (нед. 13) ·
 13 — в (нед. 3) · 14 — б (нед. 2) · 15 — б (нед. 19).
 
 Три, которые стоит перечитать:

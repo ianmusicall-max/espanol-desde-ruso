@@ -104,25 +104,25 @@ revisado: false
 Выберите правильный ответ. По одному баллу.
 
 1. De pequeño ___ en Moscú. (vivir, yo) → а) viví · б) vivía · в) he vivido
-2. Mi madre ___ en una escuela. (trabajar) → а) trabajó · б) trabajaba ·
-   в) trabaja
-3. Siempre ___ niños en el patio. → а) había · б) habían · в) hubo
+2. Mi madre ___ en una escuela. (trabajar) → а) trabajó · б) trabaja · в)
+   trabajaba
+3. Siempre ___ niños en el patio. → а) habían · б) había · в) hubo
 4. Mi abuela ___ bajita y fuerte. → а) fue · б) era · в) estaba
-5. ___ al pueblo cada verano. (ir, nosotros) → а) Fuimos · б) Íbamos ·
-   в) Ibamos
+5. ___ al pueblo cada verano. (ir, nosotros) → а) Íbamos · б) Fuimos · в)
+   Ibamos
 6. Casi no los ___. (ver, yo) → а) vía · б) veía · в) vi
-7. La biblioteca ___ al lado del parque. → а) había · б) estaba · в) era
-8. ___ fumo: lo dejé hace tres años. → а) Todavía · б) Ya no · в) Todavía no
-9. ___ he visto esa película. → а) Ya no · б) Todavía · в) Todavía no
-10. ___ ir al gimnasio tres veces por semana. (soler, yo) → а) Solía ·
-    б) Usualmente iba · в) Suelo
-11. Jugaba ___ fútbol en el recreo. → а) — · б) al · в) con
-12. Jugaba ___ muñecas hasta los diez. → а) a · б) a las · в) con
-13. ___ en 2010 y construyeron un centro comercial. (cerrar, ellos) →
-    а) Cerraban · б) Lo cerraron · в) Se cerraba
-14. ___ muy pobres entonces. (ser, nosotros) → а) Eramos · б) Éramos ·
-    в) Fuimos
-15. El metro no ___ en aquella época. → а) existía · б) existió · в) existe
+7. La biblioteca ___ al lado del parque. → а) estaba · б) había · в) era
+8. ___ fumo: lo dejé hace tres años. → а) Todavía · б) Todavía no · в) Ya no
+9. ___ he visto esa película. → а) Todavía no · б) Ya no · в) Todavía
+10. ___ ir al gimnasio tres veces por semana. (soler, yo) → а) Usualmente iba
+    · б) Suelo · в) Solía
+11. Jugaba ___ fútbol en el recreo. → а) — · б) con · в) al
+12. Jugaba ___ muñecas hasta los diez. → а) con · б) a · в) a las
+13. ___ en 2010 y construyeron un centro comercial. (cerrar, ellos) → а)
+    Cerraban · б) Se cerraba · в) Lo cerraron
+14. ___ muy pobres entonces. (ser, nosotros) → а) Éramos · б) Eramos · в)
+    Fuimos
+15. El metro no ___ en aquella época. → а) existió · б) existe · в) existía
 
 **Всего: ___ / 15**
 
@@ -169,18 +169,18 @@ en 2010.* · 10. *Entonces no había metro.*
 Фраза 9 — единственная с двумя временами, и это не случайность: фон в
 imperfecto, событие в indefinido. Вся следующая неделя об этом.
 
-**Мини-тест:** 1 — б (день 1) · 2 — б (день 1) · 3 — а (день 1) · 4 — б
-(день 2) · 5 — б (день 2) · 6 — б (день 2) · 7 — б (день 2) · 8 — б (день 3) ·
-9 — в (день 3) · 10 — а (день 3) · 11 — б (день 4) · 12 — в (день 4) ·
-13 — б (день 5) · 14 — б (день 2) · 15 — а (день 5).
+**Мини-тест:** 1 — б (день 1) · 2 — в (день 1) · 3 — б (день 1) · 4 — б
+(день 2) · 5 — а (день 2) · 6 — б (день 2) · 7 — а (день 2) · 8 — в (день 3) ·
+9 — а (день 3) · 10 — в (день 3) · 11 — в (день 4) · 12 — а (день 4) ·
+13 — в (день 5) · 14 — а (день 2) · 15 — в (день 5).
 
 Четыре, которые стоит перечитать:
 
-- **3 (б) *habían***: формы нет. Это самая частая ошибка недели и её делают
+- **3 (а) *habían***: формы нет. Это самая частая ошибка недели и её делают
   даже испанцы.
 - **4 (а) *fue***: *fue bajita* значило бы, что она побыла низенькой какое-то
   время и перестала. Описание человека — всегда *era*.
-- **9 (б) *todavía***: без *no* это «всё ещё видел», а в вопросе —
+- **9 (в) *todavía***: без *no* это «всё ещё видел», а в вопросе —
   «ещё не видел». Решает *no*, а не слово.
-- **14 (а) *eramos***: без тильды слово читается [э-**ра**-мос], а нужно
+- **14 (б) *eramos***: без тильды слово читается [э-**ра**-мос], а нужно
   [**э**-рамос]. Тильда держит ударение на месте.

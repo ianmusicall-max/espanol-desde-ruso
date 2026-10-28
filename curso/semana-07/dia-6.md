@@ -89,22 +89,22 @@ revisado: false
 
 Выберите правильный ответ. По одному баллу.
 
-1. ¿Dónde ___ tú? — Vivo en Novosibirsk. → а) vives · б) vivas · в) vivís
-2. Nosotros ___ en un piso pequeño. → а) vivamos · б) vivimos · в) vivís
+1. ¿Dónde ___ tú? — Vivo en Novosibirsk. → а) vivas · б) vives · в) vivís
+2. Nosotros ___ en un piso pequeño. → а) vivamos · б) vivís · в) vivimos
 3. En el salón ___ un sofá. → а) está · б) hay · в) es
 4. El sofá ___ delante de la ventana. → а) hay · б) está · в) es
-5. La lámpara está ___ la mesa. → а) encima · б) encima de · в) encima en
+5. La lámpara está ___ la mesa. → а) encima de · б) encima · в) encima en
 6. Mis libros ___ encima de la mesa. → а) está · б) están · в) hay
-7. Уличный этаж — это → а) la primera planta · б) la planta baja · в) el ático
+7. Уличный этаж — это → а) la planta baja · б) la primera planta · в) el ático
 8. «Я живу на третьем этаже» (по русскому счёту) → а) en la tercera planta ·
-   б) en la segunda planta · в) en la primera planta
-9. Vivo en el ___ piso. (3.º) → а) tercero · б) tercer · в) tercera
+   б) en la primera planta · в) en la segunda planta
+9. Vivo en el ___ piso. (3.º) → а) tercer · б) tercero · в) tercera
 10. El piso ___ dos dormitorios. → а) es · б) hay · в) tiene
-11. El banco está al lado ___ supermercado. → а) de el · б) del · в) de la
-12. Voy ___ farmacia. → а) al · б) a la · в) a el
-13. ¿___ vas? — Al parque. → а) Dónde · б) Adónde · в) Qué
+11. El banco está al lado ___ supermercado. → а) de el · б) de la · в) del
+12. Voy ___ farmacia. → а) a la · б) al · в) a el
+13. ¿___ vas? — Al parque. → а) Dónde · б) Qué · в) Adónde
 14. Voy ___ autobús. → а) en · б) a · в) por
-15. ___ lunes voy al gimnasio. → а) En · б) Los · в) El
+15. ___ lunes voy al gimnasio. → а) En · б) El · в) Los
 
 **Всего: ___ / 15**
 
@@ -153,10 +153,10 @@ dormitorio · el baño · el pasillo · el balcón · el ascensor. — Четы�
 назывались раньше; в тексте они появляются впервые, поэтому **hay tres
 libros**.
 
-**Мини-тест:** 1 а (день 1) · 2 б (день 1) · 3 б (день 2) · 4 б (день 2) ·
-5 б (день 2) · 6 б (день 2) · 7 б (день 3) · 8 б (день 3) · 9 б (день 3) ·
-10 в (день 3) · 11 б (день 4) · 12 б (день 4) · 13 б (день 5) · 14 а (день 5) ·
-15 б (день 5).
+**Мини-тест:** 1 б (день 1) · 2 в (день 1) · 3 б (день 2) · 4 б (день 2) ·
+5 а (день 2) · 6 б (день 2) · 7 а (день 3) · 8 в (день 3) · 9 а (день 3) ·
+10 в (день 3) · 11 в (день 4) · 12 а (день 4) · 13 в (день 5) · 14 а (день 5) ·
+15 в (день 5).
 
 Если 12–15 — неделя закрыта. Если 8–11 — перечитайте вторник (**hay / está** и
 предлоги): на нём держится вся единица. Если меньше 8 — повторите целиком дни

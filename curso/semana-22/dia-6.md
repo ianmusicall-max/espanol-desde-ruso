@@ -38,65 +38,65 @@ revisado: false
 **Глаголы быть и иметь (1–8)**
 
 1. ___ ruso, de Moscú. → а) Soy · б) Estoy · в) Tengo
-2. Mi hermana ___ en Valencia ahora. → а) es · б) está · в) hay
+2. Mi hermana ___ en Valencia ahora. → а) está · б) es · в) hay
 3. ___ una farmacia en esta calle. → а) Es · б) Está · в) Hay
-4. ___ treinta años. → а) Soy · б) Tengo · в) Estoy
+4. ___ treinta años. → а) Soy · б) Estoy · в) Tengo
 5. La paella ___ buenísima. (вкусная) → а) es · б) está · в) tiene
 6. Hoy ___ cansado. → а) soy · б) estoy · в) tengo
-7. ___ las nueve de la mañana. → а) Es · б) Son · в) Están
-8. En la nevera ___ leche. → а) es · б) está · в) hay
+7. ___ las nueve de la mañana. → а) Es · б) Están · в) Son
+8. En la nevera ___ leche. → а) es · б) hay · в) está
 
 **Настоящее время (9–16)**
 
-9. Yo ___ en una oficina. → а) trabajo · б) trabaja · в) trabajas
-10. Nosotros ___ a las dos. (comer) → а) comemos · б) comimos · в) comamos
-11. Yo no ___ dónde está. (saber) → а) sabo · б) sé · в) sabe
+9. Yo ___ en una oficina. → а) trabaja · б) trabajas · в) trabajo
+10. Nosotros ___ a las dos. (comer) → а) comimos · б) comamos · в) comemos
+11. Yo no ___ dónde está. (saber) → а) sé · б) sabo · в) sabe
 12. Yo ___ deporte dos veces a la semana. (hacer) → а) haco · б) hago · в)
     hace
-13. Nosotros ___ volver pronto. (querer) → а) queremos · б) querimos · в)
+13. Nosotros ___ volver pronto. (querer) → а) querimos · б) queremos · в)
     quieremos
-14. Ella ___ a las once. (acostarse) → а) acuesta · б) se acuesta · в) se
+14. Ella ___ a las once. (acostarse) → а) se acuesta · б) acuesta · в) se
     acosta
 15. ¿___ (vosotros) de casa a las ocho? (salir) → а) Salís · б) Salen · в)
     Salimos
-16. Él ___ que es tarde. (decir) → а) dice · б) dece · в) dici
+16. Él ___ que es tarde. (decir) → а) dece · б) dice · в) dici
 
 **Существительное и спутники (17–24)**
 
-17. Soy ___ profesor. → а) un · б) el · в) — (ничего)
+17. Soy ___ profesor. → а) un · б) — (ничего) · в) el
 18. ___ lunes tengo clase. → а) El · б) En el · в) — (ничего)
-19. ___ problema es difícil. → а) La · б) El · в) Una
-20. Quiero un coche ___. → а) rojo · б) roja · в) rojos
+19. ___ problema es difícil. → а) La · б) Una · в) El
+20. Quiero un coche ___. → а) roja · б) rojo · в) rojos
 21. Me gusta ___ foto de la pared. → а) el · б) la · в) las
 22. ___ libros son míos. (рядом со мной) → а) Estos · б) Esos · в) Aquellos
-23. ¿Ves el coche? — Sí, ___ veo. → а) le · б) lo · в) la
-24. ¿Conoces ___ María? → а) — (ничего) · б) a · в) de
+23. ¿Ves el coche? — Sí, ___ veo. → а) lo · б) le · в) la
+24. ¿Conoces ___ María? → а) — (ничего) · б) de · в) a
 
 **Конструкции (25–32)**
 
-25. Me ___ los libros de historia. → а) gusta · б) gustan · в) gusto
-26. ___ duele la cabeza. (ему) → а) Me · б) Te · в) Le
-27. Mañana ___ trabajar. → а) voy · б) voy a · в) voy para
-28. Hoy ___ veinte fotos. (hacer) → а) he hacido · б) he hecho · в) hago
+25. Me ___ los libros de historia. → а) gustan · б) gusta · в) gusto
+26. ___ duele la cabeza. (ему) → а) Le · б) Me · в) Te
+27. Mañana ___ trabajar. → а) voy · б) voy para · в) voy a
+28. Hoy ___ veinte fotos. (hacer) → а) he hacido · б) hago · в) he hecho
 29. María ___ a las dos. (llegar) → а) ha llegada · б) ha llegado · в) es
     llegada
-30. No ___ visto todavía. (его) → а) he lo · б) lo he · в) he le
-31. ___ la boca, por favor. (врач — Вам) → а) Abre · б) Abra · в) Abren
-32. ___ esta pastilla ahora. (другу: «прими её») → а) Tomala · б) Tómala ·
-    в) Toma la
+30. No ___ visto todavía. (его) → а) he lo · б) he le · в) lo he
+31. ___ la boca, por favor. (врач — Вам) → а) Abra · б) Abre · в) Abren
+32. ___ esta pastilla ahora. (другу: «прими её») → а) Tomala · б) Tómala · в)
+    Toma la
 
 **Лексика (33–40)**
 
-33. Un billete de ida y ___. → а) venida · б) vuelta · в) salida
+33. Un billete de ida y ___. → а) vuelta · б) venida · в) salida
 34. El tren sale del ___ cuatro. → а) andén · б) vagón · в) asiento
-35. He escrito una ___ a mi madre. (письмо) → а) carta · б) mapa · в) carpeta
+35. He escrito una ___ a mi madre. (письмо) → а) mapa · б) carta · в) carpeta
 36. Me duele ___ derecho. (от плеча) → а) la mano · б) el brazo · в) el pie
-37. ¿Tiene algo ___ la tos? → а) de · б) para · в) por
-38. Dos ___ a la semana. (раза) → а) tiempos · б) veces · в) horas
-39. Hoy ___ sol y no ___ frío. → а) hace / hace · б) está / tiene · в) es /
-    hay
-40. Mi hermana está ___: va a tener un niño. → а) avergonzada · б) embarazada
-    · в) sensible
+37. ¿Tiene algo ___ la tos? → а) de · б) por · в) para
+38. Dos ___ a la semana. (раза) → а) veces · б) tiempos · в) horas
+39. Hoy ___ sol y no ___ frío. → а) está / tiene · б) es / hay · в) hace /
+    hace
+40. Mi hermana está ___: va a tener un niño. → а) avergonzada · б) sensible ·
+    в) embarazada
 
 ### Блок 2. Чтение (5 баллов)
 
@@ -117,11 +117,11 @@ revisado: false
 
 41. ¿Cuántas habitaciones tiene? → а) una · б) dos · в) tres
 42. ¿Qué NO hay en el piso? → а) sofá · б) balcón · в) lavadora
-43. ¿Está lejos de la estación? → а) a diez minutos andando · б) a una hora ·
-    в) no se dice
-44. ¿Se puede vivir allí con un perro? → а) sí · б) no · в) no se dice
-45. ¿Cuándo se puede llamar? → а) por la mañana · б) de lunes a viernes por
-    la tarde · в) todos los días
+43. ¿Está lejos de la estación? → а) a una hora · б) no se dice · в) a diez
+    minutos andando
+44. ¿Se puede vivir allí con un perro? → а) no · б) sí · в) no se dice
+45. ¿Cuándo se puede llamar? → а) por la mañana · б) de lunes a viernes por la
+    tarde · в) todos los días
 
 **Всего: ___ / 45** · Блок 1 ___ / 40 · Блок 2 ___ / 5
 
@@ -129,13 +129,14 @@ revisado: false
 
 **Ключ:**
 
-> **1** а · **2** б · **3** в · **4** б · **5** б · **6** б · **7** б ·
-> **8** в · **9** а · **10** а · **11** б · **12** б · **13** а · **14** б ·
-> **15** а · **16** а · **17** в · **18** а · **19** б · **20** а ·
-> **21** б · **22** а · **23** б · **24** б · **25** б · **26** в ·
-> **27** б · **28** б · **29** б · **30** б · **31** б · **32** б ·
-> **33** б · **34** а · **35** а · **36** б · **37** б · **38** б ·
-> **39** а · **40** б · **41** б · **42** в · **43** а · **44** б · **45** б
+> **1** а · **2** а · **3** в · **4** в · **5** б · **6** б · **7** в ·
+> **8** б · **9** в · **10** в · **11** а · **12** б · **13** б ·
+> **14** а · **15** а · **16** б · **17** б · **18** а · **19** в ·
+> **20** б · **21** б · **22** а · **23** а · **24** в · **25** а ·
+> **26** а · **27** в · **28** в · **29** б · **30** в · **31** а ·
+> **32** б · **33** а · **34** а · **35** б · **36** б · **37** в ·
+> **38** а · **39** в · **40** в · **41** б · **42** в · **43** в ·
+> **44** а · **45** б
 
 **Посчитайте по группам** — это важнее общего числа:
 
