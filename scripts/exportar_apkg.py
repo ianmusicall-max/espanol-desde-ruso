@@ -39,6 +39,7 @@ import sys
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(RAIZ / "scripts"))
 import exportar_anki  # noqa: E402
+import generar_audio  # noqa: E402
 import generar_imagenes  # noqa: E402
 import plan  # noqa: E402
 
@@ -133,6 +134,19 @@ def _unidad_de(etiquetas: str) -> str:
     return BARAJA
 
 
+def _clave_de_audio(español: str, audio: dict) -> str:
+    """Con qué nombre buscar la voz de esta entrada en el índice.
+
+    Primero la entrada tal cual. Si no está, su parte española: `hay que +
+    инф.` se locuta como `hay que`, porque la etiqueta rusa explica cómo se
+    usa la palabra y no es algo que nadie quiera oír. Sin esta reserva, 103
+    tarjetas de 3.001 salían mudas."""
+    limpio = exportar_anki.limpiar(español)
+    if limpio in audio:
+        return limpio
+    return generar_audio.parte_espanola(limpio)
+
+
 def armar(tarjetas: list[tuple], audio: dict, imagenes: dict):
     """La baraja y la lista de medios que hay que meter en el zip."""
     import genanki
@@ -144,7 +158,7 @@ def armar(tarjetas: list[tuple], audio: dict, imagenes: dict):
     medios: set[pathlib.Path] = set()
 
     for español, ruso, ejemplo, etiquetas in tarjetas:
-        limpio_audio = exportar_anki.limpiar(español)
+        limpio_audio = _clave_de_audio(español, audio)
         limpio_img = generar_imagenes.limpiar(español)
 
         campo_audio, campo_img = "", ""
@@ -190,7 +204,7 @@ def main(argv=None) -> int:
     audio = leer(AUDIO / "indice.json")
     imagenes = leer(IMG / "indice.json")
 
-    con_a = sum(1 for t in tarjetas if exportar_anki.limpiar(t[0]) in audio)
+    con_a = sum(1 for t in tarjetas if _clave_de_audio(t[0], audio) in audio)
     con_i = sum(1 for t in tarjetas if generar_imagenes.limpiar(t[0]) in imagenes)
     print(f"{len(tarjetas)} tarjetas · {con_a} con voz · {con_i} con dibujo")
 

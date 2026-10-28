@@ -74,6 +74,62 @@ def vale_la_pena(texto: str) -> bool:
     return not re.fullmatch(r"\[.*\]|/.*/", texto.strip())
 
 
+CIRILICO = re.compile(r"[а-яА-ЯёЁ]")
+
+
+def parte_espanola(texto: str) -> str:
+    """El español de una entrada de vocabulario que lleva la glosa rusa dentro.
+
+    `hay que + инф.`, `tomar = и пить, и есть`, `el conductor (✗ не
+    «кондуктор»)`: la entrada ES española y lo que la ensucia es la etiqueta en
+    ruso que explica cómo se usa. Sin esto el locutor las rechaza enteras —y
+    con razón, porque una voz española leyendo «инф.» sería audio inútil y
+    pagado— y la tarjeta de Anki se queda muda: eran 103 de 3.001.
+
+    Devuelve "" si lo que queda no es español que alguien quiera oír.
+    """
+    t = re.sub(r"\([^)]*\)", lambda m: "" if CIRILICO.search(m.group()) else m.group(), texto)
+    t = re.sub(r"\s*=.*$", "", t)          # «tomar = и пить, и есть»
+    while CIRILICO.search(t):               # colas «+ инф.», «+ прил. + que»
+        corto = re.sub(r"\s*\+\s*[^+]*$", "", t)
+        if corto == t:
+            break
+        t = corto
+    t = re.sub(r"\s+", " ", t).strip(" ,;·")
+    return t if not CIRILICO.search(t) and vale_la_pena(t) else ""
+
+
+def frases_del_vocabulario(cal: dict) -> list[str]:
+    """Las entradas de vocabulario rescatadas con `parte_espanola`.
+
+    Solo las ENTRADAS, no todas las celdas, y eso es la decisión: medido sobre
+    el curso entero, limpiar cualquier celda añade 255 frases y buena parte es
+    basura —`ca-fe` y `mu-si-ca` son palabras partidas en sílabas de las tablas
+    de fonética, `cu + a` y `¿Cómo es` son trozos sin sentido—, y esas saldrían
+    además como botones ▶ en la lección, al lado de cosas que no son frases.
+    Las entradas de vocabulario están curadas: de ahí salen 67 y todas valen.
+
+    Pasa por `exportar_anki.filas_de`, que es el único sitio que sabe cuál de
+    las dos tablas tiene cada día. Una copia aquí es como el informe de léxico
+    se quedó sin ver los 50 domingos.
+    """
+    import exportar_anki
+
+    salida: list[str] = []
+    for d in plan.dias(cal):
+        if not d.ruta.exists():
+            continue
+        for fila in exportar_anki.filas_de(d.ruta)[1]:
+            if not fila:
+                continue
+            entrada = exportar_anki.limpiar(fila[0])
+            if CIRILICO.search(entrada):
+                p = parte_espanola(entrada)
+                if p:
+                    salida.append(p)
+    return salida
+
+
 def frases_de(ruta: pathlib.Path) -> list[str]:
     """El español de las tablas, mirando TODAS las columnas.
 
@@ -103,6 +159,8 @@ def todas_las_frases(cal: dict) -> list[str]:
         if d.ruta.exists():
             for f in frases_de(d.ruta):
                 vistas.setdefault(f, None)
+    for f in frases_del_vocabulario(cal):
+        vistas.setdefault(f, None)
     return list(vistas)
 
 

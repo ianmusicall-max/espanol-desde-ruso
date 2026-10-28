@@ -22,7 +22,37 @@
  *  - que la versión en papel quede escondida y el botón de empezar, visible.
  */
 const { chromium } = require('playwright');
+const http = require('http');
+const fs = require('fs');
 const path = require('path');
+
+// El sitio se sirve por HTTP y no se abre como archivo. No es cosmetico: sobre
+// file:// el navegador no resuelve play() —asi que `aria-pressed` se queda en
+// false con el codigo bien— y la peticion del MP3 no se observa, o sea que el
+// audio no se puede comprobar de ninguna manera. Y ademas es lo que hace un
+// lector de verdad.
+const TIPOS = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript',
+                '.json': 'application/json', '.mp3': 'audio/mpeg', '.webp': 'image/webp',
+                '.png': 'image/png', '.svg': 'image/svg+xml', '.woff2': 'font/woff2' };
+
+function servir(raiz) {
+  return new Promise(ok => {
+    const s = http.createServer((req, res) => {
+      const rel = decodeURIComponent(req.url.split('?')[0]).replace(/^\/+/, '');
+      const f = path.join(raiz, rel);
+      if (!f.startsWith(raiz) || !fs.existsSync(f) || fs.statSync(f).isDirectory()) {
+        res.writeHead(404); return res.end('no');
+      }
+      // Content-Length NO es decorativo aqui: sin el, la comprobacion del audio
+      // lee 0 bytes y acusa de muda a toda pagina que suene. Un servidor de
+      // verdad lo manda, asi que mandarlo es ademas lo fiel.
+      res.writeHead(200, { 'Content-Type': TIPOS[path.extname(f)] || 'application/octet-stream',
+                           'Content-Length': fs.statSync(f).size });
+      fs.createReadStream(f).pipe(res);
+    });
+    s.listen(0, '127.0.0.1', () => ok(s));
+  });
+}
 
 const POR_DEFECTO = [
   'docs/index.html',                 // portada: vitrina, probador de tres preguntas
@@ -46,13 +76,26 @@ const POR_DEFECTO = [
   'docs/semana-49/dia-1.html',       // simulacro: el tipo de día que no es un test contestable
   'docs/semana-53/dia-1.html',       // el día 365: `reserva`, único de su tipo en el curso
   'docs/semana-01/dia-1.html',       // lección normal: audio y huecos
+  // Las cuatro siguientes no tenían un solo ▶ hasta el 2026-10-28: el audio
+  // del curso llegaba a la lección 100 y se paraba. Están aquí para que el
+  // día que el audio se rompa se entere la suite y no un lector.
+  'docs/semana-15/dia-3.html',       // la 101: la primera del tramo que faltaba
+  'docs/semana-30/dia-3.html',
+  'docs/semana-45/dia-1.html',
+  'docs/semana-52/dia-7.html',
 ];
 
-async function unaPagina(b, rel) {
+async function unaPagina(b, rel, base) {
   const p = await b.newPage();
   const errores = [];
+  const mp3 = [];
   p.on('pageerror', e => errores.push(String(e)));
-  await p.goto('file://' + path.resolve(rel));
+  p.on('response', res => {
+    if (/\.mp3(\?|$)/.test(res.url())) {
+      mp3.push({ estado: res.status(), bytes: Number(res.headers()['content-length'] || 0) });
+    }
+  });
+  await p.goto(base + rel.replace(/^docs\//, ''));
 
   const r = { pagina: rel, test: null, aciertos: null, errores: [] };
 
@@ -105,6 +148,20 @@ async function unaPagina(b, rel) {
     r.resultado = txt.slice(0, 80);
     r.dice_todo_bien = txt.includes(bien + ' / ' + correctas.length);
   }
+  // El audio: que el boton SUENE, no que este puesto. La señal observable es
+  // el MP3 pedido con 200 y con bytes, mas `aria-pressed`, que el reproductor
+  // solo pone a true si play() resolvio —usa `new Audio()`, que no inserta
+  // nada en el DOM, asi que no hay ningun <audio> que buscar—.
+  const botones = p.locator('button:has-text("▶")');
+  r.audio_botones = await botones.count();
+  if (r.audio_botones) {
+    await botones.first().click();
+    try { await p.waitForResponse(res => /\.mp3/.test(res.url()), { timeout: 8000 }); } catch (e) {}
+    await p.waitForTimeout(800);
+    r.audio_suena = (await botones.first().getAttribute('aria-pressed')) === 'true'
+                    && mp3.length > 0 && mp3.every(m => m.estado === 200 && m.bytes > 1000);
+    if (!r.audio_suena) r.errores.push('el ▶ no suena: ' + JSON.stringify(mp3));
+  }
   r.errores = r.errores.concat(errores);
   await p.close();
   return r;
@@ -112,14 +169,17 @@ async function unaPagina(b, rel) {
 
 (async () => {
   const paginas = process.argv.slice(2).length ? process.argv.slice(2) : POR_DEFECTO;
+  const servidor = await servir(path.resolve('docs'));
+  const base = 'http://127.0.0.1:' + servidor.address().port + '/';
   const b = await chromium.launch({ args: ['--no-sandbox'] });
   let malas = 0;
   for (const rel of paginas) {
-    const r = await unaPagina(b, rel);
+    const r = await unaPagina(b, rel, base);
     const roto = r.errores.length || (r.test && (r.aciertos !== r.test || !r.dice_todo_bien));
     if (roto) malas++;
     console.log(JSON.stringify(r));
   }
   await b.close();
+  servidor.close();
   process.exit(malas ? 1 : 0);
 })();

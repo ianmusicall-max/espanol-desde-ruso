@@ -4327,6 +4327,76 @@ Va **inline en la orden**, nunca a un archivo ni al repositorio, que es la
 regla de este proyecto. Y una clave que se pega en un chat deja de ser secreta
 aunque nadie más la lea: se revoca y se crea otra en cuanto termina la tanda.
 
+### Las 103 mudas, y por qué la limpieza va solo en el vocabulario
+
+Las 103 tarjetas sin voz eran entradas que llevan la glosa rusa dentro —`hay
+que + инф.`, `tomar = и пить, и есть`, `el conductor (✗ не «кондуктор»)`—, así
+que el locutor las rechazaba enteras y con razón: una voz española leyendo
+«инф.» es audio inútil y pagado.
+
+`generar_audio.parte_espanola` las rescata, y **de las 103 salieron las 103**:
+31 ya estaban locutadas —solo había que buscarlas bien, y eso es
+`exportar_apkg._clave_de_audio`— y las otras 67 costaron **0,01 USD**. La
+baraja pasa de 2 898 con voz a **3 001 de 3 001**.
+
+**Lo que decidió el diseño fue medirlo antes de escribirlo.** Limpiar la glosa
+en CUALQUIER celda añade 255 frases al curso y buena parte es basura: `ca-fe`,
+`mu-si-ca` y `ar-bol` son palabras partidas en sílabas de las tablas de
+fonética, y `cu + a`, `¿Cómo es` y `Son` son trozos sin sentido. Y no se
+quedarían en la baraja: saldrían como botones ▶ en la lección, al lado de cosas
+que no son frases. Así que se limpia **solo en las entradas de vocabulario**,
+que están curadas: de ahí salen 67 y todas valen. Por eso los botones del sitio
+siguen siendo 13 575 y no uno más.
+
+Dos cosas que se comprobaron antes de pagar:
+
+- **las siete entradas con pinta rara se quedan como están.** `igual 🌎`,
+  `salir ↔ llegar`, `llevar / seguir + sin`… El corpus ya locutado trae **642
+  frases con `/`, 137 con flechas, 98 con ` + ` y 73 con 🌎**, o sea que la
+  convención existe desde octubre: ser consistente con 11 311 frases vale más
+  que inventar una regla más limpia para 67.
+- **`parte_espanola` pasa por `exportar_anki.filas_de`**, que es el único sitio
+  que sabe cuál de las dos tablas tiene cada día. Una copia aquí es exactamente
+  como el informe de léxico se quedó sin ver los 50 domingos.
+
+### La guarda del audio: que el ▶ SUENE, no que esté puesto
+
+`probar_navegador.js` **sirve el sitio por HTTP** en vez de abrirlo como
+archivo, y eso no es cosmético: sobre `file://` el navegador no resuelve
+`play()` —así que `aria-pressed` se queda en false con el código bien— y la
+petición del MP3 no se observa, o sea que el audio no se podía comprobar de
+ninguna manera. Ahora exige MP3 con **200**, con bytes, y `aria-pressed` en
+true, en las 25 páginas de su lista; entre ellas **cuatro lecciones que hasta
+hoy no tenían un solo ▶**.
+
+Comprobada rompiéndola: escondido un MP3, la página sale en rojo con un 404.
+
+**Y el primer rojo fue mío otra vez**: mi servidor no mandaba `Content-Length`,
+así que la comprobación leía 0 bytes y acusaba de muda a TODA página que
+sonaba. Es el segundo rojo del día con razón y con el motivo equivocado —el
+primero fue el `tail` que tapaba los 7 779 FALLO—, y los dos se resolvieron
+mirando el dato crudo en vez de razonar sobre el síntoma.
+
+### Los pictogramas: medidos y NO hechos
+
+El profesor propuso pictogramas minimalistas en vez de los 300 dibujos. Se hizo
+la muestra —3 variantes × 2 palabras, 0,03 USD, cada una sobre los dos temas y
+además a 56 px, que es el tamaño real— y las tres se leen bien en claro y en
+oscuro.
+
+**Lo que la muestra encontró y ninguna lectura habría encontrado**: `la
+manzana` y `el tomate`, tal como están hoy, son **casi la misma silueta y casi
+el mismo rojo**; lo que los separa es la hoja contra la corona verde. En una o
+dos tintas serían idénticos, y lo mismo `la naranja`, `el limón` y `la uva`. En
+un curso de vocabulario **el color no es decoración: es la mitad de lo que el
+dibujo enseña**.
+
+Y el precio real no son los 1,50 USD: son 300 dibujos nuevos que el profesor
+tendría que revisar otra vez (regla 6) y una baraja más pesada. La queja de la
+que salió esto —el cuadrado crema sobre la página oscura— se arregla con una
+línea de CSS. Queda propuesto y sin hacer, con la muestra ya pagada por si
+algún día se quiere mirar.
+
 ## Estado (2026-10-28)
 
 - Programa anual completo (365 días) y documentación del método.
@@ -4366,11 +4436,13 @@ aunque nadie más la lea: se revoca y se crea otra en cuanto termina la tanda.
   falta**. Queda esperar el veredicto (de días a dos semanas) y **publicar el
   CMP** en AdSense → Privacidad y mensajería, que hace falta antes de que se
   sirvan anuncios en la UE y que la banda de cookies de aquí NO sustituye.
-- **El audio está COMPLETO** (2026-10-28): las **11 311 frases** del curso
-  locutadas con la voz `shimmer` — 1,30 USD el 26 de octubre y **2,84 hoy**,
-  4,14 en total—, 290 MB a 64 kbps, y **13 575 botones ▶ en las 365
-  lecciones**, que eran 4.225 en 94. Verificado sobre los 11 322 archivos de
-  disco: todos a 64 000 bps, ninguno vacío y ninguno ilegible.
+- **El audio está COMPLETO** (2026-10-28): las **11 378 frases** del curso
+  locutadas con la voz `shimmer` —1,30 USD el 26 de octubre y **2,85 hoy**,
+  4,15 en total—, 291 MB a 64 kbps, y **13 575 botones ▶ en las 365
+  lecciones**, que eran 4.225 en 94. Verificado sobre los archivos de disco:
+  todos a 64 000 bps, ninguno vacío y ninguno ilegible. Y comprobado **en
+  navegador**: el ▶ pide su MP3 y suena, con una guarda en
+  `probar_navegador.js` que lo exige en 25 páginas.
 - **La revisión mecánica del curso entero está hecha y sus hallazgos
   cerrados** (2026-10-28, `revisiones/2026-10-28.md`): `validar.py` da 365
   lecciones y 0 problemas, y están a **cero** los ítems con dos opciones
@@ -4379,11 +4451,10 @@ aunque nadie más la lea: se revoca y se crea otra en cuanto termina la tanda.
   **formas verbales usadas antes de su lección** —que empezaron siendo 90,
   contando el pluscuamperfecto que no enseña ninguna lección—. Las nueve
   guardas viven en `TestLaRevisionDelCurso`.
-- **La baraja está al día y con voz**: 3001 palabras, **2 898 con voz** (eran
-  913), 311 con dibujo, 25 subbarajas, 3 198 medios, **59,4 MB**. Las 103 sin
-  voz no son audio que falte: son entradas que no son una frase, porque llevan
-  la etiqueta rusa dentro (`hay que + инф.`), y el locutor las rechaza por
-  diseño.
+- **La baraja está al día y con voz**: 3001 palabras, **3 001 con voz** (eran
+  913 por la mañana y 2 898 a media tarde), 311 con dibujo, 25 subbarajas,
+  3 282 medios, **60,7 MB** como los cuenta GitHub. Ninguna tarjeta queda
+  muda.
 - Pendiente, y ya no hay nada de contenido en la lista:
   - **la revisión del profesor de 344 lecciones** (regla 6), que es el trabajo
     grande que queda y no lo puede hacer nadie más;
