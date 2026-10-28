@@ -148,7 +148,7 @@ revisado: false
 > pela · pica · calienta · bate · remueve · escurre
 
 > *(1) ______ las patatas y la cebolla. (2) ______ la cebolla muy fina.
-> (3) ______ el aceite en una sartén. Cuando estén blandas, (4) ______ las
+> (3) ______ el aceite en una sartén. Después (4) ______ las
 > patatas. (5) ______ los huevos en un bol y (6) ______ todo con una
 > cuchara.*
 

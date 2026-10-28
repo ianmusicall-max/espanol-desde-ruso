@@ -30,6 +30,7 @@ import huecos  # noqa: E402
 import exportar_apkg  # noqa: E402
 import poner_dominio  # noqa: E402
 import revisar_adsense  # noqa: E402
+import revisar_progresion  # noqa: E402
 import tarjeta_social  # noqa: E402
 import exportar_wordpress  # noqa: E402
 import escribir_leccion  # noqa: E402
@@ -3479,3 +3480,161 @@ class TestElEnlaceDelTestDeNivel(unittest.TestCase):
         for clave, texto in self.textos["es"]["progreso"].items():
             if isinstance(texto, str):
                 self.assertIsNone(TU.search(texto), f"progreso.{clave} trata de tú: {texto!r}")
+
+
+class TestLaRevisionDelCurso(unittest.TestCase):
+    """Los barridos que la revisión del 2026-10-28 dejó automatizados.
+
+    Todos existen porque su defecto es invisible: una letra del otro alfabeto
+    dentro de una palabra no se ve a ojo, una entrada repetida dentro de una
+    tabla no la ve `revisar_lexico.py` —compara entre lecciones— y una forma
+    verbal usada antes de su lección no la mira ningún validador, porque
+    `validar.py` comprueba la FORMA de la lección y no su gramática."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.cal = plan.cargar()
+        cls.dias = [d for d in plan.dias(cls.cal) if d.ruta.exists()]
+
+    CIRILICO = re.compile(r"[\u0400-\u04FF]")
+    LATINO = re.compile(r"[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]")
+    TONICA = set("áéíóúÁÉÍÓÚ")
+
+    def test_ninguna_palabra_mezcla_los_dos_alfabetos(self):
+        """`Recetа` con а cirílica al final, `proходной`, `nед.`: cuatro veces
+        en esta serie de sesiones, y a ojo no se ve ninguna. Rompe cualquier
+        búsqueda y el lector no lo nota.
+
+        La excepción NO es «alguna letra latina»: es que TODAS las latinas del
+        token sean vocales con tilde, que es como el curso marca la sílaba
+        tónica rusa (`мóта`) y la española en una transcripción cirílica
+        (`грá-сьяс`). Con esa condición el barrido da 33 aciertos y 0 falsos
+        positivos; con «alguna letra latina» se tragaría justo los cuatro
+        defectos."""
+        malas = []
+        for d in self.dias:
+            cuerpo = validar.frontmatter(d.ruta.read_text(encoding="utf-8"))[1]
+            for token in re.findall(r"[^\s|·,.;:()\[\]«»\"'*>#—–-]+", cuerpo):
+                if not (self.CIRILICO.search(token) and self.LATINO.search(token)):
+                    continue
+                latinas = [c for c in token if self.LATINO.match(c)]
+                if not all(c in self.TONICA for c in latinas):
+                    malas.append(f"{d.etiqueta}: {token!r}")
+        self.assertEqual([], malas, "palabras con los dos alfabetos")
+
+    def test_ninguna_tabla_repite_una_entrada_dentro_de_si_misma(self):
+        """`revisar_lexico.py` compara ENTRE lecciones, así que una entrada
+        puesta dos veces en la MISMA tabla no la ve nadie —está escrito en
+        CLAUDE.md desde la unidad 16, donde pasó dos veces—.
+
+        La llave es más estricta que la de `revisar_lexico.normalizar`, y tiene
+        que serlo: ahí se quita el artículo porque `el libro` y `libro` son la
+        misma entrada en dos lecciones distintas, pero dentro de una tabla
+        `la suerte` («удача») y `¡Suerte!` («Удачи!») son dos entradas a
+        propósito. Conservando artículo y puntuación: 0 repetidas, sin ninguna
+        excepción que mantener."""
+        import unicodedata
+
+        def llave(entrada: str) -> str:
+            texto = entrada.replace("**", "").replace("<u>", "").replace("</u>", "")
+            texto = re.sub(r"\s+", " ", texto).strip().lower()
+            return "".join(
+                c for c in unicodedata.normalize("NFD", texto)
+                if unicodedata.category(c) != "Mn"
+            )
+
+        malas = []
+        for d in self.dias:
+            _, filas = exportar_anki.filas_de(d.ruta)
+            cuenta = Counter(llave(f[0]) for f in filas if f and f[0].strip())
+            malas += [f"{d.etiqueta}: {e!r} ×{n}" for e, n in cuenta.items() if n > 1]
+        self.assertEqual([], malas, "entradas repetidas dentro de una misma tabla")
+
+    def test_las_semanas_de_cada_tiempo_salen_del_calendario(self):
+        """Escritas a mano en el guion se quedarían viejas el día que el
+        profesor mueva una unidad, y el informe acusaría a lecciones
+        correctas. El condicional cuenta dos veces a propósito: la unidad 15
+        enseña cinco fórmulas de cortesía como vocabulario y la 20 el
+        paradigma."""
+        semanas = revisar_progresion.semanas(self.cal)
+        self.assertEqual(
+            {"perfecto": 18, "indefinido": 23, "imperfecto": 25,
+             "cortesía": 29, "futuro": 33, "condicional": 39},
+            semanas,
+        )
+        for tiempo, semana in semanas.items():
+            dias = [d for d in self.dias if d.semana == semana]
+            self.assertTrue(dias, f"{tiempo}: la semana {semana} no está escrita")
+
+    def test_las_formas_usadas_antes_de_su_leccion_no_crecen(self):
+        """72 apariciones en 36 lecciones el 2026-10-28, listadas en
+        `revisiones/2026-10-28.md`: 32 en catorce domingos de cultura y 40
+        fuera de ellos. No se arreglaron las 72 —son borradores que el
+        profesor tiene que revisar de todos modos (regla 6)— pero el número no
+        puede subir sin que nadie se entere, que es como llegaron.
+
+        Si esto se pone en rojo, un texto nuevo usa un tiempo antes de su
+        lección: o se declara (la convención de S17D4) o se escribe con lo que
+        el alumno ya sabe."""
+        hs = revisar_progresion.hallazgos(self.cal)
+        sin = [h for h in hs if h[3] == revisar_progresion.SIN_DECLARAR]
+        self.assertLessEqual(len(sin), 72, "\n".join(
+            f"{d.etiqueta} {tiempo} [{forma}] {linea[:70]}" for d, tiempo, forma, _, linea in sin))
+        # Y los otros tres estados tienen que seguir existiendo: si el informe
+        # dejara de reconocer las formas declaradas y las del vocabulario,
+        # diría que hay cientos de defectos y nadie volvería a leerlo.
+        for estado in ("lexico", "declarada", "distractor"):
+            self.assertTrue(any(h[3] == estado for h in hs), f"ninguna {estado}")
+
+    def test_el_subjuntivo_no_esta_en_lo_que_el_alumno_produce(self):
+        """A2 no cubre el subjuntivo y el curso lo dice. Lo que se permite son
+        los chunks declarados (`¡Que aproveche!`, `no me extraña que estés`,
+        `le agradecería que`, la columna «en B1» del día 48-7) y el español en
+        que están escritas las notas al profesor.
+
+        Lo que no se permite es un subjuntivo de verdad en un ejercicio, en un
+        diálogo modelo o en el ejemplo de una entrada de vocabulario, que es de
+        donde el alumno copia.
+
+        Los disparadores son `cuando`, `aunque`, `para que`, `antes de que`,
+        `hasta que`, `sin que` y `como si`, y NO el `que` a secas, a propósito:
+        con él entran los chunks declarados —`no me extraña que estés` sale
+        ocho veces en S40D5— y el barrido pasa de seis candidatos a treinta y
+        ocho, casi todos legítimos. Un informe que nadie lee no para nada.
+        Con esta lista el tope es 6 y con los archivos de antes del 2026-10-28
+        era 8."""
+        DISPARADOR = re.compile(
+            r"\b(cuando|aunque|para que|antes de que|hasta que|sin que|como si)\s+"
+            r"(?:no\s+)?(sea|esté|estén|haya|tenga|vaya|pueda|puedas|quiera|sepa|haga|"
+            r"diga|venga|ponga|salga|llegue|lleguen|guste|hubiera|tuviera|estuviera|"
+            r"pudiera|fuese|estés|blandas?)\b",
+            re.I,
+        )
+        # Una lección que declara la forma como fórmula la puede usar: es la
+        # convención de S33D5 («*Cuando sea mayor* es una fórmula, no
+        # gramática») y de la unidad 22 con los seis deseos. La declaración
+        # está a veces en ruso y con otras palabras —S32D5 enseña `cuando` +
+        # subjuntivo diciendo «на A2 его берут как готовую формулу»— así que el
+        # patrón tiene que mirar los dos idiomas: buscando solo el español, el
+        # barrido acusaba al día que de verdad enseña el conector.
+        DECLARA = re.compile(
+            r"es una fórmula|fórmula hecha|bloques útiles|chunk|готов\w* формул"
+        )
+        malas = []
+        for d in self.dias:
+            cuerpo = validar.frontmatter(d.ruta.read_text(encoding="utf-8"))[1]
+            # Buscar y cortar el renglón sobre la MISMA cadena: con el texto
+            # sin asteriscos las posiciones no son las del original y el
+            # informe citaría el renglón de al lado.
+            plano = cuerpo.replace("*", "")
+            if DECLARA.search(plano):
+                continue
+            for m in DISPARADOR.finditer(plano):
+                linea = plano[plano.rfind("\n", 0, m.start()) + 1 :].split("\n")[0]
+                if "✗" in linea or "пока" in linea or "позже" in linea:
+                    continue
+                malas.append(f"{d.etiqueta}: {m.group(0)!r} — {linea.strip()[:70]}")
+        # Las que quedan son español de las notas al profesor y metalenguaje
+        # («la tilde no se cae aunque esté en medio de la frase»), que el
+        # alumno no copia. El tope impide que vuelvan a entrar en ejercicios.
+        self.assertLessEqual(len(malas), 6, "\n".join(malas))

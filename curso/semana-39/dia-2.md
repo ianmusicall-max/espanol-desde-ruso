@@ -61,8 +61,8 @@ revisado: false
 > explicar nada.*
 >
 > *— Me he apuntado al gimnasio y no voy.*
-> *— **Yo que tú** iría dos días, no cinco. **Deberías** empezar por algo que
-> puedas cumplir.*
+> *— **Yo que tú** iría dos días, no cinco. **Deberías** empezar por un plan
+> más pequeño.*
 > *— **Lo voy a pensar.***
 >
 > *— Mi madre me llama cada día y me enfado con ella.*
@@ -236,7 +236,7 @@ Deberías descansar. / Lo mejor es descansar.**
 | **lo** **voy** a pen**sar** | подумаю | Lo voy a pensar. |
 | **con** **cal**ma · **sin** pre**sión** | спокойно · без давления | Dilo con calma. |
 | apun**tar**se **a** | записаться на | Me he apuntado al gimnasio. |
-| cum**plir** (un **plan**) | выполнять | Empieza por algo que puedas cumplir. |
+| cum**plir** (un **plan**) | выполнять | Es un plan fácil de cumplir. |
 | de**jar** **al**go **fue**ra | оставить что-то снаружи | Deja el móvil fuera. |
 
 ## Ответы

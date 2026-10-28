@@ -102,7 +102,7 @@ revisado: false
 >
 > En la calle ha llamado a Ana.
 >
-> —¿Qué tal? —ha dicho ella—. ¿Quieres que vaya?
+> —¿Qué tal? —ha dicho ella—. ¿Necesitas algo?
 >
 > —No hace falta —ha dicho Iván—. Ya está.
 >

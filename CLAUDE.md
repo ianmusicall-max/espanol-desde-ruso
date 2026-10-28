@@ -58,7 +58,9 @@ la documentación del programa, en español.
 
 - **La unidad 5 mezcla los dos titulos del apartado 2**: la semana 9 usa
   Фонетика y la semana 10, Аудирование. La regla esta en `metodologia.md` §3 y
-  dice que dentro de una unidad no se mezclan. Hay que elegir uno para las
+  dice que dentro de una unidad no se mezclan. **El reparto es 5-5**, medido
+  el 2026-10-28, y es la unica unidad que lo mezcla: en las demas la variacion
+  es por tipo de dia, que es lo correcto. Hay que elegir uno para las
   catorce sesiones. **Es el unico caso que queda**: las tres lecciones sueltas
   que decian Аудирование (30-5, 32-2, 33-3) se renombraron el 2026-10-28,
   porque ahi el desajuste era de una sesion y no de una semana entera.
@@ -80,7 +82,9 @@ la documentación del programa, en español.
 - **Las 344 lecciones de las semanas 4 en adelante son borradores**
   (`revisado: false`) y el sitio las marca como tales. Las 21 primeras estan
   revisadas. Con el curso ya escrito entero, esta es la tarea grande que
-  queda, y la unica que no puede hacer nadie mas que el profesor.
+  queda, y la unica que no puede hacer nadie mas que el profesor. La auditoria
+  de lo que SI se puede comprobar con codigo esta hecha y vive en
+  `revisiones/2026-10-28.md`; lo que queda ahi es leer el contenido.
 - **El orden de los pasados: se recomendo NO cambiarlo** (2026-10-26, de
   `referencias/espanol-en-vivo.md`). Nuzhdin pone el indefinido antes que el
   perfecto porque en casi toda Hispanoamerica el indefinido ocupa su lugar.
@@ -3961,6 +3965,149 @@ sirve de guarda propia: esos días **no tienen `unidad` en el frontmatter**, y
 ya hubo un sitio (`pruebas.main`) donde eso reventaba. 50/50 y 15/15, cero
 errores de JS.
 
+## La revisión del curso entero, y lo que una revisión no puede hacer (2026-10-28)
+
+El profesor lo pidió en tres palabras: **«Has la revision»**, después de que
+la lista de pendientes dijera que la tarea grande era «la revisión del
+profesor de 344 lecciones».
+
+**Eso no se puede hacer desde aquí, y conviene que quede escrito por qué.** La
+regla 6 dice que el generador escribe con `revisado: false` y que **el profesor
+lo pone en `true` al revisar**. Darle la vuelta a las 344 banderas afirmaría
+una lectura humana que no ha ocurrido y, de paso, le quitaría a la web el
+aviso de «borrador» que hoy lleva cada una. O sea que la bandera no es un
+trámite: es la firma de alguien.
+
+Así que se hizo la otra mitad, la que sí se puede comprobar con código: una
+auditoría de las 365 contra las ocho reglas. Está en
+**`revisiones/2026-10-28.md`** —ahí y no en `programa/`, porque todo lo que
+vive en `programa/*.md` se publica en el sitio, y un informe interno con una
+lista de defectos no es una página del curso—.
+
+### El hallazgo: 72 formas usadas antes de la lección que las enseña
+
+`scripts/revisar_progresion.py` (nuevo, **solo lee**) saca del calendario la
+semana de cada tiempo —perfecto 18, indefinido 23, imperfecto 25, cortesía 29,
+futuro 33, condicional 39— y busca sus formas antes de esa semana. De 164
+apariciones tempranas, 56 son **léxico** (la forma tiene su entrada en el
+vocabulario de esa lección: es la convención de las cinco fórmulas de
+cortesía), 25 están **declaradas** y 11 son distractores con ✗. Quedan **72 en
+36 lecciones**: 40 fuera de los domingos y 32 en catorce domingos de cultura.
+
+**Esto no lo mira ningún validador**, y es el agujero de siempre con otra
+cara: `validar.py` comprueba la FORMA de la lección —los minutos, el
+contraste, la clave— y no su gramática, así que un diálogo modelo con un
+futuro catorce semanas antes de tiempo pasa en verde. Es el mismo defecto que
+las sesiones de las unidades 17 a 24 iban cazando a mano con `grep`, ahora
+contado de una vez sobre el curso entero.
+
+Lo que importa de cómo está escrito, porque las tres cosas costaron una vuelta:
+
+- **Las semanas salen del calendario, no de una lista en el guion.** Escritas
+  a mano se quedarían viejas el día que el profesor mueva una unidad, y el
+  síntoma sería un informe que acusa a lecciones correctas. La primera versión
+  las tenía a mano y el perfecto estaba en 17 cuando el calendario dice 18.
+- **El condicional cuenta DOS veces**, y sin eso el informe no servía: la
+  unidad 15 enseña cinco fórmulas de cortesía como vocabulario (semana 29) y la
+  20 el paradigma (semana 39). Juntas, acusaba cada `me gustaría` de las
+  semanas 29 a 38, que son material enseñado.
+- **La referencia a una unidad declara la forma solo si está AL LADO.** Se
+  probó mirando la lección entera y tapó doce lecciones con defectos de
+  verdad: cualquier domingo nombra un número de unidad por su tarea final o por
+  lo que viene la semana que entra («На следующей неделе — единица 6»). Con una
+  ventana de tres renglones, las siete que quedan son declaraciones auténticas.
+
+Y dos trampas de las que ya hay nota, que volvieron a morder: el markdown
+parte las palabras con las negritas (`**fue**ra` casa con `fue`, así que hay
+que quitar los asteriscos antes de buscar) y el `>` de las citas parte las
+frases, así que un aviso que dice «будет через несколько\n> месяцев» no casa
+con ningún patrón hasta que se juntan los espacios y se quitan las comillas de
+bloque. De paso, las tablas de fonética parten las palabras en sílabas y
+`fue-ra` casa con `fue` porque el guion es frontera.
+
+### Ocho correcciones, en seis lecciones
+
+- **`Recetа` con а cirílica** (19-4) dentro de una palabra española. Es el
+  cuarto caso de esta forma en esta serie (`proходной`, `nед.`, `нóмин`) y a
+  ojo no se ve nunca. Ahora hay una prueba, y lo que la hace servir es la
+  excepción: una palabra que mezcle los dos alfabetos se admite **solo si
+  todas** sus letras latinas son vocales con tilde, que es como el curso marca
+  la tónica rusa (`мóта`) y la española en una transcripción cirílica
+  (`грá-сьяс`). Con esa condición da 33 aciertos y **0 falsos positivos**; con
+  «alguna letra latina» se tragaría justo los cuatro defectos.
+- **Siete sitios con subjuntivo** en material que el alumno produce o copia:
+  un ejercicio (19-1), el episodio (20-7), una receta (31-3), un modelo y un
+  ejemplo del vocabulario (39-2) y un modelo con su ejercicio (40-4). Los
+  barridos de esta serie solo habían mirado de la unidad 17 en adelante; **los
+  siete están en las semanas 19 a 40**, escritas en sesiones anteriores.
+
+  Lo que NO se tocó, y es la mitad que hace útil el barrido: los chunks
+  declarados (`¡Que aproveche!`, `no me extraña que estés`, `cuando quiera`,
+  `le agradecería que`, `Cuando sea mayor`), la columna «en B1» del día 48-7,
+  y el español de las notas al profesor —las que llevan `[VERIFICAR]`, que
+  están en español justamente porque las lee él—.
+
+  **Dos se tocaron y se devolvieron como estaban, y eso es lo que más enseña
+  del barrido.** `cuando` + subjuntivo está **declarado en 32-5**: lo trae su
+  tabla de conectores («**Cuando** + настоящее») y lo explica su clave («это
+  subjuntivo, и на A2 его берут как готовую формулу»). O sea que el `Cuando
+  salga el calendario` de su texto modelo es justo lo que ese día enseña, y
+  cambiarlo le quitaba al alumno el ejemplo de su propio conector. Lo que sí
+  quedó corregido es **31-3**, que usa la misma construcción una semana antes
+  y sin decir nada: ese ejercicio pasa a `Después` y el `cuando` + subjuntivo
+  estrena donde está explicado.
+
+  El barrido no podía verlo: la declaración está en ruso, con otras palabras
+  («готовую формулу») y en un apartado distinto del de la aparición. Por eso
+  lo que el informe lista son **candidatos**, y la declaración se lee en vez de
+  buscarse. La primera versión de este arreglo cambió los dos sitios de 32-5
+  antes de leer la lección entera, y el resultado habría sido un día que
+  enseña un conector sin ningún ejemplo de él.
+
+### Dos cosas que quedan para el profesor y ahora tienen un número
+
+- **La unidad 5 mezcla los títulos del apartado 2 exactamente 5-5.** Y es la
+  ÚNICA que lo mezcla: en las demás la variación es por tipo de día (Фонетика
+  en `leccion`, Повторение en `repaso`, Материал en `cultura`, Тест en
+  `prueba`), que es lo correcto. Son cinco líneas de arreglo.
+- **Los 32 de los domingos de cultura son una decisión de diseño, no un
+  defecto**, y por eso no se tocaron: un texto de domingo es para leer, no para
+  producir, y el curso nunca dijo que sus textos estuvieran graduados. Las tres
+  salidas están en el informe; la barata es una línea por domingo, como ya hace
+  S10D7.
+
+### La inconsistencia que el profesor va a encontrar al revisar
+
+El curso marca la tónica rusa **de dos maneras, y las dos están en la semana
+1**: una vocal latina con tilde dentro de la palabra (`мóта`, 15 lecciones) y
+el acento combinante U+0301 (`мо́та`, 11 lecciones). Las dos funcionan y se ven
+casi igual. Lo que las hace valer una nota es que la primera produce palabras
+con letras de los dos alfabetos, que es **exactamente la firma del defecto de
+arriba**: la prueba sabe distinguirlas, un `grep` humano no.
+
+### Lo que la suite fija, y lo que no
+
+`TestLaRevisionDelCurso`, cinco pruebas, y las dos primeras fallan con los
+archivos de antes. La última fija el **72** y no lo arregla, a propósito: son
+borradores que el profesor tiene que leer de todos modos, y lo que no puede
+pasar es que el número suba sin que nadie se entere, que es como llegaron.
+
+La del subjuntivo tiene un alcance elegido y conviene saberlo: sus
+disparadores son `cuando`, `aunque`, `para que`, `antes de que`, `hasta que`,
+`sin que` y `como si` —donde el subjuntivo es inequívocamente gramática— y
+**no** el `que` a secas. Con `que` el barrido pasa de seis candidatos a
+treinta y ocho, casi todos chunks declarados (`no me extraña que estés` sale
+ocho veces en S40D5) o metalenguaje, y un informe que nadie lee no para nada.
+Con esta lista el tope es 6 y con los archivos de antes era 8.
+
+Y una tapa un agujero que estaba anotado desde la unidad 16: **una entrada
+puesta dos veces en la MISMA tabla no la ve `revisar_lexico.py`**, que compara
+entre lecciones. Hoy no hay ninguna. La llave de esa prueba conserva el
+artículo y la puntuación, al contrario que `revisar_lexico.normalizar`, y hace
+falta: dentro de una tabla `la suerte` («удача») y `¡Suerte!` («Удачи!») son
+dos entradas a propósito, y con la llave floja salían como una repetición. Así
+queda en 0 sin ninguna excepción que mantener.
+
 ## Estado (2026-10-28)
 
 - Programa anual completo (365 días) y documentación del método.
@@ -4002,6 +4149,12 @@ errores de JS.
 - **El audio está hecho** (2026-10-26): 3.543 frases locutadas con la voz
   `shimmer`, 1,30 USD, 92 MB a 64 kbps, y 4.225 botones ▶ en 94 de las 100
   lecciones. Comprobado que suena en navegador.
+- **La revisión mecánica del curso entero está hecha** (2026-10-28,
+  `revisiones/2026-10-28.md`): `validar.py` da 365 lecciones y 0 problemas, no
+  hay ítems con dos opciones iguales, ni palabras con letras de los dos
+  alfabetos, ni subjuntivos en lo que el alumno produce. Lo que encontró y no
+  arregló son **72 formas verbales usadas antes de su lección** en 36
+  lecciones, con su guarda en la suite para que el número no suba.
 - Pendiente, y ya no hay nada de contenido en la lista:
   - **la revisión del profesor de 344 lecciones** (regla 6), que es el trabajo
     grande que queda y no lo puede hacer nadie más;

@@ -64,7 +64,7 @@ revisado: false
 > la vuelta.*
 >
 > *Si lo acabas antes, mándalo; si no, el lunes está bien. **Para** mí lo
-> importante es que esté revisado, no que llegue el viernes.*
+> importante es el trabajo bien hecho, no el día.*
 >
 > *Gracias **por** todo.*
 
@@ -181,7 +181,7 @@ Madrid* — выезжаю в Мадрид (туда). *Paso **por** Madrid* —
 6. Lo ha hecho Ana ______ mí.
 7. Estuve fuera ______ tres días.
 8. ______ ella, un café a la vuelta.
-9. ______ mí lo importante es que esté revisado.
+9. ______ mí lo importante es el trabajo bien hecho.
 10. Gracias ______ todo.
 
 ### Упражнение Б. Объясните разницу. Модель:

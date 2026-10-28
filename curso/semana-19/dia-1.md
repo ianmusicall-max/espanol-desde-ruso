@@ -158,7 +158,7 @@ revisado: false
 
 — Doctor, me duele ______ y no puedo girar a la derecha.
 — ¿Y ______? ¿Le duele también al sentarse?
-— Un poco. Y por la mañana me duele ______, como si no hubiera dormido.
+— Un poco. Y por la mañana me duele ______: duermo muy mal.
 — ¿Puede levantar ______ derecho? ¿Y cerrar ______ sin dolor?
 — Sí, eso sí.
 — ¿Y ______? ¿Le duele al tragar?
