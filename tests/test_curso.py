@@ -1599,9 +1599,17 @@ class TestElTestDeNivel(unittest.TestCase):
         self.assertTrue((self.destino / datos["ultima"]["url"]).exists())
 
     def test_el_inicio_es_la_primera_leccion_de_la_unidad_y_no_una_del_medio(self):
+        """Los días SIN unidad quedan fuera: las semanas 49-52 son la fase final
+        y la 53 el día de reserva. Buscarlos en `inicios` es un `KeyError:
+        None`, que es como se puso en rojo al escribirlas."""
         inicios = construir_sitio.inicios_de_unidad(CAL)
+        mirados = 0
         for d in construir_sitio.escritas(CAL):
+            if d.unidad is None:
+                continue
+            mirados += 1
             self.assertLessEqual(inicios[d.unidad]["n"], d.numero, d.numero)
+        self.assertGreater(mirados, 300, "casi todas las lecciones son de una unidad")
 
     def test_el_resultado_cae_en_la_ultima_escrita_cuando_la_unidad_no_existe(self):
         """Sin el `|| D.ultima`, fallar en una unidad aún no escrita dejaba la

@@ -2431,6 +2431,20 @@ reinicio del contenedor y el clasificador de permisos deniega barrerlas. La
 forma de convivir con ello es la de arriba: `TMPDIR` dentro del scratchpad de
 la sesión y `rm -rf` entre clases.
 
+## No se borra `$TMPDIR/tmp*` con la suite corriendo (2026-10-28)
+
+Un fallo de la corrida final resultó ser **mío y no del código**:
+`test_cada_tarjeta_lleva_su_episodio` murió con un `FileNotFoundError` sobre
+`…/tmp4kcaovkk/kurs.html`, que es el directorio donde esa clase estaba
+construyendo el sitio. Lo había borrado yo, con un `rm -rf $TMPDIR/tmp*`
+lanzado entre dos comandos **mientras la suite trabajaba** — y el propio `rm`
+lo avisó («Directory not empty») sin que yo lo leyera.
+
+La limpieza de temporales es necesaria (la nota del 27 explica por qué), pero
+va **antes** de lanzar la suite y **después** de que termine, nunca en medio. El
+síntoma es el peor posible: un fallo que apunta a una prueba que en realidad
+pasa, y que corriéndola sola sale en verde.
+
 ## El disco de la sesión se agota antes que el trabajo (2026-10-27)
 
 Escribiendo la unidad 12 la máquina se quedó **sin cuota de disco**: `df`
