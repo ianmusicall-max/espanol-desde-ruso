@@ -427,12 +427,18 @@ strong{font-weight:650}
 .heroe-arte img{flex:1 1 0;min-width:0;max-width:72px;height:auto;aspect-ratio:1;
   border-radius:10px;background:var(--tarjeta);border:1px solid var(--linea);
   box-shadow:var(--sombra)}
+/* En escritorio la tira es LA MISMA: una fila encima del titulo, solo que con
+   los dibujos un poco mayores. La primera version la metia en una segunda
+   columna del heroe, y alli los seis caian en una rejilla de 2x3 de 88px: ni
+   fila ni columna, descolgada del titulo, con un hueco muerto encima y con el
+   recuadro de cada ficha bien visible a ese tamano. El profesor lo dijo mirando
+   las dos pantallas —«en el movil salen imagenes y en la web no sale igual»— y
+   tenia razon: eran dos disenos distintos para la misma portada.
+
+   Se vio comparando las dos capturas, no razonandolo. */
 @media(min-width:46rem){
-  .heroe{display:grid;grid-template-columns:1fr auto;gap:0 2.2rem;align-items:center}
-  .heroe-arte{order:0;grid-column:2;grid-row:1;display:grid;
-    grid-template-columns:repeat(2,88px);gap:.55rem;margin:0}
-  .heroe-arte img{max-width:none;width:88px}
-  .heroe-texto{grid-column:1;grid-row:1}
+  .heroe-arte{gap:.75rem;margin-bottom:1.8rem}
+  .heroe-arte img{max-width:96px}
 }
 .botones{display:flex;flex-wrap:wrap;gap:.65rem;margin:1.4rem 0}
 .boton{display:inline-block;background:var(--acento);color:#fff;padding:.7rem 1.35rem;border-radius:8px;

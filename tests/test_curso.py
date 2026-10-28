@@ -3091,6 +3091,55 @@ class TestLaTipografia(unittest.TestCase):
         self.assertNotIn("{raiz}", construir_sitio.caras(".."))
 
 
+class TestElFondoDeLosDibujos(unittest.TestCase):
+    """Los 300 dibujos tienen que compartir EXACTAMENTE un crema.
+
+    El generador devuelve cada uno sobre un fondo parecido pero nunca igual, y
+    —lo que de verdad se ve— distinto entre un dibujo y otro: medido antes de
+    corregirlos, el libro estaba en (242,233,218) y el perro en (255,248,236).
+    A 56 px en una tabla no se nota; a 96 px y en fila, que es como salen los
+    seis de la portada, se lee como que unas fichas están más sucias que otras.
+    Lo vio el profesor comparando el móvil con el escritorio.
+
+    La prueba mira los DOCE de la portada, que son los que se ven grandes."""
+
+    def test_los_doce_de_la_portada_comparten_el_crema(self):
+        indice = RAIZ / "docs" / "img" / "indice.json"
+        if not indice.exists():
+            self.skipTest("no hay dibujos generados")
+        try:
+            from PIL import Image
+        except ImportError:
+            self.skipTest("sin Pillow")
+        sys.path.insert(0, str(RAIZ / "scripts"))
+        import igualar_dibujos
+        objetivo = igualar_dibujos.crema_de_la_pagina()
+        idx = json.loads(indice.read_text(encoding="utf-8"))
+        vistos = 0
+        for palabra in construir_sitio.PORTADA_DIBUJOS:
+            nombre = idx.get(palabra)
+            if not nombre:
+                continue
+            ruta = RAIZ / "docs" / "img" / nombre
+            if not ruta.exists():
+                continue
+            vistos += 1
+            fondo = igualar_dibujos.fondo_de(Image.open(ruta).convert("RGB"))
+            peor = max(abs(fondo[c] - objetivo[c]) for c in range(3))
+            self.assertLessEqual(peor, 3, f"{palabra}: fondo {fondo}, esperado {objetivo}")
+        self.assertEqual(vistos, 12)
+
+    def test_el_objetivo_sale_del_css_y_es_el_de_la_ficha(self):
+        """Escrito a mano aquí y en el CSS, el día que cambie la paleta se
+        arregla uno y el otro se queda viejo."""
+        sys.path.insert(0, str(RAIZ / "scripts"))
+        import igualar_dibujos
+        m = re.search(r"--tarjeta:\s*#([0-9a-fA-F]{6})", construir_sitio.CSS)
+        self.assertIsNotNone(m)
+        esperado = tuple(int(m.group(1)[i:i + 2], 16) for i in (0, 2, 4))
+        self.assertEqual(igualar_dibujos.crema_de_la_pagina(), esperado)
+
+
 class TestElArteDelHeroe(unittest.TestCase):
     """Los dibujos suben a la primera pantalla.
 
