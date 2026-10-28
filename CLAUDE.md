@@ -4239,9 +4239,93 @@ hace falta: los 35 `Tarea` son los simulacros y la unidad 24.
 - **La baraja se regenero**: de 908 palabras a **3001**, 25 subbarajas, 23 MB.
   Es el comando aparte de siempre, porque cada regeneracion es un blob nuevo
   entero en git.
-- **El audio no se puede hacer desde aqui**: `OPENAI_API_KEY` no esta en el
-  entorno. Son 7 779 frases y **2,84 USD**. Por eso la baraja tiene 913 con voz
-  de 3001, y el sitio lo dice con esos numeros en vez de prometer otra cosa.
+- **El audio no se pudo hacer por la manana**: `OPENAI_API_KEY` no estaba en
+  el entorno. Eran 7 779 frases y **2,84 USD**. Por eso la baraja salio con 913
+  con voz de 3001, y el sitio lo dijo con esos numeros en vez de prometer otra
+  cosa. **El profesor puso la clave el mismo dia y el audio esta hecho**: ver
+  «El audio, completo» mas abajo.
+
+## El audio, completo: las 11 311 frases (2026-10-28)
+
+El profesor puso la clave y se generó lo que faltaba: **7 779 frases nuevas,
+2,84 USD, cero fallos**. El curso entero está locutado —11 311 frases, 258 888
+caracteres— y el sitio tiene **13 575 botones ▶ en las 365 lecciones**, que
+eran 4 225 en 94.
+
+### El bug que no se veía: `-f mp3` es obligatorio
+
+La recodificación a 64 kbps va **antes del primer commit**, por lo de siempre:
+git guarda el historial para siempre, así que subir los de 128 y encogerlos
+después deja el repositorio cargando con los dos juegos. El temporal se llama
+`.parcial` —lo único que `.gitignore` ignora de `docs/audio`— y **ffmpeg no
+deduce el formato de esa extensión**: sin `-f mp3` falla con «Unable to choose
+an output format for 'X.mp3.parcial'».
+
+Lo que lo hizo difícil de ver fue mío y de método, no del arreglo:
+
+- **la salida del trabajo iba canalizada por `tail -15`**, que no imprime nada
+  hasta que el proceso termina. Mientras corría, el log estaba vacío: cuatro
+  ffmpeg vivos, cero bytes de cambio en la carpeta y **cero errores a la
+  vista**. Un trabajo largo en segundo plano se escribe a un archivo y se mira
+  el archivo; pasarlo por `tail` es quedarse ciego justo durante lo que hay que
+  ver. Los 7 779 FALLO estaban ahí desde el primer minuto.
+- **diagnostiqué dos veces antes de medir, y las dos veces mal.** Primero culpé
+  al `xargs` por mezclar `-0` con `-I{}` —que de verdad rompe el delimitador,
+  pero no era esto— y luego muestreé con `shuf --random-source=<(yes)`, que es
+  una fuente degenerada y da una muestra sesgada. Lo que lo resolvió fue mirar
+  la línea de órdenes de un ffmpeg vivo y correr uno a mano con los errores
+  delante.
+- y **`pkill -f 'ffmpeg -nostdin'` mató mi propia shell**, porque la línea de
+  órdenes del comando que hace el `pkill` contiene el patrón que busca.
+
+El recodificador quedó **idempotente**: comprueba el bitrate y lo que ya está a
+64 no se vuelve a tocar, así que una corrida cortada a mitad se reanuda sin
+recodificar dos veces y perder calidad. Y escribe aparte y renombra encima, por
+lo mismo que el `.parcial` del generador: si ffmpeg se corta, lo que queda es el
+original intacto y no un MP3 truncado que el sitio serviría como bueno.
+
+Verificado sobre los **11 322** archivos de disco (los 11 de más son huérfanos
+de lecciones cuyo texto cambió desde octubre, y no los sirve nadie): **todos a
+64 000 bps**, ninguno vacío, ninguno ilegible para ffprobe. La carpeta pasa de
+463 MB a **290**, que es casi exactamente lo que la nota del 26 proyectó (299)
+y cabe de sobra en el límite de 1 024 MB de GitHub Pages.
+
+### La baraja: 59,4 MB, y la decisión de meterla en git
+
+3 001 tarjetas, **2 898 con voz** (eran 913), 311 con dibujo, 25 subbarajas,
+3 198 medios. Pesa **59,4 MB**: por encima de los 50 en que GitHub avisa y por
+debajo de los 100 en que rechaza.
+
+**Lo decidió el profesor sobre tres opciones**: va al repositorio, como hasta
+ahora. El *release* de GitHub sigue siendo la salida el día que crezca, y su
+precio está escrito —una URL absoluta en el generador en vez de una ruta
+relativa, crear el release y acordarse de actualizarlo cada vez; si se
+desincronizan, el botón de descarga da 404, que es peor que no ofrecer la
+baraja—. Hoy pesa poco al lado de los ~200 MB de MP3 que entran en el mismo
+commit por la política del 2026-10-26.
+
+**Las 103 sin voz no son audio que falte: son entradas que no son una frase.**
+Llevan la etiqueta rusa dentro —`hay que + инф.`, `tomar = и пить, и есть`,
+`el conductor (✗ не «кондуктор»)`— y el locutor las rechaza por diseño, que es
+para lo que está la prueba del cirílico: una voz española leyendo «инф.» sería
+audio inútil y pagado. Locutar solo su parte española son unos 0,02 USD, pero
+cambia **qué texto se locuta**, o sea la llave del hash: es una decisión y no
+un arreglo.
+
+### El orden es la baraja y después el sitio
+
+`test_docs_esta_al_dia` se puso en rojo y tenía razón: construí el sitio
+**antes** de regenerar la baraja, así que `kurs.html` anunciaba «913 с
+озвучкой» con el manifiesto ya en 2 898. El sitio lee
+`docs/vocabulario/baraja.json`, así que la baraja va primero y el sitio
+después. De las **278 pruebas** de la suite, ésa fue el único fallo, y es
+justamente la que existe para esto.
+
+### La clave
+
+Va **inline en la orden**, nunca a un archivo ni al repositorio, que es la
+regla de este proyecto. Y una clave que se pega en un chat deja de ser secreta
+aunque nadie más la lea: se revoca y se crea otra en cuanto termina la tanda.
 
 ## Estado (2026-10-28)
 
@@ -4282,9 +4366,11 @@ hace falta: los 35 `Tarea` son los simulacros y la unidad 24.
   falta**. Queda esperar el veredicto (de días a dos semanas) y **publicar el
   CMP** en AdSense → Privacidad y mensajería, que hace falta antes de que se
   sirvan anuncios en la UE y que la banda de cookies de aquí NO sustituye.
-- **El audio está hecho** (2026-10-26): 3.543 frases locutadas con la voz
-  `shimmer`, 1,30 USD, 92 MB a 64 kbps, y 4.225 botones ▶ en 94 de las 100
-  lecciones. Comprobado que suena en navegador.
+- **El audio está COMPLETO** (2026-10-28): las **11 311 frases** del curso
+  locutadas con la voz `shimmer` — 1,30 USD el 26 de octubre y **2,84 hoy**,
+  4,14 en total—, 290 MB a 64 kbps, y **13 575 botones ▶ en las 365
+  lecciones**, que eran 4.225 en 94. Verificado sobre los 11 322 archivos de
+  disco: todos a 64 000 bps, ninguno vacío y ninguno ilegible.
 - **La revisión mecánica del curso entero está hecha y sus hallazgos
   cerrados** (2026-10-28, `revisiones/2026-10-28.md`): `validar.py` da 365
   lecciones y 0 problemas, y están a **cero** los ítems con dos opciones
@@ -4293,15 +4379,13 @@ hace falta: los 35 `Tarea` son los simulacros y la unidad 24.
   **formas verbales usadas antes de su lección** —que empezaron siendo 90,
   contando el pluscuamperfecto que no enseña ninguna lección—. Las nueve
   guardas viven en `TestLaRevisionDelCurso`.
-- **La baraja está al día**: 3001 palabras, 25 subbarajas, 23 MB (regenerada el
-  2026-10-28; eran 908). Solo 913 llevan voz, porque el audio de la lección 101
-  en adelante sigue sin generar.
+- **La baraja está al día y con voz**: 3001 palabras, **2 898 con voz** (eran
+  913), 311 con dibujo, 25 subbarajas, 3 198 medios, **59,4 MB**. Las 103 sin
+  voz no son audio que falte: son entradas que no son una frase, porque llevan
+  la etiqueta rusa dentro (`hay que + инф.`), y el locutor las rechaza por
+  diseño.
 - Pendiente, y ya no hay nada de contenido en la lista:
   - **la revisión del profesor de 344 lecciones** (regla 6), que es el trabajo
     grande que queda y no lo puede hacer nadie más;
-  - **el audio de todo lo escrito desde la lección 101**: van **3 532 frases
-    locutadas de 11 311**, y las 7 779 que faltan son **2,84 USD** medidos con
-    `generar_audio.py --ver`. **Es lo único de la lista que no se puede hacer
-    desde aquí**: `OPENAI_API_KEY` no está en el entorno de esta sesión;
   - los **libros de referencia** que quedaron sin analizar y lo de «Pendiente
     de revision del profesor» de arriba.
