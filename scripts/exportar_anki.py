@@ -33,13 +33,29 @@ def limpiar(celda: str) -> str:
     return re.sub(r"\s+", " ", celda).strip()
 
 
-def tarjetas_de(ruta: pathlib.Path) -> list[tuple[str, str, str, str]]:
+def filas_de(ruta: pathlib.Path) -> tuple[dict, list[list[str]]]:
+    """({frontmatter}, filas de vocabulario) de un día, de la tabla que tenga.
+
+    Hay DOS tablas y es lo que decide esta función: las lecciones usan
+    «Словарь дня» y los domingos de cultura usan «3. Слова», con dos pares de
+    columnas por fila. Vive aquí y la usa también `revisar_lexico.py`, porque
+    con una copia en cada script el informe de repeticiones se quedó sin ver
+    el vocabulario de los 50 domingos —unas 1.000 entradas— sin que nada
+    fallara: `exportar_anki` sí las exportaba, así que la palabra llegaba al
+    mazo y la repetición no se listaba nunca."""
     datos, cuerpo = validar.frontmatter(ruta.read_text(encoding="utf-8"))
     if not datos:
-        return []
+        return {}, []
     filas = validar.filas_de_vocabulario(cuerpo)
     if not filas and datos.get("tipo") == "cultura":
         filas = _filas_de_cultura(cuerpo)
+    return datos, filas
+
+
+def tarjetas_de(ruta: pathlib.Path) -> list[tuple[str, str, str, str]]:
+    datos, filas = filas_de(ruta)
+    if not datos:
+        return []
     etiquetas = f"S{int(datos['semana']):02d} U{datos.get('unidad') or 0} {datos['nivel']} {datos['tipo']}"
     tarjetas = []
     for fila in filas:

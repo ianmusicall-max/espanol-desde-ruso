@@ -22,6 +22,7 @@ import unicodedata
 
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(RAIZ / "scripts"))
+import exportar_anki  # noqa: E402
 import plan  # noqa: E402
 import validar  # noqa: E402
 
@@ -46,10 +47,13 @@ def lexico() -> dict[str, list[tuple[plan.Dia, str]]]:
     for d in plan.dias(cal):
         if not d.ruta.exists():
             continue
-        datos, cuerpo = validar.frontmatter(d.ruta.read_text(encoding="utf-8"))
+        # Las DOS tablas, y quién decide cuál vive en exportar_anki: los
+        # domingos de cultura usan «3. Слова» y no «Словарь дня», así que
+        # mirando solo la segunda este informe no veía unas mil entradas.
+        datos, filas = exportar_anki.filas_de(d.ruta)
         if not datos:
             continue
-        for fila in validar.filas_de_vocabulario(cuerpo):
+        for fila in filas:
             if not fila or not fila[0].strip():
                 continue
             clave = normalizar(fila[0])

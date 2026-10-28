@@ -62,9 +62,13 @@ la documentación del programa, en español.
   catorce sesiones. **Es el unico caso que queda**: las tres lecciones sueltas
   que decian Аудирование (30-5, 32-2, 33-3) se renombraron el 2026-10-28,
   porque ahi el desajuste era de una sesion y no de una semana entera.
-- **Trece entradas de vocabulario se ensenan dos veces** en semanas distintas,
-  de 1.557, y todas son de las semanas 1 a 14. `scripts/revisar_lexico.py` las
-  lista con el dia de cada aparicion.
+- **135 entradas de vocabulario se ensenan dos veces**, de unas 2.400, y la
+  cifra salio al arreglar el informe el 2026-10-28 (antes decia 13, porque no
+  leia la tabla de los 50 domingos de cultura). 39 son entre dos domingos —y
+  ahi la repeticion es casi legitima, porque esa tabla glosa el texto del dia—
+  y **96 cruzan un domingo con una leccion de semana**, que son las que hay
+  que mirar. `scripts/revisar_lexico.py` las lista con el dia de cada
+  aparicion.
 - **Los titulos de ejercicio siguen en ruso en la unidad 7**, pero
   `metodologia.md` §6 pide «espanol + ruso» desde ahi. O se retocan las
   semanas 13-14 (dos lineas por leccion) o se corre la tabla de §6 hasta la
@@ -73,7 +77,7 @@ la documentación del programa, en español.
   2026-10-26) estan en `revisado: false` y la pagina lo avisa. Hay que
   comprobar que cada distractor sea de verdad el error que dice y que la unidad
   asignada sea donde el curso lo ensena.
-- **Las 231 lecciones de las semanas 4 en adelante son borradores**
+- **Las 259 lecciones de las semanas 4 en adelante son borradores**
   (`revisado: false`) y el sitio las marca como tales. Las 21 primeras estan
   revisadas.
 - **El orden de los pasados: se recomendo NO cambiarlo** (2026-10-26, de
@@ -2809,13 +2813,291 @@ Cuatro cosas que lo rompen, y las cuatro tienen prueba:
   noventa píxeles pegados arriba en una pantalla de 844. Cuál es se lee en el
   nombre, que está al lado y dice más. Medido a 390 px.
 
+## La unidad 19: comparar, y cuatro cosas que ya estaban enseñadas (días 253-266)
+
+Catorce lecciones, semanas 37 y 38. El curso pasa de 252 a **266 de 365** y
+**2.362 tarjetas**.
+
+**Lo que se comprobó antes de escribir cambió cuatro lecciones, y es el
+hallazgo del día.** La unidad se llama «comparar y elegir», y de su materia
+central **cuatro piezas ya estaban dadas**, repartidas por el curso:
+
+| Lo que la unidad traía como nuevo | Ya estaba en |
+|---|---|
+| *más / menos + adjetivo + que* | **S13D5**, el día de los precios (*más caro que*) |
+| *ningún / ninguna* y la doble negación | **S08D4** (*no hay ningún cine*) |
+| *nadie* | **S26D1** (*no pasaba nadie*) |
+| *ninguno* sin sustantivo | **S28D4** (*no me acuerdo de ninguno*) |
+
+Y la lección de la semana 8 lo decía por escrito: «сравнительная степень
+будет в 19-й единице». O sea que el calendario lo había previsto y el
+borrador de la unidad no.
+
+Así que lo nuevo quedó acotado, y cada lección lo dice:
+
+- **S37D1** presenta la fórmula como conocida y enseña lo que de verdad
+  falta: la misma construcción con **sustantivo, adverbio y verbo**, el *de*
+  delante de la cifra, y *el doble que* / *la mitad que*.
+- **S38D2** presenta *ningún* y la doble negación como repaso, y enseña la
+  mitad positiva (*algo, alguien, algún, alguno*), *nada* suelto, *en ningún
+  sitio*, *todos* contra *cada* y **la única regla donde el ruso подводит**:
+  si el negativo va delante del verbo, *no* desaparece (*Nadie ha venido*,
+  no ✗ *Nadie no ha venido*).
+
+Lo demás que decidió el contenido:
+
+- **El criterio es lo que convierte un superlativo en dato.** El domingo de
+  la semana 37 son nueve récords del mundo hispano, y el que más enseña es
+  **el que no está decidido**: el río más largo. La diferencia entre *el río
+  más caudaloso* (indiscutible) y *el río más largo* (en discusión desde
+  hace un siglo) está en dónde se decide que empieza un río. Por eso las
+  frases del material llevan su criterio en negrita: *el lago **navegable**
+  más alto*, *la **sede de gobierno** más alta* —que no es «la capital», y
+  ese es el ítem que falla todo el mundo: la capital constitucional de
+  Bolivia es Sucre—.
+- **Y eso vuelve sobre el texto del alumno**: *la ciudad más bonita* no
+  tiene criterio, así que es una opinión; *la ciudad más poblada* sí.
+- **Ninguna cifra inventada** (regla 7). Las de población y superficie van
+  aproximadas a propósito (*unos*, *más de*, *alrededor de*), que es lo que
+  el jueves enseña a hacer, y el modelo de ese jueves lleva dos
+  `[VERIFICAR]` donde el precio de un billete de metro: cambia cada año y no
+  se comprobó. Del récord del idioma se dice el puesto, no el número
+  redondo.
+- **El texto comparativo se organiza por PUNTOS y no por objetos.** Es la
+  decisión del jueves: un párrafo es el tamaño, otro el clima, otro los
+  precios. Por objetos, el lector tiene que comparar él.
+- **El párrafo «en qué se parecen» es obligatorio** en la integración del
+  viernes, y es el que distingue un texto adulto: nombrar lo que dos
+  opciones tienen en común solo puede hacerlo quien entendió las dos.
+- **Las tres etapas de revisión** del viernes (sacar cada *más*/*menos* y
+  comprobar su *que*; cada superlativo y su *de*; cada negativo y su *no*)
+  son la técnica que cierra la unidad, y los seis ítems del ejercicio Б son
+  seis reglas distintas de la unidad, una por frase.
+- **El domingo de la semana 38 separa dato de tópico**, y lo hace explícito:
+  que Barcelona sea bilingüe es un dato —y el catalán **no es un dialecto**—
+  mientras que «los madrileños son abiertos» es un tópico. El cierre del día
+  es la idea que sostiene toda la unidad: *los madrileños son más abiertos
+  que los barceloneses* es gramaticalmente impecable y como afirmación sobre
+  personas no vale nada. Distinguirlo es trabajo del alumno, no de la
+  gramática.
+- **El episodio «Dos ciudades»** es Iván comparando dos ofertas de trabajo
+  en voz alta mientras Ana calla. La frase que lo resuelve es de ella —*¿Y
+  eso es una desventaja?*— y hace que él compruebe su propio argumento, que
+  no aguanta. Su conclusión lleva la forma del viernes: no solo por qué
+  eligió, también por qué **no** eligió lo otro.
+
+**El Мини-тест de la semana 37 son 20 ítems y no 15**, porque es lo que pide
+el calendario; se escribió ya contestable y en **7/6/7**. El test de la
+unidad, en **4/4/4/3**. Los dos se comprobaron **en navegador de verdad**,
+no leyendo el archivo: `scripts/probar_navegador.js` los añade a su lista y
+los contesta eligiendo la opción por su TEXTO — 20/20 y 15/15, cero errores
+de JS. El de 20 ítems es además el test más largo del curso, así que vale
+tenerlo en la lista: si algún día el envoltorio se rompe con muchos ítems,
+se rompe ahí.
+
+**Tres formas no enseñadas se colaron en textos modelo**, y las tres las
+encontró el barrido con `grep`: `que sea tímida` (S38D4), `aunque sea
+carísimo` (S38D5) y `tendría que empezar` en el episodio (S38D7). Las dos
+últimas venían con una nota que las excusaba como «fórmula hecha», y eso es
+peor que el error: la unidad 18 enseña que *aunque* va con verbo normal, así
+que un modelo con *aunque sea* contradice una lección anterior. Se
+reescribieron las tres sin excusa. **Y el barrido encontró una cuarta en la
+semana 35, ya publicada** —`aunque no las haya fallado`, en la prosa del
+repaso—, que el barrido de la unidad 18 no vio porque solo miraba los textos
+modelo. Corregida también.
+
+**Cuatro duplicados de léxico** los cazó `revisar_lexico.py`: *más … que*
+(S13D5), *un rato* (S23D1), *la llave* (S26D1) y *el sitio* (S26D3), más dos
+que el informe **no** puede ver —*ningún/ninguna* y *alguno/ninguno*, porque
+sus entradas combinan dos palabras y normalizan distinto—. Sustituidos por
+*la definición*, *adivinar*, *el abridor*, *la terraza*, *alguno/alguna* y
+*en ningún sitio / en ninguna parte*.
+
+**Y al hacer ese barrido apareció que el informe de léxico no veía los
+cincuenta domingos** — la nota siguiente lo cuenta. De ahí salieron siete
+duplicados más en estas dos semanas, también corregidos, y el número de
+referencia del curso dejó de ser 13.
+
+**Una advertencia de método que esta unidad deja clara**: el informe de
+léxico compara **entradas**, no materia. Una construcción enseñada dentro de
+la explicación de una lección vieja —como *más caro que* en el día de los
+precios— no aparece como duplicado salvo que alguien la haya puesto en la
+tabla de vocabulario. La forma de encontrarla es `grep` de la construcción
+sobre todo `curso/` **antes** de escribir, igual que se hace con el léxico.
+
+## La unidad 20: el condicional, y la unidad que casi toda estaba enseñada (días 267-280)
+
+Catorce lecciones, semanas 39 y 40. El curso pasa de 266 a **280 de 365** y
+**2.502 tarjetas**. Es la unidad de «ampliación» de la 10 (salud), y eso se
+nota en todo.
+
+**Lo que se comprobó antes de escribir, y es el récord de la serie: de los
+catorce días, SEIS tenían su materia ya dada.** La comprobación se hizo
+sobre el volcado del léxico y con `grep` sobre `curso/`, y cambió la mitad de
+la unidad:
+
+| Lo que el calendario traía | Ya estaba en |
+|---|---|
+| *demasiado*, *bastante*, *suficiente*, *poco* | **S08D4** y **S23D2** |
+| *sentirse*, *encontrarse*, *ponerse* + adj. | **S19D2**, **S13D4**, **S28D2** |
+| *dar miedo* | **S25D4** |
+| *nervioso*, *triste*, *alegre*, *enfadarse*, *alegrarse* | unidades 3, 5 y 14 |
+| *el médico de cabecera*, *el centro de salud*, *pedir cita*, *las urgencias* | **S19D7** |
+| *la tarjeta sanitaria* | **S20D2** |
+| *cambiar / anular la cita* | **S16D3** |
+| *la yerba mate*, *la bombilla*, *el termo*, *la manzanilla*, *la infusión* | **S19D7** y **S20D7** |
+| 22 expresiones con *por* y *para* | repartidas desde la unidad 1 |
+
+**Y lo nuevo de verdad, que es menos de lo que parecía:**
+
+- **El condicional entero** (S39D1), que es el día que justifica la unidad.
+  Y su mejor noticia: **las once bases irregulares son las MISMAS del futuro
+  de la unidad 17**. La regla cabe en una línea — «coja la base del futuro y
+  ponga *-ía*» — así que un tiempo verbal completo cuesta un día. Las cinco
+  fórmulas que el curso daba desde la unidad 15 (*me gustaría*, *podría*,
+  *preferiría*, *querría*, *le agradecería*) resultan ser este tiempo, y la
+  lección lo dice.
+- **Las cuatro formas de aconsejar** (S39D2) ordenadas por fuerza, y lo que
+  va detrás de cada una: *¿por qué no* + **presente**, *yo que tú* +
+  **condicional**, *deberías* / *lo mejor es* + **infinitivo**. En ruso es un
+  solo giro, así que elegir es trabajo nuevo — y el error no es gramatical
+  sino humano: *debes* a un desconocido suena grosero.
+- **El mapa de *por* y *para*** (S39D4 y S40D4), que es el hallazgo
+  pedagógico de la unidad: el alumno **ya usa 22 expresiones** con ellos y
+  nunca supo por qué. La lección las pone en dos tablas con la unidad de la
+  que vienen. La pregunta que decide es *¿por qué?* / *¿para qué?*, y la
+  pareja que decide el examen es *por* = «в течение» frente a *para* = «к
+  сроку».
+- **Los síntomas que no son dolor** (S40D1): *el mareo*, *la alergia*, *el
+  insomnio*, *me cuesta dormirme*. Y *quería pedir cita*, el **imperfecto de
+  cortesía**, que es lo que de verdad faltaba del teléfono.
+- **Las lesiones** (S40D2), con la construcción que no tiene par en ruso:
+  ***se me hinchó el pie*** — *se* (solo) + *me* (a mí) + verbo. Y
+  *hacerse daño **en*** + parte del cuerpo **con artículo**.
+
+**Decisiones de contenido que vale anotar:**
+
+- ⚠️ ***Demasiado* es «слишком» y siempre dice que algo está mal.** *Me gusta
+  demasiado* no es un elogio: es un problema. Es el error nº 1 del
+  rusohablante en esa lección, porque el ruso «слишком» admite la lectura
+  elogiosa.
+- ⚠️ ***Ser* + sentimiento significa CARÁCTER.** *Soy nervioso* = «я нервный
+  человек», no «я волнуюсь». La lección lo pone en tabla, porque cambia el
+  sentido entero.
+- **El decálogo** (S39D5) mezcla imperativo y condicional **a propósito**:
+  imperativo para lo que funciona en todos (*deja el móvil fuera*),
+  condicional para lo que depende de la persona (*yo no tomaría café*). Y su
+  último punto dice cuándo los consejos se acaban y hace falta un médico —
+  sin eso el texto promete lo que no puede.
+- **El consejo a UNA persona son tres, no diez** (S40D5), y empieza
+  **reconociendo**: *entiendo lo que me cuentas*, *no me extraña*. Un consejo
+  que empieza con el consejo se oye como un sermón, y el que lo recibe
+  entiende que no lo han escuchado. Esa es la regla del día, y no es
+  cortesía: es técnica.
+- **La hoja de coca no es cocaína**, y el domingo de la semana 40 lo dice sin
+  rodeos, con los datos estables: se mastica y se bebe en el altiplano desde
+  antes de la conquista, es legal allí, la Convención de la ONU de 1961 la
+  incluyó en sus listas y Bolivia se retiró en 2011 y volvió en 2013 con una
+  reserva. **Y lo que el curso no dice es que cure nada** (regla 7): de los
+  tres remedios se cuenta qué son y cómo se usan, que es un hecho cultural;
+  lo que hacen en el cuerpo es una afirmación médica.
+- **El episodio «Se le acabó la cuerda»** cierra la unidad con Iván haciendo
+  exactamente lo que la unidad enseña a no hacer, y el consejo de Ana es la
+  plantilla del viernes aplicada: reconocer, anunciar cuántos puntos, tres
+  puntos, y el primero es **no hacer nada una semana**.
+
+**Los dos tests, en navegador.** El Мини-тест de la semana 39 son 20 ítems
+(lo que pide el calendario) en **7/7/6**; el test de la unidad, en
+**4/4/4/3**. Los dos se comprobaron con `scripts/probar_navegador.js`, que
+los contesta en Chromium eligiendo la opción por su TEXTO.
+
+**Diez duplicados de léxico** los cazó `revisar_lexico.py` —ahora que ve los
+domingos—, y uno de ellos es el ejemplo perfecto del problema de esta unidad:
+***la merienda*** estaba ya en **S20D7**, el domingo de la dieta
+mediterránea. Sustituidos todos. Weeks 39 y 40 quedan con **cero**
+repeticiones contra el curso entero.
+
+**Tres formas no enseñadas se colaron y se barrieron**: *aunque sea de bote*
+(S40D3), *cuando vuelvas* (S40D4, dos veces) y *aunque allí sea normal*
+(S40D7). Y **tres chunks congelados se quedan, declarados ANTES y no en las
+respuestas**: *no me extraña que estés*, *normal que estés* y *cuando
+quieras*. La diferencia con los que se quitaron es la que la unidad 19 dejó
+escrita: un chunk declarado vale cuando no **contradice** una lección
+anterior. *Aunque sea* contradecía la unidad 18 (que enseña *aunque* +
+indicativo); estos tres no contradicen nada y son de las fórmulas más
+frecuentes del idioma, igual que *no creo que sea* en la unidad 17.
+
+**Y un aviso para los barridos futuros: desde la semana 39 el condicional
+está enseñado.** El `grep` de formas prohibidas que esta sesión usa en cada
+unidad debe buscar condicional solo hasta la semana 38; de la 39 en adelante
+*haría*, *sería* y *tendría* son materia del curso. Lo que sigue prohibido es
+el **subjuntivo**, que no entra en A2.
+
+## El informe de léxico no veía los cincuenta domingos (2026-10-28)
+
+Lo encontró el barrido de la unidad 19, al comprobar si `la sobremesa` —que
+yo había escrito en el domingo de la semana 35— estaba ya enseñada: el
+volcado del informe **no la tenía**, y el archivo sí.
+
+**Hay DOS tablas de vocabulario y el informe leía una.** Las lecciones usan
+`## Словарь дня` (Español · Русский · Пример); los **50 domingos de cultura**
+usan `## 3. Слова`, con dos pares de columnas por fila.
+`validar.filas_de_vocabulario` solo conoce la primera, y
+`revisar_lexico.lexico()` la llamaba directamente. `exportar_anki.py` **sí**
+leía las dos, con su propio lector.
+
+O sea que de las ~2.400 entradas del curso, el informe de repeticiones veía
+~1.750 y las otras no existían para él. El número que llevo citando en cada
+nota de unidad —«quedan los 13 de siempre»— era el de una lista a la que le
+faltaba el 27 %.
+
+**Lo que aparece al arreglarlo: 135 repeticiones, no 13.** 39 son entre dos
+domingos y 96 tocan además una lección de semana. Las más repetidas:
+
+    el barrio       5×  S07D7, S10D7, S13D7, S16D7, S25D1
+    el pueblo       4×  S03D7, S07D7, S14D7, S18D7
+    el precio       4×  S04D7, S13D7, S14D7, S31D4
+    el mercado      4×  S04D7, S07D7, S14D7, S16D5
+    la costumbre    4×  S09D7, S13D7, S20D7, S33D7
+
+**Y conviene no leerlas como 135 defectos iguales.** La tabla del domingo se
+llama «Слова» y no «Словарь дня» a propósito: un día de cultura es un texto
+para leer, y su tabla **glosa lo que el texto usa**, sea nuevo o no. Repetir
+`el barrio` en cinco domingos distintos no es lo mismo que enseñarlo dos
+veces como nuevo en dos lunes. Lo que sí hay que mirar son las 96 que cruzan
+un domingo con una lección de semana, porque ahí una de las dos lo presenta
+como nuevo cuando no lo es.
+
+**Lo que no cambió: el mazo.** `exportar_anki.exportar` ya deduplicaba, así
+que ninguna palabra llegaba dos veces a Anki — el total subió solo por las
+siete entradas que yo cambié: 2.362 tarjetas. El defecto estaba en el informe, no en lo que se publica.
+
+Cómo quedó:
+
+- **`exportar_anki.filas_de(ruta)`** es ahora el único sitio que decide qué
+  tabla tiene un día, y `revisar_lexico` pasa por ahí. Dos copias de la misma
+  pregunta es como se descubre tarde que una de las dos miente, y aquí la
+  mentirosa llevaba meses: el propio docstring de `exportar_anki.exportar`
+  promete que «`revisar_lexico.py` las lista».
+- **La prueba no cuenta repeticiones** —ese número va a cambiar— sino que
+  exige que **cada entrada de la tabla de un domingo llegue al informe**.
+  Falla con el lector viejo y pasa con el nuevo.
+- **Las siete de las semanas 37 y 38 se arreglaron**, que son las mías: *la
+  terraza* (ya en tres domingos), *la longitud* (en S09D7, ahí «долгота»),
+  *la colección*, *cariñoso*, *el equipo*, *la broma* y *madrugar*.
+
+**Lo que queda para el profesor**: decidir qué hacer con las 96 que cruzan un
+domingo con una lección. No se reescribieron 50 domingos ya revisados por una
+lista que acaba de aparecer, y la regla del propio script sigue en pie: una
+repetición puede ser legítima y decide el profesor.
+
 ## Estado (2026-10-26)
 
 - Programa anual completo (365 días) y documentación del método.
-- **252 lecciones escritas** (semanas 1-36 enteras): el nivel A1 completo y
-  ocho unidades de A2 —hasta la 18, opinar y discutir—, 2.222 tarjetas de
+- **280 lecciones escritas** (semanas 1-40 enteras): el nivel A1 completo y
+  diez unidades de A2 —hasta la 20, consejos y bienestar—, 2.502 tarjetas de
   vocabulario. Las 21 primeras revisadas; el resto son borradores.
-  **`docs/` está al día**: las 252 lecciones construidas y publicadas, con la
+  **`docs/` está al día**: las 280 lecciones construidas y publicadas, con la
   tira de dibujos del héroe —la misma fila en el móvil y en el escritorio—,
   la guía de los seis pasos dentro de cada lección y la tipografía propia
   (Literata + Onest, autoalojada). La suite entera pasa: 266 pruebas, una de
@@ -2841,6 +3123,8 @@ Cuatro cosas que lo rompen, y las cuatro tienen prueba:
 - **El audio está hecho** (2026-10-26): 3.543 frases locutadas con la voz
   `shimmer`, 1,30 USD, 92 MB a 64 kbps, y 4.225 botones ▶ en 94 de las 100
   lecciones. Comprobado que suena en navegador.
-- Pendiente: lecciones 101-365 (y su audio, que son otros ~4 USD en total),
-  más libros de referencia, y lo de «Pendiente de revision del profesor» de
-  arriba.
+- Pendiente: **lecciones 281-365** (unidades 21-24 y la fase final: 85
+  lecciones), el audio de todo lo escrito desde la 101 —5.226 frases que
+  faltan de 8.769, **1,81 USD**, con `OPENAI_API_KEY` en el entorno—, más
+  libros de referencia, y lo de
+  «Pendiente de revision del profesor» de arriba.

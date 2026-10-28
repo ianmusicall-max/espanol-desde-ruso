@@ -116,7 +116,7 @@ en la primera—.
 | 11–13 | день 4: las ocho réplicas del teléfono |
 | 14–15 | день 5: *que*, *si* y las palabras con tilde |
 
-**Три ловушки, которые стоит перечитать aunque no las haya fallado:**
+**Три ловушки, которые стоит перечитать incluso si no las ha fallado:**
 
 1. **El 1 tiene tres opciones y dos se parecen.** *Por mí* significa «мне-то
    всё равно» y *por mi* no es nada: *mi* sin tilde es «мой», y «для моего…»

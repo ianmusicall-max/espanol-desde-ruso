@@ -205,6 +205,32 @@ class TestElVocabulario(unittest.TestCase):
         repetidas = {k for k in claves if claves.count(k) > 1}
         self.assertEqual(repetidas, set())
 
+    def test_el_informe_de_lexico_ve_las_dos_tablas(self):
+        """Hay DOS tablas de vocabulario y los 50 domingos usan la otra.
+
+        `validar.filas_de_vocabulario` solo lee «Словарь дня»; los días de
+        cultura usan «3. Слова», con dos pares de columnas por fila.
+        `exportar_anki` leía las dos y `revisar_lexico` solo la primera, así
+        que el informe de repeticiones no veía unas mil entradas y pasaba de
+        135 repetidas a 13 sin que nada fallara —y el docstring de
+        `exportar_anki.exportar` prometía justamente que las lista—. Quien
+        decide qué tabla tiene un día es `exportar_anki.filas_de`, una sola
+        vez, y este test exige que el informe pase por ahí."""
+        import revisar_lexico
+        ix = revisar_lexico.lexico()
+        domingos = [d for d in plan.dias(CAL)
+                    if d.tipo == "cultura" and d.ruta.exists()]
+        self.assertGreaterEqual(len(domingos), 30)
+        for d in domingos[:5] + domingos[-5:]:
+            datos, filas = exportar_anki.filas_de(d.ruta)
+            self.assertTrue(filas, f"{d.ruta}: sin filas de vocabulario")
+            for fila in filas:
+                clave = revisar_lexico.normalizar(fila[0])
+                if not clave:
+                    continue
+                self.assertIn(clave, ix,
+                              f"{d.ruta}: «{fila[0]}» no llega al informe de léxico")
+
     def test_las_tarjetas_no_llevan_negritas_ni_estan_vacias(self):
         for linea in (RAIZ / "vocabulario" / "todo.tsv").read_text(encoding="utf-8").splitlines()[1:]:
             es, ru, _, etiquetas = linea.split("\t")
