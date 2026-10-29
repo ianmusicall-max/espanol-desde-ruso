@@ -4397,6 +4397,52 @@ que salió esto —el cuadrado crema sobre la página oscura— se arregla con u
 línea de CSS. Queda propuesto y sin hacer, con la muestra ya pagada por si
 algún día se quiere mirar.
 
+## El CMP, publicado (2026-10-29)
+
+El último punto de la lista de AdSense que no era de contenido. Lo hizo el
+profesor en su panel, pantalla a pantalla; aquí queda lo que costó encontrar,
+porque nada de esto se puede comprobar desde el contenedor: `adsense.google.com`
+y `support.google.com` dan `000` igual que el Cervantes y Drive.
+
+**Había un mensaje y NO servía.** La lista de «Reglamentos europeos» traía uno
+de noviembre de 2023 en estado Borrador… **para otro sitio del profesor**
+(`saludconfranksuarez.wordpress…`). Los mensajes van por sitio, así que
+publicarlo no habría hecho nada por el curso y el panel habría seguido
+enseñando «Mensajes mostrados 0». Hubo que crear uno nuevo.
+
+**Lo que el editor pedía y el sitio no tenía:**
+
+- **la URL de la política de privacidad** — existía desde el 26 en los tres
+  idiomas; la que va es la rusa, `https://espanoldesderuso.com/privacy.html`,
+  porque el idioma por defecto del mensaje es el ruso;
+- **un logotipo** — y ahí sí faltaba de verdad: el sitio **nunca tuvo uno**.
+  Al quitar el nombre del autor el 27 quedó sin ninguna marca, y tampoco hay
+  favicon, así que en la pestaña del navegador sale el globo gris. Se
+  dibujaron tres candidatos con la paleta del CSS y probados **a 72 px**, que
+  es como se ven en la caja: monograma `ES`, la **eñe** en blanco sobre
+  terracota, y `A` + `Я`. Se recomendó la eñe: es la única que se lee de un
+  vistazo a ese tamaño y la única que dice «español» sin explicarse. De la
+  tercera se avisó del riesgo: una `Я` suelta junto a letras latinas es también
+  el truco del «falso cirílico», que a un lector ruso puede sonarle a burla.
+- **«No consentir» estaba sin poner**, y eso no lo marcaba el aviso rojo. La
+  caja ofrecía solo *Consent* y *Manage options*. En el diálogo de países se
+  enciende el interruptor de la fila «País», que los activa todos: la lista
+  entera es el EEE, el Reino Unido y Suiza, o sea justo donde rechazar tiene
+  que ser tan fácil como aceptar. Google avisa de que «el porcentaje de
+  consentimiento podría disminuir» — es verdad y es el precio; una caja que
+  solo deja aceptar no es consentimiento válido.
+
+**También se publicó el de los estados de EE.UU.**, que es otra cosa: el de la
+UE **condiciona** que se sirvan anuncios personalizados, y el de EE.UU. no
+bloquea nada —es cumplimiento de las leyes estatales y el «no vendan mis
+datos»—. Se hizo porque Estados Unidos está en el público desde el principio y
+es donde el anuncio se paga mejor.
+
+**Lo que queda del logo**: el profesor subió uno a AdSense, pero el
+**repositorio sigue sin él**. Conviene meter el mismo archivo como icono del
+sitio, para que la pestaña del navegador y la caja de consentimiento no
+enseñen cosas distintas.
+
 ## Estado (2026-10-28)
 
 - Programa anual completo (365 días) y documentación del método.
@@ -4433,9 +4479,10 @@ algún día se quiere mirar.
 - **AdSense: el sitio está verificado y enviado a revisión** (2026-10-27). El
   identificador es `ca-pub-6339208855562328`, el `ads.txt` está en la raíz y el
   script en las 125 páginas. `scripts/revisar_adsense.py` da **10 listo · 0
-  falta**. Queda esperar el veredicto (de días a dos semanas) y **publicar el
-  CMP** en AdSense → Privacidad y mensajería, que hace falta antes de que se
-  sirvan anuncios en la UE y que la banda de cookies de aquí NO sustituye.
+  falta**. **El CMP está publicado** (2026-10-29, lo confirmó el profesor
+  haciéndolo en su panel; desde este contenedor Google no se puede abrir —
+  `adsense.google.com` y `support.google.com` dan `000`). Queda solo esperar el
+  veredicto. Ver «El CMP, publicado» más abajo.
 - **El audio está COMPLETO** (2026-10-28): las **11 378 frases** del curso
   locutadas con la voz `shimmer` —1,30 USD el 26 de octubre y **2,85 hoy**,
   4,15 en total—, 291 MB a 64 kbps, y **13 575 botones ▶ en las 365
