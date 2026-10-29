@@ -5127,6 +5127,72 @@ Dos cosas menores que importan en el móvil: **Enter guarda** —ahí el teclado
 tapa el botón— y quien ya dio su nombre ve un saludo con un botón «Изменить»,
 no un campo abierto ocupando sitio para siempre.
 
+## El diccionario del curso (2026-10-29)
+
+Una página con **las 2.985 palabras** del curso, buscable, con su audio y un
+enlace a la lección donde se enseña cada una. `slovar.html`, en los tres
+idiomas, enlazada desde el pie de las 394 páginas y en el sitemap.
+
+Sirve al alumno —«¿cómo se dice X?» a mitad de una lección— y es lo único de
+esta tanda que además puede traer visitas: la gente busca palabras sueltas en
+Google. Y es **UNA página y no 2.985 páginas finas**, que es lo que un revisor
+de AdSense rechaza.
+
+### Qué entra, y una trampa de la regla 8
+
+De las 3.155 filas de las dos tablas de vocabulario salen 2.985 palabras: una
+que se glosa en un domingo y se enseña el lunes es la misma, y se conserva la
+PRIMERA aparición, que es donde el curso la introduce.
+
+**La traducción tiene que traer cirílico**, y eso descarta dieciséis filas en
+las que la segunda columna no es una traducción sino la **variante americana**
+—«el zumo → el jugo», por la regla 8—. En una lección eso se lee bien; en un
+diccionario dice que «zumo» significa «jugo» en ruso. Es el mismo filtro que la
+vitrina de la portada, dicho al derecho: aquí se EXIGE cirílico en vez de
+rechazar latino, porque una glosa legítima puede traer las dos cosas.
+
+**Se ordena por la palabra y no por el artículo** —un diccionario busca «casa»,
+no «la casa»— y hay que pelar **por turnos**: «el / la cantante» pierde el
+«el», y entonces hay que quitar la barra para llegar a «la» y el artículo otra
+vez para llegar a «cantante». De una pasada se quedaba en «/ la cantante» y
+abría la lista entera.
+
+### El peso, que es lo que decidió la forma
+
+La primera versión traía el ▶ y el enlace escritos en cada fila y pesaba
+**142 KB comprimidos**, que es lo que un lector se descarga. Medido:
+
+    con los hashes del audio dentro ... 142 KB
+    sin ellos ........................   83 KB
+    las palabras y sus traducciones ..   84 KB de texto puro
+
+O sea que **los 83 KB de hoy son casi todo contenido** y no se pueden encoger:
+son las palabras. Lo que sobraba eran los veinte caracteres al azar del nombre
+de cada MP3, que no los comprime nadie y que **solo le sirven a quien tiene
+JavaScript**, porque es el único que puede oírlos. Ahora van en
+`vocabulario/voces.json`, un array en el mismo orden que la lista —un
+diccionario tendría las 2.985 palabras otra vez como claves— que el guion pide
+después de pintar. Hay una prueba que fija el tope: si alguien vuelve a meter
+los hashes en la página, se pone en rojo.
+
+**Sin JavaScript queda la lista entera**: las palabras y sus traducciones, para
+leer y para que Google la indexe. Lo que no sale es la caja de búsqueda, que no
+filtraría nada.
+
+### Dos fallos que solo se vieron en el navegador
+
+1. **Los ▶ no sonaban.** `pagina()` decide si carga el reproductor mirando si
+   hay un `.suena` en el cuerpo, y aquí los botones los pone el guion al llegar
+   las voces: el HTML servido no trae ninguno. Eran botones mudos en las tres
+   páginas.
+2. **«урок 87 урок 87».** Una fila se viste al entrar en pantalla y otra vez
+   cuando llegan las voces, y la primera versión le pegaba el enlace a la
+   lección dos veces. Ahora `vestir` es idempotente: cada parte comprueba si ya
+   está, en vez de llevar un «ya hecho» para toda la fila.
+
+Las dos salieron mirando la página —la segunda, en una captura— y ninguna
+habría salido leyendo el código.
+
 ## Grabarse y oírse (2026-10-29)
 
 El curso pide grabarse en **77 lecciones** —«запишите себя»— desde que se

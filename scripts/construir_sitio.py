@@ -299,6 +299,23 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
   border:1px solid var(--linea);border-radius:8px;background:var(--papel);color:var(--tinta);
   font:inherit}
 .pide-nombre .aviso-chico{flex:1 0 100%;margin:0}
+/* El diccionario: 3.001 palabras en una lista. Dos columnas en escritorio
+   porque una sola deja media pantalla vacía y obliga a el doble de scroll. */
+.dicc-caja{margin:1.2rem 0;display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
+.dicc-caja input{flex:1 1 16rem;padding:.5rem .7rem;border:1px solid var(--linea);
+  border-radius:8px;background:var(--papel);color:var(--tinta);font:inherit}
+.dicc-caja input:focus{outline:none;border-color:var(--acento)}
+.dicc-cuenta{font-family:Onest,ui-sans-serif,system-ui,sans-serif;font-size:.88rem;
+  color:var(--tenue)}
+.dicc-lista{list-style:none;margin:0;padding:0;columns:2;column-gap:2rem}
+.dicc-lista li{break-inside:avoid;padding:.3rem 0;border-bottom:1px solid var(--linea);
+  font-size:.95rem}
+.dicc-lista b{font-weight:600}
+.dicc-lista i{font-style:normal;color:var(--tenue);display:block;font-size:.88rem}
+.dicc-urok{display:inline-block;margin-inline-start:.4rem;font-size:.8rem;
+  color:var(--tenue);text-decoration:none;border-bottom:1px solid var(--linea)}
+.dicc-urok:hover{color:var(--acento);border-color:var(--acento)}
+@media (max-width:40rem){.dicc-lista{columns:1}}
 /* Grabarse y oírse. Mismo marco que el quiz: los dos son lo que se hace
    DESPUÉS de la lección, no un apartado más de ella. */
 .grabar-bloque{margin:2rem 0 0;padding:1.1rem 1.2rem;border:1px solid var(--linea);
@@ -1641,6 +1658,98 @@ HUECOS_JS = r"""(function(){
 })();"""
 
 
+DICCIONARIO_JS = r"""(function(){
+  var D=window.CURSO_DICC; if(!D)return;
+  var lista=document.getElementById('dicc-lista'); if(!lista)return;
+  var T=D.t, filas=lista.querySelectorAll('li');
+  for(var n=0;n<filas.length;n++)filas[n].dataset.i=n;
+
+  // El ▶ y el enlace a la lección NO vienen en el HTML: son 3.001 palabras, y
+  // con el botón y el enlace escritos la página pasaba de 180 KB a 580. Los
+  // pone el navegador con lo que cada fila lleva en dos atributos cortos.
+  // Sin JavaScript queda la lista de palabras con su traducción, que es lo
+  // que de verdad sirve para leer y para que Google la indexe.
+  var voces=null;
+  // Idempotente a propósito: a una fila se la viste al entrar en pantalla y
+  // otra vez cuando llegan las voces, y la primera versión le pegaba el
+  // enlace a la lección DOS veces —«урок 87 урок 87»—. Cada parte comprueba
+  // si ya está en vez de llevar un «ya hecho» para toda la fila.
+  function vestir(li){
+    var a=voces&&voces[li.dataset.i|0];
+    if(a&&!li.querySelector('.suena')){
+      var b=document.createElement('button');
+      b.type='button';b.className='suena';b.setAttribute('aria-pressed','false');
+      b.setAttribute('data-audio',D.raiz+'/audio/'+a+'.mp3');
+      b.setAttribute('aria-label',(li.querySelector('b')||{}).textContent||'');
+      b.textContent='▶';
+      li.insertBefore(b,li.firstChild);
+    }
+    var l=li.getAttribute('data-l');
+    if(l&&!li.querySelector('.dicc-urok')){
+      var p=l.split('-');
+      var e=document.createElement('a');
+      e.className='dicc-urok';
+      e.href=D.raiz+'/semana-'+p[0]+'/dia-'+p[1]+'.html';
+      e.textContent=T.urok+' '+p[2];
+      li.appendChild(e);
+    }
+  }
+
+  // Se visten solo las que se ven. Vestir las 3.001 de golpe son 6.000 nodos
+  // más y en el móvil se nota al abrir la página.
+  var mirón=('IntersectionObserver' in window)?new IntersectionObserver(function(ent){
+    ent.forEach(function(e){if(e.isIntersecting){vestir(e.target);mirón.unobserve(e.target)}});
+  },{rootMargin:'300px'}):null;
+  if(mirón){for(var i=0;i<filas.length;i++)mirón.observe(filas[i])}
+  else{for(var j=0;j<filas.length;j++)vestir(filas[j])}
+
+  if(window.fetch&&D.voces){
+    fetch(D.voces).then(function(r){return r.ok?r.json():null}).then(function(v){
+      if(!v)return;
+      voces=v;
+      // Las que ya se habían pintado se repasan, ahora con su ▶. Las que
+      // todavía no se han visto las vestirá el vigilante cuando lleguen.
+      for(var z=0;z<filas.length;z++){
+        if(filas[z].querySelector('.dicc-urok'))vestir(filas[z]);
+      }
+    }).catch(function(){});
+  }
+
+  // La búsqueda. Sin acentos y sin mayúsculas, que es como la escribe quien
+  // busca: «cancion» tiene que encontrar «la canción».
+  function pelar(s){
+    return String(s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+  }
+  var caja=document.getElementById('dicc-buscar');
+  var cuenta=document.getElementById('dicc-cuenta');
+  var vacio=document.getElementById('dicc-vacio');
+  if(!caja)return;
+  caja.closest('.dicc-caja').hidden=false;
+
+  var claves=[];
+  for(var k=0;k<filas.length;k++){
+    claves.push(pelar(filas[k].textContent));
+  }
+
+  var espera=null;
+  function filtrar(){
+    var q=pelar(caja.value.trim());
+    var vistas=0;
+    for(var m=0;m<filas.length;m++){
+      var sale=!q||claves[m].indexOf(q)>=0;
+      filas[m].hidden=!sale;
+      if(sale){vistas++;if(!mirón)vestir(filas[m])}   // sin vigilante, a mano
+    }
+    if(cuenta)cuenta.textContent=(q?T.encontradas:T.cuantas).replace('{n}',vistas);
+    if(vacio)vacio.hidden=vistas>0;
+  }
+  caja.addEventListener('input',function(){
+    // Esperar un poco: con 3.001 filas, filtrar en cada tecla se nota.
+    clearTimeout(espera);espera=setTimeout(filtrar,120);
+  });
+})();"""
+
+
 GRABAR_JS = r"""(function(){
   var D=window.CURSO_GRABAR; if(!D)return;
   var caja=document.getElementById('grabar'); if(!caja)return;
@@ -2119,6 +2228,7 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
            niveles="[]",
            quiz=None,
            grabar=None,
+           diccionario=None,
            prueba=None) -> str:
     """El armazón de toda página: cabecera con menú y cambio de idioma, cuerpo, pie."""
     dominio = cfg["dominio"]
@@ -2217,7 +2327,7 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
 {cuerpo}
 </div></main>
 <footer class="sitio"><div class="envoltorio">
-<p><a href="{raiz}/test.html">{html.escape(t['test']['titulo'])}</a> · <a href="{raiz}/o-kurse.html">{html.escape(t['menu']['sobre'])}</a> · <a href="{raiz}/kontakt.html">{html.escape(t['menu']['contacto'])}</a> · <a href="{raiz}/privacy.html">{html.escape(t['privacidad']['titulo'])}</a></p>
+<p><a href="{raiz}/slovar.html">{html.escape(t['diccionario']['enlace'])}</a> · <a href="{raiz}/test.html">{html.escape(t['test']['titulo'])}</a> · <a href="{raiz}/o-kurse.html">{html.escape(t['menu']['sobre'])}</a> · <a href="{raiz}/kontakt.html">{html.escape(t['menu']['contacto'])}</a> · <a href="{raiz}/privacy.html">{html.escape(t['privacidad']['titulo'])}</a></p>
 <p>{html.escape(t['pie'])}</p>
 {_seguir(t, cfg, raiz)}
 </div></footer>
@@ -2229,6 +2339,7 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
 {f'<script>{AUDIO_JS}</script>' if con_audio else ""}
 {f'<script>window.CURSO_TEST={json.dumps(test, ensure_ascii=False)};{TEST_JS}</script>' if test else ""}
 {f'<script>window.CURSO_PRUEBA={json.dumps(prueba, ensure_ascii=False)};{PRUEBA_JS}</script>' if prueba else ""}
+{f'<script>window.CURSO_DICC={json.dumps(diccionario, ensure_ascii=False)};{DICCIONARIO_JS}</script>' if diccionario else ""}
 {f'<script>window.CURSO_GRABAR={json.dumps(grabar, ensure_ascii=False)};{GRABAR_JS}</script>' if grabar else ""}
 {f'<script>window.CURSO_QUIZ={json.dumps(quiz, ensure_ascii=False)};{QUIZ_JS}</script>' if quiz else ""}
 {f'<script>window.CURSO_HUECOS={json.dumps({"ejercicios": huecos, "t": t["huecos"]}, ensure_ascii=False)};{HUECOS_JS}</script>' if huecos else ""}
@@ -2445,6 +2556,125 @@ EFECTOS_JS = r"""(function(){
 
 
 
+
+
+
+def palabras_del_curso(cal, audio: dict | None = None) -> list[dict]:
+    """Todas las entradas de vocabulario del curso, una por palabra.
+
+    De las 3.155 filas de las dos tablas salen 3.001 palabras: una que se
+    glosa en un domingo y se enseña el lunes es la misma palabra, y se
+    conserva la PRIMERA aparición, que es donde el curso la introduce.
+
+    Van ordenadas por la palabra y no por el artículo: un diccionario busca
+    «casa» y no «la casa». La clave de orden quita el artículo y los acentos,
+    que es también como la escribe quien busca.
+    """
+    import unicodedata
+
+    def clave(es: str) -> str:
+        # Se pelan los adornos y los artículos POR TURNOS hasta que la
+        # entrada empieza por su palabra: «el / la cantante» pierde el «el»,
+        # y entonces hay que volver a quitar la barra para llegar a «la», y
+        # el artículo otra vez para llegar a «cantante». De una pasada se
+        # quedaba en «/ la cantante» y abría la lista.
+        sin, antes = es.lower(), None
+        while sin != antes:
+            antes = sin
+            sin = re.sub(r"^[^\wа-яё]+", "", sin)
+            sin = re.sub(r"^(el|la|los|las|un|una)\b\s*", "", sin)
+        return "".join(c for c in unicodedata.normalize("NFD", sin)
+                       if unicodedata.category(c) != "Mn")
+
+    audio = audio or {}
+    vistas: set[str] = set()
+    salida = []
+    for d in escritas(cal):
+        _, filas = exportar_anki.filas_de(d.ruta)
+        for fila in filas or []:
+            if len(fila) < 2:
+                continue
+            es = quiz_lexico.limpiar(fila[0])
+            ru = quiz_lexico.limpiar(fila[1])
+            if not es or not ru or es.lower() in vistas:
+                continue
+            # La columna rusa tiene que traer ruso. A veces no es una
+            # traducción sino la variante americana —«el zumo → el jugo», por
+            # la regla 8— y en un diccionario eso se lee como que «zumo»
+            # significa «jugo» en ruso. Es el mismo filtro que la vitrina de
+            # la portada, dicho al derecho: aquí se EXIGE cirílico en vez de
+            # rechazar latino, porque una glosa puede traer las dos cosas
+            # («сок (в Испании)»).
+            if not quiz_lexico.CIRILICA.search(ru):
+                continue
+            vistas.add(es.lower())
+            salida.append({"es": es, "ru": ru, "dia": d,
+                           "mp3": (audio.get(es) or "").removesuffix(".mp3")})
+    salida.sort(key=lambda p: (clave(p["es"]), p["es"]))
+    return salida
+
+
+VOCES = "vocabulario/voces.json"
+
+
+def construir_voces(destino: pathlib.Path, palabras: list[dict]) -> int:
+    """Los nombres de los MP3 del diccionario, en el mismo orden que la lista.
+
+    Un array y no un diccionario: las claves serían las 3.001 palabras otra
+    vez. Y en un fichero aparte y no dentro de la página porque veinte
+    caracteres al azar por palabra no los comprime nadie —son 95 KB de los
+    142 que pesaba la página— y solo le sirven a quien tiene JavaScript, que
+    es el único que puede oírlos. Así la página se pinta ligera y esto llega
+    después, de una vez y cacheado."""
+    destino.joinpath("vocabulario").mkdir(parents=True, exist_ok=True)
+    voces = [p["mp3"] or "" for p in palabras]
+    destino.joinpath(VOCES).write_text(
+        json.dumps(voces, separators=(",", ":")), encoding="utf-8")
+    return sum(1 for v in voces if v)
+
+
+def construir_diccionario(cfg, t, idiomas, idioma, destino, cal, raiz,
+                          palabras) -> None:
+    """La página del vocabulario entero, buscable.
+
+    El ▶ y el enlace a la lección los pone el navegador y no van escritos:
+    son 3.001 filas y con los dos dentro la página pasa de 180 KB a 580. Lo
+    que SÍ va servido es la palabra y su traducción, que es lo que sirve para
+    leer sin JavaScript y lo que un buscador indexa.
+    """
+    c = t["diccionario"]
+    filas = []
+    for p in palabras:
+        d = p["dia"]
+        filas.append(
+            f'<li data-l="{d.semana:02d}-{d.dia}-{d.numero}">'
+            f'<b>{html.escape(p["es"])}</b><i>{html.escape(p["ru"])}</i></li>')
+    cuerpo = (
+        f'<h1>{html.escape(c["titulo"])}<span class="segunda">{html.escape(c["subtitulo"])}</span></h1>'
+        f'<p>{html.escape(c["entrada"])}</p>'
+        f'{anuncio(cfg, "cabecera")}'
+        # La caja nace oculta: sin JavaScript no filtraría nada y sería una
+        # casilla que no hace caso.
+        f'<div class="dicc-caja" hidden>'
+        f'<input type="search" id="dicc-buscar" autocomplete="off" spellcheck="false" '
+        f'placeholder="{html.escape(c["buscar"])}" aria-label="{html.escape(c["buscar"])}">'
+        f'<span class="dicc-cuenta" id="dicc-cuenta">'
+        f'{html.escape(c["cuantas"].format(n=len(palabras)))}</span></div>'
+        f'<p id="dicc-vacio" hidden>{html.escape(c["nada"])}</p>'
+        f'<ul class="dicc-lista" id="dicc-lista">{"".join(filas)}</ul>'
+        f'{anuncio(cfg, "pie")}')
+    destino.joinpath("slovar.html").write_text(
+        pagina(cfg, t, idiomas, idioma, f'{c["titulo"]} — {t["titulo_sitio"]}', cuerpo,
+               descripcion=c["meta"].format(n=len(palabras)),
+               pagina_id="slovar.html", raiz=raiz,
+               publicadas=len(escritas(cal)), mapa_dias=mapa_de_dias(cal),
+               # El reproductor hace falta aunque en el HTML servido no haya
+               # ni un `.suena`: los ▶ los pone el guion al llegar las voces,
+               # y sin esto eran botones que no sonaban. `pagina()` lo deduce
+               # mirando el cuerpo, y aquí ese cuerpo todavía no los tiene.
+               con_audio=any(p["mp3"] for p in palabras),
+               diccionario={"t": c, "raiz": raiz, "voces": f"{raiz}/{VOCES}"}),
+        encoding="utf-8")
 
 
 def _bloque_de_grabar(t: dict, con_audio: bool) -> str:
@@ -4093,7 +4323,8 @@ def construir_sitemap(cfg, idiomas, destino, cal) -> None:
     for i in idiomas:
         base = f"{i['carpeta']}/" if i["carpeta"] else ""
         urls += [(f"{base}index.html", "1.0"), (f"{base}kurs.html", "0.9"),
-                 (f"{base}o-kurse.html", "0.5"), (f"{base}kontakt.html", "0.3"), (f"{base}privacy.html", "0.3")]
+                 (f"{base}o-kurse.html", "0.5"), (f"{base}slovar.html", "0.6"),
+                 (f"{base}kontakt.html", "0.3"), (f"{base}privacy.html", "0.3")]
     urls.append(("test.html", "0.7"))
     urls += [(f"semana-{d.semana:02d}/dia-{d.dia}.html", "0.8") for d in escritas(cal)]
     if dominio:
@@ -4129,6 +4360,10 @@ def construir(destino: pathlib.Path = DOCS, cfg: dict | None = None, textos: dic
     lexico = lexico_del_curso(cal) if dibujos else {}
     dibujos_unidad = dibujo_por_unidad(cal, dibujos)
     audio = indice_de_audio(destino)
+    # Una vez para los tres idiomas: recorrer las 365 lecciones por idioma
+    # sería tres veces el mismo trabajo para el mismo resultado.
+    palabras = palabras_del_curso(cal, audio)
+    construir_voces(destino, palabras)
 
     for i in idiomas:
         t = textos[i["codigo"]]
@@ -4140,6 +4375,8 @@ def construir(destino: pathlib.Path = DOCS, cfg: dict | None = None, textos: dic
         construir_indice_curso(cfg, t, idiomas, i["codigo"], carpeta, cal, raiz,
                                destino, dibujos_unidad)
         construir_estaticas(cfg, t, idiomas, i["codigo"], carpeta, cal, raiz)
+        construir_diccionario(cfg, t, idiomas, i["codigo"], carpeta, cal, raiz,
+                              palabras)
 
     construir_test(cfg, textos["ru"], idiomas, destino, cal, preguntas)
     todos = plan.dias(cal)

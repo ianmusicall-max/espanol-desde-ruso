@@ -178,6 +178,23 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
   border:1px solid var(--linea);border-radius:8px;background:var(--papel);color:var(--tinta);
   font:inherit}
 .pide-nombre .aviso-chico{flex:1 0 100%;margin:0}
+/* El diccionario: 3.001 palabras en una lista. Dos columnas en escritorio
+   porque una sola deja media pantalla vacía y obliga a el doble de scroll. */
+.dicc-caja{margin:1.2rem 0;display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
+.dicc-caja input{flex:1 1 16rem;padding:.5rem .7rem;border:1px solid var(--linea);
+  border-radius:8px;background:var(--papel);color:var(--tinta);font:inherit}
+.dicc-caja input:focus{outline:none;border-color:var(--acento)}
+.dicc-cuenta{font-family:Onest,ui-sans-serif,system-ui,sans-serif;font-size:.88rem;
+  color:var(--tenue)}
+.dicc-lista{list-style:none;margin:0;padding:0;columns:2;column-gap:2rem}
+.dicc-lista li{break-inside:avoid;padding:.3rem 0;border-bottom:1px solid var(--linea);
+  font-size:.95rem}
+.dicc-lista b{font-weight:600}
+.dicc-lista i{font-style:normal;color:var(--tenue);display:block;font-size:.88rem}
+.dicc-urok{display:inline-block;margin-inline-start:.4rem;font-size:.8rem;
+  color:var(--tenue);text-decoration:none;border-bottom:1px solid var(--linea)}
+.dicc-urok:hover{color:var(--acento);border-color:var(--acento)}
+@media (max-width:40rem){.dicc-lista{columns:1}}
 /* Grabarse y oírse. Mismo marco que el quiz: los dos son lo que se hace
    DESPUÉS de la lección, no un apartado más de ella. */
 .grabar-bloque{margin:2rem 0 0;padding:1.1rem 1.2rem;border:1px solid var(--linea);
@@ -781,7 +798,7 @@ En Ekaterimburgo las tiendas abren todos los días, también el domingo.</em></p
 })();</script><div class="grabar-bloque" id="grabar" hidden><h2>Запишите себя</h2><p>Послушайте фразу (▶), скажите её вслух и сравните. Запись остаётся в браузере: она никуда не отправляется и нигде не сохраняется.</p></div><div class="quiz-bloque"><h2>Слова сегодняшнего урока</h2><p>Пять слов из словаря этого урока. Ответы не сохраняются и ни на что не влияют.</p><div class="botones" id="quiz-arranque" hidden><button type="button" class="boton" id="quiz-empezar">Проверить слова</button></div><div id="quiz"></div></div><div id="marcar-caja"></div><div class="compartir"><span class="de-que">Поделиться уроком</span><a class="red" href="https://t.me/share/url?url=https%3A%2F%2Fespanoldesderuso.com%2Fsemana-13%2Fdia-7.html&text=%D0%98%D1%81%D0%BF%D0%B0%D0%BD%D1%81%D0%BA%D0%B8%D0%B9%20%D1%81%20%D0%BD%D1%83%D0%BB%D1%8F%20%D0%B4%D0%BB%D1%8F%20%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D1%80%D1%8F%D1%89%D0%B8%D1%85" target="_blank" rel="noopener">Telegram</a><a class="red" href="https://wa.me/?text=%D0%98%D1%81%D0%BF%D0%B0%D0%BD%D1%81%D0%BA%D0%B8%D0%B9%20%D1%81%20%D0%BD%D1%83%D0%BB%D1%8F%20%D0%B4%D0%BB%D1%8F%20%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D1%80%D1%8F%D1%89%D0%B8%D1%85%20https%3A%2F%2Fespanoldesderuso.com%2Fsemana-13%2Fdia-7.html" target="_blank" rel="noopener">WhatsApp</a><button type="button" class="red" id="copiar-enlace" data-url="https://espanoldesderuso.com/semana-13/dia-7.html" data-ok="Ссылка скопирована">Скопировать ссылку</button></div><nav class="pasos"><a href="../semana-13/dia-6.html">← Урок 90</a><a href="../kurs.html">Все уроки</a><a id="enlace-siguiente" href="../semana-14/dia-1.html">Урок 92 →</a></nav></article>
 </div></main>
 <footer class="sitio"><div class="envoltorio">
-<p><a href="../test.html">Тест на уровень</a> · <a href="../o-kurse.html">О курсе</a> · <a href="../kontakt.html">Контакты</a> · <a href="../privacy.html">Политика конфиденциальности</a></p>
+<p><a href="../slovar.html">Словарь курса</a> · <a href="../test.html">Тест на уровень</a> · <a href="../o-kurse.html">О курсе</a> · <a href="../kontakt.html">Контакты</a> · <a href="../privacy.html">Политика конфиденциальности</a></p>
 <p>Материалы курса можно свободно использовать для учёбы.</p>
 
 </div></footer>
@@ -817,6 +834,7 @@ En Ekaterimburgo las tiendas abren todos los días, también el domingo.</em></p
                       .catch(function(){b.setAttribute('aria-pressed','false');sonando=null});
   });
 })();</script>
+
 
 
 <script>window.CURSO_GRABAR={"t": {"titulo": "Запишите себя", "entrada": "Послушайте фразу (▶), скажите её вслух и сравните. Запись остаётся в браузере: она никуда не отправляется и нигде не сохраняется.", "grabar": "Записать", "parar": "Стоп", "oir": "Послушать себя", "otra": "Записать заново", "sin_permiso": "Браузер не дал доступ к микрофону. Разрешите его в настройках сайта — или просто говорите вслух, без записи.", "grabando": "Идёт запись…"}};(function(){

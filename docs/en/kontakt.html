@@ -178,6 +178,23 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
   border:1px solid var(--linea);border-radius:8px;background:var(--papel);color:var(--tinta);
   font:inherit}
 .pide-nombre .aviso-chico{flex:1 0 100%;margin:0}
+/* El diccionario: 3.001 palabras en una lista. Dos columnas en escritorio
+   porque una sola deja media pantalla vacía y obliga a el doble de scroll. */
+.dicc-caja{margin:1.2rem 0;display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
+.dicc-caja input{flex:1 1 16rem;padding:.5rem .7rem;border:1px solid var(--linea);
+  border-radius:8px;background:var(--papel);color:var(--tinta);font:inherit}
+.dicc-caja input:focus{outline:none;border-color:var(--acento)}
+.dicc-cuenta{font-family:Onest,ui-sans-serif,system-ui,sans-serif;font-size:.88rem;
+  color:var(--tenue)}
+.dicc-lista{list-style:none;margin:0;padding:0;columns:2;column-gap:2rem}
+.dicc-lista li{break-inside:avoid;padding:.3rem 0;border-bottom:1px solid var(--linea);
+  font-size:.95rem}
+.dicc-lista b{font-weight:600}
+.dicc-lista i{font-style:normal;color:var(--tenue);display:block;font-size:.88rem}
+.dicc-urok{display:inline-block;margin-inline-start:.4rem;font-size:.8rem;
+  color:var(--tenue);text-decoration:none;border-bottom:1px solid var(--linea)}
+.dicc-urok:hover{color:var(--acento);border-color:var(--acento)}
+@media (max-width:40rem){.dicc-lista{columns:1}}
 /* Grabarse y oírse. Mismo marco que el quiz: los dos son lo que se hace
    DESPUÉS de la lección, no un apartado más de ella. */
 .grabar-bloque{margin:2rem 0 0;padding:1.1rem 1.2rem;border:1px solid var(--linea);
@@ -596,7 +613,7 @@ footer.sitio p{margin:.35rem 0}
 
 </div></main>
 <footer class="sitio"><div class="envoltorio">
-<p><a href="../test.html">Level test</a> · <a href="../o-kurse.html">About</a> · <a href="../kontakt.html">Contact</a> · <a href="../privacy.html">Privacy policy</a></p>
+<p><a href="../slovar.html">The vocabulary</a> · <a href="../test.html">Level test</a> · <a href="../o-kurse.html">About</a> · <a href="../kontakt.html">Contact</a> · <a href="../privacy.html">Privacy policy</a></p>
 <p>Course material may be used freely for study.</p>
 
 </div></footer>
@@ -605,6 +622,7 @@ footer.sitio p{margin:.35rem 0}
 
 <script>window.CURSO_TEXTOS={"continuar": "Continue: lesson", "guia_paso": "Step {n} of {total}", "guia_siguiente": "Next", "guia_final": "Mark and continue", "guia_empezar": "Start with step one", "empezar": "Start from the beginning", "marcar": "Mark this lesson as done", "hecho": "Lesson done", "siguiente": "Next lesson", "tuyo": "done by you", "titulo": "Your progress", "aviso": "Progress is stored in this browser on this device only. There is no sign-up and nothing is sent anywhere. If you clear your browser data or open the course on another phone, your marks do not come with you.", "borrar": "Reset progress", "confirmar": "Clear all marks?", "copiar": "Save my progress", "copiado": "Code copied — paste it into your notes or a message to yourself", "restaurar": "Restore my progress", "pegar": "Paste your code here", "aplicar": "Restore", "cancelar": "Cancel", "malo": "That does not look like a progress code. Nothing was changed.", "menos": "That code has fewer lessons than you have marked (%a% instead of %b%). Restore anyway?", "hecho_restaurar": "Done: %n% lessons restored", "nombre_label": "What is your name?", "nombre_boton": "Save", "nombre_cambiar": "Change", "nombre_nota": "Only to greet you by name. It stays in this browser and is never sent anywhere.", "bravo": ["Well done!", "That's the way!", "Nice work!", "One more lesson done!", "You're on track!", "Done!", "Great pace!", "Keep it up!", "Step by step it adds up."], "bravo_con": ["Well done, {nombre}!", "That's the way, {nombre}!", "Nice work, {nombre}!", "{nombre}, one more lesson done!", "You're on track, {nombre}!", "Done, {nombre}!", "Great pace, {nombre}!", "Keep it up, {nombre}!", "{nombre}, step by step it adds up."], "vuelta": "Welcome back, {nombre}!", "primera": "First lesson done — the hardest part is behind you.", "primera_con": "{nombre}, first lesson done — the hardest part is behind you.", "cuantas": "{n} of {total}", "faltan": "{n} to go", "racha": "{n} {dias} in a row", "racha_dias": ["day", "days", "days"], "racha_hoy": "You studied today", "racha_mejor": "Your best streak: {n} {dias}", "antes": "Before clearing your browser or switching phones, save your code.", "calendario": "Your year", "calendario_nota": "{n} {dias} of study in the past year", "calendario_hoy": "today", "diploma_boton": "Download your certificate ({nivel})", "diploma_pide_nombre": "Enter your name above and the certificate will carry it.", "diploma_titulo": "CERTIFICATE", "diploma_sub": "of course completion", "diploma_quien": "Awarded to", "diploma_que": "Level {nivel} · lessons completed: {n}", "diploma_fecha": "Date", "diploma_aviso": "A personal record of self-study. This is not an official language certificate."};window.CURSO_RAIZ="..";window.CURSO_PUBLICADAS=0;window.CURSO_DIAS={};window.CURSO_NIVELES=[];window.CURSO_SITIO="Spanish from Russian";window.CURSO_DOMINIO="espanoldesderuso.com";</script>
 <script src="../progreso.js" defer></script>
+
 
 
 

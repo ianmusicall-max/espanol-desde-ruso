@@ -178,6 +178,23 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
   border:1px solid var(--linea);border-radius:8px;background:var(--papel);color:var(--tinta);
   font:inherit}
 .pide-nombre .aviso-chico{flex:1 0 100%;margin:0}
+/* El diccionario: 3.001 palabras en una lista. Dos columnas en escritorio
+   porque una sola deja media pantalla vacía y obliga a el doble de scroll. */
+.dicc-caja{margin:1.2rem 0;display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
+.dicc-caja input{flex:1 1 16rem;padding:.5rem .7rem;border:1px solid var(--linea);
+  border-radius:8px;background:var(--papel);color:var(--tinta);font:inherit}
+.dicc-caja input:focus{outline:none;border-color:var(--acento)}
+.dicc-cuenta{font-family:Onest,ui-sans-serif,system-ui,sans-serif;font-size:.88rem;
+  color:var(--tenue)}
+.dicc-lista{list-style:none;margin:0;padding:0;columns:2;column-gap:2rem}
+.dicc-lista li{break-inside:avoid;padding:.3rem 0;border-bottom:1px solid var(--linea);
+  font-size:.95rem}
+.dicc-lista b{font-weight:600}
+.dicc-lista i{font-style:normal;color:var(--tenue);display:block;font-size:.88rem}
+.dicc-urok{display:inline-block;margin-inline-start:.4rem;font-size:.8rem;
+  color:var(--tenue);text-decoration:none;border-bottom:1px solid var(--linea)}
+.dicc-urok:hover{color:var(--acento);border-color:var(--acento)}
+@media (max-width:40rem){.dicc-lista{columns:1}}
 /* Grabarse y oírse. Mismo marco que el quiz: los dos son lo que se hace
    DESPUÉS de la lección, no un apartado más de ella. */
 .grabar-bloque{margin:2rem 0 0;padding:1.1rem 1.2rem;border:1px solid var(--linea);
@@ -725,7 +742,7 @@ footer.sitio p{margin:.35rem 0}
 
 </div></main>
 <footer class="sitio"><div class="envoltorio">
-<p><a href="./test.html">Тест на уровень</a> · <a href="./o-kurse.html">О курсе</a> · <a href="./kontakt.html">Контакты</a> · <a href="./privacy.html">Политика конфиденциальности</a></p>
+<p><a href="./slovar.html">Словарь курса</a> · <a href="./test.html">Тест на уровень</a> · <a href="./o-kurse.html">О курсе</a> · <a href="./kontakt.html">Контакты</a> · <a href="./privacy.html">Политика конфиденциальности</a></p>
 <p>Материалы курса можно свободно использовать для учёбы.</p>
 
 </div></footer>
@@ -751,6 +768,7 @@ footer.sitio p{margin:.35rem 0}
                       .catch(function(){b.setAttribute('aria-pressed','false');sonando=null});
   });
 })();</script>
+
 
 
 

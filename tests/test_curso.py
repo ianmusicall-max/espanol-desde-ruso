@@ -4124,6 +4124,160 @@ class TestElSaludoYLaRacha(unittest.TestCase):
         self.assertNotIn("variante(hechasAhora", self.js)
 
 
+class TestElDiccionario(unittest.TestCase):
+    """La página con las 2.985 palabras del curso, buscable (2026-10-29).
+
+    Sirve al alumno —«¿cómo se dice X?»— y es lo único de esta tanda que
+    además puede traer visitas: la gente busca palabras sueltas, y esto es
+    UNA página y no 2.985 páginas finas, que es lo que AdSense rechaza."""
+
+    DOCS = RAIZ / "docs"
+
+    @classmethod
+    def setUpClass(cls):
+        cls.audio = (construir_sitio.indice_de_audio(cls.DOCS)
+                     if (cls.DOCS / "audio" / construir_sitio.INDICE_AUDIO).exists() else {})
+        cls.palabras = construir_sitio.palabras_del_curso(CAL, cls.audio)
+
+    # --- qué entra en el diccionario ---
+
+    def test_la_traduccion_siempre_trae_ruso(self):
+        """A veces la segunda columna no es una traducción sino la variante
+        americana —«el zumo → el jugo», por la regla 8— y en un diccionario
+        eso se lee como que «zumo» significa «jugo» en ruso."""
+        for p in self.palabras:
+            self.assertTrue(quiz_lexico.CIRILICA.search(p["ru"]),
+                            f"«{p['es']}» se traduce por «{p['ru']}»")
+
+    def test_cada_palabra_sale_una_vez_y_en_su_primera_leccion(self):
+        """De las 3.155 filas de las dos tablas salen 2.985 palabras: una que
+        se glosa en un domingo y se enseña el lunes es la misma palabra. Se
+        conserva la PRIMERA, que es donde el curso la introduce."""
+        vistas = [p["es"].lower() for p in self.palabras]
+        self.assertEqual(len(vistas), len(set(vistas)))
+        self.assertGreater(len(self.palabras), 2900)
+        por_palabra = {}
+        for d in construir_sitio.escritas(CAL):
+            _, filas = exportar_anki.filas_de(d.ruta)
+            for fila in filas or []:
+                if len(fila) >= 2:
+                    es = quiz_lexico.limpiar(fila[0]).lower()
+                    por_palabra.setdefault(es, d.numero)
+        for p in self.palabras:
+            self.assertEqual(p["dia"].numero, por_palabra[p["es"].lower()], p["es"])
+
+    def test_se_ordena_por_la_palabra_y_no_por_el_articulo(self):
+        """Un diccionario busca «casa» y no «la casa». Y hay que pelar por
+        TURNOS: «el / la cantante» pierde el «el», y entonces hay que quitar
+        la barra para llegar a «la» y el artículo otra vez para llegar a
+        «cantante». De una pasada se quedaba en «/ la cantante» y abría la
+        lista entera."""
+        orden = [p["es"] for p in self.palabras]
+        # Una cadena alfabética de verdad: banco < cantante < casa < zapatos.
+        # Solo se cumple si se pelan los artículos Y los separadores, y
+        # «el / la cantante» es el caso que obliga a hacerlo por turnos: de
+        # una pasada se quedaba en «/ la cantante» y abría la lista entera.
+        cadena = ["el banco", "el / la cantante", "la casa", "los zapatos"]
+        sitios = []
+        for entrada in cadena:
+            self.assertIn(entrada, orden, f"«{entrada}» ya no está en el curso")
+            sitios.append(orden.index(entrada))
+        self.assertEqual(sitios, sorted(sitios),
+                         f"el orden no es alfabético por la palabra: {list(zip(cadena, sitios))}")
+
+    # --- la página ---
+
+    def test_las_tres_paginas_traen_la_lista_entera(self):
+        if not (self.DOCS / "slovar.html").exists():
+            self.skipTest("el sitio todavía no está construido")
+        for pagina in ("slovar.html", "es/slovar.html", "en/slovar.html"):
+            texto = (self.DOCS / pagina).read_text(encoding="utf-8")
+            self.assertEqual(len(self.palabras), texto.count("<li data-l="), pagina)
+            # La caja nace oculta: sin JavaScript no filtraría nada.
+            self.assertIn('class="dicc-caja" hidden', texto, pagina)
+            self.assertIn('id="dicc-vacio" hidden', texto, pagina)
+
+    def test_la_pagina_carga_el_reproductor_aunque_no_sirva_ningun_boton(self):
+        """Los ▶ los pone el guion al llegar las voces, así que el HTML
+        servido no trae ni un `.suena` y `pagina()` lo deducía mirando el
+        cuerpo: eran botones que no sonaban. Se vio pulsándolos en el
+        navegador, no leyendo el código."""
+        if not (self.DOCS / "slovar.html").exists():
+            self.skipTest("el sitio todavía no está construido")
+        for pagina in ("slovar.html", "es/slovar.html", "en/slovar.html"):
+            texto = (self.DOCS / pagina).read_text(encoding="utf-8")
+            self.assertNotIn('class="suena"', texto, f"{pagina}: el HTML ya trae botones")
+            self.assertIn("var sonando=null, reproductor=new Audio()", texto,
+                          f"{pagina}: sin reproductor los ▶ no suenan")
+
+    def test_las_voces_van_aparte_y_en_el_mismo_orden(self):
+        """Veinte caracteres al azar por palabra no los comprime nadie: con
+        los hashes dentro la página pesaba 142 KB comprimidos y sin ellos 83.
+        Y solo le sirven a quien tiene JavaScript, que es el único que puede
+        oírlos."""
+        fichero = self.DOCS / construir_sitio.VOCES
+        if not fichero.exists():
+            self.skipTest("el sitio todavía no está construido")
+        voces = json.loads(fichero.read_text(encoding="utf-8"))
+        self.assertEqual(len(voces), len(self.palabras),
+                         "el fichero de voces y la lista no miden lo mismo")
+        for p, v in zip(self.palabras, voces):
+            self.assertEqual(p["mp3"], v, p["es"])
+            if v:
+                self.assertTrue((self.DOCS / "audio" / f"{v}.mp3").exists(),
+                                f"falta docs/audio/{v}.mp3")
+        self.assertGreater(sum(1 for v in voces if v), 2800)
+
+    def test_la_pagina_no_se_vuelve_a_engordar(self):
+        """El tope existe porque la primera versión traía el ▶ y el enlace
+        escritos en cada fila y pesaba 142 KB comprimidos, que es lo que un
+        lector se descarga. Hoy son 83, y de esos la mayor parte son las
+        palabras mismas: el contenido, que no se puede encoger."""
+        pagina = self.DOCS / "slovar.html"
+        if not pagina.exists():
+            self.skipTest("el sitio todavía no está construido")
+        import gzip
+        comprimida = len(gzip.compress(pagina.read_bytes())) / 1024
+        self.assertLess(comprimida, 100,
+                        f"la página del diccionario pesa {comprimida:.0f} KB comprimida")
+
+    def test_el_enlace_del_pie_resuelve_desde_todas_las_profundidades(self):
+        """Es la SÉPTIMA vez que esta suite mira una ruta relativa por el
+        mismo motivo —el conmutador de idioma, las tarjetas del mapa, los
+        destinos del probador, las fuentes, los iconos y la portada de
+        compartir—: una ruta escrita sin tener en cuenta en qué carpeta está
+        la página."""
+        if not (self.DOCS / "slovar.html").exists():
+            self.skipTest("el sitio todavía no está construido")
+        for pagina in ("index.html", "kurs.html", "es/index.html", "en/kurs.html",
+                       "semana-01/dia-1.html", "test.html"):
+            ruta = self.DOCS / pagina
+            texto = ruta.read_text(encoding="utf-8")
+            m = re.search(r'href="([^"]*slovar\.html)"', texto)
+            self.assertTrue(m, f"{pagina} no enlaza el diccionario")
+            destino = (ruta.parent / m.group(1)).resolve()
+            self.assertTrue(destino.exists(), f"{pagina}: «{m.group(1)}» no existe")
+
+    def test_esta_en_el_sitemap_en_los_tres_idiomas(self):
+        mapa = self.DOCS / "sitemap.xml"
+        if not mapa.exists():
+            self.skipTest("el sitio todavía no está construido")
+        texto = mapa.read_text(encoding="utf-8")
+        for prefijo in ("", "es/", "en/"):
+            self.assertIn(f"/{prefijo}slovar.html<", texto, prefijo or "ru")
+
+    def test_los_tres_idiomas_traen_los_textos(self):
+        t = construir_sitio.cargar_textos()
+        claves = ("titulo", "subtitulo", "entrada", "buscar", "nada", "cuantas",
+                  "encontradas", "urok", "enlace", "meta")
+        for idioma in ("ru", "es", "en"):
+            for c in claves:
+                self.assertTrue(str(t[idioma]["diccionario"].get(c, "")).strip(),
+                                f"falta diccionario.{c} en {idioma}")
+            for clave in ("cuantas", "encontradas", "meta"):
+                self.assertIn("{n}", t[idioma]["diccionario"][clave], f"{idioma}.{clave}")
+
+
 class TestGrabarseYOirse(unittest.TestCase):
     """El botón de grabarse, del 2026-10-29.
 

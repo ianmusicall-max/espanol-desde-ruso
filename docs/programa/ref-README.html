@@ -178,6 +178,23 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
   border:1px solid var(--linea);border-radius:8px;background:var(--papel);color:var(--tinta);
   font:inherit}
 .pide-nombre .aviso-chico{flex:1 0 100%;margin:0}
+/* El diccionario: 3.001 palabras en una lista. Dos columnas en escritorio
+   porque una sola deja media pantalla vacía y obliga a el doble de scroll. */
+.dicc-caja{margin:1.2rem 0;display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
+.dicc-caja input{flex:1 1 16rem;padding:.5rem .7rem;border:1px solid var(--linea);
+  border-radius:8px;background:var(--papel);color:var(--tinta);font:inherit}
+.dicc-caja input:focus{outline:none;border-color:var(--acento)}
+.dicc-cuenta{font-family:Onest,ui-sans-serif,system-ui,sans-serif;font-size:.88rem;
+  color:var(--tenue)}
+.dicc-lista{list-style:none;margin:0;padding:0;columns:2;column-gap:2rem}
+.dicc-lista li{break-inside:avoid;padding:.3rem 0;border-bottom:1px solid var(--linea);
+  font-size:.95rem}
+.dicc-lista b{font-weight:600}
+.dicc-lista i{font-style:normal;color:var(--tenue);display:block;font-size:.88rem}
+.dicc-urok{display:inline-block;margin-inline-start:.4rem;font-size:.8rem;
+  color:var(--tenue);text-decoration:none;border-bottom:1px solid var(--linea)}
+.dicc-urok:hover{color:var(--acento);border-color:var(--acento)}
+@media (max-width:40rem){.dicc-lista{columns:1}}
 /* Grabarse y oírse. Mismo marco que el quiz: los dos son lo que se hace
    DESPUÉS de la lección, no un apartado más de ella. */
 .grabar-bloque{margin:2rem 0 0;padding:1.1rem 1.2rem;border:1px solid var(--linea);
@@ -644,7 +661,7 @@ versionan (derechos de autor): quedan fuera del repositorio.</p>
 </ul>
 </div></main>
 <footer class="sitio"><div class="envoltorio">
-<p><a href="../test.html">Test de nivel</a> · <a href="../o-kurse.html">El curso</a> · <a href="../kontakt.html">Contacto</a> · <a href="../privacy.html">Política de privacidad</a></p>
+<p><a href="../slovar.html">El vocabulario</a> · <a href="../test.html">Test de nivel</a> · <a href="../o-kurse.html">El curso</a> · <a href="../kontakt.html">Contacto</a> · <a href="../privacy.html">Política de privacidad</a></p>
 <p>El material del curso puede usarse libremente para estudiar.</p>
 
 </div></footer>
@@ -663,6 +680,7 @@ versionan (derechos de autor): quedan fuera del repositorio.</p>
 })();</script>
 <script>window.CURSO_TEXTOS={"continuar": "Continuar: lección", "guia_paso": "Paso {n} de {total}", "guia_siguiente": "Siguiente", "guia_final": "Marcar y seguir", "guia_empezar": "Empezar por el primer paso", "empezar": "Empezar de cero", "marcar": "Marcar la lección como hecha", "hecho": "Lección hecha", "siguiente": "Siguiente lección", "tuyo": "hechas por usted", "titulo": "Su progreso", "aviso": "El progreso se guarda solo en este navegador y en este aparato. No hay registro y no se envía a ninguna parte. Si borra los datos del navegador o abre el curso en otro teléfono, las marcas no viajan con usted.", "borrar": "Borrar el progreso", "confirmar": "¿Borrar todas las marcas?", "copiar": "Guardar mi progreso", "copiado": "Código copiado — péguelo en sus notas o en un mensaje a sí mismo", "restaurar": "Recuperar mi progreso", "pegar": "Pegue aquí su código", "aplicar": "Restaurar", "cancelar": "Cancelar", "malo": "Esto no parece un código de progreso. No se ha cambiado nada.", "menos": "Ese código trae menos lecciones de las que tiene marcadas (%a% en vez de %b%). ¿Restaurar igualmente?", "hecho_restaurar": "Listo: %n% lecciones restauradas", "nombre_label": "¿Cómo se llama?", "nombre_boton": "Guardar", "nombre_cambiar": "Cambiar", "nombre_nota": "Solo para saludarle por su nombre. Se queda en este navegador y no se envía a ninguna parte.", "bravo": ["¡Muy bien!", "¡Así se hace!", "¡Buen trabajo!", "¡Una lección más!", "¡Va por buen camino!", "¡Hecho!", "¡Qué ritmo!", "¡Siga así!", "Paso a paso se llega."], "bravo_con": ["¡Muy bien, {nombre}!", "¡Así se hace, {nombre}!", "¡Buen trabajo, {nombre}!", "¡{nombre}, una lección más!", "¡Va por buen camino, {nombre}!", "¡Hecho, {nombre}!", "¡Qué ritmo, {nombre}!", "¡Siga así, {nombre}!", "{nombre}, paso a paso se llega."], "vuelta": "Hola de nuevo, {nombre}.", "primera": "Primera lección hecha: lo más difícil ya pasó.", "primera_con": "{nombre}, primera lección hecha: lo más difícil ya pasó.", "cuantas": "{n} de {total}", "faltan": "quedan {n}", "racha": "{n} {dias} seguidos", "racha_dias": ["día", "días", "días"], "racha_hoy": "Hoy ha estudiado", "racha_mejor": "Su mejor racha: {n} {dias}", "antes": "Antes de limpiar el navegador o cambiar de móvil, guarde su código.", "calendario": "Su año", "calendario_nota": "{n} {dias} de estudio en el último año", "calendario_hoy": "hoy", "diploma_boton": "Descargar el certificado ({nivel})", "diploma_pide_nombre": "Escriba su nombre arriba y el certificado saldrá a su nombre.", "diploma_titulo": "CERTIFICADO", "diploma_sub": "de finalización del curso", "diploma_quien": "Otorgado a", "diploma_que": "Nivel {nivel} · lecciones completadas: {n}", "diploma_fecha": "Fecha", "diploma_aviso": "Certificado personal de estudio autodidacta. No es un documento oficial de nivel de idioma."};window.CURSO_RAIZ="..";window.CURSO_PUBLICADAS=0;window.CURSO_DIAS={};window.CURSO_NIVELES=[];window.CURSO_SITIO="Español desde el ruso";window.CURSO_DOMINIO="espanoldesderuso.com";</script>
 <script src="../progreso.js" defer></script>
+
 
 
 
