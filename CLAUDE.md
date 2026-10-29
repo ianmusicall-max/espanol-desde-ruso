@@ -5127,6 +5127,105 @@ Dos cosas menores que importan en el móvil: **Enter guarda** —ahí el teclado
 tapa el botón— y quien ya dio su nombre ve un saludo con un botón «Изменить»,
 no un campo abierto ocupando sitio para siempre.
 
+## Las palabras del día, al cerrar la lección (2026-10-29)
+
+El profesor echaba en falta un test al final de cada lección: el sitio tenía
+**66 de 365 días contestables** —los 23 tests de unidad y los 43 mini-tests— y
+los 220 días de lección normal acababan en ejercicios de escribir con la clave
+detrás de un botón.
+
+**Se le dijo que serían unas 1.100 preguntas nuevas de trabajo de contenido, y
+eso era falso.** Las palabras ya están escritas y traducidas en la tabla
+`Словарь дня` de cada lección, revisadas por él. Contado:
+
+    entradas de vocabulario del curso ...... 3.155
+    con traducción limpia y usable ......... 2.333
+    lecciones con quiz (>= 4 limpias) ......   244 de 365
+    preguntas publicadas ................... 1.198
+    de esas palabras, con voz ya pagada .... las 1.198
+
+O sea **cero contenido nuevo y cero céntimos**: `scripts/quiz_lexico.py` arma
+las preguntas de lo que hay.
+
+**El sentido es ruso → español**: se enseña la traducción y se elige la
+palabra. Es la dirección que cuesta —producir— y la que pide el examen; al
+revés sería reconocer, que ya hacen las tarjetas.
+
+### Lo que NO hace, y es lo que lo sostiene
+
+- **No inventa nada.** Las dos columnas salen de la tabla del profesor. Si una
+  entrada no se puede usar sin dudas se descarta ella sola, y si no quedan
+  cuatro limpias esa lección **se queda exactamente como está**. Es el contrato
+  de `pruebas.py` y de `huecos.py`: decirle a alguien que falló cuando acertó
+  es lo que este proyecto no hace.
+- **No saca distractores de otras lecciones.** Son las otras palabras del
+  mismo día, así que el ejercicio es «reconozca las palabras de hoy» y no una
+  mezcla con material de hace seis meses. De paso, construir una lección no
+  necesita leer el curso entero.
+- **No guarda nada ni sale a la red.** Su propia entrada lo dice —«las
+  respuestas no se guardan y no cuentan para nada»— y hay una prueba que busca
+  `fetch`, `XMLHttpRequest`, `sendBeacon` y `localStorage` en el guion. El día
+  que contara, habría que decirlo antes.
+- **No sale en los días que ya tienen su test** (`prueba`, `repaso`, `examen`,
+  `simulacro`, `proyecto`, `reserva`): dos tests en la misma página son ruido,
+  y un repaso no tiene `Словарь дня` siquiera.
+
+### Qué descalifica una entrada, y por qué
+
+No es una lista de gustos: cada marca significa que la celda no es una
+traducción limpia de una palabra. `✗ ↔ 🌎` son avisos y variantes
+(«el conductor (✗ не «кондуктор»)»), `+ =` dicen que la entrada es una
+construcción (`hay que + инф.`), los paréntesis son una glosa y la barra son
+dos palabras en una (`sí / no`). Más dos que se descartan **enteras**: una
+traducción repetida haría una pregunta con DOS respuestas correctas, y una
+palabra repetida, dos opciones iguales —que es el defecto que esta suite ya
+cazó dos veces en los tests escritos a mano—.
+
+### El reparto de la respuesta correcta: dos cosas, no una
+
+1. **Repartida**, porque el 2026-10-27 se midió que catorce de quince
+   respuestas de un test de unidad eran la б) y marcando todo б se aprobaba la
+   unidad sin saber nada.
+2. **Sin ciclo.** La primera versión hacía `sitios[i % 3]`, que reparte igual
+   de bien en el recuento y deja la secuencia **а-б-в-а-б**, que se aprende de
+   memoria en dos lecciones. Es exactamente el defecto que ya tuvieron la letra
+   correcta de los tests y los mensajes de ánimo, con otra cara.
+
+Y una tercera que apareció midiendo: con cinco preguntas y tres opciones el
+reparto de base es 2-2-1, y **si la corta es siempre la misma**, sobre las 244
+lecciones daba **488-466-244** —la tercera opción valía la mitad que las otras
+dos en todo el curso—. Se rota con el número de lección. Hoy: **397-400-401,
+cero escaleras y cero tríos**, y la prueba exige las tres cosas.
+
+### La palabra fallada se puede OÍR
+
+Las 1.198 están locutadas desde el 2026-10-28, así que el ▶ del resultado no
+cuesta un céntimo. Funciona sin tocar el reproductor porque `AUDIO_JS` escucha
+en `document`: un botón que el guion inserta después de cargar la página entra
+solo. Lo único que hubo que ampliar es la condición de cargar el reproductor —
+una lección sin un solo ▶ en su cuerpo pero con palabras locutadas en el quiz
+lo necesita igual.
+
+### Comprobado contestándolo
+
+`scripts/probar_navegador.js` lo contesta en Chromium eligiendo la opción **por
+su TEXTO** y no por su letra ni su posición: por la letra sería repetir la
+cuenta del propio generador y no probaría nada. 5/5 en las lecciones, y los
+días con su propio test siguen sin llevarlo.
+
+**Y la prueba de fondo mira la RELACIÓN, no un número**: para cada pregunta de
+cada lección, la opción marcada como correcta tiene que ser la palabra que el
+profesor puso al lado de esa traducción en la tabla. Si algún día el lector se
+desalinea, se pone en rojo aunque el reparto de letras siga pareciendo sano.
+
+**De paso, dos artefactos de MI comprobación y no del sitio**, los dos del
+mismo tipo y conviene anotarlos: el generador **no copia `docs/fonts/` ni
+`docs/audio/indice.json` a un destino nuevo** —están versionados en `docs/` y
+nada más—, así que una construcción de prueba sale sin tipografía y con cero
+palabras locutadas. En el sitio publicado nunca faltaron. Una construcción de
+prueba hay que sembrarla con los dos índices y las fuentes, o se diagnostica
+un fallo que no existe.
+
 ## El año en casillas y el certificado de nivel (2026-10-29)
 
 El profesor preguntó qué más haría el sitio atractivo para el alumno. Las dos

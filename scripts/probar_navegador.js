@@ -148,6 +148,31 @@ async function unaPagina(b, rel, base) {
     r.resultado = txt.slice(0, 80);
     r.dice_todo_bien = txt.includes(bien + ' / ' + correctas.length);
   }
+  // El quiz de las palabras del dia. Se contesta eligiendo por el TEXTO de la
+  // opcion, nunca por su letra ni por su posicion: por la letra seria repetir
+  // la cuenta del propio generador y la comprobacion no probaria nada.
+  const hayQuiz = await p.evaluate(() => !!(window.CURSO_QUIZ && window.CURSO_QUIZ.preguntas));
+  if (hayQuiz) {
+    const correctas = await p.evaluate(() =>
+      window.CURSO_QUIZ.preguntas.map(q => q.opciones[q.correcta]));
+    r.quiz = correctas.length;
+    await p.locator('#quiz-empezar').click();
+    let bien = 0;
+    for (const texto of correctas) {
+      const bs = p.locator('#quiz .test-ops button');
+      const n = await bs.count();
+      let pulsado = false;
+      for (let k = 0; k < n; k++) {
+        if ((await bs.nth(k).textContent()).trim() === texto) { await bs.nth(k).click(); pulsado = true; bien++; break; }
+      }
+      if (!pulsado) { r.errores.push('quiz: no encontré la opción: ' + texto); break; }
+    }
+    r.quiz_aciertos = bien;
+    const txt = (await p.locator('#quiz').textContent()).replace(/\s+/g, ' ');
+    r.quiz_bien = txt.includes(bien + ' / ' + correctas.length);
+    if (!r.quiz_bien) r.errores.push('el quiz no da ' + bien + '/' + correctas.length + ': ' + txt.slice(0, 80));
+  }
+
   // El audio: que el boton SUENE, no que este puesto. La señal observable es
   // el MP3 pedido con 200 y con bytes, mas `aria-pressed`, que el reproductor
   // solo pone a true si play() resolvio —usa `new Audio()`, que no inserta

@@ -39,6 +39,7 @@ import escribir_leccion  # noqa: E402
 import exportar_anki  # noqa: E402
 import plan  # noqa: E402
 import pruebas  # noqa: E402
+import quiz_lexico  # noqa: E402
 import validar  # noqa: E402
 
 CAL = plan.cargar()
@@ -4123,6 +4124,238 @@ class TestElSaludoYLaRacha(unittest.TestCase):
         self.assertNotIn("variante(hechasAhora", self.js)
 
 
+class TestElQuizDeVocabulario(unittest.TestCase):
+    """Las cinco palabras del día, al cerrar la lección (2026-10-29).
+
+    El profesor echaba en falta un test al final de cada lección. Se le dijo
+    que serían unas 1.100 preguntas nuevas de trabajo de contenido y **eso era
+    falso**: las palabras ya están escritas y traducidas en la tabla
+    `Словарь дня`, así que las preguntas se arman de lo que hay. Cero
+    contenido nuevo, 1.198 preguntas en 244 de los 365 días.
+
+    El contrato es el de `pruebas.py` y el de `huecos.py`: a la mínima duda
+    sobre una entrada se descarta, y si no quedan cuatro limpias esa lección
+    se queda exactamente como está. Decirle a alguien que falló cuando acertó
+    es lo que este proyecto no hace."""
+
+    DOCS = RAIZ / "docs"
+
+    # --- qué entrada sirve y cuál no ---
+
+    def test_una_entrada_sucia_se_descarta_sola(self):
+        """Cada marca significa que la celda no es una traducción limpia de
+        una palabra, y las seis salen de entradas reales del curso."""
+        casos = [
+            (["el conductor (✗ не «кондуктор»)", "водитель"], "aviso entre paréntesis"),
+            (["hay que + инф.", "нужно"], "una construcción, no una palabra"),
+            (["sí / no", "да / нет"], "dos palabras en una"),
+            (["igual 🌎", "одинаковый"], "marca de variante"),
+            (["el zumo", "el jugo"], "la columna rusa trae español"),
+            (["Спокойной ночи", "спокойной ночи"], "la columna española trae ruso"),
+        ]
+        for fila, por_que in casos:
+            self.assertEqual([], quiz_lexico.usables([fila]), por_que)
+
+    def test_una_traduccion_repetida_se_cae_entera(self):
+        """Dos entradas con la misma traducción harían una pregunta con DOS
+        respuestas correctas, y dos con la misma palabra, dos opciones
+        iguales. Las dos vienen de la tabla, así que se descartan: no se
+        arreglan."""
+        filas = [["la casa", "дом"], ["el hogar", "дом"], ["el libro", "книга"]]
+        self.assertEqual([("el libro", "книга")], quiz_lexico.usables(filas))
+        filas = [["la carta", "письмо"], ["la carta", "меню"], ["el libro", "книга"]]
+        self.assertEqual([("el libro", "книга")], quiz_lexico.usables(filas))
+
+    def test_la_tonica_no_llega_a_la_pagina(self):
+        """`la **ca**sa` es la entrada y `la casa` la palabra. Sin limpiar,
+        el alumno leería los asteriscos."""
+        self.assertEqual([("la casa", "дом")], quiz_lexico.usables([["la **ca**sa", "дом"]]))
+
+    def test_con_menos_de_cuatro_limpias_no_hay_quiz(self):
+        """La página se queda exactamente como está hoy."""
+        with tempfile.TemporaryDirectory() as tmp:
+            ruta = pathlib.Path(tmp) / "dia-1.md"
+            ruta.write_text(
+                "---\ntipo: leccion\nnumero: 1\n---\n\n"
+                "## Словарь дня\n\n"
+                "| Español | Русский | Пример |\n|---|---|---|\n"
+                "| la casa | дом | x |\n| el libro | книга | y |\n",
+                encoding="utf-8")
+            self.assertEqual([], quiz_lexico.preguntas_de(ruta, 1))
+
+    # --- lo que de verdad importa: que la respuesta sea la respuesta ---
+
+    def test_la_correcta_es_la_palabra_de_esa_traduccion_en_las_365(self):
+        """La comprobación de fondo, y mira la RELACIÓN y no un número: para
+        cada pregunta de cada lección, la opción marcada como correcta tiene
+        que ser la palabra que el profesor puso al lado de esa traducción en
+        la tabla. Si algún día el lector se desalinea, esto se pone en rojo
+        aunque el reparto de letras siga pareciendo sano."""
+        revisadas = 0
+        for d in DIAS:
+            if not d.ruta.exists():
+                continue
+            preguntas = quiz_lexico.preguntas_de(d.ruta, d.numero)
+            if not preguntas:
+                continue
+            _, filas = exportar_anki.filas_de(d.ruta)
+            pares = {ru: es for es, ru in quiz_lexico.usables(filas)}
+            for q in preguntas:
+                self.assertIn(q["ru"], pares, f"{d.ruta}: «{q['ru']}» no está en la tabla")
+                self.assertEqual(q["opciones"][q["correcta"]], pares[q["ru"]],
+                                 f"{d.ruta}: «{q['ru']}»")
+            revisadas += 1
+        self.assertGreater(revisadas, 200, "casi ninguna lección trae quiz")
+
+    def test_ninguna_pregunta_trae_dos_opciones_iguales(self):
+        """Es el defecto que esta suite ya cazó dos veces en los tests
+        escritos a mano (unidad 14 y semana 21): una pregunta con dos
+        respuestas correctas."""
+        for d in DIAS:
+            if not d.ruta.exists():
+                continue
+            for q in quiz_lexico.preguntas_de(d.ruta, d.numero):
+                self.assertEqual(len(set(q["opciones"])), len(q["opciones"]),
+                                 f"{d.ruta}: {q['opciones']}")
+                self.assertEqual(len(q["opciones"]), quiz_lexico.OPCIONES)
+                self.assertTrue(0 <= q["correcta"] < len(q["opciones"]))
+
+    def test_los_distractores_son_palabras_del_MISMO_dia(self):
+        """Así el ejercicio es «reconozca las palabras de hoy» y no una mezcla
+        con material de hace seis meses. De paso, construir una lección no
+        necesita leer el curso entero."""
+        for d in DIAS[:120]:
+            if not d.ruta.exists():
+                continue
+            preguntas = quiz_lexico.preguntas_de(d.ruta, d.numero)
+            if not preguntas:
+                continue
+            _, filas = exportar_anki.filas_de(d.ruta)
+            suyas = {es for es, _ in quiz_lexico.usables(filas)}
+            for q in preguntas:
+                for o in q["opciones"]:
+                    self.assertIn(o, suyas, f"{d.ruta}: «{o}» no es de esta lección")
+
+    def test_los_dias_con_su_propio_test_no_llevan_este(self):
+        """Dos tests en la misma página son ruido, y un `repaso` no tiene
+        `Словарь дня` siquiera."""
+        for d in DIAS:
+            if d.ruta.exists() and d.tipo in quiz_lexico.SIN_QUIZ:
+                self.assertEqual([], quiz_lexico.preguntas_de(d.ruta, d.numero), str(d.ruta))
+
+    # --- el reparto de la respuesta correcta ---
+
+    def test_la_correcta_esta_repartida_y_sin_ciclo(self):
+        """Dos cosas a la vez, y las dos están aprendidas aquí:
+
+        - REPARTIDA, porque el 2026-10-27 se midió que catorce de quince
+          respuestas de un test de unidad eran la б) y marcando todo б se
+          aprobaba la unidad sin saber nada.
+        - SIN CICLO: una escalera а-б-в-а-б reparte igual de bien en el
+          recuento y se adivina en dos lecciones. Es el mismo defecto con otra
+          cara que tuvieron la letra de los tests y los mensajes de ánimo."""
+        cuenta = Counter()
+        escaleras = tres_iguales = lecciones = 0
+        for d in DIAS:
+            if not d.ruta.exists():
+                continue
+            preguntas = quiz_lexico.preguntas_de(d.ruta, d.numero)
+            if not preguntas:
+                continue
+            lecciones += 1
+            sitios = [q["correcta"] for q in preguntas]
+            cuenta.update(sitios)
+            paso = (sitios[1] - sitios[0]) % quiz_lexico.OPCIONES
+            if all((sitios[i + 1] - sitios[i]) % quiz_lexico.OPCIONES == paso
+                   for i in range(len(sitios) - 1)):
+                escaleras += 1
+            if any(sitios[i] == sitios[i + 1] == sitios[i + 2]
+                   for i in range(len(sitios) - 2)):
+                tres_iguales += 1
+        self.assertEqual(0, escaleras, "hay lecciones con la secuencia en escalera")
+        self.assertEqual(0, tres_iguales, "hay lecciones con tres respuestas iguales seguidas")
+        total = sum(cuenta.values())
+        for sitio in range(quiz_lexico.OPCIONES):
+            parte = cuenta[sitio] / total
+            self.assertGreater(parte, 0.28, f"la opción {sitio} sale el {parte:.0%}")
+            self.assertLess(parte, 0.39, f"la opción {sitio} sale el {parte:.0%}")
+
+    def test_reconstruir_el_sitio_no_mueve_ninguna_respuesta(self):
+        """Determinista a propósito: si no, cada publicación cambiaría el test
+        de 244 lecciones y el alumno vería otras preguntas al recargar."""
+        for d in DIAS[:40]:
+            if d.ruta.exists():
+                self.assertEqual(quiz_lexico.preguntas_de(d.ruta, d.numero),
+                                 quiz_lexico.preguntas_de(d.ruta, d.numero))
+
+    # --- cómo queda en la página ---
+
+    def test_el_bloque_nace_con_el_boton_oculto(self):
+        """Como el resto del sitio: sin JavaScript sería un botón muerto, y el
+        vocabulario ya está en su tabla más arriba con su traducción."""
+        t = construir_sitio.cargar_textos()["ru"]
+        bloque = construir_sitio._bloque_del_quiz(t, [{"ru": "дом", "opciones": ["a", "b", "c"], "correcta": 0}])
+        self.assertIn('id="quiz-arranque" hidden', bloque)
+        self.assertIn('<div id="quiz"></div>', bloque)
+        # Y sin preguntas no se escribe nada en absoluto.
+        self.assertEqual("", construir_sitio._bloque_del_quiz(t, []))
+
+    def test_las_paginas_publicadas_lo_traen_donde_toca(self):
+        if not (self.DOCS / "semana-01" / "dia-1.html").exists():
+            self.skipTest("el sitio todavía no está construido")
+        con = sin = 0
+        for d in DIAS:
+            pagina = self.DOCS / f"semana-{d.semana:02d}" / f"dia-{d.dia}.html"
+            if not pagina.exists():
+                continue
+            texto = pagina.read_text(encoding="utf-8")
+            espera = bool(quiz_lexico.preguntas_de(d.ruta, d.numero))
+            self.assertEqual(espera, 'id="quiz-empezar"' in texto, str(pagina))
+            self.assertEqual(espera, "window.CURSO_QUIZ=" in texto, str(pagina))
+            con += espera
+            sin += not espera
+        self.assertGreater(con, 200)
+        self.assertGreater(sin, 50, "los días con su propio test tienen que quedarse fuera")
+
+    def test_la_palabra_fallada_se_puede_OIR(self):
+        """Las 2.201 palabras del quiz ya están locutadas desde el 2026-10-28,
+        así que el ▶ del resultado no cuesta un céntimo. Y el mp3 tiene que
+        existir: un botón que no suena es peor que ninguno."""
+        if not (self.DOCS / "audio" / construir_sitio.INDICE_AUDIO).exists():
+            self.skipTest("todavía no se ha generado el audio")
+        indice = construir_sitio.indice_de_audio(self.DOCS)
+        total = con_voz = 0
+        for d in DIAS[:60]:
+            if not d.ruta.exists():
+                continue
+            for q in quiz_lexico.preguntas_de(d.ruta, d.numero):
+                total += 1
+                archivo = indice.get(q["opciones"][q["correcta"]])
+                if archivo:
+                    con_voz += 1
+                    self.assertTrue((self.DOCS / "audio" / archivo).exists(),
+                                    f"falta docs/audio/{archivo}")
+        self.assertGreater(total, 0)
+        self.assertEqual(total, con_voz, "hay palabras del quiz sin locutar")
+
+    def test_el_guion_del_quiz_no_lleva_las_respuestas_a_otro_sitio(self):
+        """El quiz no se guarda y no cuenta para nada —lo dice su propia
+        entrada— así que no puede escribir en `localStorage` ni salir a la
+        red. Si algún día contara, habría que decirlo antes."""
+        js = construir_sitio.QUIZ_JS
+        for fuga in ("fetch(", "XMLHttpRequest", "sendBeacon", "localStorage"):
+            self.assertNotIn(fuga, js, f"el quiz usa {fuga}")
+
+    def test_los_tres_idiomas_traen_los_textos(self):
+        t = construir_sitio.cargar_textos()
+        claves = ("titulo", "entrada", "empezar", "instruccion", "de", "resultado",
+                  "aciertos", "sin_fallos", "errores", "repetir")
+        for idioma in ("ru", "es", "en"):
+            for c in claves:
+                self.assertTrue(str(t[idioma]["quiz"].get(c, "")).strip(),
+                                f"falta quiz.{c} en {idioma}")
+
+
 class TestElCalendarioYElCertificado(unittest.TestCase):
     """El año en casillas y el certificado de nivel, del 2026-10-29.
 
@@ -4461,11 +4694,16 @@ class TestElEnlaceDelTestDeNivel(unittest.TestCase):
         # mensajes de aliento viven en una, o sea que el texto más visible del
         # bloque estaba fuera de esta guarda: un «¡Sigue así!» futuro habría
         # entrado sin que nadie lo notara.
-        for clave, valor in self.textos["es"]["progreso"].items():
-            trozos = valor if isinstance(valor, list) else [valor]
-            for texto in trozos:
-                if isinstance(texto, str):
-                    self.assertIsNone(TU.search(texto), f"progreso.{clave} trata de tú: {texto!r}")
+        # Y el bloque del quiz desde el 2026-10-29, que es texto que el
+        # alumno lee en las 244 lecciones: si se quedara fuera, la mezcla de
+        # tú y usted volvería por la puerta más visible del sitio.
+        for bloque in ("progreso", "quiz"):
+            for clave, valor in self.textos["es"][bloque].items():
+                trozos = valor if isinstance(valor, list) else [valor]
+                for texto in trozos:
+                    if isinstance(texto, str):
+                        self.assertIsNone(TU.search(texto),
+                                          f"{bloque}.{clave} trata de tú: {texto!r}")
 
 
 class TestLaRevisionDelCurso(unittest.TestCase):

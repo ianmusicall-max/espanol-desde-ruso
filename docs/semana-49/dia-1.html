@@ -178,6 +178,13 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
   border:1px solid var(--linea);border-radius:8px;background:var(--papel);color:var(--tinta);
   font:inherit}
 .pide-nombre .aviso-chico{flex:1 0 100%;margin:0}
+/* El test de las palabras del día. Usa las cajas del test de nivel —son el
+   mismo trasto— y lo único propio es el marco, que lo separa de los
+   ejercicios de la lección sin parecer otro apartado. */
+.quiz-bloque{margin:2rem 0 0;padding:1.1rem 1.2rem;border:1px solid var(--linea);
+  border-radius:12px;background:var(--tarjeta)}
+.quiz-bloque h2{margin:0 0 .3rem;border:0;padding:0;font-size:1.05rem}
+.quiz-bloque p{margin:0 0 .6rem;font-size:.92rem;color:var(--tenue)}
 /* El calendario del año: una casilla por día y las columnas son semanas.
    La racha ya se contaba desde el 2026-10-29 pero era un número («7 дней»);
    la rejilla dice lo mismo y además enseña los huecos, que es lo que hace
@@ -875,6 +882,7 @@ el curso.</em></p>
                       .catch(function(){b.setAttribute('aria-pressed','false');sonando=null});
   });
 })();</script>
+
 
 
 

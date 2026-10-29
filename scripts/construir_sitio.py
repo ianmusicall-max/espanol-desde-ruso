@@ -38,6 +38,7 @@ sys.path.insert(0, str(RAIZ / "scripts"))
 import plan  # noqa: E402
 import pruebas  # noqa: E402
 import huecos  # noqa: E402
+import quiz_lexico  # noqa: E402
 import validar  # noqa: E402
 # Se importa por `limpiar`: la palabra del índice de imágenes está limpia de
 # negritas, del 🌎 y de la barra de variantes, así que aquí hay que limpiar la
@@ -298,6 +299,13 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
   border:1px solid var(--linea);border-radius:8px;background:var(--papel);color:var(--tinta);
   font:inherit}
 .pide-nombre .aviso-chico{flex:1 0 100%;margin:0}
+/* El test de las palabras del día. Usa las cajas del test de nivel —son el
+   mismo trasto— y lo único propio es el marco, que lo separa de los
+   ejercicios de la lección sin parecer otro apartado. */
+.quiz-bloque{margin:2rem 0 0;padding:1.1rem 1.2rem;border:1px solid var(--linea);
+  border-radius:12px;background:var(--tarjeta)}
+.quiz-bloque h2{margin:0 0 .3rem;border:0;padding:0;font-size:1.05rem}
+.quiz-bloque p{margin:0 0 .6rem;font-size:.92rem;color:var(--tenue)}
 /* El calendario del año: una casilla por día y las columnas son semanas.
    La racha ya se contaba desde el 2026-10-29 pero era un número («7 дней»);
    la rejilla dice lo mismo y además enseña los huecos, que es lo que hace
@@ -1626,6 +1634,68 @@ HUECOS_JS = r"""(function(){
 })();"""
 
 
+QUIZ_JS = r"""(function(){
+  var D=window.CURSO_QUIZ; if(!D||!D.preguntas||!D.preguntas.length)return;
+  var caja=document.getElementById('quiz'); if(!caja)return;
+  var arranque=document.getElementById('quiz-arranque');
+  var boton=document.getElementById('quiz-empezar');
+  if(!arranque||!boton)return;
+  var P=D.preguntas, T=D.t, i=0, aciertos=0, fallos=[];
+
+  function esc(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML}
+
+  // Nace oculto y lo enciende el navegador, como todo lo de este sitio: sin
+  // JavaScript un botón que no hace nada es peor que ningún botón, y el
+  // vocabulario del día ya está en su tabla ahí arriba, con su traducción.
+  arranque.hidden=false;
+
+  function pregunta(){
+    var q=P[i];
+    caja.innerHTML='<div class="test-caja">'
+      +'<div class="test-cuenta">'+(i+1)+' '+esc(T.de)+' '+P.length+'</div>'
+      +'<p class="test-cuenta">'+esc(T.instruccion)+'</p>'
+      +'<p class="test-pregunta">'+esc(q.ru)+'</p>'
+      +'<div class="test-ops">'+q.opciones.map(function(o,n){
+          return '<button type="button" data-n="'+n+'">'+esc(o)+'</button>'}).join('')+'</div>'
+      +'<div class="test-barra"><i style="width:'+(i*100/P.length)+'%"></i></div></div>';
+    caja.querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click',function(){responder(parseInt(b.dataset.n,10))});
+    });
+  }
+
+  function responder(n){
+    var q=P[i];
+    if(n===q.correcta){aciertos++}else{fallos.push(q)}
+    i++;
+    if(i<P.length){pregunta()}else{resultado()}
+  }
+
+  function resultado(){
+    var h='<div class="test-caja"><div class="test-cuenta">'+esc(T.resultado)+'</div>'
+      +'<p class="test-pregunta">'+aciertos+' / '+P.length+' '+esc(T.aciertos)+'</p>';
+    if(!fallos.length){h+='<p>'+esc(T.sin_fallos)+'</p>'}
+    else{
+      h+='<p class="test-cuenta" style="margin-top:1.2rem">'+esc(T.errores)+'</p>';
+      fallos.forEach(function(q){
+        var oir=q.mp3?'<button type="button" class="suena" aria-pressed="false"'
+          +' data-audio="'+esc(q.mp3)+'" aria-label="'+esc(q.opciones[q.correcta])+'">▶</button>':'';
+        h+='<div class="test-fallo"><b>'+oir+esc(q.opciones[q.correcta])+'</b>'
+          +'<span>'+esc(q.ru)+'</span></div>';
+      });
+    }
+    h+='<p style="margin-top:1.2rem">'
+      +'<button type="button" class="boton secundario" id="quiz-otra">'+esc(T.repetir)+'</button></p></div>';
+    caja.innerHTML=h;
+    var r=document.getElementById('quiz-otra');
+    // Las mismas cinco y en el mismo orden: las elige el generador, así que
+    // repetir es repasar lo que se acaba de fallar y no una tirada nueva.
+    if(r)r.addEventListener('click',function(){i=0;aciertos=0;fallos=[];pregunta()});
+  }
+
+  boton.addEventListener('click',function(){arranque.hidden=true;pregunta()});
+})();"""
+
+
 PRUEBA_JS = r"""(function(){
   var D=window.CURSO_PRUEBA; if(!D)return;
   var caja=document.getElementById('prueba'); if(!caja)return;
@@ -1953,6 +2023,7 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
            jsonld="", publicadas=0, mapa_dias="{}", traducida=True, con_audio=False, test=None,
            huecos=None,
            niveles="[]",
+           quiz=None,
            prueba=None) -> str:
     """El armazón de toda página: cabecera con menú y cambio de idioma, cuerpo, pie."""
     dominio = cfg["dominio"]
@@ -2063,6 +2134,7 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
 {f'<script>{AUDIO_JS}</script>' if con_audio else ""}
 {f'<script>window.CURSO_TEST={json.dumps(test, ensure_ascii=False)};{TEST_JS}</script>' if test else ""}
 {f'<script>window.CURSO_PRUEBA={json.dumps(prueba, ensure_ascii=False)};{PRUEBA_JS}</script>' if prueba else ""}
+{f'<script>window.CURSO_QUIZ={json.dumps(quiz, ensure_ascii=False)};{QUIZ_JS}</script>' if quiz else ""}
 {f'<script>window.CURSO_HUECOS={json.dumps({"ejercicios": huecos, "t": t["huecos"]}, ensure_ascii=False)};{HUECOS_JS}</script>' if huecos else ""}
 {f'<script>{CASILLA_JS}</script>' if 'hueco-escribir' in cuerpo else ""}
 </body>
@@ -2275,6 +2347,29 @@ EFECTOS_JS = r"""(function(){
   },2000);
 })();"""
 
+
+
+
+def _bloque_del_quiz(t: dict, preguntas: list) -> str:
+    """El test de las palabras del día, al cerrar la lección.
+
+    Nace con el botón OCULTO y lo enciende el guion, como el resto del sitio:
+    sin JavaScript sería un botón muerto, y el vocabulario ya está en su tabla
+    más arriba con su traducción al lado, que es la versión que vale.
+
+    Va DESPUÉS de los ejercicios y antes de marcar la lección: primero se
+    hace el día, después se comprueban las palabras, y lo último es marcarlo.
+    """
+    if not preguntas:
+        return ""
+    q = t["quiz"]
+    return (f'<div class="quiz-bloque">'
+            f'<h2>{html.escape(q["titulo"])}</h2>'
+            f'<p>{html.escape(q["entrada"])}</p>'
+            f'<div class="botones" id="quiz-arranque" hidden>'
+            f'<button type="button" class="boton" id="quiz-empezar">'
+            f'{html.escape(q["empezar"])}</button></div>'
+            f'<div id="quiz"></div></div>')
 
 
 def _calendario_y_diploma() -> str:
@@ -3654,8 +3749,23 @@ def construir_leccion(d, cfg, t, idiomas, destino, cal, todos, audio=None,
     # gustado, no lo que acabas de abrir.
     # `None` es la raíz del sitio: las lecciones existen solo en ruso.
     canonica = canonica_de(cfg, idiomas, None, f"semana-{d.semana:02d}/dia-{d.dia}.html")
+    # Las cinco palabras del día, si se pueden preguntar sin dudas. Un día
+    # que ya trae su propio test contestable no lleva éste, y una tabla de
+    # la que no salen cuatro preguntas limpias deja la página como está.
+    preguntas_quiz = quiz_lexico.preguntas_de(d.ruta, d.numero)
+    # Y la palabra que se falló se puede OÍR ahí mismo: las 2.201 del quiz ya
+    # están locutadas desde el 2026-10-28, así que no cuesta un céntimo. El
+    # reproductor escucha en `document`, de modo que un botón insertado por el
+    # guion después de cargar la página funciona sin tocar nada más.
+    for q in preguntas_quiz:
+        archivo = (audio or {}).get(q["opciones"][q["correcta"]])
+        if archivo:
+            q["mp3"] = f"../audio/{archivo}"
+    datos_quiz = ({"preguntas": preguntas_quiz, "t": t["quiz"]}
+                  if preguntas_quiz else None)
     cuerpo_final = (f'<article data-leccion="{d.numero}">' + cab + guia + aviso
-                    + html_cuerpo + anuncio(cfg, "pie") + '<div id="marcar-caja"></div>'
+                    + html_cuerpo + anuncio(cfg, "pie")
+                    + _bloque_del_quiz(t, preguntas_quiz) + '<div id="marcar-caja"></div>'
                     + _compartir(t, cfg, canonica)
                     + f'<nav class="pasos">{"".join(pasos)}</nav></article>')
 
@@ -3665,8 +3775,10 @@ def construir_leccion(d, cfg, t, idiomas, destino, cal, todos, audio=None,
         pagina(cfg, t, idiomas, "ru", titulo, cuerpo_final, descripcion=descripcion,
                pagina_id=f"semana-{d.semana:02d}/dia-{d.dia}.html", raiz="..",
                publicadas=len(escritas(cal)), mapa_dias=mapa_de_dias(cal), traducida=False,
-               con_audio='class="suena"' in cuerpo_final, prueba=datos_prueba,
-               huecos=datos_huecos),
+               con_audio=('class="suena"' in cuerpo_final
+                          or any(q.get("mp3") for q in preguntas_quiz)),
+               prueba=datos_prueba,
+               huecos=datos_huecos, quiz=datos_quiz),
         encoding="utf-8")
 
 
