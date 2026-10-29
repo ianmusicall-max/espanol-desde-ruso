@@ -100,6 +100,22 @@ ru:
     cuanto: "Сколько это стоит"
     cuanto_texto: "Нисколько. Курс открыт целиком, без регистрации. Сайт существует за счёт рекламы."
     abierto: "Сейчас открыто"
+    falta: "Что нужно для занятий"
+    falta_texto: "Покупать ничего не надо: курс, озвучка, картинки и карточки — бесплатно и без регистрации. Но три вещи понадобятся с первого дня, и лучше знать об этом заранее."
+    falta_lista:
+      - "<strong>Тетрадь и ручка.</strong> Больше половины уроков просят что-то написать от руки. Это не прихоть: рука запоминает написание лучше клавиатуры, а ударения и ñ на телефоне набирать неудобно."
+      - "<strong>Телефон с диктофоном.</strong> Каждый пятый урок просит записать себя и послушать. Изнутри свой акцент не слышно — это единственный способ его заметить. Подойдёт тот диктофон, который уже есть в телефоне."
+      - "<strong>Карточки для слов.</strong> С них начинается почти каждый урок. Делать их самому не нужно: колода уже готова — 3001 слово с озвучкой и картинками, скачать можно на странице со списком уроков. Бумажные тоже подойдут, если так привычнее."
+    falta_no: "Что НЕ нужно: учебник — курс полный сам по себе; словарь — все слова переведены в самом уроке; принтер. В наушниках испанские звуки слышно лучше, но обойтись можно и без них."
+    dele: "Зачем это нужно: экзамен DELE A2"
+    dele_texto: "Курс ведёт к DELE A2 — это официальный диплом по испанскому языку. Его выдаёт Институт Сервантеса от имени Министерства образования Испании."
+    dele_lista:
+      - "<strong>Действует бессрочно.</strong> Сдали один раз — продлевать и подтверждать не нужно."
+      - "<strong>Признаётся во всём мире:</strong> это государственный диплом Испании, а не сертификат языковой школы."
+      - "<strong>Нужен для испанского гражданства.</strong> Тем, чей родной язык не испанский, DELE A2 нужен при подаче на гражданство по месту жительства. Граждане двадцати испаноязычных стран от него освобождены — к русскоговорящим это как раз не относится."
+      - "<strong>Подтверждает понятный уровень:</strong> вы понимаете повседневную речь о себе, семье, покупках, работе и дороге и можете объясниться в простых ситуациях."
+    dele_examen: "Экзамен состоит из четырёх частей: чтение (60 минут), аудирование (40), письмо (45) и устная часть (12 минут плюс 12 на подготовку). Считают по двум группам, и в каждой нужно набрать 60 %: чтение с письмом в одной, аудирование с устной частью в другой. Поэтому одной грамматики не хватит — последние четыре недели курса это пробные экзамены целиком."
+    dele_aviso: "Даты, цена и места сдачи меняются каждый год, поэтому их здесь нет: смотрите на examenes.cervantes.es. Курс готовит к экзамену, но не записывает на него и ничего не гарантирует."
   contacto:
     titulo: "Контакты"
     texto: "Пишите об ошибке в уроке, о том, что непонятно, или о занятиях с преподавателем."
@@ -174,6 +190,7 @@ ru:
     tsv_nota: "Для Excel, Google Таблиц, Quizlet и любого другого приложения."
   compartir:
     titulo: "Поделиться уроком"
+    titulo_curso: "Поделиться курсом"
     telegram: "Telegram"
     whatsapp: "WhatsApp"
     copiar: "Скопировать ссылку"
@@ -209,6 +226,7 @@ ru:
     hecho_restaurar: "Готово: восстановлено уроков — %n%"
     nombre_label: "Как вас зовут?"
     nombre_boton: "Сохранить"
+    nombre_cambiar: "Изменить"
     nombre_nota: "Только чтобы обращаться к вам по имени. Имя остаётся в этом браузере и никуда не отправляется."
     # Los mensajes de aliento al terminar una lección. Son LISTAS y van
     # emparejadas por índice: `bravo[i]` es la misma frase que `bravo_con[i]`
@@ -331,6 +349,22 @@ es:
     cuanto: "Cuánto cuesta"
     cuanto_texto: "Nada. El curso está abierto entero, sin registro. La web se sostiene con publicidad."
     abierto: "Publicadas"
+    falta: "Qué hace falta"
+    falta_texto: "No hay que comprar nada: el curso, el audio, los dibujos y las tarjetas son gratis y sin registro. Pero tres cosas se necesitan desde el primer día, y conviene saberlo antes de empezar."
+    falta_lista:
+      - "<strong>Un cuaderno y un bolígrafo.</strong> Más de la mitad de las lecciones piden escribir algo a mano. No es un capricho: la mano retiene la ortografía mejor que el teclado, y las tildes y la ñ en el móvil se teclean mal."
+      - "<strong>Un móvil con grabadora.</strong> Una de cada cinco lecciones pide grabarse y escucharse. El propio acento no se oye desde dentro: es la única forma de notarlo. Sirve la grabadora que ya trae el teléfono."
+      - "<strong>Tarjetas de vocabulario.</strong> Casi todas las lecciones empiezan con ellas. No hay que hacerlas: la baraja ya está hecha —3001 palabras con voz y dibujo— y se descarga en la página de las lecciones. De papel también valen."
+    falta_no: "Lo que NO hace falta: un libro de texto —el curso se sostiene solo—, un diccionario —todas las palabras vienen traducidas en la propia lección— ni impresora. Con auriculares los sonidos españoles se oyen mejor, pero se puede sin ellos."
+    dele: "Para qué sirve: el examen DELE A2"
+    dele_texto: "El curso lleva al DELE A2, el Diploma de Español como Lengua Extranjera. Lo expide el Instituto Cervantes en nombre del Ministerio de Educación de España."
+    dele_lista:
+      - "<strong>No caduca.</strong> Se aprueba una vez y no hay que renovarlo ni revalidarlo."
+      - "<strong>Tiene reconocimiento internacional:</strong> es un título oficial del Estado español, no el certificado de una academia."
+      - "<strong>Hace falta para la nacionalidad española.</strong> Quien no tiene el español como lengua materna lo necesita al solicitar la nacionalidad por residencia. Los nacionales de veinte países hispanohablantes están exentos; los rusohablantes, precisamente, no."
+      - "<strong>Acredita un nivel que se entiende:</strong> comprende el habla cotidiana sobre uno mismo, la familia, las compras, el trabajo y los desplazamientos, y se hace entender en situaciones sencillas."
+    dele_examen: "El examen son cuatro pruebas: lectura (60 minutos), audición (40), escritura (45) y oral (12 minutos más 12 de preparación). Se puntúa en dos grupos y hay que sacar el 60 % en cada uno: lectura con escritura en uno, audición con oral en el otro. Por eso no basta la gramática, y las cuatro últimas semanas del curso son simulacros enteros."
+    dele_aviso: "Las fechas, el precio y los centros cambian cada año, así que no están aquí: se consultan en examenes.cervantes.es. El curso prepara para el examen; no inscribe a nadie ni garantiza nada."
   contacto:
     titulo: "Contacto"
     texto: "Escriba por un error en una lección, por algo que no se entienda o por clases con profesor."
@@ -405,6 +439,7 @@ es:
     tsv_nota: "Para Excel, Google Sheets, Quizlet y cualquier otra app."
   compartir:
     titulo: "Compartir esta lección"
+    titulo_curso: "Compartir el curso"
     telegram: "Telegram"
     whatsapp: "WhatsApp"
     copiar: "Copiar el enlace"
@@ -440,6 +475,7 @@ es:
     hecho_restaurar: "Listo: %n% lecciones restauradas"
     nombre_label: "¿Cómo se llama?"
     nombre_boton: "Guardar"
+    nombre_cambiar: "Cambiar"
     nombre_nota: "Solo para saludarle por su nombre. Se queda en este navegador y no se envía a ninguna parte."
     bravo:
       - "¡Muy bien!"
@@ -550,6 +586,22 @@ en:
     cuanto: "What it costs"
     cuanto_texto: "Nothing. The whole course is open, with no sign-up. The site is supported by advertising."
     abierto: "Published"
+    falta: "What you need"
+    falta_texto: "Nothing to buy: the course, the audio, the drawings and the flashcards are free and need no sign-up. But three things are needed from day one, and it is better to know beforehand."
+    falta_lista:
+      - "<strong>A notebook and a pen.</strong> More than half the lessons ask you to write something by hand. Not a whim: the hand remembers spelling better than a keyboard, and accents and ñ are awkward to type on a phone."
+      - "<strong>A phone that records.</strong> One lesson in five asks you to record yourself and listen. You cannot hear your own accent from the inside — this is the only way to notice it. The recorder already on your phone will do."
+      - "<strong>Vocabulary flashcards.</strong> Almost every lesson starts with them. You do not have to make them: the deck is ready — 3,001 words with audio and pictures — and downloads from the lessons page. Paper ones work too."
+    falta_no: "What you do NOT need: a textbook — the course stands on its own; a dictionary — every word is translated inside the lesson; or a printer. Headphones make the Spanish sounds clearer, but you can do without."
+    dele: "What it is for: the DELE A2 exam"
+    dele_texto: "The course leads to the DELE A2, the Diploma of Spanish as a Foreign Language. It is issued by the Instituto Cervantes on behalf of Spain's Ministry of Education."
+    dele_lista:
+      - "<strong>It never expires.</strong> Pass once and there is nothing to renew or revalidate."
+      - "<strong>It is recognised internationally:</strong> an official Spanish state qualification, not a language-school certificate."
+      - "<strong>It is required for Spanish nationality.</strong> Anyone whose first language is not Spanish needs it when applying for nationality by residence. Nationals of twenty Spanish-speaking countries are exempt; Russian speakers are not."
+      - "<strong>It certifies a level you can describe:</strong> you understand everyday speech about yourself, family, shopping, work and getting around, and you can make yourself understood in simple situations."
+    dele_examen: "The exam has four papers: reading (60 minutes), listening (40), writing (45) and speaking (12 minutes plus 12 to prepare). It is marked in two groups and you need 60 % in each: reading with writing in one, listening with speaking in the other. Grammar alone is not enough, which is why the last four weeks of the course are full mock exams."
+    dele_aviso: "Dates, price and centres change every year, so they are not here: check examenes.cervantes.es. The course prepares you for the exam; it does not enrol you and guarantees nothing."
   contacto:
     titulo: "Contact"
     texto: "Write about a mistake in a lesson, about something unclear, or about lessons with a teacher."
@@ -624,6 +676,7 @@ en:
     tsv_nota: "For Excel, Google Sheets, Quizlet and any other app."
   compartir:
     titulo: "Share this lesson"
+    titulo_curso: "Share the course"
     telegram: "Telegram"
     whatsapp: "WhatsApp"
     copiar: "Copy the link"
@@ -659,6 +712,7 @@ en:
     hecho_restaurar: "Done: %n% lessons restored"
     nombre_label: "What is your name?"
     nombre_boton: "Save"
+    nombre_cambiar: "Change"
     nombre_nota: "Only to greet you by name. It stays in this browser and is never sent anywhere."
     bravo:
       - "Well done!"

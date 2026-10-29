@@ -15,6 +15,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+import urllib.parse
 import xml.etree.ElementTree as ET
 from collections import Counter
 
@@ -2168,6 +2169,196 @@ class TestLaPruebaDeUnidad(unittest.TestCase):
         self.assertGreater(total, 50, "la clave dice de qué lección sale cada respuesta")
 
 
+class TestLoQueHaceFaltaYElDele(unittest.TestCase):
+    """Los dos apartados de «О курсе» y compartir desde la portada, del
+    2026-10-29.
+
+    Se leen de `docs/` y no se construye el sitio otra vez: `docs/` está
+    versionado y `test_docs_esta_al_dia` ya garantiza que corresponde a los
+    fuentes, así que construirlo aquí serían 17 MB más por método en la clase
+    más cara de la suite."""
+
+    def setUp(self):
+        self.cfg = construir_sitio.cargar_config()
+        self.textos = construir_sitio.cargar_textos()
+        self.idiomas = self.textos["idiomas"]
+
+    def _pagina(self, rel):
+        return (RAIZ / "docs" / rel).read_text(encoding="utf-8")
+
+    # ---- el material que hace falta ----
+
+    def test_el_material_sale_antes_de_empezar_y_en_los_tres_idiomas(self):
+        """Contado sobre las 365 lecciones el 2026-10-29: 295 piden tarjetas,
+        187 escribir a mano y 77 grabarse. O sea que el curso ya exigía
+        material desde la lección 1 y no se avisaba en ninguna parte."""
+        for codigo, rel in (("ru", "o-kurse.html"), ("es", "es/o-kurse.html"),
+                            ("en", "en/o-kurse.html")):
+            s = self.textos[codigo]["sobre"]
+            pag = self._pagina(rel)
+            self.assertIn(html.escape(s["falta"]), pag, codigo)
+            self.assertEqual(len(s["falta_lista"]), 3, codigo)
+            for punto in s["falta_lista"]:
+                # El punto entero, que lleva <strong> dentro: va sin escapar a
+                # propósito, así que si alguien lo pasara por html.escape se
+                # vería el `<strong>` literal en la página y esto se pone rojo.
+                self.assertIn(punto, pag, (codigo, punto[:40]))
+            self.assertIn(html.escape(s["falta_no"]), pag, codigo)
+
+    def test_el_material_que_hace_falta_nombra_lo_que_el_curso_pide(self):
+        """Las tres cosas no son una opinión: salen de contar las lecciones.
+        Y la tercera dice que la baraja YA ESTÁ HECHA, que es lo que la
+        convierte en un enlace y no en un gasto."""
+        lista = " ".join(self.textos["ru"]["sobre"]["falta_lista"]).lower()
+        for pide in ("тетрад", "диктофон", "карточк"):
+            self.assertIn(pide, lista, pide)
+        self.assertIn("3001", lista, "la baraja ya hecha es lo que evita el gasto")
+        # Y lo que NO hace falta, que es la mitad del valor de la sección.
+        no = self.textos["ru"]["sobre"]["falta_no"].lower()
+        for sobra in ("учебник", "словар"):
+            self.assertIn(sobra, no, sobra)
+
+    # ---- el DELE ----
+
+    def test_el_dele_sale_en_los_tres_idiomas_con_sus_cuatro_puntos(self):
+        for codigo, rel in (("ru", "o-kurse.html"), ("es", "es/o-kurse.html"),
+                            ("en", "en/o-kurse.html")):
+            s = self.textos[codigo]["sobre"]
+            pag = self._pagina(rel)
+            self.assertIn(html.escape(s["dele"]), pag, codigo)
+            self.assertEqual(len(s["dele_lista"]), 4, codigo)
+            for punto in s["dele_lista"]:
+                self.assertIn(punto, pag, (codigo, punto[:40]))
+            self.assertIn(html.escape(s["dele_examen"]), pag, codigo)
+            self.assertIn(html.escape(s["dele_aviso"]), pag, codigo)
+
+    def test_la_estructura_del_examen_es_la_que_el_programa_verifico(self):
+        """Los minutos no se escriben de memoria: están en
+        `alineacion-mcer-pcic.md` §5, verificados el 2026-10-26 contra fuentes
+        que citan la guía oficial de 2020, y las semanas 45-52 del curso se
+        construyeron sobre ellos.
+
+        Lo que esta prueba evita es que la página y el programa se separen: si
+        alguien corrige el documento, el apartado público tiene que seguirlo, y
+        al revés. Es la deriva que este proyecto sufre una y otra vez."""
+        doc = (RAIZ / "programa" / "alineacion-mcer-pcic.md").read_text(encoding="utf-8")
+        seccion = doc[doc.index("## 5."):doc.index("## 6.")]
+        for codigo in ("ru", "es", "en"):
+            texto = self.textos[codigo]["sobre"]["dele_examen"]
+            for minutos in ("60", "40", "45", "12"):
+                self.assertIn(minutos, texto, (codigo, minutos))
+                self.assertIn(minutos, seccion, f"el programa ya no dice {minutos}")
+            # El 60 % por grupo, que es la regla que de verdad decide un apto.
+            self.assertIn("60", seccion)
+
+    def test_el_dele_no_se_atribuye_el_cervantes(self):
+        """La decisión del 2026-10-27: el sitio habla del EXAMEN, que es un
+        hecho, y nunca de una autoría prestada. Se rechazó escribir
+        «elaborado por profesores del Cervantes» porque nada en este
+        repositorio lo sostiene, y porque tergiversar credenciales es causa de
+        rechazo de AdSense con nombre propio."""
+        PRESTADA = re.compile(
+            r"(profesor\w*|elaborad\w*|cread\w*|preparad\w*|авторы?|составлен\w*)"
+            r"[^.]{0,40}(Cervantes|Сервантес)", re.I)
+        for codigo in ("ru", "es", "en"):
+            s = self.textos[codigo]["sobre"]
+            for clave in ("dele_texto", "dele_examen", "dele_aviso"):
+                self.assertIsNone(PRESTADA.search(s[clave]), (codigo, clave))
+            for punto in s["dele_lista"]:
+                self.assertIsNone(PRESTADA.search(punto), (codigo, punto[:40]))
+
+    def test_el_dele_no_trae_precio_ni_fechas(self):
+        """Regla 7. La tasa, las fechas y los centros cambian cada año, así que
+        no se escriben: se manda a la fuente oficial. Es lo mismo que las
+        lecciones S50D7 y S52D7, que llevan `[VERIFICAR]` por esto.
+
+        Un precio viejo en la página es peor que ninguno: el lector cuenta con
+        él y se lleva la sorpresa al inscribirse."""
+        for codigo in ("ru", "es", "en"):
+            s = self.textos[codigo]["sobre"]
+            todo = " ".join([s["dele_texto"], s["dele_examen"], s["dele_aviso"]]
+                            + list(s["dele_lista"]))
+            for moneda in ("€", "EUR", "USD", "руб", "$"):
+                self.assertNotIn(moneda, todo, (codigo, moneda))
+            # Ningún año: una convocatoria con año se queda vieja en meses.
+            self.assertIsNone(re.search(r"\b20[0-9]{2}\b", todo), codigo)
+            # Y el aviso manda a la fuente, que es lo que sostiene el apartado.
+            self.assertIn("examenes.cervantes.es", s["dele_aviso"], codigo)
+
+    # ---- compartir el curso, desde la portada ----
+
+    def test_la_portada_tambien_se_puede_compartir(self):
+        """Los botones estaban al pie de las 365 lecciones y no en la portada,
+        que es justo la página que alguien manda para recomendar el curso. La
+        regla del 2026-10-27 —«se comparte lo que ya has leído»— era correcta
+        para las lecciones y dejó sin mirar el caso que más trae gente."""
+        for codigo, rel in (("ru", "index.html"), ("es", "es/index.html"),
+                            ("en", "en/index.html")):
+            pag = self._pagina(rel)
+            self.assertIn('class="compartir"', pag, codigo)
+            self.assertIn('id="copiar-enlace"', pag, codigo)
+            # Una sola vez: dos bloques en la misma página duplicarían el id y
+            # el botón de copiar dejaría de funcionar en uno de los dos.
+            self.assertEqual(pag.count('id="copiar-enlace"'), 1, codigo)
+
+    def test_el_rotulo_de_la_portada_dice_curso_y_no_leccion(self):
+        """El rótulo de la lección dice «esta lección» y en la portada sería
+        falso: lo que se manda desde ahí es el curso. Un rótulo equivocado no
+        rompe nada, y por eso hay que escribirlo."""
+        for codigo, rel in (("ru", "index.html"), ("es", "es/index.html"),
+                            ("en", "en/index.html")):
+            c = self.textos[codigo]["compartir"]
+            pag = self._pagina(rel)
+            self.assertIn(html.escape(c["titulo_curso"]), pag, codigo)
+            self.assertNotIn(html.escape(c["titulo"]), pag, codigo)
+
+    def test_compartir_la_portada_enlaza_a_la_portada_de_ese_idioma(self):
+        """La SEXTA vez que esta suite mira una ruta por idioma, y por el mismo
+        motivo que las cinco anteriores —el conmutador de idioma, las tarjetas
+        del mapa, los destinos del probador, las fuentes y los iconos—: una URL
+        escrita sin tener en cuenta en qué carpeta está la página.
+
+        Aquí el fallo sería mudo y caro: el botón de compartir del curso en
+        inglés mandaría a la portada rusa."""
+        for codigo, rel in (("ru", "index.html"), ("es", "es/index.html"),
+                            ("en", "en/index.html")):
+            esperada = construir_sitio.canonica_de(self.cfg, self.idiomas, codigo,
+                                                   "index.html")
+            self.assertTrue(esperada, "hace falta dominio configurado")
+            pag = self._pagina(rel)
+            self.assertIn(f'data-url="{html.escape(esperada)}"', pag, codigo)
+            self.assertIn(urllib.parse.quote(esperada, safe=""), pag, codigo)
+
+    def test_la_canonica_se_calcula_en_un_solo_sitio(self):
+        """`canonica_de` tiene que dar lo MISMO que el `<link rel="canonical">`
+        de la página construida. Prueba la relación y no el texto: si alguien
+        vuelve a rearmar la URL a mano en un tercer sitio, las dos cuentas se
+        separan y esto lo caza.
+
+        La lección se la rearmaba con `cfg['dominio'] + "/semana-.."`, que
+        funcionaba por una coincidencia —existen solo en ruso y el ruso va en
+        la raíz—."""
+        casos = [(None, "semana-01/dia-1.html", "semana-01/dia-1.html"),
+                 ("ru", "index.html", "index.html"),
+                 ("es", "o-kurse.html", "es/o-kurse.html"),
+                 ("en", "index.html", "en/index.html")]
+        for idioma, pagina_id, rel in casos:
+            esperada = construir_sitio.canonica_de(self.cfg, self.idiomas, idioma, pagina_id)
+            pag = self._pagina(rel)
+            self.assertIn(f'<link rel="canonical" href="{html.escape(esperada)}">', pag,
+                          (idioma, pagina_id))
+
+    def test_sin_dominio_no_hay_canonica_ni_botones(self):
+        """Un enlace para compartir que apunta a `file:///` no le sirve a
+        nadie, y un `canonical` sin dominio sería una URL relativa declarada
+        como absoluta."""
+        sin = dict(self.cfg, dominio="")
+        self.assertEqual(
+            construir_sitio.canonica_de(sin, self.idiomas, "ru", "index.html"), "")
+        self.assertEqual(
+            construir_sitio.canonica_de(sin, self.idiomas, None, "x.html"), "")
+        self.assertEqual(construir_sitio._compartir(self.textos["ru"], sin, ""), "")
+
 if __name__ == "__main__":
     unittest.main()
 
@@ -3814,6 +4005,39 @@ class TestElSaludoYLaRacha(unittest.TestCase):
                 self.assertTrue(self.textos[i]["progreso"][clave].strip(), (i, clave))
         for marca in ("T.cuantas", "T.faltan", "T.racha", "T.bravo_con", "T.primera"):
             self.assertIn(marca, self.js, marca)
+
+
+    def test_el_nombre_se_puede_poner_desde_la_primera_visita(self):
+        """Lo pidió el profesor el 2026-10-29: poder escribir el nombre en la
+        portada.
+
+        El campo ya existía ahí, pero DENTRO de `#mio`, que se enciende solo
+        cuando ya hay lecciones marcadas. O sea que era invisible justo para
+        quien acaba de llegar, que es a quien se le quería preguntar. Vive
+        fuera, y esta prueba es la que impide que vuelva a meterse dentro."""
+        for rel in ("index.html", "es/index.html", "en/index.html"):
+            pag = (RAIZ / "docs" / rel).read_text(encoding="utf-8")
+            self.assertIn('id="nombre-portada"', pag, rel)
+            # Fuera de `#mio`: el hueco aparece ANTES de que `#mio` abra.
+            self.assertLess(pag.index('id="nombre-portada"'), pag.index('id="mio"'), rel)
+
+    def test_el_campo_del_nombre_lo_monta_el_navegador(self):
+        """Nace vacío y oculto, como el resto del sitio: sin JavaScript no
+        habría dónde guardarlo y sería un formulario que no hace nada."""
+        pag = (RAIZ / "docs" / "index.html").read_text(encoding="utf-8")
+        self.assertIn('<p class="pide-nombre" id="nombre-portada" hidden></p>', pag)
+        for marca in ("getElementById('nombre-portada')", "hueco.hidden=false"):
+            self.assertIn(marca, self.js, marca)
+
+    def test_desde_la_portada_se_puede_cambiar_el_nombre(self):
+        """Quien ya lo dio ve un saludo y un botón, no un campo abierto
+        ocupando sitio para siempre."""
+        self.assertIn("T.nombre_cambiar", self.js)
+        self.assertIn("removeItem(CLAVE_NOMBRE)", self.js)
+        for i in ("ru", "es", "en"):
+            self.assertTrue(self.textos[i]["progreso"]["nombre_cambiar"].strip(), i)
+        # Enter guarda: en el móvil el teclado tapa el botón.
+        self.assertIn("e.key==='Enter'", self.js)
 
     def test_las_dos_listas_de_aliento_van_emparejadas(self):
         """Los mensajes variados los pidió el profesor el 2026-10-29: «los

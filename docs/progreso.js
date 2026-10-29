@@ -192,6 +192,56 @@
     }
   }
 
+  // --- el nombre, en la portada y desde la primera visita ---
+  //
+  // Vive FUERA de `#mio` a propósito. `#mio` se enciende solo cuando ya hay
+  // lecciones marcadas, así que el campo metido ahí era invisible justo para
+  // quien acaba de llegar, que es a quien el profesor quería preguntarle.
+  // Lo que no se hace es una ventana al entrar: un formulario que tapa la
+  // página antes de que el visitante haya visto nada es la forma más fiable
+  // de perderlo.
+  var hueco=document.getElementById('nombre-portada');
+  if(hueco){
+    var ponerNombre=function(){
+      hueco.innerHTML='';
+      var quien=nombre();
+      if(quien){
+        // Ya lo dio: se le saluda y se le deja cambiarlo, sin un campo
+        // abierto ocupando sitio.
+        var hola=document.createElement('span');
+        hola.textContent=conPlantilla(T.vuelta,{nombre:quien});
+        var otro=document.createElement('button');
+        otro.type='button';otro.className='boton secundario';
+        otro.textContent=T.nombre_cambiar||T.nombre_boton||'';
+        otro.addEventListener('click',function(){
+          try{localStorage.removeItem(CLAVE_NOMBRE)}catch(e){}
+          ponerNombre();
+        });
+        hueco.appendChild(hola);hueco.appendChild(otro);
+      }else{
+        var et=document.createElement('label');et.textContent=T.nombre_label||'';
+        var ca=document.createElement('input');
+        ca.type='text';ca.autocomplete='given-name';ca.maxLength=40;
+        var bo=document.createElement('button');
+        bo.type='button';bo.className='boton secundario';bo.textContent=T.nombre_boton||'';
+        var no=document.createElement('span');
+        no.className='aviso-chico';no.textContent=T.nombre_nota||'';
+        var guardarlo=function(){
+          var v=ca.value.trim().slice(0,40);
+          if(!v)return;
+          try{localStorage.setItem(CLAVE_NOMBRE,v)}catch(e){}
+          ponerNombre();
+        };
+        bo.addEventListener('click',guardarlo);
+        // Enter guarda: en el móvil el teclado tapa el botón.
+        ca.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();guardarlo()}});
+        hueco.appendChild(et);hueco.appendChild(ca);hueco.appendChild(bo);hueco.appendChild(no);
+      }
+      hueco.hidden=false;
+    };
+    ponerNombre();
+  }
+
   // --- el contador personal, donde lo haya ---
   var hechasAhora=hechas(), publicadas=window.CURSO_PUBLICADAS||0;
   var contador=document.getElementById('mio');

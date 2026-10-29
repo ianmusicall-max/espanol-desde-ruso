@@ -280,6 +280,11 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 .respaldo .enlace{background:none;border:0;padding:0;margin-inline-start:.6rem;
   color:var(--acento);text-decoration:underline;cursor:pointer;font:inherit}
 .aviso-chico{margin:.4rem 0 0;font-size:.82rem;color:var(--tenue)}
+/* Las listas de «qué hace falta» y del DELE: cada punto es un párrafo corto
+   con su negrita, no una palabra, así que necesitan aire entre ellos. */
+.lista-larga{margin:.6rem 0 1rem;padding-inline-start:1.2rem}
+.lista-larga li{margin:0 0 .7rem}
+.lista-larga li:last-child{margin-bottom:0}
 /* El saludo al marcar la lección, la racha y el campo del nombre. El campo
    se envuelve en varias líneas a propósito: en el móvil, una etiqueta, una
    casilla y un botón en la misma fila dejan la casilla en cuarenta píxeles. */
@@ -878,6 +883,56 @@ PROGRESO_JS = r"""(function(){
       var empezar=document.getElementById('empezar');
       if(empezar){empezar.textContent=T.empezar;empezar.classList.add('secundario')}
     }
+  }
+
+  // --- el nombre, en la portada y desde la primera visita ---
+  //
+  // Vive FUERA de `#mio` a propósito. `#mio` se enciende solo cuando ya hay
+  // lecciones marcadas, así que el campo metido ahí era invisible justo para
+  // quien acaba de llegar, que es a quien el profesor quería preguntarle.
+  // Lo que no se hace es una ventana al entrar: un formulario que tapa la
+  // página antes de que el visitante haya visto nada es la forma más fiable
+  // de perderlo.
+  var hueco=document.getElementById('nombre-portada');
+  if(hueco){
+    var ponerNombre=function(){
+      hueco.innerHTML='';
+      var quien=nombre();
+      if(quien){
+        // Ya lo dio: se le saluda y se le deja cambiarlo, sin un campo
+        // abierto ocupando sitio.
+        var hola=document.createElement('span');
+        hola.textContent=conPlantilla(T.vuelta,{nombre:quien});
+        var otro=document.createElement('button');
+        otro.type='button';otro.className='boton secundario';
+        otro.textContent=T.nombre_cambiar||T.nombre_boton||'';
+        otro.addEventListener('click',function(){
+          try{localStorage.removeItem(CLAVE_NOMBRE)}catch(e){}
+          ponerNombre();
+        });
+        hueco.appendChild(hola);hueco.appendChild(otro);
+      }else{
+        var et=document.createElement('label');et.textContent=T.nombre_label||'';
+        var ca=document.createElement('input');
+        ca.type='text';ca.autocomplete='given-name';ca.maxLength=40;
+        var bo=document.createElement('button');
+        bo.type='button';bo.className='boton secundario';bo.textContent=T.nombre_boton||'';
+        var no=document.createElement('span');
+        no.className='aviso-chico';no.textContent=T.nombre_nota||'';
+        var guardarlo=function(){
+          var v=ca.value.trim().slice(0,40);
+          if(!v)return;
+          try{localStorage.setItem(CLAVE_NOMBRE,v)}catch(e){}
+          ponerNombre();
+        };
+        bo.addEventListener('click',guardarlo);
+        // Enter guarda: en el móvil el teclado tapa el botón.
+        ca.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();guardarlo()}});
+        hueco.appendChild(et);hueco.appendChild(ca);hueco.appendChild(bo);hueco.appendChild(no);
+      }
+      hueco.hidden=false;
+    };
+    ponerNombre();
   }
 
   // --- el contador personal, donde lo haya ---
@@ -1657,6 +1712,29 @@ def _iconos(raiz: str) -> str:
     return "".join(salida)
 
 
+def canonica_de(cfg, idiomas, idioma, pagina_id: str) -> str:
+    """La URL absoluta de una página, o cadena vacía sin dominio configurado.
+
+    Vive aquí y no dentro de `pagina()` porque la necesitan además los bloques
+    de compartir, que van en el CUERPO: la lección se la rearmaba a mano y con
+    la portada habría tres copias de la misma cuenta. Dos copias de la misma
+    pregunta es como se descubre tarde que una de las dos miente —pasó con
+    `facebook.permisos` en el proyecto hermano y con `replica.CARPETA`—.
+
+    `idioma=None` es la RAÍZ del sitio, que es donde viven las 365 lecciones:
+    existen solo en ruso y por eso no cuelgan de ninguna carpeta de idioma.
+    Pedirlo así y no pasar un `"ru"` a ciegas es lo que deja la cuenta escrita
+    una sola vez sin dar por supuesto cuál es el idioma de la raíz."""
+    dominio = cfg.get("dominio")
+    if not dominio:
+        return ""
+    carpeta = ""
+    if idioma is not None:
+        carpeta = next(i for i in idiomas if i["codigo"] == idioma)["carpeta"]
+    base = f"{dominio}/{carpeta}".rstrip("/")
+    return f"{base}/{pagina_id}" if pagina_id else base
+
+
 def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id="", raiz=".",
            jsonld="", publicadas=0, mapa_dias="{}", traducida=True, con_audio=False, test=None,
            huecos=None,
@@ -1665,7 +1743,7 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
     dominio = cfg["dominio"]
     actual = next(i for i in idiomas if i["codigo"] == idioma)
     base_actual = f"{dominio}/{actual['carpeta']}".rstrip("/") if dominio else ""
-    canonica = f"{base_actual}/{pagina_id}" if base_actual and pagina_id else base_actual
+    canonica = canonica_de(cfg, idiomas, idioma, pagina_id)
 
     menu = "".join(
         f'<a href="{raiz}/{destino}"{" aria-current=\"page\"" if destino == pagina_id else ""}>{html.escape(t["menu"][clave])}</a>'
@@ -2291,6 +2369,7 @@ def construir_portada(cfg, t, idiomas, idioma, destino, cal, raiz,
 <div class="cifras"><span class="n">{len(hechas)}</span><span>/ {total} {html.escape(p['progreso'])}</span></div>
 <div class="barra"><i style="width:{max(pct, 1)}%"></i></div>
 {nota_meses}
+<p class="pide-nombre" id="nombre-portada" hidden></p>
 <div id="mio" hidden>
 <div class="cifras"><span class="n">0</span><span class="texto"></span></div>
 <div class="barra"><i style="width:1%"></i></div>
@@ -2327,6 +2406,7 @@ def construir_portada(cfg, t, idiomas, idioma, destino, cal, raiz,
 <h2>{html.escape(p['final_titulo'])}</h2>
 <p>{html.escape(p['final_texto'])}</p>
 <div class="botones"><a class="boton" href="{enlace}">{html.escape(p['final_boton'])}</a></div>
+{_compartir(t, cfg, canonica_de(cfg, idiomas, idioma, "index.html"), t['compartir']['titulo_curso'])}
 {anuncio(cfg, "pie")}
 """
     destino.joinpath("index.html").write_text(
@@ -2587,8 +2667,12 @@ REDES = (("telegram", "Telegram"), ("instagram", "Instagram"),
          ("youtube", "YouTube"), ("facebook", "Facebook"))
 
 
-def _compartir(t, cfg, canonica: str) -> str:
-    """Compartir la lección, y seguir el curso.
+def _compartir(t, cfg, canonica: str, de_que: str = "") -> str:
+    """Compartir la lección —o el curso, desde la portada—.
+
+    `de_que` es el rótulo. Hace falta porque el de la lección dice «esta
+    lección» y en la portada eso sería falso: lo que se manda desde ahí es el
+    curso. Un rótulo equivocado no rompe nada, y por eso se escribe.
 
     **Enlaces normales y NUNCA los widgets oficiales.** El botón «Compartir»
     de Facebook carga el SDK de Meta, que rastrea al lector; la política de
@@ -2616,7 +2700,7 @@ def _compartir(t, cfg, canonica: str) -> str:
         f'data-url="{html.escape(canonica)}" data-ok="{html.escape(c["copiado"])}">'
         f'{html.escape(c["copiar"])}</button>',
     ]
-    return (f'<div class="compartir"><span class="de-que">{html.escape(c["titulo"])}</span>'
+    return (f'<div class="compartir"><span class="de-que">{html.escape(de_que or c["titulo"])}</span>'
             f'{"".join(enlaces)}</div>')
 
 
@@ -2991,6 +3075,15 @@ def construir_estaticas(cfg, t, idiomas, idioma, destino, cal, raiz) -> None:
 <h2>{html.escape(s['cuanto'])}</h2>
 <p>{html.escape(s['cuanto_texto'])}</p>
 <p><strong>{html.escape(s['abierto'])}: {hechas} / {len(plan.dias(cal))}.</strong></p>
+<h2>{html.escape(s['falta'])}</h2>
+<p>{html.escape(s['falta_texto'])}</p>
+<ul class="lista-larga">{"".join(f"<li>{x}</li>" for x in s['falta_lista'])}</ul>
+<p>{html.escape(s['falta_no'])}</p>
+<h2>{html.escape(s['dele'])}</h2>
+<p>{html.escape(s['dele_texto'])}</p>
+<ul class="lista-larga">{"".join(f"<li>{x}</li>" for x in s['dele_lista'])}</ul>
+<p>{html.escape(s['dele_examen'])}</p>
+<p class="aviso-chico">{html.escape(s['dele_aviso'])}</p>
 {anuncio(cfg, "pie")}
 """
     destino.joinpath("o-kurse.html").write_text(
@@ -3309,7 +3402,8 @@ def construir_leccion(d, cfg, t, idiomas, destino, cal, todos, audio=None,
     # no haría nada, y un botón muerto es peor que ninguno.
     # Compartir va al PIE y no arriba: se comparte lo que ya has leído y te ha
     # gustado, no lo que acabas de abrir.
-    canonica = f"{cfg['dominio']}/semana-{d.semana:02d}/dia-{d.dia}.html" if cfg.get("dominio") else ""
+    # `None` es la raíz del sitio: las lecciones existen solo en ruso.
+    canonica = canonica_de(cfg, idiomas, None, f"semana-{d.semana:02d}/dia-{d.dia}.html")
     cuerpo_final = (f'<article data-leccion="{d.numero}">' + cab + guia + aviso
                     + html_cuerpo + anuncio(cfg, "pie") + '<div id="marcar-caja"></div>'
                     + _compartir(t, cfg, canonica)

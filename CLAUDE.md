@@ -4954,6 +4954,179 @@ está el código de respaldo del 2026-10-27, y conviene saber que **el código n
 lleva el nombre ni las fechas**: son 46 bytes de lecciones hechas, y crecer el
 formato rompería los códigos que la gente ya tenga guardados.
 
+## Qué hace falta, el DELE A2, y compartir desde la portada (2026-10-29)
+
+Tres pedidos del profesor seguidos, y los tres se contestaron midiendo antes de
+escribir.
+
+### «¿Es necesario mencionar que el alumno necesita un cuaderno?»
+
+Sí, y no era una opinión: se contó sobre las 365 lecciones.
+
+    tarjetas (карточк*)   295 lecciones   81 %
+    escribir (запиши*)    187             51 %
+    grabarse              77              21 %
+    cuaderno (тетрад*)    25
+    cronómetro             9 · espejo 3 · auriculares 2
+
+O sea que **el curso ya exigía material desde la lección 1 y no se avisaba en
+ninguna parte**. Quien llega no sabe qué necesita, y eso se descubre a mitad
+del primer ejercicio.
+
+El apartado nuevo de «О курсе» dice tres cosas —cuaderno y bolígrafo, el móvil
+para grabarse, y las tarjetas— y **lo que NO hace falta**, que es la mitad de
+su valor: ni libro de texto (el curso se sostiene solo), ni diccionario (todas
+las palabras vienen traducidas dentro de la lección), ni impresora.
+
+**La tercera es la que convierte un gasto en un enlace**: la baraja ya está
+hecha —3001 palabras con voz y dibujo— así que el alumno no tiene que fabricar
+nada. Hay una prueba que exige que el texto lo diga.
+
+**Van PROPORCIONES y no los números exactos**, y es deliberado: «187 de 365»
+sale de contar las lecciones que contienen «запиши», que no es lo mismo que
+las que piden escribir. Lo que el recuento sostiene de verdad es el orden de
+magnitud, y además una proporción no envejece el día que se reescriba una
+lección. Los números exactos quedan aquí, que es donde se pueden fechar.
+
+### El DELE A2: lo que el profesor trajo coincidía con lo que ya estaba verificado
+
+Trajo la descripción del examen con sus fuentes. Lo primero fue cotejarla con
+`programa/alineacion-mcer-pcic.md` §5, verificado el 2026-10-26, y **coincide
+hasta el minuto**: 60 de lectura, 40 de audición, 45 de escritura y 12 de oral
+más 12 de preparación. Son dos verificaciones independientes del mismo dato, lo
+cual lo refuerza — y por eso hay una prueba que compara el apartado público
+con esa sección del programa: **si alguien corrige uno, el otro tiene que
+seguirlo**. Es la deriva que este proyecto sufre una y otra vez.
+
+**Las cuatro fuentes que trajo no se pudieron abrir** (`delea2.org`, el
+Cervantes de Berlín y las otras dan `000` desde este contenedor, como ya pasaba
+con el Cervantes en octubre). Lo que se confirmó se confirmó por búsqueda, con
+fuentes de terceros: título oficial del Instituto Cervantes en nombre del
+Ministerio de Educación de España, validez indefinida, reconocimiento
+internacional, y requisito para la nacionalidad por residencia.
+
+**Un matiz que el profesor no mencionó y que cambia la frase**: los nacionales
+de veinte países hispanohablantes están EXENTOS del DELE para la nacionalidad.
+Su público rusohablante es justo el que no lo está, así que el dato le sirve —
+pero escrito sin ese matiz sería falso para media América, y el sitio se lee
+también en español.
+
+Tres cosas que el apartado no hace, y las tres tienen prueba:
+
+- **No trae precio ni fechas** (regla 7): la tasa, las convocatorias y los
+  centros cambian cada año. Es lo mismo que las lecciones S50D7 y S52D7, que
+  llevan `[VERIFICAR]` por esto. Un precio viejo en la página es peor que
+  ninguno, porque el lector cuenta con él. El aviso manda a
+  `examenes.cervantes.es`, y la prueba exige que ese enlace esté: es lo que
+  sostiene el apartado entero.
+- **No se atribuye el Cervantes.** Es la decisión del 2026-10-27, cuando se
+  rechazó escribir «elaborado por profesores del Cervantes»: el sitio habla del
+  EXAMEN, que es un hecho, no de una autoría prestada. La guarda busca
+  «profesor/elaborado/creado/авторы» a menos de cuarenta caracteres de
+  «Cervantes».
+- **No promete aprobar**: dice que el curso prepara, no que inscriba ni
+  garantice nada.
+
+### «En la página principal no está el botón para compartir»
+
+Tenía razón, y es el patrón que más se repite aquí: **una regla correcta para
+el caso que la motivó, aplicada a un caso que nadie miró**. El 2026-10-27 se
+decidió que compartir va al pie de la lección «porque se comparte lo que ya has
+leído», y eso dejó fuera la portada — que es justamente la página que alguien
+manda para recomendar el curso, y por tanto la que más gente puede traer.
+
+Dos cosas que no son de forma:
+
+- **El rótulo cambia.** El de la lección dice «Поделиться **уроком**», y en la
+  portada eso sería falso: lo que se manda desde ahí es el curso. Un rótulo
+  equivocado no rompe nada, y por eso hay que escribirlo y probarlo.
+- **La canónica pasa a calcularse en UN solo sitio** (`canonica_de`). Estaba
+  dentro de `pagina()` y la lección la rearmaba a mano con
+  `cfg['dominio'] + "/semana-.."`, que funciona **por una coincidencia**: las
+  lecciones existen solo en ruso y el ruso va en la raíz. Con la portada habría
+  tres copias de la misma cuenta, y dos copias de la misma pregunta es como se
+  descubre tarde que una de las dos miente —pasó con `facebook.permisos` y con
+  `replica.CARPETA` en el proyecto hermano—. `idioma=None` significa «la raíz
+  del sitio», que es lo que la lección quiere decir, en vez de pasarle un
+  `"ru"` a ciegas.
+- **El enlace de cada portada apunta a SU portada.** Es la sexta vez que esta
+  suite mira una ruta por idioma, después del conmutador de idioma, las
+  tarjetas del mapa, los destinos del probador, las fuentes y los iconos. Aquí
+  el fallo sería mudo y caro: el botón del curso en inglés mandando a la
+  portada rusa. La prueba resuelve las tres contra `canonica_de`.
+
+Y una cosa del ensayo que vale anotar: el parche se probó **sobre copias** de
+los dos ficheros antes de tocar el repo, y ahí saltó que `yaml.safe_dump`
+**envuelve a 80 columnas**, así que un texto largo salía partido en varias
+líneas sin la indentación del bloque y dejaba `textos.yaml` ilegible para el
+propio YAML. Se escriben con `json.dumps`, que es un subconjunto válido de YAML
+para un escalar entre comillas y no envuelve nada.
+
+### El vídeo por lección: medido, probado y NO aplicado (2026-10-29)
+
+El profesor preguntó si se podía montar un canal de YouTube y poner un vídeo
+por lección, y al terminar aclaró que **no va a grabar nada: era una
+pregunta**. Así que no se aplicó nada. Queda escrito porque lo que costó
+averiguar no es el código.
+
+**Lo que bloquea esto no es técnico, es la política de privacidad.** Un
+`<iframe>` de YouTube carga el reproductor de Google al abrir la página, y la
+política de este sitio promete por escrito que sin anuncios no se carga nada
+de terceros. Es el mismo caso que ya se decidió dos veces: los widgets de
+compartir —que por eso son enlaces normales— y Google Fonts, que por eso están
+autoalojadas. La miniatura tampoco vale: `i.ytimg.com` también es de Google.
+
+La salida es una **fachada**: un bloque con el botón, y el iframe
+(`youtube-nocookie.com`) lo inserta el guion **al pulsar**. Medido en
+navegador: antes del clic, **cero peticiones a Google**; después, una. Y sin
+JavaScript el bloque es un **enlace** a YouTube y no un botón muerto, que es
+la regla del sitio desde el principio —va al revés que el resto, nace como
+enlace y el guion lo convierte en botón, porque la versión sin guion tiene que
+ser la que sirve—.
+
+**Y aun así hay que escribir una línea en la política**, diciendo que al
+pulsar YouTube recibe la IP y los datos del dispositivo. Ésa es la razón de no
+dejarlo puesto «por si acaso»: sin vídeos, esa línea afirma algo que no pasa, y
+lo único que una política no puede hacer es describir mal lo que el sitio
+carga. Más el campo, el guion, el CSS y ocho guardas sin camino, que es lo que
+ya pasó con `render_cifra` y `render_tarjetas`.
+
+**Sobre el canal en sí**, por si vuelve la pregunta: la política de
+monetización de YouTube pone como ejemplo de contenido «inauténtico» —el que
+no se monetiza— las plantillas clonadas, las diapositivas sin aporte y las
+lecturas con voz sintética. O sea que generar 365 vídeos del curso con los
+11.378 audios y los 300 dibujos que ya hay en disco **pondría en riesgo el
+canal entero**, no solo esos vídeos: es la lección del 2026-10-04 en el
+proyecto hermano, donde el reglamento de Facebook penaliza con menos alcance
+en TODA la cuenta. Lo que sí monetiza es el profesor grabándose, porque cada
+vídeo tiene enfoque propio. Los umbrales (1.000 suscriptores, 4.000 horas, y
+8.000 desde febrero de 2027) y la fecha de la política vienen de blogs de
+terceros que **se contradicen entre sí**: cotejar en la página oficial del
+Programa de Socios antes de montar nada. Y YouTube paga por AdSense, o sea el
+mismo asunto de residencia fiscal que quedó pendiente de un contable el 27.
+
+### Y el nombre, desde la portada (2026-10-29)
+
+El profesor lo pidió al final del día: poder escribir el nombre en la página
+principal. **El campo ya estaba ahí** —se añadió esa misma mañana— pero DENTRO
+de `#mio`, el recuadro de progreso, que se enciende solo cuando ya hay
+lecciones marcadas. O sea que era invisible **exactamente para quien acaba de
+llegar**, que es a quien se le quería preguntar. El mismo patrón que el botón
+de restaurar el progreso el 2026-10-27: escondido justo para el que lo
+necesita.
+
+Ahora vive fuera, y hay una prueba que exige que el hueco aparezca ANTES que
+`#mio` en el HTML: si vuelve a meterse dentro, nadie lo notaría mirando la
+página con progreso.
+
+**Lo que sigue sin hacerse es una ventana al entrar**, y eso no cambió: un
+formulario que tapa la página antes de que el visitante haya visto nada es la
+forma más fiable de perderlo. Es un campo en la columna, debajo del contador.
+
+Dos cosas menores que importan en el móvil: **Enter guarda** —ahí el teclado
+tapa el botón— y quien ya dio su nombre ve un saludo con un botón «Изменить»,
+no un campo abierto ocupando sitio para siempre.
+
 ## Estado (2026-10-28)
 
 - Programa anual completo (365 días) y documentación del método.
