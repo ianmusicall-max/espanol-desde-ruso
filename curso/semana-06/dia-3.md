@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Las mascotas y el 'de' posesivo"
 tema_ru: "Домашние животные и притяжательное 'de'"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 6 · Día 3 — Las mascotas y el 'de' posesivo

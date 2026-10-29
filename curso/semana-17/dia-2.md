@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "En la estación: billetes y horarios"
 tema_ru: "На вокзале: билеты и расписание"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 17 · Día 2 — En la estación: billetes y horarios

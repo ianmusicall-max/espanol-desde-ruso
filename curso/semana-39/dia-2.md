@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Deberías, yo que tú, lo mejor es"
 tema_ru: "Тебе следовало бы, я бы на твоём месте, лучше всего"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 39 · Día 2 — Deberías, yo que tú, lo mejor es

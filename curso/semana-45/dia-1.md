@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Estrategias de lectura: anuncios, carteles, programas"
 tema_ru: "Стратегии чтения: объявления, вывески, программы"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 45 · Día 1 — Estrategias de lectura: anuncios, carteles, programas

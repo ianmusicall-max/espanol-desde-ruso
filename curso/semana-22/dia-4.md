@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Proyecto «Mi vida» (1): preparar"
 tema_ru: "Проект «Моя жизнь» (1): подготовка"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 22 · Día 4 — Proyecto «Mi vida» (1): preparar

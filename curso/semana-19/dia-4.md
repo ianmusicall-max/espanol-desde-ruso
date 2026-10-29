@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "En la consulta y en la farmacia"
 tema_ru: "На приёме у врача и в аптеке"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 19 · Día 4 — En la consulta y en la farmacia

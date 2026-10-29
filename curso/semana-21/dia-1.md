@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Repaso 1: ser, estar, hay, tener"
 tema_ru: "Повторение 1: ser, estar, hay, tener"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 21 · Día 1 — Repaso 1: ser, estar, hay, tener

@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Problemas en la ciudad: he perdido la cartera"
 tema_ru: "Проблемы в городе: я потерял кошелёк"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 32 · Día 3 — Problemas en la ciudad: he perdido la cartera

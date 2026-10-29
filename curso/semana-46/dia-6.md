@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Prueba de la Unidad 23"
 tema_ru: "Тест по Уроку 23"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 46 · Día 6 — Prueba de la Unidad 23

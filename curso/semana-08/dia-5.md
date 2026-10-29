@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Mi barrio: del camino a casa al texto"
 tema_ru: "Мой район: от дороги домой к тексту"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 8 · Día 5 — Mi barrio: del camino a casa al texto

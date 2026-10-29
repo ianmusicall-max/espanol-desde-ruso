@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Ofertas de empleo"
 tema_ru: "Вакансии"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 30 · Día 1 — Ofertas de empleo

@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "El carácter: ¿cómo es tu hermano?"
 tema_ru: "Характер: какой твой брат?"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 5 · Día 5 — El carácter: ¿cómo es tu hermano?

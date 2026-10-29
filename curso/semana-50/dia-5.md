@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Refuerzo 4: oral"
 tema_ru: "Работа над ошибками 4: устная речь"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 50 · Día 5 — Refuerzo 4: oral

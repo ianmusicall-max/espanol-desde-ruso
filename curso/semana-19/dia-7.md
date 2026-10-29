@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Salud, farmacias y remedios caseros"
 tema_ru: "Здоровье, аптеки и домашние средства"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 19 · Día 7 — Salud, farmacias y remedios caseros

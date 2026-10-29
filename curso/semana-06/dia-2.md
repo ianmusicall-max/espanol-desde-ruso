@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "¿Dónde está? Estar + lugar"
 tema_ru: "¿Dónde está? Estar + место"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 6 · Día 2 — ¿Dónde está? Estar + lugar

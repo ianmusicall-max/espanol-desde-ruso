@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Consejos: integración"
 tema_ru: "Советы: интеграция"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 40 · Día 5 — Consejos: integración

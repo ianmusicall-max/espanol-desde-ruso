@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "La moda hispana y el regateo; tarea final"
 tema_ru: "Испанская мода и торг; итоговое задание"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 14 · Día 7 — La moda hispana y el regateo; tarea final

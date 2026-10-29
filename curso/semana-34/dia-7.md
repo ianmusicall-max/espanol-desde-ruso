@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Ciencia ficción hispana y Año Nuevo; tarea final"
 tema_ru: "Испаноязычная фантастика и Новый год; итоговое задание"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 34 · Día 7 — Ciencia ficción hispana y Año Nuevo; tarea final

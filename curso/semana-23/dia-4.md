@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Años y fechas: nací en 1995"
 tema_ru: "Годы и даты: я родился в 1995"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 23 · Día 4 — Años y fechas: nací en 1995

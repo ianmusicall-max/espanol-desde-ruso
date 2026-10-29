@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Fiestas del mundo hispano: ¿cómo se celebra?"
 tema_ru: "Праздники испаноязычного мира: как празднуют?"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 43 · Día 3 — Fiestas del mundo hispano: ¿cómo se celebra?

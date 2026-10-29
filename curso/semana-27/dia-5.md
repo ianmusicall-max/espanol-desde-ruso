@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Noticias breves: quién, qué, cuándo, dónde"
 tema_ru: "Короткие новости: кто, что, когда, где"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 27 · Día 5 — Noticias breves: quién, qué, cuándo, dónde

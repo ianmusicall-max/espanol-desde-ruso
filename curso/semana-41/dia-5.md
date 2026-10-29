@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Normas de convivencia: hay que, no se puede"
 tema_ru: "Правила совместной жизни: надо, нельзя"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 41 · Día 5 — Normas de convivencia: hay que, no se puede

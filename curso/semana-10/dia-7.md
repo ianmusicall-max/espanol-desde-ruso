@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "El ritmo de vida y la tarea final"
 tema_ru: "Ритм жизни и итоговое задание"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 10 · Día 7 — El ritmo de vida y la tarea final

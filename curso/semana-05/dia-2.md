@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Los posesivos: mi, tu, su"
 tema_ru: "Притяжательные: mi, tu, su"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 5 · Día 2 — Los posesivos: mi, tu, su

@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Alquilar un piso: contrato, fianza, gastos"
 tema_ru: "Снять квартиру: договор, залог, коммунальные"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 41 · Día 1 — Alquilar un piso: contrato, fianza, gastos

@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "La infancia y la escuela"
 tema_ru: "Детство и школа"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 25 · Día 4 — La infancia y la escuela

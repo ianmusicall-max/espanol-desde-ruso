@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Repaso de la semana 39: condicional y por / para"
 tema_ru: "Повторение недели 39: условное наклонение и por / para"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 39 · Día 6 — Repaso de la semana 39: condicional y por / para

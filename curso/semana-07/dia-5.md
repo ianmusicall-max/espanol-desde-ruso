@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Ir a: ¿Adónde vas?"
 tema_ru: "Ir a: куда идёшь?"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 7 · Día 5 — Ir a: ¿Adónde vas?

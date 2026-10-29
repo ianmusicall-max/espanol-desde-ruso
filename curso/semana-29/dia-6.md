@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Repaso de la semana 29: trabajo y saber / conocer"
 tema_ru: "Повторение недели 29: работа и saber / conocer"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 29 · Día 6 — Repaso de la semana 29: trabajo y saber / conocer

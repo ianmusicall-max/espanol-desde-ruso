@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Perfecto o indefinido: hoy / ayer"
 tema_ru: "Perfecto или indefinido: сегодня / вчера"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 24 · Día 1 — Perfecto o indefinido: hoy / ayer

@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Prueba de la Unidad 18"
 tema_ru: "Тест по Уроку 18"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 36 · Día 6 — Prueba de la Unidad 18

@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "El currículum"
 tema_ru: "Резюме"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 29 · Día 4 — El currículum

@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "El presente regular: -ar, -er, -ir"
 tema_ru: "Настоящее время правильных глаголов: -ar, -er, -ir"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 9 · Día 2 — El presente regular: -ar, -er, -ir

@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Algo, nada, alguien, nadie, algún, ningún"
 tema_ru: "Что-то, ничего, кто-то, никто, какой-нибудь, никакой"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 38 · Día 2 — Algo, nada, alguien, nadie, algún, ningún

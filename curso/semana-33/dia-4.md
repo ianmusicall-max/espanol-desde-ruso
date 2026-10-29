@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Si llueve, no iremos: condiciones reales"
 tema_ru: "Если пойдёт дождь, мы не пойдём: реальные условия"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 33 · Día 4 — Si llueve, no iremos: condiciones reales

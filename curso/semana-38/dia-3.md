@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Elegir un producto: reseñas"
 tema_ru: "Выбрать товар: отзывы"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 38 · Día 3 — Elegir un producto: reseñas

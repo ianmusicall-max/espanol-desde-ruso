@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "El condicional: me gustaría, podría"
 tema_ru: "Условное наклонение: мне хотелось бы, мог бы"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 39 · Día 1 — El condicional: me gustaría, podría

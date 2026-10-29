@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Expresión escrita: los dos textos con rúbrica"
 tema_ru: "Письмо: два текста с критериями"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 48 · Día 4 — Expresión escrita: los dos textos con rúbrica

@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Tiendas y productos: ¿dónde se compra…?"
 tema_ru: "Магазины и товары: где покупают…?"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 14 · Día 1 — Tiendas y productos: ¿dónde se compra…?

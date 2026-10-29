@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Tan … como, tanto … como; mejor, peor, mayor, menor"
 tema_ru: "Такой же … как, столько же … сколько; лучше, хуже, старше, младше"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 37 · Día 2 — Tan … como, tanto … como; mejor, peor, mayor, menor

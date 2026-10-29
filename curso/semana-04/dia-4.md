@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "¿Cómo es? Describir objetos"
 tema_ru: "¿Cómo es? Описание предметов"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 4 · Día 4 — ¿Cómo es? Describir objetos

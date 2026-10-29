@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Урок 306: Праздник моей страны: интеграция — Испанский с нуля для русскоговорящих</title>
-<meta name="description" content="Урок 306: Праздник моей страны: интеграция. Invitación escrita; texto «Una fiesta de mi país» (150 palabras); presentación oral de 2 minutos"><link rel="canonical" href="https://espanoldesderuso.com/semana-44/dia-5.html"><meta property="og:type" content="website"><meta property="og:locale" content="ru"><meta property="og:title" content="Урок 306: Праздник моей страны: интеграция — Испанский с нуля для русскоговорящих"><meta property="og:description" content="Урок 306: Праздник моей страны: интеграция. Invitación escrita; texto «Una fiesta de mi país» (150 palabras); presentación oral de 2 minutos"><meta property="og:url" content="https://espanoldesderuso.com/semana-44/dia-5.html"><meta property="og:image" content="https://espanoldesderuso.com/img/tarjeta.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Урок 306: Праздник моей страны: интеграция — Испанский с нуля для русскоговорящих"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://espanoldesderuso.com/img/tarjeta.png">
+<meta name="description" content="Урок 306: Праздник моей страны: интеграция. Invitación escrita; texto «Una fiesta de mi país» (150 palabras); presentación oral de 2 minutos"><link rel="canonical" href="https://espanoldesderuso.com/semana-44/dia-5.html"><meta property="og:type" content="website"><meta property="og:locale" content="ru"><meta property="og:title" content="Урок 306: Праздник моей страны: интеграция — Испанский с нуля для русскоговорящих"><meta property="og:description" content="Урок 306: Праздник моей страны: интеграция. Invitación escrita; texto «Una fiesta de mi país» (150 palabras); presentación oral de 2 minutos"><meta property="og:url" content="https://espanoldesderuso.com/semana-44/dia-5.html"><meta property="og:image" content="https://espanoldesderuso.com/img/tarjeta.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Урок 306: Праздник моей страны: интеграция — Испанский с нуля для русскоговорящих"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://espanoldesderuso.com/img/tarjeta.png"><link rel="icon" type="image/png" sizes="32x32" href="../img/icono-32.png"><link rel="icon" type="image/png" sizes="512x512" href="../img/icono.png"><link rel="apple-touch-icon" href="../img/icono-180.png">
 <style>@font-face{font-family:'Literata';font-style:normal;font-weight:400;font-display:swap;src:url(../fonts/literata-cyrillic-400.woff2) format('woff2');unicode-range:U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116}
 @font-face{font-family:'Literata';font-style:italic;font-weight:400;font-display:swap;src:url(../fonts/literata-cyrillic-400i.woff2) format('woff2');unicode-range:U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116}
 @font-face{font-family:'Literata';font-style:normal;font-weight:700;font-display:swap;src:url(../fonts/literata-cyrillic-700.woff2) format('woff2');unicode-range:U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116}
@@ -231,6 +231,12 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 .u-tarjeta .alto{display:flex;align-items:baseline;gap:.5rem;margin-bottom:.3rem}
 .u-tarjeta .num{font-size:1.45rem;font-weight:700;color:var(--acento);
   font-feature-settings:"tnum";line-height:1}
+/* `align-self` porque la fila alinea por la línea base y una imagen no tiene:
+   sin esto el dibujo cuelga del número. Mismo tratamiento que `.dibujo` de
+   las tablas de vocabulario —fondo de ficha y esquina redonda— para que las
+   dos formas de enseñar un dibujo se parezcan. */
+.u-tarjeta .u-dibujo{width:40px;height:40px;border-radius:8px;align-self:center;
+  background:var(--tarjeta)}
 .u-tarjeta .nivel{margin-inline-start:auto;font-size:.68rem;font-weight:700;letter-spacing:.06em;
   color:var(--celeste);border:1px solid var(--celeste);border-radius:999px;padding:.05rem .4rem}
 .u-tarjeta .tit{font-weight:600;font-size:.94rem;color:var(--tinta);line-height:1.3;
@@ -253,7 +259,13 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 ul.dias li.hecha .num::after{content:"✓";color:var(--acento);font-weight:700;margin-inline-start:.25rem}
 ul.dias li.hecha a{color:var(--tenue)}
 #mio{margin-top:.9rem;padding-top:.9rem;border-top:1px dashed var(--linea)}
-.puerta{font-size:.9rem;color:var(--tenue);margin:-.6rem 0 0}
+/* El margen negativo era de la PORTADA, donde `.puerta` va pegada a los dos
+   botones del héroe y hacía falta recogerla. En `kurs.html` va detrás del
+   botón de restaurar el progreso, y ahí lo que hacía era METERSE ENCIMA: el
+   enlace y la frase se tocaban. Lo vio el profesor en una captura. Ahora el
+   recorte vive donde se escribió, colgado del hermano anterior. */
+.puerta{font-size:.9rem;color:var(--tenue);margin:1.2rem 0 0}
+.botones+.puerta{margin-top:-.6rem}
 .puerta a{color:var(--acento);font-weight:600}
 .progreso-nota{font-size:.84rem;color:var(--tenue);font-family:Onest,ui-sans-serif,system-ui,sans-serif;margin-top:.5rem}
 #borrar-progreso{background:none;border:0;padding:0;color:var(--tenue);text-decoration:underline;
@@ -474,7 +486,7 @@ footer.sitio p{margin:.35rem 0}
 <p class="sin-idioma" id="sin-idioma" hidden>Эта страница есть только на русском. <a href="" data-ir="Открыть главную страницу"></a></p>
 </div></header>
 <main><div class="envoltorio">
-<article data-leccion="306"><div class="leccion-cab"><span class="n">Урок 306</span><span>из 365</span><span class="tipo">урок</span><span>неделя 44 · уровень A2</span></div><div id="guia" class="guia" hidden></div><p class="aviso">Черновик: урок написан, но преподаватель его ещё не вычитал.</p><h1 id="semana-44-dia-5-una-fiesta-de-mi-pais-integracion">Semana 44 · Día 5 — Una fiesta de mi país: integración</h1>
+<article data-leccion="306"><div class="leccion-cab"><span class="n">Урок 306</span><span>из 365</span><span class="tipo">урок</span><span>неделя 44 · уровень A2</span></div><div id="guia" class="guia" hidden></div><h1 id="semana-44-dia-5-una-fiesta-de-mi-pais-integracion">Semana 44 · Día 5 — Una fiesta de mi país: integración</h1>
 <h1 id="44-5">Неделя 44 · День 5 — Праздник моей страны: интеграция</h1>
 <blockquote>
 <p><strong>Сегодня вы научитесь</strong></p>

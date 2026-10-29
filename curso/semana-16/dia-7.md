@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Fiestas populares del calendario; tarea final"
 tema_ru: "Народные праздники календаря; итоговое задание"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 16 · Día 7 — Fiestas populares del calendario; tarea final

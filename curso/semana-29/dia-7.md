@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "El mundo laboral hispano"
 tema_ru: "Трудовая жизнь в испаноязычном мире"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 29 · Día 7 — El mundo laboral hispano

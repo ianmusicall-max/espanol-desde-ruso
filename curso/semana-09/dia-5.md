@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Mi rutina: primero, luego, después"
 tema_ru: "Мой распорядок: сначала, потом, затем"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 9 · Día 5 — Mi rutina: primero, luego, después

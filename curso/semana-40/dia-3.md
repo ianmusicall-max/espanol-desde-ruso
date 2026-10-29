@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Comer sano: demasiado, suficiente, bastante"
 tema_ru: "Здоровое питание: слишком, достаточно, довольно"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 40 · Día 3 — Comer sano: demasiado, suficiente, bastante

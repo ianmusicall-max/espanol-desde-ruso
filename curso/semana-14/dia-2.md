@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Un regalo: ¿para quién es?"
 tema_ru: "Подарок: для кого?"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 14 · Día 2 — Un regalo: ¿para quién es?

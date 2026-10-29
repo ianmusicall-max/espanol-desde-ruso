@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "El correo formal"
 tema_ru: "Официальное письмо"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 30 · Día 3 — El correo formal

@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Imperativo afirmativo: toma, bebe, descansa"
 tema_ru: "Повелительное наклонение: toma, bebe, descansa"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 20 · Día 1 — Imperativo afirmativo: toma, bebe, descansa

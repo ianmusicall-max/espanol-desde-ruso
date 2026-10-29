@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Dentro de diez años: predicciones personales"
 tema_ru: "Через десять лет: личные прогнозы"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 33 · Día 5 — Dentro de diez años: predicciones personales

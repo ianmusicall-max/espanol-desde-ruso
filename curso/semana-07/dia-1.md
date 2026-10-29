@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "La casa: habitaciones y el verbo vivir"
 tema_ru: "Дом: комнаты и глагол vivir"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 7 · Día 1 — La casa: habitaciones y el verbo vivir

@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Un día normal: entrevista y texto"
 tema_ru: "Обычный день: интервью и текст"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 10 · Día 5 — Un día normal: entrevista y texto

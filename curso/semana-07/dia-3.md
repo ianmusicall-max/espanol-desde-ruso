@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Mi piso: cómo es, dónde está, en qué planta"
 tema_ru: "Моя квартира: какая, где, на каком этаже"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 7 · Día 3 — Mi piso: cómo es, dónde está, en qué planta

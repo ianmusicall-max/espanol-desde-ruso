@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Una película en español (fragmentos)"
 tema_ru: "Фильм на испанском (фрагменты)"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 47 · Día 7 — Una película en español (fragmentos)

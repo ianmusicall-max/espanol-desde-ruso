@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Destinos hispanos para rusos; tarea final"
 tema_ru: "Популярные у россиян испаноязычные направления; итоговое задание"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 18 · Día 7 — Destinos hispanos para rusos; tarea final

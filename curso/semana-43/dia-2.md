@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Seguir + gerundio, estar a punto de"
 tema_ru: "Продолжать + герундий, вот-вот"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 43 · Día 2 — Seguir + gerundio, estar a punto de

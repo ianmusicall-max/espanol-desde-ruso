@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "La entrevista: me gustaría, podría"
 tema_ru: "Собеседование: мне хотелось бы, мог бы"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 30 · Día 2 — La entrevista: me gustaría, podría

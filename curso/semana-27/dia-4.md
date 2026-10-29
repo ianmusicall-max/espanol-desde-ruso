@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Contar una anécdota y reaccionar"
 tema_ru: "Рассказать историю и отреагировать"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 27 · Día 4 — Contar una anécdota y reaccionar

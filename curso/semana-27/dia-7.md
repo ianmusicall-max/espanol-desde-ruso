@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Leyendas: La Llorona y el Cid"
 tema_ru: "Легенды: Ла Льорона и Сид"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 27 · Día 7 — Leyendas: La Llorona y el Cid

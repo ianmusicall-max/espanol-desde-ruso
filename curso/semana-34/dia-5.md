@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "«Mi vida en 2040»: integración"
 tema_ru: "«Моя жизнь в 2040»: интеграция"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 34 · Día 5 — «Mi vida en 2040»: integración

@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Mis errores: análisis como rusohablante"
 tema_ru: "Мои ошибки: разбор типичных ошибок русскоговорящего"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 22 · Día 3 — Mis errores: análisis como rusohablante

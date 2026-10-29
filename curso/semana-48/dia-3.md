@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Expresión oral: las tres tareas del DELE A2"
 tema_ru: "Устная речь: три задания DELE A2"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 48 · Día 3 — Expresión oral: las tres tareas del DELE A2

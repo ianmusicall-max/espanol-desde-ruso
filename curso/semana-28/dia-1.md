@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Hace dos años, desde hace, llevo … estudiando"
 tema_ru: "Два года назад, уже … как, llevo … estudiando"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 28 · Día 1 — Hace dos años, desde hace, llevo … estudiando

@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Repaso de la semana 31: imperativo y pronombres"
 tema_ru: "Повторение недели 31: императив и местоимения"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 31 · Día 6 — Repaso de la semana 31: imperativo y pronombres

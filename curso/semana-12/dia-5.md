@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Mi comida favorita: diálogo y texto"
 tema_ru: "Моя любимая еда: диалог и текст"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 12 · Día 5 — Mi comida favorita: diálogo y texto

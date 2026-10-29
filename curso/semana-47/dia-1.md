@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Repaso 1: presente, reflexivos y verbos tipo gustar"
 tema_ru: "Повторение 1: настоящее время, возвратные и глаголы типа gustar"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 47 · Día 1 — Repaso 1: presente, reflexivos y verbos tipo gustar

@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "La Transición y la Movida; tarea final"
 tema_ru: "Переход к демократии и Мовида; итоговое задание"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 26 · Día 7 — La Transición y la Movida; tarea final

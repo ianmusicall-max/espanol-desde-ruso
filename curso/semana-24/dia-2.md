@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Irregulares (2): pude, puse, quise, vine, dije, di, vi"
 tema_ru: "Неправильные (2): pude, puse, quise, vine, dije, di, vi"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 24 · Día 2 — Irregulares (2): pude, puse, quise, vine, dije, di, vi

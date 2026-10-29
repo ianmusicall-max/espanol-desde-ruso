@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Pedir y dar indicaciones"
 tema_ru: "Спросить и объяснить дорогу"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 8 · Día 1 — Pedir y dar indicaciones

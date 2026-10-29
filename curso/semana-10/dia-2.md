@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Cambio vocálico: empiezo, vuelvo, duermo, juego"
 tema_ru: "Чередование гласных: empiezo, vuelvo, duermo, juego"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 10 · Día 2 — Cambio vocálico: empiezo, vuelvo, duermo, juego

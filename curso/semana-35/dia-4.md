@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Al teléfono: ¿Está Marta? ¿De parte de quién?"
 tema_ru: "По телефону: Марта дома? Кто её спрашивает?"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 35 · Día 4 — Al teléfono: ¿Está Marta? ¿De parte de quién?

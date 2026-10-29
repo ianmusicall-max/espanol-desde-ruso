@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Me ha dicho que…: cambios de persona"
 tema_ru: "Он сказал мне, что…: изменение лица"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 36 · Día 1 — Me ha dicho que…: cambios de persona

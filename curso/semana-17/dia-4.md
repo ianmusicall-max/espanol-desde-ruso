@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "En el hotel: reservar una habitación"
 tema_ru: "В гостинице: забронировать номер"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 17 · Día 4 — En el hotel: reservar una habitación

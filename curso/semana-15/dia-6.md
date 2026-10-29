@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Repaso de la semana 15: aficiones, fecha y tiempo"
 tema_ru: "Повторение недели 15: увлечения, дата и погода"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 15 · Día 6 — Repaso de la semana 15: aficiones, fecha y tiempo

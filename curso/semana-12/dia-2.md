@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "En el mercado: cantidades y envases"
 tema_ru: "На рынке: количество и упаковка"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 12 · Día 2 — En el mercado: cantidades y envases

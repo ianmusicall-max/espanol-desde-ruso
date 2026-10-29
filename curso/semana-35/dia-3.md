@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Además, sin embargo, por eso, aunque"
 tema_ru: "Кроме того, однако, поэтому, хотя"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 35 · Día 3 — Además, sin embargo, por eso, aunque

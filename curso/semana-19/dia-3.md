@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Síntomas con tener y estar"
 tema_ru: "Симптомы с tener и estar"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 19 · Día 3 — Síntomas con tener y estar

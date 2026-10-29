@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Compartir piso y vivir con los padres"
 tema_ru: "Снимать квартиру вместе и жить с родителями"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 41 · Día 7 — Compartir piso y vivir con los padres

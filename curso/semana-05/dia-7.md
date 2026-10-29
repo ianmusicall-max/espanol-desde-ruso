@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "La familia en España y Latinoamérica"
 tema_ru: "Семья в Испании и Латинской Америке"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 5 · Día 7 — La familia en España y Latinoamérica

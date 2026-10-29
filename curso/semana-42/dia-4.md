@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Se vende, se alquilan, se habla español"
 tema_ru: "Продаётся, сдаются, здесь говорят по-испански"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 42 · Día 4 — Se vende, se alquilan, se habla español

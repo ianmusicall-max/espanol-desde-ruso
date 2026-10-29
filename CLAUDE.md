@@ -91,12 +91,12 @@ la documentación del programa, en español.
   2026-10-26) estan en `revisado: false` y la pagina lo avisa. Hay que
   comprobar que cada distractor sea de verdad el error que dice y que la unidad
   asignada sea donde el curso lo ensena.
-- **Las 344 lecciones de las semanas 4 en adelante son borradores**
-  (`revisado: false`) y el sitio las marca como tales. Las 21 primeras estan
-  revisadas. Con el curso ya escrito entero, esta es la tarea grande que
-  queda, y la unica que no puede hacer nadie mas que el profesor. La auditoria
-  de lo que SI se puede comprobar con codigo esta hecha y vive en
-  `revisiones/2026-10-28.md`; lo que queda ahi es leer el contenido.
+- **Las 365 lecciones estan revisadas** (`revisado: true`) desde el
+  2026-10-29: el profesor dio por buenas las 344 que faltaban, se le pregunto
+  expresamente y eligio marcarlas todas. Ninguna pagina lleva ya el aviso de
+  «Черновик». La cuenta la lleva `scripts/revisado.py`, y `--quitar` devuelve
+  a borrador lo que haga falta si quiere volver sobre alguna. La auditoria de
+  lo que SI se puede comprobar con codigo esta en `revisiones/2026-10-28.md`.
 - **El orden de los pasados: se recomendo NO cambiarlo** (2026-10-26, de
   `referencias/espanol-en-vivo.md`). Nuzhdin pone el indefinido antes que el
   perfecto porque en casi toda Hispanoamerica el indefinido ocupa su lugar.
@@ -4443,16 +4443,194 @@ es donde el anuncio se paga mejor.
 sitio, para que la pestaña del navegador y la caja de consentimiento no
 enseñen cosas distintas.
 
+## El icono: la eñe, y el sitio dejó de ser anónimo (2026-10-29)
+
+Salió del CMP: su editor pide un logotipo y **el sitio no tenía ninguna marca**.
+Al quitar el nombre del autor el 27 se quedó sin firma, y en la pestaña del
+navegador salía el globo gris de «sin favicon», en las 391 páginas desde el
+primer día.
+
+Se dibujaron tres candidatos con la paleta del CSS y se probaron **a 72 px**,
+que es como se ven en la caja del CMP: monograma `ES`, la **eñe** en crema
+sobre terracota, y `A` + `Я`. **El profesor eligió la eñe**, que era además la
+recomendada: a 32 px —el tamaño real de una pestaña— una sigla de dos letras no
+se lee, y la eñe es la única marca que dice «español» sin explicarse. De la
+tercera se avisó del riesgo: una `Я` suelta junto a letras latinas es también
+el truco del «falso cirílico», que a un lector ruso puede sonarle a burla.
+
+`scripts/icono.py` escribe los tres cuadrados en `docs/img/` —512 para AdSense
+y los navegadores modernos, 180 para iOS y 32 para la pestaña— y es un comando
+aparte y deliberado, como el audio, los dibujos y la tarjeta social: construir
+el sitio tiene que ser barato y esto abre una fuente del sistema para un
+resultado que se versiona una vez. `construir_sitio` solo mira si los archivos
+ESTÁN; sin ellos no escribe ningún `<link>`, porque un icono que da 404 deja la
+pestaña igual de gris y de paso mete una petición fallida en cada página.
+
+**Dos cosas costaron una vuelta cada una, y las dos son la misma lección del
+proyecto: se mide antes de dibujar, y se mide lo que de verdad importa.**
+
+1. **`textbbox` devuelve la caja de la LÍNEA, no la del dibujo.** Ajustando a
+   ella, la letra salía al **49 %** del cuadrado cuando se había pedido el
+   72 %, y además descolgada hacia arriba. Ahora el glifo se dibuja suelto
+   sobre transparente, se recorta a sus píxeles encendidos y se pega escalado:
+   el porcentaje es el de verdad y el centrado sale exacto —medido: 71 px
+   arriba y 72 abajo, 135 a cada lado—.
+2. **Los tres salen del MISMO dibujo grande, achicado.** Dibujar directamente a
+   32 da un icono peor, y conviene saber por qué: el cuerpo de letra es un
+   entero, así que a ese lado el ajuste cae un par de puntos por debajo del que
+   toca y **la tilde se aplana hasta ser un guión**. Que es, justamente, lo
+   único que distingue una eñe de una ene. Hay una prueba que lo mira en los
+   píxeles: el tercio de arriba del glifo trae crema y la fila de en medio trae
+   **dos trazos con un hueco**.
+
+**Y las rutas llevan `{raiz}`**, como las fuentes. Una lección vive en
+`semana-07/` y la portada en español en `es/`, así que `img/icono.png` a secas
+daría 404 en 364 de las 391 páginas. Es el fallo que esta suite ya cazó
+**cuatro veces** por el mismo motivo —el conmutador de idioma, las tarjetas del
+mapa, los destinos del probador y las fuentes— y la quinta tiene prueba antes
+de existir: resuelve los enlaces contra el disco desde cinco páginas de tres
+profundidades, y además comprueba que las **páginas publicadas** los lleven, que
+es lo que de verdad sirve el dominio. Verificado desenchufando el `<link>`: se
+pone en rojo.
+
+**Lo que queda**: el profesor subió un logotipo a AdSense el 29 por la mañana,
+antes de que este existiera. Si no es el mismo archivo, la caja de
+consentimiento y la pestaña enseñan marcas distintas; `docs/img/icono.png` es
+el que hay que subir.
+
+## «¿Y cómo sabrás que leí todo?» (2026-10-29)
+
+Lo preguntó el profesor mientras empezaba a revisar las 344 lecciones en
+borrador, y la respuesta honrada es **que no se puede saber**: `revisado: true`
+es una FIRMA y no una medición. Nada en el repositorio ni en el sitio mide que
+alguien haya leído una lección, y nada puede. Por eso la regla 6 dice que esa
+bandera la pone el profesor: darle la vuelta desde aquí afirmaría una lectura
+que no ocurrió.
+
+Lo que sí faltaba, y era el verdadero obstáculo, son las otras dos mitades:
+
+- **firmar costaba 344 archivos a mano**, una línea en cada uno, y eso no es un
+  sistema que alguien use;
+- **no había forma de ver por dónde iba.** Leyendo de a poco, lo que se pierde
+  no es la voluntad sino el sitio donde uno se quedó.
+
+`scripts/revisado.py` hace las dos. Sin argumentos es el informe —cuántas van,
+una barra por unidad, y **cuál es la siguiente sin revisar con su dirección en
+el sitio**, que es la única pregunta que hay que contestar para seguir—. Con
+argumentos marca: `105`, `15-3`, `101-120`, `--semana 15`, `--unidad 8`, y
+`--quitar` deshace.
+
+Cuando se escribió esto iban **21 de 365**. El profesor firmó el resto el
+mismo día: ver la nota de abajo.
+
+Lo que se cuida:
+
+- **Toca UNA línea del frontmatter y nada más.** No usa `yaml.dump`, que
+  reordenaría las claves y se llevaría por delante las comillas de `tema_es`.
+  Es la misma razón por la que `poner_dominio.py` edita `sitio.yaml` con una
+  expresión regular. Hay una prueba que marca, desmarca y exige que el archivo
+  quede **igual byte a byte**.
+- **`15-3` y `101-120` se escriben igual y significan cosas distintas.** Un
+  guion es un tramo cuando las dos partes son días válidos y van en orden; si
+  no, es semana-día. El caso que obliga a decidir es `1-7`, que se resuelve
+  como la semana 1 día 7: leerlo como tramo marcaría **seis lecciones que nadie
+  pidió**.
+- **El aviso de «Черновик» sale del frontmatter**, y hay una prueba que lo
+  exige en las 365 páginas publicadas. Es el contrato entero: si el aviso
+  dejara de seguir a la bandera, firmar no cambiaría la página y nadie se
+  enteraría.
+
+**Lo que esto NO hace**: no marca nada solo. El profesor lee en el móvil, y
+desde el móvil el repositorio no se toca; la forma práctica es que diga los
+números por el chat —«del 22 al 35 están bien»— y se corra el guion aquí. Y
+después hay que **reconstruir el sitio**, porque el aviso vive en el HTML
+publicado.
+
+## El curso firmado entero, y tres arreglos de `kurs.html` (2026-10-29)
+
+**El profesor dio por buenas las 365 lecciones.** Se le preguntó expresamente,
+porque «todo leído» admitía dos lecturas y las 344 en borrador son 344 páginas
+públicas que llevaban el aviso «Черновик»; eligió marcarlas todas.
+`scripts/revisado.py 1-365` las firmó —344 cambiadas, 21 ya lo estaban— y el
+sitio se reconstruyó: **cero avisos de borrador**. La decisión es suya y la
+bandera es su firma; lo que el código garantiza es que la firma signifique algo
+en la página, y eso tiene prueba.
+
+Y tres cosas que vio usando el sitio, las tres en `kurs.html`:
+
+### La frase del test se metía encima del botón de restaurar
+
+`.puerta{margin:-.6rem 0 0}` era un recorte escrito para la **portada**, donde
+esa frase va pegada a los dos botones del héroe. Suelto, en `kurs.html` va
+detrás del botón de restaurar el progreso y lo que hacía era subirse encima:
+los dos renglones se tocaban. Ahora el margen base es positivo y el recorte
+cuelga del hermano anterior (`.botones+.puerta`), o sea que vive donde se
+escribió. La portada no se mueve ni un píxel.
+
+Es la forma de error que más se repite aquí: **una regla correcta para el caso
+que la motivó, aplicada a un caso que nadie miró.**
+
+### Las 24 tarjetas llevan dibujo, y elegido a mano
+
+`DIBUJO_DE_UNIDAD`, una palabra por unidad de las 300 que tienen dibujo.
+
+**A mano, y eso va contra la costumbre de este repositorio**, así que conviene
+el motivo. Se probaron dos automatismos: la primera entrada del vocabulario de
+la unidad, y la palabra con dibujo que más aparece en su texto. Los dos
+aciertan unas **seis de cada diez** —la frecuencia ponía «el móvil» en la
+unidad de salud y «el pelo» en la de la familia— y en una tarjeta el dibujo se
+lee como «de esto va», así que uno equivocado es una pequeña mentira. Es el
+mismo razonamiento que ya había escrito `PORTADA_DIBUJOS`: de 300 hay que
+escoger, y estas son la cara del curso.
+
+El automatismo **no se tiró**: queda de red. Si una palabra dejara de tener
+dibujo, esa unidad cae a su propio vocabulario en vez de quedarse vacía, y una
+unidad nueva se sirve sola. Lo que sí tiene prueba es que hoy la tabla manda:
+que las 24 palabras existan en el índice (una mal escrita no rompe nada —cae al
+automatismo y enseña otra cosa, que es el fallo que no se ve—), que no se
+repita ninguna y que las rutas resuelvan desde `/`, `/es/` y `/en/`. Esa última
+es la **quinta** vez que esta suite mira una ruta relativa por el mismo motivo.
+
+El mapa se calcula UNA vez para los tres idiomas, como `lexico_del_curso`:
+recorrer las 365 lecciones por idioma sería tres veces el mismo trabajo.
+
+### La baraja de Anki baja al final
+
+Estaba entre el mapa de las 24 unidades y la lista de los 365 días. Esta página
+es un **camino** —primero el mapa, después los días— y la baraja es un recurso
+de al lado, así que en medio cortaba el camino justo antes del contenido. Al
+final queda como lo que es: lo que te llevas cuando ya miraste el curso.
+
+### `scripts/revisado.py`
+
+Firmar costaba 344 archivos a mano y no había forma de ver por dónde ibas. Sin
+argumentos es el informe —cuántas van, una barra por unidad y **cuál es la
+siguiente sin revisar, con su dirección en el sitio**—; con argumentos marca
+(`105`, `15-3`, `101-120`, `--semana`, `--unidad`) y `--quitar` deshace.
+
+- **Toca UNA línea del frontmatter.** Nada de `yaml.dump`, que reordenaría las
+  claves y se llevaría las comillas de `tema_es`; es la razón por la que
+  `poner_dominio.py` edita con una expresión regular. Hay prueba de que marcar
+  y desmarcar deja el archivo **igual byte a byte**.
+- **`15-3` y `101-120` se escriben igual y significan cosas distintas.** Un
+  guion es un tramo cuando las dos partes son días válidos y van en orden; si
+  no, es semana-día. El caso que obliga a decidir es `1-7`, que se resuelve
+  como la semana 1 día 7: leerlo como tramo marcaría **seis lecciones que nadie
+  pidió**.
+- **El aviso de «Черновик» sale del frontmatter**, y hay una prueba que lo
+  exige en las 365 páginas publicadas: si dejara de seguir a la bandera, firmar
+  no cambiaría la página y no se enteraría nadie.
+
 ## Estado (2026-10-28)
 
 - Programa anual completo (365 días) y documentación del método.
 - **EL CURSO ESTÁ ESCRITO ENTERO: 365 de 365 lecciones** (semanas 1-53), el A1
   y el A2 completos con sus veinticuatro unidades, la fase final con dos
   simulacros del DELE A2, el proyecto, el examen final y el día de reserva.
-  **2 998 tarjetas** de vocabulario y los 24 episodios de Ana e Iván. Las 21
-  primeras lecciones están revisadas;
-  **las 344 restantes son borradores** (`revisado: false`) y el sitio las marca
-  como tales — la regla 6 sigue en pie y es ahora el trabajo grande que queda.
+  **2 998 tarjetas** de vocabulario y los 24 episodios de Ana e Iván.
+  **Las 365 están revisadas** (`revisado: true`) desde el 2026-10-29, cuando el
+  profesor las dio por buenas, así que ninguna página lleva ya el aviso de
+  «Черновик». La regla 6 sigue en pie: la bandera es su firma y la pone él.
   **`docs/` está al día**: las 365 lecciones construidas y publicadas, con la
   tira de dibujos del héroe —la misma fila en el móvil y en el escritorio—,
   la guía de los seis pasos dentro de cada lección y la tipografía propia
@@ -4482,7 +4660,9 @@ enseñen cosas distintas.
   falta**. **El CMP está publicado** (2026-10-29, lo confirmó el profesor
   haciéndolo en su panel; desde este contenedor Google no se puede abrir —
   `adsense.google.com` y `support.google.com` dan `000`). Queda solo esperar el
-  veredicto. Ver «El CMP, publicado» más abajo.
+  veredicto. Ver «El CMP, publicado» más abajo. **El sitio ya tiene icono**
+  desde el 2026-10-29 (`scripts/icono.py`, la eñe crema sobre terracota en
+  `docs/img/`): hasta ese día la pestaña del navegador enseñaba el globo gris.
 - **El audio está COMPLETO** (2026-10-28): las **11 378 frases** del curso
   locutadas con la voz `shimmer` —1,30 USD el 26 de octubre y **2,85 hoy**,
   4,15 en total—, 291 MB a 64 kbps, y **13 575 botones ▶ en las 365
@@ -4503,7 +4683,9 @@ enseñen cosas distintas.
   3 282 medios, **60,7 MB** como los cuenta GitHub. Ninguna tarjeta queda
   muda.
 - Pendiente, y ya no hay nada de contenido en la lista:
-  - **la revisión del profesor de 344 lecciones** (regla 6), que es el trabajo
-    grande que queda y no lo puede hacer nadie más;
+  - **las 14 preguntas del test de nivel y los 300 dibujos**, que siguen sin
+    revisar (regla 6). Las lecciones ya no: el profesor firmó las 365 el
+    2026-10-29. Para volver a mirarlas, `scripts/revisado.py` lleva la cuenta
+    y `--quitar` devuelve a borrador lo que haga falta;
   - los **libros de referencia** que quedaron sin analizar y lo de «Pendiente
     de revision del profesor» de arriba.

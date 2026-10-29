@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Comparar y recomendar: integración"
 tema_ru: "Сравнить и порекомендовать: интеграция"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 38 · Día 5 — Comparar y recomendar: integración

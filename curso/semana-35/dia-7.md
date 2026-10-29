@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "La tertulia: discutir sin ofender"
 tema_ru: "Тертулия: спорить, не обижая"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 35 · Día 7 — La tertulia: discutir sin ofender

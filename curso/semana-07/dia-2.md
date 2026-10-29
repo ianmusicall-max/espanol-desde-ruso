@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Muebles: hay o está"
 tema_ru: "Мебель: hay или está"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 7 · Día 2 — Muebles: hay o está

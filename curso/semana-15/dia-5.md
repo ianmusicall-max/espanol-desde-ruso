@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "El clima de mi país y del mundo hispano"
 tema_ru: "Климат моей страны и испаноязычного мира"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 15 · Día 5 — El clima de mi país y del mundo hispano

@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Examen final de A1"
 tema_ru: "Итоговый экзамен уровня A1"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 22 · Día 6 — Examen final de A1

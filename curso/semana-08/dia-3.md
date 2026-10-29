@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Anuncios de pisos"
 tema_ru: "Объявления о квартирах"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 8 · Día 3 — Anuncios de pisos

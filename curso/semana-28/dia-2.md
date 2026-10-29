@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Un día terrible, un día perfecto: emociones"
 tema_ru: "Ужасный день, идеальный день: эмоции"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 28 · Día 2 — Un día terrible, un día perfecto: emociones

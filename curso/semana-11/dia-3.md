@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Gustar (2): gustan, nos / os / les, a mí también"
 tema_ru: "Gustar (2): gustan, nos / os / les, a mí también"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 11 · Día 3 — Gustar (2): gustan, nos / os / les, a mí también

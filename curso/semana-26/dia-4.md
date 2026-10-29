@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Personas del pasado: mi abuelo era…"
 tema_ru: "Люди из прошлого: мой дедушка был…"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 26 · Día 4 — Personas del pasado: mi abuelo era…

@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Repaso 3: futuro, condicional, ir a, perífrasis"
 tema_ru: "Повторение 3: будущее, условное, ir a, перифразы"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 47 · Día 3 — Repaso 3: futuro, condicional, ir a, perífrasis

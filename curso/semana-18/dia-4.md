@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Preposiciones de movimiento: de Moscú a Madrid"
 tema_ru: "Предлоги движения: из Москвы в Мадрид"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 18 · Día 4 — Preposiciones de movimiento: de Moscú a Madrid

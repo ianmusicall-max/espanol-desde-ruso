@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Dieta mediterránea, mate y tarea final"
 tema_ru: "Средиземноморская диета, мате и итоговое задание"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 20 · Día 7 — Dieta mediterránea, mate y tarea final

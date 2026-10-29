@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Noticias y textos informativos: la idea principal"
 tema_ru: "Новости и информационные тексты: главная мысль"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 45 · Día 2 — Noticias y textos informativos: la idea principal

@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "¿Puedes…? ¿Te importa si…? ¿Puedo…?"
 tema_ru: "Можешь…? Ты не против, если…? Можно…?"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 42 · Día 1 — ¿Puedes…? ¿Te importa si…? ¿Puedo…?

@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Nuestro, vuestro y el estado civil"
 tema_ru: "Nuestro, vuestro и семейное положение"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 5 · Día 3 — Nuestro, vuestro y el estado civil

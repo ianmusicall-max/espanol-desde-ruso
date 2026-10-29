@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Repaso 2: los pasados, tabla de decisión"
 tema_ru: "Повторение 2: прошедшие времена, таблица решений"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 47 · Día 2 — Repaso 2: los pasados, tabla de decisión

@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Prueba de la Unidad 15"
 tema_ru: "Тест по Уроку 15"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 30 · Día 6 — Prueba de la Unidad 15

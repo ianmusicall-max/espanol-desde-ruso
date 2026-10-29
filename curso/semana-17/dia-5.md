@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "En el aeropuerto: hay que facturar"
 tema_ru: "В аэропорту: нужно сдать багаж"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 17 · Día 5 — En el aeropuerto: hay que facturar

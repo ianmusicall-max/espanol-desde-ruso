@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Mi familia: texto modelo y presentación"
 tema_ru: "Моя семья: образец текста и презентация"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 6 · Día 5 — Mi familia: texto modelo y presentación

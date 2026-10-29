@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Los medios: ¿qué programas ves?"
 tema_ru: "СМИ: какие передачи ты смотришь?"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 36 · Día 4 — Los medios: ¿qué programas ves?

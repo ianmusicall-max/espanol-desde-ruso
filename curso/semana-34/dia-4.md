@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Organizar un evento: la semana que viene"
 tema_ru: "Организовать мероприятие: на следующей неделе"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 34 · Día 4 — Organizar un evento: la semana que viene

@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Me siento mal, me pongo nervioso, me da miedo"
 tema_ru: "Мне плохо, я нервничаю, мне страшно"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 39 · Día 3 — Me siento mal, me pongo nervioso, me da miedo

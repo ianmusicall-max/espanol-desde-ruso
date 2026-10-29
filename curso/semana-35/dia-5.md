@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Dice que…, pregunta si…: transmitir un recado"
 tema_ru: "Говорит, что…, спрашивает, ли…: передать сообщение"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 35 · Día 5 — Dice que…, pregunta si…: transmitir un recado

@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Prueba de la Unidad 22"
 tema_ru: "Тест по Уроку 22"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 44 · Día 6 — Prueba de la Unidad 22

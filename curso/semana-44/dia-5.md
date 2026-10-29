@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Una fiesta de mi país: integración"
 tema_ru: "Праздник моей страны: интеграция"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 44 · Día 5 — Una fiesta de mi país: integración

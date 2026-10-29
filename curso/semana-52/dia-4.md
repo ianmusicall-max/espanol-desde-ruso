@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Proyecto final (3): grabar y autoevaluar"
 tema_ru: "Итоговый проект (3): записать и оценить"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 52 · Día 4 — Proyecto final (3): grabar y autoevaluar

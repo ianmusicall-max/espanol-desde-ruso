@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Integración: de la tienda al correo"
 tema_ru: "Интеграция: от магазина к письму"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 14 · Día 5 — Integración: de la tienda al correo

@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Repaso de la semana 23: el indefinido"
 tema_ru: "Повторение недели 23: pretérito indefinido"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 23 · Día 6 — Repaso de la semana 23: el indefinido

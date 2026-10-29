@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Repaso de la semana 11: gustar y la comida"
 tema_ru: "Повторение недели 11: gustar и еда"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 11 · Día 6 — Repaso de la semana 11: gustar y la comida

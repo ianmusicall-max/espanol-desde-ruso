@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Horarios españoles: comer a las tres, cenar a las diez"
 tema_ru: "Испанское расписание: обед в три, ужин в десять"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 9 · Día 7 — Horarios españoles: comer a las tres, cenar a las diez

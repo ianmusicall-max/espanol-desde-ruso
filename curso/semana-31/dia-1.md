@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Imperativo afirmativo: hablad, hablen; dímelo"
 tema_ru: "Повелительное: hablad, hablen; dímelo"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 31 · Día 1 — Imperativo afirmativo: hablad, hablen; dímelo

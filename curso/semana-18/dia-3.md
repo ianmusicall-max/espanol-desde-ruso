@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Turismo: ¿qué has hecho hoy?"
 tema_ru: "Туризм: что ты сделал сегодня?"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 18 · Día 3 — Turismo: ¿qué has hecho hoy?

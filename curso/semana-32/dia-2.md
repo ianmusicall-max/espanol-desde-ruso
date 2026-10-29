@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Trámites y citas: rellene, firme aquí"
 tema_ru: "Оформление документов: заполните, подпишите здесь"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 32 · Día 2 — Trámites y citas: rellene, firme aquí

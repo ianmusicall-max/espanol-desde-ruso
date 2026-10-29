@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Balance: la lista can-do de A2"
 tema_ru: "Итоги: чек-лист «я умею» уровня A2"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 52 · Día 5 — Balance: la lista can-do de A2

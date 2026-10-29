@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Balance del nivel A1 y plan para A2"
 tema_ru: "Итоги уровня A1 и план на A2"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 22 · Día 7 — Balance del nivel A1 y plan para A2

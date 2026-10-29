@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Contar una fiesta: fuimos, había mucha gente, bailamos"
 tema_ru: "Рассказать о празднике: пошли, было много людей, танцевали"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 43 · Día 5 — Contar una fiesta: fuimos, había mucha gente, bailamos

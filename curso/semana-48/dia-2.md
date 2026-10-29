@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Comprensión de lectura: estrategias por tarea"
 tema_ru: "Чтение: стратегии по заданиям"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 48 · Día 2 — Comprensión de lectura: estrategias por tarea

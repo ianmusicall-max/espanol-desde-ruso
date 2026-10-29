@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Futuro irregular: tendré, haré, podré, habrá"
 tema_ru: "Неправильное будущее: tendré, haré, podré, habrá"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 33 · Día 2 — Futuro irregular: tendré, haré, podré, habrá

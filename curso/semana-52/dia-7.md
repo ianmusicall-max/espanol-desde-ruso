@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Cierre y plan para B1"
 tema_ru: "Завершение и план на B1"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 52 · Día 7 — Cierre y plan para B1

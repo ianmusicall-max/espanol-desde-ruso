@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "El texto descriptivo: un lugar, una persona, un objeto"
 tema_ru: "Описательный текст: место, человек, предмет"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 46 · Día 3 — El texto descriptivo: un lugar, una persona, un objeto

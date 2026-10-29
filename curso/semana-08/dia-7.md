@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "El metro, la calle y la tarea final"
 tema_ru: "Метро, улица и итоговое задание"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 8 · Día 7 — El metro, la calle y la tarea final

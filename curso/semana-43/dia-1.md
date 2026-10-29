@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Empezar a, dejar de, volver a, acabar de"
 tema_ru: "Начать, перестать, снова, только что"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 43 · Día 1 — Empezar a, dejar de, volver a, acabar de

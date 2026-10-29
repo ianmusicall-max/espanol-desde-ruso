@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Revisar y corregir: la lista de control del rusohablante"
 tema_ru: "Проверить и исправить: чек-лист русскоговорящего"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 46 · Día 4 — Revisar y corregir: la lista de control del rusohablante

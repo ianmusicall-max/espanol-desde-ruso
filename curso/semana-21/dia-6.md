@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Simulacro A1: comprensión de lectura y auditiva"
 tema_ru: "Пробный экзамен A1: чтение и аудирование"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 21 · Día 6 — Simulacro A1: comprensión de lectura y auditiva

@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Prueba de la Unidad 16"
 tema_ru: "Тест по Уроку 16"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 32 · Día 6 — Prueba de la Unidad 16

@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Me da miedo, me pone nervioso, estoy harto de"
 tema_ru: "Мне страшно, меня нервирует, мне надоело"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 44 · Día 1 — Me da miedo, me pone nervioso, estoy harto de

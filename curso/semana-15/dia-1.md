@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Aficiones y deportes"
 tema_ru: "Увлечения и спорт"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 15 · Día 1 — Aficiones y deportes

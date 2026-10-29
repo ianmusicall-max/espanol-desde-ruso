@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Refuerzo 2: léxico y audio"
 tema_ru: "Работа над ошибками 2: лексика и аудирование"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 50 · Día 3 — Refuerzo 2: léxico y audio

@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Mi anécdota: texto y oral (integración)"
 tema_ru: "Моя история: текст и устная речь (интеграция)"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 28 · Día 5 — Mi anécdota: texto y oral (integración)

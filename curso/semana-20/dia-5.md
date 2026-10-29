@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Consulta y consejos: integración"
 tema_ru: "Приём у врача и советы: интеграция"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 20 · Día 5 — Consulta y consejos: integración

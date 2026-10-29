@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Repaso de la semana 45: leer y ortografía"
 tema_ru: "Повторение недели 45: чтение и орфография"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 45 · Día 6 — Repaso de la semana 45: leer y ortografía

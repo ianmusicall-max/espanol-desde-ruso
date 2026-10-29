@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Que, donde, el que: definir cosas"
 tema_ru: "Который, где, тот что: давать определения"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 38 · Día 1 — Que, donde, el que: definir cosas

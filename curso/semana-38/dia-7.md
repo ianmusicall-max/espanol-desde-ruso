@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Madrid o Barcelona; tarea final"
 tema_ru: "Мадрид или Барселона; итоговое задание"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 38 · Día 7 — Madrid o Barcelona; tarea final

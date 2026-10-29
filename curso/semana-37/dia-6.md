@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Repaso de la semana 37: comparativos"
 tema_ru: "Повторение недели 37: сравнительные конструкции"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 37 · Día 6 — Repaso de la semana 37: comparativos

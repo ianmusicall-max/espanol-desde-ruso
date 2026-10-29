@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Repaso de la semana 19: cuerpo y síntomas"
 tema_ru: "Повторение недели 19: тело и симптомы"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 19 · Día 6 — Repaso de la semana 19: cuerpo y síntomas

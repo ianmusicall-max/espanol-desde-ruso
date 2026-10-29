@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "¿Qué hora es?"
 tema_ru: "Который час?"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 9 · Día 1 — ¿Qué hora es?

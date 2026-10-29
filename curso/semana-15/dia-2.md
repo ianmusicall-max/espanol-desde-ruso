@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Me gusta bailar: gustar + infinitivo"
 tema_ru: "Мне нравится танцевать: gustar + инфинитив"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 15 · Día 2 — Me gusta bailar: gustar + infinitivo

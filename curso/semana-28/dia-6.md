@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Prueba de la Unidad 14"
 tema_ru: "Тест по Уроку 14"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 28 · Día 6 — Prueba de la Unidad 14

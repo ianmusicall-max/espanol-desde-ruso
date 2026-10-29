@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Entrevista y solicitud: integración"
 tema_ru: "Собеседование и заявка: интеграция"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 30 · Día 5 — Entrevista y solicitud: integración

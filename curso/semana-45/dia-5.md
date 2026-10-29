@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "El correo informal (DELE A2, tarea 1 de escritura)"
 tema_ru: "Неформальное письмо (DELE A2, письменное задание 1)"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 45 · Día 5 — El correo informal (DELE A2, tarea 1 de escritura)

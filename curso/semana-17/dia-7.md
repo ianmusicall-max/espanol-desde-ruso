@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "El Camino de Santiago y Machu Picchu"
 tema_ru: "Путь Сантьяго и Мачу-Пикчу"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 17 · Día 7 — El Camino de Santiago y Machu Picchu

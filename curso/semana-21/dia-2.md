@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Repaso 2: el presente"
 tema_ru: "Повторение 2: настоящее время"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 21 · Día 2 — Repaso 2: el presente

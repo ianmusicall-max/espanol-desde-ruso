@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "El pronóstico del tiempo"
 tema_ru: "Прогноз погоды"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 33 · Día 3 — El pronóstico del tiempo

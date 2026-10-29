@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Simulacro 1 · Escritura, tarea 1 (correo)"
 tema_ru: "Пробный экзамен 1 · Письмо, задание 1 (письмо)"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 49 · Día 5 — Simulacro 1 · Escritura, tarea 1 (correo)

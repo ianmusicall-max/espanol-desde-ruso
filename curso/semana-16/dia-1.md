@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Planes: voy a + infinitivo"
 tema_ru: "Планы: voy a + инфинитив"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 16 · Día 1 — Planes: voy a + infinitivo

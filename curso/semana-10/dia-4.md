@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "El fin de semana: ¿qué haces los sábados?"
 tema_ru: "Выходные: что ты делаешь по субботам?"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 10 · Día 4 — El fin de semana: ¿qué haces los sábados?

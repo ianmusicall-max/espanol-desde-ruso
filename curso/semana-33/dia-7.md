@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Supersticiones, horóscopo y las doce uvas"
 tema_ru: "Суеверия, гороскоп и двенадцать виноградин"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 33 · Día 7 — Supersticiones, horóscopo y las doce uvas

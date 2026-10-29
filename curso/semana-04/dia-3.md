@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "El adjetivo: concordancia y posición"
 tema_ru: "Прилагательное: согласование и место"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 4 · Día 3 — El adjetivo: concordancia y posición

@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Mi biografía: etapas de la vida"
 tema_ru: "Моя биография: этапы жизни"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 24 · Día 3 — Mi biografía: etapas de la vida

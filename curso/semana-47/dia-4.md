@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Repaso 4: imperativo, pronombres y se"
 tema_ru: "Повторение 4: императив, местоимения и se"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 47 · Día 4 — Repaso 4: imperativo, pronombres y se

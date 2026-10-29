@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "El euro, el peso y los objetos de cada día"
 tema_ru: "Евро, песо и предметы быта"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 4 · Día 7 — El euro, el peso y los objetos de cada día

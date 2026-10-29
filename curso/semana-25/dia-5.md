@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Mi ciudad antes y ahora"
 tema_ru: "Мой город раньше и сейчас"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 25 · Día 5 — Mi ciudad antes y ahora

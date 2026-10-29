@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Ser o estar (1): el carácter y el estado"
 tema_ru: "Ser или estar (1): характер и состояние"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 6 · Día 1 — Ser o estar (1): el carácter y el estado

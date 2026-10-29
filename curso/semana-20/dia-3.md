@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "¿Llevas una vida sana?"
 tema_ru: "Ты ведёшь здоровый образ жизни?"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 20 · Día 3 — ¿Llevas una vida sana?

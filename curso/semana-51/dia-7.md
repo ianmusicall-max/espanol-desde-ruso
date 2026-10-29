@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Simulacro 2 · Oral (preparación y ejecución)"
 tema_ru: "Пробный экзамен 2 · Устная часть (подготовка и выполнение)"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 51 · Día 7 — Simulacro 2 · Oral (preparación y ejecución)

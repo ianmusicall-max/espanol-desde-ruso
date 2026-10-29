@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Indefinido o imperfecto (1): acción y contexto"
 tema_ru: "Indefinido или imperfecto (1): действие и фон"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 26 · Día 2 — Indefinido o imperfecto (1): acción y contexto

@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Preguntar e informar sobre otras personas"
 tema_ru: "Спрашивать и рассказывать о других"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 6 · Día 4 — Preguntar e informar sobre otras personas

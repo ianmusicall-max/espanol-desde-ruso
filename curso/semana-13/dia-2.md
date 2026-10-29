@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "En la tienda: tallas, probador y este / ese / aquel"
 tema_ru: "В магазине: размеры, примерочная и este / ese / aquel"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 13 · Día 2 — En la tienda: tallas, probador y este / ese / aquel

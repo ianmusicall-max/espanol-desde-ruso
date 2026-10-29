@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "¿Quedamos? Invitar, aceptar y rechazar"
 tema_ru: "Встретимся? Приглашение, согласие и отказ"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 16 · Día 2 — ¿Quedamos? Invitar, aceptar y rechazar

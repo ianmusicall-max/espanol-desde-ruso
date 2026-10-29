@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "En la papelería: ¿Tiene…? ¿Cuánto cuesta?"
 tema_ru: "В магазине канцтоваров: ¿Tiene…? ¿Cuánto cuesta?"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 4 · Día 5 — En la papelería: ¿Tiene…? ¿Cuánto cuesta?

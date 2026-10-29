@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "En el banco y en correos"
 tema_ru: "В банке и на почте"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 32 · Día 1 — En el banco y en correos

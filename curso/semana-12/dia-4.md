@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "La comida rusa explicada en español"
 tema_ru: "Русская кухня по-испански"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 12 · Día 4 — La comida rusa explicada en español

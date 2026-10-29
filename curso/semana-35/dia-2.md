@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Estoy de acuerdo, tienes razón, yo sí / yo no"
 tema_ru: "Согласен, ты прав, а я да / а я нет"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 35 · Día 2 — Estoy de acuerdo, tienes razón, yo sí / yo no

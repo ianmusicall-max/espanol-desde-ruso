@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Corrección del simulacro 1 y plan de refuerzo"
 tema_ru: "Разбор пробного экзамена 1 и план работы над слабыми местами"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 50 · Día 1 — Corrección del simulacro 1 y plan de refuerzo

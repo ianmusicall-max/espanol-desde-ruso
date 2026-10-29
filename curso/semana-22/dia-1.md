@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Simulacro A1: expresión escrita"
 tema_ru: "Пробный экзамен A1: письмо"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 22 · Día 1 — Simulacro A1: expresión escrita

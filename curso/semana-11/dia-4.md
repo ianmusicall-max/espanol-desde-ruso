@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Encantar y la gradación de los gustos"
 tema_ru: "Encantar и градация вкусов"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 11 · Día 4 — Encantar y la gradación de los gustos

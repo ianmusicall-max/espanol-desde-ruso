@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Los reflexivos: me levanto, te duchas"
 tema_ru: "Возвратные глаголы: me levanto, te duchas"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 9 · Día 3 — Los reflexivos: me levanto, te duchas

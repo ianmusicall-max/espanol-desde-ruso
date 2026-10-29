@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Ortografía (2): b / v, h, g / j, c / z / s, ll / y; puntuación"
 tema_ru: "Орфография (2): b / v, h, g / j, c / z / s, ll / y; пунктуация"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 45 · Día 4 — Ortografía (2): b / v, h, g / j, c / z / s, ll / y; puntuación

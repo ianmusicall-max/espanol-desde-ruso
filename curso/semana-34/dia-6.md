@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Prueba de la Unidad 17"
 tema_ru: "Тест по Уроку 17"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 34 · Día 6 — Prueba de la Unidad 17

@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Cómo se vive: piso, casa, barrio"
 tema_ru: "Как живут: квартира, дом, район"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 7 · Día 7 — Cómo se vive: piso, casa, barrio

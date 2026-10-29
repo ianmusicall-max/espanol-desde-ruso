@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Conectores del relato: primero, entonces, de repente, al final"
 tema_ru: "Связки рассказа: сначала, тогда, вдруг, в конце"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 27 · Día 2 — Conectores del relato: primero, entonces, de repente, al final

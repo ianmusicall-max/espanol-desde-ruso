@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Navidad hispana frente a Новый год"
 tema_ru: "Испаноязычное Рождество и русский Новый год"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 43 · Día 7 — Navidad hispana frente a Новый год

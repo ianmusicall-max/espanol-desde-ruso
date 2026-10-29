@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Hay: existe o no existe"
 tema_ru: "Hay: есть или нет"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 4 · Día 1 — Hay: existe o no existe

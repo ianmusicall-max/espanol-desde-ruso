@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Día 365: día de reserva"
 tema_ru: "День 365: резервный день"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 53 · Día 1 — Día 365: día de reserva

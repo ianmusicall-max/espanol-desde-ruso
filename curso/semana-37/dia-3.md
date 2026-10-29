@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "El más alto de la clase; buenísimo"
 tema_ru: "Самый высокий в классе; очень-очень хороший"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 37 · Día 3 — El más alto de la clase; buenísimo

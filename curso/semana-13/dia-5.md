@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Precios: es caro, está rebajado, más barato que"
 tema_ru: "Цены: дорого, со скидкой, дешевле чем"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 13 · Día 5 — Precios: es caro, está rebajado, más barato que

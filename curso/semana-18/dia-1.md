@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Pretérito perfecto (1): hoy he viajado"
 tema_ru: "Pretérito perfecto (1): сегодня я съездил"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 18 · Día 1 — Pretérito perfecto (1): hoy he viajado

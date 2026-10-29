@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Rebajas, mercadillos y horarios comerciales"
 tema_ru: "Распродажи, блошиные рынки и часы работы"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 13 · Día 7 — Rebajas, mercadillos y horarios comerciales

@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Creo que, me parece que: dar la opinión"
 tema_ru: "Я думаю, мне кажется: выразить мнение"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 35 · Día 1 — Creo que, me parece que: dar la opinión

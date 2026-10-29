@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Campo o ciudad: comparar estilos de vida"
 tema_ru: "Деревня или город: сравнение образа жизни"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 37 · Día 5 — Campo o ciudad: comparar estilos de vida

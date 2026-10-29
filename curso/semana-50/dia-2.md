@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Refuerzo 1: gramática"
 tema_ru: "Работа над ошибками 1: грамматика"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 50 · Día 2 — Refuerzo 1: gramática

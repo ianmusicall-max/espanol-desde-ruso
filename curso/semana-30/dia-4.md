@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Cualidades y defectos"
 tema_ru: "Качества и недостатки"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 30 · Día 4 — Cualidades y defectos

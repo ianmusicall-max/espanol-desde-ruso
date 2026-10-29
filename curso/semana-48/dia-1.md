@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Comprensión auditiva: estrategias y tipos de tarea"
 tema_ru: "Аудирование: стратегии и типы заданий"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 48 · Día 1 — Comprensión auditiva: estrategias y tipos de tarea

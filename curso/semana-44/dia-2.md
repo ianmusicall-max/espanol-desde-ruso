@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Música y baile: salsa, flamenco, tango, reguetón"
 tema_ru: "Музыка и танец: сальса, фламенко, танго, реггетон"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 44 · Día 2 — Música y baile: salsa, flamenco, tango, reguetón

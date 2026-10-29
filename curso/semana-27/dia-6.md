@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Repaso de la semana 27: narrar"
 tema_ru: "Повторение недели 27: рассказ"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 27 · Día 6 — Repaso de la semana 27: narrar

@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Irregulares (3): leyó, oyó, durmió, pidió, trajo"
 tema_ru: "Неправильные (3): leyó, oyó, durmió, pidió, trajo"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 27 · Día 3 — Irregulares (3): leyó, oyó, durmió, pidió, trajo

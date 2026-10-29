@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "El español en internet; tarea final"
 tema_ru: "Испанский в интернете; итоговое задание"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 36 · Día 7 — El español en internet; tarea final

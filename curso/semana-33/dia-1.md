@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "El futuro simple: mañana lloverá"
 tema_ru: "Простое будущее: завтра будет дождь"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 33 · Día 1 — El futuro simple: mañana lloverá

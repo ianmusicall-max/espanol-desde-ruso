@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Saber, conocer, poder: знать, уметь, мочь"
 tema_ru: "Saber, conocer, poder: знать, уметь, мочь"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 29 · Día 2 — Saber, conocer, poder: знать, уметь, мочь

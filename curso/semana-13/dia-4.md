@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Te queda bien: llevar y ponerse"
 tema_ru: "Тебе идёт: llevar и ponerse"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 13 · Día 4 — Te queda bien: llevar y ponerse

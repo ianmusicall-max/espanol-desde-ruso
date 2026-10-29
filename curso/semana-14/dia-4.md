@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Reclamar y devolver"
 tema_ru: "Претензия и возврат"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 14 · Día 4 — Reclamar y devolver

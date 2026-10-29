@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "¿Cómo es? El aspecto físico"
 tema_ru: "¿Cómo es? Внешность"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 5 · Día 4 — ¿Cómo es? El aspecto físico

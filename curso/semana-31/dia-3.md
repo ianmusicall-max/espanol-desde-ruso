@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Recetas: pela, corta, añade; se fríe"
 tema_ru: "Рецепты: почисти, нарежь, добавь; se fríe"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 31 · Día 3 — Recetas: pela, corta, añade; se fríe

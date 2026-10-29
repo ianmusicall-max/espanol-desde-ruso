@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Vidas hispanas: Frida, Picasso, Messi"
 tema_ru: "Жизни испаноязычных знаменитостей: Фрида, Пикассо, Месси"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 23 · Día 7 — Vidas hispanas: Frida, Picasso, Messi

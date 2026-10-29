@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Internet y redes sociales"
 tema_ru: "Интернет и социальные сети"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 36 · Día 3 — Internet y redes sociales

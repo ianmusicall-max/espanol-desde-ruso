@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Carteles y normas: prohibido fumar"
 tema_ru: "Вывески и правила: курить запрещено"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 31 · Día 5 — Carteles y normas: prohibido fumar

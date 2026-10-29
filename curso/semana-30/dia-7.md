@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Emprendedores hispanos; tarea final"
 tema_ru: "Испаноязычные предприниматели; итоговое задание"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 30 · Día 7 — Emprendedores hispanos; tarea final

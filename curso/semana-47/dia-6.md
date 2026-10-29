@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Repaso 6: el léxico de A2 y los falsos amigos"
 tema_ru: "Повторение 6: лексика A2 и ложные друзья"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 47 · Día 6 — Repaso 6: el léxico de A2 y los falsos amigos

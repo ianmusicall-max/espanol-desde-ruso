@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Prueba de la Unidad 7"
 tema_ru: "Тест по Уроку 7"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 14 · Día 6 — Prueba de la Unidad 7

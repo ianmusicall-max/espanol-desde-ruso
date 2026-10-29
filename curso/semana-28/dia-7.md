@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "El humor hispano; tarea final"
 tema_ru: "Испаноязычный юмор; итоговое задание"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 28 · Día 7 — El humor hispano; tarea final

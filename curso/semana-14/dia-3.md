@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Compras por internet"
 tema_ru: "Покупки в интернете"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 14 · Día 3 — Compras por internet

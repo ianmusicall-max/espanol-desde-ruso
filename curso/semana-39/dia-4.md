@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Por y para (1): causa y finalidad"
 tema_ru: "Por и para (1): причина и цель"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 39 · Día 4 — Por y para (1): causa y finalidad

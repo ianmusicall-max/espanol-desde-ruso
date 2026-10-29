@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Irregulares de la rutina: hago, salgo, voy, veo, pongo"
 tema_ru: "Неправильные глаголы: hago, salgo, voy, veo, pongo"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 10 · Día 1 — Irregulares de la rutina: hago, salgo, voy, veo, pongo

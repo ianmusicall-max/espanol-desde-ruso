@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Corrección del simulacro 2 y comparación con el 1"
 tema_ru: "Разбор пробного экзамена 2 и сравнение с первым"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 52 · Día 1 — Corrección del simulacro 2 y comparación con el 1

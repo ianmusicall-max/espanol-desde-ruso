@@ -351,6 +351,12 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 .u-tarjeta .alto{display:flex;align-items:baseline;gap:.5rem;margin-bottom:.3rem}
 .u-tarjeta .num{font-size:1.45rem;font-weight:700;color:var(--acento);
   font-feature-settings:"tnum";line-height:1}
+/* `align-self` porque la fila alinea por la línea base y una imagen no tiene:
+   sin esto el dibujo cuelga del número. Mismo tratamiento que `.dibujo` de
+   las tablas de vocabulario —fondo de ficha y esquina redonda— para que las
+   dos formas de enseñar un dibujo se parezcan. */
+.u-tarjeta .u-dibujo{width:40px;height:40px;border-radius:8px;align-self:center;
+  background:var(--tarjeta)}
 .u-tarjeta .nivel{margin-inline-start:auto;font-size:.68rem;font-weight:700;letter-spacing:.06em;
   color:var(--celeste);border:1px solid var(--celeste);border-radius:999px;padding:.05rem .4rem}
 .u-tarjeta .tit{font-weight:600;font-size:.94rem;color:var(--tinta);line-height:1.3;
@@ -373,7 +379,13 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 ul.dias li.hecha .num::after{content:"✓";color:var(--acento);font-weight:700;margin-inline-start:.25rem}
 ul.dias li.hecha a{color:var(--tenue)}
 #mio{margin-top:.9rem;padding-top:.9rem;border-top:1px dashed var(--linea)}
-.puerta{font-size:.9rem;color:var(--tenue);margin:-.6rem 0 0}
+/* El margen negativo era de la PORTADA, donde `.puerta` va pegada a los dos
+   botones del héroe y hacía falta recogerla. En `kurs.html` va detrás del
+   botón de restaurar el progreso, y ahí lo que hacía era METERSE ENCIMA: el
+   enlace y la frase se tocaban. Lo vio el profesor en una captura. Ahora el
+   recorte vive donde se escribió, colgado del hermano anterior. */
+.puerta{font-size:.9rem;color:var(--tenue);margin:1.2rem 0 0}
+.botones+.puerta{margin-top:-.6rem}
 .puerta a{color:var(--acento);font-weight:600}
 .progreso-nota{font-size:.84rem;color:var(--tenue);font-family:Onest,ui-sans-serif,system-ui,sans-serif;margin-top:.5rem}
 #borrar-progreso{background:none;border:0;padding:0;color:var(--tenue);text-decoration:underline;
@@ -1347,6 +1359,33 @@ def _tarjeta_social(cfg, titulo: str) -> str:
             f'<meta name="twitter:image" content="{html.escape(url)}">')
 
 
+# El icono de la pestaña, en `img/` como la tarjeta y los dibujos. Lo escribe
+# `scripts/icono.py`, que es un comando aparte; aquí solo se mira si está.
+ICONOS = (("icono-32.png", "32x32"), ("icono.png", "512x512"))
+ICONO_IOS = "icono-180.png"
+
+
+def _iconos(raiz: str) -> str:
+    """Los <link> del icono, con la ruta RELATIVA a la profundidad de la página.
+
+    Por eso llevan `{raiz}` y no una ruta escrita a mano: una lección vive en
+    `semana-07/` y la portada en español en `es/`, así que `img/icono.png` a
+    secas da 404 en 364 de las 391 páginas. Es el mismo fallo que esta suite ya
+    cazó cuatro veces —el conmutador de idioma, las tarjetas del mapa, los
+    destinos del probador y las fuentes— y la quinta tiene prueba antes de
+    existir.
+
+    Sin los archivos no se escribe nada: un icono que da 404 deja la pestaña
+    igual de gris y de paso mete una petición fallida en cada página."""
+    salida = []
+    for nombre, medida in ICONOS:
+        if (DOCS / "img" / nombre).exists():
+            salida.append(f'<link rel="icon" type="image/png" sizes="{medida}" href="{raiz}/img/{nombre}">')
+    if (DOCS / "img" / ICONO_IOS).exists():
+        salida.append(f'<link rel="apple-touch-icon" href="{raiz}/img/{ICONO_IOS}">')
+    return "".join(salida)
+
+
 def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id="", raiz=".",
            jsonld="", publicadas=0, mapa_dias="{}", traducida=True, con_audio=False, test=None,
            huecos=None,
@@ -1431,7 +1470,7 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{html.escape(titulo)}</title>
-{meta}{canon}{"".join(hreflangs)}{og}{estructura}
+{meta}{canon}{"".join(hreflangs)}{og}{estructura}{_iconos(raiz)}
 <style>{caras(raiz)}{CSS}</style>
 {TEMA_CABEZA}
 {cabeza_terceros(cfg)}
@@ -1940,7 +1979,7 @@ def construir_portada(cfg, t, idiomas, idioma, destino, cal, raiz,
 <a class="boton" id="empezar" href="{enlace}">{html.escape(p['boton'])}</a>
 <a class="boton secundario" href="{raiz}/kurs.html">{html.escape(p['boton2'])}</a>
 </div>
-<p class="puerta">{html.escape(p['ya_sabe'])} <a href="{raiz}/test.html">{html.escape(p.get('ya_sabe_enlace') or t['test']['titulo'])} →</a></p>
+<p class="puerta">{html.escape(p['ya_sabe'])} <a href="{raiz}/test.html">{html.escape(p.get('ya_sabe_enlace') or t['test']['titulo'])}\u00a0→</a></p>
 <div class="progreso">
 <div class="cifras"><span class="n">{len(hechas)}</span><span>/ {total} {html.escape(p['progreso'])}</span></div>
 <div class="barra"><i style="width:{max(pct, 1)}%"></i></div>
@@ -1991,7 +2030,105 @@ def construir_portada(cfg, t, idiomas, idioma, destino, cal, raiz,
         encoding="utf-8")
 
 
-def _mapa_de_unidades(cal: dict, dias: list, c: dict, idioma: str, raiz: str) -> str:
+# El dibujo de cada una de las 24 tarjetas, elegido a mano y mirando los 300.
+#
+# A mano y no por una regla, que es lo mismo que decidió `PORTADA_DIBUJOS`: se
+# probaron dos automatismos —la primera entrada del vocabulario de la unidad, y
+# la palabra con dibujo que más sale en su texto— y los dos aciertan unas seis
+# de cada diez. La frecuencia ponía «el móvil» en la unidad de salud y «el
+# pelo» en la de la familia. En una tarjeta de unidad el dibujo se lee como
+# «de esto va», así que uno equivocado es una pequeña mentira, y eso cuesta
+# más que el trabajo de elegir veinticuatro.
+#
+# Si una palabra deja de tener dibujo, esa unidad no se queda sin él: cae al
+# vocabulario de la propia unidad, que es lo que hace `dibujo_por_unidad`.
+DIBUJO_DE_UNIDAD = {
+    1: "un apretón de manos",   # saludos
+    2: "el ingeniero",          # cosas, personas y profesiones
+    3: "la familia",
+    4: "la casa",
+    5: "el reloj",              # el día a día
+    6: "la comida",
+    7: "el carrito",            # de compras
+    8: "la guitarra",           # tiempo libre
+    9: "el autobús",            # viajes y transporte
+    10: "el médico",            # salud y cuerpo
+    11: "el cuestionario",      # repaso y evaluación de A1
+    12: "el árbol genealógico", # biografías
+    13: "el barrio",            # antes y ahora
+    14: "la conversación",      # anécdotas
+    15: "la entrevista",        # estudios y trabajo
+    16: "el ayuntamiento",      # ciudad y servicios
+    17: "el sol",               # el futuro: el pronóstico
+    18: "el correo electrónico",# comunicarse
+    19: "la ciudad",            # comparar y elegir
+    20: "la farmacia",          # salud (ampliación)
+    21: "la cocina",            # casa y convivencia
+    22: "la fiesta",
+    23: "la carta",             # leer y escribir
+    24: "la pizarra",           # repaso integral de A2
+}
+
+
+def dibujo_por_unidad(cal, dibujos: dict) -> dict[int, str]:
+    """Una imagen por unidad, sacada del vocabulario de esa MISMA unidad.
+
+    Elegida y no escrita a mano, por lo mismo que la vitrina de la portada
+    saca sus traducciones de las lecciones: una lista en el código se queda
+    vieja el día que alguien reescriba un día, y el síntoma sería una tarjeta
+    enseñando algo que esa unidad ya no da.
+
+    **Ninguna se repite.** Un dibujo que ya salió en otra tarjeta se salta y
+    se busca el siguiente: veinticuatro puertas con la misma manzana no son
+    veinticuatro puertas. Solo si la unidad no tuviera ninguno propio se
+    acepta un repetido, que es mejor que dejar el hueco.
+
+    Se calcula UNA vez para los tres idiomas: el mapa es el mismo en ru, es e
+    en, y recorrer las 365 lecciones por idioma sería tres veces el mismo
+    trabajo. Es la misma razón por la que `lexico_del_curso` vive fuera del
+    bucle."""
+    if not dibujos:
+        return {}
+    candidatos: dict[int, list[str]] = {}
+    for unidad, palabra in DIBUJO_DE_UNIDAD.items():
+        archivo = dibujos.get(generar_imagenes.limpiar(palabra))
+        if archivo:
+            candidatos[unidad] = [archivo]
+    for d in plan.dias(cal):
+        if d.unidad is None or not d.ruta.exists():
+            continue
+        for es, _ru, _ej, _et in exportar_anki.tarjetas_de(d.ruta):
+            archivo = dibujos.get(generar_imagenes.limpiar(es))
+            if archivo and archivo not in candidatos.setdefault(d.unidad, []):
+                candidatos[d.unidad].append(archivo)
+    salida: dict[int, str] = {}
+    usados: set[str] = set()
+    for unidad in sorted(candidatos):
+        libres = [a for a in candidatos[unidad] if a not in usados]
+        elegido = (libres or candidatos[unidad])[0]
+        salida[unidad] = elegido
+        usados.add(elegido)
+    return salida
+
+
+def _dibujo_de_tarjeta(dibujos_unidad: dict | None, unidad: int, raiz: str) -> str:
+    """El `<img>` de la tarjeta, o nada.
+
+    `alt` vacío a propósito: el título de la unidad está al lado y un lector
+    de pantalla diría lo mismo dos veces. Es la misma decisión que en las
+    tablas de vocabulario.
+
+    Sin dibujos generados no sale ninguno y el mapa queda como estaba: se cae
+    de pie, igual que la vitrina, la tira del héroe y la baraja."""
+    archivo = (dibujos_unidad or {}).get(unidad)
+    if not archivo:
+        return ""
+    return (f'<img class="u-dibujo" src="{raiz}/img/{html.escape(archivo)}" alt="" '
+            f'width="40" height="40" loading="lazy" decoding="async">')
+
+
+def _mapa_de_unidades(cal: dict, dias: list, c: dict, idioma: str, raiz: str,
+                     dibujos_unidad: dict | None = None) -> str:
     """Las 24 unidades como tarjetas, antes de la lista día a día.
 
     La idea viene de la referencia que mandó el profesor, que entra a cada
@@ -2019,7 +2156,8 @@ def _mapa_de_unidades(cal: dict, dias: list, c: dict, idioma: str, raiz: str) ->
         tarjetas.append(
             f'<a class="u-tarjeta{"" if primera else " vacia"}" href="{destino_u}">'
             f'<span class="alto"><span class="num">{u["numero"]}</span>'
-            f'<span class="nivel">{html.escape(u["nivel"])}</span></span>'
+            + _dibujo_de_tarjeta(dibujos_unidad, u["numero"], raiz)
+            + f'<span class="nivel">{html.escape(u["nivel"])}</span></span>'
             f'<span class="tit">{html.escape(titulo)}</span>'
             + (f'<span class="serie">{html.escape(c["episodio"])}: {html.escape(ep)}</span>' if ep else "")
             + f'<span class="pie"><span>{hechas}/{len(suyos)} {html.escape(c["listos"])}</span>'
@@ -2285,7 +2423,7 @@ def _firma(autor: dict) -> str:
 
 
 def construir_indice_curso(cfg, t, idiomas, idioma, destino, cal, raiz,
-                           sitio=None) -> None:
+                           sitio=None, dibujos_unidad=None) -> None:
     """`destino` es la carpeta del idioma y `sitio` la raíz del sitio.
 
     No son lo mismo y por eso se pasan las dos: el índice en español se
@@ -2328,11 +2466,10 @@ def construir_indice_curso(cfg, t, idiomas, idioma, destino, cal, raiz,
               f'<p class="aviso-chico" id="restaurar-aviso" hidden></p></div></div>',
               f'<p class="puerta">{html.escape(t["portada"]["ya_sabe"])} '
               f'<a href="{raiz}/test.html">'
-              f'{html.escape(t["portada"].get("ya_sabe_enlace") or t["test"]["titulo"])} →</a></p>',
+              f'{html.escape(t["portada"].get("ya_sabe_enlace") or t["test"]["titulo"])}\u00a0→</a></p>',
               anuncio(cfg, "cabecera")]
     dias = plan.dias(cal)
-    partes.append(_mapa_de_unidades(cal, dias, c, idioma, raiz))
-    partes.append(_bloque_de_la_baraja(t, sitio or destino, raiz))
+    partes.append(_mapa_de_unidades(cal, dias, c, idioma, raiz, dibujos_unidad))
     por_semana: dict[int, list[plan.Dia]] = {}
     for d in dias:
         por_semana.setdefault(d.semana, []).append(d)
@@ -2363,6 +2500,13 @@ def construir_indice_curso(cfg, t, idiomas, idioma, destino, cal, raiz,
             else:
                 partes.append(f'<li>{num}<span class="falta">{html.escape(tema)} {etiqueta}</span></li>')
         partes.append("</ul>")
+    # La baraja va AL FINAL y no debajo del mapa, donde estuvo hasta el
+    # 2026-10-29. Lo pidió el profesor usando el sitio y tiene razón: esta
+    # página es un camino —el mapa de las 24 unidades y después los 365 días—
+    # y la baraja es un recurso de al lado, así que en medio cortaba el camino
+    # justo antes de la lista, que es el contenido. Al final queda como lo que
+    # es: lo que te llevas cuando ya miraste el curso.
+    partes.append(_bloque_de_la_baraja(t, sitio or destino, raiz))
     partes.append(anuncio(cfg, "pie"))
     destino.joinpath("kurs.html").write_text(
         pagina(cfg, t, idiomas, idioma, f'{c["titulo"]} — {c["subtitulo"]}', "\n".join(partes),
@@ -3038,6 +3182,7 @@ def construir(destino: pathlib.Path = DOCS, cfg: dict | None = None, textos: dic
     # vez por idioma sería hacer tres veces el mismo trabajo.
     dibujos = indice_de_imagenes(destino)
     lexico = lexico_del_curso(cal) if dibujos else {}
+    dibujos_unidad = dibujo_por_unidad(cal, dibujos)
     audio = indice_de_audio(destino)
 
     for i in idiomas:
@@ -3047,7 +3192,8 @@ def construir(destino: pathlib.Path = DOCS, cfg: dict | None = None, textos: dic
         raiz = ".." if i["carpeta"] else "."
         construir_portada(cfg, t, idiomas, i["codigo"], carpeta, cal, raiz,
                           dibujos, lexico, audio, preguntas)
-        construir_indice_curso(cfg, t, idiomas, i["codigo"], carpeta, cal, raiz, destino)
+        construir_indice_curso(cfg, t, idiomas, i["codigo"], carpeta, cal, raiz,
+                               destino, dibujos_unidad)
         construir_estaticas(cfg, t, idiomas, i["codigo"], carpeta, cal, raiz)
 
     construir_test(cfg, textos["ru"], idiomas, destino, cal, preguntas)

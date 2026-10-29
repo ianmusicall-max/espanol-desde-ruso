@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Mi ciudad: lo que hay y lo que no hay"
 tema_ru: "Мой город: что есть и чего нет"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 8 · Día 4 — Mi ciudad: lo que hay y lo que no hay

@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Explicar cómo hacer algo: integración"
 tema_ru: "Объяснить, как что-то сделать: интеграция"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 32 · Día 5 — Explicar cómo hacer algo: integración

@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Mis errores: la lista negra del rusohablante"
 tema_ru: "Мои ошибки: чёрный список русскоговорящего"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 48 · Día 5 — Mis errores: la lista negra del rusohablante

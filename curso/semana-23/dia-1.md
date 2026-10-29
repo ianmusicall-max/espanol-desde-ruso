@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Indefinido regular -ar: ayer hablé"
 tema_ru: "Pretérito indefinido -ar: вчера я говорил"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 23 · Día 1 — Indefinido regular -ar: ayer hablé

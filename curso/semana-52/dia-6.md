@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Examen final del curso"
 tema_ru: "Итоговый экзамен курса"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 52 · Día 6 — Examen final del curso

@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Días de la familia y la tarea final"
 tema_ru: "Семейные праздники и итоговое задание"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 6 · Día 7 — Días de la familia y la tarea final

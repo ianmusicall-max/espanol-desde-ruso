@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Promesas y propósitos: te prometo que…"
 tema_ru: "Обещания и намерения: обещаю, что…"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 34 · Día 3 — Promesas y propósitos: te prometo que…

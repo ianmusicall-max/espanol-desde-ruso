@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Proyecto final (2): redactar y revisar"
 tema_ru: "Итоговый проект (2): написать и проверить"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 52 · Día 3 — Proyecto final (2): redactar y revisar

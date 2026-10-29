@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Simulacro 2 · Lectura, tareas 3 y 4"
 tema_ru: "Пробный экзамен 2 · Чтение, задания 3 и 4"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 51 · Día 2 — Simulacro 2 · Lectura, tareas 3 y 4

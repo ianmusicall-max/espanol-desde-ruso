@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Un cuento en versión fácil; tarea final"
 tema_ru: "Рассказ в адаптированной версии; итоговое задание"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 46 · Día 7 — Un cuento en versión fácil; tarea final

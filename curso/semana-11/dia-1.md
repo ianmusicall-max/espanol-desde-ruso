@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "El desayuno: alimentos y bebidas"
 tema_ru: "Завтрак: еда и напитки"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 11 · Día 1 — El desayuno: alimentos y bebidas

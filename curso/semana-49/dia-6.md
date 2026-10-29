@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Simulacro 1 · Escritura, tarea 2 (texto)"
 tema_ru: "Пробный экзамен 1 · Письмо, задание 2 (текст)"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 49 · Día 6 — Simulacro 1 · Escritura, tarea 2 (texto)

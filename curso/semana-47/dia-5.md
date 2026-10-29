@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Repaso 5: ser / estar / hay, por / para, comparar, relativos, indefinidos"
 tema_ru: "Повторение 5: ser / estar / hay, por / para, сравнение, относительные, неопределённые"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 47 · Día 5 — Repaso 5: ser / estar / hay, por / para, comparar, relativos, indefinidos

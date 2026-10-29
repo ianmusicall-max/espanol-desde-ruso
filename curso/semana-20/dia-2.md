@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Imperativos irregulares y con pronombres"
 tema_ru: "Неправильные императивы и с местоимениями"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 20 · Día 2 — Imperativos irregulares y con pronombres

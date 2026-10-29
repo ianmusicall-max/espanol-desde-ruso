@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Indefinido o imperfecto (2): hábito y una vez"
 tema_ru: "Indefinido или imperfecto (2): привычка и однократное"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 26 · Día 3 — Indefinido o imperfecto (2): hábito y una vez

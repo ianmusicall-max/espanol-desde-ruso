@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Manual de un aparato o una app"
 tema_ru: "Инструкция к прибору или приложению"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 32 · Día 4 — Manual de un aparato o una app

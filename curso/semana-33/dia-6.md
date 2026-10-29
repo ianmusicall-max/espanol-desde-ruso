@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Repaso de la semana 33: el futuro"
 tema_ru: "Повторение недели 33: будущее время"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 33 · Día 6 — Repaso de la semana 33: el futuro

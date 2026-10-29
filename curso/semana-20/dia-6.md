@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Prueba de la Unidad 10"
 tema_ru: "Тест по Уроку 10"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 20 · Día 6 — Prueba de la Unidad 10

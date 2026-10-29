@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Deporte y lesiones: me he hecho daño"
 tema_ru: "Спорт и травмы: я ушибся"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 40 · Día 2 — Deporte y lesiones: me he hecho daño

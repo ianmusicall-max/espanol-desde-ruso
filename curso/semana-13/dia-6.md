@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Repaso de la semana 13: ropa y pronombres"
 tema_ru: "Повторение недели 13: одежда и местоимения"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 13 · Día 6 — Repaso de la semana 13: ropa y pronombres

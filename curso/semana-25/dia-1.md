@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "El imperfecto: de pequeño vivía en…"
 tema_ru: "Pretérito imperfecto: в детстве я жил в…"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 25 · Día 1 — El imperfecto: de pequeño vivía en…

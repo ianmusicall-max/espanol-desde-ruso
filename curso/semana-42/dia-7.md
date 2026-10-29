@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "La casa latinoamericana; tarea final"
 tema_ru: "Латиноамериканский дом; итоговое задание"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 42 · Día 7 — La casa latinoamericana; tarea final

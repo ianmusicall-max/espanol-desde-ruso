@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "La experiencia: he trabajado como…, llevo tres años"
 tema_ru: "Опыт: я работал…, уже три года"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 29 · Día 3 — La experiencia: he trabajado como…, llevo tres años

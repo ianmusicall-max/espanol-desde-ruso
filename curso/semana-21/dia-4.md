@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Repaso 4: gustar, ir a, perfecto, imperativo"
 tema_ru: "Повторение 4: gustar, ir a, perfecto, императив"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 21 · Día 4 — Repaso 4: gustar, ir a, perfecto, imperativo

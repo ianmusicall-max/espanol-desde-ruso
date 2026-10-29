@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Entrevista sobre el pasado: integración"
 tema_ru: "Интервью о прошлом: интеграция"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 24 · Día 5 — Entrevista sobre el pasado: integración

@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Microcuentos y poemas cortos"
 tema_ru: "Микрорассказы и короткие стихи"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 45 · Día 7 — Microcuentos y poemas cortos

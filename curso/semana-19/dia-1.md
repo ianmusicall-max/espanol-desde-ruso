@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Las partes del cuerpo"
 tema_ru: "Части тела"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 19 · Día 1 — Las partes del cuerpo

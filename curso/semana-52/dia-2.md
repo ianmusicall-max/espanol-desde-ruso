@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Proyecto final (1): «Un año en español», guion"
 tema_ru: "Итоговый проект (1): «Год с испанским», план"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 52 · Día 2 — Proyecto final (1): «Un año en español», guion

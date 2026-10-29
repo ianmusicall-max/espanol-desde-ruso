@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Pedir cita por teléfono y describir síntomas"
 tema_ru: "Записаться по телефону и описать симптомы"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 40 · Día 1 — Pedir cita por teléfono y describir síntomas

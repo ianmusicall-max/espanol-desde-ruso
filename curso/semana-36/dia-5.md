@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Mini-debate y correo: integración"
 tema_ru: "Мини-дебаты и письмо: интеграция"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 36 · Día 5 — Mini-debate y correo: integración

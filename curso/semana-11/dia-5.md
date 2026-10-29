@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Querer y preferir: en el bar"
 tema_ru: "Querer и preferir: в баре"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 11 · Día 5 — Querer y preferir: en el bar

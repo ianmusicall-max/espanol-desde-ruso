@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Repaso de la semana 25: el imperfecto"
 tema_ru: "Повторение недели 25: pretérito imperfecto"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 25 · Día 6 — Repaso de la semana 25: el imperfecto

@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Un cortometraje en español"
 tema_ru: "Короткометражный фильм на испанском"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 21 · Día 7 — Un cortometraje en español

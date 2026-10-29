@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Meses, estaciones y la fecha"
 tema_ru: "Месяцы, времена года и дата"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 15 · Día 3 — Meses, estaciones y la fecha

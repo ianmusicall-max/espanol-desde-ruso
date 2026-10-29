@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Repaso general en juego: 50 preguntas"
 tema_ru: "Общее повторение в игре: 50 вопросов"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 50 · Día 6 — Repaso general en juego: 50 preguntas

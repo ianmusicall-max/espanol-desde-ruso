@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Indefinido regular -er / -ir: comí, viví"
 tema_ru: "Pretérito indefinido -er / -ir: comí, viví"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 23 · Día 2 — Indefinido regular -er / -ir: comí, viví

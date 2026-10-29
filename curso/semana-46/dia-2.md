@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "El texto narrativo (DELE A2, tarea 2 de escritura)"
 tema_ru: "Повествовательный текст (DELE A2, письменное задание 2)"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 46 · Día 2 — El texto narrativo (DELE A2, tarea 2 de escritura)

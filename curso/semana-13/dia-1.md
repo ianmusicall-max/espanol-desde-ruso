@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "La ropa y los colores"
 tema_ru: "Одежда и цвета"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 13 · Día 1 — La ropa y los colores

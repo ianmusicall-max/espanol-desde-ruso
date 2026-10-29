@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Repaso 5: el léxico de A1"
 tema_ru: "Повторение 5: лексика A1"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 21 · Día 5 — Repaso 5: el léxico de A1

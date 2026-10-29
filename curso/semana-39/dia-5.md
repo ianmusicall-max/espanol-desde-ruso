@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "El estrés y el descanso"
 tema_ru: "Стресс и отдых"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 39 · Día 5 — El estrés y el descanso

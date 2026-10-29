@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "El escenario: hacía frío, era de noche"
 tema_ru: "Фон: было холодно, была ночь"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 26 · Día 1 — El escenario: hacía frío, era de noche

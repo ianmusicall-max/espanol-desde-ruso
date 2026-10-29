@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Me duele: ¿qué te pasa?"
 tema_ru: "У меня болит: что с тобой?"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 19 · Día 2 — Me duele: ¿qué te pasa?

@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Por y para (2): duración, medio, destinatario, plazo"
 tema_ru: "Por и para (2): длительность, средство, адресат, срок"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 40 · Día 4 — Por y para (2): duración, medio, destinatario, plazo

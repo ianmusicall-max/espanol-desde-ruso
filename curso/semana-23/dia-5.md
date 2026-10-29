@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "La biografía: nació, estudió, se casó, murió"
 tema_ru: "Биография: родился, учился, женился, умер"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 23 · Día 5 — La biografía: nació, estudió, se casó, murió

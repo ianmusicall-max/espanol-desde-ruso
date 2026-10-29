@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "«Cuando tenía diez años»: texto y oral"
 tema_ru: "«Когда мне было десять лет»: текст и устная речь"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 26 · Día 5 — «Cuando tenía diez años»: texto y oral

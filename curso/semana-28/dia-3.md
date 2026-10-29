@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Historia en viñetas: de las imágenes al relato"
 tema_ru: "История в картинках: от изображений к рассказу"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 28 · Día 3 — Historia en viñetas: de las imágenes al relato

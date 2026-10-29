@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Un fin de semana con un amigo: plan y texto"
 tema_ru: "Выходные с другом: план и текст"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 16 · Día 5 — Un fin de semana con un amigo: plan y texto

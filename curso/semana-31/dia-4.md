@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Me, te, le, nos, os, les + lo, la: se lo doy"
 tema_ru: "Me, te, le, nos, os, les + lo, la: se lo doy"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 31 · Día 4 — Me, te, le, nos, os, les + lo, la: se lo doy

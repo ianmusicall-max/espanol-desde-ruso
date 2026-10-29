@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "La burocracia: el NIE, el ayuntamiento, la cita previa"
 tema_ru: "Бюрократия: NIE, мэрия, предварительная запись"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 31 · Día 7 — La burocracia: el NIE, el ayuntamiento, la cita previa

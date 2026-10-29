@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Repaso 3: el sustantivo y sus acompañantes"
 tema_ru: "Повторение 3: существительное и его спутники"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 21 · Día 3 — Repaso 3: el sustantivo y sus acompañantes

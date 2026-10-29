@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Cine y series: ¿de qué trata?"
 tema_ru: "Кино и сериалы: о чём?"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 44 · Día 3 — Cine y series: ¿de qué trata?

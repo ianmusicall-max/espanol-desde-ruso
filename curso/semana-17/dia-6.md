@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Repaso de la semana 17: transporte y gerundio"
 tema_ru: "Повторение недели 17: транспорт и герундий"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 17 · Día 6 — Repaso de la semana 17: transporte y gerundio

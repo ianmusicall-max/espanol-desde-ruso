@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Crecer en los 80 y 90: España y Rusia"
 tema_ru: "Вырасти в 80-е и 90-е: Испания и Россия"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 25 · Día 7 — Crecer en los 80 y 90: España y Rusia

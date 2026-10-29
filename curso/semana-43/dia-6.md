@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Repaso de la semana 43: perífrasis y fiestas"
 tema_ru: "Повторение недели 43: перифразы и праздники"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 43 · Día 6 — Repaso de la semana 43: perífrasis y fiestas

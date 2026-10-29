@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Prueba de la Unidad 24: integral de A2"
 tema_ru: "Тест по Уроку 24: итоговый по A2"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 48 · Día 6 — Prueba de la Unidad 24: integral de A2

@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Repaso de la semana 5: familia y descripción"
 tema_ru: "Повторение недели 5: семья и описание"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 5 · Día 6 — Repaso de la semana 5: familia y descripción

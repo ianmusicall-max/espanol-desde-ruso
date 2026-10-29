@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Dos textos tipo DELE: integración"
 tema_ru: "Два текста в формате DELE: интеграция"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 46 · Día 5 — Dos textos tipo DELE: integración

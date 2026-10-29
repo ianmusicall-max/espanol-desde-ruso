@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Este, esta, estos, estas; ese, esa"
 tema_ru: "Этот, эта, эти; тот, та"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 4 · Día 2 — Este, esta, estos, estas; ese, esa

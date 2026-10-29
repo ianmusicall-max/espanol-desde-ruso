@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "¿Qué tiempo hace?"
 tema_ru: "Какая погода?"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 15 · Día 4 — ¿Qué tiempo hace?

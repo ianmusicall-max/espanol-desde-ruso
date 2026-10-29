@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Prueba de la Unidad 8"
 tema_ru: "Тест по Уроку 8"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 16 · Día 6 — Prueba de la Unidad 8

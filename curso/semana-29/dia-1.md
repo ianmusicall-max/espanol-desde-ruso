@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "¿A qué te dedicas? Profesiones y sectores"
 tema_ru: "Чем ты занимаешься? Профессии и отрасли"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 29 · Día 1 — ¿A qué te dedicas? Profesiones y sectores

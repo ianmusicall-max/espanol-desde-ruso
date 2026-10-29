@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "¿Sabes qué me ha pasado hoy? El perfecto en la anécdota"
 tema_ru: "Знаешь, что со мной сегодня случилось? Perfecto в рассказе"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 28 · Día 4 — ¿Sabes qué me ha pasado hoy? El perfecto en la anécdota

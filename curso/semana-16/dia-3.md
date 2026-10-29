@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "La agenda: citas, cambios y cancelaciones"
 tema_ru: "Ежедневник: встречи, переносы и отмены"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 16 · Día 3 — La agenda: citas, cambios y cancelaciones

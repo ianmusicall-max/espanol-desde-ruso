@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Diario de viaje y recepción: integración"
 tema_ru: "Дневник путешествия и ресепшен: интеграция"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 18 · Día 5 — Diario de viaje y recepción: integración

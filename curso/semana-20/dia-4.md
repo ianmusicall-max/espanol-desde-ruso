@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Emergencias y servicios"
 tema_ru: "Экстренные случаи и службы"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 20 · Día 4 — Emergencias y servicios

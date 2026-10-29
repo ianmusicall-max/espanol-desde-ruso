@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Estaba durmiendo cuando sonó el teléfono"
 tema_ru: "Я спал, когда зазвонил телефон"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 27 · Día 1 — Estaba durmiendo cuando sonó el teléfono

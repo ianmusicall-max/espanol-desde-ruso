@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "La familia y el verbo tener"
 tema_ru: "Семья и глагол tener"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 5 · Día 1 — La familia y el verbo tener

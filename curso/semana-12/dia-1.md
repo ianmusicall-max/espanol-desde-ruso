@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "En el restaurante: el menú del día"
 tema_ru: "В ресторане: комплексный обед"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 12 · Día 1 — En el restaurante: el menú del día

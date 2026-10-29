@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Repaso de la semana 9: presente y reflexivos"
 tema_ru: "Повторение недели 9: настоящее время и возвратные"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 9 · Día 6 — Repaso de la semana 9: presente y reflexivos

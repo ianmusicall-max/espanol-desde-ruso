@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Parecerse a: comparar personas"
 tema_ru: "Быть похожим на: сравнение людей"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 38 · Día 4 — Parecerse a: comparar personas

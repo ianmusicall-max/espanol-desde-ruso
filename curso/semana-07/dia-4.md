@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "La ciudad: ¿Dónde está el banco?"
 tema_ru: "Город: где банк?"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 7 · Día 4 — La ciudad: ¿Dónde está el banco?

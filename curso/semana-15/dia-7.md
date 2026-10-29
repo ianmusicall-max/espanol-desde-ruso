@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "El fútbol y el domingo en familia"
 tema_ru: "Футбол и воскресенье в кругу семьи"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 15 · Día 7 — El fútbol y el domingo en familia

@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Proyecto «Mi vida» (2): grabar y evaluar"
 tema_ru: "Проект «Моя жизнь» (2): запись и оценка"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 22 · Día 5 — Proyecto «Mi vida» (2): grabar y evaluar

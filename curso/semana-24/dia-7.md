@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "1492, las independencias y la tarea final"
 tema_ru: "1492, независимость и итоговое задание"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 24 · Día 7 — 1492, las independencias y la tarea final

@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Refuerzo 3: escritura"
 tema_ru: "Работа над ошибками 3: письмо"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 50 · Día 4 — Refuerzo 3: escritura

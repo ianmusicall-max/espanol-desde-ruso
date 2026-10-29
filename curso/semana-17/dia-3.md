@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "¿Qué estás haciendo? Estar + gerundio"
 tema_ru: "Что ты делаешь (сейчас)? Estar + герундий"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 17 · Día 3 — ¿Qué estás haciendo? Estar + gerundio

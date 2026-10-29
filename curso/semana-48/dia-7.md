@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "¿Qué hay después de A2?"
 tema_ru: "Что после A2?"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 48 · Día 7 — ¿Qué hay después de A2?

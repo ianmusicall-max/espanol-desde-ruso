@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Flamenco, tango y cumbia; tarea final"
 tema_ru: "Фламенко, танго и кумбия; итоговое задание"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 44 · Día 7 — Flamenco, tango y cumbia; tarea final

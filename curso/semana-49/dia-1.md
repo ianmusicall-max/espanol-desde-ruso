@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Simulacro 1 · Lectura, tareas 1 y 2"
 tema_ru: "Пробный экзамен 1 · Чтение, задания 1 и 2"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 49 · Día 1 — Simulacro 1 · Lectura, tareas 1 y 2

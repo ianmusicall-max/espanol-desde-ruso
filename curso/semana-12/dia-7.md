@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Sobremesa, propina y brindis; tarea final"
 tema_ru: "Застолье, чаевые и тосты; итоговое задание"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 12 · Día 7 — Sobremesa, propina y brindis; tarea final

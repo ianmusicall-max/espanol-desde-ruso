@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "¡Felicidades! ¡Que aproveche! Felicitar e invitar"
 tema_ru: "Поздравляю! Приятного аппетита! Поздравить и пригласить"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 43 · Día 4 — ¡Felicidades! ¡Que aproveche! Felicitar e invitar

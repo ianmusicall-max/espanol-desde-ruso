@@ -3332,6 +3332,274 @@ class TestLaTipografia(unittest.TestCase):
         self.assertNotIn("{raiz}", construir_sitio.caras(".."))
 
 
+
+class TestElIcono(unittest.TestCase):
+    """La eñe de la pestaña: existe, se declara bien y resuelve desde todas.
+
+    El sitio no tuvo ninguna marca hasta el 2026-10-29. Al quitar el nombre del
+    autor el 27 se quedó sin firma, y en la pestaña salía el globo gris; lo
+    destapó el editor del CMP de AdSense, que pide un logotipo.
+
+    Estas pruebas no construyen el sitio: `_iconos()` es una función pura y las
+    rutas se resuelven contra el disco."""
+
+    IMG = RAIZ / "docs" / "img"
+    PAGINAS = (("docs/index.html", "."),
+               ("docs/es/index.html", ".."),
+               ("docs/en/index.html", ".."),
+               ("docs/semana-01/dia-1.html", ".."),
+               ("docs/semana-53/dia-1.html", ".."))
+
+    def test_los_tres_cuadrados_estan_y_son_cuadrados(self):
+        from PIL import Image
+        for nombre, lado in construir_sitio_iconos_esperados().items():
+            ruta = self.IMG / nombre
+            self.assertTrue(ruta.exists(), f"falta docs/img/{nombre}: corre scripts/icono.py")
+            with Image.open(ruta) as im:
+                self.assertEqual(im.size, (lado, lado), nombre)
+
+    def test_el_sizes_declarado_es_el_tamano_de_verdad(self):
+        """Un `sizes="32x32"` sobre un PNG de 64 hace que el navegador elija
+        mal entre los dos iconos, y no falla nada: solo sale borroso."""
+        from PIL import Image
+        for nombre, medida in construir_sitio.ICONOS:
+            with Image.open(self.IMG / nombre) as im:
+                ancho, alto = im.size
+            self.assertEqual(f"{ancho}x{alto}", medida, nombre)
+
+    def test_las_rutas_resuelven_desde_todas_las_profundidades(self):
+        """Es el fallo que esta suite ya cazó CUATRO veces por el mismo motivo
+        —el conmutador de idioma, las tarjetas del mapa, los destinos del
+        probador y las fuentes—: una ruta escrita sin tener en cuenta en qué
+        carpeta está la página."""
+        for pagina, raiz in self.PAGINAS:
+            base = (RAIZ / pagina).parent
+            enlaces = re.findall(r'href="([^"]+icono[^"]*)"', construir_sitio._iconos(raiz))
+            self.assertTrue(enlaces, raiz)
+            for u in enlaces:
+                self.assertTrue((base / u).resolve().exists(),
+                                f"desde {pagina} el icono {u} no resuelve")
+
+    def test_las_paginas_publicadas_lo_llevan(self):
+        """Lo anterior prueba el ayudante; esto prueba que está enchufado. Es
+        lo que de verdad sirve el dominio."""
+        for pagina, raiz in self.PAGINAS:
+            html_ = (RAIZ / pagina).read_text(encoding="utf-8")
+            self.assertIn(f'<link rel="icon" type="image/png" sizes="32x32" href="{raiz}/img/icono-32.png">',
+                          html_, pagina)
+            self.assertIn(f'<link rel="apple-touch-icon" href="{raiz}/img/icono-180.png">',
+                          html_, pagina)
+
+    def test_sin_los_archivos_no_se_declara_nada(self):
+        """Un icono que da 404 deja la pestaña igual de gris y de paso mete una
+        petición fallida en cada una de las 391 páginas."""
+        with tempfile.TemporaryDirectory() as vacio:
+            antes = construir_sitio.DOCS
+            try:
+                construir_sitio.DOCS = pathlib.Path(vacio)
+                self.assertEqual(construir_sitio._iconos("."), "")
+            finally:
+                construir_sitio.DOCS = antes
+
+    def test_la_elle_se_lee_a_32_px(self):
+        """Lo que distingue una eñe de una ene es la tilde, y a 32 px son dos
+        filas de píxeles. Dibujar el icono DIRECTAMENTE a ese lado la aplana
+        hasta ser un guión —el cuerpo de letra es un entero y el ajuste cae por
+        debajo del que toca—, así que los tres salen del mismo dibujo grande.
+
+        Se mide donde la tilde tiene que estar: el tercio de arriba del glifo
+        trae crema, y la fila de en medio trae DOS trazos con un hueco."""
+        from PIL import Image
+        import icono as modulo_icono
+        with Image.open(self.IMG / "icono-32.png") as abierta:
+            im = abierta.convert("RGB")
+        claro = [[sum(im.getpixel((x, y))) > 450 for x in range(32)] for y in range(32)]
+        filas = [y for y, f in enumerate(claro) if any(f)]
+        self.assertTrue(filas, "el icono de 32 px está vacío")
+        arriba, abajo = filas[0], filas[-1]
+        # Medido: 0,69 del alto. El suelo va por debajo de eso y no en el
+        # 0,72 de `PARTE`, porque el umbral deja fuera las filas del borde
+        # suavizado; lo que se fija es que no se encoja, no el número exacto.
+        self.assertGreater(len(filas) / 32, 0.6, "la letra ocupa menos de medio cuadrado")
+        tercio = claro[arriba + (abajo - arriba) // 6]
+        self.assertTrue(any(tercio), "no hay tilde en el tercio de arriba")
+        medio = claro[(arriba + abajo) // 2 + (abajo - arriba) // 4]
+        trazos = sum(1 for x in range(1, 32) if medio[x] and not medio[x - 1])
+        self.assertEqual(trazos, 2, "la ene no enseña sus dos trazos")
+        self.assertEqual(modulo_icono.ACENTO, (176, 63, 38))
+
+
+def construir_sitio_iconos_esperados():
+    import icono
+    return dict(icono.TAMANOS)
+
+
+
+class TestLaFirmaDelProfesor(unittest.TestCase):
+    """`revisado:` es una FIRMA, no una medición, y el sitio le hace caso.
+
+    La regla 6 dice que el generador escribe `revisado: false` y que lo pone en
+    `true` el profesor al leer la lección. Nada mide que alguien la haya leído
+    y nada puede; lo que sí se puede cuidar es que firmar sea barato y que la
+    firma signifique algo en la página. Si el aviso de «Черновик» dejara de
+    salir del frontmatter, marcar lecciones no cambiaría nada y nadie se
+    enteraría: la lección seguiría viéndose igual."""
+
+    def setUp(self):
+        self.cal = plan.cargar()
+
+    def test_marcar_toca_una_linea_y_nada_mas(self):
+        """No se usa `yaml.dump`: reordenaría las claves y se llevaría por
+        delante las comillas de `tema_es`. Es la razón por la que
+        `poner_dominio.py` edita con una expresión regular."""
+        import revisado
+        with tempfile.TemporaryDirectory() as tmp:
+            original = (RAIZ / "curso" / "semana-04" / "dia-1.md").read_text(encoding="utf-8")
+            ruta = pathlib.Path(tmp) / "dia-1.md"
+            ruta.write_text(original, encoding="utf-8")
+
+            self.assertTrue(revisado.marcar(ruta, True))
+            self.assertFalse(revisado.marcar(ruta, True), "marcar dos veces no cambia nada")
+            tocado = ruta.read_text(encoding="utf-8")
+            distintas = [(a, b) for a, b in zip(original.split("\n"), tocado.split("\n")) if a != b]
+            self.assertEqual(distintas, [("revisado: false", "revisado: true")])
+
+            revisado.marcar(ruta, False)
+            self.assertEqual(ruta.read_text(encoding="utf-8"), original,
+                             "deshacer tiene que dejar el archivo igual byte a byte")
+
+    def test_entiende_las_tres_formas_de_nombrar_un_dia(self):
+        """`15-3` y `101-120` se escriben igual y significan cosas distintas."""
+        import revisado
+        self.assertEqual(revisado._numeros(["105"], self.cal), [105])
+        self.assertEqual(revisado._numeros(["15-3"], self.cal), [101])
+        self.assertEqual(revisado._numeros(["101-104"], self.cal), [101, 102, 103, 104])
+        # El caso que obliga a decidir: «1-7» es la semana 1 día 7 y no el
+        # tramo del 1 al 7. Da igual cuál se elija —los dos acaban en el 7—
+        # pero elegir el tramo marcaría SEIS lecciones que nadie pidió.
+        self.assertEqual(revisado._numeros(["1-7"], self.cal), [7])
+        with self.assertRaises(SystemExit):
+            revisado._numeros(["400"], self.cal)
+        with self.assertRaises(SystemExit):
+            revisado._numeros(["lunes"], self.cal)
+
+    def test_la_siguiente_sin_revisar_es_la_primera_sin_revisar(self):
+        """Es lo único que hay que contestar para seguir leyendo, y por eso el
+        informe la nombra con su dirección en el sitio."""
+        import revisado
+        escritas = [d for d in plan.dias(self.cal)
+                    if revisado._leer(d.ruta) is not None]
+        self.assertTrue(escritas)
+        pendientes = [d for d in escritas if not revisado._leer(d.ruta)]
+        if pendientes:
+            self.assertEqual(pendientes[0].numero,
+                             min(d.numero for d in pendientes))
+
+    def test_el_aviso_de_borrador_sigue_a_la_bandera(self):
+        """El contrato entero: sin esto, firmar no cambia la página."""
+        import revisado
+        aviso = self.textos_ru["borrador"]
+        miradas = 0
+        for d in plan.dias(self.cal):
+            estado = revisado._leer(d.ruta)
+            publicada = RAIZ / "docs" / f"semana-{d.semana:02d}" / f"dia-{d.dia}.html"
+            if estado is None or not publicada.exists():
+                continue
+            html_ = publicada.read_text(encoding="utf-8")
+            if estado:
+                self.assertNotIn(aviso, html_, f"{d.etiqueta} está revisada y sale como borrador")
+            else:
+                self.assertIn(aviso, html_, f"{d.etiqueta} es borrador y no lo dice")
+            miradas += 1
+        self.assertGreater(miradas, 300)
+
+    @property
+    def textos_ru(self):
+        return construir_sitio.cargar_textos()["ru"]["leccion"]
+
+
+
+class TestElMapaDeUnidades(unittest.TestCase):
+    """Las 24 tarjetas: su dibujo, y qué va antes y qué después.
+
+    El profesor miró `kurs.html` en el móvil y dijo dos cosas: que la parte de
+    arriba estaba muy apretada y que faltaban imágenes. Lo primero era un
+    margen negativo escrito para la portada que en esta página metía la frase
+    del test de nivel ENCIMA del botón de restaurar el progreso."""
+
+    DOCS = RAIZ / "docs"
+    PAGINAS = (("kurs.html", "."), ("es/kurs.html", ".."), ("en/kurs.html", ".."))
+
+    def test_la_tabla_nombra_palabras_que_de_verdad_tienen_dibujo(self):
+        """Una palabra mal escrita no rompe nada: la unidad cae al automatismo
+        y enseña otra cosa. Es justo la clase de fallo que no se ve."""
+        dibujos = construir_sitio.indice_de_imagenes(self.DOCS)
+        if not dibujos:
+            self.skipTest("no hay dibujos generados")
+        for unidad, palabra in construir_sitio.DIBUJO_DE_UNIDAD.items():
+            self.assertIn(generar_imagenes.limpiar(palabra), dibujos,
+                          f"unidad {unidad}: «{palabra}» no tiene dibujo")
+
+    def test_las_veinticuatro_unidades_tienen_el_suyo_y_ninguno_se_repite(self):
+        """Veinticuatro puertas con la misma manzana no son veinticuatro
+        puertas."""
+        cal = plan.cargar()
+        unidades = [u["numero"] for u in cal["unidades"]]
+        self.assertEqual(sorted(construir_sitio.DIBUJO_DE_UNIDAD), sorted(unidades))
+        elegidos = list(construir_sitio.DIBUJO_DE_UNIDAD.values())
+        self.assertEqual(len(set(elegidos)), len(elegidos))
+        dibujos = construir_sitio.indice_de_imagenes(self.DOCS)
+        if not dibujos:
+            self.skipTest("no hay dibujos generados")
+        mapa = construir_sitio.dibujo_por_unidad(cal, dibujos)
+        self.assertEqual(sorted(mapa), sorted(unidades))
+        self.assertEqual(len(set(mapa.values())), len(mapa))
+
+    def test_las_rutas_del_mapa_resuelven_en_los_tres_idiomas(self):
+        """La cuarta vez que esta suite mira una ruta relativa, y por el mismo
+        motivo de siempre: desde `/es/kurs.html` un `img/…` sin prefijo apunta
+        a `/es/img/`, que no existe."""
+        for pagina, _raiz in self.PAGINAS:
+            ruta = self.DOCS / pagina
+            if not ruta.exists():
+                self.skipTest(f"falta docs/{pagina}")
+            base = ruta.parent
+            fuentes = re.findall(r'class="u-dibujo" src="([^"]+)"',
+                                 ruta.read_text(encoding="utf-8"))
+            if not fuentes:
+                self.skipTest("el sitio se construyó sin dibujos")
+            self.assertEqual(len(fuentes), 24, pagina)
+            for u in fuentes:
+                self.assertTrue((base / u).resolve().exists(),
+                                f"desde {pagina} el dibujo {u} no resuelve")
+
+    def test_la_baraja_va_despues_de_la_lista_dia_a_dia(self):
+        """Esta página es un CAMINO —el mapa de las 24 unidades y después los
+        365 días— y la baraja es un recurso de al lado. Entre los dos cortaba
+        el camino justo antes del contenido. Lo pidió el profesor usando el
+        sitio."""
+        for pagina, _raiz in self.PAGINAS:
+            ruta = self.DOCS / pagina
+            if not ruta.exists():
+                self.skipTest(f"falta docs/{pagina}")
+            h = ruta.read_text(encoding="utf-8")
+            if "baraja" not in h:
+                self.skipTest("el sitio se construyó sin baraja")
+            self.assertLess(h.index('class="mapa"'), h.index('<ul class="dias">'), pagina)
+            self.assertLess(h.index('<ul class="dias">'), h.index('class="baraja"'), pagina)
+
+    def test_la_frase_del_test_no_se_mete_encima_de_lo_de_arriba(self):
+        """El margen negativo era de la portada, donde `.puerta` va pegada a
+        los dos botones del héroe. Suelto, en `kurs.html` se subía encima del
+        botón de restaurar el progreso: los dos renglones se tocaban."""
+        css = construir_sitio.CSS
+        base = re.search(r"\.puerta\{[^}]*margin:([^;}]+)", css)
+        self.assertIsNotNone(base, "no encuentro el margen de .puerta")
+        self.assertNotIn("-", base.group(1), "el recorte no puede ser global")
+        self.assertIn(".botones+.puerta{margin-top:-", css,
+                      "el recorte tiene que colgar del hermano anterior")
+
+
 class TestElFondoDeLosDibujos(unittest.TestCase):
     """Los 300 dibujos tienen que compartir EXACTAMENTE un crema.
 

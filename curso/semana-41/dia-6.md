@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Repaso de la semana 41: casa y estar + participio"
 tema_ru: "Повторение недели 41: дом и estar + причастие"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 41 · Día 6 — Repaso de la semana 41: casa y estar + participio

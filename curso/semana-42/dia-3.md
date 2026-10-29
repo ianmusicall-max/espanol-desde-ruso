@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Los vecinos: el ruido, la fiesta, la nota"
 tema_ru: "Соседи: шум, вечеринка, записка"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 42 · Día 3 — Los vecinos: el ruido, la fiesta, la nota

@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Seguro que, creo que, probablemente, a lo mejor"
 tema_ru: "Наверняка, думаю что, вероятно, может быть"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 34 · Día 1 — Seguro que, creo que, probablemente, a lo mejor

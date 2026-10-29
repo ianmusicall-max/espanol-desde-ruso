@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Ortografía (1): la tilde"
 tema_ru: "Орфография (1): тильда"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 45 · Día 3 — Ortografía (1): la tilde

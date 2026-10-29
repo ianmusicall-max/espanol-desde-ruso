@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Un viaje gastronómico por el mundo hispano"
 tema_ru: "Гастрономическое путешествие по испаноязычному миру"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 11 · Día 7 — Un viaje gastronómico por el mundo hispano

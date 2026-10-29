@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Tener que, hay que, deber"
 tema_ru: "Tener que, hay que, deber: должен, надо"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 19 · Día 5 — Tener que, hay que, deber

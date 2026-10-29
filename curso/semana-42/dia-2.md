@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Gracias por, perdona por, no pasa nada"
 tema_ru: "Спасибо за, извини за, ничего страшного"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 42 · Día 2 — Gracias por, perdona por, no pasa nada

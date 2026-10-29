@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Simulacro A1: expresión oral"
 tema_ru: "Пробный экзамен A1: устная речь"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 22 · Día 2 — Simulacro A1: expresión oral

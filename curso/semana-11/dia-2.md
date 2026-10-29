@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Gustar (1): me gusta = мне нравится"
 tema_ru: "Gustar (1): me gusta = мне нравится"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 11 · Día 2 — Gustar (1): me gusta = мне нравится

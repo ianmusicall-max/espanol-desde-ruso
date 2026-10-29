@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Medios de transporte: ¿cómo vas al trabajo?"
 tema_ru: "Транспорт: как ты добираешься на работу?"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 17 · Día 1 — Medios de transporte: ¿cómo vas al trabajo?

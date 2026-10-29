@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Mensajes de texto: invitar por WhatsApp"
 tema_ru: "Текстовые сообщения: пригласить в WhatsApp"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 16 · Día 4 — Mensajes de texto: invitar por WhatsApp

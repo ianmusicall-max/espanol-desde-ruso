@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Tareas domésticas: ¿quién pone la lavadora?"
 tema_ru: "Домашние дела: кто запускает стиральную машину?"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 41 · Día 4 — Tareas domésticas: ¿quién pone la lavadora?

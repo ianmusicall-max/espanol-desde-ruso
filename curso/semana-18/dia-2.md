@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Pretérito perfecto (2): ¿Has estado en…?"
 tema_ru: "Pretérito perfecto (2): ты бывал в…?"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 18 · Día 2 — Pretérito perfecto (2): ¿Has estado en…?

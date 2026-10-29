@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Irregulares (1): fui, tuve, estuve, hice"
 tema_ru: "Неправильные (1): fui, tuve, estuve, hice"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 23 · Día 3 — Irregulares (1): fui, tuve, estuve, hice

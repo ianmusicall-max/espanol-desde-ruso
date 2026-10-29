@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Los días de la semana y las partes del día"
 tema_ru: "Дни недели и части дня"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 9 · Día 4 — Los días de la semana y las partes del día

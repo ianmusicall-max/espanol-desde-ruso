@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Simulacro 1 · Audio, tareas 1 y 2"
 tema_ru: "Пробный экзамен 1 · Аудирование, задания 1 и 2"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 49 · Día 3 — Simulacro 1 · Audio, tareas 1 y 2

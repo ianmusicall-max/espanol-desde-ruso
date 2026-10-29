@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Números 100-1000 y las direcciones"
 tema_ru: "Числа 100-1000 и адреса"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 8 · Día 2 — Números 100-1000 y las direcciones

@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Reclamación al casero y convivencia: integración"
 tema_ru: "Претензия хозяину и совместная жизнь: интеграция"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 42 · Día 5 — Reclamación al casero y convivencia: integración

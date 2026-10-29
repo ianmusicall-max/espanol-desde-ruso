@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Lo, la, los, las: el objeto directo"
 tema_ru: "Lo, la, los, las: прямое дополнение"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 13 · Día 3 — Lo, la, los, las: el objeto directo

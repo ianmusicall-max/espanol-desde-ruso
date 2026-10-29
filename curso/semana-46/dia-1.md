@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "El correo formal: solicitar, reclamar, agradecer"
 tema_ru: "Официальное письмо: запросить, пожаловаться, поблагодарить"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 46 · Día 1 — El correo formal: solicitar, reclamar, agradecer

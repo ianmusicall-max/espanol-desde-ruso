@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "No funciona, se ha roto: problemas en casa"
 tema_ru: "Не работает, сломалось: проблемы дома"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 41 · Día 3 — No funciona, se ha roto: problemas en casa

@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "¿Qué tal el viaje? Contar un viaje pasado"
 tema_ru: "Как прошла поездка? Рассказ о путешествии"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 24 · Día 4 — ¿Qué tal el viaje? Contar un viaje pasado

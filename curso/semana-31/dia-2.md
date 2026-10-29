@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Imperativo negativo: no hables, no comas"
 tema_ru: "Отрицательный императив: no hables, no comas"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 31 · Día 2 — Imperativo negativo: no hables, no comas

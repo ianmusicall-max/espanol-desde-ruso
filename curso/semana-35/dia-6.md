@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Repaso de la semana 35: opinión y teléfono"
 tema_ru: "Повторение недели 35: мнение и телефон"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 35 · Día 6 — Repaso de la semana 35: opinión y teléfono

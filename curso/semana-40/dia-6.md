@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Prueba de la Unidad 20"
 tema_ru: "Тест по Уроку 20"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 40 · Día 6 — Prueba de la Unidad 20

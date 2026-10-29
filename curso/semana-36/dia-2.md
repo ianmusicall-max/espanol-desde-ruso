@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Correos y mensajes informales: contar novedades"
 tema_ru: "Неформальные письма и сообщения: рассказать новости"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 36 · Día 2 — Correos y mensajes informales: contar novedades

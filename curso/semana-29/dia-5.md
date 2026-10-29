@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Estudios: la carrera, el máster, el examen"
 tema_ru: "Учёба: специальность, магистратура, экзамен"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 29 · Día 5 — Estudios: la carrera, el máster, el examen

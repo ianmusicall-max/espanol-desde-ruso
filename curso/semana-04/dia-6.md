@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Prueba de la Unidad 2"
 tema_ru: "Тест по Уроку 2"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 4 · Día 6 — Prueba de la Unidad 2

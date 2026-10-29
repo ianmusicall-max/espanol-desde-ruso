@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Está roto, está abierta: estar + participio"
 tema_ru: "Сломан, открыта: estar + причастие"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 41 · Día 2 — Está roto, está abierta: estar + participio

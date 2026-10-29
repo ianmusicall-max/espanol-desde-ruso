@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Carteles y señales del mundo hispano; tarea final"
 tema_ru: "Вывески и знаки испаноязычного мира; итоговое задание"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 32 · Día 7 — Carteles y señales del mundo hispano; tarea final

@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Antes y ahora: ya no, todavía, soler"
 tema_ru: "Раньше и сейчас: ya no, todavía, soler"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 25 · Día 3 — Antes y ahora: ya no, todavía, soler

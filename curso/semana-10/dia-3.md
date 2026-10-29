@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "¿Con qué frecuencia?"
 tema_ru: "Как часто?"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 10 · Día 3 — ¿Con qué frecuencia?

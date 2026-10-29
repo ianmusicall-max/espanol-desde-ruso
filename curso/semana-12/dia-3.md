@@ -7,7 +7,7 @@ nivel: A1
 tema_es: "Poder: peticiones corteses; muy o mucho"
 tema_ru: "Poder: вежливые просьбы; muy или mucho"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 12 · Día 3 — Poder: peticiones corteses; muy o mucho

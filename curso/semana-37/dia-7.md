@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Los «más» del mundo hispano"
 tema_ru: "Рекорды испаноязычного мира"
 minutos: 30
-revisado: false
+revisado: true
 ---
 
 # Semana 37 · Día 7 — Los «más» del mundo hispano
