@@ -3739,6 +3739,166 @@ class TestElMapaDeUnidades(unittest.TestCase):
             self.assertEqual(revisar_adsense.enlaces_rotos(otro), [])
 
 
+
+class TestElSaludoYLaRacha(unittest.TestCase):
+    """El nombre y los días seguidos, que el profesor pidió el 2026-10-29.
+
+    Lo que pidió fue «que la página le envíe un mensaje con su nombre». Un
+    sitio estático no envía nada —ni correo ni notificación: eso necesita
+    servidor y una dirección, que es lo que se decidió no tener— así que lo
+    que hace es saludar AQUÍ, al marcar la lección."""
+
+    def setUp(self):
+        self.js = construir_sitio.PROGRESO_JS
+        self.textos = construir_sitio.cargar_textos()
+
+    def test_el_nombre_no_sale_del_navegador(self):
+        """Es la promesa que la política de privacidad hace por escrito, y la
+        única de este bloque que no se puede arreglar después: un nombre que
+        se escapó ya se escapó."""
+        self.assertIn("CLAVE_NOMBRE='curso.nombre'", self.js)
+        for fuga in ("fetch(", "XMLHttpRequest", "navigator.sendBeacon", "new Image("):
+            self.assertTrue(fuga not in self.js, f"el guion usa {fuga}")
+        # El nombre solo se toca con localStorage. La línea que DECLARA la
+        # clave no cuenta: ahí todavía no se hace nada con ella.
+        for linea in self.js.split("\n"):
+            if "CLAVE_NOMBRE" in linea and "CLAVE_NOMBRE=" not in linea.replace(" ", ""):
+                self.assertIn("localStorage", linea, linea.strip())
+
+    def test_la_fecha_de_la_racha_es_la_LOCAL(self):
+        """`toISOString()` da UTC: quien estudia a las once de la noche en
+        Moscú vería el día contado como el siguiente, y quien estudia de
+        madrugada en México lo perdería. La racha es lo único del sitio donde
+        un día de diferencia se nota."""
+        # Sin los comentarios: el propio código explica POR QUÉ no se usa
+        # `toISOString`, así que buscarlo en el texto entero se encuentra a sí
+        # mismo. Es el mismo tropiezo que el barrido de `publicar_varias` en
+        # el proyecto hermano, que acusaba a los docstrings que lo nombraban
+        # para decir que no lo usan.
+        codigo = "\n".join(l.split("//")[0] for l in self.js.split("\n"))
+        self.assertNotIn("toISOString", codigo)
+        self.assertIn("function hoy()", self.js)
+        self.assertIn("getFullYear()", self.js)
+
+    def test_el_nombre_se_pide_DESPUES_de_la_primera_leccion(self):
+        """Un formulario en la puerta, antes de que el visitante haya visto
+        nada, es la forma más fiable de perderlo. Por eso no hay ninguna
+        ventana al entrar: el campo nace oculto y lo enciende el marcado."""
+        self.assertIn("pedirNombre.hidden=true", self.js)
+        self.assertIn("pedirNombre.hidden=!!quien", self.js)
+
+    def test_las_tres_formas_del_plural_ruso(self):
+        """1 день · 2 дня · 5 дней. Sin las tres, la racha delata que el sitio
+        no lo escribió nadie, que es el mismo motivo por el que la portada
+        declina «месяц»."""
+        for i in ("ru", "es", "en"):
+            formas = self.textos[i]["progreso"]["racha_dias"]
+            self.assertEqual(len(formas), 3, i)
+            self.assertTrue(all(str(f).strip() for f in formas), i)
+        self.assertNotEqual(self.textos["ru"]["progreso"]["racha_dias"][0],
+                            self.textos["ru"]["progreso"]["racha_dias"][2],
+                            "en ruso las tres formas no pueden ser la misma")
+        self.assertIn("function plural(", self.js)
+
+    def test_la_racha_no_se_rompe_por_madrugar(self):
+        """Cuenta hacia atrás desde hoy, y si hoy aún no hay nada, desde
+        ayer: una racha no se puede romper porque sean las diez de la mañana
+        y todavía no hayas estudiado."""
+        self.assertIn("ultima===h||ultima===h-DIA", self.js.replace(" ", ""))
+
+    def test_el_saludo_dice_cuanto_lleva_y_cuanto_falta(self):
+        """Era el pedido entero: felicitarlo, decirle cuánto lleva y cuánto
+        le falta."""
+        for clave in ("cuantas", "faltan", "racha", "primera", "primera_con", "vuelta"):
+            for i in ("ru", "es", "en"):
+                self.assertTrue(self.textos[i]["progreso"][clave].strip(), (i, clave))
+        for marca in ("T.cuantas", "T.faltan", "T.racha", "T.bravo_con", "T.primera"):
+            self.assertIn(marca, self.js, marca)
+
+    def test_las_dos_listas_de_aliento_van_emparejadas(self):
+        """Los mensajes variados los pidió el profesor el 2026-10-29: «los
+        mensajes deben ser variados».
+
+        Son DOS listas y no una frase con el nombre pegado detrás, porque el
+        nombre no siempre va al final —«Иван, ещё один урок позади!»—. El
+        precio de eso es que se emparejan por índice, así que una lista más
+        larga que la otra daría la frase de otro mensaje con el nombre de
+        éste, y nada fallaría."""
+        for i in ("ru", "es", "en"):
+            p = self.textos[i]["progreso"]
+            sin, con = p["bravo"], p["bravo_con"]
+            self.assertIsInstance(sin, list, i)
+            self.assertIsInstance(con, list, i)
+            self.assertEqual(len(sin), len(con), i)
+            self.assertGreaterEqual(len(sin), 5, f"{i}: con menos de cinco no hay variedad")
+            for a, b in zip(sin, con):
+                self.assertTrue(a.strip() and b.strip(), (i, a, b))
+                # El de la versión con nombre tiene que NOMBRARLO, y el otro
+                # no puede: sin el nombre, un «{nombre}» suelto se imprime
+                # tal cual y con él sale «Отлично, !».
+                self.assertIn("{nombre}", b, (i, b))
+                self.assertNotIn("{nombre}", a, (i, a))
+            self.assertIn("{nombre}", p["primera_con"], i)
+            self.assertNotIn("{nombre}", p["primera"], i)
+            self.assertIn("{nombre}", p["vuelta"], i)
+
+    def test_el_mensaje_no_se_repite_dos_lecciones_seguidas(self):
+        """La propiedad que el profesor pidió, medida con la misma aritmética
+        que corre en el navegador.
+
+        Es por lo que no hay aquí un `n % largo` ni un hash: el hash repite la
+        frase en 15 a 40 de las 365 lecciones —o sea dos días seguidos la
+        misma, que es justo la queja— y el resto es un ciclo visible, la
+        frase de hoy es la de hace nueve lecciones. El reparto por bloques da
+        las dos cosas, y es el mismo que el de la letra correcta de los
+        tests."""
+        largo = len(self.textos["ru"]["progreso"]["bravo"])
+        M, A = 2147483647, 48271
+
+        def permutacion(bloque):
+            s = ((bloque + 1) * A) % M
+            p = list(range(largo))
+            for k in range(largo - 1, 0, -1):
+                s = (s * A) % M
+                j = (s >> 8) % (k + 1)
+                p[k], p[j] = p[j], p[k]
+            return p
+
+        def variante(n):
+            bloque, pos = (n - 1) // largo, (n - 1) % largo
+            p = permutacion(bloque)
+            if bloque > 0 and p[0] == permutacion(bloque - 1)[largo - 1]:
+                p[0], p[1] = p[1], p[0]
+            return p[pos]
+
+        serie = [variante(n) for n in range(1, 366)]
+        seguidas = [n for n, (a, b) in enumerate(zip(serie, serie[1:]), 1) if a == b]
+        self.assertEqual(seguidas, [], f"se repite al pasar de la lección {seguidas[:3]}")
+        self.assertEqual(len(set(serie)), largo, "alguna frase no sale nunca")
+        # Y que el navegador haga ESTA cuenta: con el multiplicador del LCG de
+        # libro (1103515245) el producto se sale de los enteros exactos de
+        # JavaScript y la mezcla deja de ser la que se acaba de medir.
+        #
+        # Se miran los comentarios FUERA, porque el código NOMBRA ese número
+        # para explicar por qué no lo usa: buscándolo en el archivo entero, la
+        # prueba acusa al comentario que cuenta el error. Es la tercera vez que
+        # pasa aquí —el `grep` de formas prohibidas y el de `TMPDIR`— y por eso
+        # ya no se busca sobre el texto crudo.
+        codigo = "\n".join(l.split("//")[0] for l in self.js.split("\n"))
+        self.assertIn("48271", codigo)
+        self.assertNotIn("1103515245", codigo)
+
+    def test_la_portada_no_felicita_por_algo_que_no_paso(self):
+        """En el recuadro de la portada el lector LLEGA: no acaba de terminar
+        ninguna lección. Una frase de la rotación ahí diría algo que no ha
+        ocurrido —«una lección más» sin haber hecho ninguna— así que ese sitio
+        lleva un saludo de vuelta, fijo."""
+        self.assertIn("conPlantilla(T.vuelta,{nombre:quien})", self.js)
+        # La rotación, en cambio, solo puede colgar del número de LECCIÓN.
+        self.assertIn("variante(n,quien?T.bravo_con:T.bravo)", self.js)
+        self.assertNotIn("variante(hechasAhora", self.js)
+
+
 class TestElFondoDeLosDibujos(unittest.TestCase):
     """Los 300 dibujos tienen que compartir EXACTAMENTE un crema.
 
@@ -3885,9 +4045,15 @@ class TestElEnlaceDelTestDeNivel(unittest.TestCase):
         # SE GUARDA solo en este navegador» no trata de tú—. Con los posesivos
         # basta: cazaban cinco de las seis cadenas que había que cambiar.
         TU = re.compile(r"\b(tus?|tú|ti|te|contigo|tienes|sabes|puedes|quieres)\b", re.I)
-        for clave, texto in self.textos["es"]["progreso"].items():
-            if isinstance(texto, str):
-                self.assertIsNone(TU.search(texto), f"progreso.{clave} trata de tú: {texto!r}")
+        # Las LISTAS se recorren, no se saltan. Desde el 2026-10-29 los nueve
+        # mensajes de aliento viven en una, o sea que el texto más visible del
+        # bloque estaba fuera de esta guarda: un «¡Sigue así!» futuro habría
+        # entrado sin que nadie lo notara.
+        for clave, valor in self.textos["es"]["progreso"].items():
+            trozos = valor if isinstance(valor, list) else [valor]
+            for texto in trozos:
+                if isinstance(texto, str):
+                    self.assertIsNone(TU.search(texto), f"progreso.{clave} trata de tú: {texto!r}")
 
 
 class TestLaRevisionDelCurso(unittest.TestCase):

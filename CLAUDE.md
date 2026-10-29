@@ -4812,6 +4812,148 @@ detrás de un botón. Rematar CADA lección con cinco preguntas serían unas
 **1.100 preguntas nuevas con sus distractores**: es trabajo de contenido y no
 de código, y queda anotado sin hacer.
 
+## Que Google encuentre el curso (2026-10-29)
+
+El profesor lo preguntó así: «cómo hacer para que las personas busquen
+aprender español en google encuentren mi página». Lo primero fue separar lo
+que el repositorio puede arreglar de lo que no, porque la mayor parte **no es
+código**:
+
+- **el sitio no está en Google todavía**, y eso no se arregla escribiendo: hay
+  que darlo de alta en Search Console y mandar el sitemap. Es trabajo del
+  profesor y desde este contenedor no se puede ni comprobar (el proxy no abre
+  `google.com`, ni resuelve DNS);
+- **lo que de verdad posiciona son enlaces desde otros sitios**, y ahí el canal
+  es el que ya se decidió el 2026-10-27: Telegram, donde vive el público
+  rusohablante fuera de Rusia.
+
+**Pero había dos defectos reales en las páginas, y los dos eran míos.**
+
+**1. El `<title>` de la página de las lecciones no decía «испанский».** Decía
+«Все уроки», o sea «todas las lecciones», de nada. Es la segunda página más
+importante del sitio —está en el menú— y la única palabra por la que alguien la
+buscaría no estaba. Ahora es «Все уроки — Испанский с нуля для
+русскоговорящих». El título de una página es el renglón azul del resultado de
+Google: si no trae la palabra que se busca, la página no sale.
+
+**2. Las 365 descripciones volcaban el `foco` EN ESPAÑOL.** La descripción se
+armaba con el campo del calendario pensado para el profesor, así que lo que
+Google enseñaba debajo del título de una lección rusa era una frase en español
+que el lector no entiende. Ahora sale de `meta_leccion`, una plantilla por
+idioma: «Урок 1 из 365: Алфавит и пять гласных. Испанский с нуля для
+русскоговорящих — 30 минут в день, бесплатно и без регистрации.»
+
+Los dos trozos que esa plantilla añade son los que contestan la pregunta que
+se hace quien lee un resultado: **cuánto cuesta y cuánto hay que hacer al
+día**. «Бесплатно и без регистрации» es lo que distingue este curso de los
+cinco resultados de arriba, y no estaba escrito en ninguna parte visible.
+
+**El punto que `tema` pone y la plantilla no**: el tema del calendario a veces
+acaba en punto y a veces no, así que el punto se añade solo si falta. Sin eso
+la descripción decía «...пять гласных Испанский с нуля», dos frases pegadas, y
+Google corta por donde quiere.
+
+**Lo que NO se tocó, y conviene saber por qué**: el `<title>` de las 365
+lecciones ya llevaba el nombre del sitio detrás, y los `canonical`, el
+`hreflang`, el sitemap y los datos estructurados ya estaban desde octubre. El
+revisor que los mira es `scripts/revisar_adsense.py`, que da 10 listo · 0
+falta.
+
+## El saludo por su nombre, la racha y los mensajes variados (2026-10-29)
+
+Tres pedidos del profesor el mismo día, y el primero hubo que acotarlo antes de
+hacer nada: *«no hay forma que la persona pongan su nombre y la que la página
+le envíe un mensaje con su nombre que ya terminó la lección y felicitarlo»*.
+
+**Un sitio estático no envía nada.** Ni un correo ni una notificación: eso
+necesita servidor, una dirección y responsabilidad sobre datos personales, que
+es exactamente lo que se decidió no tener el 2026-10-27 al descartar las
+cuentas. Lo que sí puede hacer, y es casi todo lo que se pedía, es **saludarle
+ahí mismo**, al marcar la lección. Se le dijo con esas palabras.
+
+Así que el nombre vive en `localStorage` —`curso.nombre`, al lado de
+`curso.hechas`— y no sale del navegador. Hay una prueba que busca `fetch`,
+`XMLHttpRequest`, `sendBeacon` y `new Image(` en el guion: un nombre que se
+escapó ya se escapó, y es lo único de este bloque que no se puede arreglar
+después.
+
+**Dónde se pide, que es la decisión que más importa.** El profesor preguntó
+después: *«¿Entonces habría una ventana para que coloque su nombre en la página
+principal?»*. **No**, y es a propósito: un formulario en la puerta, antes de
+que el visitante haya visto nada, es la forma más fiable de perderlo. El campo
+sale **después de la primera lección marcada**, donde ya hay una relación, y se
+puede cambiar en el recuadro de progreso. Es la misma regla que ya tenía
+escrita `#mio`: nada que desanime la primera visita.
+
+**La racha** son los días seguidos, de `curso.fechas`. Dos cosas que la rompen:
+
+- **la fecha es LOCAL y no `toISOString()`**, que da UTC: quien estudia a las
+  once de la noche en Moscú vería el día contado como el siguiente, y quien
+  estudia de madrugada en México perdería la racha. Hay una prueba que exige
+  que `toISOString` no aparezca en el guion —y que mira los comentarios
+  fuera, porque el código NOMBRA esa función para explicar por qué no la usa—;
+- **la racha no se rompe porque hoy aún no hayas estudiado**: se cuenta hacia
+  atrás desde hoy o desde ayer. Si no, a las diez de la mañana el sitio te
+  diría que perdiste ocho días.
+
+El ruso declina los días (1 день, 2-4 дня, 5+ дней), así que el plural va en
+una lista de tres formas, como ya hacía `meses_de` en la portada. Un «5 день» en
+la pantalla delata que el texto no lo escribió nadie.
+
+### Los mensajes variados, y por qué no son un `%` ni un azar
+
+Lo pidió a continuación: *«podemos mandar mensajes de aliento cada vez que
+acabe una lección con su nombre, los mensajes deben ser variados»*. Son nueve
+por idioma, y lo que costó pensar fue **cuál sale cada vez**:
+
+- **al azar, no**: marcar y desmarcar la misma lección daría tres frases
+  distintas para el mismo acto, y eso se lee como que el sitio está probando
+  textos en vez de hablarte. La frase de una lección es siempre la misma.
+- **`n % 9`, tampoco**: deja un ciclo visible. La frase de hoy es la de hace
+  nueve lecciones, y en una racha de dos semanas eso se nota, que es justo de
+  lo que la variedad venía a salvar.
+- **un hash, menos todavía**: medido sobre las 365 lecciones, repite la frase
+  de la lección anterior **entre 15 y 40 veces**. O sea dos días seguidos la
+  misma, que es la queja entera.
+
+Queda el **reparto por bloques**, que es el mismo que el de la letra correcta
+de los tests (2026-10-27) y por el mismo motivo: dentro de cada bloque de nueve
+lecciones salen las nueve frases una vez, en un orden que depende del bloque, y
+si la primera del bloque coincide con la última del anterior se cambia por la
+segunda. Medido sobre las 365: **0 repeticiones seguidas**, las nueve usadas
+40-41 veces cada una, y ningún ciclo. La prueba hace esa cuenta con la misma
+aritmética que corre en el navegador.
+
+**El multiplicador es el de MINSTD (48271) y no el del LCG de libro
+(1103515245)**, y no es cosmético: con el segundo el producto se sale de 2^53,
+que es hasta donde JavaScript cuenta exacto, y la mezcla deja de ser la que se
+midió aquí. La prueba lo fija.
+
+**Son DOS listas y no una frase con el nombre pegado detrás**, porque el nombre
+no siempre va al final: «Иван, ещё один урок позади!» frente a «Отлично,
+Иван!». El precio es que se emparejan por índice, así que una lista más larga
+que la otra daría la frase de un mensaje con el nombre de otro **y nada
+fallaría**: hay una prueba que exige mismo largo, que la versión con nombre lo
+nombre y que la otra no —un `{nombre}` suelto se imprime tal cual, y sin él sale
+«Отлично, !»—.
+
+**Dos mensajes se salen de la rotación a propósito:**
+
+- **la primera lección** tiene el suyo («Первый урок пройден — самое трудное
+  уже позади»). Es el momento en que más gente se va, y una frase de rotación
+  no dice nada de lo que acaba de pasar.
+- **el recuadro de la portada no felicita**: ahí el lector LLEGA, no acaba de
+  terminar nada. Una frase de la rotación diría algo que no ha ocurrido —«una
+  lección más» sin haber hecho ninguna— así que ese sitio lleva un saludo de
+  vuelta, fijo («С возвращением, Иван!»). Hay una prueba que lo exige en los
+  dos sentidos.
+
+**Lo que esto NO hace**: no sincroniza entre aparatos, no sobrevive a un
+borrado de datos del navegador y no manda nada a ningún sitio. Para lo primero
+está el código de respaldo del 2026-10-27, y conviene saber que **el código no
+lleva el nombre ni las fechas**: son 46 bytes de lecciones hechas, y crecer el
+formato rompería los códigos que la gente ya tenga guardados.
+
 ## Estado (2026-10-28)
 
 - Programa anual completo (365 días) y documentación del método.

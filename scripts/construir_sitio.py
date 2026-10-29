@@ -280,6 +280,19 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 .respaldo .enlace{background:none;border:0;padding:0;margin-inline-start:.6rem;
   color:var(--acento);text-decoration:underline;cursor:pointer;font:inherit}
 .aviso-chico{margin:.4rem 0 0;font-size:.82rem;color:var(--tenue)}
+/* El saludo al marcar la lección, la racha y el campo del nombre. El campo
+   se envuelve en varias líneas a propósito: en el móvil, una etiqueta, una
+   casilla y un botón en la misma fila dejan la casilla en cuarenta píxeles. */
+.saludo{margin:.6rem 0 0;font-family:Onest,ui-sans-serif,system-ui,sans-serif;
+  font-weight:600;color:var(--acento)}
+.racha{margin:.5rem 0 0;font-family:Onest,ui-sans-serif,system-ui,sans-serif;
+  font-size:.92rem;color:var(--tinta)}
+.pide-nombre{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin:.7rem 0 0;
+  font-family:Onest,ui-sans-serif,system-ui,sans-serif;font-size:.92rem}
+.pide-nombre input{flex:1 1 9rem;min-width:7rem;padding:.35rem .5rem;
+  border:1px solid var(--linea);border-radius:8px;background:var(--papel);color:var(--tinta);
+  font:inherit}
+.pide-nombre .aviso-chico{flex:1 0 100%;margin:0}
 /* la baraja de tarjetas: dos descargas, la de Anki primero. En tarjeta y no
    en una lista suelta porque es una oferta, no un apartado del curso. */
 .baraja{margin:2rem 0;padding:1.1rem 1.2rem;border:1px solid var(--linea);
@@ -675,6 +688,7 @@ TEMA_SCRIPT = (
 # iba?» tampoco hace falta.
 PROGRESO_JS = r"""(function(){
   var CLAVE_HECHAS='curso.hechas', CLAVE_ULTIMA='curso.ultima';
+  var CLAVE_FECHAS='curso.fechas', CLAVE_NOMBRE='curso.nombre';
   var T=window.CURSO_TEXTOS||{}, RAIZ=window.CURSO_RAIZ||'.';
 
   function leer(clave,porDefecto){
@@ -688,6 +702,86 @@ PROGRESO_JS = r"""(function(){
     var d=window.CURSO_DIAS&&window.CURSO_DIAS[n];
     return d?RAIZ+'/'+d:null;
   }
+
+  function hoy(){
+    // La fecha LOCAL y no toISOString(), que da UTC: quien estudia a las
+    // once de la noche en Moscú vería la racha contada como del día
+    // siguiente, y quien estudia de madrugada en México la perdería.
+    var f=new Date(), m=f.getMonth()+1, d=f.getDate();
+    return f.getFullYear()+'-'+(m<10?'0':'')+m+'-'+(d<10?'0':'')+d;
+  }
+  function fechas(){var v=leer(CLAVE_FECHAS,[]);return Array.isArray(v)?v:[]}
+  function anotarHoy(){
+    var f=fechas(), h=hoy();
+    if(f.indexOf(h)<0){f.push(h);guardar(CLAVE_FECHAS,f)}
+  }
+  function dia(cadena){var p=String(cadena).split('-');return Date.UTC(+p[0],+p[1]-1,+p[2])}
+  function rachas(){
+    // Devuelve {actual, mejor}. La actual cuenta hacia atrás desde HOY, y si
+    // hoy todavía no hay nada, desde ayer: una racha no se rompe por que
+    // sean las diez de la mañana y aún no hayas estudiado.
+    var f=fechas().slice().sort(), DIA=86400000;
+    if(!f.length)return {actual:0,mejor:0,hoy:false};
+    var h=dia(hoy()), ultima=dia(f[f.length-1]);
+    var actual=0, mejor=0, seguidas=0, previa=null;
+    for(var i=0;i<f.length;i++){
+      var d=dia(f[i]);
+      seguidas = (previa!==null && d-previa===DIA) ? seguidas+1 : 1;
+      if(seguidas>mejor)mejor=seguidas;
+      previa=d;
+    }
+    if(ultima===h||ultima===h-DIA){
+      actual=1;
+      for(var j=f.length-2;j>=0;j--){
+        if(dia(f[j+1])-dia(f[j])===DIA)actual++;else break;
+      }
+    }
+    return {actual:actual,mejor:mejor,hoy:ultima===h};
+  }
+  function plural(n,formas){
+    // Tres formas porque el ruso las pide (1 день, 2-4 дня, 5+ дней). En
+    // español y en inglés las dos últimas son la misma y no estorba.
+    if(!formas||!formas.length)return '';
+    var d=n%10, c=n%100;
+    if(d===1&&c!==11)return formas[0];
+    if(d>=2&&d<=4&&!(c>=12&&c<=14))return formas[1]||formas[0];
+    return formas[2]||formas[1]||formas[0];
+  }
+  function permutacion(bloque,largo){
+    // Fisher-Yates con una semilla que sale del BLOQUE, así que da lo mismo
+    // en cada visita: el mensaje de una lección no cambia al recargarla.
+    // El multiplicador es el de MINSTD y no el del LCG de libro: con éste
+    // todos los productos se quedan por debajo de 2^53, que es hasta donde
+    // JavaScript cuenta exacto. Con 1103515245 el producto se sale y la
+    // mezcla deja de ser la que se midió.
+    var s=((bloque+1)*48271)%2147483647, p=[];
+    for(var i=0;i<largo;i++)p.push(i);
+    for(var k=largo-1;k>0;k--){
+      s=(s*48271)%2147483647;
+      var j=(s>>8)%(k+1), t=p[k];p[k]=p[j];p[j]=t;
+    }
+    return p;
+  }
+  function variante(n,lista){
+    // Dentro de cada bloque de `largo` lecciones salen todas las frases una
+    // vez, en un orden que depende del bloque. Hace dos cosas a la vez que
+    // ninguna solución simple hace: no repite nunca la frase de la lección
+    // anterior Y no deja un ciclo visible —con n%largo la frase de hoy es la
+    // de hace nueve lecciones, y en una racha de dos semanas eso se nota, que
+    // es justo de lo que el profesor se quejó—. Es el mismo reparto por
+    // bloques que la letra correcta de los tests, y por el mismo motivo.
+    if(!lista)return '';
+    if(!lista.length||typeof lista==='string')return String(lista);
+    var largo=lista.length, bloque=Math.floor((n-1)/largo), p=permutacion(bloque,largo);
+    if(bloque>0&&p[0]===permutacion(bloque-1,largo)[largo-1]){var t=p[0];p[0]=p[1];p[1]=t}
+    return lista[p[(n-1)%largo]];
+  }
+  function conPlantilla(txt,datos){
+    return String(txt||'').replace(/\{(\w+)\}/g,function(_,k){
+      return datos[k]!==undefined?datos[k]:'';
+    });
+  }
+  function nombre(){try{return localStorage.getItem(CLAVE_NOMBRE)||''}catch(e){return ''}}
 
   // --- en una lección: recordar que se pasó por aquí y poder marcarla ---
   // article[data-leccion] y no [data-leccion] a secas: en el índice el primero
@@ -707,13 +801,69 @@ PROGRESO_JS = r"""(function(){
         boton.textContent=(yaEsta?'✓ ':'')+(yaEsta?T.hecho:T.marcar);
         boton.classList.toggle('secundario',yaEsta);
       }
+      // El saludo al terminar: por su nombre, cuánto lleva y cuántos días
+      // seguidos. Lo pidió el profesor —«que la página le envíe un mensaje
+      // con su nombre»— y esto es lo que un sitio estático puede hacer de
+      // verdad: saludar aquí. Mandar un correo o una notificación necesita
+      // servidor y una dirección, que es lo que se decidió no tener.
+      var saludo=document.createElement('p');
+      saludo.className='saludo';saludo.hidden=true;
+      var pedirNombre=document.createElement('p');
+      pedirNombre.className='pide-nombre';pedirNombre.hidden=true;
+      function felicitar(){
+        var r=rachas(), total=window.CURSO_PUBLICADAS||0, hechasAhora=hechas().length;
+        var quien=nombre();
+        // La PRIMERA lección lleva su propio mensaje: es donde más gente se
+        // va, y una frase de rotación no dice nada de lo que acaba de pasar.
+        // De ahí en adelante, una de las nueve, elegida por el NÚMERO DE
+        // LECCIÓN y no al azar: al azar, marcar y desmarcar la misma lección
+        // daría tres frases distintas para el mismo acto, y eso se lee como
+        // que el sitio está probando textos en vez de hablarte.
+        var trozos=[hechasAhora===1
+          ? conPlantilla(quien?T.primera_con:T.primera,{nombre:quien})
+          : conPlantilla(variante(n,quien?T.bravo_con:T.bravo),{nombre:quien})];
+        if(total)trozos.push(conPlantilla(T.cuantas,{n:hechasAhora,total:total}));
+        if(r.actual>1)trozos.push(conPlantilla(T.racha,
+          {n:r.actual,dias:plural(r.actual,T.racha_dias)}));
+        if(total&&total>hechasAhora)trozos.push(conPlantilla(T.faltan,{n:total-hechasAhora}));
+        saludo.textContent=trozos.join(' · ');
+        saludo.hidden=false;
+        // El nombre se pide DESPUÉS de la primera lección marcada y no antes:
+        // preguntárselo a quien acaba de llegar es un formulario en la puerta.
+        pedirNombre.hidden=!!quien;
+      }
       boton.addEventListener('click',function(){
         var lista=hechas(), i=lista.indexOf(n);
         if(i>=0){lista.splice(i,1)}else{lista.push(n)}
         guardar(CLAVE_HECHAS,lista);pintar();
-        if(i<0&&siguiente){siguiente.classList.add('destacado')}
+        if(i<0){
+          anotarHoy();felicitar();
+          if(siguiente){siguiente.classList.add('destacado')}
+        }else{saludo.hidden=true;pedirNombre.hidden=true}
       });
-      pintar();caja.appendChild(boton);
+      pintar();caja.appendChild(boton);caja.appendChild(saludo);
+
+      // El campo del nombre, montado aquí y no servido en el HTML: sin
+      // JavaScript no habría dónde guardarlo y sería un formulario que no
+      // hace nada.
+      var etiqueta=document.createElement('label');
+      etiqueta.textContent=T.nombre_label||'';
+      var campo=document.createElement('input');
+      campo.type='text';campo.autocomplete='given-name';campo.maxLength=40;
+      var guardarNombre=document.createElement('button');
+      guardarNombre.type='button';guardarNombre.className='boton secundario';
+      guardarNombre.textContent=T.nombre_boton||'';
+      var notaNombre=document.createElement('span');
+      notaNombre.className='aviso-chico';notaNombre.textContent=T.nombre_nota||'';
+      guardarNombre.addEventListener('click',function(){
+        var v=campo.value.trim().slice(0,40);
+        if(!v)return;
+        try{localStorage.setItem(CLAVE_NOMBRE,v)}catch(e){}
+        pedirNombre.hidden=true;felicitar();
+      });
+      pedirNombre.appendChild(etiqueta);pedirNombre.appendChild(campo);
+      pedirNombre.appendChild(guardarNombre);pedirNombre.appendChild(notaNombre);
+      caja.appendChild(pedirNombre);
     }
   }
 
@@ -740,6 +890,45 @@ PROGRESO_JS = r"""(function(){
     if(texto)texto.textContent='/ '+publicadas+' '+T.tuyo;
     var barra=contador.querySelector('.barra i');
     if(barra&&publicadas)barra.style.width=Math.max(hechasAhora.length*100/publicadas,1)+'%';
+
+    // La racha y el nombre, en el recuadro de progreso.
+    //
+    // Aquí y NO en una ventana al entrar: un formulario en la puerta, antes
+    // de que el visitante haya visto nada, es la forma más fiable de
+    // perderlo. El sitio pide el nombre donde ya hay una relación —después
+    // de la primera lección marcada— y aquí lo deja cambiar.
+    var r=rachas(), quien=nombre();
+    var linea=document.createElement('p');
+    linea.className='racha';
+    var partes=[];
+    if(r.actual)partes.push(conPlantilla(T.racha,{n:r.actual,dias:plural(r.actual,T.racha_dias)}));
+    if(r.mejor>r.actual)partes.push(conPlantilla(T.racha_mejor,
+      {n:r.mejor,dias:plural(r.mejor,T.racha_dias)}));
+    if(partes.length){
+      linea.textContent=(quien?conPlantilla(T.vuelta,{nombre:quien})+' ':'')+partes.join(' · ');
+      contador.appendChild(linea);
+    }
+    if(!quien){
+      var pide=document.createElement('p');
+      pide.className='pide-nombre';
+      var et=document.createElement('label');et.textContent=T.nombre_label||'';
+      var ca=document.createElement('input');
+      ca.type='text';ca.autocomplete='given-name';ca.maxLength=40;
+      var bo=document.createElement('button');
+      bo.type='button';bo.className='boton secundario';bo.textContent=T.nombre_boton||'';
+      var no=document.createElement('span');
+      no.className='aviso-chico';no.textContent=T.nombre_nota||'';
+      bo.addEventListener('click',function(){
+        var v=ca.value.trim().slice(0,40);
+        if(!v)return;
+        try{localStorage.setItem(CLAVE_NOMBRE,v)}catch(e){}
+        pide.hidden=true;
+        linea.textContent=conPlantilla(T.vuelta,{nombre:v})+' '+partes.join(' · ');
+        if(!linea.parentNode)contador.appendChild(linea);
+      });
+      pide.appendChild(et);pide.appendChild(ca);pide.appendChild(bo);pide.appendChild(no);
+      contador.appendChild(pide);
+    }
   }
 
   // --- en el índice: una marca en cada lección hecha ---
@@ -2672,7 +2861,12 @@ def construir_indice_curso(cfg, t, idiomas, idioma, destino, cal, raiz,
     partes.append(_bloque_de_la_baraja(t, sitio or destino, raiz))
     partes.append(anuncio(cfg, "pie"))
     destino.joinpath("kurs.html").write_text(
-        pagina(cfg, t, idiomas, idioma, f'{c["titulo"]} — {c["subtitulo"]}', "\n".join(partes),
+        # El nombre del sitio en el <title>, como en «О курсе», el test y el
+        # contacto. Antes decía «Все уроки — 365 дней, 52 недели, 24 темы» y
+        # **no contenía la palabra «испанский» en ninguna parte**: es la
+        # segunda página del sitio y un buscador no podía saber qué idioma
+        # enseña. El «365 дней…» no se pierde: pasa a la descripción.
+        pagina(cfg, t, idiomas, idioma, f'{c["titulo"]} — {t["titulo_sitio"]}', "\n".join(partes),
                descripcion=c["entrada"], pagina_id="kurs.html", raiz=raiz,
                publicadas=len(escritas(cal)), mapa_dias=mapa_de_dias(cal)),
         encoding="utf-8")
@@ -3084,7 +3278,17 @@ def construir_leccion(d, cfg, t, idiomas, destino, cal, todos, audio=None,
             html_cuerpo = _envolver_prueba(html_cuerpo, t, es_minitest=es_mini)
 
     titulo = f"{L['urok']} {d.numero}: {d.tema_ru} — {t['titulo_sitio']}"
-    descripcion = f"{L['urok']} {d.numero}: {d.tema_ru}. {d.foco[:110]}"
+    # `foco` es la nota del autor y está EN ESPAÑOL —«dormir 8 horas, hacer
+    # ejercicio…»—, así que las 365 páginas salían en Google con medio
+    # fragmento en un idioma que el lector ruso no está buscando. La
+    # descripción se arma ahora de la plantilla traducida: dice qué lección
+    # es, de cuántas, su tema en ruso y lo que un buscador necesita saber
+    # —gratis, sin registro, 30 minutos—.
+    # El tema se mete con su punto, salvo que ya acabe en signo: hay temas
+    # que son una pregunta («Ты ведёшь здоровый образ жизни?») y quedaban
+    # con «?.» en el fragmento de Google.
+    tema = d.tema_ru if d.tema_ru.rstrip()[-1:] in ".!?…" else d.tema_ru + "."
+    descripcion = L["meta_leccion"].format(n=d.numero, tema=tema)
     aviso = "" if datos.get("revisado") else f'<p class="aviso">{html.escape(L["borrador"])}</p>'
 
     pasos = []

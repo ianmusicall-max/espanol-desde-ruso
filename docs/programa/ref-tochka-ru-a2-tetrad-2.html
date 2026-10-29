@@ -160,6 +160,19 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 .respaldo .enlace{background:none;border:0;padding:0;margin-inline-start:.6rem;
   color:var(--acento);text-decoration:underline;cursor:pointer;font:inherit}
 .aviso-chico{margin:.4rem 0 0;font-size:.82rem;color:var(--tenue)}
+/* El saludo al marcar la lección, la racha y el campo del nombre. El campo
+   se envuelve en varias líneas a propósito: en el móvil, una etiqueta, una
+   casilla y un botón en la misma fila dejan la casilla en cuarenta píxeles. */
+.saludo{margin:.6rem 0 0;font-family:Onest,ui-sans-serif,system-ui,sans-serif;
+  font-weight:600;color:var(--acento)}
+.racha{margin:.5rem 0 0;font-family:Onest,ui-sans-serif,system-ui,sans-serif;
+  font-size:.92rem;color:var(--tinta)}
+.pide-nombre{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin:.7rem 0 0;
+  font-family:Onest,ui-sans-serif,system-ui,sans-serif;font-size:.92rem}
+.pide-nombre input{flex:1 1 9rem;min-width:7rem;padding:.35rem .5rem;
+  border:1px solid var(--linea);border-radius:8px;background:var(--papel);color:var(--tinta);
+  font:inherit}
+.pide-nombre .aviso-chico{flex:1 0 100%;margin:0}
 /* la baraja de tarjetas: dos descargas, la de Anki primero. En tarjeta y no
    en una lista suelta porque es una oferta, no un apartado del curso. */
 .baraja{margin:2rem 0;padding:1.1rem 1.2rem;border:1px solid var(--linea);
@@ -787,7 +800,7 @@ instrucción y la forma del test de unidad.</p>
     });
   });
 })();</script>
-<script>window.CURSO_TEXTOS={"continuar": "Continuar: lección", "guia_paso": "Paso {n} de {total}", "guia_siguiente": "Siguiente", "guia_final": "Marcar y seguir", "guia_empezar": "Empezar por el primer paso", "empezar": "Empezar de cero", "marcar": "Marcar la lección como hecha", "hecho": "Lección hecha", "siguiente": "Siguiente lección", "tuyo": "hechas por usted", "titulo": "Su progreso", "aviso": "El progreso se guarda solo en este navegador y en este aparato. No hay registro y no se envía a ninguna parte. Si borra los datos del navegador o abre el curso en otro teléfono, las marcas no viajan con usted.", "borrar": "Borrar el progreso", "confirmar": "¿Borrar todas las marcas?", "copiar": "Guardar mi progreso", "copiado": "Código copiado — péguelo en sus notas o en un mensaje a sí mismo", "restaurar": "Recuperar mi progreso", "pegar": "Pegue aquí su código", "aplicar": "Restaurar", "cancelar": "Cancelar", "malo": "Esto no parece un código de progreso. No se ha cambiado nada.", "menos": "Ese código trae menos lecciones de las que tiene marcadas (%a% en vez de %b%). ¿Restaurar igualmente?", "hecho_restaurar": "Listo: %n% lecciones restauradas", "antes": "Antes de limpiar el navegador o cambiar de móvil, guarde su código."};window.CURSO_RAIZ="..";window.CURSO_PUBLICADAS=0;window.CURSO_DIAS={};</script>
+<script>window.CURSO_TEXTOS={"continuar": "Continuar: lección", "guia_paso": "Paso {n} de {total}", "guia_siguiente": "Siguiente", "guia_final": "Marcar y seguir", "guia_empezar": "Empezar por el primer paso", "empezar": "Empezar de cero", "marcar": "Marcar la lección como hecha", "hecho": "Lección hecha", "siguiente": "Siguiente lección", "tuyo": "hechas por usted", "titulo": "Su progreso", "aviso": "El progreso se guarda solo en este navegador y en este aparato. No hay registro y no se envía a ninguna parte. Si borra los datos del navegador o abre el curso en otro teléfono, las marcas no viajan con usted.", "borrar": "Borrar el progreso", "confirmar": "¿Borrar todas las marcas?", "copiar": "Guardar mi progreso", "copiado": "Código copiado — péguelo en sus notas o en un mensaje a sí mismo", "restaurar": "Recuperar mi progreso", "pegar": "Pegue aquí su código", "aplicar": "Restaurar", "cancelar": "Cancelar", "malo": "Esto no parece un código de progreso. No se ha cambiado nada.", "menos": "Ese código trae menos lecciones de las que tiene marcadas (%a% en vez de %b%). ¿Restaurar igualmente?", "hecho_restaurar": "Listo: %n% lecciones restauradas", "nombre_label": "¿Cómo se llama?", "nombre_boton": "Guardar", "nombre_nota": "Solo para saludarle por su nombre. Se queda en este navegador y no se envía a ninguna parte.", "bravo": ["¡Muy bien!", "¡Así se hace!", "¡Buen trabajo!", "¡Una lección más!", "¡Va por buen camino!", "¡Hecho!", "¡Qué ritmo!", "¡Siga así!", "Paso a paso se llega."], "bravo_con": ["¡Muy bien, {nombre}!", "¡Así se hace, {nombre}!", "¡Buen trabajo, {nombre}!", "¡{nombre}, una lección más!", "¡Va por buen camino, {nombre}!", "¡Hecho, {nombre}!", "¡Qué ritmo, {nombre}!", "¡Siga así, {nombre}!", "{nombre}, paso a paso se llega."], "vuelta": "Hola de nuevo, {nombre}.", "primera": "Primera lección hecha: lo más difícil ya pasó.", "primera_con": "{nombre}, primera lección hecha: lo más difícil ya pasó.", "cuantas": "{n} de {total}", "faltan": "quedan {n}", "racha": "{n} {dias} seguidos", "racha_dias": ["día", "días", "días"], "racha_hoy": "Hoy ha estudiado", "racha_mejor": "Su mejor racha: {n} {dias}", "antes": "Antes de limpiar el navegador o cambiar de móvil, guarde su código."};window.CURSO_RAIZ="..";window.CURSO_PUBLICADAS=0;window.CURSO_DIAS={};</script>
 <script src="../progreso.js" defer></script>
 
 

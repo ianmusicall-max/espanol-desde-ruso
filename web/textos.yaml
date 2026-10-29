@@ -78,7 +78,7 @@ ru:
   curso:
     titulo: "Все уроки"
     subtitulo: "365 дней, 52 недели, 24 темы"
-    entrada: "Ссылками открываются уроки, которые уже написаны. У остальных показана тема дня: программа составлена на весь год вперёд."
+    entrada: "Все 365 уроков испанского с нуля: 24 темы, 52 недели, от алфавита до уровня A2 и экзамена DELE. Бесплатно, без регистрации."
     tema: "Тема"
     semana: "Неделя"
     objetivos: "Чему вы научитесь"
@@ -125,6 +125,7 @@ ru:
     ninos_texto: "Сайт не предназначен для детей младше 13 лет и не собирает их данные сознательно."
   leccion:
     urok: "Урок"
+    meta_leccion: "Урок {n} из 365: {tema} Испанский с нуля для русскоговорящих — 30 минут в день, бесплатно и без регистрации."
     de: "из"
     semana: "неделя"
     nivel: "уровень"
@@ -206,6 +207,50 @@ ru:
     malo: "Это не похоже на код прогресса. Ничего не изменено."
     menos: "В этом коде меньше уроков, чем отмечено сейчас (%a% вместо %b%). Всё равно восстановить?"
     hecho_restaurar: "Готово: восстановлено уроков — %n%"
+    nombre_label: "Как вас зовут?"
+    nombre_boton: "Сохранить"
+    nombre_nota: "Только чтобы обращаться к вам по имени. Имя остаётся в этом браузере и никуда не отправляется."
+    # Los mensajes de aliento al terminar una lección. Son LISTAS y van
+    # emparejadas por índice: `bravo[i]` es la misma frase que `bravo_con[i]`
+    # con el nombre dentro, así que las dos tienen que medir lo mismo y hay una
+    # prueba que lo exige. El nombre no siempre va al final —en ruso y en
+    # español hay frases donde suena mejor delante—, y por eso son dos listas y
+    # no una frase con una coma pegada.
+    bravo:
+      - "Отлично!"
+      - "Так держать!"
+      - "Хорошая работа!"
+      - "Ещё один урок позади!"
+      - "Вы молодец!"
+      - "Готово!"
+      - "Вот это темп!"
+      - "Продолжайте так же!"
+      - "Шаг за шагом — и получается!"
+    bravo_con:
+      - "Отлично, {nombre}!"
+      - "Так держать, {nombre}!"
+      - "Хорошая работа, {nombre}!"
+      - "{nombre}, ещё один урок позади!"
+      - "Вы молодец, {nombre}!"
+      - "Готово, {nombre}!"
+      - "Вот это темп, {nombre}!"
+      - "Продолжайте так же, {nombre}!"
+      - "Шаг за шагом, {nombre}, — и получается!"
+    # La primera lección tiene su propio mensaje: es el momento en que más
+    # gente se va, y un «Отлично!» de rotación no dice nada de lo que acaba
+    # de pasar.
+    # El recuadro de la portada no felicita: ahí el lector LLEGA, no acaba
+    # de terminar nada. Es fijo a propósito; lo que varía es el mensaje de
+    # la lección.
+    vuelta: "С возвращением, {nombre}!"
+    primera: "Первый урок пройден — самое трудное уже позади."
+    primera_con: "{nombre}, первый урок пройден — самое трудное уже позади."
+    cuantas: "{n} из {total}"
+    faltan: "осталось {n}"
+    racha: "{n} {dias} подряд"
+    racha_dias: ["день", "дня", "дней"]
+    racha_hoy: "Сегодня вы занимались"
+    racha_mejor: "Лучшая серия: {n} {dias}"
     antes: "Перед тем как очистить браузер или сменить телефон, сохраните код."
 
 es:
@@ -264,7 +309,7 @@ es:
   curso:
     titulo: "Las lecciones"
     subtitulo: "365 días, 52 semanas, 24 unidades"
-    entrada: "Los enlaces abren las lecciones ya escritas. Del resto se muestra el tema del día: el programa está hecho para el año entero."
+    entrada: "Las 365 lecciones de español desde cero: 24 temas, 52 semanas, del alfabeto al nivel A2 y al examen DELE. Gratis y sin registro."
     tema: "Unidad"
     semana: "Semana"
     objetivos: "Objetivos"
@@ -311,6 +356,7 @@ es:
     ninos_texto: "La web no está dirigida a menores de 13 años ni recoge sus datos a sabiendas."
   leccion:
     urok: "Lección"
+    meta_leccion: "Lección {n} de 365: {tema} Español desde cero para rusohablantes — 30 minutos al día, gratis y sin registro."
     de: "de"
     semana: "semana"
     nivel: "nivel"
@@ -392,6 +438,38 @@ es:
     malo: "Esto no parece un código de progreso. No se ha cambiado nada."
     menos: "Ese código trae menos lecciones de las que tiene marcadas (%a% en vez de %b%). ¿Restaurar igualmente?"
     hecho_restaurar: "Listo: %n% lecciones restauradas"
+    nombre_label: "¿Cómo se llama?"
+    nombre_boton: "Guardar"
+    nombre_nota: "Solo para saludarle por su nombre. Se queda en este navegador y no se envía a ninguna parte."
+    bravo:
+      - "¡Muy bien!"
+      - "¡Así se hace!"
+      - "¡Buen trabajo!"
+      - "¡Una lección más!"
+      - "¡Va por buen camino!"
+      - "¡Hecho!"
+      - "¡Qué ritmo!"
+      - "¡Siga así!"
+      - "Paso a paso se llega."
+    bravo_con:
+      - "¡Muy bien, {nombre}!"
+      - "¡Así se hace, {nombre}!"
+      - "¡Buen trabajo, {nombre}!"
+      - "¡{nombre}, una lección más!"
+      - "¡Va por buen camino, {nombre}!"
+      - "¡Hecho, {nombre}!"
+      - "¡Qué ritmo, {nombre}!"
+      - "¡Siga así, {nombre}!"
+      - "{nombre}, paso a paso se llega."
+    vuelta: "Hola de nuevo, {nombre}."
+    primera: "Primera lección hecha: lo más difícil ya pasó."
+    primera_con: "{nombre}, primera lección hecha: lo más difícil ya pasó."
+    cuantas: "{n} de {total}"
+    faltan: "quedan {n}"
+    racha: "{n} {dias} seguidos"
+    racha_dias: ["día", "días", "días"]
+    racha_hoy: "Hoy ha estudiado"
+    racha_mejor: "Su mejor racha: {n} {dias}"
     antes: "Antes de limpiar el navegador o cambiar de móvil, guarde su código."
 
 en:
@@ -450,7 +528,7 @@ en:
   curso:
     titulo: "Lessons"
     subtitulo: "365 days, 52 weeks, 24 units"
-    entrada: "Links open the lessons already written. For the rest, the topic of the day is shown: the syllabus covers the whole year."
+    entrada: "All 365 lessons of Spanish from scratch: 24 topics, 52 weeks, from the alphabet to level A2 and the DELE exam. Free, no sign-up."
     tema: "Unit"
     semana: "Week"
     objetivos: "Objectives"
@@ -497,6 +575,7 @@ en:
     ninos_texto: "The site is not aimed at children under 13 and does not knowingly collect their data."
   leccion:
     urok: "Lesson"
+    meta_leccion: "Lesson {n} of 365: {tema} Spanish from scratch for Russian speakers — 30 minutes a day, free, no sign-up."
     de: "of"
     semana: "week"
     nivel: "level"
@@ -578,4 +657,36 @@ en:
     malo: "That does not look like a progress code. Nothing was changed."
     menos: "That code has fewer lessons than you have marked (%a% instead of %b%). Restore anyway?"
     hecho_restaurar: "Done: %n% lessons restored"
+    nombre_label: "What is your name?"
+    nombre_boton: "Save"
+    nombre_nota: "Only to greet you by name. It stays in this browser and is never sent anywhere."
+    bravo:
+      - "Well done!"
+      - "That's the way!"
+      - "Nice work!"
+      - "One more lesson done!"
+      - "You're on track!"
+      - "Done!"
+      - "Great pace!"
+      - "Keep it up!"
+      - "Step by step it adds up."
+    bravo_con:
+      - "Well done, {nombre}!"
+      - "That's the way, {nombre}!"
+      - "Nice work, {nombre}!"
+      - "{nombre}, one more lesson done!"
+      - "You're on track, {nombre}!"
+      - "Done, {nombre}!"
+      - "Great pace, {nombre}!"
+      - "Keep it up, {nombre}!"
+      - "{nombre}, step by step it adds up."
+    vuelta: "Welcome back, {nombre}!"
+    primera: "First lesson done — the hardest part is behind you."
+    primera_con: "{nombre}, first lesson done — the hardest part is behind you."
+    cuantas: "{n} of {total}"
+    faltan: "{n} to go"
+    racha: "{n} {dias} in a row"
+    racha_dias: ["day", "days", "days"]
+    racha_hoy: "You studied today"
+    racha_mejor: "Your best streak: {n} {dias}"
     antes: "Before clearing your browser or switching phones, save your code."
