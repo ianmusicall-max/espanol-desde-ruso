@@ -155,11 +155,30 @@ async function unaPagina(b, rel, base) {
   const botones = p.locator('button:has-text("▶")');
   r.audio_botones = await botones.count();
   if (r.audio_botones) {
-    await botones.first().click();
-    try { await p.waitForResponse(res => /\.mp3/.test(res.url()), { timeout: 8000 }); } catch (e) {}
-    await p.waitForTimeout(800);
-    r.audio_suena = (await botones.first().getAttribute('aria-pressed')) === 'true'
-                    && mp3.length > 0 && mp3.every(m => m.estado === 200 && m.bytes > 1000);
+    // Se ESPERA a que el boton diga que suena, y se reintenta, en vez de
+    // dormir un rato fijo. Los 800 ms que habia aqui bastaban casi siempre y
+    // fallaban en UNA pagina al azar de las 25, distinta en cada corrida y
+    // con su MP3 ya descargado (200 y bytes): la promesa de `play()` se queda
+    // sin resolver cuando el contenedor no tiene salida de audio.
+    //
+    // Lo que NO se hizo es conformarse con el MP3: `aria-pressed` es la unica
+    // señal de que play() resolvio, y era justo lo que esta guarda vino a
+    // comprobar el 2026-10-28. Reintentar mantiene la exigencia y quita la
+    // casualidad: una pagina de verdad muda falla los tres intentos.
+    for (let intento = 0; intento < 3 && !r.audio_suena; intento++) {
+      await botones.first().click();
+      if (intento === 0) {
+        try { await p.waitForResponse(res => /\.mp3/.test(res.url()), { timeout: 8000 }); } catch (e) {}
+      }
+      try {
+        await p.waitForFunction(
+          () => document.querySelector('button.suena[aria-pressed="true"]') !== null,
+          null, { timeout: 5000 });
+      } catch (e) {}
+      r.audio_suena = (await botones.first().getAttribute('aria-pressed')) === 'true'
+                      && mp3.length > 0 && mp3.every(m => m.estado === 200 && m.bytes > 1000);
+      r.audio_intentos = intento + 1;
+    }
     if (!r.audio_suena) r.errores.push('el ▶ no suena: ' + JSON.stringify(mp3));
   }
   r.errores = r.errores.concat(errores);
@@ -171,7 +190,14 @@ async function unaPagina(b, rel, base) {
   const paginas = process.argv.slice(2).length ? process.argv.slice(2) : POR_DEFECTO;
   const servidor = await servir(path.resolve('docs'));
   const base = 'http://127.0.0.1:' + servidor.address().port + '/';
-  const b = await chromium.launch({ args: ['--no-sandbox'] });
+  // `--mute-audio` no afloja nada: `play()` sigue resolviendo igual y
+  // `aria-pressed` sigue siendo la señal exigida. Lo que quita es la
+  // dependencia de que el contenedor tenga salida de audio, que no la tiene:
+  // sin esto, una página al azar de las 25 se quedaba con la promesa de
+  // `play()` sin resolver —con su MP3 descargado, 200 y bytes— y el rojo
+  // señalaba cada vez a una página distinta.
+  const b = await chromium.launch({
+    args: ['--no-sandbox', '--mute-audio', '--autoplay-policy=no-user-gesture-required'] });
   let malas = 0;
   for (const rel of paginas) {
     const r = await unaPagina(b, rel, base);

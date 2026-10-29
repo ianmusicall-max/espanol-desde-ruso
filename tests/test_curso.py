@@ -3682,13 +3682,34 @@ class TestElMapaDeUnidades(unittest.TestCase):
             pies = re.findall(r'<span class="hechas" data-palabra="([^"]*)">([^<]*)</span>', h)
             self.assertEqual(len(pies), 24, pagina)
             for palabra, texto in pies:
+                # El servidor pone el TAMAÑO de la unidad («14 lecciones») y
+                # el guion lo cambia por lo del lector («7/14 hechas»). Son
+                # dos frases distintas a propósito, así que el texto servido
+                # NO puede acabar en la palabra del progreso.
                 self.assertTrue(palabra.strip(), pagina)
-                self.assertTrue(texto.strip().endswith(palabra), (pagina, texto))
+                self.assertRegex(texto.strip(), r"^14 \S+$", (pagina, texto))
+                self.assertFalse(texto.strip().endswith(palabra), (pagina, texto))
+                self.assertNotIn("/", texto, (pagina, texto))
+            # Y la barra nace oculta: llena mentiría y vacía desanima.
+            self.assertEqual(len(re.findall(r'<span class="mini" hidden>', h)), 24, pagina)
+            self.assertNotIn('<i style="width:100%"></i>', h, pagina)
         js = construir_sitio.PROGRESO_JS
         self.assertIn(".u-tarjeta[data-desde]", js)
+        self.assertIn("barra.hidden=false", js)
         # Solo si ya hay progreso: veinticuatro barras en cero en la primera
         # visita desaniman, que es la regla que ya tiene escrita `#mio`.
         self.assertIn("tarjetas.length&&hechasAhora.length", js)
+
+    def test_todas_las_unidades_miden_catorce(self):
+        """La tarjeta escribe «14 уроков», y 14 en ruso pide el genitivo
+        plural. Con otro número haría falta declinar —como ya hace
+        `meses_de`— así que lo que esta prueba protege no es el reparto del
+        calendario sino que esa frase siga estando bien escrita."""
+        cal = plan.cargar()
+        dias = plan.dias(cal)
+        for u in cal["unidades"]:
+            suyos = [d for d in dias if d.unidad == u["numero"]]
+            self.assertEqual(len(suyos), 14, u["numero"])
 
     def test_la_frase_del_test_no_se_mete_encima_de_lo_de_arriba(self):
         """El margen negativo era de la portada, donde `.puerta` va pegada a

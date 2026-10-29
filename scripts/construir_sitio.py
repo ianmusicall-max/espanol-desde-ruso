@@ -140,22 +140,32 @@ CSS = """
    lo escribe un script de dos líneas en <head> para que no haya parpadeo. */
 :root{
   color-scheme:light;
-  --papel:#fdfbf6; --tinta:#1b1e23; --tenue:#646c78; --linea:#e2dacb;
-  --acento:#b03f26; --acento-suave:#fbeee9; --celeste:#2f6b8f; --celeste-suave:#eaf2f7;
-  --realce:#fdf3d8; --tarjeta:#f7f2e6; --sombra:0 1px 2px rgba(27,30,35,.05);
+  /* Blanco con un solo acento, elegido por el profesor sobre una lámina con
+     cuatro paletas aplicadas a su propia portada (2026-10-29). El acento es
+     el MISMO terracota de antes, y eso no es inercia: es el color del logo
+     que eligió el 29 por la mañana, así que la eñe de la pestaña, los
+     botones y la caja de consentimiento siguen hablando el mismo idioma.
+     Lo que se fue es el crema. */
+  --papel:#ffffff; --tinta:#101113; --tenue:#6b7076; --linea:#dcdde0;
+  --acento:#b03f26; --acento-suave:#fbeee9; --celeste:#55585e; --celeste-suave:#f1f2f3;
+  --realce:#fdeee9; --tarjeta:#f4f4f5; --sombra:0 1px 2px rgba(16,17,19,.06);
   --ancho:44rem;
 }
 @media(prefers-color-scheme:dark){:root:not([data-tema="light"]){
   color-scheme:dark;
-  --papel:#14161a; --tinta:#e8e4da; --tenue:#9aa2ae; --linea:#333941;
-  --acento:#f0896a; --acento-suave:#2a1d19; --celeste:#7fb6d6; --celeste-suave:#162229;
-  --realce:#2a2718; --tarjeta:#1d2026; --sombra:none;
+  /* La noche se neutraliza con el día: la tinta era crema (#e8e4da) para ir
+     con el papel crema, y sobre un sitio blanco y gris eso se lee amarillo. */
+  --papel:#121316; --tinta:#e7e8ea; --tenue:#9b9fa6; --linea:#303337;
+  --acento:#f0896a; --acento-suave:#2a1d19; --celeste:#a8adb5; --celeste-suave:#1c1e22;
+  --realce:#2a2718; --tarjeta:#1c1e21; --sombra:none;
 }}
 :root[data-tema="dark"]{
   color-scheme:dark;
-  --papel:#14161a; --tinta:#e8e4da; --tenue:#9aa2ae; --linea:#333941;
-  --acento:#f0896a; --acento-suave:#2a1d19; --celeste:#7fb6d6; --celeste-suave:#162229;
-  --realce:#2a2718; --tarjeta:#1d2026; --sombra:none;
+  /* La noche se neutraliza con el día: la tinta era crema (#e8e4da) para ir
+     con el papel crema, y sobre un sitio blanco y gris eso se lee amarillo. */
+  --papel:#121316; --tinta:#e7e8ea; --tenue:#9b9fa6; --linea:#303337;
+  --acento:#f0896a; --acento-suave:#2a1d19; --celeste:#a8adb5; --celeste-suave:#1c1e22;
+  --realce:#2a2718; --tarjeta:#1c1e21; --sombra:none;
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
@@ -517,6 +527,27 @@ del{text-decoration-line:line-through;text-decoration-color:var(--acento);
 .mal{color:var(--acento)}
 .bien{color:#1d7a4f}
 @media(prefers-color-scheme:dark){:root:not([data-tema="light"]) .bien{color:#5fc48f}}
+/* Los 300 dibujos llevan el fondo DENTRO del archivo —`igualar_dibujos.py`
+   los iguala a `--tarjeta`— así que en la noche son cuadrados casi blancos
+   sobre tarjetas oscuras, y con la paleta del 2026-10-29 eso empeoró: el
+   crema (#f7f2e6) pasó a un gris casi blanco (#f4f4f5).
+
+   Atenuarlos es la única salida barata: el fondo transparente lo descartó la
+   nota del 2026-10-28 —en estos dibujos el color es la mitad de lo que
+   enseñan, así que no pueden ser siluetas— y recortar el fondo de 300 webp
+   con el objeto dentro es arriesgar 300 activos por un cuadrito.
+
+   0,80 está medido sobre las tarjetas, comparado con 1,0 y con una versión
+   con aro: por encima deslumbra y por debajo el dibujo deja de leerse. El
+   aro no aportaba nada a 40 px. Solo de noche: de día el fondo del dibujo y
+   el de su ficha son el MISMO color y no hay nada que atenuar. */
+@media(prefers-color-scheme:dark){:root:not([data-tema="light"]) .dibujo,
+  :root:not([data-tema="light"]) .u-dibujo,
+  :root:not([data-tema="light"]) .heroe-arte img,
+  :root:not([data-tema="light"]) .vitrina img{filter:brightness(.8) saturate(.95)}}
+:root[data-tema="dark"] .dibujo,:root[data-tema="dark"] .u-dibujo,
+:root[data-tema="dark"] .heroe-arte img,
+:root[data-tema="dark"] .vitrina img{filter:brightness(.8) saturate(.95)}
 :root[data-tema="dark"] .bien{color:#5fc48f}
 
 blockquote{margin:1.2rem 0;padding:.85rem 1.1rem;background:var(--tarjeta);
@@ -747,8 +778,12 @@ PROGRESO_JS = r"""(function(){
         var palabra=cuenta.getAttribute('data-palabra')||'';
         cuenta.textContent=mias+'/'+total+(palabra?' '+palabra:'');
       }
-      var raya=tj.querySelector('.mini i');
-      if(raya)raya.style.width=(mias?Math.max(mias*100/total,3):0)+'%';
+      var barra=tj.querySelector('.mini');
+      if(barra){
+        barra.hidden=false;
+        var raya=barra.querySelector('i');
+        if(raya)raya.style.width=(mias?Math.max(mias*100/total,3):0)+'%';
+      }
       if(mias===total)tj.classList.add('completa');
     }
   }
@@ -2225,7 +2260,10 @@ def _mapa_de_unidades(cal: dict, dias: list, c: dict, idioma: str, raiz: str,
     tarjetas = []
     for u in cal["unidades"]:
         suyos = [d for d in dias if d.unidad == u["numero"]]
-        hechas = sum(1 for d in suyos if d.ruta.exists())
+        # Cuántas lecciones TIENE la unidad sale del calendario y no de
+        # cuántas están escritas: la tarjeta dice de qué tamaño es la unidad,
+        # y eso es verdad aunque algún día falte un archivo. Si no hay
+        # ninguna escrita, la tarjeta sale apagada y ancla a su sección.
         primera = next((d for d in suyos if d.ruta.exists()), None)
         # Con `raiz`: las lecciones viven solo en la carpeta de ruso, asi que
         # desde /es/kurs.html y /en/kurs.html un enlace relativo sin prefijo
@@ -2235,7 +2273,6 @@ def _mapa_de_unidades(cal: dict, dias: list, c: dict, idioma: str, raiz: str,
                      else f"#u{u['numero']}")
         titulo = u["titulo_ru"] if idioma == "ru" else u["titulo_es"]
         ep = (u.get("episodio") or {}).get("titulo", "")
-        pct = round(hechas * 100 / len(suyos)) if suyos else 0
         tarjetas.append(
             f'<a class="u-tarjeta{"" if primera else " vacia"}" href="{destino_u}"'
             f' data-desde="{suyos[0].numero}" data-hasta="{suyos[-1].numero}">'
@@ -2244,9 +2281,22 @@ def _mapa_de_unidades(cal: dict, dias: list, c: dict, idioma: str, raiz: str,
             + f'<span class="nivel">{html.escape(u["nivel"])}</span></span>'
             f'<span class="tit">{html.escape(titulo)}</span>'
             + (f'<span class="serie">{html.escape(c["episodio"])}: {html.escape(ep)}</span>' if ep else "")
-            + f'<span class="pie"><span class="hechas" data-palabra="{html.escape(c["listos"])}">'
-              f'{hechas}/{len(suyos)} {html.escape(c["listos"])}</span>'
-              f'<span class="mini"><i style="width:{pct}%"></i></span></span></a>')
+            # El pie dice «14 lecciones» mientras el lector no haya marcado
+            # nada, y el guion lo cambia por lo SUYO en cuanto hay progreso.
+            #
+            # Hasta el 2026-10-29 decía «14/14 listas», que contaba las
+            # lecciones ESCRITAS: desde que el curso está entero eso son las
+            # catorce en las veinticuatro, o sea un contador que no dice nada
+            # y que encima parece de progreso. El profesor leyó las 24
+            # tarjetas como 24 lecciones y preguntó dónde estaban las demás.
+            #
+            # La barra nace oculta por lo mismo: llena miente —no has hecho
+            # ninguna— y vacía en las veinticuatro desanima en la primera
+            # visita, que es la regla que ya tiene escrita `#mio`.
+            + f'<span class="pie">'
+              f'<span class="hechas" data-palabra="{html.escape(c["listos"])}">'
+              f'{len(suyos)} {html.escape(c["lecciones"])}</span>'
+              f'<span class="mini" hidden><i style="width:0%"></i></span></span></a>')
     return (f'<h2>{html.escape(c["mapa"])}</h2>'
             f'<p>{html.escape(c["mapa_nota"])}</p>'
             f'<div class="mapa">{"".join(tarjetas)}</div>')

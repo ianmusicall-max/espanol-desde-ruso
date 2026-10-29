@@ -85,7 +85,8 @@ ru:
     mapa: "Весь курс целиком"
     mapa_nota: "24 темы за год. Нажмите на тему, чтобы увидеть её уроки."
     episodio: "Серия"
-    listos: "готово"
+    listos: "сделано"
+    lecciones: "уроков"
     niveles: "уровень"
     semanas: "недели"
   sobre:
@@ -270,7 +271,8 @@ es:
     mapa: "El curso entero"
     mapa_nota: "24 unidades en un año. Pulse una unidad para ver sus lecciones."
     episodio: "Episodio"
-    listos: "listas"
+    listos: "hechas"
+    lecciones: "lecciones"
     niveles: "nivel"
     semanas: "semanas"
   sobre:
@@ -455,7 +457,8 @@ en:
     mapa: "The whole course"
     mapa_nota: "24 units in a year. Tap a unit to see its lessons."
     episodio: "Episode"
-    listos: "ready"
+    listos: "done"
+    lecciones: "lessons"
     niveles: "level"
     semanas: "weeks"
   sobre:

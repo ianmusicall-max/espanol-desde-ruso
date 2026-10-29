@@ -4710,6 +4710,108 @@ un marcador NOMBRADO -entre comillas simples, negrita o cursiva, que es como
 aparece en las once- de un hueco de verdad, que va suelto. No se toco: la
 regla es suya.
 
+### «¿Por qué solo salen 24 lecciones?»
+
+Lo preguntó el profesor mirando `/es/kurs.html`, y no faltaba nada —24 tarjetas
+de unidad arriba y las 365 lecciones listadas debajo, contado sobre el propio
+HTML—. Pero que lo preguntara **él**, que conoce el curso, dice que un visitante
+lo leería igual.
+
+Y había una causa concreta, y era mía: el pie de la tarjeta decía
+**«14/14 listas»**, que contaba las lecciones ESCRITAS. Desde que el curso está
+entero eso son las catorce en las veinticuatro, o sea un contador que no dice
+nada y que **encima parece de progreso** —una barra llena en las 24—.
+
+Ahora el servidor pone el TAMAÑO de la unidad («14 уроков» · «14 lecciones» ·
+«14 lessons») y el guion lo cambia por lo del lector («7/14 сделано») en cuanto
+hay progreso. **La barra nace oculta**: llena miente —no has hecho ninguna— y
+vacía en las veinticuatro desanima en la primera visita, que es la regla que ya
+tiene escrita `#mio`. Son dos frases distintas a propósito, y la prueba lo
+exige en los dos sentidos: la servida no puede acabar en la palabra del
+progreso ni llevar una barra inclinada.
+
+- **El número sale del calendario y no de cuántos archivos existen.** La
+  tarjeta dice de qué tamaño es la unidad, y eso es verdad aunque algún día
+  falte un archivo; si no hay ninguna escrita, la tarjeta ya salía apagada.
+- **`listos` cambia de sentido y por eso cambia de palabra**: ahora va siempre
+  detrás de un número, así que «listas» pasa a «hechas» y «ready» a «done».
+- **14 en ruso pide genitivo plural** («уроков»). Con otro número habría que
+  declinar, como hace `meses_de`, así que hay una prueba que exige que las 24
+  unidades midan catorce: lo que protege no es el reparto del calendario sino
+  que esa frase siga estando bien escrita.
+
+## La paleta: blanco con un solo acento (2026-10-29)
+
+El profesor propuso blanco y negro y preguntó por combinaciones de moda. **No
+se le vendió ninguna moda**: desde este contenedor no se puede abrir un solo
+sitio de diseño —el proxy bloquea casi todo— y una tendencia inventada es
+exactamente el tipo de dato que este proyecto no publica. Lo que se hizo fue
+enseñarle **su propia portada con cuatro paletas**, cambiando solo las
+variables del CSS en el navegador y sin tocar un archivo del repositorio. Es
+la misma forma en que se eligió la voz, el estilo de los dibujos, la
+tipografía y el logo.
+
+Y la lámina enseñó lo que ninguna conversación habría enseñado: **en las tres
+paletas blancas los dibujos salían sobre cuadraditos beige.** Ese crema está
+DENTRO de los 300 `.webp`, porque `igualar_dibujos.py` los igualó a
+`--tarjeta`. O sea que el obstáculo de ir a blanco no era el gusto: eran 300
+archivos.
+
+**Eligió la C**: blanco, grises neutros y **el mismo terracota de antes** como
+único acento. Que el acento no cambie no es inercia —es el color del logo que
+eligió esa misma mañana, así que la eñe de la pestaña, los botones y la caja
+de consentimiento de AdSense siguen hablando el mismo idioma, y `icono.py` no
+se toca—.
+
+Lo que hubo que mover, y es más de lo que parece un cambio de color:
+
+- **`--papel` #fdfbf6 → #ffffff**, `--tarjeta` #f7f2e6 → #f4f4f5, `--tinta`
+  #1b1e23 → #101113, y `--celeste` deja de ser azul (#2f6b8f → #55585e): en la
+  lámina que eligió, el segundo color era gris.
+- **Los 300 dibujos**, re-igualados al gris nuevo con el mismo guion. Gratis y
+  en segundos, porque el color objetivo lo lee del CSS y no está escrito a
+  mano.
+- **La tarjeta social**, que copia la paleta a mano —PIL no lee variables
+  CSS—. Es el precio conocido de esa copia, y está anotado desde que se
+  escribió.
+- **La noche se neutraliza con el día.** La tinta oscura era crema (#e8e4da)
+  para ir con el papel crema; sobre un sitio blanco y gris eso se lee
+  amarillo. Pasa a #e7e8ea, y el papel de #14161a a #121316.
+
+### Y el cuadrito de los dibujos en la noche, que empeoró
+
+Con el crema los dibujos eran un cuadro cálido sobre la tarjeta oscura; con el
+gris casi blanco **deslumbran**. Se atenúan solo de noche
+(`filter:brightness(.8) saturate(.95)`), y el 0,8 está **medido comparando
+tres versiones** sobre las tarjetas de verdad: tal cual deslumbra, con aro el
+borde se ensucia a 40 px, y por debajo de 0,8 el dibujo deja de leerse.
+
+**Las otras dos salidas se descartaron con su motivo**: el fondo transparente
+ya lo descartó la nota del 2026-10-28 —en estos dibujos el color es la mitad
+de lo que enseñan, así que no pueden ser siluetas— y recortarle el fondo a 300
+webp con el objeto dentro es arriesgar 300 activos por un cuadrito de 40 px.
+
+De día no se atenúa nada, y la razón es la que hace que esto funcione: el
+fondo del dibujo y el de su ficha son **el mismo color**, así que el cuadro no
+existe.
+
+### Lo que se midió de paso: cuántas lecciones se pueden contestar
+
+El profesor mandó una captura de otra web con un test de opción múltiple al
+final de cada lección y preguntó si el curso lo tenía. Contado sobre las
+páginas publicadas:
+
+    test de opción múltiple PULSABLE ....  66 páginas
+    ejercicios con fichas que se pulsan .. 101
+    casillas donde escribir .............. 365
+
+O sea que sí, y además con corrección automática, **pero solo en 66 de los 365
+días**: los 23 tests de unidad y los 43 mini-tests de repaso. Los 220 días de
+lección normal tienen ejercicios de escribir o de colocar fichas con la clave
+detrás de un botón. Rematar CADA lección con cinco preguntas serían unas
+**1.100 preguntas nuevas con sus distractores**: es trabajo de contenido y no
+de código, y queda anotado sin hacer.
+
 ## Estado (2026-10-28)
 
 - Programa anual completo (365 días) y documentación del método.

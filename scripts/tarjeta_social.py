@@ -43,8 +43,8 @@ ANCHO, ALTO = 1200, 630
 # La paleta del sitio, la misma del CSS claro. Escrita aquí porque PIL no lee
 # variables CSS; si algún día cambia allí, cambia aquí, y la tarjeta se vuelve
 # a generar a mano como el audio.
-CREMA, TINTA, TENUE = (244, 241, 234), (27, 30, 35), (100, 108, 120)
-ACENTO, LINEA, TARJETA = (176, 63, 38), (226, 218, 203), (247, 242, 230)
+CREMA, TINTA, TENUE = (255, 255, 255), (16, 17, 19), (107, 112, 118)
+ACENTO, LINEA, TARJETA = (176, 63, 38), (220, 221, 224), (244, 244, 245)
 
 INTER = "/usr/share/fonts/opentype/inter/Inter-{}.otf"
 DEJAVU = "/usr/share/fonts/truetype/dejavu/DejaVuSans{}.ttf"

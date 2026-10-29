@@ -103,8 +103,12 @@
         var palabra=cuenta.getAttribute('data-palabra')||'';
         cuenta.textContent=mias+'/'+total+(palabra?' '+palabra:'');
       }
-      var raya=tj.querySelector('.mini i');
-      if(raya)raya.style.width=(mias?Math.max(mias*100/total,3):0)+'%';
+      var barra=tj.querySelector('.mini');
+      if(barra){
+        barra.hidden=false;
+        var raya=barra.querySelector('i');
+        if(raya)raya.style.width=(mias?Math.max(mias*100/total,3):0)+'%';
+      }
       if(mias===total)tj.classList.add('completa');
     }
   }
