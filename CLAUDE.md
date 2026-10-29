@@ -5415,6 +5415,26 @@ la causa era mía: **el generador no copia `docs/fonts/` a un destino nuevo**
 —las fuentes están versionadas en `docs/` y nada más— así que la construcción
 de prueba no tenía ninguna. En el sitio publicado nunca faltaron.
 
+## Estado (2026-10-29)
+
+**Lo que el alumno puede hacer en el sitio, después de la tanda del 29:**
+
+| | |
+|---|---|
+| leer las lecciones | 365 días, con 13 440 botones ▶ |
+| escribir en los ejercicios | 3 933 casillas, y 730 huecos que se rellenan pulsando en 101 lecciones |
+| contestarse | 68 días con test de opción múltiple **+ 244 con el de las palabras del día** |
+| **comprobar las palabras del día** | 1 198 preguntas en 244 lecciones, con el ▶ de la que se falla |
+| **grabarse y compararse** | en las 355 lecciones que tienen audio |
+| **buscar una palabra** | las 2 985 del curso, en `slovar.html` |
+| llevar la cuenta | el contador, la racha, **el año en 364 casillas** y el mapa de las 24 unidades |
+| **llevarse un certificado** | al cerrar A1 (154) y A2 (365) |
+| llevarse el vocabulario | la baraja de Anki: 3 001 tarjetas, 60,7 MB |
+| no perderlo | el código de respaldo, 68 caracteres |
+
+Nada de eso sale del navegador: no hay registro, no hay servidor y la
+grabación muere con la pestaña.
+
 ## Estado (2026-10-28)
 
 - Programa anual completo (365 días) y documentación del método.
