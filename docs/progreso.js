@@ -95,6 +95,81 @@
   }
   function nombre(){try{return localStorage.getItem(CLAVE_NOMBRE)||''}catch(e){return ''}}
 
+
+  // --- el certificado, dibujado en el navegador ---
+  function partirTexto(g,texto,ancho){
+    var palabras=String(texto||'').split(/\s+/), lineas=[], linea='';
+    for(var i=0;i<palabras.length;i++){
+      var prueba=linea?linea+' '+palabras[i]:palabras[i];
+      if(g.measureText(prueba).width>ancho&&linea){lineas.push(linea);linea=palabras[i]}
+      else{linea=prueba}
+    }
+    if(linea)lineas.push(linea);
+    return lineas;
+  }
+  function descargarDiploma(nv,quien){
+    var A=1200, B=850, lienzo=document.createElement('canvas');
+    lienzo.width=A;lienzo.height=B;
+    var g=lienzo.getContext('2d');
+    if(!g)return;
+    // La paleta va escrita aquí y NO leída de las variables del CSS, a
+    // propósito: un certificado se imprime, así que es siempre la versión
+    // clara. Leyéndola, quien tenga puesto el tema oscuro se descargaría un
+    // papel negro. Es el mismo precio que ya paga `tarjeta_social.py`.
+    var PAPEL='#ffffff', TINTA='#101113', ACENTO='#b03f26', TENUE='#6b7076';
+    var SANS='Onest,ui-sans-serif,system-ui,sans-serif';
+    var SERIF='Literata,ui-serif,Georgia,serif';
+    g.fillStyle=PAPEL;g.fillRect(0,0,A,B);
+    g.strokeStyle=ACENTO;g.lineWidth=6;g.strokeRect(26,26,A-52,B-52);
+    g.strokeStyle='#dcdde0';g.lineWidth=1;g.strokeRect(44,44,A-88,B-88);
+    // La marca del sitio: la misma eñe del icono, para que el papel y la
+    // pestaña hablen el mismo idioma.
+    g.fillStyle=ACENTO;
+    var lado=84, mx=(A-lado)/2;
+    if(g.roundRect){g.beginPath();g.roundRect(mx,88,lado,lado,20);g.fill()}
+    else{g.fillRect(mx,88,lado,lado)}
+    g.fillStyle=PAPEL;g.textAlign='center';g.textBaseline='alphabetic';
+    g.font='700 56px '+SANS;g.fillText('ñ',A/2,88+lado-20);
+    g.fillStyle=TINTA;
+    g.font='700 46px '+SANS;g.fillText(T.diploma_titulo||'',A/2,250);
+    g.fillStyle=TENUE;
+    g.font='400 22px '+SANS;g.fillText(T.diploma_sub||'',A/2,288);
+    g.strokeStyle='#dcdde0';g.lineWidth=1;
+    g.beginPath();g.moveTo(A/2-180,318);g.lineTo(A/2+180,318);g.stroke();
+    g.fillStyle=TENUE;
+    g.font='400 20px '+SANS;g.fillText(T.diploma_quien||'',A/2,368);
+    g.fillStyle=ACENTO;
+    g.font='400 56px '+SERIF;g.fillText(quien,A/2,432);
+    g.fillStyle=TINTA;
+    g.font='400 26px '+SANS;
+    g.fillText(conPlantilla(T.diploma_que,{nivel:nv.nivel,n:nv.hasta}),A/2,492);
+    g.fillStyle=TENUE;
+    g.font='400 22px '+SANS;
+    g.fillText(window.CURSO_SITIO||'',A/2,548);
+    g.font='400 19px '+SANS;
+    g.fillText((T.diploma_fecha||'')+': '+hoy(),A/2,592);
+    // El aviso es la línea que hace honrado el papel, así que va en el
+    // certificado y no solo en la página.
+    g.fillStyle=TENUE;g.font='400 16px '+SANS;
+    var lineas=partirTexto(g,T.diploma_aviso,A-280), y=B-150;
+    for(var i=0;i<lineas.length;i++){g.fillText(lineas[i],A/2,y+i*23)}
+    var dominio=window.CURSO_DOMINIO||'';
+    if(dominio){g.fillStyle=TINTA;g.font='700 18px '+SANS;g.fillText(dominio,A/2,B-78)}
+    var archivo='certificado-'+String(nv.nivel).replace(/[^A-Za-z0-9]/g,'')+'.png';
+    function bajar(url){
+      var a=document.createElement('a');
+      a.href=url;a.download=archivo;
+      document.body.appendChild(a);a.click();document.body.removeChild(a);
+    }
+    if(lienzo.toBlob){
+      lienzo.toBlob(function(b){
+        if(!b){bajar(lienzo.toDataURL('image/png'));return}
+        var url=URL.createObjectURL(b);bajar(url);
+        setTimeout(function(){URL.revokeObjectURL(url)},10000);
+      },'image/png');
+    }else{bajar(lienzo.toDataURL('image/png'))}
+  }
+
   // --- en una lección: recordar que se pasó por aquí y poder marcarla ---
   // article[data-leccion] y no [data-leccion] a secas: en el índice el primero
   // que aparece es un <li data-leccion>, así que abrir el índice movía «la
@@ -268,7 +343,9 @@
       {n:r.mejor,dias:plural(r.mejor,T.racha_dias)}));
     if(partes.length){
       linea.textContent=(quien?conPlantilla(T.vuelta,{nombre:quien})+' ':'')+partes.join(' · ');
-      contador.appendChild(linea);
+      var antesDe=document.getElementById('calendario');
+      if(antesDe&&antesDe.parentNode===contador)contador.insertBefore(linea,antesDe);
+      else contador.appendChild(linea);
     }
     if(!quien){
       var pide=document.createElement('p');
@@ -286,10 +363,125 @@
         try{localStorage.setItem(CLAVE_NOMBRE,v)}catch(e){}
         pide.hidden=true;
         linea.textContent=conPlantilla(T.vuelta,{nombre:v})+' '+partes.join(' · ');
-        if(!linea.parentNode)contador.appendChild(linea);
+        if(!linea.parentNode){
+          var ant=document.getElementById('calendario');
+          if(ant&&ant.parentNode===contador)contador.insertBefore(linea,ant);
+          else contador.appendChild(linea);
+        }
       });
       pide.appendChild(et);pide.appendChild(ca);pide.appendChild(bo);pide.appendChild(no);
       contador.appendChild(pide);
+    }
+  }
+
+
+  // --- el calendario del año: una casilla por día ---
+  //
+  // Lo mismo que `#mio` y las barras del mapa, y por la razón escrita allí:
+  // solo si ya hay progreso. Trescientas sesenta y cuatro casillas vacías en
+  // la primera visita no se leen como «empieza», se leen como un hueco.
+  var cal=document.getElementById('calendario');
+  if(cal&&hechasAhora.length){
+    var DIA2=86400000, hoyCad=hoy(), hoyMs=dia(hoyCad);
+    var puestas={};fechas().forEach(function(f){puestas[f]=1});
+    // Se arranca en el lunes de hace 51 semanas, así que las 52 columnas son
+    // semanas enteras y la última es la de hoy. Los días de esta semana que
+    // aún no han llegado se dibujan vacíos y sin fondo: dejarlos fuera
+    // cambiaría el alto de la última columna y la rejilla saldría mellada.
+    var lunes=hoyMs-((new Date(hoyMs).getUTCDay()+6)%7)*DIA2;
+    var ini=lunes-51*7*DIA2, cuenta=0;
+    var rejilla=document.createElement('div');
+    rejilla.className='cal-rejilla';
+    for(var q=0;q<364;q++){
+      var ms=ini+q*DIA2, f=new Date(ms);
+      var mm=f.getUTCMonth()+1, dd=f.getUTCDate();
+      var clave=f.getUTCFullYear()+'-'+(mm<10?'0':'')+mm+'-'+(dd<10?'0':'')+dd;
+      var c=document.createElement('span');
+      var clases='cal-dia';
+      if(ms>hoyMs){clases+=' futuro'}
+      else if(puestas[clave]){clases+=' hecho';cuenta++}
+      if(clave===hoyCad)clases+=' es-hoy';
+      c.className=clases;
+      c.title=clave+(clave===hoyCad&&T.calendario_hoy?' · '+T.calendario_hoy:'');
+      rejilla.appendChild(c);
+    }
+    // Una sola etiqueta para la rejilla entera y las casillas calladas: un
+    // lector de pantalla leyendo 364 celdas sería inservible, y el dato que
+    // de verdad se quiere oír es cuántos días son.
+    var nota=conPlantilla(T.calendario_nota,
+      {n:cuenta,dias:plural(cuenta,T.racha_dias)});
+    rejilla.setAttribute('role','img');
+    rejilla.setAttribute('aria-label',nota);
+    var cabc=document.createElement('p');
+    cabc.className='cal-cab';
+    var fuerte=document.createElement('strong');
+    fuerte.textContent=T.calendario||'';
+    var suave=document.createElement('span');
+    suave.textContent=nota;
+    cabc.appendChild(fuerte);cabc.appendChild(suave);
+    cal.appendChild(cabc);cal.appendChild(rejilla);
+    cal.hidden=false;
+    // Desplazada hasta hoy. En el móvil la rejilla desborda y lo que importa
+    // es el extremo derecho, no enero.
+    rejilla.scrollLeft=rejilla.scrollWidth;
+  }
+
+  // --- el certificado, al cerrar un nivel ---
+  //
+  // Es un sitio estático, así que esto se dibuja en el navegador y no lo
+  // firma nadie: el propio papel lo dice —«no es un documento oficial»—. No
+  // nombra al Instituto Cervantes, que es la decisión del 2026-10-27: el
+  // sitio habla del EXAMEN, que es un hecho, no de una autoría prestada.
+  var dip=document.getElementById('diploma');
+  if(dip&&hechasAhora.length){
+    var niveles=window.CURSO_NIVELES||[];
+    var dentroN={};hechasAhora.forEach(function(x){dentroN[x]=1});
+    // El nivel más alto que esté ENTERO. A2 pide las 365 y no solo las de
+    // A2: terminar A2 incluye haber hecho A1, y un certificado de A2 con el
+    // A1 a medias no diría la verdad.
+    var logrado=null;
+    for(var z=0;z<niveles.length;z++){
+      var nv=niveles[z], todo=nv.hasta>0;
+      for(var w=1;w<=nv.hasta;w++){if(!dentroN[w]){todo=false;break}}
+      if(todo)logrado=nv;
+    }
+    if(logrado){
+      var quienD=nombre();
+      if(!quienD){
+        // Sin nombre no hay certificado que valga: se señala el campo que ya
+        // existe arriba en vez de abrir otro aquí.
+        var pideD=document.createElement('p');
+        pideD.textContent=T.diploma_pide_nombre||'';
+        dip.appendChild(pideD);
+      }else{
+        var botonD=document.createElement('button');
+        botonD.type='button';botonD.className='boton secundario';
+        botonD.textContent=conPlantilla(T.diploma_boton,{nivel:logrado.nivel});
+        botonD.addEventListener('click',function(){
+          // Se esperan las fuentes: sin esto el lienzo dibuja con la letra de
+          // reserva del navegador y el certificado sale con otra tipografía
+          // que el sitio.
+          // `fonts.ready` NO basta, y esto se vio mirando el PNG y no
+          // razonándolo: cada cara lleva `unicode-range`, así que el
+          // navegador no se baja la cirílica hasta que algo la usa, y
+          // dibujar en un lienzo no cuenta como usarla. Sin pedirlas por su
+          // nombre Y con el texto que se va a escribir, el certificado sale
+          // con la letra de reserva del sistema mientras la página de al
+          // lado está en Literata y Onest.
+          var pintar=function(){descargarDiploma(logrado,quienD)};
+          if(document.fonts&&document.fonts.load){
+            var muestra=quienD+(T.diploma_titulo||'')+(T.diploma_sub||'')+(T.diploma_quien||'');
+            Promise.all([
+              document.fonts.load('700 46px Onest',muestra),
+              document.fonts.load('400 22px Onest',muestra),
+              document.fonts.load('400 56px Literata',quienD)
+            ]).then(pintar,pintar);
+          }
+          else{pintar()}
+        });
+        dip.appendChild(botonD);
+      }
+      dip.hidden=false;
     }
   }
 

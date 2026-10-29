@@ -4123,6 +4123,194 @@ class TestElSaludoYLaRacha(unittest.TestCase):
         self.assertNotIn("variante(hechasAhora", self.js)
 
 
+class TestElCalendarioYElCertificado(unittest.TestCase):
+    """El año en casillas y el certificado de nivel, del 2026-10-29.
+
+    El profesor preguntó qué más haría el sitio atractivo. Las dos cosas de
+    este bloque salen de datos que YA estaban en el navegador —`curso.fechas`
+    desde el saludo por su nombre, y `curso.hechas` desde el principio—: no
+    miden nada nuevo, lo hacen visible. La racha era un número («7 дней») y
+    ahora se ve dónde están los huecos, que es lo que hace volver.
+    """
+
+    DOCS = RAIZ / "docs"
+
+    def setUp(self):
+        self.js = construir_sitio.PROGRESO_JS
+        self.t = construir_sitio.cargar_textos()
+
+    # --- los niveles, que deciden cuándo hay certificado ---
+
+    def test_los_niveles_salen_del_calendario(self):
+        """Y no de dos números escritos a mano: el día que el profesor mueva
+        una unidad de nivel, el certificado lo sigue solo."""
+        niveles = construir_sitio.niveles_del_curso(CAL)
+        esperado = {}
+        for d in DIAS:
+            esperado[d.nivel] = max(esperado.get(d.nivel, 0), d.numero)
+        self.assertEqual({n["nivel"]: n["hasta"] for n in niveles}, esperado)
+        # En orden ascendente, porque el guion se queda con el ÚLTIMO que esté
+        # entero: desordenados, acabar el curso daría el certificado de A1.
+        self.assertEqual([n["hasta"] for n in niveles],
+                         sorted(n["hasta"] for n in niveles))
+
+    def test_el_ultimo_nivel_llega_a_la_ultima_leccion(self):
+        """`hasta` cuenta desde la lección 1 y no desde donde empieza el
+        nivel: terminar A2 incluye haber hecho A1, y un certificado de A2 con
+        el A1 a medias no diría la verdad."""
+        niveles = construir_sitio.niveles_del_curso(CAL)
+        self.assertEqual(niveles[-1]["hasta"], len(DIAS))
+
+    def test_el_guion_exige_el_nivel_ENTERO_desde_la_leccion_1(self):
+        """La guarda del bucle. Si alguien la cambiara por «las de este
+        nivel», el certificado de A2 saldría sin haber hecho el A1 y nada
+        fallaría."""
+        self.assertIn("for(var w=1;w<=nv.hasta;w++)", self.js)
+
+    def test_las_paginas_con_progreso_declaran_los_niveles(self):
+        """`window.CURSO_NIVELES` es lo único que el navegador tiene para
+        saber cuándo ofrecer el certificado."""
+        if not (self.DOCS / "kurs.html").exists():
+            self.skipTest("el sitio todavía no está construido")
+        esperado = construir_sitio.niveles_del_curso(CAL)
+        for pagina in ("index.html", "kurs.html", "es/index.html", "es/kurs.html",
+                       "en/index.html", "en/kurs.html"):
+            texto = (self.DOCS / pagina).read_text(encoding="utf-8")
+            m = re.search(r"window\.CURSO_NIVELES=(\[.*?\]);", texto)
+            self.assertTrue(m, f"{pagina} no declara CURSO_NIVELES")
+            self.assertEqual(json.loads(m.group(1)), esperado, pagina)
+
+    # --- los dos huecos en la página ---
+
+    def test_los_dos_huecos_nacen_ocultos_y_vacios(self):
+        """Como `#mio` y las barras del mapa, y por la razón escrita allí: una
+        rejilla de 364 casillas en blanco y un botón de certificado que nadie
+        ha ganado desaniman en la primera visita."""
+        hueco = construir_sitio._calendario_y_diploma()
+        for id_ in ("calendario", "diploma"):
+            self.assertIn(f'id="{id_}"', hueco)
+        self.assertEqual(hueco.count("hidden"), 2)
+        # Vacíos de verdad: lo que los llena es el navegador. Un calendario
+        # servido con casillas sería una rejilla en blanco para quien llega.
+        self.assertNotIn("cal-dia", hueco)
+        self.assertNotIn("<button", hueco)
+
+    def test_el_calendario_va_ANTES_del_aviso_de_la_privacidad(self):
+        """El orden del recuadro es el dato primero y la letra pequeña al
+        final. Puesto detrás, el calendario quedaba debajo de un párrafo de
+        cuatro líneas sobre localStorage, que es justo lo contrario de lo que
+        se buscaba. Se vio en una captura, no leyendo el HTML."""
+        if not (self.DOCS / "kurs.html").exists():
+            self.skipTest("el sitio todavía no está construido")
+        for pagina in ("index.html", "kurs.html", "es/index.html", "en/kurs.html"):
+            texto = (self.DOCS / pagina).read_text(encoding="utf-8")
+            mio = texto.split('id="mio"', 1)[1].split("</main>", 1)[0]
+            self.assertLess(mio.index('id="calendario"'), mio.index("progreso-nota"), pagina)
+            self.assertLess(mio.index('id="calendario"'), mio.index('id="diploma"'), pagina)
+
+    def test_el_saludo_de_la_racha_se_mete_delante_del_calendario(self):
+        """Con `appendChild` la racha caía debajo del certificado, o sea al
+        final de todo. Es el titular del recuadro."""
+        self.assertIn("contador.insertBefore(linea,antesDe)", self.js)
+
+    # --- los textos ---
+
+    def test_los_tres_idiomas_traen_los_textos_nuevos(self):
+        claves = ("calendario", "calendario_nota", "calendario_hoy",
+                  "diploma_boton", "diploma_pide_nombre", "diploma_titulo",
+                  "diploma_sub", "diploma_quien", "diploma_que", "diploma_fecha",
+                  "diploma_aviso")
+        for idioma in ("ru", "es", "en"):
+            pr = self.t[idioma]["progreso"]
+            for c in claves:
+                self.assertIn(c, pr, f"falta {c} en {idioma}")
+                self.assertTrue(str(pr[c]).strip(), f"{idioma}.{c} está vacío")
+
+    def test_los_huecos_de_las_plantillas_son_los_que_el_guion_rellena(self):
+        """Un `{n}` que nadie sustituye se imprime tal cual en la página."""
+        for idioma in ("ru", "es", "en"):
+            pr = self.t[idioma]["progreso"]
+            self.assertEqual(set(re.findall(r"\{(\w+)\}", pr["calendario_nota"])),
+                             {"n", "dias"}, idioma)
+            self.assertEqual(set(re.findall(r"\{(\w+)\}", pr["diploma_boton"])),
+                             {"nivel"}, idioma)
+            self.assertEqual(set(re.findall(r"\{(\w+)\}", pr["diploma_que"])),
+                             {"nivel", "n"}, idioma)
+            # El plural de los días lo pone `racha_dias`, que ya existía: el
+            # ruso declina (1 день / 2-4 дня / 5+ дней) y un «5 день» en la
+            # pantalla delata que el texto no lo escribió nadie.
+            self.assertEqual(len(pr["racha_dias"]), 3, idioma)
+
+    def test_el_certificado_dice_que_NO_es_oficial(self):
+        """Es la línea que lo hace honrado, y va en el propio papel y no solo
+        en la página: el PNG se comparte suelto."""
+        for idioma, marcas in (("ru", ("не официальн",)),
+                               ("es", ("No es un documento oficial",)),
+                               ("en", ("not an official",))):
+            aviso = self.t[idioma]["progreso"]["diploma_aviso"]
+            self.assertTrue(any(m.lower() in aviso.lower() for m in marcas),
+                            f"{idioma}: «{aviso}»")
+        self.assertIn("T.diploma_aviso", self.js, "el aviso no se dibuja en el PNG")
+
+    def test_el_certificado_no_se_atribuye_el_cervantes(self):
+        """La decisión del 2026-10-27: el sitio habla del EXAMEN, que es un
+        hecho, no de una autoría ni de un aval prestado. Un certificado es
+        justo donde eso costaría más caro."""
+        for idioma in ("ru", "es", "en"):
+            pr = self.t[idioma]["progreso"]
+            junto = " ".join(str(v) for k, v in pr.items() if k.startswith("diploma"))
+            for palabra in ("Cervantes", "Сервантес", "DELE", "ДЕЛЕ"):
+                self.assertNotIn(palabra.lower(), junto.lower(), f"{idioma}: {palabra}")
+
+    # --- el dibujo del certificado ---
+
+    def test_la_paleta_del_certificado_es_la_CLARA_del_sitio(self):
+        """Va escrita en el guion y no leída de las variables del CSS: un
+        certificado se imprime, así que es siempre la versión clara, y
+        leyéndola quien tenga el tema oscuro se descargaría un papel negro.
+
+        El precio de esa copia es que se queda vieja, que es lo que ya le pasa
+        a `tarjeta_social.py`. Por eso se compara con el CSS aquí: si alguien
+        cambia la paleta, esto se pone en rojo y no se descubre mirando un
+        PNG."""
+        raiz = construir_sitio.CSS.split(":root{", 1)[1].split("}", 1)[0]
+        css = dict(re.findall(r"--([\w-]+):\s*(#[0-9a-fA-F]{3,8})", raiz))
+        for variable, nombre in (("papel", "PAPEL"), ("tinta", "TINTA"),
+                                 ("acento", "ACENTO"), ("tenue", "TENUE")):
+            self.assertIn(variable, css, f"el CSS ya no declara --{variable}")
+            self.assertIn(f"{nombre}='{css[variable]}'", self.js,
+                          f"el certificado no usa el {variable} del sitio ({css[variable]})")
+        self.assertNotIn("getComputedStyle", self.js,
+                         "el certificado lee la paleta del tema: de noche saldría negro")
+
+    def test_el_lienzo_solo_pide_grosores_que_existen(self):
+        """Las caras del sitio son 400 y 700. Pidiendo 600 el navegador no
+        encuentra ninguna y engorda la de 400 por su cuenta, que no es la
+        letra del sitio. Salió mirando el PNG, no leyendo el código."""
+        grosores = set(re.findall(r"g\.font='(\d+) ", self.js))
+        declarados = set(re.findall(r"font-weight:(\d+)", construir_sitio.CARAS))
+        self.assertTrue(grosores, "el certificado no fija ningún grosor")
+        self.assertTrue(grosores <= declarados,
+                        f"pide {sorted(grosores - declarados)} y el sitio solo trae {sorted(declarados)}")
+
+    def test_las_fuentes_se_piden_por_su_nombre_antes_de_dibujar(self):
+        """`fonts.ready` NO basta: cada cara lleva `unicode-range`, así que el
+        navegador no se baja la cirílica hasta que algo la usa, y dibujar en
+        un lienzo no cuenta como usarla."""
+        self.assertIn("document.fonts.load('700 46px Onest'", self.js)
+        self.assertIn("document.fonts.load('400 56px Literata'", self.js)
+        # Y si la carga falla el certificado se dibuja igual, con la letra que
+        # haya: quedarse sin papel sería peor que quedarse sin tipografía.
+        self.assertIn(").then(pintar,pintar)", self.js)
+
+    def test_el_calendario_no_lee_la_lista_de_dias_dos_veces(self):
+        """La rejilla y la racha miran el MISMO `curso.fechas`. Si el
+        calendario tuviera su propia lectura, un día podría salir contado en
+        una y no en la otra."""
+        self.assertIn("fechas().forEach", self.js)
+        self.assertEqual(self.js.count("CLAVE_FECHAS='curso.fechas'"), 1)
+
+
 class TestElFondoDeLosDibujos(unittest.TestCase):
     """Los 300 dibujos tienen que compartir EXACTAMENTE un crema.
 

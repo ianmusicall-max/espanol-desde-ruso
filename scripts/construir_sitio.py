@@ -298,6 +298,28 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
   border:1px solid var(--linea);border-radius:8px;background:var(--papel);color:var(--tinta);
   font:inherit}
 .pide-nombre .aviso-chico{flex:1 0 100%;margin:0}
+/* El calendario del año: una casilla por día y las columnas son semanas.
+   La racha ya se contaba desde el 2026-10-29 pero era un número («7 дней»);
+   la rejilla dice lo mismo y además enseña los huecos, que es lo que hace
+   volver al día siguiente. No mide nada nuevo: hace visible `curso.fechas`.
+   En el móvil 52 columnas no caben, así que desborda y se desplaza sola
+   hasta hoy, que es el extremo derecho. */
+.calendario{margin:.9rem 0 0;font-family:Onest,ui-sans-serif,system-ui,sans-serif}
+.cal-cab{display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;margin:0 0 .45rem;
+  font-size:.88rem}
+.cal-cab strong{font-weight:650}
+.cal-cab span{color:var(--tenue)}
+.cal-rejilla{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,11px);
+  gap:3px;overflow-x:auto;padding:2px 3px 4px}
+.cal-dia{width:11px;height:11px;border-radius:3px;background:var(--linea)}
+.cal-dia.hecho{background:var(--acento)}
+.cal-dia.futuro{background:transparent}
+.cal-dia.es-hoy{outline:2px solid var(--tinta);outline-offset:1px}
+/* El certificado. Sale solo cuando un nivel está cerrado, así que la mayoría
+   no lo verá nunca y por eso no puede ocupar sitio de más. */
+.diploma-caja{margin:.9rem 0 0;font-family:Onest,ui-sans-serif,system-ui,sans-serif;
+  font-size:.92rem}
+.diploma-caja p{margin:0 0 .4rem}
 /* la baraja de tarjetas: dos descargas, la de Anki primero. En tarjeta y no
    en una lista suelta porque es una oferta, no un apartado del curso. */
 .baraja{margin:2rem 0;padding:1.1rem 1.2rem;border:1px solid var(--linea);
@@ -788,6 +810,81 @@ PROGRESO_JS = r"""(function(){
   }
   function nombre(){try{return localStorage.getItem(CLAVE_NOMBRE)||''}catch(e){return ''}}
 
+
+  // --- el certificado, dibujado en el navegador ---
+  function partirTexto(g,texto,ancho){
+    var palabras=String(texto||'').split(/\s+/), lineas=[], linea='';
+    for(var i=0;i<palabras.length;i++){
+      var prueba=linea?linea+' '+palabras[i]:palabras[i];
+      if(g.measureText(prueba).width>ancho&&linea){lineas.push(linea);linea=palabras[i]}
+      else{linea=prueba}
+    }
+    if(linea)lineas.push(linea);
+    return lineas;
+  }
+  function descargarDiploma(nv,quien){
+    var A=1200, B=850, lienzo=document.createElement('canvas');
+    lienzo.width=A;lienzo.height=B;
+    var g=lienzo.getContext('2d');
+    if(!g)return;
+    // La paleta va escrita aquí y NO leída de las variables del CSS, a
+    // propósito: un certificado se imprime, así que es siempre la versión
+    // clara. Leyéndola, quien tenga puesto el tema oscuro se descargaría un
+    // papel negro. Es el mismo precio que ya paga `tarjeta_social.py`.
+    var PAPEL='#ffffff', TINTA='#101113', ACENTO='#b03f26', TENUE='#6b7076';
+    var SANS='Onest,ui-sans-serif,system-ui,sans-serif';
+    var SERIF='Literata,ui-serif,Georgia,serif';
+    g.fillStyle=PAPEL;g.fillRect(0,0,A,B);
+    g.strokeStyle=ACENTO;g.lineWidth=6;g.strokeRect(26,26,A-52,B-52);
+    g.strokeStyle='#dcdde0';g.lineWidth=1;g.strokeRect(44,44,A-88,B-88);
+    // La marca del sitio: la misma eñe del icono, para que el papel y la
+    // pestaña hablen el mismo idioma.
+    g.fillStyle=ACENTO;
+    var lado=84, mx=(A-lado)/2;
+    if(g.roundRect){g.beginPath();g.roundRect(mx,88,lado,lado,20);g.fill()}
+    else{g.fillRect(mx,88,lado,lado)}
+    g.fillStyle=PAPEL;g.textAlign='center';g.textBaseline='alphabetic';
+    g.font='700 56px '+SANS;g.fillText('ñ',A/2,88+lado-20);
+    g.fillStyle=TINTA;
+    g.font='700 46px '+SANS;g.fillText(T.diploma_titulo||'',A/2,250);
+    g.fillStyle=TENUE;
+    g.font='400 22px '+SANS;g.fillText(T.diploma_sub||'',A/2,288);
+    g.strokeStyle='#dcdde0';g.lineWidth=1;
+    g.beginPath();g.moveTo(A/2-180,318);g.lineTo(A/2+180,318);g.stroke();
+    g.fillStyle=TENUE;
+    g.font='400 20px '+SANS;g.fillText(T.diploma_quien||'',A/2,368);
+    g.fillStyle=ACENTO;
+    g.font='400 56px '+SERIF;g.fillText(quien,A/2,432);
+    g.fillStyle=TINTA;
+    g.font='400 26px '+SANS;
+    g.fillText(conPlantilla(T.diploma_que,{nivel:nv.nivel,n:nv.hasta}),A/2,492);
+    g.fillStyle=TENUE;
+    g.font='400 22px '+SANS;
+    g.fillText(window.CURSO_SITIO||'',A/2,548);
+    g.font='400 19px '+SANS;
+    g.fillText((T.diploma_fecha||'')+': '+hoy(),A/2,592);
+    // El aviso es la línea que hace honrado el papel, así que va en el
+    // certificado y no solo en la página.
+    g.fillStyle=TENUE;g.font='400 16px '+SANS;
+    var lineas=partirTexto(g,T.diploma_aviso,A-280), y=B-150;
+    for(var i=0;i<lineas.length;i++){g.fillText(lineas[i],A/2,y+i*23)}
+    var dominio=window.CURSO_DOMINIO||'';
+    if(dominio){g.fillStyle=TINTA;g.font='700 18px '+SANS;g.fillText(dominio,A/2,B-78)}
+    var archivo='certificado-'+String(nv.nivel).replace(/[^A-Za-z0-9]/g,'')+'.png';
+    function bajar(url){
+      var a=document.createElement('a');
+      a.href=url;a.download=archivo;
+      document.body.appendChild(a);a.click();document.body.removeChild(a);
+    }
+    if(lienzo.toBlob){
+      lienzo.toBlob(function(b){
+        if(!b){bajar(lienzo.toDataURL('image/png'));return}
+        var url=URL.createObjectURL(b);bajar(url);
+        setTimeout(function(){URL.revokeObjectURL(url)},10000);
+      },'image/png');
+    }else{bajar(lienzo.toDataURL('image/png'))}
+  }
+
   // --- en una lección: recordar que se pasó por aquí y poder marcarla ---
   // article[data-leccion] y no [data-leccion] a secas: en el índice el primero
   // que aparece es un <li data-leccion>, así que abrir el índice movía «la
@@ -961,7 +1058,9 @@ PROGRESO_JS = r"""(function(){
       {n:r.mejor,dias:plural(r.mejor,T.racha_dias)}));
     if(partes.length){
       linea.textContent=(quien?conPlantilla(T.vuelta,{nombre:quien})+' ':'')+partes.join(' · ');
-      contador.appendChild(linea);
+      var antesDe=document.getElementById('calendario');
+      if(antesDe&&antesDe.parentNode===contador)contador.insertBefore(linea,antesDe);
+      else contador.appendChild(linea);
     }
     if(!quien){
       var pide=document.createElement('p');
@@ -979,10 +1078,125 @@ PROGRESO_JS = r"""(function(){
         try{localStorage.setItem(CLAVE_NOMBRE,v)}catch(e){}
         pide.hidden=true;
         linea.textContent=conPlantilla(T.vuelta,{nombre:v})+' '+partes.join(' · ');
-        if(!linea.parentNode)contador.appendChild(linea);
+        if(!linea.parentNode){
+          var ant=document.getElementById('calendario');
+          if(ant&&ant.parentNode===contador)contador.insertBefore(linea,ant);
+          else contador.appendChild(linea);
+        }
       });
       pide.appendChild(et);pide.appendChild(ca);pide.appendChild(bo);pide.appendChild(no);
       contador.appendChild(pide);
+    }
+  }
+
+
+  // --- el calendario del año: una casilla por día ---
+  //
+  // Lo mismo que `#mio` y las barras del mapa, y por la razón escrita allí:
+  // solo si ya hay progreso. Trescientas sesenta y cuatro casillas vacías en
+  // la primera visita no se leen como «empieza», se leen como un hueco.
+  var cal=document.getElementById('calendario');
+  if(cal&&hechasAhora.length){
+    var DIA2=86400000, hoyCad=hoy(), hoyMs=dia(hoyCad);
+    var puestas={};fechas().forEach(function(f){puestas[f]=1});
+    // Se arranca en el lunes de hace 51 semanas, así que las 52 columnas son
+    // semanas enteras y la última es la de hoy. Los días de esta semana que
+    // aún no han llegado se dibujan vacíos y sin fondo: dejarlos fuera
+    // cambiaría el alto de la última columna y la rejilla saldría mellada.
+    var lunes=hoyMs-((new Date(hoyMs).getUTCDay()+6)%7)*DIA2;
+    var ini=lunes-51*7*DIA2, cuenta=0;
+    var rejilla=document.createElement('div');
+    rejilla.className='cal-rejilla';
+    for(var q=0;q<364;q++){
+      var ms=ini+q*DIA2, f=new Date(ms);
+      var mm=f.getUTCMonth()+1, dd=f.getUTCDate();
+      var clave=f.getUTCFullYear()+'-'+(mm<10?'0':'')+mm+'-'+(dd<10?'0':'')+dd;
+      var c=document.createElement('span');
+      var clases='cal-dia';
+      if(ms>hoyMs){clases+=' futuro'}
+      else if(puestas[clave]){clases+=' hecho';cuenta++}
+      if(clave===hoyCad)clases+=' es-hoy';
+      c.className=clases;
+      c.title=clave+(clave===hoyCad&&T.calendario_hoy?' · '+T.calendario_hoy:'');
+      rejilla.appendChild(c);
+    }
+    // Una sola etiqueta para la rejilla entera y las casillas calladas: un
+    // lector de pantalla leyendo 364 celdas sería inservible, y el dato que
+    // de verdad se quiere oír es cuántos días son.
+    var nota=conPlantilla(T.calendario_nota,
+      {n:cuenta,dias:plural(cuenta,T.racha_dias)});
+    rejilla.setAttribute('role','img');
+    rejilla.setAttribute('aria-label',nota);
+    var cabc=document.createElement('p');
+    cabc.className='cal-cab';
+    var fuerte=document.createElement('strong');
+    fuerte.textContent=T.calendario||'';
+    var suave=document.createElement('span');
+    suave.textContent=nota;
+    cabc.appendChild(fuerte);cabc.appendChild(suave);
+    cal.appendChild(cabc);cal.appendChild(rejilla);
+    cal.hidden=false;
+    // Desplazada hasta hoy. En el móvil la rejilla desborda y lo que importa
+    // es el extremo derecho, no enero.
+    rejilla.scrollLeft=rejilla.scrollWidth;
+  }
+
+  // --- el certificado, al cerrar un nivel ---
+  //
+  // Es un sitio estático, así que esto se dibuja en el navegador y no lo
+  // firma nadie: el propio papel lo dice —«no es un documento oficial»—. No
+  // nombra al Instituto Cervantes, que es la decisión del 2026-10-27: el
+  // sitio habla del EXAMEN, que es un hecho, no de una autoría prestada.
+  var dip=document.getElementById('diploma');
+  if(dip&&hechasAhora.length){
+    var niveles=window.CURSO_NIVELES||[];
+    var dentroN={};hechasAhora.forEach(function(x){dentroN[x]=1});
+    // El nivel más alto que esté ENTERO. A2 pide las 365 y no solo las de
+    // A2: terminar A2 incluye haber hecho A1, y un certificado de A2 con el
+    // A1 a medias no diría la verdad.
+    var logrado=null;
+    for(var z=0;z<niveles.length;z++){
+      var nv=niveles[z], todo=nv.hasta>0;
+      for(var w=1;w<=nv.hasta;w++){if(!dentroN[w]){todo=false;break}}
+      if(todo)logrado=nv;
+    }
+    if(logrado){
+      var quienD=nombre();
+      if(!quienD){
+        // Sin nombre no hay certificado que valga: se señala el campo que ya
+        // existe arriba en vez de abrir otro aquí.
+        var pideD=document.createElement('p');
+        pideD.textContent=T.diploma_pide_nombre||'';
+        dip.appendChild(pideD);
+      }else{
+        var botonD=document.createElement('button');
+        botonD.type='button';botonD.className='boton secundario';
+        botonD.textContent=conPlantilla(T.diploma_boton,{nivel:logrado.nivel});
+        botonD.addEventListener('click',function(){
+          // Se esperan las fuentes: sin esto el lienzo dibuja con la letra de
+          // reserva del navegador y el certificado sale con otra tipografía
+          // que el sitio.
+          // `fonts.ready` NO basta, y esto se vio mirando el PNG y no
+          // razonándolo: cada cara lleva `unicode-range`, así que el
+          // navegador no se baja la cirílica hasta que algo la usa, y
+          // dibujar en un lienzo no cuenta como usarla. Sin pedirlas por su
+          // nombre Y con el texto que se va a escribir, el certificado sale
+          // con la letra de reserva del sistema mientras la página de al
+          // lado está en Literata y Onest.
+          var pintar=function(){descargarDiploma(logrado,quienD)};
+          if(document.fonts&&document.fonts.load){
+            var muestra=quienD+(T.diploma_titulo||'')+(T.diploma_sub||'')+(T.diploma_quien||'');
+            Promise.all([
+              document.fonts.load('700 46px Onest',muestra),
+              document.fonts.load('400 22px Onest',muestra),
+              document.fonts.load('400 56px Literata',quienD)
+            ]).then(pintar,pintar);
+          }
+          else{pintar()}
+        });
+        dip.appendChild(botonD);
+      }
+      dip.hidden=false;
     }
   }
 
@@ -1738,6 +1952,7 @@ def canonica_de(cfg, idiomas, idioma, pagina_id: str) -> str:
 def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id="", raiz=".",
            jsonld="", publicadas=0, mapa_dias="{}", traducida=True, con_audio=False, test=None,
            huecos=None,
+           niveles="[]",
            prueba=None) -> str:
     """El armazón de toda página: cabecera con menú y cambio de idioma, cuerpo, pie."""
     dominio = cfg["dominio"]
@@ -1843,7 +2058,7 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
 {banda_cookies(cfg, t, raiz)}
 {TEMA_SCRIPT}
 {IDIOMA_SCRIPT if not traducida else ""}
-<script>window.CURSO_TEXTOS={json.dumps(t['progreso'], ensure_ascii=False)};window.CURSO_RAIZ="{raiz}";window.CURSO_PUBLICADAS={publicadas};window.CURSO_DIAS={mapa_dias};</script>
+<script>window.CURSO_TEXTOS={json.dumps(t['progreso'], ensure_ascii=False)};window.CURSO_RAIZ="{raiz}";window.CURSO_PUBLICADAS={publicadas};window.CURSO_DIAS={mapa_dias};window.CURSO_NIVELES={niveles};window.CURSO_SITIO={json.dumps(t["titulo_sitio"], ensure_ascii=False)};window.CURSO_DOMINIO={json.dumps((cfg.get("dominio") or "").replace("https://", "").replace("http://", ""), ensure_ascii=False)};</script>
 <script src="{raiz}/progreso.js" defer></script>
 {f'<script>{AUDIO_JS}</script>' if con_audio else ""}
 {f'<script>window.CURSO_TEST={json.dumps(test, ensure_ascii=False)};{TEST_JS}</script>' if test else ""}
@@ -2059,6 +2274,37 @@ EFECTOS_JS = r"""(function(){
     for(var j=0;j<tarjetas.length;j++)tarjetas[j].classList.add('dentro');
   },2000);
 })();"""
+
+
+
+def _calendario_y_diploma() -> str:
+    """Los dos huecos que llena el navegador dentro de `#mio`.
+
+    Nacen vacíos y ocultos, como todo lo que depende del progreso: una
+    rejilla de 364 casillas en blanco y un botón de certificado que nadie ha
+    ganado desaniman en la primera visita, que es la regla de `#mio`.
+
+    En UNA función y no copiados en la portada y en el índice: dos copias de
+    lo mismo es como se descubre tarde que una de las dos se quedó vieja.
+    """
+    return ('<div class="calendario" id="calendario" hidden></div>'
+            '<div class="diploma-caja" id="diploma" hidden></div>')
+
+
+def niveles_del_curso(cal: dict) -> list[dict]:
+    """Los niveles del curso con la última lección de cada uno.
+
+    `hasta` es el número de esa última lección y el certificado pide TODAS
+    las de 1 a `hasta`: terminar A2 incluye haber hecho A1, así que un
+    certificado de A2 con el A1 a medias no diría la verdad.
+
+    Sale del calendario y no de dos números escritos a mano: el día que el
+    profesor mueva una unidad de nivel, esto lo sigue solo.
+    """
+    topes: dict[str, int] = {}
+    for d in plan.dias(cal):
+        topes[d.nivel] = max(topes.get(d.nivel, 0), d.numero)
+    return [{"nivel": n, "hasta": h} for n, h in sorted(topes.items(), key=lambda x: x[1])]
 
 
 def escribir_progreso_js(destino: pathlib.Path) -> None:
@@ -2373,6 +2619,7 @@ def construir_portada(cfg, t, idiomas, idioma, destino, cal, raiz,
 <div id="mio" hidden>
 <div class="cifras"><span class="n">0</span><span class="texto"></span></div>
 <div class="barra"><i style="width:1%"></i></div>
+{_calendario_y_diploma()}
 <p class="progreso-nota">{html.escape(pr['aviso'])} <button type="button" id="borrar-progreso" hidden>{html.escape(pr['borrar'])}</button></p>
 </div>
 </div>
@@ -2413,6 +2660,7 @@ def construir_portada(cfg, t, idiomas, idioma, destino, cal, raiz,
         pagina(cfg, t, idiomas, idioma, f"{p['titulo']} {p['titulo2']} — {p['lema']}", cuerpo,
                descripcion=p["entrada"], pagina_id="index.html", raiz=raiz, jsonld=jsonld,
                publicadas=len(hechas), mapa_dias=mapa_de_dias(cal),
+               niveles=json.dumps(niveles_del_curso(cal), ensure_ascii=False),
                con_audio='class="suena ficha"' in cuerpo),
         encoding="utf-8")
 
@@ -2875,7 +3123,8 @@ def construir_indice_curso(cfg, t, idiomas, idioma, destino, cal, raiz,
               f'<div class="progreso" id="mio" hidden>'
               f'<div class="cifras"><span class="n">0</span><span class="texto"></span></div>'
               f'<div class="barra"><i style="width:1%"></i></div>'
-              f'<p class="progreso-nota">{html.escape(pr["aviso"])} '
+              + _calendario_y_diploma()
+              + f'<p class="progreso-nota">{html.escape(pr["aviso"])} '
               f'<strong>{html.escape(pr["antes"])}</strong> '
               f'<button type="button" id="borrar-progreso" hidden>{html.escape(pr["borrar"])}</button></p></div>'
               # El respaldo va FUERA del recuadro de progreso, y eso no es
@@ -2952,7 +3201,8 @@ def construir_indice_curso(cfg, t, idiomas, idioma, destino, cal, raiz,
         # enseña. El «365 дней…» no se pierde: pasa a la descripción.
         pagina(cfg, t, idiomas, idioma, f'{c["titulo"]} — {t["titulo_sitio"]}', "\n".join(partes),
                descripcion=c["entrada"], pagina_id="kurs.html", raiz=raiz,
-               publicadas=len(escritas(cal)), mapa_dias=mapa_de_dias(cal)),
+               publicadas=len(escritas(cal)), mapa_dias=mapa_de_dias(cal),
+               niveles=json.dumps(niveles_del_curso(cal), ensure_ascii=False)),
         encoding="utf-8")
 
 

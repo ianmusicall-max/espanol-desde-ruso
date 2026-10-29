@@ -5127,6 +5127,85 @@ Dos cosas menores que importan en el móvil: **Enter guarda** —ahí el teclado
 tapa el botón— y quien ya dio su nombre ve un saludo con un botón «Изменить»,
 no un campo abierto ocupando sitio para siempre.
 
+## El año en casillas y el certificado de nivel (2026-10-29)
+
+El profesor preguntó qué más haría el sitio atractivo para el alumno. Las dos
+cosas de este bloque **no miden nada nuevo**: hacen visible lo que el navegador
+ya guardaba desde el saludo por su nombre, unas horas antes.
+
+### El calendario del año
+
+La racha era un número —«7 дней подряд»—. Ahora es una rejilla de **364
+casillas**, una por día, con las columnas como semanas. El mismo dato dicho de
+otra forma, y la forma importa: un número no enseña los huecos, y los huecos
+son lo que hace volver mañana.
+
+- **364 y no 365**: se arranca en el lunes de hace 51 semanas, así que las 52
+  columnas son semanas enteras y la última es la de hoy. Los días de esta
+  semana que aún no han llegado se dibujan vacíos en vez de dejarse fuera: sin
+  ellos la última columna cambiaría de alto y la rejilla saldría mellada.
+- **Solo si ya hay progreso**, igual que `#mio` y las barras del mapa. En la
+  primera visita 364 casillas en blanco no se leen como «empieza», se leen como
+  un hueco.
+- **En el móvil desborda y se desplaza sola hasta hoy**, que es el extremo
+  derecho. Cincuenta y dos columnas no caben en 358 px y achicar la casilla
+  hasta que quepan la deja en cuatro píxeles.
+- **Una etiqueta para la rejilla entera** (`role="img"`) y las casillas calladas:
+  un lector de pantalla leyendo 364 celdas sería inservible, y lo que se quiere
+  oír es cuántos días son.
+- **El aire de los lados no es decorativo**: el recuadro de HOY es un `outline`,
+  que se dibuja FUERA de la casilla, y pegado al borde de la rejilla se corta.
+
+**Y el orden del recuadro cambió**: el calendario va ANTES del párrafo que
+explica que el progreso vive en este navegador. Puesto detrás quedaba debajo de
+cuatro líneas sobre `localStorage`. El recuadro se lee ahora como lo que es:
+el número, la barra, el saludo con la racha, el año, el certificado, y la letra
+pequeña al final. Se vio en una captura, no leyendo el HTML.
+
+### El certificado
+
+Al cerrar un nivel —A1 en la 154, A2 en la 365— sale un botón que descarga un
+PNG con el nombre del alumno. Lo dibuja el navegador en un `<canvas>`: no hay
+servidor, no se sube nada y no se guarda nada de nadie.
+
+- **Los niveles salen del calendario** (`niveles_del_curso`) y no de dos números
+  escritos a mano: el día que el profesor mueva una unidad de nivel, esto lo
+  sigue solo.
+- **`hasta` cuenta desde la lección 1**, no desde donde empieza el nivel:
+  terminar A2 incluye haber hecho A1, y un certificado de A2 con el A1 a medias
+  no diría la verdad. La guarda es el `for(var w=1;w<=nv.hasta;w++)`.
+- **Sin nombre no hay certificado**: se señala el campo que ya existe arriba en
+  vez de abrir otro. Un papel que dice «Выдан: » no vale nada.
+- **El papel dice que no es oficial**, y lo dice el PNG y no solo la página,
+  porque el PNG se comparte suelto. Y **no nombra al Instituto Cervantes ni al
+  DELE**: es la decisión del 2026-10-27 —el sitio habla del EXAMEN, que es un
+  hecho, no de una autoría ni de un aval prestados— y un certificado es justo
+  donde eso costaría más caro. Hay una prueba que busca las cuatro palabras.
+- **La paleta va escrita en el guion y NO leída de las variables del CSS**: un
+  certificado se imprime, así que es siempre la versión clara; leyéndola, quien
+  tenga puesto el tema oscuro se descargaría un papel negro. El precio de esa
+  copia es que se queda vieja —es lo que ya le pasa a `tarjeta_social.py`— así
+  que hay una prueba que la compara con el `:root` del CSS.
+
+**Dos cosas que costaron una vuelta cada una, y las dos se vieron mirando el
+PNG y no razonando:**
+
+1. **El lienzo pedía grosor 600 y el sitio solo trae 400 y 700.** El navegador
+   no encuentra ninguna cara y engorda la de 400 por su cuenta, que no es la
+   letra del sitio. Hay una prueba que compara los grosores que pide el guion
+   con los que declara `CARAS`.
+2. **`document.fonts.ready` NO basta.** Cada cara lleva `unicode-range`, así que
+   el navegador no se baja la cirílica hasta que algo la USA, y dibujar en un
+   lienzo no cuenta como usarla. Hay que pedirlas por su nombre y con el texto
+   que se va a escribir. Si la carga falla, se dibuja igual con la letra que
+   haya: quedarse sin papel sería peor que quedarse sin tipografía.
+
+**Y un fallo de la comprobación, no del sitio**: la primera verificación en
+navegador dijo que el certificado salía con la letra de reserva. Era verdad y
+la causa era mía: **el generador no copia `docs/fonts/` a un destino nuevo**
+—las fuentes están versionadas en `docs/` y nada más— así que la construcción
+de prueba no tenía ninguna. En el sitio publicado nunca faltaron.
+
 ## Estado (2026-10-28)
 
 - Programa anual completo (365 días) y documentación del método.
