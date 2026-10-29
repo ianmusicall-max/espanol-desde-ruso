@@ -747,14 +747,37 @@ class TestLaExportacionAWordPress(unittest.TestCase):
         """La regla 6 del proyecto tiene que sobrevivir al cambio de plataforma:
         si entraran publicadas, mudarse a WordPress sería la forma de saltársela
         sin querer."""
-        estados = {}
         for d, item in zip(construir_sitio.escritas(self.cal), self._items("post")):
             datos, _ = validar.frontmatter(d.ruta.read_text(encoding="utf-8"))
-            estados[item.find("wp:status", self.ns).text] = True
             self.assertEqual(item.find("wp:status", self.ns).text,
                              "publish" if datos.get("revisado") else "draft",
                              f"lección {d.numero}")
-        self.assertEqual(set(estados), {"publish", "draft"}, "hay de las dos")
+
+        # Y el camino del borrador se ejercita a mano, porque desde el
+        # 2026-10-29 el profesor firmó las 365 y en el curso ya no hay
+        # ninguna sin revisar. La versión anterior exigía «hay de las dos» y
+        # se puso en rojo ese día: medía el CONTENIDO y no el código, así que
+        # el camino que la regla 6 tiene que proteger se quedaba sin probar
+        # justo cuando dejó de recorrerse solo.
+        real = exportar_wordpress.cuerpo_de
+        primera = construir_sitio.escritas(self.cal)[0]
+
+        def sin_revisar(d):
+            datos, contenido = real(d)
+            if d.numero == primera.numero:
+                datos = dict(datos, revisado=False)
+            return datos, contenido
+
+        otro = pathlib.Path(tempfile.mkdtemp())
+        exportar_wordpress.cuerpo_de = sin_revisar
+        try:
+            exportar_wordpress.exportar(self.cal, construir_sitio.cargar_config(), otro)
+        finally:
+            exportar_wordpress.cuerpo_de = real
+        arbol = ET.parse(otro / "curso-wordpress.xml").getroot()
+        posts = [i for i in arbol.findall(".//item")
+                 if i.find("wp:post_type", self.ns).text == "post"]
+        self.assertEqual(posts[0].find("wp:status", self.ns).text, "draft")
 
     def test_el_contraste_con_el_ruso_no_depende_del_css_del_sitio(self):
         """Es la firma del curso y lo único que un tema ajeno se llevaría por
@@ -3463,9 +3486,18 @@ class TestLaFirmaDelProfesor(unittest.TestCase):
         `poner_dominio.py` edita con una expresión regular."""
         import revisado
         with tempfile.TemporaryDirectory() as tmp:
-            original = (RAIZ / "curso" / "semana-04" / "dia-1.md").read_text(encoding="utf-8")
+            # Se parte de una lección de verdad —para que el frontmatter tenga
+            # sus comillas y su orden— pero la bandera se pone en `false` aquí,
+            # y no se da por hecho que alguna lo esté. La primera versión leía
+            # el archivo tal cual y se puso en rojo el mismo día, cuando el
+            # profesor firmó las 365: medía el CONTENIDO del curso en vez del
+            # código, que es justo lo que esta prueba existe para no hacer.
             ruta = pathlib.Path(tmp) / "dia-1.md"
-            ruta.write_text(original, encoding="utf-8")
+            ruta.write_text((RAIZ / "curso" / "semana-04" / "dia-1.md")
+                            .read_text(encoding="utf-8"), encoding="utf-8")
+            revisado.marcar(ruta, False)
+            original = ruta.read_text(encoding="utf-8")
+            self.assertIn("revisado: false", original)
 
             self.assertTrue(revisado.marcar(ruta, True))
             self.assertFalse(revisado.marcar(ruta, True), "marcar dos veces no cambia nada")

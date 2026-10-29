@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Una película completa (primera mitad)"
 tema_ru: "Полнометражный фильм (первая половина)"
 minutos: 30
-revisado: true
+revisado: false
 ---
 
 # Semana 50 · Día 7 — Una película completa (primera mitad)

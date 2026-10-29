@@ -91,10 +91,12 @@ la documentación del programa, en español.
   2026-10-26) estan en `revisado: false` y la pagina lo avisa. Hay que
   comprobar que cada distractor sea de verdad el error que dice y que la unidad
   asignada sea donde el curso lo ensena.
-- **Las 365 lecciones estan revisadas** (`revisado: true`) desde el
+- **350 de las 365 lecciones estan revisadas** (`revisado: true`) desde el
   2026-10-29: el profesor dio por buenas las 344 que faltaban, se le pregunto
-  expresamente y eligio marcarlas todas. Ninguna pagina lleva ya el aviso de
-  «Черновик». La cuenta la lleva `scripts/revisado.py`, y `--quitar` devuelve
+  expresamente y eligio marcarlas todas. Quince no pasaron `validar.py` por
+  llevar un `[VERIFICAR]` pendiente y siguen como borrador; la mayoria son
+  lecciones que ENSENAN el marcador, y que eso cuente es una decision del
+  profesor que queda abierta. La cuenta la lleva `scripts/revisado.py`, y `--quitar` devuelve
   a borrador lo que haga falta si quiere volver sobre alguna. La auditoria de
   lo que SI se puede comprobar con codigo esta en `revisiones/2026-10-28.md`.
 - **El orden de los pasados: se recomendo NO cambiarlo** (2026-10-26, de
@@ -4680,6 +4682,34 @@ como `construir_vocabulario` con los TSV, y no hace nada cuando el destino es
 PNG en ese recorrido, `read_text` sobre uno reventaba con un error que no dice
 nada de lo que pasa.
 
+### Las quince que el validador no dejo firmar
+
+Al marcar las 365, `validar.py` puso **quince** en rojo con el mismo motivo:
+«marcada como revisada pero tiene un [VERIFICAR] pendiente». Es una regla del
+propio proyecto -la 7- y conviene saber que **no todas son lo mismo**:
+
+- **Once son el marcador que la LECCION ENSENA**: «si necesita una cifra,
+  ponga `[VERIFICAR]`». No es un hueco, es materia, y no va a desaparecer
+  nunca (S31D7, S34D2, S37D1, S37D4, S37D7, S43D3, S44D2, S44D3, S44D4,
+  S44D7, y el modelo con dos huecos a proposito de S37D4).
+- **Dos son el cortometraje de la semana** (S34D7 y S39D7), que elige el
+  profesor: desde este contenedor no se puede saber que hay disponible ni con
+  que subtitulos.
+- **Una es una cifra de verdad**: la edad de emancipacion en Espana (S41D7).
+- **Dos cambian todos los anos**: las fechas, el plazo y la tasa del DELE
+  (S50D7 y S52D7), asi que tampoco dejaran de llevar marcador.
+
+Se les quito la firma (`revisado.py --quitar`), que es lo unico que se puede
+hacer sin inventar un dato ni aflojar la regla del profesor: **350 de 365**.
+El sitio vuelve a marcar esas quince como borrador.
+
+**Lo que queda para el profesor, y es una decision suya**: la regla cuenta
+cualquier `[VERIFICAR]`, tambien cuando la leccion lo esta ensenando. Si
+quiere que esas once se puedan firmar, la forma es que el validador distinga
+un marcador NOMBRADO -entre comillas simples, negrita o cursiva, que es como
+aparece en las once- de un hueco de verdad, que va suelto. No se toco: la
+regla es suya.
+
 ## Estado (2026-10-28)
 
 - Programa anual completo (365 días) y documentación del método.
@@ -4687,9 +4717,12 @@ nada de lo que pasa.
   y el A2 completos con sus veinticuatro unidades, la fase final con dos
   simulacros del DELE A2, el proyecto, el examen final y el día de reserva.
   **2 998 tarjetas** de vocabulario y los 24 episodios de Ana e Iván.
-  **Las 365 están revisadas** (`revisado: true`) desde el 2026-10-29, cuando el
-  profesor las dio por buenas, así que ninguna página lleva ya el aviso de
-  «Черновик». La regla 6 sigue en pie: la bandera es su firma y la pone él.
+  **350 de 365 están revisadas** (`revisado: true`) desde el 2026-10-29,
+  cuando el profesor las dio por buenas. Las otras quince las rechazó
+  `validar.py` por llevar un `[VERIFICAR]` pendiente —once de ellas porque la
+  propia lección ENSEÑA el marcador— y siguen marcadas como borrador en el
+  sitio; ver «Las quince que el validador no dejó firmar». La regla 6 sigue en
+  pie: la bandera es su firma y la pone él.
   **`docs/` está al día**: las 365 lecciones construidas y publicadas, con la
   tira de dibujos del héroe —la misma fila en el móvil y en el escritorio—,
   la guía de los seis pasos dentro de cada lección y la tipografía propia

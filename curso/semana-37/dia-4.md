@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Moscú y Madrid: comparar ciudades"
 tema_ru: "Москва и Мадрид: сравнение городов"
 minutos: 30
-revisado: true
+revisado: false
 ---
 
 # Semana 37 · Día 4 — Moscú y Madrid: comparar ciudades

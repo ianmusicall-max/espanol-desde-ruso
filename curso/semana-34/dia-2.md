@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "¿Qué pasará en 2050? Tecnología y medio ambiente"
 tema_ru: "Что будет в 2050? Технологии и окружающая среда"
 minutos: 30
-revisado: true
+revisado: false
 ---
 
 # Semana 34 · Día 2 — ¿Qué pasará en 2050? Tecnología y medio ambiente

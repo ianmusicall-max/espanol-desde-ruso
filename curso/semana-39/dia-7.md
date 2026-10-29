@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "La vida tranquila: paseo, siesta y sobremesa"
 tema_ru: "Спокойная жизнь: прогулка, сиеста и застолье"
 minutos: 30
-revisado: true
+revisado: false
 ---
 
 # Semana 39 · Día 7 — La vida tranquila: paseo, siesta y sobremesa

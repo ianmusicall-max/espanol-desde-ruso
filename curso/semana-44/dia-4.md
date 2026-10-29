@@ -7,7 +7,7 @@ nivel: A2
 tema_es: "Las fiestas rusas explicadas en español"
 tema_ru: "Русские праздники по-испански"
 minutos: 30
-revisado: true
+revisado: false
 ---
 
 # Semana 44 · Día 4 — Las fiestas rusas explicadas en español
