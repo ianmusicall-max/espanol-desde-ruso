@@ -4621,6 +4621,65 @@ siguiente sin revisar, con su dirección en el sitio**—; con argumentos marca
   exige en las 365 páginas publicadas: si dejara de seguir a la bandera, firmar
   no cambiaría la página y no se enteraría nadie.
 
+## El mapa se mueve y mide lo tuyo (2026-10-29)
+
+El profesor preguntó si la página no sería «más atractiva e interactiva» y si
+se le pondría algún efecto. Es la segunda vez: el 2026-10-27 se descartaron
+los efectos de movimiento por escrito. Esta vez eligió él, y eligió dos cosas.
+
+**La barra de cada tarjeta ya no decía nada, y ese fue el hallazgo.** Medía
+cuántas lecciones de la unidad están ESCRITAS, y desde que el profesor firmó
+las 365 eso son las catorce en las veinticuatro: `14/14` y la barra llena en
+todas. Decoración pura. El navegador sí sabe cuáles ha hecho el lector —es lo
+que guarda `localStorage` desde el 2026-10-26—, así que la misma barra pasa a
+medir eso.
+
+- La tarjeta declara su tramo (`data-desde` / `data-hasta`) y el guion cuenta
+  cuántas de esas catorce están marcadas. Hay prueba de que el tramo es el de
+  su unidad: mal puesto, contaría las de otra y nadie lo notaría.
+- **Solo si ya hay progreso**, igual que `#mio` y por la misma razón escrita
+  allí: veinticuatro barras en cero en la primera visita desaniman. Sin nada
+  hecho, la página se queda exactamente como la sirve el servidor.
+- La palabra («готово») viaja en un atributo porque está traducida a tres
+  idiomas y el guion no puede inventarla.
+
+**Los efectos, y la línea que no se puede cruzar.** Las tarjetas aparecen
+subiendo al llegar a ellas y el dibujo crece al pasar el ratón —solo con
+`hover:hover`, que en una pantalla táctil el `:hover` se queda pegado después
+de tocar—.
+
+**La clase que las esconde la pone el GUION, no el servidor.** Sin
+`IntersectionObserver`, con «menos movimiento» pedido por el sistema o sin
+tarjetas, no se añade nada y nacen visibles. Al revés —un `opacity:0` servido
+en el HTML— deja la página **en blanco** para quien no tenga JavaScript, que
+es lo que este sitio no hace en ninguna otra parte. Hay tres pruebas: que el
+HTML servido nunca traiga la clase, que las tres salidas estén ANTES de
+añadirla, y que exista la red del temporizador —una tarjeta invisible para
+siempre sería peor que no tener efecto—.
+
+Comprobado en navegador y no deducido: sin JavaScript `.anima` no aparece y
+las 24 tarjetas están a opacidad 1; con `prefers-reduced-motion`, lo mismo;
+con progreso, la unidad 1 marca «7/14» y barra al 50 % y la 2 se lleva la
+clase `completa`.
+
+### Y un fallo de diseño del icono que destapó una prueba vieja
+
+`test_sin_fichero_de_preguntas_el_sitio_se_construye_igual` se puso roja, y
+tenía razón: construye el sitio en un temporal y ahí mis tres `<link
+rel="icon">` apuntaban a ninguna parte.
+
+**La regla ya estaba escrita en la nota de la tarjeta social y no la seguí**:
+un enlace RELATIVO se comprueba contra la construcción, y solo lo que se
+declara con la URL absoluta del sitio publicado mira `docs/`. `_iconos` miraba
+`docs/` para un enlace relativo.
+
+`construir_iconos(destino)` los copia a la carpeta que se esté construyendo,
+como `construir_vocabulario` con los TSV, y no hace nada cuando el destino es
+`docs/` —origen y destino serían el mismo fichero—. De paso,
+`test_docs_esta_al_dia` compara **por bytes** lo que no es texto: desde que hay
+PNG en ese recorrido, `read_text` sobre uno reventaba con un error que no dice
+nada de lo que pasa.
+
 ## Estado (2026-10-28)
 
 - Programa anual completo (365 días) y documentación del método.

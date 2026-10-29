@@ -551,6 +551,15 @@ class TestElSitio(unittest.TestCase):
             # que `read_text` ni siquiera puede abrir.
             if generado.suffix == ".apkg":
                 continue
+            # Los binarios se comparan por bytes. Desde que el icono se copia
+            # a la construcción —tiene que estar donde apunta el <link>, que
+            # es relativo— hay PNG en este recorrido, y `read_text` sobre un
+            # PNG revienta con un error que no dice nada de lo que pasa. El
+            # texto se sigue comparando como texto, que es lo que da un diff
+            # legible cuando una página se queda vieja.
+            if generado.suffix.lower() in (".png", ".webp", ".jpg", ".ico", ".woff2", ".mp3"):
+                self.assertEqual(versionado.read_bytes(), generado.read_bytes(), f"docs/{rel} desactualizado")
+                continue
             self.assertEqual(versionado.read_text(encoding="utf-8"), generado.read_text(encoding="utf-8"), f"docs/{rel} desactualizado")
 
 
@@ -3588,6 +3597,67 @@ class TestElMapaDeUnidades(unittest.TestCase):
             self.assertLess(h.index('class="mapa"'), h.index('<ul class="dias">'), pagina)
             self.assertLess(h.index('<ul class="dias">'), h.index('class="baraja"'), pagina)
 
+    def test_cada_tarjeta_declara_el_tramo_de_dias_de_su_unidad(self):
+        """De ahí saca el navegador TU progreso: cuántas de esas catorce
+        llevas hechas. Un tramo mal puesto contaría las de otra unidad."""
+        cal = plan.cargar()
+        ruta = self.DOCS / "kurs.html"
+        if not ruta.exists():
+            self.skipTest("falta docs/kurs.html")
+        tramos = re.findall(r'data-desde="(\d+)" data-hasta="(\d+)"',
+                            ruta.read_text(encoding="utf-8"))
+        unidades = [u["numero"] for u in cal["unidades"]]
+        self.assertEqual(len(tramos), len(unidades))
+        dias = plan.dias(cal)
+        for (desde, hasta), numero in zip(tramos, unidades):
+            suyos = [d.numero for d in dias if d.unidad == numero]
+            self.assertEqual((int(desde), int(hasta)), (min(suyos), max(suyos)), numero)
+
+    def test_el_html_servido_nunca_trae_la_clase_que_esconde(self):
+        """La invariante del efecto, y la única que puede dejar la página en
+        blanco: `.anima` la pone el GUION. Servida en el HTML, quien no tenga
+        JavaScript —o tenga `prefers-reduced-motion`— vería veinticuatro
+        tarjetas invisibles y ninguna forma de encenderlas."""
+        for pagina, _raiz in self.PAGINAS:
+            ruta = self.DOCS / pagina
+            if not ruta.exists():
+                continue
+            self.assertNotIn('class="mapa anima"', ruta.read_text(encoding="utf-8"), pagina)
+        self.assertIn("mapa.classList.add('anima')", construir_sitio.EFECTOS_JS)
+
+    def test_el_efecto_se_rinde_antes_de_esconder_nada(self):
+        """Las tres salidas, y las tres ANTES de añadir la clase: sin
+        `IntersectionObserver`, con «menos movimiento» pedido por el sistema, y
+        sin tarjetas. Más la red del temporizador: una tarjeta invisible para
+        siempre sería peor que no tener efecto."""
+        js = construir_sitio.EFECTOS_JS
+        antes = js.index("mapa.classList.add('anima')")
+        for salida in ("!window.IntersectionObserver", "prefers-reduced-motion", "!tarjetas.length"):
+            self.assertIn(salida, js)
+            self.assertLess(js.index(salida), antes, salida)
+        self.assertIn("setTimeout(", js[antes:])
+
+    def test_el_pie_de_la_tarjeta_lo_puede_reescribir_el_navegador(self):
+        """El servidor pone lo ESCRITO —que hoy son las catorce en las
+        veinticuatro, o sea una barra que no dice nada— y el guion lo cambia
+        por lo tuyo. La palabra viaja en un atributo porque está traducida a
+        tres idiomas y el guion no puede inventarla."""
+        for pagina, _raiz in self.PAGINAS:
+            ruta = self.DOCS / pagina
+            if not ruta.exists():
+                continue
+            h = ruta.read_text(encoding="utf-8")
+            pies = re.findall(r'<span class="hechas" data-palabra="([^"]*)">([^<]*)</span>', h)
+            self.assertEqual(len(pies), 24, pagina)
+            for palabra, texto in pies:
+                self.assertTrue(palabra.strip(), pagina)
+                self.assertTrue(texto.strip().endswith(palabra), (pagina, texto))
+        js = construir_sitio.PROGRESO_JS
+        self.assertIn(".u-tarjeta[data-desde]", js)
+        # Solo si ya hay progreso: veinticuatro barras en cero en la primera
+        # visita desaniman, que es la regla que ya tiene escrita `#mio`.
+        self.assertIn("tarjetas.length&&hechasAhora.length", js)
+
     def test_la_frase_del_test_no_se_mete_encima_de_lo_de_arriba(self):
         """El margen negativo era de la portada, donde `.puerta` va pegada a
         los dos botones del héroe. Suelto, en `kurs.html` se subía encima del
@@ -3598,6 +3668,22 @@ class TestElMapaDeUnidades(unittest.TestCase):
         self.assertNotIn("-", base.group(1), "el recorte no puede ser global")
         self.assertIn(".botones+.puerta{margin-top:-", css,
                       "el recorte tiene que colgar del hermano anterior")
+
+
+    def test_una_construccion_en_otra_carpeta_se_lleva_el_icono(self):
+        """Es el caso que puso en rojo `test_sin_fichero_de_preguntas…`, y el
+        fallo era de diseño: el `<link>` es RELATIVO, así que lo que tiene que
+        existir es el fichero del sitio que se construye, no el de `docs/`.
+        Media suite construye en un temporal, y ahí los tres enlaces del icono
+        no llevaban a ninguna parte."""
+        with tempfile.TemporaryDirectory() as tmp:
+            otro = pathlib.Path(tmp)
+            construir_sitio.construir(otro, construir_sitio.cargar_config(),
+                                      construir_sitio.cargar_textos())
+            for nombre, _medida in construir_sitio.ICONOS:
+                self.assertTrue((otro / "img" / nombre).exists(), nombre)
+            self.assertTrue((otro / "img" / construir_sitio.ICONO_IOS).exists())
+            self.assertEqual(revisar_adsense.enlaces_rotos(otro), [])
 
 
 class TestElFondoDeLosDibujos(unittest.TestCase):

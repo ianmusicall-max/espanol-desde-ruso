@@ -236,7 +236,23 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
    las tablas de vocabulario —fondo de ficha y esquina redonda— para que las
    dos formas de enseñar un dibujo se parezcan. */
 .u-tarjeta .u-dibujo{width:40px;height:40px;border-radius:8px;align-self:center;
-  background:var(--tarjeta)}
+  background:var(--tarjeta);transition:transform .14s}
+/* El dibujo crece al pasar por encima, como ya hace el de las tablas de
+   vocabulario. Solo donde hay raton de verdad: en una pantalla tactil
+   `:hover` se queda pegado despues de tocar. */
+@media(hover:hover){.u-tarjeta:hover .u-dibujo{transform:scale(1.45)}}
+/* Las tarjetas aparecen subiendo al llegar a ellas.
+   `.anima` lo pone el GUION y no el servidor, y esa es la linea que no se
+   puede cruzar: si el navegador no trae IntersectionObserver —o el sistema
+   pide menos movimiento— la clase no se anade y las tarjetas nacen visibles.
+   Al reves, un `opacity:0` servido en el HTML deja la pagina en blanco para
+   quien no tenga JavaScript, que es justo lo que este sitio no hace. */
+.mapa.anima .u-tarjeta{opacity:0;translate:0 12px;
+  transition:opacity .4s ease,translate .4s ease,border-color .12s,transform .12s}
+.mapa.anima .u-tarjeta.dentro{opacity:1;translate:0 0}
+@media(prefers-reduced-motion:reduce){
+  .mapa.anima .u-tarjeta{opacity:1;translate:0 0;transition:none}
+  .u-tarjeta:hover .u-dibujo{transform:none}}
 .u-tarjeta .nivel{margin-inline-start:auto;font-size:.68rem;font-weight:700;letter-spacing:.06em;
   color:var(--celeste);border:1px solid var(--celeste);border-radius:999px;padding:.05rem .4rem}
 .u-tarjeta .tit{font-weight:600;font-size:.94rem;color:var(--tinta);line-height:1.3;

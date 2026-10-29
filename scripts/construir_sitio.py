@@ -356,7 +356,23 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
    las tablas de vocabulario —fondo de ficha y esquina redonda— para que las
    dos formas de enseñar un dibujo se parezcan. */
 .u-tarjeta .u-dibujo{width:40px;height:40px;border-radius:8px;align-self:center;
-  background:var(--tarjeta)}
+  background:var(--tarjeta);transition:transform .14s}
+/* El dibujo crece al pasar por encima, como ya hace el de las tablas de
+   vocabulario. Solo donde hay raton de verdad: en una pantalla tactil
+   `:hover` se queda pegado despues de tocar. */
+@media(hover:hover){.u-tarjeta:hover .u-dibujo{transform:scale(1.45)}}
+/* Las tarjetas aparecen subiendo al llegar a ellas.
+   `.anima` lo pone el GUION y no el servidor, y esa es la linea que no se
+   puede cruzar: si el navegador no trae IntersectionObserver —o el sistema
+   pide menos movimiento— la clase no se anade y las tarjetas nacen visibles.
+   Al reves, un `opacity:0` servido en el HTML deja la pagina en blanco para
+   quien no tenga JavaScript, que es justo lo que este sitio no hace. */
+.mapa.anima .u-tarjeta{opacity:0;translate:0 12px;
+  transition:opacity .4s ease,translate .4s ease,border-color .12s,transform .12s}
+.mapa.anima .u-tarjeta.dentro{opacity:1;translate:0 0}
+@media(prefers-reduced-motion:reduce){
+  .mapa.anima .u-tarjeta{opacity:1;translate:0 0;transition:none}
+  .u-tarjeta:hover .u-dibujo{transform:none}}
 .u-tarjeta .nivel{margin-inline-start:auto;font-size:.68rem;font-weight:700;letter-spacing:.06em;
   color:var(--celeste);border:1px solid var(--celeste);border-radius:999px;padding:.05rem .4rem}
 .u-tarjeta .tit{font-weight:600;font-size:.94rem;color:var(--tinta);line-height:1.3;
@@ -703,6 +719,37 @@ PROGRESO_JS = r"""(function(){
       if(mapa[parseInt(filas[i].getAttribute('data-leccion'),10)]){
         filas[i].classList.add('hecha');
       }
+    }
+  }
+
+  // --- en el mapa de unidades: TU progreso, no el del curso ---
+  //
+  // La barra de cada tarjeta medía cuántas lecciones de esa unidad están
+  // ESCRITAS, y desde que el curso está entero eso son las catorce en las
+  // veinticuatro: una barra llena que no dice nada. El navegador sí sabe
+  // cuáles has hecho tú, así que la misma barra pasa a medir eso.
+  //
+  // Solo si ya hay progreso, igual que `#mio` y por la misma razón: en la
+  // primera visita, veinticuatro barras en cero desaniman. Sin nada hecho la
+  // página se queda exactamente como la sirve el servidor.
+  var tarjetas=document.querySelectorAll('.u-tarjeta[data-desde]');
+  if(tarjetas.length&&hechasAhora.length){
+    var dentro={};hechasAhora.forEach(function(x){dentro[x]=1});
+    for(var k=0;k<tarjetas.length;k++){
+      var tj=tarjetas[k],
+          desde=parseInt(tj.getAttribute('data-desde'),10),
+          hasta=parseInt(tj.getAttribute('data-hasta'),10);
+      if(!(desde>0)||!(hasta>=desde))continue;
+      var total=hasta-desde+1, mias=0;
+      for(var d=desde;d<=hasta;d++){if(dentro[d])mias++}
+      var cuenta=tj.querySelector('.hechas');
+      if(cuenta){
+        var palabra=cuenta.getAttribute('data-palabra')||'';
+        cuenta.textContent=mias+'/'+total+(palabra?' '+palabra:'');
+      }
+      var raya=tj.querySelector('.mini i');
+      if(raya)raya.style.width=(mias?Math.max(mias*100/total,3):0)+'%';
+      if(mias===total)tj.classList.add('completa');
     }
   }
 
@@ -1677,8 +1724,44 @@ GUIA_JS = r"""(function(){
 })();"""
 
 
+EFECTOS_JS = r"""(function(){
+  // Las tarjetas del mapa aparecen subiendo al llegar a ellas.
+  //
+  // La clase que las esconde la pone ESTE guion y no el servidor, y es la
+  // linea que no se puede cruzar: si el navegador no trae
+  // IntersectionObserver, o el sistema pide menos movimiento, no se anade
+  // nada y las tarjetas nacen visibles. Al reves —un `opacity:0` servido en
+  // el HTML— deja la pagina en blanco para quien no tenga JavaScript, que es
+  // justo lo que este sitio no hace en ninguna otra parte.
+  //
+  // Se desconecta cada tarjeta en cuanto entra: si no, el observador sigue
+  // trabajando en cada scroll durante toda la visita para nada.
+  var mapa=document.querySelector('.mapa');
+  if(!mapa||!window.IntersectionObserver)return;
+  try{
+    if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  }catch(e){}
+  var tarjetas=mapa.querySelectorAll('.u-tarjeta');
+  if(!tarjetas.length)return;
+  mapa.classList.add('anima');
+  var ojo=new IntersectionObserver(function(entradas){
+    entradas.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add('dentro');ojo.unobserve(e.target)}
+    });
+  },{rootMargin:'0px 0px -40px 0px'});
+  for(var i=0;i<tarjetas.length;i++)ojo.observe(tarjetas[i]);
+  // Red: si algo impidiera que el observador disparara, a los dos segundos
+  // se encienden igual. Una tarjeta invisible para siempre seria peor que
+  // no tener efecto.
+  setTimeout(function(){
+    for(var j=0;j<tarjetas.length;j++)tarjetas[j].classList.add('dentro');
+  },2000);
+})();"""
+
+
 def escribir_progreso_js(destino: pathlib.Path) -> None:
-    destino.joinpath("progreso.js").write_text(PROGRESO_JS + "\n" + GUIA_JS, encoding="utf-8")
+    destino.joinpath("progreso.js").write_text(
+        PROGRESO_JS + "\n" + GUIA_JS + "\n" + EFECTOS_JS, encoding="utf-8")
 
 
 # Las doce palabras que se enseñan en la portada, elegidas A MANO y en este
@@ -2154,17 +2237,47 @@ def _mapa_de_unidades(cal: dict, dias: list, c: dict, idioma: str, raiz: str,
         ep = (u.get("episodio") or {}).get("titulo", "")
         pct = round(hechas * 100 / len(suyos)) if suyos else 0
         tarjetas.append(
-            f'<a class="u-tarjeta{"" if primera else " vacia"}" href="{destino_u}">'
+            f'<a class="u-tarjeta{"" if primera else " vacia"}" href="{destino_u}"'
+            f' data-desde="{suyos[0].numero}" data-hasta="{suyos[-1].numero}">'
             f'<span class="alto"><span class="num">{u["numero"]}</span>'
             + _dibujo_de_tarjeta(dibujos_unidad, u["numero"], raiz)
             + f'<span class="nivel">{html.escape(u["nivel"])}</span></span>'
             f'<span class="tit">{html.escape(titulo)}</span>'
             + (f'<span class="serie">{html.escape(c["episodio"])}: {html.escape(ep)}</span>' if ep else "")
-            + f'<span class="pie"><span>{hechas}/{len(suyos)} {html.escape(c["listos"])}</span>'
+            + f'<span class="pie"><span class="hechas" data-palabra="{html.escape(c["listos"])}">'
+              f'{hechas}/{len(suyos)} {html.escape(c["listos"])}</span>'
               f'<span class="mini"><i style="width:{pct}%"></i></span></span></a>')
     return (f'<h2>{html.escape(c["mapa"])}</h2>'
             f'<p>{html.escape(c["mapa_nota"])}</p>'
             f'<div class="mapa">{"".join(tarjetas)}</div>')
+
+
+def construir_iconos(destino: pathlib.Path) -> int:
+    """Lleva el icono a la carpeta donde se esté construyendo.
+
+    Los `<link rel="icon">` son enlaces RELATIVOS, así que lo que tiene que
+    existir es el fichero de la construcción y no el de `docs/`. Es la misma
+    distinción que ya separa a la baraja de la tarjeta social: aquella se
+    enlaza en relativo y mira el destino; esta se declara con la URL absoluta
+    del sitio publicado y mira `docs/`. Mirando el sitio que no es, una
+    construcción en otra carpeta —la que hace media suite— sale con tres
+    enlaces a ninguna parte, y lo caza el revisor de enlaces rotos.
+
+    Los escribe `scripts/icono.py`, que es un comando aparte; aquí solo se
+    copian, como los TSV del vocabulario. Cuando se construye sobre `docs/`
+    no hay nada que hacer: el origen y el destino son el mismo fichero."""
+    origen = DOCS / "img"
+    if destino.resolve() == DOCS.resolve():
+        return 0
+    nombres = [n for n, _ in ICONOS] + [ICONO_IOS]
+    carpeta = destino / "img"
+    copiados = 0
+    for nombre in nombres:
+        if (origen / nombre).exists():
+            carpeta.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(origen / nombre, carpeta / nombre)
+            copiados += 1
+    return copiados
 
 
 def construir_vocabulario(destino: pathlib.Path) -> int:
@@ -3176,6 +3289,7 @@ def construir(destino: pathlib.Path = DOCS, cfg: dict | None = None, textos: dic
     # Antes de las páginas, porque el índice del curso enlaza la baraja y mira
     # si está: copiarlos después dejaría el bloque fuera en la primera corrida.
     construir_vocabulario(destino)
+    construir_iconos(destino)
 
     # Antes del bucle y no dentro: la portada de los tres idiomas enseña los
     # mismos doce dibujos, así que leer el índice y recorrer las lecciones una
