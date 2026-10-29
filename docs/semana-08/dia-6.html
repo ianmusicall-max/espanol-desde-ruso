@@ -178,6 +178,13 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
   border:1px solid var(--linea);border-radius:8px;background:var(--papel);color:var(--tinta);
   font:inherit}
 .pide-nombre .aviso-chico{flex:1 0 100%;margin:0}
+/* Grabarse y oírse. Mismo marco que el quiz: los dos son lo que se hace
+   DESPUÉS de la lección, no un apartado más de ella. */
+.grabar-bloque{margin:2rem 0 0;padding:1.1rem 1.2rem;border:1px solid var(--linea);
+  border-radius:12px;background:var(--tarjeta)}
+.grabar-bloque h2{margin:0 0 .3rem;border:0;padding:0;font-size:1.05rem}
+.grabar-bloque>p{margin:0 0 .6rem;font-size:.92rem;color:var(--tenue)}
+.grabar-bloque .botones{margin:0}
 /* El test de las palabras del día. Usa las cajas del test de nivel —son el
    mismo trasto— y lo único propio es el marco, que lo separa de los
    ejercicios de la lección sin parecer otro apartado. */
@@ -872,6 +879,7 @@ footer.sitio p{margin:.35rem 0}
     boton.addEventListener('click',function(){arranque.hidden=true;pregunta()});
   }
 })();</script>
+
 
 
 <script>(function(){

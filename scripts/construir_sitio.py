@@ -299,6 +299,13 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
   border:1px solid var(--linea);border-radius:8px;background:var(--papel);color:var(--tinta);
   font:inherit}
 .pide-nombre .aviso-chico{flex:1 0 100%;margin:0}
+/* Grabarse y oírse. Mismo marco que el quiz: los dos son lo que se hace
+   DESPUÉS de la lección, no un apartado más de ella. */
+.grabar-bloque{margin:2rem 0 0;padding:1.1rem 1.2rem;border:1px solid var(--linea);
+  border-radius:12px;background:var(--tarjeta)}
+.grabar-bloque h2{margin:0 0 .3rem;border:0;padding:0;font-size:1.05rem}
+.grabar-bloque>p{margin:0 0 .6rem;font-size:.92rem;color:var(--tenue)}
+.grabar-bloque .botones{margin:0}
 /* El test de las palabras del día. Usa las cajas del test de nivel —son el
    mismo trasto— y lo único propio es el marco, que lo separa de los
    ejercicios de la lección sin parecer otro apartado. */
@@ -1634,6 +1641,93 @@ HUECOS_JS = r"""(function(){
 })();"""
 
 
+GRABAR_JS = r"""(function(){
+  var D=window.CURSO_GRABAR; if(!D)return;
+  var caja=document.getElementById('grabar'); if(!caja)return;
+  // Sin micrófono o sin MediaRecorder el bloque NO sale. Es la regla del
+  // sitio: un botón que no puede hacer nada es peor que ningún botón, y aquí
+  // además pediría un permiso para nada.
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)return;
+  if(typeof MediaRecorder==='undefined')return;
+
+  var T=D.t, grabadora=null, trozos=[], url=null, sonido=null;
+
+  function boton(texto,secundario){
+    // El tercer estado no existe: o es el botón principal o es secundario.
+    // La primera versión recibía la clase como cadena y `''` caía en el
+    // `||`, así que «Записать» salía perfilado como los demás cuando es la
+    // única acción de este bloque.
+    var b=document.createElement('button');
+    b.type='button';b.className=secundario?'boton secundario':'boton';
+    b.textContent=texto;
+    return b;
+  }
+  var bGrabar=boton(T.grabar,false), bParar=boton(T.parar,true), bOir=boton(T.oir,true);
+  var aviso=document.createElement('p');
+  aviso.className='aviso-chico';aviso.hidden=true;
+  bParar.hidden=true;bOir.hidden=true;
+
+  function soltar(){
+    // La grabación anterior se tira en cuanto hay otra: no se acumulan blobs
+    // en memoria y no queda nada al salir de la página.
+    if(url){URL.revokeObjectURL(url);url=null}
+    if(sonido){sonido.pause();sonido=null}
+  }
+
+  bGrabar.addEventListener('click',function(){
+    aviso.hidden=true;
+    navigator.mediaDevices.getUserMedia({audio:true}).then(function(flujo){
+      soltar();
+      trozos=[];
+      // Sin `mimeType`: cada navegador graba en lo suyo —Safari en mp4, el
+      // resto en webm— y fijarlo aquí dejaría a uno de los dos fuera.
+      grabadora=new MediaRecorder(flujo);
+      grabadora.addEventListener('dataavailable',function(e){if(e.data.size)trozos.push(e.data)});
+      grabadora.addEventListener('stop',function(){
+        // El micrófono se apaga de verdad: sin esto la pestaña se queda con
+        // el punto rojo encendido hasta que se cierra.
+        flujo.getTracks().forEach(function(p){p.stop()});
+        if(!trozos.length)return;
+        url=URL.createObjectURL(new Blob(trozos,{type:grabadora.mimeType||'audio/webm'}));
+        bOir.hidden=false;bGrabar.textContent=T.otra;
+      });
+      grabadora.start();
+      bGrabar.hidden=true;bParar.hidden=false;bOir.hidden=true;
+      aviso.textContent=T.grabando;aviso.hidden=false;
+    }).catch(function(){
+      // Permiso denegado, o no hay micrófono. Se dice, y se dice que la
+      // lección se puede hacer igual: el ejercicio es decirlo en voz alta.
+      aviso.textContent=T.sin_permiso;aviso.hidden=false;
+    });
+  });
+
+  bParar.addEventListener('click',function(){
+    if(grabadora&&grabadora.state!=='inactive')grabadora.stop();
+    bParar.hidden=true;bGrabar.hidden=false;aviso.hidden=true;
+  });
+
+  bOir.addEventListener('click',function(){
+    if(!url)return;
+    if(!sonido)sonido=new Audio();
+    sonido.src=url;sonido.currentTime=0;sonido.play().catch(function(){});
+  });
+
+  // Al salir de la página no queda nada. No hace falta para que sea cierto
+  // —un blob en memoria muere con la pestaña— pero sí para que el punto rojo
+  // del micrófono no se quede encendido si se navega a mitad de una toma.
+  window.addEventListener('pagehide',function(){
+    if(grabadora&&grabadora.state!=='inactive')grabadora.stop();
+    soltar();
+  });
+
+  var fila=document.createElement('div');
+  fila.className='botones';
+  fila.appendChild(bGrabar);fila.appendChild(bParar);fila.appendChild(bOir);
+  caja.appendChild(fila);caja.appendChild(aviso);
+  caja.hidden=false;
+})();"""
+
+
 QUIZ_JS = r"""(function(){
   var D=window.CURSO_QUIZ; if(!D||!D.preguntas||!D.preguntas.length)return;
   var caja=document.getElementById('quiz'); if(!caja)return;
@@ -2024,6 +2118,7 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
            huecos=None,
            niveles="[]",
            quiz=None,
+           grabar=None,
            prueba=None) -> str:
     """El armazón de toda página: cabecera con menú y cambio de idioma, cuerpo, pie."""
     dominio = cfg["dominio"]
@@ -2134,6 +2229,7 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
 {f'<script>{AUDIO_JS}</script>' if con_audio else ""}
 {f'<script>window.CURSO_TEST={json.dumps(test, ensure_ascii=False)};{TEST_JS}</script>' if test else ""}
 {f'<script>window.CURSO_PRUEBA={json.dumps(prueba, ensure_ascii=False)};{PRUEBA_JS}</script>' if prueba else ""}
+{f'<script>window.CURSO_GRABAR={json.dumps(grabar, ensure_ascii=False)};{GRABAR_JS}</script>' if grabar else ""}
 {f'<script>window.CURSO_QUIZ={json.dumps(quiz, ensure_ascii=False)};{QUIZ_JS}</script>' if quiz else ""}
 {f'<script>window.CURSO_HUECOS={json.dumps({"ejercicios": huecos, "t": t["huecos"]}, ensure_ascii=False)};{HUECOS_JS}</script>' if huecos else ""}
 {f'<script>{CASILLA_JS}</script>' if 'hueco-escribir' in cuerpo else ""}
@@ -2348,6 +2444,26 @@ EFECTOS_JS = r"""(function(){
 })();"""
 
 
+
+
+
+def _bloque_de_grabar(t: dict, con_audio: bool) -> str:
+    """El botón de grabarse, al cerrar la lección.
+
+    El curso pide grabarse en 77 lecciones —«запишите себя»— y el sitio no
+    ofrecía dónde. Nada sale del navegador: la grabación vive en memoria y se
+    tira al salir de la página, y eso está dicho en el propio bloque y en la
+    política de privacidad.
+
+    Solo donde hay audio que comparar. Sin un ▶ en la página el ejercicio es
+    grabarse contra nada, y el micrófono se pediría para eso.
+    """
+    if not con_audio:
+        return ""
+    g = t["grabar"]
+    return (f'<div class="grabar-bloque" id="grabar" hidden>'
+            f'<h2>{html.escape(g["titulo"])}</h2>'
+            f'<p>{html.escape(g["entrada"])}</p></div>')
 
 
 def _bloque_del_quiz(t: dict, preguntas: list) -> str:
@@ -3474,7 +3590,8 @@ def construir_estaticas(cfg, t, idiomas, idioma, destino, cal, raiz) -> None:
     if not necesita_cookies(cfg):
         bloques += [f"<h2>{html.escape(pr['sin_cookies'])}</h2><p>{html.escape(pr['sin_cookies_texto'])}</p>"]
     bloques += [f"<h2>{html.escape(pr['derechos'])}</h2><p>{html.escape(pr['derechos_texto'])}</p>",
-                f"<h2>{html.escape(pr['ninos'])}</h2><p>{html.escape(pr['ninos_texto'])}</p>"]
+                f"<h2>{html.escape(pr['ninos'])}</h2><p>{html.escape(pr['ninos_texto'])}</p>",
+                f"<h2>{html.escape(pr['micro'])}</h2><p>{html.escape(pr['micro_texto'])}</p>"]
     destino.joinpath("privacy.html").write_text(
         pagina(cfg, t, idiomas, idioma, f"{pr['titulo']} — {t['titulo_sitio']}", "\n".join(bloques),
                descripcion=pr["propio_texto"], pagina_id="privacy.html", raiz=raiz), encoding="utf-8")
@@ -3763,8 +3880,12 @@ def construir_leccion(d, cfg, t, idiomas, destino, cal, todos, audio=None,
             q["mp3"] = f"../audio/{archivo}"
     datos_quiz = ({"preguntas": preguntas_quiz, "t": t["quiz"]}
                   if preguntas_quiz else None)
+    # Grabarse solo donde hay un ▶ con el que compararse.
+    hay_audio = 'class="suena"' in html_cuerpo
+    datos_grabar = {"t": t["grabar"]} if hay_audio else None
     cuerpo_final = (f'<article data-leccion="{d.numero}">' + cab + guia + aviso
                     + html_cuerpo + anuncio(cfg, "pie")
+                    + _bloque_de_grabar(t, hay_audio)
                     + _bloque_del_quiz(t, preguntas_quiz) + '<div id="marcar-caja"></div>'
                     + _compartir(t, cfg, canonica)
                     + f'<nav class="pasos">{"".join(pasos)}</nav></article>')
@@ -3778,7 +3899,7 @@ def construir_leccion(d, cfg, t, idiomas, destino, cal, todos, audio=None,
                con_audio=('class="suena"' in cuerpo_final
                           or any(q.get("mp3") for q in preguntas_quiz)),
                prueba=datos_prueba,
-               huecos=datos_huecos, quiz=datos_quiz),
+               huecos=datos_huecos, quiz=datos_quiz, grabar=datos_grabar),
         encoding="utf-8")
 
 

@@ -4124,6 +4124,108 @@ class TestElSaludoYLaRacha(unittest.TestCase):
         self.assertNotIn("variante(hechasAhora", self.js)
 
 
+class TestGrabarseYOirse(unittest.TestCase):
+    """El botón de grabarse, del 2026-10-29.
+
+    El curso pide grabarse en 77 lecciones —«запишите себя»— y el sitio no
+    ofrecía dónde. Nada sale del navegador: la grabación vive en memoria y
+    muere con la pestaña."""
+
+    DOCS = RAIZ / "docs"
+
+    def setUp(self):
+        self.js = construir_sitio.GRABAR_JS
+        self.t = construir_sitio.cargar_textos()
+
+    def test_la_grabacion_no_sale_del_navegador(self):
+        """Es la promesa que hacen el propio bloque y la política de
+        privacidad, y la única de aquí que no se puede arreglar después: una
+        grabación que se escapó ya se escapó."""
+        for fuga in ("fetch(", "XMLHttpRequest", "sendBeacon", "FormData",
+                     "localStorage", "indexedDB", "showSaveFilePicker"):
+            self.assertNotIn(fuga, self.js, f"el grabador usa {fuga}")
+
+    def test_sin_microfono_el_bloque_NO_sale(self):
+        """Un botón que no puede hacer nada es peor que ningún botón, y aquí
+        además pediría un permiso para nada. Las dos salidas van ANTES de
+        encender el bloque."""
+        antes = self.js.split("caja.hidden=false")[0]
+        for guarda in ("!navigator.mediaDevices", "typeof MediaRecorder==='undefined'"):
+            self.assertIn(guarda, antes, f"falta la salida por {guarda}")
+        # Y el hueco nace oculto: lo enciende el guion.
+        hueco = construir_sitio._bloque_de_grabar(self.t["ru"], True)
+        self.assertIn('id="grabar" hidden', hueco)
+
+    def test_solo_donde_hay_audio_con_que_compararse(self):
+        """Sin un ▶ en la página el ejercicio es grabarse contra nada."""
+        self.assertEqual("", construir_sitio._bloque_de_grabar(self.t["ru"], False))
+
+    def test_el_microfono_se_apaga_al_parar(self):
+        """Sin `stop()` en cada pista, la pestaña se queda con el punto rojo
+        encendido hasta que se cierra, y eso se lee como que el sitio sigue
+        escuchando."""
+        self.assertIn("flujo.getTracks().forEach", self.js)
+        self.assertIn(".stop()", self.js)
+
+    def test_no_se_fija_el_formato_de_grabacion(self):
+        """Cada navegador graba en lo suyo —Safari en mp4, el resto en webm—
+        y fijar un `mimeType` aquí dejaría a uno de los dos fuera."""
+        self.assertIn("new MediaRecorder(flujo)", self.js)
+        self.assertNotIn("mimeType:", self.js)
+
+    def test_la_grabacion_anterior_se_tira(self):
+        """Si no, cada toma deja su blob en memoria y la página de una sesión
+        larga acaba cargando con todas."""
+        self.assertIn("URL.revokeObjectURL", self.js)
+
+    def test_la_politica_de_privacidad_declara_el_microfono(self):
+        """Lo único que una política no puede hacer es describir mal lo que el
+        sitio hace. Aquí no se recoge nada, pero el lector ve una petición de
+        micrófono y merece saber por qué."""
+        for idioma in ("ru", "es", "en"):
+            pr = self.t[idioma]["privacidad"]
+            self.assertTrue(str(pr.get("micro", "")).strip(), f"falta micro en {idioma}")
+            texto = pr["micro_texto"]
+            self.assertGreater(len(texto), 80, f"{idioma}: el apartado no explica nada")
+        if not (self.DOCS / "privacy.html").exists():
+            self.skipTest("el sitio todavía no está construido")
+        for pagina, idioma in (("privacy.html", "ru"), ("es/privacy.html", "es"),
+                               ("en/privacy.html", "en")):
+            texto = (self.DOCS / pagina).read_text(encoding="utf-8")
+            self.assertIn(html.escape(self.t[idioma]["privacidad"]["micro"]), texto, pagina)
+
+    def test_sale_exactamente_donde_hay_un_boton_de_audio(self):
+        """Y no en las 365. Diez días —tests y exámenes— no tienen un solo ▶
+        en su cuerpo, así que ahí grabarse sería compararse con nada y el
+        micrófono se pediría para eso. La guarda mira la relación y no un
+        número: si mañana una lección pierde su audio, el bloque la sigue."""
+        if not (self.DOCS / "semana-01" / "dia-1.html").exists():
+            self.skipTest("el sitio todavía no está construido")
+        con = sin = 0
+        for d in DIAS:
+            pagina = self.DOCS / f"semana-{d.semana:02d}" / f"dia-{d.dia}.html"
+            if not pagina.exists():
+                continue
+            texto = pagina.read_text(encoding="utf-8")
+            hay_audio = 'class="suena"' in texto
+            self.assertEqual(hay_audio, 'id="grabar"' in texto, str(pagina))
+            con += hay_audio
+            sin += not hay_audio
+        self.assertGreater(con, 300)
+        self.assertGreater(sin, 0, "ninguna lección se queda fuera: la regla no se ejercita")
+
+    def test_los_tres_idiomas_traen_los_textos(self):
+        claves = ("titulo", "entrada", "grabar", "parar", "oir", "otra",
+                  "sin_permiso", "grabando")
+        for idioma in ("ru", "es", "en"):
+            for c in claves:
+                self.assertTrue(str(self.t[idioma]["grabar"].get(c, "")).strip(),
+                                f"falta grabar.{c} en {idioma}")
+            # La entrada DICE que no sale del navegador: es la mitad de la
+            # función, porque un micrófono sin explicación da miedo.
+            self.assertGreater(len(self.t[idioma]["grabar"]["entrada"]), 80, idioma)
+
+
 class TestElQuizDeVocabulario(unittest.TestCase):
     """Las cinco palabras del día, al cerrar la lección (2026-10-29).
 

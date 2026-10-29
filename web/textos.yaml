@@ -139,6 +139,8 @@ ru:
     derechos_texto: "Если вы в Европейском союзе, у вас есть право на доступ к своим данным, их исправление и удаление. Поскольку сайт сам никаких данных о вас не хранит, обращаться с такими запросами нужно напрямую к Google."
     ninos: "Дети"
     ninos_texto: "Сайт не предназначен для детей младше 13 лет и не собирает их данные сознательно."
+    micro: "Микрофон"
+    micro_texto: "В уроках есть кнопка «Записать себя». Она просит доступ к микрофону только когда вы её нажимаете. Запись остаётся в памяти браузера, не отправляется на сервер и не сохраняется на устройстве: она исчезает, когда вы закрываете страницу."
   leccion:
     urok: "Урок"
     meta_leccion: "Урок {n} из 365: {tema} Испанский с нуля для русскоговорящих — 30 минут в день, бесплатно и без регистрации."
@@ -196,6 +198,15 @@ ru:
     copiar: "Скопировать ссылку"
     copiado: "Ссылка скопирована"
     seguir: "Курс в соцсетях"
+  grabar:
+    titulo: "Запишите себя"
+    entrada: "Послушайте фразу (▶), скажите её вслух и сравните. Запись остаётся в браузере: она никуда не отправляется и нигде не сохраняется."
+    grabar: "Записать"
+    parar: "Стоп"
+    oir: "Послушать себя"
+    otra: "Записать заново"
+    sin_permiso: "Браузер не дал доступ к микрофону. Разрешите его в настройках сайта — или просто говорите вслух, без записи."
+    grabando: "Идёт запись…"
   quiz:
     titulo: "Слова сегодняшнего урока"
     entrada: "Пять слов из словаря этого урока. Ответы не сохраняются и ни на что не влияют."
@@ -411,6 +422,8 @@ es:
     derechos_texto: "Si está en la Unión Europea tiene derecho a acceder a sus datos, rectificarlos y suprimirlos. Como la web no guarda ningún dato suyo, esas solicitudes van directamente a Google."
     ninos: "Menores"
     ninos_texto: "La web no está dirigida a menores de 13 años ni recoge sus datos a sabiendas."
+    micro: "El micrófono"
+    micro_texto: "Las lecciones tienen un botón para grabarse. Pide acceso al micrófono solo cuando usted lo pulsa. La grabación se queda en la memoria del navegador, no se envía a ningún servidor y no se guarda en el dispositivo: desaparece al cerrar la página."
   leccion:
     urok: "Lección"
     meta_leccion: "Lección {n} de 365: {tema} Español desde cero para rusohablantes — 30 minutos al día, gratis y sin registro."
@@ -468,6 +481,15 @@ es:
     copiar: "Copiar el enlace"
     copiado: "Enlace copiado"
     seguir: "El curso en redes"
+  grabar:
+    titulo: "Grábese"
+    entrada: "Escuche la frase (▶), dígala en voz alta y compare. La grabación se queda en el navegador: no se envía a ninguna parte y no se guarda en ningún sitio."
+    grabar: "Grabar"
+    parar: "Parar"
+    oir: "Escucharse"
+    otra: "Grabar otra vez"
+    sin_permiso: "El navegador no ha dado acceso al micrófono. Puede permitirlo en los ajustes del sitio — o decir la frase en voz alta sin grabarla."
+    grabando: "Grabando…"
   quiz:
     titulo: "Las palabras de hoy"
     entrada: "Cinco palabras del vocabulario de esta lección. Las respuestas no se guardan ni cuentan para nada."
@@ -671,6 +693,8 @@ en:
     derechos_texto: "If you are in the European Union you have the right to access, correct and erase your data. Since the site stores no data about you, such requests go directly to Google."
     ninos: "Children"
     ninos_texto: "The site is not aimed at children under 13 and does not knowingly collect their data."
+    micro: "The microphone"
+    micro_texto: "Lessons have a button to record yourself. It asks for microphone access only when you press it. The recording stays in the browser's memory, is never sent to a server and is not saved on the device: it disappears when you close the page."
   leccion:
     urok: "Lesson"
     meta_leccion: "Lesson {n} of 365: {tema} Spanish from scratch for Russian speakers — 30 minutes a day, free, no sign-up."
@@ -728,6 +752,15 @@ en:
     copiar: "Copy the link"
     copiado: "Link copied"
     seguir: "The course on social media"
+  grabar:
+    titulo: "Record yourself"
+    entrada: "Listen to the phrase (▶), say it out loud and compare. The recording stays in your browser: it is not sent anywhere and not saved anywhere."
+    grabar: "Record"
+    parar: "Stop"
+    oir: "Listen back"
+    otra: "Record again"
+    sin_permiso: "The browser did not grant microphone access. You can allow it in the site settings — or just say the phrase out loud without recording."
+    grabando: "Recording…"
   quiz:
     titulo: "Today's words"
     entrada: "Five words from this lesson's vocabulary. Answers are not saved and count for nothing."

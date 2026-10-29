@@ -5127,6 +5127,50 @@ Dos cosas menores que importan en el móvil: **Enter guarda** —ahí el teclado
 tapa el botón— y quien ya dio su nombre ve un saludo con un botón «Изменить»,
 no un campo abierto ocupando sitio para siempre.
 
+## Grabarse y oírse (2026-10-29)
+
+El curso pide grabarse en **77 lecciones** —«запишите себя»— desde que se
+escribió, y el sitio no ofrecía dónde. Ahora hay un botón al cerrar la
+lección: se graba, se oye y se compara con el ▶ de la frase.
+
+**Nada sale del navegador.** La grabación vive en memoria, no se sube, no se
+guarda en el aparato y muere con la pestaña. Eso lo dice el propio bloque —la
+entrada, antes de cualquier botón— y desde hoy también la política de
+privacidad, que estrena un apartado «Микрофон». No era obligatorio, porque el
+sitio no recoge nada; pero el lector ve una petición de micrófono y merece
+saber por qué, que es la misma regla que dejó escrita el vídeo de YouTube que
+no se aplicó: lo único que una política no puede hacer es describir mal lo que
+el sitio hace.
+
+Lo que hay que cuidar si alguien lo toca:
+
+- **Sin micrófono o sin `MediaRecorder` el bloque NO sale**, y las dos salidas
+  van antes de encenderlo. Un botón que no puede hacer nada es peor que ningún
+  botón, y aquí además pediría un permiso para nada.
+- **Solo donde hay un ▶ con el que compararse.** Diez días —tests y exámenes—
+  no tienen una sola frase locutada en su cuerpo; ahí el ejercicio sería
+  grabarse contra nada. La prueba mira esa relación y no un número: si mañana
+  una lección pierde su audio, el bloque la sigue.
+- **El micrófono se apaga de verdad al parar** (`flujo.getTracks()...stop()`).
+  Sin eso la pestaña se queda con el punto rojo encendido hasta que se cierra,
+  y eso se lee como que el sitio sigue escuchando.
+- **No se fija el `mimeType`.** Cada navegador graba en lo suyo —Safari en
+  mp4, el resto en webm— y fijarlo dejaría a uno de los dos fuera.
+- **La toma anterior se tira** (`revokeObjectURL`) en cuanto hay otra: si no,
+  una sesión larga acaba cargando con todos los blobs.
+- **Permiso denegado se dice, y se dice que la lección sigue**: el ejercicio
+  es decir la frase en voz alta, y eso se puede hacer sin grabar nada.
+
+**Comprobado con un micrófono falso de Chromium**, que es la única forma de
+saber si graba: la toma produce **10.720 bytes de `audio/webm;codecs=opus`**,
+no sale una sola petición con cuerpo, sin permiso lo explica y sin
+`MediaRecorder` el bloque se queda oculto.
+
+**Y un fallo de una línea que solo se ve mirando**: el ayudante que fabrica
+los botones recibía la clase como cadena y `''` caía en el `||`, así que
+«Записать» —la única acción del bloque— salía perfilado como los otros dos.
+Ahora el parámetro es un booleano: o es el botón principal o es secundario.
+
 ## Las palabras del día, al cerrar la lección (2026-10-29)
 
 El profesor echaba en falta un test al final de cada lección: el sitio tenía
