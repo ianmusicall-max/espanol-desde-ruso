@@ -1204,7 +1204,16 @@ class TestElAudioDeLasLecciones(unittest.TestCase):
         construir_sitio.construir(destino, construir_sitio.cargar_config(),
                                   construir_sitio.cargar_textos())
         leccion = (destino / "semana-01" / "dia-1.html").read_text(encoding="utf-8")
-        self.assertNotIn('class="suena"', leccion)
+        # Lo que se mira es el MARCADO servido y no los `<script>`. Desde el
+        # 2026-10-29 el guion del test de palabras lleva `class="suena"`
+        # dentro de una cadena —el ▶ de la palabra fallada, que solo se monta
+        # si esa palabra tiene voz— y un buscador de texto acusaba a ese
+        # trozo de código de ser un botón. Es exactamente lo que ya le pasó a
+        # `revisar_adsense.enlaces_rotos`, que por esto se salta los scripts.
+        sin_guiones = re.sub(r"<script\b.*?</script>", "", leccion, flags=re.S)
+        self.assertNotIn('class="suena"', sin_guiones)
+        # Y el reproductor SÍ se busca en la página entera: es un script, así
+        # que esconderlo del registro sería dejar la guarda sin nada que ver.
         self.assertNotIn("sonando", leccion, "ni se carga el reproductor")
 
     def test_con_audio_salen_los_botones_y_el_reproductor(self):
