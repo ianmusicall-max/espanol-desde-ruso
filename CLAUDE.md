@@ -5839,8 +5839,8 @@ grabación muere con la pestaña.
   **`docs/` está al día**: las 365 lecciones construidas y publicadas, con la
   tira de dibujos del héroe —la misma fila en el móvil y en el escritorio—,
   la guía de los seis pasos dentro de cada lección y la tipografía propia
-  (Literata + Onest, autoalojada). La suite entera pasa: 267 pruebas, una de
-  ellas en navegador de verdad.
+  (Literata + Onest, autoalojada). La suite entera pasa: **422 pruebas** en 58
+  clases (2026-10-30), una de ellas en navegador de verdad.
 - **68 días son contestables o legibles con su clave**: 23 tests de unidad, 43
   mini-tests de repaso (de 47 — los otros cuatro piden escribir la forma, no
   elegir) y los 2 exámenes de nivel. El más largo es el quiz de 50 ítems de la
