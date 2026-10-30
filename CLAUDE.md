@@ -6128,6 +6128,63 @@ en la historia siguen ahí. Sacarlos pide reescribir la historia
 copia que alguien tenga del repositorio. No se hizo sin permiso. A partir de
 hoy no crece más, que es la mitad que sí se podía cerrar sola.
 
+## Decidido: un segundo curso, español desde el inglés (2026-10-30)
+
+El profesor lo decidió después de preguntar por un curso de ruso al revés —que
+se descartó porque lo firmaría alguien que no es nativo— y de aclarar que lo que
+quería era otra cosa: *«un curso para personas en europa, estados unidos, que
+quieran aprender español, no tiene nada que ver con el ruso»*. **Este sí lo
+puede firmar él**: español nativo e inglés.
+
+**El orden que eligió, y es el que importa**: primero termina lo que ya está
+hecho y no se ha encendido —el canal de Telegram y Search Console— y después se
+empieza. Son dos semanas sin escribir una línea, y contestan lo único que hoy no
+se sabe: si el curso ruso trae gente. Con 365 lecciones escritas y cero visitas,
+el cuello de botella no es que falte un segundo curso.
+
+**Lo medido antes de decidir, que es lo que fija el tamaño del trabajo:**
+
+    ruso en las TABLAS de vocabulario ....    39.049  ( 4%)  en 3.155 filas
+    ruso en la ENSEÑANZA (la prosa) ......   964.704  (96%)
+    bloques «Контраст с русским» ......... 252
+
+**Lo que se reaprovecha gratis**: la maquinaria entera (el generador, las 451
+pruebas, el audio, el quiz, los tests contestables, el progreso, el código de
+respaldo, el certificado, la baraja, el canal, AdSense y el CMP, el icono), los
+**11.378 audios españoles** —4,15 USD ya pagados— y los **300 dibujos**: no
+tienen idioma. Y las tablas de vocabulario son casi mecánicas, porque el
+español, el ejemplo, la voz y el dibujo se quedan; lo que cambia es la columna
+del medio.
+
+**Lo que hay que escribir**: el 96%. Y los 252 contrastes **se reescriben y no
+se traducen**, porque el angloparlante falla en otra lista —género, subjuntivo,
+*ser/estar*, *por/para*, la *a* personal, falsos amigos como *embarazada* y
+*actualmente*—. O sea: mismo esqueleto, 365 lecciones de prosa nuevas.
+
+**Y una corrección sobre el argumento de venta, porque como está escrito es
+falso**: él dijo «a diferencia de Duolingo será gratis con publicidad», y
+**Duolingo ya es gratis con publicidad**. Lo que de verdad lo distingue, y es lo
+que hay que escribir en la portada, es lo que este curso tiene y Duolingo no:
+una sesión de **30 minutos con su reloj**, un **camino de A0 a A2 con examen de
+salida** (el DELE A2) en vez de un árbol de ejercicios, **sin registro y sin
+rachas que castiguen**, y sobre todo el **bloque de contraste**: la lección
+nombra el error de TU lengua antes de que lo cometas. Eso último es lo único que
+ningún curso masivo hace, porque hace falta un curso por lengua de partida.
+
+**Y «Europa» hay que acotarlo a inglés**: son muchas lenguas de partida, y un
+contraste sirve para una sola. Un curso «para Europa» sin elegir la lengua de
+partida es exactamente el curso genérico del que se quiere diferenciar.
+
+**El dinero es el argumento más fuerte y conviene tenerlo con el número
+delante**: AdSense **no sirve anuncios dentro de Rusia** desde marzo de 2022, así
+que el curso ruso solo monetiza al rusohablante de fuera —Alemania, España,
+Israel, Kazajistán, EE.UU.—. Este apunta directo a EE.UU., Reino Unido, Canadá y
+Australia, que es donde el anuncio se paga mejor.
+
+**La prueba barata que se propuso, por si se quiere empezar antes de terminar lo
+otro**: traducir la portada, el índice y las diez primeras lecciones, publicarlas
+en `/en/` y ver si Google las indexa. Son días y no meses.
+
 ## Estado (2026-10-29)
 
 **Lo que el alumno puede hacer en el sitio, después de la tanda del 29:**
