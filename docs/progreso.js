@@ -1,6 +1,13 @@
 (function(){
   var CLAVE_HECHAS='curso.hechas', CLAVE_ULTIMA='curso.ultima';
   var CLAVE_FECHAS='curso.fechas', CLAVE_NOMBRE='curso.nombre';
+  // Qué día se marcó cada lección, para el rótulo de su casilla. Es un mapa
+  // {lección: fecha} y NO entra en el código de respaldo: ese son 46 bytes
+  // de lecciones hechas y crecerlo rompería los códigos que la gente ya
+  // tiene guardados. Una lección restaurada de un código, o marcada antes
+  // de que esto existiera, se queda sin fecha, y entonces no se inventa
+  // ninguna: el rótulo dice la lección y nada más.
+  var CLAVE_CUANDO='curso.cuando';
   var T=window.CURSO_TEXTOS||{}, RAIZ=window.CURSO_RAIZ||'.';
 
   function leer(clave,porDefecto){
@@ -23,6 +30,15 @@
     return f.getFullYear()+'-'+(m<10?'0':'')+m+'-'+(d<10?'0':'')+d;
   }
   function fechas(){var v=leer(CLAVE_FECHAS,[]);return Array.isArray(v)?v:[]}
+  function cuandoSe(){
+    var v=leer(CLAVE_CUANDO,{});
+    return (v&&typeof v==='object'&&!Array.isArray(v))?v:{};
+  }
+  function anotarCuando(n,puesta){
+    var c=cuandoSe();
+    if(puesta)c[n]=hoy(); else delete c[n];
+    guardar(CLAVE_CUANDO,c);
+  }
   function anotarHoy(){
     var f=fechas(), h=hoy();
     if(f.indexOf(h)<0){f.push(h);guardar(CLAVE_FECHAS,f)}
@@ -223,6 +239,7 @@
         var lista=hechas(), i=lista.indexOf(n);
         if(i>=0){lista.splice(i,1)}else{lista.push(n)}
         guardar(CLAVE_HECHAS,lista);pintar();
+        anotarCuando(n,i<0);
         if(i<0){
           anotarHoy();felicitar();
           if(siguiente){siguiente.classList.add('destacado')}
@@ -375,41 +392,51 @@
   }
 
 
-  // --- el calendario del año: una casilla por día ---
+  // --- la rejilla del curso: una casilla por LECCIÓN ---
   //
-  // Lo mismo que `#mio` y las barras del mapa, y por la razón escrita allí:
-  // solo si ya hay progreso. Trescientas sesenta y cuatro casillas vacías en
-  // la primera visita no se leen como «empieza», se leen como un hueco.
+  // Antes era un año de días, al estilo del calendario de contribuciones de
+  // GitHub, y el profesor lo pidió al revés: «debería marcarse por lección,
+  // lección 1 cuadradito 1, y cuando pongas el ratón diga la fecha». Tiene
+  // más sentido aquí: un día puede llevar cinco lecciones y entonces el
+  // cuadro de ese día ya estaba naranja, así que marcar la quinta no se veía
+  // en ninguna parte. Por lección, cada vez que marcas cambia algo.
+  //
+  // Las columnas son las SEMANAS DEL CURSO y las filas los siete días, que
+  // es la cuadrícula del propio calendario: la casilla 8 es la semana 2 día
+  // 1 sin tener que calcular nada, porque `grid-auto-flow:column` llena por
+  // columnas. El día 365 cae solo en la columna 53, y así es el curso.
+  //
+  // Solo si ya hay progreso, igual que `#mio` y por la razón escrita allí.
   var cal=document.getElementById('calendario');
   if(cal&&hechasAhora.length){
-    var DIA2=86400000, hoyCad=hoy(), hoyMs=dia(hoyCad);
-    var puestas={};fechas().forEach(function(f){puestas[f]=1});
-    // Se arranca en el lunes de hace 51 semanas, así que las 52 columnas son
-    // semanas enteras y la última es la de hoy. Los días de esta semana que
-    // aún no han llegado se dibujan vacíos y sin fondo: dejarlos fuera
-    // cambiaría el alto de la última columna y la rejilla saldría mellada.
-    var lunes=hoyMs-((new Date(hoyMs).getUTCDay()+6)%7)*DIA2;
-    var ini=lunes-51*7*DIA2, cuenta=0;
+    var total=window.CURSO_PUBLICADAS||365, cuando=cuandoSe();
+    var puestas={};hechasAhora.forEach(function(n){puestas[n]=1});
+    var siguienteN=0;
+    for(var b=1;b<=total;b++){if(!puestas[b]){siguienteN=b;break}}
     var rejilla=document.createElement('div');
     rejilla.className='cal-rejilla';
-    for(var q=0;q<364;q++){
-      var ms=ini+q*DIA2, f=new Date(ms);
-      var mm=f.getUTCMonth()+1, dd=f.getUTCDate();
-      var clave=f.getUTCFullYear()+'-'+(mm<10?'0':'')+mm+'-'+(dd<10?'0':'')+dd;
+    for(var q=1;q<=total;q++){
+      var sem=Math.ceil(q/7), dsem=(q-1)%7+1;
       var c=document.createElement('span');
       var clases='cal-dia';
-      if(ms>hoyMs){clases+=' futuro'}
-      else if(puestas[clave]){clases+=' hecho';cuenta++}
-      if(clave===hoyCad)clases+=' es-hoy';
+      if(puestas[q])clases+=' hecho';
+      if(q===siguienteN)clases+=' aqui';
       c.className=clases;
-      c.title=clave+(clave===hoyCad&&T.calendario_hoy?' · '+T.calendario_hoy:'');
+      // El rótulo dice la lección, dónde cae y —si está hecha— QUÉ DÍA se
+      // hizo, que es lo que se pidió. Una lección marcada antes de que esto
+      // existiera no tiene fecha guardada y entonces no se inventa ninguna.
+      var rot=conPlantilla(T.calendario_rotulo||'',{n:q,semana:sem,dia:dsem});
+      if(cuando[q])rot+=' · '+cuando[q];
+      else if(q===siguienteN&&T.calendario_aqui)rot+=' · '+T.calendario_aqui;
+      c.title=rot;
       rejilla.appendChild(c);
     }
     // Una sola etiqueta para la rejilla entera y las casillas calladas: un
-    // lector de pantalla leyendo 364 celdas sería inservible, y el dato que
-    // de verdad se quiere oír es cuántos días son.
+    // lector de pantalla leyendo 365 celdas sería inservible, y el dato que
+    // de verdad se quiere oír es cuántas lecciones van.
     var nota=conPlantilla(T.calendario_nota,
-      {n:cuenta,dias:plural(cuenta,T.racha_dias)});
+      {n:hechasAhora.length,total:total,
+       lecciones:plural(hechasAhora.length,T.calendario_lecciones)});
     rejilla.setAttribute('role','img');
     rejilla.setAttribute('aria-label',nota);
     var cabc=document.createElement('p');
@@ -421,15 +448,18 @@
     cabc.appendChild(fuerte);cabc.appendChild(suave);
     cal.appendChild(cabc);cal.appendChild(rejilla);
     cal.hidden=false;
-    // Desplazada hasta hoy, para cuando desborda —hoy solo en el móvil—.
-    //
-    // Se repite en el siguiente fotograma y al acabar de cargar porque un
-    // desplazamiento puesto antes de que la página termine de componerse se
-    // pierde sin avisar, y lo que queda entonces es la rejilla anclada en
-    // enero: 362 casillas vacías y los días del lector fuera de la pantalla,
-    // que se lee como que esto no marca nada. Solo se repite si sigue en
-    // cero, o sea mientras nadie la haya movido a mano.
-    var alFinal=function(){if(!rejilla.scrollLeft)rejilla.scrollLeft=rejilla.scrollWidth};
+    // Desplazada hasta donde vas, para cuando desborda —hoy solo en el
+    // móvil—. Se repite en el siguiente fotograma y al acabar de cargar
+    // porque un desplazamiento puesto antes de que la página termine de
+    // componerse se pierde sin avisar, y lo que queda entonces es la rejilla
+    // anclada en la semana 1, que es como no marcar nada. Solo se repite si
+    // sigue en cero, o sea mientras nadie la haya movido a mano.
+    var marca=rejilla.querySelector('.aqui')||rejilla.lastChild;
+    var alFinal=function(){
+      if(rejilla.scrollLeft)return;
+      if(marca&&marca.offsetLeft>rejilla.clientWidth)
+        rejilla.scrollLeft=marca.offsetLeft-rejilla.clientWidth/2;
+    };
     alFinal();
     if(window.requestAnimationFrame)requestAnimationFrame(alFinal);
     window.addEventListener('load',alFinal);

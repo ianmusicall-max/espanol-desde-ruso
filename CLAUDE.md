@@ -5848,8 +5848,13 @@ Cómo quedó:
   sigue en cero**: si no, le quitaría la rejilla de las manos a quien la esté
   moviendo con el dedo.
 
+**Y unas horas después la rejilla dejó de ser de días**: ver la nota de abajo.
+Lo de aquí sigue valiendo entero —la cuenta, la casilla de 10 px, el
+desplazamiento que se repone— porque el defecto era del ancho y no de lo que
+cada casilla significa.
+
 **Las guardas, y cuál de las dos sirve.** La de la aritmética lee las medidas
-del CSS —no las escribe— y exige que las 52 columnas quepan; falla con el
+del CSS —no las escribe— y exige que las columnas quepan; falla con el
 código de antes. La del navegador siembra progreso en `kurs.html`, recarga y
 exige que las casillas marcadas y la de hoy estén DENTRO de la caja, en
 escritorio y a 390 px. **Esa segunda pasaba con el código viejo**, porque aquí
@@ -5857,6 +5862,72 @@ el desplazamiento sí llega: sirve de red para el móvil y para que una casilla
 marcada no acabe del color de una vacía, no para lo que se rompió hoy. La
 tercera fija que la casilla sea cuadrada, que su alto y su ancho se escriben
 en dos reglas distintas.
+
+## La rejilla pasa a ser el CURSO: una casilla por lección (2026-10-30)
+
+Arreglado el ancho, el profesor siguió sin ver lo que esperaba: **«¿por qué
+cuando marco terminé la lección el cuadradito no se llena?»**. Y después la
+pregunta que lo explicaba todo: **«¿se marca por fecha o se marca por
+lección?»**.
+
+**Se marcaba por fecha**, al estilo del calendario de contribuciones de
+GitHub: una casilla por día, encendida si ese día estudiaste algo. Con tres
+lecciones repartidas en dos días, marcar la tercera no cambiaba nada a la
+vista —el cuadro de ese día ya estaba pintado— y eso se lee exactamente como
+que no funciona. El defecto no era un fallo: era que la rejilla medía
+**constancia** y él esperaba **avance**.
+
+Lo pidió claro: *«debería marcarse por lección, lección 1 cuadradito 1, y
+cuando pongas el mouse diga la fecha»*. Hecho, y encaja mejor con este sitio:
+
+- **365 casillas, una por lección**, y las columnas son las **semanas del
+  curso**. Eso sale gratis: con `grid-auto-flow:column` y siete filas, la
+  casilla 8 cae sola en la semana 2 día 1. La rejilla **es** la cuadrícula del
+  calendario del curso, y el día 365 queda solo en la columna 53, que es como
+  está escrito el año.
+- **El rótulo dice la lección, dónde cae y qué día se hizo**: «Урок 2 · нед. 1,
+  день 2 · 2026-10-30».
+- **El recuadro marca la primera sin hacer** («здесь вы остановились»), que es
+  dónde vas. Antes marcaba hoy, que en una rejilla de lecciones no significa
+  nada.
+- **53 columnas caben**: 640 px contra los 664 de la columna de prosa. La
+  cuenta de la nota de arriba sigue siendo la guarda, ahora contando las
+  semanas del propio calendario en vez de un 52 escrito a mano.
+
+**Lo que hubo que guardar, que es la parte delicada.** El navegador sabía *qué*
+lecciones hiciste y *qué días* estudiaste, pero no cuál en qué día, así que la
+fecha del rótulo no se podía deducir: hace falta una clave nueva,
+`curso.cuando`, un mapa {lección: fecha} que se escribe al marcar y se borra al
+desmarcar.
+
+- **NO entra en el código de respaldo**, y hay una prueba que lo exige. Ese
+  código son 46 bytes de lecciones hechas en 68 caracteres pegables; meterle
+  las fechas lo haría crecer y **rompería los códigos que la gente ya tiene
+  guardados**, que es lo único de este bloque que no se puede arreglar después.
+- **Una lección sin fecha no se inventa ninguna.** Las marcadas antes de que
+  esto existiera y las que vienen de un código de respaldo no la tienen: el
+  rótulo dice la lección y nada más. Una prueba mira que entre el `if(cuando[q])`
+  y el `title` no aparezca `hoy()`.
+- **Un `curso.cuando` estropeado cae en vacío** en vez de reventar la página,
+  como todas las lecturas de este guion.
+
+**`curso.fechas` se queda** y la racha sigue saliendo de ahí: son dos cosas
+distintas y ahora cada una está donde se entiende —el avance en la rejilla, la
+constancia en la línea de «2 días seguidos»—.
+
+**Una guarda vieja se puso en rojo y tenía razón.**
+`test_el_calendario_no_lee_la_lista_de_dias_dos_veces` exigía que la rejilla y
+la racha miraran el MISMO `curso.fechas`. Eso describía el contrato de ayer. No
+se aflojó: ahora exige que la rejilla y el CONTADOR cuenten lo mismo —las dos
+miran `hechasAhora`, la lista que el contador ya tiene leída—, porque con una
+lectura propia una lección podría salir contada arriba y no pintada abajo, y
+las dos cifras de la misma caja se contradirían sin que nada fallara.
+
+**Comprobado haciendo lo que él hace**, no leyendo el código: abrir la lección 1
+sin ningún progreso, pulsar «Отметить урок пройденным», abrir la lección 2 y
+marcarla también, e irse al índice. Salen **dos casillas**, cada una con su
+fecha en el rótulo, y el recuadro en la lección 3. Con la rejilla de ayer eso
+era **una**.
 
 ## Estado (2026-10-29)
 

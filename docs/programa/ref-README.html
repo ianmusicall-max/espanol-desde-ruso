@@ -252,17 +252,18 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
   border-radius:12px;background:var(--tarjeta)}
 .quiz-bloque h2{margin:0 0 .3rem;border:0;padding:0;font-size:1.05rem}
 .quiz-bloque p{margin:0 0 .6rem;font-size:.92rem;color:var(--tenue)}
-/* El calendario del año: una casilla por día y las columnas son semanas.
+/* La rejilla del curso: una casilla por LECCIÓN y las columnas son las
+   semanas del curso, que es la cuadrícula del propio calendario.
    La racha ya se contaba desde el 2026-10-29 pero era un número («7 дней»);
    la rejilla dice lo mismo y además enseña los huecos, que es lo que hace
    volver al día siguiente. No mide nada nuevo: hace visible `curso.fechas`.
-   La casilla mide 10 px y el hueco 2 para que las 52 columnas QUEPAN en la
-   columna de prosa: con 11 y 3 medía 731 px contra 664, así que se salía en
-   TODA pantalla y dependía siempre de un desplazamiento puesto desde el
-   guion. El día que ese desplazamiento no llegó, el profesor vio la rejilla
-   anclada en enero —362 casillas vacías— y dio por hecho que no se marcaba
-   nada. Hay una prueba que fija la cuenta. En el móvil sigue desbordando, y
-   para eso está el desplazamiento. */
+   La casilla mide 10 px y el hueco 2 para que las 53 columnas del curso
+   QUEPAN en la columna de prosa: con 11 y 3 medía 745 px contra 664, así que
+   se salía en TODA pantalla y dependía siempre de un desplazamiento puesto
+   desde el guion. El día que ese desplazamiento no llegó, el profesor vio la
+   rejilla anclada en el principio y dio por hecho que no se marcaba nada.
+   Hay una prueba que fija la cuenta. En el móvil sigue desbordando, y para
+   eso está el desplazamiento. */
 .calendario{margin:.9rem 0 0;font-family:Onest,ui-sans-serif,system-ui,sans-serif}
 .cal-cab{display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;margin:0 0 .45rem;
   font-size:.88rem}
@@ -273,9 +274,10 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 .cal-dia{width:10px;height:10px;border-radius:3px;background:var(--linea)}
 .cal-dia.hecho{background:var(--acento)}
 .cal-dia.futuro{background:transparent}
-/* El recuadro de HOY se dibuja FUERA de la casilla, así que sin `offset:0`
-   se metería en la casilla de al lado: el hueco son 2 px y el trazo, 2. */
-.cal-dia.es-hoy{outline:2px solid var(--tinta);outline-offset:0}
+/* «Vas por aquí»: la primera sin marcar. El recuadro se dibuja FUERA de la
+   casilla, así que sin `offset:0` se metería en la de al lado: el hueco son
+   2 px y el trazo, 2. */
+.cal-dia.aqui{outline:2px solid var(--tinta);outline-offset:0}
 /* El certificado. Sale solo cuando un nivel está cerrado, así que la mayoría
    no lo verá nunca y por eso no puede ocupar sitio de más. */
 .diploma-caja{margin:.9rem 0 0;font-family:Onest,ui-sans-serif,system-ui,sans-serif;
@@ -737,7 +739,7 @@ versionan (derechos de autor): quedan fuera del repositorio.</p>
     });
   });
 })();</script>
-<script>window.CURSO_TEXTOS={"continuar": "Continuar: lección", "guia_paso": "Paso {n} de {total}", "guia_siguiente": "Siguiente", "guia_final": "Marcar y seguir", "guia_empezar": "Empezar por el primer paso", "empezar": "Empezar de cero", "marcar": "Marcar la lección como hecha", "hecho": "Lección hecha", "siguiente": "Siguiente lección", "tuyo": "hechas por usted", "titulo": "Su progreso", "aviso": "El progreso se guarda solo en este navegador y en este aparato. No hay registro y no se envía a ninguna parte. Si borra los datos del navegador o abre el curso en otro teléfono, las marcas no viajan con usted.", "borrar": "Borrar el progreso", "confirmar": "¿Borrar todas las marcas?", "copiar": "Guardar mi progreso", "copiado": "Código copiado — péguelo en sus notas o en un mensaje a sí mismo", "restaurar": "Recuperar mi progreso", "pegar": "Pegue aquí su código", "aplicar": "Restaurar", "cancelar": "Cancelar", "malo": "Esto no parece un código de progreso. No se ha cambiado nada.", "menos": "Ese código trae menos lecciones de las que tiene marcadas (%a% en vez de %b%). ¿Restaurar igualmente?", "hecho_restaurar": "Listo: %n% lecciones restauradas", "nombre_label": "¿Cómo se llama?", "nombre_boton": "Guardar", "nombre_cambiar": "Cambiar", "nombre_nota": "Solo para saludarle por su nombre. Se queda en este navegador y no se envía a ninguna parte.", "bravo": ["¡Muy bien!", "¡Así se hace!", "¡Buen trabajo!", "¡Una lección más!", "¡Va por buen camino!", "¡Hecho!", "¡Qué ritmo!", "¡Siga así!", "Paso a paso se llega."], "bravo_con": ["¡Muy bien, {nombre}!", "¡Así se hace, {nombre}!", "¡Buen trabajo, {nombre}!", "¡{nombre}, una lección más!", "¡Va por buen camino, {nombre}!", "¡Hecho, {nombre}!", "¡Qué ritmo, {nombre}!", "¡Siga así, {nombre}!", "{nombre}, paso a paso se llega."], "vuelta": "Hola de nuevo, {nombre}.", "primera": "Primera lección hecha: lo más difícil ya pasó.", "primera_con": "{nombre}, primera lección hecha: lo más difícil ya pasó.", "cuantas": "{n} de {total}", "faltan": "quedan {n}", "racha": "{n} {dias} seguidos", "racha_dias": ["día", "días", "días"], "racha_hoy": "Hoy ha estudiado", "racha_mejor": "Su mejor racha: {n} {dias}", "antes": "Antes de limpiar el navegador o cambiar de móvil, guarde su código.", "calendario": "Su año", "calendario_nota": "{n} {dias} de estudio en el último año", "calendario_hoy": "hoy", "diploma_boton": "Descargar el certificado ({nivel})", "diploma_pide_nombre": "Escriba su nombre arriba y el certificado saldrá a su nombre.", "diploma_titulo": "CERTIFICADO", "diploma_sub": "de finalización del curso", "diploma_quien": "Otorgado a", "diploma_que": "Nivel {nivel} · lecciones completadas: {n}", "diploma_fecha": "Fecha", "diploma_aviso": "Certificado personal de estudio autodidacta. No es un documento oficial de nivel de idioma."};window.CURSO_RAIZ="..";window.CURSO_PUBLICADAS=0;window.CURSO_DIAS={};window.CURSO_NIVELES=[];window.CURSO_SITIO="Español desde el ruso";window.CURSO_DOMINIO="espanoldesderuso.com";</script>
+<script>window.CURSO_TEXTOS={"continuar": "Continuar: lección", "guia_paso": "Paso {n} de {total}", "guia_siguiente": "Siguiente", "guia_final": "Marcar y seguir", "guia_empezar": "Empezar por el primer paso", "empezar": "Empezar de cero", "marcar": "Marcar la lección como hecha", "hecho": "Lección hecha", "siguiente": "Siguiente lección", "tuyo": "hechas por usted", "titulo": "Su progreso", "aviso": "El progreso se guarda solo en este navegador y en este aparato. No hay registro y no se envía a ninguna parte. Si borra los datos del navegador o abre el curso en otro teléfono, las marcas no viajan con usted.", "borrar": "Borrar el progreso", "confirmar": "¿Borrar todas las marcas?", "copiar": "Guardar mi progreso", "copiado": "Código copiado — péguelo en sus notas o en un mensaje a sí mismo", "restaurar": "Recuperar mi progreso", "pegar": "Pegue aquí su código", "aplicar": "Restaurar", "cancelar": "Cancelar", "malo": "Esto no parece un código de progreso. No se ha cambiado nada.", "menos": "Ese código trae menos lecciones de las que tiene marcadas (%a% en vez de %b%). ¿Restaurar igualmente?", "hecho_restaurar": "Listo: %n% lecciones restauradas", "nombre_label": "¿Cómo se llama?", "nombre_boton": "Guardar", "nombre_cambiar": "Cambiar", "nombre_nota": "Solo para saludarle por su nombre. Se queda en este navegador y no se envía a ninguna parte.", "bravo": ["¡Muy bien!", "¡Así se hace!", "¡Buen trabajo!", "¡Una lección más!", "¡Va por buen camino!", "¡Hecho!", "¡Qué ritmo!", "¡Siga así!", "Paso a paso se llega."], "bravo_con": ["¡Muy bien, {nombre}!", "¡Así se hace, {nombre}!", "¡Buen trabajo, {nombre}!", "¡{nombre}, una lección más!", "¡Va por buen camino, {nombre}!", "¡Hecho, {nombre}!", "¡Qué ritmo, {nombre}!", "¡Siga así, {nombre}!", "{nombre}, paso a paso se llega."], "vuelta": "Hola de nuevo, {nombre}.", "primera": "Primera lección hecha: lo más difícil ya pasó.", "primera_con": "{nombre}, primera lección hecha: lo más difícil ya pasó.", "cuantas": "{n} de {total}", "faltan": "quedan {n}", "racha": "{n} {dias} seguidos", "racha_dias": ["día", "días", "días"], "racha_hoy": "Hoy ha estudiado", "racha_mejor": "Su mejor racha: {n} {dias}", "antes": "Antes de limpiar el navegador o cambiar de móvil, guarde su código.", "calendario": "Su curso", "calendario_nota": "{n} {lecciones} de {total}", "calendario_rotulo": "Lección {n} · sem. {semana}, día {dia}", "calendario_aqui": "aquí lo dejó", "calendario_lecciones": ["lección", "lecciones", "lecciones"], "diploma_boton": "Descargar el certificado ({nivel})", "diploma_pide_nombre": "Escriba su nombre arriba y el certificado saldrá a su nombre.", "diploma_titulo": "CERTIFICADO", "diploma_sub": "de finalización del curso", "diploma_quien": "Otorgado a", "diploma_que": "Nivel {nivel} · lecciones completadas: {n}", "diploma_fecha": "Fecha", "diploma_aviso": "Certificado personal de estudio autodidacta. No es un documento oficial de nivel de idioma."};window.CURSO_RAIZ="..";window.CURSO_PUBLICADAS=0;window.CURSO_DIAS={};window.CURSO_NIVELES=[];window.CURSO_SITIO="Español desde el ruso";window.CURSO_DOMINIO="espanoldesderuso.com";</script>
 <script src="../progreso.js" defer></script>
 
 

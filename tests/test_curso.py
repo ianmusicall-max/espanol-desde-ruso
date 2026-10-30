@@ -9,6 +9,7 @@ import datetime as dt
 import dataclasses
 import html
 import json
+import math
 import pathlib
 import re
 import shutil
@@ -5215,18 +5216,69 @@ class TestElCalendarioYElCertificado(unittest.TestCase):
                 "hueco": int(hueco.group(1)), "relleno": int(relleno.group(1)),
                 "prosa": float(ancho.group(1)) * 16 - 2 * int(gutter.group(1))}
 
-    def test_las_52_columnas_caben_en_la_columna_de_prosa(self):
+    def test_las_columnas_del_curso_caben_en_la_columna_de_prosa(self):
         """La rejilla medía 731 px contra los 664 de la columna de texto, así
         que se salía en TODA pantalla y dependía siempre del desplazamiento
         que el guion le pone. El día que ese desplazamiento no llegó, lo que
-        se vio fue enero: 362 casillas vacías y los días del lector fuera de
-        la pantalla. Ahora cabe, y el desplazamiento se queda solo para el
-        móvil."""
+        se vio fue el principio del curso, con las casillas del lector fuera
+        de la pantalla. Ahora cabe, y el desplazamiento se queda para el
+        móvil.
+
+        Las columnas son las SEMANAS del curso y salen del calendario, no de
+        un número escrito aquí: el día que el curso cambie de largo, esta
+        cuenta lo sigue."""
         m = self._medidas()
-        ancho = 52 * m["celda"] + 51 * m["hueco"] + 2 * m["relleno"]
+        columnas = math.ceil(len(DIAS) / 7)
+        ancho = columnas * m["celda"] + (columnas - 1) * m["hueco"] + 2 * m["relleno"]
         self.assertLessEqual(
             ancho, m["prosa"],
-            f"las 52 columnas miden {ancho} px y la columna de prosa {m['prosa']:.0f}")
+            f"las {columnas} columnas miden {ancho} px y la prosa {m['prosa']:.0f}")
+
+    def test_hay_una_casilla_por_LECCION_y_el_rotulo_dice_la_fecha(self):
+        """Lo que pidió el profesor: «debería marcarse por lección, lección 1
+        cuadradito 1, y cuando pongas el ratón diga la fecha».
+
+        Antes era una casilla por DÍA, al estilo del calendario de GitHub, y
+        eso tiene un defecto que él encontró usándolo: un día puede llevar
+        cinco lecciones, así que al marcar la segunda del día el cuadro ya
+        estaba pintado y no cambiaba nada a la vista.
+
+        Esto mira el guion, que es donde vive la decisión: el bucle va de 1 a
+        `total` lecciones —no 364 días—, la casilla se pinta mirando las
+        lecciones hechas, y el rótulo lleva la fecha guardada cuando la hay.
+        """
+        js = self.js
+        self.assertIn("for(var q=1;q<=total;q++)", js, "el bucle ya no es por lección")
+        self.assertIn("if(puestas[q])clases+=' hecho'", js)
+        self.assertIn("if(cuando[q])rot+=' · '+cuando[q]", js,
+                      "el rótulo no dice la fecha")
+        # Y la fecha se apunta al marcar, que es lo único que la puede saber.
+        self.assertIn("anotarCuando(n,i<0)", js)
+        self.assertIn("if(puesta)c[n]=hoy(); else delete c[n]", js,
+                      "desmarcar tiene que borrar su fecha")
+
+    def test_la_fecha_de_cada_leccion_no_entra_en_el_codigo_de_respaldo(self):
+        """El código son 46 bytes de lecciones hechas y cabe en 68 caracteres
+        pegables. Meterle las fechas lo haría crecer y rompería los códigos
+        que la gente ya tiene guardados, que es lo único de este bloque que
+        no se puede arreglar después."""
+        js = self.js
+        codigo = js.split("function aCodigo(")[1].split("function ")[0]
+        self.assertNotIn("CLAVE_CUANDO", codigo)
+        self.assertNotIn("cuandoSe", codigo)
+
+    def test_una_leccion_sin_fecha_guardada_no_se_inventa_ninguna(self):
+        """Las marcadas antes de que esto existiera, y las que vienen de un
+        código de respaldo, no tienen fecha. El rótulo dice la lección y nada
+        más: una fecha inventada sería peor que ninguna."""
+        js = self.js
+        # La fecha se añade SOLO si está, y lo único que la puede sustituir es
+        # el rótulo de «aquí lo dejó», que no es una fecha.
+        cola = js.split("if(cuando[q])")[1].split("c.title=rot")[0]
+        self.assertNotIn("hoy()", cola, "se cuela la fecha de hoy en una lección vieja")
+        self.assertIn("T.calendario_aqui", cola)
+        # Y un `curso.cuando` estropeado cae en vacío en vez de reventar.
+        self.assertIn("return (v&&typeof v==='object'&&!Array.isArray(v))?v:{}", js)
 
     def test_la_casilla_es_cuadrada(self):
         """El alto sale de `grid-template-rows` y el ancho de `.cal-dia`: dos
@@ -5234,11 +5286,11 @@ class TestElCalendarioYElCertificado(unittest.TestCase):
         m = self._medidas()
         self.assertEqual(m["celda"], m["fila"])
 
-    def test_el_recuadro_de_hoy_no_invade_la_casilla_de_al_lado(self):
+    def test_el_recuadro_de_donde_vas_no_invade_la_casilla_de_al_lado(self):
         """Un `outline` se dibuja FUERA de la casilla: con el hueco en 2 px,
         un trazo de 2 con desplazamiento de 1 se metería en la vecina."""
         css = construir_sitio.CSS
-        m = re.search(r"\.cal-dia\.es-hoy\{outline:(\d+)px[^}]*outline-offset:(\d+)", css)
+        m = re.search(r"\.cal-dia\.aqui\{outline:(\d+)px[^}]*outline-offset:(\d+)", css)
         self.assertIsNotNone(m, "no se pudo leer el recuadro de hoy")
         trazo, fuera = int(m.group(1)), int(m.group(2))
         medidas = self._medidas()
@@ -5254,14 +5306,15 @@ class TestElCalendarioYElCertificado(unittest.TestCase):
         js = self.js
         self.assertIn("requestAnimationFrame(alFinal)", js)
         self.assertIn("window.addEventListener('load',alFinal)", js)
-        cuerpo = js.split("var alFinal=")[1].split(";")[0]
-        self.assertIn("if(!rejilla.scrollLeft)", cuerpo,
+        cuerpo = js.split("var alFinal=function(){")[1].split("};")[0]
+        self.assertIn("if(rejilla.scrollLeft)return", cuerpo,
                       "se repone el desplazamiento aunque el lector lo haya movido")
 
     # --- los textos ---
 
     def test_los_tres_idiomas_traen_los_textos_nuevos(self):
-        claves = ("calendario", "calendario_nota", "calendario_hoy",
+        claves = ("calendario", "calendario_nota", "calendario_rotulo",
+                  "calendario_aqui", "calendario_lecciones",
                   "diploma_boton", "diploma_pide_nombre", "diploma_titulo",
                   "diploma_sub", "diploma_quien", "diploma_que", "diploma_fecha",
                   "diploma_aviso")
@@ -5276,7 +5329,9 @@ class TestElCalendarioYElCertificado(unittest.TestCase):
         for idioma in ("ru", "es", "en"):
             pr = self.t[idioma]["progreso"]
             self.assertEqual(set(re.findall(r"\{(\w+)\}", pr["calendario_nota"])),
-                             {"n", "dias"}, idioma)
+                             {"n", "total", "lecciones"}, idioma)
+            self.assertEqual(set(re.findall(r"\{(\w+)\}", pr["calendario_rotulo"])),
+                             {"n", "semana", "dia"}, idioma)
             self.assertEqual(set(re.findall(r"\{(\w+)\}", pr["diploma_boton"])),
                              {"nivel"}, idioma)
             self.assertEqual(set(re.findall(r"\{(\w+)\}", pr["diploma_que"])),
@@ -5285,6 +5340,9 @@ class TestElCalendarioYElCertificado(unittest.TestCase):
             # ruso declina (1 день / 2-4 дня / 5+ дней) y un «5 день» en la
             # pantalla delata que el texto no lo escribió nadie.
             self.assertEqual(len(pr["racha_dias"]), 3, idioma)
+            # Y el de las lecciones, por lo mismo: «2 урок» en la cabecera de
+            # la rejilla delata lo mismo que un «5 день».
+            self.assertEqual(len(pr["calendario_lecciones"]), 3, idioma)
 
     def test_el_certificado_dice_que_NO_es_oficial(self):
         """Es la línea que lo hace honrado, y va en el propio papel y no solo
@@ -5348,12 +5406,20 @@ class TestElCalendarioYElCertificado(unittest.TestCase):
         # haya: quedarse sin papel sería peor que quedarse sin tipografía.
         self.assertIn(").then(pintar,pintar)", self.js)
 
-    def test_el_calendario_no_lee_la_lista_de_dias_dos_veces(self):
-        """La rejilla y la racha miran el MISMO `curso.fechas`. Si el
-        calendario tuviera su propia lectura, un día podría salir contado en
-        una y no en la otra."""
-        self.assertIn("fechas().forEach", self.js)
-        self.assertEqual(self.js.count("CLAVE_FECHAS='curso.fechas'"), 1)
+    def test_la_rejilla_y_el_contador_cuentan_lo_MISMO(self):
+        """Las dos miran `hechasAhora`, la lista que el contador ya tiene
+        leída. Con una lectura propia, una lección podría salir contada
+        arriba y no pintada abajo —o al revés— y las dos cifras de la misma
+        caja se contradirían sin que nada fallara.
+
+        Hasta el 2026-10-30 la rejilla era de DÍAS y miraba `curso.fechas`;
+        esta guarda decía eso mismo de aquel contrato. La racha sigue
+        mirándolo, y por eso cada clave se declara una sola vez."""
+        self.assertIn("var puestas={};hechasAhora.forEach", self.js)
+        self.assertIn("{n:hechasAhora.length,total:total,", self.js)
+        for clave in ("CLAVE_HECHAS='curso.hechas'", "CLAVE_FECHAS='curso.fechas'",
+                      "CLAVE_CUANDO='curso.cuando'"):
+            self.assertEqual(self.js.count(clave), 1, clave)
 
 
 class TestElFondoDeLosDibujos(unittest.TestCase):

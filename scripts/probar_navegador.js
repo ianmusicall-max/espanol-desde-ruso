@@ -278,17 +278,23 @@ async function unaPagina(b, rel, base) {
     }
     if (!r.audio_suena) r.errores.push('el ▶ no suena: ' + JSON.stringify(mp3));
   }
-  // El calendario del ano: no que ESTE, sino que las casillas del lector se
-  // VEAN. El profesor lo denuncio con la cabecera diciendo «2 dias» y la
-  // rejilla entera gris: las dos casillas existian y estaban fuera de la
-  // parte visible, ancladas en enero. Leyendo el codigo no se ve.
+  // La rejilla del curso: no que ESTE, sino que las casillas del lector se
+  // VEAN y que su rotulo diga la fecha. El profesor la denuncio dos veces: la
+  // primera con la cabecera diciendo «2 dias» y las 364 casillas grises —las
+  // marcadas existian y estaban fuera de la parte visible— y la segunda
+  // porque marcaba una leccion mas el mismo dia y no cambiaba nada, que es
+  // lo que pasa cuando la casilla es un DIA y no una leccion. Leyendo el
+  // codigo no se ve ninguna de las dos.
   if (/kurs\.html$/.test(rel)) {
     await p.evaluate(() => {
-      const h = new Date(), ayer = new Date(Date.now() - 86400000);
+      const hoy = new Date();
       const k = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0')
                      + '-' + String(d.getDate()).padStart(2, '0');
+      // Tres lecciones DEL MISMO DIA: con la rejilla vieja eso era UNA
+      // casilla, y es justo la queja.
       localStorage.setItem('curso.hechas', JSON.stringify([1, 2, 3]));
-      localStorage.setItem('curso.fechas', JSON.stringify([k(ayer), k(h)]));
+      localStorage.setItem('curso.fechas', JSON.stringify([k(hoy)]));
+      localStorage.setItem('curso.cuando', JSON.stringify({ 1: k(hoy), 2: k(hoy) }));
     });
     await p.reload({ waitUntil: 'load' });
     await p.waitForTimeout(600);
@@ -301,30 +307,40 @@ async function unaPagina(b, rel, base) {
         return b.x >= caja.x - 1 && b.right <= caja.right + 1;
       };
       const hechas = [...rj.children].filter(c => c.classList.contains('hecho'));
-      const hoy = [...rj.children].find(c => c.classList.contains('es-hoy'));
+      const aqui = [...rj.children].find(c => c.classList.contains('aqui'));
       return {
         casillas: rj.children.length,
         hechas: hechas.length,
         hechas_visibles: hechas.filter(dentro).length,
-        hoy_visible: !!hoy && dentro(hoy),
+        con_fecha: hechas.filter(c => /\d{4}-\d{2}-\d{2}/.test(c.title)).length,
+        aqui: aqui ? aqui.title : null,
+        aqui_visible: !!aqui && dentro(aqui),
         desborda: rj.scrollWidth > rj.clientWidth,
         color: hechas.length ? getComputedStyle(hechas[0]).backgroundColor : null,
-        vacio: getComputedStyle(rj.children[0]).backgroundColor,
+        vacio: getComputedStyle(rj.children[rj.children.length - 1]).backgroundColor,
       };
     });
-    if (!cal) r.errores.push('el calendario no se dibujo con progreso');
+    if (!cal) r.errores.push('la rejilla del curso no se dibujo con progreso');
     else {
       r.calendario = cal;
-      if (cal.hechas !== 2) r.errores.push('el calendario marco ' + cal.hechas + ' dias y no 2');
+      // Una casilla por leccion: tres del mismo dia son TRES.
+      if (cal.hechas !== 3) r.errores.push('la rejilla marco ' + cal.hechas + ' y no 3');
+      if (cal.casillas !== 365)
+        r.errores.push('la rejilla trae ' + cal.casillas + ' casillas y no 365');
       if (cal.hechas_visibles !== cal.hechas)
         r.errores.push('hay casillas marcadas fuera de la vista: '
                        + cal.hechas_visibles + ' de ' + cal.hechas);
-      if (!cal.hoy_visible) r.errores.push('la casilla de HOY no se ve');
+      // Dos tienen fecha guardada y la tercera no: esa no se inventa ninguna.
+      if (cal.con_fecha !== 2)
+        r.errores.push('rotulos con fecha: ' + cal.con_fecha + ' y no 2');
+      if (!cal.aqui_visible) r.errores.push('la casilla de «aqui lo dejo» no se ve');
+      if (cal.aqui && !/ 4 /.test(cal.aqui))
+        r.errores.push('«aqui lo dejo» no cae en la leccion 4: ' + cal.aqui);
       if (cal.color === cal.vacio) r.errores.push('una casilla marcada es del color de una vacia');
-      if (cal.desborda) r.errores.push('las 52 columnas no caben en el escritorio');
+      if (cal.desborda) r.errores.push('las columnas del curso no caben en el escritorio');
     }
     // Y en el movil, que es donde la rejilla SI desborda y lo unico que pone
-    // hoy a la vista es el desplazamiento del guion.
+    // a la vista donde vas es el desplazamiento del guion.
     await p.setViewportSize({ width: 390, height: 780 });
     await p.reload({ waitUntil: 'load' });
     await p.waitForTimeout(600);
@@ -332,14 +348,14 @@ async function unaPagina(b, rel, base) {
       const rj = document.querySelector('.cal-rejilla');
       if (!rj) return null;
       const caja = rj.getBoundingClientRect();
-      const hoy = [...rj.children].find(c => c.classList.contains('es-hoy'));
-      const b = hoy && hoy.getBoundingClientRect();
+      const a = [...rj.children].find(c => c.classList.contains('aqui'));
+      const b = a && a.getBoundingClientRect();
       return { desborda: rj.scrollWidth > rj.clientWidth,
-               hoy_visible: !!b && b.x >= caja.x - 1 && b.right <= caja.right + 1 };
+               aqui_visible: !!b && b.x >= caja.x - 1 && b.right <= caja.right + 1 };
     });
     r.calendario_movil = movil;
-    if (!movil || !movil.hoy_visible)
-      r.errores.push('en el movil la casilla de HOY se queda fuera de la vista');
+    if (!movil || !movil.aqui_visible)
+      r.errores.push('en el movil la casilla de «aqui lo dejo» se queda fuera de la vista');
   }
 
   r.errores = r.errores.concat(errores);
