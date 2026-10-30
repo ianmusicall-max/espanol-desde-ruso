@@ -31,6 +31,18 @@ autor:
   # para el curso, para que el spam de publicarlo no caiga en la personal.
   email: "espanoldesderuso@gmail.com"
 
+# La baraja de Anki. El .apkg pesa 64 MB y git no lo puede comprimir ni
+# deltar, así que cada regeneración metía un blob nuevo entero: cinco
+# versiones eran 235 MB de los 442 que ocupaba el repositorio. Desde el
+# 2026-10-30 la arma `.github/workflows/baraja.yml` y queda como archivo de
+# una release de TAG FIJO, o sea con una URL que no cambia nunca.
+#
+# Vacío = se enlaza el archivo de al lado, como antes. Vaciar esta línea es
+# el camino de vuelta, y es lo que hay que hacer si algún día se borra la
+# release: un botón de descarga que lleva a un 404 es peor que no ofrecerla.
+baraja:
+  release: "https://github.com/ianmusicall-max/espanol-desde-ruso/releases/download/baraja"
+
 # Google AdSense. Vacío = sin anuncios y sin aviso de cookies.
 # El alta se pide en adsense.google.com; dan el identificador ca-pub-… y
 # después los identificadores de cada bloque.

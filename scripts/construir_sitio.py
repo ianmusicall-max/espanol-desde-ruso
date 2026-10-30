@@ -3688,7 +3688,7 @@ def construir_vocabulario(destino: pathlib.Path) -> int:
     return len(tsv)
 
 
-def _bloque_de_la_baraja(t, destino: pathlib.Path, raiz: str) -> str:
+def _bloque_de_la_baraja(t, destino: pathlib.Path, raiz: str, cfg=None) -> str:
     """La descarga de las tarjetas, si la baraja existe.
 
     Sale de lo que HAY en disco y no de una promesa en el código: sin
@@ -3712,13 +3712,27 @@ def _bloque_de_la_baraja(t, destino: pathlib.Path, raiz: str) -> str:
                        .read_text(encoding="utf-8"))
     except (OSError, ValueError):
         return ""
-    if not (destino / VOCABULARIO_WEB / m["archivo"]).exists():
+    # Desde el 2026-10-30 el `.apkg` NO vive en el repositorio: lo arma el
+    # trabajo de GitHub y queda como archivo de una *release* de tag fijo, así
+    # que la URL no cambia nunca y aquí no hay nada que sincronizar. Lo que
+    # sigue en git es el manifiesto, que son cinco números.
+    #
+    # Sin `baraja.release` configurado se usa el archivo de al lado, como
+    # hasta ahora: así el generador funciona igual en un repositorio que
+    # todavía lo tenga, y vaciar esa línea es el camino de vuelta.
+    suelta = (cfg or {}).get("baraja") or {}
+    release = str(suelta.get("release") or "").strip().rstrip("/")
+    if release:
+        url = f'{release}/{urllib.parse.quote(m["archivo"])}'
+    elif (destino / VOCABULARIO_WEB / m["archivo"]).exists():
+        url = f'{raiz}/{VOCABULARIO_WEB}/{html.escape(m["archivo"])}'
+    else:
         return ""
 
     texto = html.escape(b["texto"]).format(
         n=m["palabras"], v=m["con_voz"], d=m["con_dibujo"])
     enlaces = [
-        f'<div><a class="boton" href="{raiz}/{VOCABULARIO_WEB}/{html.escape(m["archivo"])}" '
+        f'<div><a class="boton" href="{html.escape(url)}" '
         f'download>{html.escape(b["anki"])} · {m["bytes"] / 1e6:.0f} MB</a>'
         f'<p class="nota">{html.escape(b["anki_nota"])}</p></div>']
     if (destino / VOCABULARIO_WEB / "todo.tsv").exists():
@@ -4018,7 +4032,7 @@ def construir_indice_curso(cfg, t, idiomas, idioma, destino, cal, raiz,
     # y la baraja es un recurso de al lado, así que en medio cortaba el camino
     # justo antes de la lista, que es el contenido. Al final queda como lo que
     # es: lo que te llevas cuando ya miraste el curso.
-    partes.append(_bloque_de_la_baraja(t, sitio or destino, raiz))
+    partes.append(_bloque_de_la_baraja(t, sitio or destino, raiz, cfg))
     partes.append(anuncio(cfg, "pie"))
     destino.joinpath("kurs.html").write_text(
         # El nombre del sitio en el <title>, como en «О курсе», el test y el

@@ -6065,6 +6065,69 @@ tropezar con las dos el mismo día:
   línea de órdenes del comando que hace el `pkill` contiene el patrón que
   busca. Es el mismo caso que `pkill -f 'ffmpeg -nostdin'`, también anotado.
 
+## La baraja sale de git: más de la mitad del repositorio eran copias suyas (2026-10-30)
+
+«Arreglarlo», sobre el aviso de que el `.apkg` pasaba de 50 MB. **Y el número
+que le di estaba mal**: no pasó de 60,7 a 64,0 MB — ya pesaba **63,7** antes
+de tocarla, y mi cambio sumó 0,3. El 60,7 venía de estas notas y estaba viejo.
+
+Medido antes de arreglar nada, que es lo que cambió la solución:
+
+    .apkg hoy ............... 64,0 MB  (57,5 de MP3 + 4,6 de webp + 1,5 la base)
+    versiones en la historia ....... 5
+    lo que ocupan ................ 235 MB
+    .git entero .................. 442 MB
+
+O sea que **más de la mitad del repositorio son copias viejas de ese archivo**,
+y encima sus 2.982 MP3 duplican `docs/audio`, que ya está versionado al lado.
+Git no puede comprimirlos ni deltarlos —ya vienen comprimidos; medido dentro
+del zip, `compress_size == file_size`— así que cada regeneración es un blob
+nuevo **entero**.
+
+**Lo que NO era el arreglo, y conviene que quede escrito**: encoger el audio.
+57,5 MB son 2.982 voces a 64 kbps; a 32 la baraja bajaría a unos 34 MB, pero
+esto es un curso de PRONUNCIACIÓN y a ese bitrate lo primero que se va son las
+sibilantes y la vocal átona, que es justo lo que el alumno tiene que oír. El
+tamaño no era el defecto.
+
+### El arreglo: una release de TAG FIJO, armada por GitHub
+
+`.github/workflows/baraja.yml` arma la baraja y la sube como archivo de la
+release `baraja`. Una release **no vive en git**, así que el repositorio deja
+de crecer 64 MB por regeneración.
+
+- **El tag es fijo y por eso esto funciona.** El precio que este camino tenía
+  escrito desde el 2026-10-27 era «una URL absoluta en el generador, crear la
+  release y acordarse de actualizarla; si se desincronizan, el botón da 404».
+  Con un tag fijo y `gh release upload --clobber`, **la URL no cambia nunca** y
+  no hay nada que sincronizar: el archivo se reemplaza debajo.
+- **El manifiesto sigue en git** (`docs/vocabulario/baraja.json`, cinco
+  números) y lo actualiza el propio trabajo. Es lo que el sitio lee para pintar
+  el bloque sin abrir 64 MB, que ya era el diseño.
+- **`baraja.release` en `sitio.yaml` es el interruptor.** Vacío = se enlaza el
+  archivo de al lado, como antes. **Vaciarlo es el camino de vuelta**, y es lo
+  que hay que hacer si algún día se borra la release: un botón de descarga a
+  un 404 es peor que no ofrecerla.
+- **`baraja.json` NO está entre los caminos que disparan el trabajo**, porque
+  lo escribe él mismo y se perseguiría la cola. Hay una prueba.
+- **`genanki` no estaba en `requirements.txt`** —lo tenía este contenedor por
+  casualidad— y en Actions se instala SOLO lo que ese fichero diga. Es
+  exactamente el descuido que ya tuvo Pillow con la palabra del día, y van dos.
+
+**El orden importó y por eso fueron dos commits.** Primero el trabajo, con el
+archivo y el enlace intactos; se comprobó que la release existiera y que el
+archivo subido pesara **64 009 258 bytes, los mismos que el local**; y solo
+entonces se cambió el enlace y se sacó el `.apkg` de git. Al revés, un fallo
+del trabajo habría dejado la descarga rota sin nada a lo que volver.
+Verificado por la API de GitHub, no descargándolo: desde este contenedor no se
+alcanza.
+
+**Lo que esto NO arregla, y es decisión del profesor**: los 235 MB que ya están
+en la historia siguen ahí. Sacarlos pide reescribir la historia
+(`git filter-repo`) y un `push --force` sobre `main`, que invalida cualquier
+copia que alguien tenga del repositorio. No se hizo sin permiso. A partir de
+hoy no crece más, que es la mitad que sí se podía cerrar sola.
+
 ## Estado (2026-10-29)
 
 **Lo que el alumno puede hacer en el sitio, después de la tanda del 29:**
@@ -6079,7 +6142,7 @@ tropezar con las dos el mismo día:
 | **buscar una palabra** | las 2 985 del curso en `slovar.html`, **en los dos sentidos** (2 800 entradas rusas) |
 | llevar la cuenta | el contador, la racha, **el año en 364 casillas** y el mapa de las 24 unidades |
 | **llevarse un certificado** | al cerrar A1 (154) y A2 (365) |
-| llevarse el vocabulario | la baraja de Anki: 3 001 notas y **6 112 tarjetas**, 64,0 MB |
+| llevarse el vocabulario | la baraja de Anki: 3 001 notas y **6 112 tarjetas**, 64,0 MB, **desde una release y ya no desde git** |
 | no perderlo | el código de respaldo, 68 caracteres |
 
 Nada de eso sale del navegador: no hay registro, no hay servidor y la

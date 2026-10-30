@@ -2593,6 +2593,58 @@ class TestLaBarajaDeTarjetas(unittest.TestCase):
             self.assertIn("./vocabulario/x.apkg", bloque)
             self.assertIn("10", bloque)
 
+    def test_con_release_el_boton_apunta_fuera_del_repositorio(self):
+        """Desde el 2026-10-30 el .apkg no vive en git: lo arma el trabajo de
+        GitHub y queda en una release de tag fijo. Entonces el bloque NO puede
+        depender de que el archivo esté al lado, porque no lo está nunca."""
+        textos = construir_sitio.cargar_textos()["ru"]
+        cfg = {"baraja": {"release": "https://ej.test/releases/download/baraja/"}}
+        with tempfile.TemporaryDirectory() as tmp:
+            vacio = pathlib.Path(tmp)
+            (vacio / "vocabulario").mkdir()
+            # Sin manifiesto sigue sin haber bloque, release o no: los números
+            # que la página anuncia salen de ahí.
+            self.assertEqual(
+                "", construir_sitio._bloque_de_la_baraja(textos, vacio, ".", cfg))
+            (vacio / "vocabulario" / construir_sitio.MANIFIESTO_BARAJA).write_text(
+                json.dumps({"archivo": "x.apkg", "bytes": 64_000_000, "palabras": 3001,
+                            "con_voz": 3001, "con_dibujo": 311}), encoding="utf-8")
+            bloque = construir_sitio._bloque_de_la_baraja(textos, vacio, ".", cfg)
+            self.assertIn("https://ej.test/releases/download/baraja/x.apkg", bloque)
+            self.assertNotIn("./vocabulario/x.apkg", bloque)
+            self.assertIn("64 MB", bloque)
+            # Y vaciar la línea es el camino de vuelta: sin archivo al lado,
+            # no hay botón.
+            self.assertEqual("", construir_sitio._bloque_de_la_baraja(
+                textos, vacio, ".", {"baraja": {"release": ""}}))
+
+    def test_el_trabajo_la_sube_a_un_TAG_FIJO_y_no_se_persigue_la_cola(self):
+        """El tag fijo es lo que hace que la URL no cambie nunca, que es el
+        precio que este camino tenía escrito —un botón de descarga que acaba
+        en 404 porque nadie sincronizó el enlace—.
+
+        Y `baraja.json` no puede estar entre los caminos que lo disparan: lo
+        escribe el propio trabajo, así que se llamaría a sí mismo."""
+        flujo = RAIZ / ".github" / "workflows" / "baraja.yml"
+        self.assertTrue(flujo.exists(), "falta el trabajo que arma la baraja")
+        y = yaml.safe_load(flujo.read_text(encoding="utf-8"))
+        texto = flujo.read_text(encoding="utf-8")
+        self.assertEqual({"contents": "write"}, y["permissions"],
+                         "sin esto no puede escribir en la release")
+        self.assertIn("--clobber", texto, "sin esto el archivo del tag no se reemplaza")
+        self.assertIn("gh release upload baraja", texto)
+        caminos = y[True]["push"]["paths"]            # `on:` lo lee YAML como True
+        self.assertNotIn("docs/vocabulario/baraja.json", caminos)
+        for esperado in ("curso/**", "scripts/exportar_apkg.py"):
+            self.assertIn(esperado, caminos, esperado)
+
+    def test_genanki_esta_en_requirements(self):
+        """En Actions se instala SOLO lo que ese fichero diga, y aquí lo
+        teníamos por casualidad. Es el mismo descuido que ya tuvo Pillow con
+        la palabra del día."""
+        pide = (RAIZ / "requirements.txt").read_text(encoding="utf-8")
+        self.assertIn("genanki", pide)
+
     def test_los_tres_idiomas_enlazan_la_misma_baraja_en_la_raiz(self):
         """La baraja vive UNA vez en `docs/vocabulario/`, no una por idioma.
         El índice en español se escribe en `docs/es/`, así que mirándola en su

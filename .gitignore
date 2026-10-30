@@ -29,3 +29,12 @@ muestras-voz/
 # Archivos de zona DNS para importar en el registrador: se generan al mudarse
 # de dominio y no son parte del sitio.
 dns-*.txt
+
+# La baraja de Anki NO se versiona desde el 2026-10-30. Son 64 MB que git no
+# puede comprimir ni deltar —2.982 MP3 y 300 webp ya comprimidos— así que
+# cada regeneración metía un blob nuevo entero: cinco versiones eran 235 MB
+# de los 442 que ocupaba el repositorio, y sus medios duplican docs/audio,
+# que ya está versionado al lado. La arma `.github/workflows/baraja.yml` y
+# queda en una release de tag fijo. Lo que SÍ se versiona es el manifiesto,
+# que son cinco números y es lo que el sitio lee.
+docs/vocabulario/*.apkg
