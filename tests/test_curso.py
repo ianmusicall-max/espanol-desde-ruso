@@ -4133,6 +4133,152 @@ class TestElSaludoYLaRacha(unittest.TestCase):
         self.assertNotIn("variante(hechasAhora", self.js)
 
 
+class TestLaBarraDeArriba(unittest.TestCase):
+    """Los cinco destinos en la barra, y la eñe cuando el título no cabe.
+
+    Lo pidió el profesor —«Словарь курса · Тест на уровень deberían estar en
+    la parte de arriba»—: estaban en el pie, o sea abajo del todo de las 394
+    páginas. Medido en Chromium ANTES de tocar nada, porque esta barra ya
+    falló una vez por cuatro píxeles. El alto de la cabecera (46 px es una
+    fila):
+
+                             360  414  600  700  768  900 1024
+        antes, 3 enlaces     111  111   78   82   46   46   46
+        ahora, 5 + la eñe    107  107   78   46   46   46   46
+
+    O sea que no es un apaño para meter dos enlaces: cabe en una fila desde
+    700 px en los tres idiomas —el ruso necesitaba 768— y en el móvil la
+    cabecera encoge. Lo que ocupaba sitio era el título: «Испанский с нуля для
+    русскоговорящих» son 304 px de una barra de 768, más que los cinco
+    enlaces juntos."""
+
+    DOCS = RAIZ / "docs"
+
+    def setUp(self):
+        self.css = construir_sitio.CSS
+        self.t = construir_sitio.cargar_textos()
+
+    def test_la_barra_lleva_los_cinco_destinos(self):
+        if not (self.DOCS / "index.html").exists():
+            self.skipTest("el sitio todavía no está construido")
+        for pagina in ("index.html", "kurs.html", "slovar.html", "test.html",
+                       "es/index.html", "en/kurs.html", "semana-01/dia-1.html"):
+            texto = (self.DOCS / pagina).read_text(encoding="utf-8")
+            barra = texto.split('nav class="paginas">', 1)[1].split("</nav>", 1)[0]
+            enlaces = re.findall(r'href="([^"]+)"', barra)
+            self.assertEqual(5, len(enlaces), f"{pagina}: {enlaces}")
+            for destino in ("kurs.html", "slovar.html", "test.html",
+                            "o-kurse.html", "kontakt.html"):
+                self.assertTrue(any(h.endswith(destino) for h in enlaces),
+                                f"{pagina} no enlaza {destino}")
+
+    def test_los_cinco_destinos_existen_desde_cualquier_profundidad(self):
+        """La OCTAVA vez que esta suite mira una ruta relativa por el mismo
+        motivo: una ruta escrita sin tener en cuenta en qué carpeta está la
+        página. Aquí sería un menú roto en 365 de las 394."""
+        if not (self.DOCS / "index.html").exists():
+            self.skipTest("el sitio todavía no está construido")
+        for pagina in ("index.html", "es/index.html", "en/index.html",
+                       "semana-01/dia-1.html", "semana-53/dia-1.html",
+                       "programa/metodologia.html"):
+            ruta = self.DOCS / pagina
+            barra = ruta.read_text(encoding="utf-8").split(
+                'nav class="paginas">', 1)[1].split("</nav>", 1)[0]
+            for destino in re.findall(r'href="([^"]+)"', barra):
+                self.assertTrue((ruta.parent / destino).resolve().exists(),
+                                f"{pagina}: «{destino}» no existe")
+
+    def test_los_rotulos_no_son_textos_nuevos(self):
+        """El del diccionario y el del test salen de donde ya vivían, así que
+        cada uno se escribe en UN solo sitio. Dos copias de la misma palabra
+        es como se descubre tarde que una de las dos se quedó vieja."""
+        if not (self.DOCS / "index.html").exists():
+            self.skipTest("el sitio todavía no está construido")
+        for pagina, idioma in (("index.html", "ru"), ("es/index.html", "es"),
+                               ("en/index.html", "en")):
+            barra = (self.DOCS / pagina).read_text(encoding="utf-8").split(
+                'nav class="paginas">', 1)[1].split("</nav>", 1)[0]
+            self.assertIn(html.escape(self.t[idioma]["diccionario"]["enlace"]), barra, pagina)
+            self.assertIn(html.escape(self.t[idioma]["test"]["titulo"]), barra, pagina)
+
+    # --- la marca ---
+
+    def test_la_marca_nunca_se_queda_sin_nombre(self):
+        """El título se esconde por CSS en pantallas medianas, así que el
+        nombre accesible va en el `aria-label` del enlace: ahí está esté el
+        texto a la vista o no."""
+        if not (self.DOCS / "index.html").exists():
+            self.skipTest("el sitio todavía no está construido")
+        for pagina, idioma in (("index.html", "ru"), ("es/index.html", "es"),
+                               ("semana-01/dia-1.html", "ru")):
+            texto = (self.DOCS / pagina).read_text(encoding="utf-8")
+            marca = re.search(r'<a class="marca[^>]*>', texto)
+            self.assertTrue(marca, f"{pagina} no trae la marca")
+            self.assertIn(f'aria-label="{html.escape(self.t[idioma]["titulo_sitio"])}"',
+                          marca.group(0), pagina)
+            # Y el icono es decorativo: el nombre ya lo da el enlace.
+            self.assertIn('class="marca-icono"', texto, pagina)
+            self.assertRegex(texto, r'class="marca-icono"[^>]*alt=""')
+
+    def test_sin_el_archivo_del_icono_el_titulo_no_se_esconde(self):
+        """La clase `con-icono` es lo que enciende el cambio. Sin ella el CSS
+        no esconde el título nunca, porque esconderlo sin nada que poner en su
+        lugar dejaría la barra sin marca ninguna."""
+        self.assertIn(".marca.con-icono .marca-texto{display:none}", self.css)
+        self.assertNotIn(".marca .marca-texto{display:none}", self.css)
+        # Y la clase se pone MIRANDO el archivo, no siempre: con el icono
+        # ausente la página sale sin `con-icono`, o sea con el título a la
+        # vista a cualquier ancho. Es la misma regla que los <link> del icono.
+        vacio = pathlib.Path(tempfile.mkdtemp())
+        (vacio / "img").mkdir()
+        antes = construir_sitio.DOCS
+        try:
+            construir_sitio.DOCS = vacio
+            sin = construir_sitio.pagina(
+                construir_sitio.cargar_config(), self.t["ru"],
+                self.t["idiomas"], "ru", "x", "<p>x</p>")
+        finally:
+            construir_sitio.DOCS = antes
+        # Se mira la ETIQUETA de la marca y no la página entera: `con-icono`
+        # sale también en el CSS —es el selector de la regla— y un buscador de
+        # texto sobre todo el HTML acusaría a la hoja de estilo. Es el mismo
+        # error que acababa de cometer la guarda del audio.
+        def etiqueta(pag):
+            return re.search(r'<a class="marca[^>]*>', pag).group(0)
+
+        self.assertNotIn("con-icono", etiqueta(sin),
+                         "sin el archivo no puede encenderse el cambio")
+        self.assertNotIn("marca-icono", etiqueta(sin))
+        # Y con el archivo puesto, sí.
+        if (self.DOCS / "img" / construir_sitio.ICONO_MARCA).exists():
+            con = construir_sitio.pagina(
+                construir_sitio.cargar_config(), self.t["ru"],
+                self.t["idiomas"], "ru", "x", "<p>x</p>")
+            self.assertIn("con-icono", etiqueta(con))
+
+    def test_el_titulo_vuelve_justo_cuando_la_barra_da_para_el(self):
+        """La invariante, y no el número: el corte de la eñe tiene que ser el
+        ANCHO de la barra. Medido con la barra en 60rem, el ruso se partía en
+        dos filas a 1024 y a 1280 con trescientos píxeles libres al lado:
+        «Испанский с нуля для русскоговорящих» más los cinco enlaces no caben
+        en 960 px. Si alguien ensancha la barra y no mueve el corte —o al
+        revés— vuelve esa franja rota."""
+        barra = float(re.search(
+            r"header\.sitio \.envoltorio\{max-width:([\d.]+)rem\}", self.css).group(1))
+        corte = float(re.search(
+            r"@media\(max-width:([\d.]+)rem\)\{\s*header\.sitio \.marca\.con-icono",
+            self.css).group(1))
+        self.assertAlmostEqual(barra, corte + 0.01, places=2,
+                               msg=f"la barra mide {barra}rem y la eñe se va en {corte}rem")
+
+    def test_en_el_movil_el_menu_se_parte_y_no_esconde_nada(self):
+        """Con tres enlaces cabían en una línea y el desplazamiento no se
+        notaba; con cinco, los dos últimos quedaban detrás de un deslizamiento
+        y sin ninguna señal —`scrollbar-width:none` esconde hasta la barra—,
+        que es la forma más fiable de que nadie los encuentre."""
+        self.assertRegex(self.css, r"header\.sitio nav\.paginas\{[^}]*flex-wrap:wrap")
+
+
 class TestElDiccionario(unittest.TestCase):
     """La página con las 2.985 palabras del curso, buscable (2026-10-29).
 

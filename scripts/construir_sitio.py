@@ -191,9 +191,30 @@ header.sitio a:hover,header.sitio nav.paginas a[aria-current]{color:var(--acento
 /* El título cede espacio antes que el selector de idioma: en un móvil
    estrecho se recorta con puntos suspensivos, pero el selector no se sale. */
 header.sitio .marca{font-weight:650;color:var(--tinta);font-size:.95rem;letter-spacing:-.01em;
-  flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
-header.sitio nav.paginas{display:flex;gap:.9rem;order:3;flex:1 0 100%;overflow-x:auto;
-  scrollbar-width:none;padding-bottom:.1rem}
+  flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;
+  display:flex;align-items:center;gap:.45rem}
+header.sitio .marca-texto{min-width:0;overflow:hidden;text-overflow:ellipsis}
+/* La marca: el título largo, o la eñe cuando la barra no da para él.
+   El ruso dice «Испанский с нуля для русскоговорящих» y eso son 304 px de
+   una barra de 768 —más que los cinco enlaces juntos—, así que por debajo de
+   56rem se cambia por el icono del sitio, que desde el 2026-10-29 existe y es
+   reconocible. La clase `con-icono` la pone el generador solo si el archivo
+   está: sin ella el título no se esconde nunca, porque esconderlo sin nada
+   que poner en su lugar dejaría la barra sin marca. */
+header.sitio .marca-icono{display:none;width:26px;height:26px;border-radius:7px;
+  flex:0 0 auto}
+@media(max-width:63.99rem){
+  header.sitio .marca.con-icono .marca-texto{display:none}
+  header.sitio .marca.con-icono .marca-icono{display:block}
+}
+/* En el móvil el menú SE PARTE en dos líneas en vez de desplazarse. Con
+   tres enlaces cabía en una y el desplazamiento no se notaba; con cinco, los
+   dos últimos quedaban escondidos tras un deslizamiento y sin ninguna señal
+   —`scrollbar-width:none` esconde hasta la barra—, que es la forma más fiable
+   de que nadie los encuentre. Partido ocupa lo mismo que ocupaba la cabecera
+   antes de esto (111 px) y no esconde ninguno. */
+header.sitio nav.paginas{display:flex;flex-wrap:wrap;gap:.35rem .9rem;order:3;flex:1 0 100%;
+  overflow-x:auto;scrollbar-width:none;padding-bottom:.1rem}
 header.sitio nav.paginas::-webkit-scrollbar{display:none}
 .idiomas{display:flex;gap:.2rem;flex:0 0 auto;border:1px solid var(--linea);border-radius:999px;padding:2px}
 .idiomas a,.idiomas span{padding:.12rem .5rem;border-radius:999px;font-size:.75rem;font-weight:600;
@@ -498,7 +519,7 @@ ul.dias li.hecha a{color:var(--tenue)}
      titulo + los tres enlaces + los tres idiomas + la luna sumaban 708 y el
      boton del tema caia a una segunda fila con 700 px de pantalla libres al
      lado. Se vio midiendo los hijos, no mirando: fallaba por cuatro pixeles. */
-  header.sitio .envoltorio{max-width:60rem}
+  header.sitio .envoltorio{max-width:64rem}
 }
 
 main{padding-bottom:3.5rem}
@@ -2176,6 +2197,8 @@ def _tarjeta_social(cfg, titulo: str) -> str:
 # `scripts/icono.py`, que es un comando aparte; aquí solo se mira si está.
 ICONOS = (("icono-32.png", "32x32"), ("icono.png", "512x512"))
 ICONO_IOS = "icono-180.png"
+# La eñe que hace de marca en la barra cuando el título no cabe.
+ICONO_MARCA = "icono-32.png"
 
 
 def _iconos(raiz: str) -> str:
@@ -2236,10 +2259,28 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
     base_actual = f"{dominio}/{actual['carpeta']}".rstrip("/") if dominio else ""
     canonica = canonica_de(cfg, idiomas, idioma, pagina_id)
 
+    # El diccionario y el test suben al menú, que es lo que pidió el
+    # profesor. Medido en Chromium antes de hacerlo —esta barra ya falló una
+    # vez por cuatro píxeles—: con la eñe como marca los cinco caben en una
+    # fila desde 700 px en los tres idiomas, contra los 768 que necesita hoy
+    # el ruso con tres, y en el móvil la cabecera baja de 111 px a 78.
+    #
+    # Los rótulos no son textos nuevos: salen de donde ya vivían, así que cada
+    # uno sigue escribiéndose en un solo sitio.
+    destinos = (("kurs.html", t["menu"]["curso"]),
+                ("slovar.html", t["diccionario"]["enlace"]),
+                ("test.html", t["test"]["titulo"]),
+                ("o-kurse.html", t["menu"]["sobre"]),
+                ("kontakt.html", t["menu"]["contacto"]))
     menu = "".join(
-        f'<a href="{raiz}/{destino}"{" aria-current=\"page\"" if destino == pagina_id else ""}>{html.escape(t["menu"][clave])}</a>'
-        for clave, destino in (("curso", "kurs.html"), ("sobre", "o-kurse.html"), ("contacto", "kontakt.html"))
+        f'<a href="{raiz}/{destino}"{" aria-current=\"page\"" if destino == pagina_id else ""}>{html.escape(rotulo)}</a>'
+        for destino, rotulo in destinos
     )
+    # La eñe, si está. Sin el archivo no se escribe nada y el título se queda
+    # siempre a la vista: es la misma regla que los <link> del icono.
+    marca_icono = (f'<img class="marca-icono" src="{raiz}/img/{ICONO_MARCA}" '
+                   f'width="26" height="26" alt="" decoding="async">'
+                   if (DOCS / "img" / ICONO_MARCA).exists() else "")
     # El cambio de idioma lleva a la MISMA página en el otro idioma, pero solo
     # cuando esa página existe de verdad en los tres. Las lecciones están solo
     # en ruso —son el curso—, los documentos del programa solo en español y el
@@ -2317,7 +2358,7 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
 </head>
 <body>
 <header class="sitio"><div class="envoltorio">
-<a class="marca" href="{raiz}/index.html">{html.escape(t['titulo_sitio'])}</a>
+<a class="marca{marca_icono and " con-icono"}" href="{raiz}/index.html" aria-label="{html.escape(t['titulo_sitio'])}">{marca_icono}<span class="marca-texto">{html.escape(t['titulo_sitio'])}</span></a>
 <nav class="paginas">{menu}</nav>
 <div class="idiomas" title="{html.escape(t['idioma'])}">{"".join(conmutador)}</div>
 <button class="tema" id="tema" type="button" title="{html.escape(t['tema'])}" aria-label="{html.escape(t['tema'])}">{LUNA}{SOL}</button>

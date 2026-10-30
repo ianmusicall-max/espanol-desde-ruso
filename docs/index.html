@@ -70,9 +70,30 @@ header.sitio a:hover,header.sitio nav.paginas a[aria-current]{color:var(--acento
 /* El título cede espacio antes que el selector de idioma: en un móvil
    estrecho se recorta con puntos suspensivos, pero el selector no se sale. */
 header.sitio .marca{font-weight:650;color:var(--tinta);font-size:.95rem;letter-spacing:-.01em;
-  flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
-header.sitio nav.paginas{display:flex;gap:.9rem;order:3;flex:1 0 100%;overflow-x:auto;
-  scrollbar-width:none;padding-bottom:.1rem}
+  flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;
+  display:flex;align-items:center;gap:.45rem}
+header.sitio .marca-texto{min-width:0;overflow:hidden;text-overflow:ellipsis}
+/* La marca: el título largo, o la eñe cuando la barra no da para él.
+   El ruso dice «Испанский с нуля для русскоговорящих» y eso son 304 px de
+   una barra de 768 —más que los cinco enlaces juntos—, así que por debajo de
+   56rem se cambia por el icono del sitio, que desde el 2026-10-29 existe y es
+   reconocible. La clase `con-icono` la pone el generador solo si el archivo
+   está: sin ella el título no se esconde nunca, porque esconderlo sin nada
+   que poner en su lugar dejaría la barra sin marca. */
+header.sitio .marca-icono{display:none;width:26px;height:26px;border-radius:7px;
+  flex:0 0 auto}
+@media(max-width:63.99rem){
+  header.sitio .marca.con-icono .marca-texto{display:none}
+  header.sitio .marca.con-icono .marca-icono{display:block}
+}
+/* En el móvil el menú SE PARTE en dos líneas en vez de desplazarse. Con
+   tres enlaces cabía en una y el desplazamiento no se notaba; con cinco, los
+   dos últimos quedaban escondidos tras un deslizamiento y sin ninguna señal
+   —`scrollbar-width:none` esconde hasta la barra—, que es la forma más fiable
+   de que nadie los encuentre. Partido ocupa lo mismo que ocupaba la cabecera
+   antes de esto (111 px) y no esconde ninguno. */
+header.sitio nav.paginas{display:flex;flex-wrap:wrap;gap:.35rem .9rem;order:3;flex:1 0 100%;
+  overflow-x:auto;scrollbar-width:none;padding-bottom:.1rem}
 header.sitio nav.paginas::-webkit-scrollbar{display:none}
 .idiomas{display:flex;gap:.2rem;flex:0 0 auto;border:1px solid var(--linea);border-radius:999px;padding:2px}
 .idiomas a,.idiomas span{padding:.12rem .5rem;border-radius:999px;font-size:.75rem;font-weight:600;
@@ -377,7 +398,7 @@ ul.dias li.hecha a{color:var(--tenue)}
      titulo + los tres enlaces + los tres idiomas + la luna sumaban 708 y el
      boton del tema caia a una segunda fila con 700 px de pantalla libres al
      lado. Se vio midiendo los hijos, no mirando: fallaba por cuatro pixeles. */
-  header.sitio .envoltorio{max-width:60rem}
+  header.sitio .envoltorio{max-width:64rem}
 }
 
 main{padding-bottom:3.5rem}
@@ -597,8 +618,8 @@ footer.sitio p{margin:.35rem 0}
 </head>
 <body>
 <header class="sitio"><div class="envoltorio">
-<a class="marca" href="./index.html">Испанский с нуля для русскоговорящих</a>
-<nav class="paginas"><a href="./kurs.html">Все уроки</a><a href="./o-kurse.html">О курсе</a><a href="./kontakt.html">Контакты</a></nav>
+<a class="marca con-icono" href="./index.html" aria-label="Испанский с нуля для русскоговорящих"><img class="marca-icono" src="./img/icono-32.png" width="26" height="26" alt="" decoding="async"><span class="marca-texto">Испанский с нуля для русскоговорящих</span></a>
+<nav class="paginas"><a href="./kurs.html">Все уроки</a><a href="./slovar.html">Словарь курса</a><a href="./test.html">Тест на уровень</a><a href="./o-kurse.html">О курсе</a><a href="./kontakt.html">Контакты</a></nav>
 <div class="idiomas" title="Язык"><a href="./index.html" hreflang="ru" lang="ru" aria-current="true">ru</a><a href="./es/index.html" hreflang="es" lang="es">es</a><a href="./en/index.html" hreflang="en" lang="en">en</a></div>
 <button class="tema" id="tema" type="button" title="Светлая или тёмная тема" aria-label="Светлая или тёмная тема"><svg class="luna" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sol" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.5 1.5M17.9 17.9l1.5 1.5M2.5 12h2M19.5 12h2M4.6 19.4l1.5-1.5M17.9 6.1l1.5-1.5"/></svg></button>
 

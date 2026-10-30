@@ -5127,6 +5127,67 @@ Dos cosas menores que importan en el móvil: **Enter guarda** —ahí el teclado
 tapa el botón— y quien ya dio su nombre ve un saludo con un botón «Изменить»,
 no un campo abierto ocupando sitio para siempre.
 
+## Los cinco destinos en la barra, y la eñe como marca (2026-10-30)
+
+Lo pidió el profesor: *«Словарь курса · Тест на уровень, deberían estar en la
+parte de arriba, ¿no crees?»*. Tenía razón y el motivo es simple: estaban en
+el **pie**, o sea abajo del todo de las 394 páginas. Quien no baje, no sabe
+que existen.
+
+**Lo que frenaba no era el sitio, era el título.** La barra ya había fallado
+una vez por cuatro píxeles (2026-10-26), así que esto se midió en Chromium
+antes de tocar una línea. El alto de la cabecera a cada ancho de ventana —46
+px es UNA fila— en la portada rusa:
+
+                             360  414  600  640  700  768  834  900 1024
+    antes, 3 enlaces         111  111   78   78   82   46   46   46   46
+    4, «Словарь курса»       111  111   78   79   79   79   82   46   46
+    5, con los dos           111  111   78   79   79   79   82   46   46
+    5 + la eñe de marca      107  107   78   80   46   46   46   46   46
+
+O sea que **no fue un apaño para que cupieran dos enlaces más**: cabe en una
+fila desde 700 px en los tres idiomas —el ruso necesitaba 768— y en el móvil
+la cabecera encoge. Más destinos y menos barra.
+
+**Y no hubo que acortar ningún rótulo.** Lo que ocupaba el sitio era
+«Испанский с нуля для русскоговорящих»: **304 px de una barra de 768, más que
+los cinco enlaces juntos**. Por debajo de 64rem se cambia por la eñe, que
+desde el 2026-10-29 existe y es reconocible.
+
+Lo que hay que cuidar si alguien lo toca:
+
+- **El corte de la eñe tiene que ser el ANCHO de la barra, y por eso hay una
+  prueba que compara los dos números.** La primera versión puso el corte en
+  56rem dejando la barra en 60: el título volvía a los 896 px y entonces el
+  ruso se partía en dos filas **a 1024 y a 1280, con trescientos píxeles
+  libres al lado**, que es exactamente el fallo de octubre con otra cara. La
+  barra pasa a 64rem y el corte a 63.99: el título vuelve justo cuando cabe.
+- **Sin el archivo del icono el título no se esconde nunca.** La clase
+  `con-icono` la pone el generador mirando el disco, igual que los `<link>`
+  del icono: esconder el título sin nada que poner en su lugar dejaría la
+  barra sin marca.
+- **El nombre accesible va en el `aria-label` del enlace**, no en el texto:
+  el texto se esconde por CSS, el `aria-label` no. Y el icono lleva `alt=""`,
+  que es decorativo.
+- **En el móvil el menú SE PARTE en dos líneas en vez de desplazarse.** Con
+  tres enlaces cabían en una y el desplazamiento no se notaba; con cinco, los
+  dos últimos quedaban detrás de un deslizamiento **y sin ninguna señal**
+  —`scrollbar-width:none` esconde hasta la barra—, que es la forma más fiable
+  de que nadie los encuentre. Partido ocupa 107 px, menos que los 111 que
+  ocupaba la cabecera con tres enlaces.
+- **Los rótulos no son textos nuevos**: el del diccionario sale de
+  `diccionario.enlace` y el del test de `test.titulo`, que es donde ya vivían.
+  Cada palabra se escribe en un solo sitio.
+
+**El pie no se tocó.** Repite cuatro de los cinco destinos, y eso en un pie es
+lo normal: lo que se pidió fue subirlos, no vaciarlo.
+
+**Y una guarda mía que miró donde no era, por segunda vez en el mismo día**:
+la prueba del icono buscaba `con-icono` en la página entera y lo encontraba
+**en el CSS**, que es donde está el selector de la regla. Mira la etiqueta de
+la marca. Es el mismo error que acababa de cometer la guarda del audio con
+`class="suena"` dentro de un `<script>`.
+
 ## El diccionario del curso (2026-10-29)
 
 Una página con **las 2.985 palabras** del curso, buscable, con su audio y un
