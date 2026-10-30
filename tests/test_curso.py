@@ -42,6 +42,7 @@ import palabra_del_dia  # noqa: E402
 import plan  # noqa: E402
 import pruebas  # noqa: E402
 import quiz_lexico  # noqa: E402
+import tarjetas  # noqa: E402
 import validar  # noqa: E402
 
 CAL = plan.cargar()
@@ -2959,6 +2960,52 @@ class TestLosHuecosInteractivos(unittest.TestCase):
         # borra: sin JavaScript es lo único que dice qué palabras hay.
         self.assertIn('class="banco-escrito"', uno)
 
+    def test_la_respuesta_que_se_guarda_es_la_FICHA_del_banco(self):
+        """Y no el texto de la clave, que es lo que se guardaba.
+
+        La clave escribe las respuestas en negrita y con mayúscula al empezar
+        frase —«**el cartel**», «Aquí»— y la ficha lleva lo que dice el banco
+        —«el cartel»—. Comparando contra la clave no coincidían nunca: eran
+        **32 ejercicios**, y en 30 de ellos el lector sacaba 0 aciertos con
+        todo bien puesto."""
+        negrita = self.EJEMPLO.replace("**Б.** 1. aquí · 2. cerca de · 3. del / ahí.",
+                                       "**Б.** 1. **Aquí** · 2. **cerca de** · 3. **del** / **ahí**.")
+        e = huecos.leer(negrita)
+        self.assertEqual(1, len(e))
+        self.assertEqual(["aquí", "cerca de", "del", "ahí"], e[0].respuestas)
+
+    def test_en_las_365_toda_respuesta_es_UNA_de_las_fichas(self):
+        """La invariante que hace que el ejercicio se pueda acertar: el lector
+        solo puede poner lo que hay en el banco, así que una respuesta que no
+        esté ahí, letra por letra, es un hueco imposible."""
+        imposibles = []
+        for d in DIAS:
+            if not d.ruta.exists():
+                continue
+            for e in huecos.de_la_leccion(d.ruta):
+                fuera = [x for x in e.respuestas if x not in e.banco]
+                if fuera:
+                    imposibles.append((d.numero, e.letra, fuera))
+        self.assertEqual([], imposibles[:5])
+
+    def test_el_boton_de_comprobar_va_DEBAJO_del_ejercicio(self):
+        """El banco arriba, donde se empieza; el botón abajo, al terminar las
+        frases. Juntos arriba —como estaban— el resultado salía a una pantalla
+        de distancia de lo que acababas de rellenar."""
+        mirados = 0
+        for p in (RAIZ / "docs").rglob("semana-*/dia-*.html"):
+            s = p.read_text(encoding="utf-8")
+            if 'class="hueco"' not in s:
+                continue
+            mirados += 1
+            banco = s.index('<div class="fichas"')
+            primero = s.index('<span class="hueco"')
+            ultimo = s.rindex('<span class="hueco"')
+            pie = s.rindex('<div class="huecos-pie">')
+            self.assertLess(banco, primero, f"{p.name}: el banco no está antes")
+            self.assertGreater(pie, ultimo, f"{p.name}: comprobar no está debajo")
+        self.assertGreaterEqual(mirados, 20)
+
     def test_ninguna_pagina_trae_un_byte_nulo(self):
         """El CSS llevaba `content:"\00a0"`, que Python lee como escape octal
         y escribía un NUL en las 125 páginas. Un HTML con un NUL lo sirven los
@@ -5010,25 +5057,37 @@ class TestElQuizDeVocabulario(unittest.TestCase):
         self.assertGreater(sin, 50, "los días con su propio test tienen que quedarse fuera")
 
     def test_la_palabra_fallada_se_puede_OIR(self):
-        """Las 2.201 palabras del quiz ya están locutadas desde el 2026-10-28,
-        así que el ▶ del resultado no cuesta un céntimo. Y el mp3 tiene que
-        existir: un botón que no suena es peor que ninguno."""
+        """Las palabras del quiz están locutadas desde el 2026-10-28, así que
+        el ▶ del resultado no cuesta un céntimo. Y el mp3 tiene que existir:
+        un botón que no suena es peor que ninguno.
+
+        La única excepción admitida es un audio que volvió MUDO del locutor
+        —hay dos: «toma» y «la vela · soplar las velas»—. Ahí no hay ▶ y es
+        lo honrado, porque no hay nada que oír. Lo que la prueba no deja
+        pasar es una palabra sin audio que NO esté en esa lista: eso sería
+        audio perdido y no silencio."""
         if not (self.DOCS / "audio" / construir_sitio.INDICE_AUDIO).exists():
             self.skipTest("todavía no se ha generado el audio")
         indice = construir_sitio.indice_de_audio(self.DOCS)
+        mudas = generar_audio.leer_mudos(self.DOCS / "audio")
         total = con_voz = 0
+        sin_explicar = []
         for d in DIAS[:60]:
             if not d.ruta.exists():
                 continue
             for q in quiz_lexico.preguntas_de(d.ruta, d.numero):
                 total += 1
-                archivo = indice.get(q["opciones"][q["correcta"]])
+                palabra = q["opciones"][q["correcta"]]
+                archivo = indice.get(palabra)
                 if archivo:
                     con_voz += 1
                     self.assertTrue((self.DOCS / "audio" / archivo).exists(),
                                     f"falta docs/audio/{archivo}")
+                elif palabra not in mudas:
+                    sin_explicar.append((d.numero, palabra))
         self.assertGreater(total, 0)
-        self.assertEqual(total, con_voz, "hay palabras del quiz sin locutar")
+        self.assertEqual([], sin_explicar, "hay palabras del quiz sin locutar")
+        self.assertGreaterEqual(con_voz, total - len(mudas))
 
     def test_el_guion_del_quiz_no_lleva_las_respuestas_a_otro_sitio(self):
         """El quiz no se guarda y no cuenta para nada —lo dice su propia
@@ -5754,3 +5813,248 @@ class TestLaRevisionDelCurso(unittest.TestCase):
         # («la tilde no se cae aunque esté en medio de la frase»), que el
         # alumno no copia. El tope impide que vuelvan a entrar en ejercicios.
         self.assertLessEqual(len(malas), 6, "\n".join(malas))
+
+
+class TestLasTarjetasDelDia(unittest.TestCase):
+    """Las tarjetas que la propia lección pide, enseñadas en la página.
+
+    El profesor lo preguntó mirando la lección 1-2 en el móvil: el apartado
+    de calentamiento dice «Карточки: 8 слов» y no había ninguna tarjeta a la
+    vista. Lo que faltaba no era contenido —son palabras de los días
+    anteriores, ya escritas, traducidas y locutadas—: era enseñarlas.
+    """
+
+    VOCAB = {1: [("hola", "привет"), ("adiós", "пока"), ("bien", "хорошо"),
+                 ("muy", "очень"), ("gracias", "спасибо")],
+             2: [("el libro", "книга"), ("la mesa", "стол")]}
+
+    def test_lee_cuantas_pide_la_leccion(self):
+        self.assertEqual(8, tarjetas.cuantas_pide("## 1. Разминка\n\nКарточки: 8 слов."))
+        self.assertIsNone(tarjetas.cuantas_pide("Сегодня первый день, карточек ещё нет."))
+
+    def test_las_palabras_son_de_las_lecciones_ANTERIORES(self):
+        """Nunca de la suya: el calentamiento repasa lo de ayer, y enseñar hoy
+        las palabras que la lección va a dar dentro de veinte minutos sería
+        regalar el vocabulario del día."""
+        f = tarjetas.del_dia(3, 4, self.VOCAB)
+        # En el orden del CURSO —la más vieja primero— y no en el del paseo
+        # hacia atrás: el alumno las vio así y las recuerda así.
+        self.assertEqual(["muy", "gracias", "el libro", "la mesa"], [x["es"] for x in f])
+
+    def test_se_tira_hacia_atras_hasta_juntar_las_que_pide(self):
+        f = tarjetas.del_dia(3, 7, self.VOCAB)
+        self.assertEqual(7, len(f))
+        self.assertEqual("hola", f[0]["es"])   # las 7 últimas, seguidas
+
+    def test_sin_material_suficiente_no_hay_tarjetas(self):
+        """Falla de forma segura, como `pruebas.py` y `huecos.py`: media baraja
+        no es un repaso, y es mejor dejar la lección como estaba."""
+        self.assertEqual([], tarjetas.del_dia(2, 8, {1: [("hola", "привет")]}))
+
+    def test_las_365_lecciones_que_las_piden_las_tienen(self):
+        """285 piden tarjetas y 285 pueden armarlas. Si un día este número baja
+        sin que nadie haya tocado el calentamiento de una lección, es que el
+        lector del vocabulario dejó de ver una tabla."""
+        vocabulario = tarjetas.vocabulario_del_curso(DIAS)
+        piden = con = 0
+        for d in DIAS:
+            if not d.ruta.exists():
+                continue
+            cuerpo = validar.frontmatter(d.ruta.read_text(encoding="utf-8"))[1]
+            if tarjetas.cuantas_pide(cuerpo) is None:
+                continue
+            piden += 1
+            if tarjetas.de_la_leccion(d, vocabulario):
+                con += 1
+        self.assertEqual(285, piden)
+        self.assertEqual(piden, con, "alguna lección pide tarjetas y no puede darlas")
+
+    def test_en_el_sitio_salen_y_nacen_ocultas(self):
+        con = [p for p in (RAIZ / "docs").rglob("semana-*/dia-*.html")
+               if '<div class="tarjetas-bloque"' in p.read_text(encoding="utf-8")]
+        self.assertEqual(285, len(con))
+        uno = (RAIZ / "docs" / "semana-01" / "dia-2.html").read_text(encoding="utf-8")
+        # Nace oculto y lo enciende el navegador, como el resto del sitio: sin
+        # JavaScript una tarjeta no se puede dar la vuelta.
+        self.assertIn('id="tarjetas" hidden', uno)
+        self.assertIn("CURSO_TARJETAS", uno)
+
+    def test_el_primer_dia_no_lleva_ninguna(self):
+        """La lección 1 dice «карточек ещё нет» y es verdad: no hay ningún día
+        anterior. Un bloque de tarjetas ahí contradiría su propio texto."""
+        uno = (RAIZ / "docs" / "semana-01" / "dia-1.html").read_text(encoding="utf-8")
+        self.assertNotIn('<div class="tarjetas-bloque"', uno)
+
+    def test_la_cuenta_es_la_que_pide_cada_leccion(self):
+        vocabulario = tarjetas.vocabulario_del_curso(DIAS)
+        for d in DIAS[:120]:
+            if not d.ruta.exists():
+                continue
+            cuerpo = validar.frontmatter(d.ruta.read_text(encoding="utf-8"))[1]
+            piden = tarjetas.cuantas_pide(cuerpo)
+            fichas = tarjetas.de_la_leccion(d, vocabulario)
+            if piden is None or not fichas:
+                continue
+            self.assertEqual(min(piden, tarjetas.TOPE), len(fichas),
+                             f"día {d.numero} pide {piden} y salen {len(fichas)}")
+
+    def test_los_mp3_que_nombra_existen(self):
+        audio = json.loads((RAIZ / "docs" / "audio" / generar_audio.INDICE)
+                           .read_text(encoding="utf-8"))
+        vocabulario = tarjetas.vocabulario_del_curso(DIAS)
+        vistos = 0
+        for d in DIAS[:60]:
+            if not d.ruta.exists():
+                continue
+            for f in tarjetas.de_la_leccion(d, vocabulario, audio):
+                if f["mp3"]:
+                    vistos += 1
+                    self.assertTrue((RAIZ / "docs" / "audio" / f"{f['mp3']}.mp3").exists(),
+                                    f"{f['es']} nombra un audio que no está")
+        self.assertGreater(vistos, 100)
+
+    def test_los_tres_idiomas_tienen_sus_textos(self):
+        textos = construir_sitio.cargar_textos()
+        for idioma in ("ru", "es", "en"):
+            for clave in ("titulo", "entrada", "girar", "siguiente", "anterior", "de", "otra"):
+                self.assertTrue(textos[idioma]["tarjetas"].get(clave),
+                                f"{idioma}: falta tarjetas.{clave}")
+
+
+class TestLaFraseParaGrabar(unittest.TestCase):
+    """El bloque de grabarse NOMBRA la frase que hay que decir.
+
+    Lo pidió el profesor mirando la lección 1-2: «no sale la frase que va a
+    grabar». Decía «escuche la frase (▶), dígala y compárese» sin ninguna
+    frase delante, así que el ejercicio no se podía hacer."""
+
+    def test_toda_leccion_con_bloque_de_grabar_nombra_una_frase(self):
+        sin = []
+        for p in (RAIZ / "docs").rglob("semana-*/dia-*.html"):
+            s = p.read_text(encoding="utf-8")
+            if 'id="grabar"' not in s:
+                continue
+            if 'class="grabar-frase"' not in s:
+                sin.append(p.name)
+        self.assertEqual([], sin[:5])
+
+    def test_la_frase_viene_con_su_boton_para_oirla(self):
+        """Grabarse sin poder oír el modelo no sirve de nada: lo que se compara
+        es la propia voz contra la del locutor."""
+        s = (RAIZ / "docs" / "semana-01" / "dia-2.html").read_text(encoding="utf-8")
+        trozo = re.search(r'<p class="grabar-frase">(.*?)</p>', s, re.S).group(1)
+        self.assertIn("class=\"suena\"", trozo)
+        self.assertIn("<b>", trozo)
+
+    def test_la_frase_tiene_al_menos_dos_palabras(self):
+        """Una palabra suelta no entrena la pronunciación: lo que cuesta es la
+        cadena, el enlace entre palabras y la vocal átona que el ruso reduce."""
+        audio = json.loads((RAIZ / "docs" / "audio" / generar_audio.INDICE)
+                           .read_text(encoding="utf-8"))
+        vistas = 0
+        for d in DIAS[:80]:
+            if not d.ruta.exists():
+                continue
+            f = construir_sitio.frase_para_grabar(d, audio)
+            if f:
+                vistas += 1
+                self.assertGreaterEqual(len(f["texto"].split()), 2, f"día {d.numero}")
+        self.assertGreater(vistas, 50)
+
+
+class TestElAudioQueNoSuena(unittest.TestCase):
+    """Un MP3 que es silencio no puede llevar ▶.
+
+    Lo encontró el profesor pulsando la «y» de la tabla de fonética: «esta
+    letra no suena». El archivo existía y pesaba 3.501 bytes, así que pasaba
+    las dos guardas de siempre —no está vacío, no es un `.parcial`— y el sitio
+    le ponía su botón. Medido sobre el curso entero son **14**: la «h»
+    española, que no se pronuncia, la «y» suelta, y doce frases normales que
+    volvieron mudas del locutor."""
+
+    def test_mudo_distingue_el_silencio_de_una_frase(self):
+        if not shutil.which("ffmpeg"):
+            self.skipTest("sin ffmpeg")
+        carpeta = pathlib.Path(tempfile.mkdtemp())
+        silencio, tono = carpeta / "s.mp3", carpeta / "t.mp3"
+        subprocess.run(["ffmpeg", "-y", "-hide_banner", "-loglevel", "error", "-f", "lavfi",
+                        "-i", "anullsrc=r=24000:cl=mono", "-t", "1", str(silencio)], check=True)
+        subprocess.run(["ffmpeg", "-y", "-hide_banner", "-loglevel", "error", "-f", "lavfi",
+                        "-i", "sine=frequency=440:r=24000:d=1", str(tono)], check=True)
+        self.assertTrue(generar_audio.mudo(silencio))
+        self.assertFalse(generar_audio.mudo(tono))
+        shutil.rmtree(carpeta, ignore_errors=True)
+
+    def test_sin_ffmpeg_no_se_inventa_un_silencio(self):
+        """Quitarle el ▶ a una frase que sí suena sería peor que dejar uno
+        mudo, así que la duda se resuelve a favor del audio."""
+        self.assertFalse(generar_audio.mudo(RAIZ / "no" / "existe.mp3"))
+
+    def test_ningun_mudo_esta_en_el_indice(self):
+        carpeta = RAIZ / "docs" / "audio"
+        mudos = generar_audio.leer_mudos(carpeta)
+        self.assertGreaterEqual(len(mudos), 1, "el barrido no dejó su lista")
+        indice = json.loads((carpeta / generar_audio.INDICE).read_text(encoding="utf-8"))
+        self.assertEqual(set(), mudos & set(indice))
+
+    def test_ninguna_pagina_pone_un_boton_a_un_audio_mudo(self):
+        """La comprobación que de verdad importa: el índice puede estar bien y
+        la página llevar el botón igual."""
+        carpeta = RAIZ / "docs" / "audio"
+        prohibidos = {generar_audio.nombre_de(f).removesuffix(".mp3")
+                      for f in generar_audio.leer_mudos(carpeta)}
+        for p in (RAIZ / "docs").rglob("*.html"):
+            for h in re.findall(r'data-audio="[^"]*?/audio/([0-9a-f]+)\.mp3"',
+                                p.read_text(encoding="utf-8")):
+                self.assertNotIn(h, prohibidos, f"{p.name} ofrece un ▶ que no suena")
+
+    def test_lo_apartado_no_se_vuelve_a_pagar(self):
+        """`faltan()` lo salta: si no, cada corrida volvería a pedir —y a
+        pagar— las mismas catorce frases para que volvieran mudas otra vez."""
+        carpeta = pathlib.Path(tempfile.mkdtemp())
+        generar_audio.anotar_mudos(carpeta, ["la h muda"])
+        self.assertEqual([], generar_audio.faltan(["la h muda"], carpeta))
+        self.assertEqual(["otra"], generar_audio.faltan(["la h muda", "otra"], carpeta))
+        shutil.rmtree(carpeta, ignore_errors=True)
+
+
+class TestElBotonDeOir(unittest.TestCase):
+    """El ▶ se pulsa con el dedo, y medía 17x13 px.
+
+    Lo pidió el profesor: «los botones de play pueden ser un poquito más
+    grandes para poder apretar». Lo que crece es la ZONA y no el dibujo:
+    agrandar el triángulo dentro de una tabla de vocabulario lo convertiría en
+    el protagonista de la celda, cuando lo que enseña es la palabra de al
+    lado."""
+
+    CSS = construir_sitio.CSS
+
+    def _px(self, regla, propiedad):
+        m = re.search(rf"\.suena::after\{{[^}}]*{propiedad}:(-?[\d.]+)px", self.CSS)
+        self.assertIsNotNone(m, f"falta {propiedad} en .suena::after")
+        return float(m.group(1))
+
+    def test_la_zona_crece_con_un_pseudoelemento_colocado(self):
+        """Colocado y no con `padding`: un `<button>` es `inline-block`, así
+        que el relleno vertical SÍ movería la maqueta —los 13.575 ▶ del curso
+        van dentro de frases y de celdas—. Un `::after` absoluto no ocupa
+        sitio."""
+        m = re.search(r"\.suena::after\{([^}]*)\}", self.CSS)
+        self.assertIsNotNone(m, "el ▶ ya no agranda su zona")
+        self.assertIn("position:absolute", m.group(1))
+        self.assertIn("position:relative", re.search(r"\n\.suena\{([^}]*)\}", self.CSS).group(1))
+
+    def test_dos_zonas_de_la_misma_columna_no_se_tocan(self):
+        """Medido en el navegador: dos ▶ de una tabla de vocabulario están a
+        **39,6 px**. Si la zona creciera más que eso, al pulsar una fila se
+        dispararía la de al lado, que es peor que un botón pequeño."""
+        alto = 20 + abs(self._px("after", "top")) + abs(self._px("after", "bottom"))
+        self.assertLessEqual(alto, 39, f"la zona mide {alto} px y las filas van a 39,6")
+
+    def test_la_zona_llega_a_lo_que_se_puede_apretar(self):
+        """Treinta y tantos píxeles. No son los 44 que pide Apple —no caben
+        entre dos filas— pero duplican los 13 que había."""
+        alto = 15 + abs(self._px("after", "top")) + abs(self._px("after", "bottom"))
+        ancho = 21 + abs(self._px("after", "left")) + abs(self._px("after", "right"))
+        self.assertGreaterEqual(alto, 30)
+        self.assertGreaterEqual(ancho, 30)

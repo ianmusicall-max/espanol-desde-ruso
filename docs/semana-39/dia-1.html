@@ -146,6 +146,12 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 .hueco:empty::before{content:" "}
 .hueco.bien{border-color:#2e7d4f;color:#2e7d4f}
 .hueco.mal{border-color:#b3332b;color:#b3332b}
+/* La respuesta correcta va PEGADA al hueco que se falló, no al final de la
+   página: el ejercicio se corrige donde se hizo. Es un hermano del hueco y
+   no un hijo, para que `textContent` del hueco siga siendo solo la palabra
+   que se puso —de ahí sale la cuenta de las fichas gastadas—. */
+.correcta{color:#2e7d4f;font-weight:600;font-size:.9rem;white-space:nowrap}
+.correcta::before{content:" → "}
 /* Y el hueco que se ESCRIBE, que son casi todos: 1.398 de los 1.587. No
    lleva ficha que pulsar porque su ejercicio no trae banco de palabras, así
    que se teclea. Sigue pareciendo la raya que sustituye —sin caja, solo el
@@ -216,6 +222,22 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
   color:var(--tenue);text-decoration:none;border-bottom:1px solid var(--linea)}
 .dicc-urok:hover{color:var(--acento);border-color:var(--acento)}
 @media (max-width:40rem){.dicc-lista{columns:1}}
+/* Las tarjetas de la разминка. La cara entera es el botón: en el móvil, un
+   enlace de doce píxeles al lado de una palabra no se acierta con el dedo,
+   que es la lección de la vitrina de la portada. */
+.tarjetas-bloque{margin:1.2rem 0;padding:1rem 1.1rem;border:1px solid var(--linea);
+  border-radius:12px;background:var(--tarjeta)}
+.tarjetas-bloque h3{margin:0 0 .2rem;border:0;padding:0;font-size:1rem;
+  font-family:Onest,ui-sans-serif,system-ui,sans-serif}
+.tarjetas-bloque>p{margin:0 0 .7rem;font-size:.9rem;color:var(--tenue)}
+.ficha-cara{display:flex;align-items:center;justify-content:center;width:100%;
+  min-height:5.5rem;margin:.2rem 0 .7rem;padding:1rem;border:1px solid var(--linea);
+  border-radius:10px;background:var(--papel);color:var(--tinta);cursor:pointer;
+  font:inherit;text-align:center}
+.ficha-cara:hover{border-color:var(--acento)}
+.ficha-es{font-size:1.5rem;font-weight:600}
+.ficha-ru{font-size:1.25rem;color:var(--tenue)}
+.ficha-mandos{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
 /* Grabarse y oírse. Mismo marco que el quiz: los dos son lo que se hace
    DESPUÉS de la lección, no un apartado más de ella. */
 .grabar-bloque{margin:2rem 0 0;padding:1.1rem 1.2rem;border:1px solid var(--linea);
@@ -282,8 +304,17 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 #clave-boton{margin:2rem 0 .5rem}
 #clave{border-top:1px solid var(--linea);padding-top:.2rem}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
-.suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
-  font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
+.suena{position:relative;background:none;border:0;padding:0 .4rem 0 .05rem;margin:0;cursor:pointer;
+  color:var(--celeste);font:inherit;font-size:1em;line-height:1;vertical-align:baseline;
+  opacity:.65;transition:opacity .12s}
+/* El ▶ se pulsa con el dedo y medía 17x13. Lo que crece es la ZONA y no el
+   dibujo: agrandar el triángulo dentro de una tabla de vocabulario lo
+   convertiría en el protagonista de la celda, cuando lo que enseña es la
+   palabra de al lado. El recuadro invisible lo lleva a unos 34x34 sin mover
+   un pixel de la maqueta —un `::after` colocado no ocupa sitio—. Los 9 px
+   de arriba y abajo salen medidos: dos ▶ de la misma columna están a 39,6
+   px, así que dos zonas de 34 no llegan a tocarse. */
+.suena::after{content:"";position:absolute;top:-9px;bottom:-9px;left:-7px;right:-7px}
 .suena:hover,.suena:focus-visible{opacity:1}
 .suena[aria-pressed="true"]{opacity:1;color:var(--acento)}
 @media(hover:none){.suena{opacity:.9}}
@@ -642,7 +673,7 @@ footer.sitio p{margin:.35rem 0}
 <li>Карточки: 10 слов недели 38 (<em>la reseña</em>, <em>parecerse a</em>, <em>en conclusión</em>…).</li>
 <li>Вопрос: два совета, которые вы бы дали человеку, который плохо спит.</li>
 </ul>
-<h2 id="2-36">2. Фонетика (3–6 мин)</h2>
+<div class="tarjetas-bloque" id="tarjetas" hidden><h3>Карточки</h3><p>Скажите перевод вслух — и переверните.</p></div><h2 id="2-36">2. Фонетика (3–6 мин)</h2>
 <p><strong>Тильда в <em>-ía</em> обязательна, и без неё слово — другое.</strong></p>
 <blockquote>
 <p>ha-bla-<strong>rí</strong>-a · co-me-<strong>rí</strong>-a · vi-vi-<strong>rí</strong>-a · ten-<strong>drí</strong>-a</p>
@@ -893,7 +924,7 @@ haría</em>, <em>yo no me preocuparía</em>, <em>yo iría al médico</em> — э
    <strong>venir</strong></em> (с инфинитивом; с другой половиной — позже).</li>
 </ol>
 </section><h2 id="4-1626">4. Практика (16–26 мин)</h2>
-<h3 id="_4">Упражнение А. Поставьте глагол в условное наклонение. Банк слов:</h3><div class="fichas" data-ej="0"><button type="button" class="ficha" data-ej="0">podría</button><button type="button" class="ficha" data-ej="0">tendría</button><button type="button" class="ficha" data-ej="0">sería</button><button type="button" class="ficha" data-ej="0">haría</button><button type="button" class="ficha" data-ej="0">estaría</button><button type="button" class="ficha" data-ej="0">diría</button></div><div class="huecos-pie"><button type="button" class="boton secundario comprobar" data-ej="0">Проверить</button><span class="marcador" data-ej="0"></span></div>
+<h3 id="_4">Упражнение А. Поставьте глагол в условное наклонение. Банк слов:</h3><div class="fichas" data-ej="0"><button type="button" class="ficha" data-ej="0">podría</button><button type="button" class="ficha" data-ej="0">tendría</button><button type="button" class="ficha" data-ej="0">sería</button><button type="button" class="ficha" data-ej="0">haría</button><button type="button" class="ficha" data-ej="0">estaría</button><button type="button" class="ficha" data-ej="0">diría</button></div>
 <blockquote class="banco-escrito">
 <p>podría · tendría · sería · haría · estaría · diría</p>
 </blockquote>
@@ -905,7 +936,7 @@ haría</em>, <em>yo no me preocuparía</em>, <em>yo iría al médico</em> — э
 <li>El viernes también <span class="hueco" data-ej="0" data-n="4" tabindex="0" role="button"></span> bien. (estar)</li>
 <li>Yo no <span class="hueco" data-ej="0" data-n="5" tabindex="0" role="button"></span> nada todavía. (decir)</li>
 </ol>
-<h3 id="_5">Упражнение Б. Сделайте фразу вежливой. Модель:</h3>
+<div class="huecos-pie"><button type="button" class="boton secundario comprobar" data-ej="0">Проверить</button><span class="marcador" data-ej="0"></span></div><h3 id="_5">Упражнение Б. Сделайте фразу вежливой. Модель:</h3>
 <p>Modelo: ¿Puede ayudarme? → <strong>¿Podría ayudarme?</strong></p>
 <ol>
 <li>¿Le importa sentarse ahí?</li>
@@ -1043,7 +1074,7 @@ todavía.</em> · 7. <em>Habría que preguntar.</em> · 8. <em>Preferiría saber
     a.addEventListener('click',function(){pon(true)});
   });
   if(location.hash==='#clave')pon(true);
-})();</script><div class="grabar-bloque" id="grabar" hidden><h2>Запишите себя</h2><p>Послушайте фразу (▶), скажите её вслух и сравните. Запись остаётся в браузере: она никуда не отправляется и нигде не сохраняется.</p></div><div class="quiz-bloque"><h2>Слова сегодняшнего урока</h2><p>Пять слов из словаря этого урока. Ответы не сохраняются и ни на что не влияют.</p><div class="botones" id="quiz-arranque" hidden><button type="button" class="boton" id="quiz-empezar">Проверить слова</button></div><div id="quiz"></div></div><div id="marcar-caja"></div><div class="compartir"><span class="de-que">Поделиться уроком</span><a class="red" href="https://t.me/share/url?url=https%3A%2F%2Fespanoldesderuso.com%2Fsemana-39%2Fdia-1.html&text=%D0%98%D1%81%D0%BF%D0%B0%D0%BD%D1%81%D0%BA%D0%B8%D0%B9%20%D1%81%20%D0%BD%D1%83%D0%BB%D1%8F%20%D0%B4%D0%BB%D1%8F%20%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D1%80%D1%8F%D1%89%D0%B8%D1%85" target="_blank" rel="noopener">Telegram</a><a class="red" href="https://wa.me/?text=%D0%98%D1%81%D0%BF%D0%B0%D0%BD%D1%81%D0%BA%D0%B8%D0%B9%20%D1%81%20%D0%BD%D1%83%D0%BB%D1%8F%20%D0%B4%D0%BB%D1%8F%20%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D1%80%D1%8F%D1%89%D0%B8%D1%85%20https%3A%2F%2Fespanoldesderuso.com%2Fsemana-39%2Fdia-1.html" target="_blank" rel="noopener">WhatsApp</a><button type="button" class="red" id="copiar-enlace" data-url="https://espanoldesderuso.com/semana-39/dia-1.html" data-ok="Ссылка скопирована">Скопировать ссылку</button></div><nav class="pasos"><a href="../semana-38/dia-7.html">← Урок 266</a><a href="../kurs.html">Все уроки</a><a id="enlace-siguiente" href="../semana-39/dia-2.html">Урок 268 →</a></nav></article>
+})();</script><div class="grabar-bloque" id="grabar" hidden><h2>Запишите себя</h2><p>Послушайте фразу (▶), скажите её вслух и сравните. Запись остаётся в браузере: она никуда не отправляется и нигде не сохраняется.</p><p class="grabar-frase">Скажите эту фразу: <button type="button" class="suena" aria-pressed="false" data-audio="../audio/d097ad6936858b57f269.mp3" aria-label="Yo hablaría con él.">▶</button><b>Yo hablaría con él.</b></p></div><div class="quiz-bloque"><h2>Слова сегодняшнего урока</h2><p>Пять слов из словаря этого урока. Ответы не сохраняются и ни на что не влияют.</p><div class="botones" id="quiz-arranque" hidden><button type="button" class="boton" id="quiz-empezar">Проверить слова</button></div><div id="quiz"></div></div><div id="marcar-caja"></div><div class="compartir"><span class="de-que">Поделиться уроком</span><a class="red" href="https://t.me/share/url?url=https%3A%2F%2Fespanoldesderuso.com%2Fsemana-39%2Fdia-1.html&text=%D0%98%D1%81%D0%BF%D0%B0%D0%BD%D1%81%D0%BA%D0%B8%D0%B9%20%D1%81%20%D0%BD%D1%83%D0%BB%D1%8F%20%D0%B4%D0%BB%D1%8F%20%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D1%80%D1%8F%D1%89%D0%B8%D1%85" target="_blank" rel="noopener">Telegram</a><a class="red" href="https://wa.me/?text=%D0%98%D1%81%D0%BF%D0%B0%D0%BD%D1%81%D0%BA%D0%B8%D0%B9%20%D1%81%20%D0%BD%D1%83%D0%BB%D1%8F%20%D0%B4%D0%BB%D1%8F%20%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D1%80%D1%8F%D1%89%D0%B8%D1%85%20https%3A%2F%2Fespanoldesderuso.com%2Fsemana-39%2Fdia-1.html" target="_blank" rel="noopener">WhatsApp</a><button type="button" class="red" id="copiar-enlace" data-url="https://espanoldesderuso.com/semana-39/dia-1.html" data-ok="Ссылка скопирована">Скопировать ссылку</button></div><nav class="pasos"><a href="../semana-38/dia-7.html">← Урок 266</a><a href="../kurs.html">Все уроки</a><a id="enlace-siguiente" href="../semana-39/dia-2.html">Урок 268 →</a></nav></article>
 </div></main>
 <footer class="sitio"><div class="envoltorio">
 <p><a href="../slovar.html">Словарь курса</a> · <a href="../test.html">Тест на уровень</a> · <a href="../o-kurse.html">О курсе</a> · <a href="../kontakt.html">Контакты</a> · <a href="../privacy.html">Политика конфиденциальности</a></p>
@@ -1085,7 +1116,46 @@ todavía.</em> · 7. <em>Habría que preguntar.</em> · 8. <em>Preferiría saber
 
 
 
-<script>window.CURSO_GRABAR={"t": {"titulo": "Запишите себя", "entrada": "Послушайте фразу (▶), скажите её вслух и сравните. Запись остаётся в браузере: она никуда не отправляется и нигде не сохраняется.", "grabar": "Записать", "parar": "Стоп", "oir": "Послушать себя", "otra": "Записать заново", "sin_permiso": "Браузер не дал доступ к микрофону. Разрешите его в настройках сайта — или просто говорите вслух, без записи.", "grabando": "Идёт запись…"}};(function(){
+<script>window.CURSO_TARJETAS={"fichas": [{"es": "el interior (страны)", "ru": "внутренняя часть, глубинка", "mp3": ""}, {"es": "mediterráneo", "ru": "средиземноморский", "mp3": "fb0b96bd3fbc3a561491"}, {"es": "el madrileño / la madrileña", "ru": "мадридец / мадридка", "mp3": "5551f15f1fcfa25394b6"}, {"es": "el barcelonés / la barcelonesa", "ru": "барселонец / барселонка", "mp3": "69b2bfccb78db4c713bb"}, {"es": "el dialecto", "ru": "диалект", "mp3": "376e3d2160a22d7cfc74"}, {"es": "puntual", "ru": "пунктуальный", "mp3": "1cde7f35419e998c66b7"}, {"es": "el aficionado 🌎 (hincha)", "ru": "болельщик", "mp3": "b2cd76a0b11fe14027ff"}, {"es": "la lengua románica", "ru": "романский язык", "mp3": "60c520a98be5ee1569b5"}, {"es": "folclórico / folclórica", "ru": "фольклорный", "mp3": "994a4fd44b5e7bb0353a"}, {"es": "el insulto", "ru": "оскорбление", "mp3": "7630f4feb5264cd36564"}], "t": {"titulo": "Карточки", "entrada": "Скажите перевод вслух — и переверните.", "girar": "Перевернуть", "siguiente": "Дальше", "anterior": "Назад", "de": "из", "otra": "Ещё раз", "fin": "Все карточки пройдены."}, "raiz": ".."};(function(){
+  var D=window.CURSO_TARJETAS; if(!D||!D.fichas||!D.fichas.length)return;
+  var caja=document.getElementById('tarjetas'); if(!caja)return;
+  var T=D.t, F=D.fichas, i=0, vuelta=false;
+
+  function esc(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML}
+
+  function pintar(){
+    var f=F[i];
+    // El ▶ va en la cara ESPAÑOLA: se oye la palabra, se dice la traducción
+    // en voz alta y se da la vuelta, que es lo que pide el texto de la
+    // lección tres renglones más arriba.
+    var oir=f.mp3?'<button type="button" class="suena" aria-pressed="false"'
+      +' data-audio="'+esc(D.raiz)+'/audio/'+esc(f.mp3)+'.mp3"'
+      +' aria-label="'+esc(f.es)+'">▶</button>':'';
+    caja.innerHTML='<div class="ficha-caja">'
+      +'<div class="test-cuenta">'+(i+1)+' '+esc(T.de)+' '+F.length+'</div>'
+      +'<button type="button" class="ficha-cara" id="ficha-cara"'
+      +' aria-live="polite">'
+      +(vuelta?'<span class="ficha-ru">'+esc(f.ru)+'</span>'
+              :'<span class="ficha-es">'+esc(f.es)+'</span>')
+      +'</button>'
+      +'<div class="ficha-mandos">'+oir
+      +'<button type="button" class="boton secundario" id="ficha-girar">'+esc(T.girar)+'</button>'
+      +'<button type="button" class="boton" id="ficha-sig">'+esc(i+1<F.length?T.siguiente:T.otra)+'</button>'
+      +'</div></div>';
+    // El ▶ NO va dentro del botón de la cara: un botón dentro de otro no es
+    // HTML válido y el navegador lo saca fuera, con lo que la tarjeta se
+    // parte en dos.
+    var cara=document.getElementById('ficha-cara');
+    cara.addEventListener('click',girar);
+    document.getElementById('ficha-girar').addEventListener('click',girar);
+    document.getElementById('ficha-sig').addEventListener('click',siguiente);
+  }
+  function girar(){vuelta=!vuelta;pintar()}
+  function siguiente(){i=(i+1)%F.length;vuelta=false;pintar()}
+  pintar();
+  caja.hidden=false;
+})();</script>
+<script>window.CURSO_GRABAR={"t": {"titulo": "Запишите себя", "entrada": "Послушайте фразу (▶), скажите её вслух и сравните. Запись остаётся в браузере: она никуда не отправляется и нигде не сохраняется.", "grabar": "Записать", "parar": "Стоп", "oir": "Послушать себя", "otra": "Записать заново", "sin_permiso": "Браузер не дал доступ к микрофону. Разрешите его в настройках сайта — или просто говорите вслух, без записи.", "grabando": "Идёт запись…", "frase": "Скажите эту фразу:"}};(function(){
   var D=window.CURSO_GRABAR; if(!D)return;
   var caja=document.getElementById('grabar'); if(!caja)return;
   // Sin micrófono o sin MediaRecorder el bloque NO sale. Es la regla del
@@ -1230,7 +1300,7 @@ todavía.</em> · 7. <em>Habría que preguntar.</em> · 8. <em>Preferiría saber
 
   boton.addEventListener('click',function(){arranque.hidden=true;pregunta()});
 })();</script>
-<script>window.CURSO_HUECOS={"ejercicios": [{"respuestas": ["**Podría**", "**Tendría**", "**sería**", "**haría**", "**estaría**", "**diría**"]}], "t": {"comprobar": "Проверить", "resultado": "Верно: %a% из %b%", "otra": "Ещё раз"}};(function(){
+<script>window.CURSO_HUECOS={"ejercicios": [{"respuestas": ["podría", "tendría", "sería", "haría", "estaría", "diría"]}], "t": {"comprobar": "Проверить", "resultado": "Верно: %a% из %b%", "otra": "Ещё раз"}};(function(){
   var D=window.CURSO_HUECOS; if(!D)return;
   var T=D.t||{};
 
@@ -1257,17 +1327,29 @@ todavía.</em> · 7. <em>Habría que preguntar.</em> · 8. <em>Preferiría saber
     fichasDe(ej).forEach(function(f){
       var n = f.textContent;
       vistas[n] = (vistas[n]||0)+1;
-      // Una palabra puede repetirse en el banco y usarse varias veces: se
-      // apaga la ficha solo cuando ya no quedan copias libres.
-      f.classList.toggle('gastada', (usadas[n]||0) >= vistas[n] && (usadas[n]||0) > 0
-                                     && fichasDe(ej).length === Object.keys(vistas).length);
+      // Una palabra puede estar DOS veces en el banco y usarse dos veces, así
+      // que se apagan tantas copias como huecos la lleven —la primera, la
+      // segunda— y no todas las que se llaman igual. La versión anterior
+      // comparaba además el total de fichas con `Object.keys(vistas).length`,
+      // que aquí dentro todavía va por la mitad: solo la ÚLTIMA ficha del
+      // banco llegaba a cumplirlo, así que era la única que se apagaba.
+      f.classList.toggle('gastada', vistas[n] <= (usadas[n]||0));
     });
+  }
+
+  // La respuesta correcta que se enseña al corregir. Se borra en cuanto el
+  // hueco se vacía o se vuelve a comprobar: si no, quedaría la de la vez
+  // anterior al lado de una palabra nueva.
+  function quitarPista(h){
+    var p = h.nextElementSibling;
+    if(p && p.classList && p.classList.contains('correcta')) p.remove();
   }
 
   function soltar(h){
     if(!h.textContent) return;
     h.textContent = '';
     h.classList.remove('bien','mal');
+    quitarPista(h);
     repintarFichas(h.dataset.ej);
   }
 
@@ -1315,6 +1397,16 @@ todavía.</em> · 7. <em>Habría que preguntar.</em> · 8. <em>Preferiría saber
       var ok = plano(h.textContent) === plano(datos.respuestas[i]);
       h.classList.toggle('bien', ok);
       h.classList.toggle('mal', !ok);
+      quitarPista(h);
+      // La correcta se enseña SOLO donde se puso algo y se falló. Un hueco en
+      // blanco no se contesta: regalarle la respuesta a quien pulse comprobar
+      // sin rellenar nada deshace el ejercicio entero.
+      if(!ok && h.textContent){
+        var p = document.createElement('span');
+        p.className = 'correcta';
+        p.textContent = datos.respuestas[i];
+        h.insertAdjacentElement('afterend', p);
+      }
       if(ok) bien++;
     });
     var m = document.querySelector('.marcador[data-ej="'+ej+'"]');

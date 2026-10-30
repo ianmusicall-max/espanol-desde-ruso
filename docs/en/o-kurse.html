@@ -146,6 +146,12 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 .hueco:empty::before{content:" "}
 .hueco.bien{border-color:#2e7d4f;color:#2e7d4f}
 .hueco.mal{border-color:#b3332b;color:#b3332b}
+/* La respuesta correcta va PEGADA al hueco que se falló, no al final de la
+   página: el ejercicio se corrige donde se hizo. Es un hermano del hueco y
+   no un hijo, para que `textContent` del hueco siga siendo solo la palabra
+   que se puso —de ahí sale la cuenta de las fichas gastadas—. */
+.correcta{color:#2e7d4f;font-weight:600;font-size:.9rem;white-space:nowrap}
+.correcta::before{content:" → "}
 /* Y el hueco que se ESCRIBE, que son casi todos: 1.398 de los 1.587. No
    lleva ficha que pulsar porque su ejercicio no trae banco de palabras, así
    que se teclea. Sigue pareciendo la raya que sustituye —sin caja, solo el
@@ -216,6 +222,22 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
   color:var(--tenue);text-decoration:none;border-bottom:1px solid var(--linea)}
 .dicc-urok:hover{color:var(--acento);border-color:var(--acento)}
 @media (max-width:40rem){.dicc-lista{columns:1}}
+/* Las tarjetas de la разминка. La cara entera es el botón: en el móvil, un
+   enlace de doce píxeles al lado de una palabra no se acierta con el dedo,
+   que es la lección de la vitrina de la portada. */
+.tarjetas-bloque{margin:1.2rem 0;padding:1rem 1.1rem;border:1px solid var(--linea);
+  border-radius:12px;background:var(--tarjeta)}
+.tarjetas-bloque h3{margin:0 0 .2rem;border:0;padding:0;font-size:1rem;
+  font-family:Onest,ui-sans-serif,system-ui,sans-serif}
+.tarjetas-bloque>p{margin:0 0 .7rem;font-size:.9rem;color:var(--tenue)}
+.ficha-cara{display:flex;align-items:center;justify-content:center;width:100%;
+  min-height:5.5rem;margin:.2rem 0 .7rem;padding:1rem;border:1px solid var(--linea);
+  border-radius:10px;background:var(--papel);color:var(--tinta);cursor:pointer;
+  font:inherit;text-align:center}
+.ficha-cara:hover{border-color:var(--acento)}
+.ficha-es{font-size:1.5rem;font-weight:600}
+.ficha-ru{font-size:1.25rem;color:var(--tenue)}
+.ficha-mandos{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
 /* Grabarse y oírse. Mismo marco que el quiz: los dos son lo que se hace
    DESPUÉS de la lección, no un apartado más de ella. */
 .grabar-bloque{margin:2rem 0 0;padding:1.1rem 1.2rem;border:1px solid var(--linea);
@@ -282,8 +304,17 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 #clave-boton{margin:2rem 0 .5rem}
 #clave{border-top:1px solid var(--linea);padding-top:.2rem}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
-.suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
-  font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
+.suena{position:relative;background:none;border:0;padding:0 .4rem 0 .05rem;margin:0;cursor:pointer;
+  color:var(--celeste);font:inherit;font-size:1em;line-height:1;vertical-align:baseline;
+  opacity:.65;transition:opacity .12s}
+/* El ▶ se pulsa con el dedo y medía 17x13. Lo que crece es la ZONA y no el
+   dibujo: agrandar el triángulo dentro de una tabla de vocabulario lo
+   convertiría en el protagonista de la celda, cuando lo que enseña es la
+   palabra de al lado. El recuadro invisible lo lleva a unos 34x34 sin mover
+   un pixel de la maqueta —un `::after` colocado no ocupa sitio—. Los 9 px
+   de arriba y abajo salen medidos: dos ▶ de la misma columna están a 39,6
+   px, así que dos zonas de 34 no llegan a tocarse. */
+.suena::after{content:"";position:absolute;top:-9px;bottom:-9px;left:-7px;right:-7px}
 .suena:hover,.suena:focus-visible{opacity:1}
 .suena[aria-pressed="true"]{opacity:1;color:var(--acento)}
 @media(hover:none){.suena{opacity:.9}}
@@ -660,6 +691,7 @@ footer.sitio p{margin:.35rem 0}
 
 <script>window.CURSO_TEXTOS={"continuar": "Continue: lesson", "guia_paso": "Step {n} of {total}", "guia_siguiente": "Next", "guia_final": "Mark and continue", "guia_empezar": "Start with step one", "empezar": "Start from the beginning", "marcar": "Mark this lesson as done", "hecho": "Lesson done", "siguiente": "Next lesson", "tuyo": "done by you", "titulo": "Your progress", "aviso": "Progress is stored in this browser on this device only. There is no sign-up and nothing is sent anywhere. If you clear your browser data or open the course on another phone, your marks do not come with you.", "borrar": "Reset progress", "confirmar": "Clear all marks?", "copiar": "Save my progress", "copiado": "Code copied — paste it into your notes or a message to yourself", "restaurar": "Restore my progress", "pegar": "Paste your code here", "aplicar": "Restore", "cancelar": "Cancel", "malo": "That does not look like a progress code. Nothing was changed.", "menos": "That code has fewer lessons than you have marked (%a% instead of %b%). Restore anyway?", "hecho_restaurar": "Done: %n% lessons restored", "nombre_label": "What is your name?", "nombre_boton": "Save", "nombre_cambiar": "Change", "nombre_nota": "Only to greet you by name. It stays in this browser and is never sent anywhere.", "bravo": ["Well done!", "That's the way!", "Nice work!", "One more lesson done!", "You're on track!", "Done!", "Great pace!", "Keep it up!", "Step by step it adds up."], "bravo_con": ["Well done, {nombre}!", "That's the way, {nombre}!", "Nice work, {nombre}!", "{nombre}, one more lesson done!", "You're on track, {nombre}!", "Done, {nombre}!", "Great pace, {nombre}!", "Keep it up, {nombre}!", "{nombre}, step by step it adds up."], "vuelta": "Welcome back, {nombre}!", "primera": "First lesson done — the hardest part is behind you.", "primera_con": "{nombre}, first lesson done — the hardest part is behind you.", "cuantas": "{n} of {total}", "faltan": "{n} to go", "racha": "{n} {dias} in a row", "racha_dias": ["day", "days", "days"], "racha_hoy": "You studied today", "racha_mejor": "Your best streak: {n} {dias}", "antes": "Before clearing your browser or switching phones, save your code.", "calendario": "Your year", "calendario_nota": "{n} {dias} of study in the past year", "calendario_hoy": "today", "diploma_boton": "Download your certificate ({nivel})", "diploma_pide_nombre": "Enter your name above and the certificate will carry it.", "diploma_titulo": "CERTIFICATE", "diploma_sub": "of course completion", "diploma_quien": "Awarded to", "diploma_que": "Level {nivel} · lessons completed: {n}", "diploma_fecha": "Date", "diploma_aviso": "A personal record of self-study. This is not an official language certificate."};window.CURSO_RAIZ="..";window.CURSO_PUBLICADAS=0;window.CURSO_DIAS={};window.CURSO_NIVELES=[];window.CURSO_SITIO="Spanish from Russian";window.CURSO_DOMINIO="espanoldesderuso.com";</script>
 <script src="../progreso.js" defer></script>
+
 
 
 

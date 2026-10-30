@@ -31,6 +31,7 @@ import json
 import os
 import pathlib
 import re
+import subprocess
 import sys
 
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
@@ -39,6 +40,20 @@ import plan  # noqa: E402
 
 AUDIO = RAIZ / "docs" / "audio"
 INDICE = "indice.json"
+# Lo que volvió MUDO. Un MP3 de silencio pesa y existe, así que pasaba las dos
+# guardas de siempre —no está vacío, no es un `.parcial`— y el sitio le ponía
+# su ▶: el lector lo pulsa y no suena nada, que es el peor fallo posible
+# porque no se distingue de un botón roto. Pasó con dos letras sueltas de la
+# tabla de fonética: la «h» española no se pronuncia y la «y» a secas tampoco
+# le dio nada al locutor.
+#
+# Se guarda el TEXTO y no el hash: así se lee qué frase es sin descifrar nada,
+# y `faltan()` no vuelve a pagarla en cada corrida.
+MUDOS = "mudos.json"
+# Medido sobre el curso entero: una frase de verdad pica entre -3 y -10 dB, y
+# las dos mudas estaban en -61 y -84. Cualquier corte entre medias vale; -50
+# deja fuera el silencio sin tocar una grabación floja.
+SILENCIO_DB = -50.0
 
 MODELO = "gpt-4o-mini-tts"
 # La eligió el profesor el 2026-10-26 oyendo las tres con la misma frase
@@ -190,21 +205,74 @@ def muestra_de(frases: list[str], n: int) -> list[str]:
     return sorted(frases, key=len, reverse=True)[:n]
 
 
+def mudo(ruta: pathlib.Path) -> bool:
+    """¿Este MP3 es silencio?
+
+    Lo contesta ffmpeg y no una cuenta sobre el tamaño: un archivo corto puede
+    ser una palabra corta. Si ffmpeg no está, devuelve False —no se inventa un
+    silencio—, porque quitarle el ▶ a una frase que sí suena sería peor.
+    """
+    try:
+        salida = subprocess.run(
+            ["ffmpeg", "-hide_banner", "-i", str(ruta), "-af", "volumedetect",
+             "-f", "null", "-"],
+            capture_output=True, text=True, timeout=60).stderr
+    except (OSError, subprocess.SubprocessError):
+        return False
+    pico = re.search(r"max_volume:\s*(-?[\d.]+) dB", salida)
+    return bool(pico) and float(pico.group(1)) < SILENCIO_DB
+
+
+def leer_mudos(carpeta: pathlib.Path) -> set[str]:
+    try:
+        return set(json.loads((carpeta / MUDOS).read_text(encoding="utf-8")))
+    except (OSError, ValueError):
+        return set()
+
+
+def anotar_mudos(carpeta: pathlib.Path, textos) -> set[str]:
+    """Suma, nunca reemplaza: una corrida de una tanda no puede borrar lo que
+    encontró la anterior."""
+    todos = leer_mudos(carpeta) | set(textos)
+    carpeta.mkdir(parents=True, exist_ok=True)
+    (carpeta / MUDOS).write_text(
+        json.dumps(sorted(todos), ensure_ascii=False, indent=0), encoding="utf-8")
+    return todos
+
+
+def buscar_mudos(frases: list[str], carpeta: pathlib.Path, voz: str = VOZ,
+                 hilos: int = 8) -> list[str]:
+    """Mide los que ya están en disco. Es el barrido de una vez, no de cada
+    construcción del sitio: son 11.378 llamadas a ffmpeg."""
+    hay = [f for f in frases if (carpeta / nombre_de(f, voz)).exists()]
+    with cf.ThreadPoolExecutor(max_workers=hilos) as pool:
+        juicios = list(pool.map(lambda f: mudo(carpeta / nombre_de(f, voz)), hay))
+    return [f for f, m in zip(hay, juicios) if m]
+
+
 def faltan(frases: list[str], carpeta: pathlib.Path, voz: str = VOZ) -> list[str]:
     """Lo que ya está en disco no se vuelve a pagar. Un archivo vacío no cuenta:
     es una descarga que se cortó.
 
     La voz entra en el nombre, así que probar otra no borra ni pisa la primera:
     son dos juegos de archivos y se puede comparar."""
+    mudas = leer_mudos(carpeta)
     return [f for f in frases
-            if not (carpeta / nombre_de(f, voz)).exists()
-            or (carpeta / nombre_de(f, voz)).stat().st_size == 0]
+            if f not in mudas
+            and (not (carpeta / nombre_de(f, voz)).exists()
+                 or (carpeta / nombre_de(f, voz)).stat().st_size == 0)]
 
 
 def escribir_indice(frases: list[str], carpeta: pathlib.Path, voz: str = VOZ) -> int:
-    """Texto → archivo, pero solo de lo que de verdad se puede oír."""
+    """Texto → archivo, pero solo de lo que de verdad se puede oír.
+
+    «Se puede oír» son tres cosas y no una: que el archivo esté, que no esté
+    vacío y que no sea silencio. Un texto que está en `mudos.json` no entra,
+    así que el sitio no le pone ▶ y nadie pulsa un botón que no suena."""
+    mudas = leer_mudos(carpeta)
     indice = {f: nombre_de(f, voz) for f in frases
-              if (carpeta / nombre_de(f, voz)).exists()
+              if f not in mudas
+              and (carpeta / nombre_de(f, voz)).exists()
               and (carpeta / nombre_de(f, voz)).stat().st_size}
     carpeta.mkdir(parents=True, exist_ok=True)
     carpeta.joinpath(INDICE).write_text(
@@ -241,9 +309,14 @@ def _una(texto: str, carpeta: pathlib.Path, cliente, voz: str) -> str | None:
 
 
 def generar(frases: list[str], carpeta: pathlib.Path, cliente, voz: str = VOZ,
-            hilos: int = HILOS) -> int:
+            hilos: int = HILOS) -> list[str]:
+    """Devuelve las frases que de verdad se escribieron, no cuántas.
+
+    Hacen falta una por una para medirlas justo después: una que vuelva en
+    silencio tiene que quedar anotada en la misma corrida, o el ▶ mudo se
+    publica y nadie se entera hasta que alguien lo pulsa."""
     carpeta.mkdir(parents=True, exist_ok=True)
-    hechos = 0
+    hechas = []
     with cf.ThreadPoolExecutor(max_workers=hilos) as pool:
         pedidos = {pool.submit(_una, t, carpeta, cliente, voz): t for t in frases}
         for i, fut in enumerate(cf.as_completed(pedidos), 1):
@@ -251,10 +324,10 @@ def generar(frases: list[str], carpeta: pathlib.Path, cliente, voz: str = VOZ,
             if fallo:
                 print(f"  [{i}/{len(frases)}] falló «{pedidos[fut][:40]}»: {fallo}")
             else:
-                hechos += 1
+                hechas.append(pedidos[fut])
             if i % 250 == 0:
                 print(f"  {i}/{len(frases)}", flush=True)
-    return hechos
+    return hechas
 
 
 def main(argv=None) -> int:
@@ -265,9 +338,40 @@ def main(argv=None) -> int:
     p.add_argument("--voz", default=VOZ, choices=VOCES,
                    help=f"la voz de OpenAI (por defecto {VOZ})")
     p.add_argument("--carpeta", type=pathlib.Path, default=AUDIO)
+    p.add_argument("--mudos", action="store_true",
+                   help="mide los audios que ya están en disco y aparta los que son silencio")
+    p.add_argument("--reintentar", action="store_true",
+                   help="borra los audios apartados por mudos para volver a pedirlos")
     a = p.parse_args(argv)
 
     frases = todas_las_frases(plan.cargar())
+
+    if a.reintentar:
+        # Un silencio puede ser la letra —la «h» española no se pronuncia— o
+        # un fallo suelto de la API en una frase normal, y desde fuera se ven
+        # igual. Esto borra los archivos y la lista, y la corrida siguiente
+        # los vuelve a pedir; lo que vuelva mudo otra vez se aparta solo, así
+        # que reintentar no puede dejar un ▶ que no suena.
+        mudas = sorted(leer_mudos(a.carpeta))
+        for f in mudas:
+            (a.carpeta / nombre_de(f, a.voz)).unlink(missing_ok=True)
+        (a.carpeta / MUDOS).unlink(missing_ok=True)
+        print(f"{len(mudas)} audios mudos borrados · cuestan "
+              f"{coste(mudas):.4f} USD volver a pedirlos")
+        print("Ahora: .venv/bin/python scripts/generar_audio.py")
+        return 0
+
+    if a.mudos:
+        # El barrido de una vez, para lo que ya estaba locutado antes de que
+        # esta comprobación existiera. No gasta un céntimo: solo mide.
+        callados = buscar_mudos(frases, a.carpeta, a.voz)
+        for f in callados:
+            print(f"  silencio: «{f}»")
+        todos = anotar_mudos(a.carpeta, callados)
+        print(f"{len(callados)} mudos en esta pasada · {len(todos)} apartados en total")
+        print(f"índice con {escribir_indice(frases, a.carpeta, a.voz)} frases")
+        print("Ahora: .venv/bin/python scripts/construir_sitio.py")
+        return 0
     pendientes = faltan(frases, a.carpeta, a.voz)
     print(f"{len(frases)} frases distintas · {sum(len(f) for f in frases):,} caracteres"
           .replace(",", " "))
@@ -299,9 +403,17 @@ def main(argv=None) -> int:
         print("\nfalta el paquete: .venv/bin/pip install openai")
         return 1
 
-    hechos = generar(pendientes, a.carpeta, OpenAI(), a.voz)
+    hechas = generar(pendientes, a.carpeta, OpenAI(), a.voz)
+    # Se miden SOLO las de esta tanda: son pocas y es el momento de enterarse.
+    # El barrido de todo el disco es `--mudos`.
+    callados = [f for f in hechas if mudo(a.carpeta / nombre_de(f, a.voz))]
+    if callados:
+        anotar_mudos(a.carpeta, callados)
+        print(f"\n{len(callados)} volvieron en silencio y se apartan (sin ▶):")
+        for f in callados[:10]:
+            print(f"  «{f}»")
     total = escribir_indice(frases, a.carpeta, a.voz)
-    print(f"\n{hechos} audios nuevos · índice con {total} frases")
+    print(f"\n{len(hechas)} audios nuevos · índice con {total} frases")
     if a.muestra:
         print(f"Escúchalas en {a.carpeta} y, si la voz te vale, córrelo sin --muestra.")
     else:

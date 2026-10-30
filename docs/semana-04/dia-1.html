@@ -146,6 +146,12 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 .hueco:empty::before{content:" "}
 .hueco.bien{border-color:#2e7d4f;color:#2e7d4f}
 .hueco.mal{border-color:#b3332b;color:#b3332b}
+/* La respuesta correcta va PEGADA al hueco que se falló, no al final de la
+   página: el ejercicio se corrige donde se hizo. Es un hermano del hueco y
+   no un hijo, para que `textContent` del hueco siga siendo solo la palabra
+   que se puso —de ahí sale la cuenta de las fichas gastadas—. */
+.correcta{color:#2e7d4f;font-weight:600;font-size:.9rem;white-space:nowrap}
+.correcta::before{content:" → "}
 /* Y el hueco que se ESCRIBE, que son casi todos: 1.398 de los 1.587. No
    lleva ficha que pulsar porque su ejercicio no trae banco de palabras, así
    que se teclea. Sigue pareciendo la raya que sustituye —sin caja, solo el
@@ -216,6 +222,22 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
   color:var(--tenue);text-decoration:none;border-bottom:1px solid var(--linea)}
 .dicc-urok:hover{color:var(--acento);border-color:var(--acento)}
 @media (max-width:40rem){.dicc-lista{columns:1}}
+/* Las tarjetas de la разминка. La cara entera es el botón: en el móvil, un
+   enlace de doce píxeles al lado de una palabra no se acierta con el dedo,
+   que es la lección de la vitrina de la portada. */
+.tarjetas-bloque{margin:1.2rem 0;padding:1rem 1.1rem;border:1px solid var(--linea);
+  border-radius:12px;background:var(--tarjeta)}
+.tarjetas-bloque h3{margin:0 0 .2rem;border:0;padding:0;font-size:1rem;
+  font-family:Onest,ui-sans-serif,system-ui,sans-serif}
+.tarjetas-bloque>p{margin:0 0 .7rem;font-size:.9rem;color:var(--tenue)}
+.ficha-cara{display:flex;align-items:center;justify-content:center;width:100%;
+  min-height:5.5rem;margin:.2rem 0 .7rem;padding:1rem;border:1px solid var(--linea);
+  border-radius:10px;background:var(--papel);color:var(--tinta);cursor:pointer;
+  font:inherit;text-align:center}
+.ficha-cara:hover{border-color:var(--acento)}
+.ficha-es{font-size:1.5rem;font-weight:600}
+.ficha-ru{font-size:1.25rem;color:var(--tenue)}
+.ficha-mandos{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
 /* Grabarse y oírse. Mismo marco que el quiz: los dos son lo que se hace
    DESPUÉS de la lección, no un apartado más de ella. */
 .grabar-bloque{margin:2rem 0 0;padding:1.1rem 1.2rem;border:1px solid var(--linea);
@@ -282,8 +304,17 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 #clave-boton{margin:2rem 0 .5rem}
 #clave{border-top:1px solid var(--linea);padding-top:.2rem}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
-.suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
-  font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
+.suena{position:relative;background:none;border:0;padding:0 .4rem 0 .05rem;margin:0;cursor:pointer;
+  color:var(--celeste);font:inherit;font-size:1em;line-height:1;vertical-align:baseline;
+  opacity:.65;transition:opacity .12s}
+/* El ▶ se pulsa con el dedo y medía 17x13. Lo que crece es la ZONA y no el
+   dibujo: agrandar el triángulo dentro de una tabla de vocabulario lo
+   convertiría en el protagonista de la celda, cuando lo que enseña es la
+   palabra de al lado. El recuadro invisible lo lleva a unos 34x34 sin mover
+   un pixel de la maqueta —un `::after` colocado no ocupa sitio—. Los 9 px
+   de arriba y abajo salen medidos: dos ▶ de la misma columna están a 39,6
+   px, así que dos zonas de 34 no llegan a tocarse. */
+.suena::after{content:"";position:absolute;top:-9px;bottom:-9px;left:-7px;right:-7px}
 .suena:hover,.suena:focus-visible{opacity:1}
 .suena[aria-pressed="true"]{opacity:1;color:var(--acento)}
 @media(hover:none){.suena{opacity:.9}}
@@ -641,7 +672,7 @@ footer.sitio p{margin:.35rem 0}
 <li>Вопрос по прошлой неделе: скажите по-испански «На стене есть карта» и
   «Карта на стене». Два разных глагола, два разных артикля — вспомните какие.</li>
 </ul>
-<h2 id="2-36">2. Фонетика (3–6 мин)</h2>
+<div class="tarjetas-bloque" id="tarjetas" hidden><h3>Карточки</h3><p>Скажите перевод вслух — и переверните.</p></div><h2 id="2-36">2. Фонетика (3–6 мин)</h2>
 <p><strong>d и t — зубные, и это подарок.</strong> Русские «д» и «т» тоже зубные: кончик
 языка там, где нужно (а вот английские — нет, они за зубами). Отличий два:
 испанское <strong>t</strong> произносится без придыхания, а <strong>d</strong> между гласными и на
@@ -946,7 +977,7 @@ tijeras</strong>; в 4 «тоже нет» — это <strong>tampoco</strong>, 
     a.addEventListener('click',function(){pon(true)});
   });
   if(location.hash==='#clave')pon(true);
-})();</script><div class="grabar-bloque" id="grabar" hidden><h2>Запишите себя</h2><p>Послушайте фразу (▶), скажите её вслух и сравните. Запись остаётся в браузере: она никуда не отправляется и нигде не сохраняется.</p></div><div class="quiz-bloque"><h2>Слова сегодняшнего урока</h2><p>Пять слов из словаря этого урока. Ответы не сохраняются и ни на что не влияют.</p><div class="botones" id="quiz-arranque" hidden><button type="button" class="boton" id="quiz-empezar">Проверить слова</button></div><div id="quiz"></div></div><div id="marcar-caja"></div><div class="compartir"><span class="de-que">Поделиться уроком</span><a class="red" href="https://t.me/share/url?url=https%3A%2F%2Fespanoldesderuso.com%2Fsemana-04%2Fdia-1.html&text=%D0%98%D1%81%D0%BF%D0%B0%D0%BD%D1%81%D0%BA%D0%B8%D0%B9%20%D1%81%20%D0%BD%D1%83%D0%BB%D1%8F%20%D0%B4%D0%BB%D1%8F%20%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D1%80%D1%8F%D1%89%D0%B8%D1%85" target="_blank" rel="noopener">Telegram</a><a class="red" href="https://wa.me/?text=%D0%98%D1%81%D0%BF%D0%B0%D0%BD%D1%81%D0%BA%D0%B8%D0%B9%20%D1%81%20%D0%BD%D1%83%D0%BB%D1%8F%20%D0%B4%D0%BB%D1%8F%20%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D1%80%D1%8F%D1%89%D0%B8%D1%85%20https%3A%2F%2Fespanoldesderuso.com%2Fsemana-04%2Fdia-1.html" target="_blank" rel="noopener">WhatsApp</a><button type="button" class="red" id="copiar-enlace" data-url="https://espanoldesderuso.com/semana-04/dia-1.html" data-ok="Ссылка скопирована">Скопировать ссылку</button></div><nav class="pasos"><a href="../semana-03/dia-7.html">← Урок 21</a><a href="../kurs.html">Все уроки</a><a id="enlace-siguiente" href="../semana-04/dia-2.html">Урок 23 →</a></nav></article>
+})();</script><div class="grabar-bloque" id="grabar" hidden><h2>Запишите себя</h2><p>Послушайте фразу (▶), скажите её вслух и сравните. Запись остаётся в браузере: она никуда не отправляется и нигде не сохраняется.</p><p class="grabar-frase">Скажите эту фразу: <button type="button" class="suena" aria-pressed="false" data-audio="../audio/3bea62eecaf6a0671489.mp3" aria-label="¿Hay tijeras en el estuche?">▶</button><b>¿Hay tijeras en el estuche?</b></p></div><div class="quiz-bloque"><h2>Слова сегодняшнего урока</h2><p>Пять слов из словаря этого урока. Ответы не сохраняются и ни на что не влияют.</p><div class="botones" id="quiz-arranque" hidden><button type="button" class="boton" id="quiz-empezar">Проверить слова</button></div><div id="quiz"></div></div><div id="marcar-caja"></div><div class="compartir"><span class="de-que">Поделиться уроком</span><a class="red" href="https://t.me/share/url?url=https%3A%2F%2Fespanoldesderuso.com%2Fsemana-04%2Fdia-1.html&text=%D0%98%D1%81%D0%BF%D0%B0%D0%BD%D1%81%D0%BA%D0%B8%D0%B9%20%D1%81%20%D0%BD%D1%83%D0%BB%D1%8F%20%D0%B4%D0%BB%D1%8F%20%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D1%80%D1%8F%D1%89%D0%B8%D1%85" target="_blank" rel="noopener">Telegram</a><a class="red" href="https://wa.me/?text=%D0%98%D1%81%D0%BF%D0%B0%D0%BD%D1%81%D0%BA%D0%B8%D0%B9%20%D1%81%20%D0%BD%D1%83%D0%BB%D1%8F%20%D0%B4%D0%BB%D1%8F%20%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%B3%D0%BE%D0%B2%D0%BE%D1%80%D1%8F%D1%89%D0%B8%D1%85%20https%3A%2F%2Fespanoldesderuso.com%2Fsemana-04%2Fdia-1.html" target="_blank" rel="noopener">WhatsApp</a><button type="button" class="red" id="copiar-enlace" data-url="https://espanoldesderuso.com/semana-04/dia-1.html" data-ok="Ссылка скопирована">Скопировать ссылку</button></div><nav class="pasos"><a href="../semana-03/dia-7.html">← Урок 21</a><a href="../kurs.html">Все уроки</a><a id="enlace-siguiente" href="../semana-04/dia-2.html">Урок 23 →</a></nav></article>
 </div></main>
 <footer class="sitio"><div class="envoltorio">
 <p><a href="../slovar.html">Словарь курса</a> · <a href="../test.html">Тест на уровень</a> · <a href="../o-kurse.html">О курсе</a> · <a href="../kontakt.html">Контакты</a> · <a href="../privacy.html">Политика конфиденциальности</a></p>
@@ -988,7 +1019,46 @@ tijeras</strong>; в 4 «тоже нет» — это <strong>tampoco</strong>, 
 
 
 
-<script>window.CURSO_GRABAR={"t": {"titulo": "Запишите себя", "entrada": "Послушайте фразу (▶), скажите её вслух и сравните. Запись остаётся в браузере: она никуда не отправляется и нигде не сохраняется.", "grabar": "Записать", "parar": "Стоп", "oir": "Послушать себя", "otra": "Записать заново", "sin_permiso": "Браузер не дал доступ к микрофону. Разрешите его в настройках сайта — или просто говорите вслух, без записи.", "grabando": "Идёт запись…"}};(function(){
+<script>window.CURSO_TARJETAS={"fichas": [{"es": "el menú del día", "ru": "комплексный обед", "mp3": "ed3e6408e590a36230a4"}, {"es": "la sobremesa", "ru": "разговор за столом после еды", "mp3": "9f629cb6353f0906831b"}, {"es": "la siesta", "ru": "послеобеденный сон", "mp3": "6d06fb7af23695811ee0"}, {"es": "el mito", "ru": "миф", "mp3": "922242fd3cfa5ac91233"}, {"es": "entre semana", "ru": "в будни", "mp3": "44b3e84906369ccc5a9c"}, {"es": "el fin de semana", "ru": "выходные", "mp3": "904de0a0011365ae970c"}, {"es": "las vacaciones", "ru": "отпуск", "mp3": "16a64867edc58b60ef47"}, {"es": "la paga extra", "ru": "тринадцатая зарплата", "mp3": "4d0598054e8748d2334a"}, {"es": "el pueblo", "ru": "посёлок, деревня", "mp3": "54c66b2dccc224bfd3ce"}, {"es": "cerrar", "ru": "закрывать(ся)", "mp3": "ac257549819242c931c3"}], "t": {"titulo": "Карточки", "entrada": "Скажите перевод вслух — и переверните.", "girar": "Перевернуть", "siguiente": "Дальше", "anterior": "Назад", "de": "из", "otra": "Ещё раз", "fin": "Все карточки пройдены."}, "raiz": ".."};(function(){
+  var D=window.CURSO_TARJETAS; if(!D||!D.fichas||!D.fichas.length)return;
+  var caja=document.getElementById('tarjetas'); if(!caja)return;
+  var T=D.t, F=D.fichas, i=0, vuelta=false;
+
+  function esc(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML}
+
+  function pintar(){
+    var f=F[i];
+    // El ▶ va en la cara ESPAÑOLA: se oye la palabra, se dice la traducción
+    // en voz alta y se da la vuelta, que es lo que pide el texto de la
+    // lección tres renglones más arriba.
+    var oir=f.mp3?'<button type="button" class="suena" aria-pressed="false"'
+      +' data-audio="'+esc(D.raiz)+'/audio/'+esc(f.mp3)+'.mp3"'
+      +' aria-label="'+esc(f.es)+'">▶</button>':'';
+    caja.innerHTML='<div class="ficha-caja">'
+      +'<div class="test-cuenta">'+(i+1)+' '+esc(T.de)+' '+F.length+'</div>'
+      +'<button type="button" class="ficha-cara" id="ficha-cara"'
+      +' aria-live="polite">'
+      +(vuelta?'<span class="ficha-ru">'+esc(f.ru)+'</span>'
+              :'<span class="ficha-es">'+esc(f.es)+'</span>')
+      +'</button>'
+      +'<div class="ficha-mandos">'+oir
+      +'<button type="button" class="boton secundario" id="ficha-girar">'+esc(T.girar)+'</button>'
+      +'<button type="button" class="boton" id="ficha-sig">'+esc(i+1<F.length?T.siguiente:T.otra)+'</button>'
+      +'</div></div>';
+    // El ▶ NO va dentro del botón de la cara: un botón dentro de otro no es
+    // HTML válido y el navegador lo saca fuera, con lo que la tarjeta se
+    // parte en dos.
+    var cara=document.getElementById('ficha-cara');
+    cara.addEventListener('click',girar);
+    document.getElementById('ficha-girar').addEventListener('click',girar);
+    document.getElementById('ficha-sig').addEventListener('click',siguiente);
+  }
+  function girar(){vuelta=!vuelta;pintar()}
+  function siguiente(){i=(i+1)%F.length;vuelta=false;pintar()}
+  pintar();
+  caja.hidden=false;
+})();</script>
+<script>window.CURSO_GRABAR={"t": {"titulo": "Запишите себя", "entrada": "Послушайте фразу (▶), скажите её вслух и сравните. Запись остаётся в браузере: она никуда не отправляется и нигде не сохраняется.", "grabar": "Записать", "parar": "Стоп", "oir": "Послушать себя", "otra": "Записать заново", "sin_permiso": "Браузер не дал доступ к микрофону. Разрешите его в настройках сайта — или просто говорите вслух, без записи.", "grabando": "Идёт запись…", "frase": "Скажите эту фразу:"}};(function(){
   var D=window.CURSO_GRABAR; if(!D)return;
   var caja=document.getElementById('grabar'); if(!caja)return;
   // Sin micrófono o sin MediaRecorder el bloque NO sale. Es la regla del

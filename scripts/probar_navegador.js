@@ -76,6 +76,8 @@ const POR_DEFECTO = [
   'docs/semana-49/dia-1.html',       // simulacro: el tipo de día que no es un test contestable
   'docs/semana-53/dia-1.html',       // el día 365: `reserva`, único de su tipo en el curso
   'docs/semana-01/dia-1.html',       // lección normal: audio y huecos
+  'docs/semana-01/dia-2.html',       // las tarjetas del día: las 8 primeras del curso
+  'docs/semana-31/dia-2.html',       // clave en NEGRITA: daba 0 aciertos con todo bien
   // Las cuatro siguientes no tenían un solo ▶ hasta el 2026-10-28: el audio
   // del curso llegaba a la lección 100 y se paraba. Están aquí para que el
   // día que el audio se rompa se entere la suite y no un lector.
@@ -171,6 +173,70 @@ async function unaPagina(b, rel, base) {
     const txt = (await p.locator('#quiz').textContent()).replace(/\s+/g, ' ');
     r.quiz_bien = txt.includes(bien + ' / ' + correctas.length);
     if (!r.quiz_bien) r.errores.push('el quiz no da ' + bien + '/' + correctas.length + ': ' + txt.slice(0, 80));
+  }
+
+  // Los huecos que se rellenan pulsando. Se comprueban las tres cosas que el
+  // profesor vio rotas el 2026-10-30: que al colocar una palabra se APAGUE su
+  // ficha —y no solo la ultima del banco—, que el boton de comprobar este
+  // DESPUES de las frases y no antes, y que al fallar salga la respuesta
+  // correcta pegada al hueco en vez de obligar a bajar hasta la clave.
+  const hayHuecos = await p.evaluate(() => !!(window.CURSO_HUECOS && window.CURSO_HUECOS.ejercicios));
+  if (hayHuecos) {
+    const h = await p.evaluate(() => {
+      const plano = x => (x || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+      const e = '0';
+      const D = window.CURSO_HUECOS.ejercicios[e];
+      const hs = [...document.querySelectorAll('.hueco[data-ej="' + e + '"]')];
+      const fs = [...document.querySelectorAll('.ficha[data-ej="' + e + '"]')];
+      const pie = document.querySelector('.comprobar[data-ej="' + e + '"]');
+      const banco = document.querySelector('.fichas[data-ej="' + e + '"]');
+      const sitio = {
+        bancoArriba: !!(hs[0].compareDocumentPosition(banco) & Node.DOCUMENT_POSITION_PRECEDING),
+        pieAbajo: !!(hs[hs.length - 1].compareDocumentPosition(pie) & Node.DOCUMENT_POSITION_FOLLOWING),
+      };
+      for (let k = 0; k < hs.length; k++) {
+        const f = fs.find(x => plano(x.textContent) === plano(D.respuestas[k]) && !x.classList.contains('gastada'));
+        if (!f) return Object.assign(sitio, { fallo: 'sin ficha libre para ' + D.respuestas[k] });
+        f.click(); hs[k].click();
+      }
+      const gastadas = fs.filter(x => x.classList.contains('gastada')).length;
+      pie.click();
+      const pistasBien = document.querySelectorAll('.correcta').length;
+      // Y ahora un fallo a proposito, para ver la respuesta correcta.
+      hs[0].click();
+      const mala = fs.find(x => plano(x.textContent) !== plano(D.respuestas[0]));
+      mala.click(); hs[0].click();
+      pie.click();
+      const pistas = [...document.querySelectorAll('.correcta')].map(x => x.textContent);
+      return Object.assign(sitio, {
+        huecos: hs.length, fichas: fs.length, gastadas: gastadas,
+        pistasConTodoBien: pistasBien, pistas: pistas, debia: D.respuestas[0],
+      });
+    });
+    r.huecos = h.huecos;
+    if (h.fallo) r.errores.push('huecos: ' + h.fallo);
+    if (!h.bancoArriba) r.errores.push('huecos: el banco de fichas no esta antes de las frases');
+    if (!h.pieAbajo) r.errores.push('huecos: comprobar no esta debajo del ejercicio');
+    if (h.gastadas !== h.fichas) r.errores.push('huecos: se apagaron ' + h.gastadas + ' de ' + h.fichas + ' fichas');
+    if (h.pistasConTodoBien !== 0) r.errores.push('huecos: sale la respuesta correcta con todo bien');
+    if (h.pistas && (h.pistas.length !== 1 || h.pistas[0] !== h.debia)) {
+      r.errores.push('huecos: al fallar no sale la correcta: ' + JSON.stringify(h.pistas));
+    }
+  }
+
+  // Las tarjetas del dia: se dan la vuelta y se pasa a la siguiente.
+  const hayFichas = await p.evaluate(() => !!(window.CURSO_TARJETAS && window.CURSO_TARJETAS.fichas));
+  if (hayFichas) {
+    const caja = p.locator('#tarjetas');
+    if (await caja.isHidden()) r.errores.push('tarjetas: el bloque no se encendio');
+    const es = (await p.locator('#ficha-cara').textContent()).trim();
+    await p.locator('#ficha-girar').click();
+    const ru = (await p.locator('#ficha-cara').textContent()).trim();
+    if (!ru || ru === es) r.errores.push('tarjetas: no se da la vuelta');
+    await p.locator('#ficha-sig').click();
+    const dos = (await p.locator('#ficha-cara').textContent()).trim();
+    if (dos === ru) r.errores.push('tarjetas: la siguiente no cambia');
+    r.tarjetas = await p.evaluate(() => window.CURSO_TARJETAS.fichas.length);
   }
 
   // El audio: que el boton SUENE, no que este puesto. La señal observable es

@@ -168,9 +168,19 @@ def leer(cuerpo: str) -> list[Ejercicio]:
 
         if len(respuestas) != cuantos:
             continue
-        plano = {_plano(p) for p in banco}
-        if any(_plano(r) not in plano for r in respuestas):
+        # La respuesta que se guarda es la ENTRADA DEL BANCO, no el texto de
+        # la clave, porque la ficha que el lector pulsa lleva la del banco. La
+        # clave escribe «**el cartel**» en negrita y «Aquí» con mayúscula al
+        # empezar frase, así que comparando con su texto el ejercicio de la
+        # 45-1 daba 0 aciertos con todo bien puesto. Comparado contra el banco,
+        # negrita, mayúsculas, acentos y puntuación dejan de importar de una
+        # vez, que es lo que `_plano` ya hacía para validar y no para guardar.
+        del_banco = {}
+        for p in banco:
+            del_banco.setdefault(_plano(p), p)
+        if any(_plano(r) not in del_banco for r in respuestas):
             continue
+        respuestas = [del_banco[_plano(r)] for r in respuestas]
 
         salida.append(Ejercicio(letra=letra,
                                 titulo=cab.group(0).strip().lstrip("# ").strip(),

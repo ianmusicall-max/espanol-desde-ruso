@@ -39,11 +39,13 @@ import plan  # noqa: E402
 import pruebas  # noqa: E402
 import huecos  # noqa: E402
 import quiz_lexico  # noqa: E402
+import tarjetas as tarjetas_mod  # noqa: E402
 import validar  # noqa: E402
 # Se importa por `limpiar`: la palabra del índice de imágenes está limpia de
 # negritas, del 🌎 y de la barra de variantes, así que aquí hay que limpiar la
 # celda EXACTAMENTE igual o no casaría ninguna. Dos copias de esa regla es como
 # se descubre tarde que una de las dos se quedó vieja.
+import generar_audio  # noqa: E402
 import generar_imagenes  # noqa: E402
 # Y por `tarjetas_de`: la traducción de las doce palabras de la portada sale
 # del vocabulario de las lecciones, no de una lista aquí. Si se escribieran a
@@ -267,6 +269,12 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 .hueco:empty::before{content:" "}
 .hueco.bien{border-color:#2e7d4f;color:#2e7d4f}
 .hueco.mal{border-color:#b3332b;color:#b3332b}
+/* La respuesta correcta va PEGADA al hueco que se falló, no al final de la
+   página: el ejercicio se corrige donde se hizo. Es un hermano del hueco y
+   no un hijo, para que `textContent` del hueco siga siendo solo la palabra
+   que se puso —de ahí sale la cuenta de las fichas gastadas—. */
+.correcta{color:#2e7d4f;font-weight:600;font-size:.9rem;white-space:nowrap}
+.correcta::before{content:" → "}
 /* Y el hueco que se ESCRIBE, que son casi todos: 1.398 de los 1.587. No
    lleva ficha que pulsar porque su ejercicio no trae banco de palabras, así
    que se teclea. Sigue pareciendo la raya que sustituye —sin caja, solo el
@@ -337,6 +345,22 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
   color:var(--tenue);text-decoration:none;border-bottom:1px solid var(--linea)}
 .dicc-urok:hover{color:var(--acento);border-color:var(--acento)}
 @media (max-width:40rem){.dicc-lista{columns:1}}
+/* Las tarjetas de la разминка. La cara entera es el botón: en el móvil, un
+   enlace de doce píxeles al lado de una palabra no se acierta con el dedo,
+   que es la lección de la vitrina de la portada. */
+.tarjetas-bloque{margin:1.2rem 0;padding:1rem 1.1rem;border:1px solid var(--linea);
+  border-radius:12px;background:var(--tarjeta)}
+.tarjetas-bloque h3{margin:0 0 .2rem;border:0;padding:0;font-size:1rem;
+  font-family:Onest,ui-sans-serif,system-ui,sans-serif}
+.tarjetas-bloque>p{margin:0 0 .7rem;font-size:.9rem;color:var(--tenue)}
+.ficha-cara{display:flex;align-items:center;justify-content:center;width:100%;
+  min-height:5.5rem;margin:.2rem 0 .7rem;padding:1rem;border:1px solid var(--linea);
+  border-radius:10px;background:var(--papel);color:var(--tinta);cursor:pointer;
+  font:inherit;text-align:center}
+.ficha-cara:hover{border-color:var(--acento)}
+.ficha-es{font-size:1.5rem;font-weight:600}
+.ficha-ru{font-size:1.25rem;color:var(--tenue)}
+.ficha-mandos{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
 /* Grabarse y oírse. Mismo marco que el quiz: los dos son lo que se hace
    DESPUÉS de la lección, no un apartado más de ella. */
 .grabar-bloque{margin:2rem 0 0;padding:1.1rem 1.2rem;border:1px solid var(--linea);
@@ -403,8 +427,17 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 #clave-boton{margin:2rem 0 .5rem}
 #clave{border-top:1px solid var(--linea);padding-top:.2rem}
 /* audio: un ▶ al lado de cada frase española que esté locutada */
-.suena{background:none;border:0;padding:0 .35rem 0 0;margin:0;cursor:pointer;color:var(--celeste);
-  font:inherit;font-size:.82em;line-height:1;vertical-align:baseline;opacity:.65;transition:opacity .12s}
+.suena{position:relative;background:none;border:0;padding:0 .4rem 0 .05rem;margin:0;cursor:pointer;
+  color:var(--celeste);font:inherit;font-size:1em;line-height:1;vertical-align:baseline;
+  opacity:.65;transition:opacity .12s}
+/* El ▶ se pulsa con el dedo y medía 17x13. Lo que crece es la ZONA y no el
+   dibujo: agrandar el triángulo dentro de una tabla de vocabulario lo
+   convertiría en el protagonista de la celda, cuando lo que enseña es la
+   palabra de al lado. El recuadro invisible lo lleva a unos 34x34 sin mover
+   un pixel de la maqueta —un `::after` colocado no ocupa sitio—. Los 9 px
+   de arriba y abajo salen medidos: dos ▶ de la misma columna están a 39,6
+   px, así que dos zonas de 34 no llegan a tocarse. */
+.suena::after{content:"";position:absolute;top:-9px;bottom:-9px;left:-7px;right:-7px}
 .suena:hover,.suena:focus-visible{opacity:1}
 .suena[aria-pressed="true"]{opacity:1;color:var(--acento)}
 @media(hover:none){.suena{opacity:.9}}
@@ -1613,17 +1646,29 @@ HUECOS_JS = r"""(function(){
     fichasDe(ej).forEach(function(f){
       var n = f.textContent;
       vistas[n] = (vistas[n]||0)+1;
-      // Una palabra puede repetirse en el banco y usarse varias veces: se
-      // apaga la ficha solo cuando ya no quedan copias libres.
-      f.classList.toggle('gastada', (usadas[n]||0) >= vistas[n] && (usadas[n]||0) > 0
-                                     && fichasDe(ej).length === Object.keys(vistas).length);
+      // Una palabra puede estar DOS veces en el banco y usarse dos veces, así
+      // que se apagan tantas copias como huecos la lleven —la primera, la
+      // segunda— y no todas las que se llaman igual. La versión anterior
+      // comparaba además el total de fichas con `Object.keys(vistas).length`,
+      // que aquí dentro todavía va por la mitad: solo la ÚLTIMA ficha del
+      // banco llegaba a cumplirlo, así que era la única que se apagaba.
+      f.classList.toggle('gastada', vistas[n] <= (usadas[n]||0));
     });
+  }
+
+  // La respuesta correcta que se enseña al corregir. Se borra en cuanto el
+  // hueco se vacía o se vuelve a comprobar: si no, quedaría la de la vez
+  // anterior al lado de una palabra nueva.
+  function quitarPista(h){
+    var p = h.nextElementSibling;
+    if(p && p.classList && p.classList.contains('correcta')) p.remove();
   }
 
   function soltar(h){
     if(!h.textContent) return;
     h.textContent = '';
     h.classList.remove('bien','mal');
+    quitarPista(h);
     repintarFichas(h.dataset.ej);
   }
 
@@ -1671,6 +1716,16 @@ HUECOS_JS = r"""(function(){
       var ok = plano(h.textContent) === plano(datos.respuestas[i]);
       h.classList.toggle('bien', ok);
       h.classList.toggle('mal', !ok);
+      quitarPista(h);
+      // La correcta se enseña SOLO donde se puso algo y se falló. Un hueco en
+      // blanco no se contesta: regalarle la respuesta a quien pulse comprobar
+      // sin rellenar nada deshace el ejercicio entero.
+      if(!ok && h.textContent){
+        var p = document.createElement('span');
+        p.className = 'correcta';
+        p.textContent = datos.respuestas[i];
+        h.insertAdjacentElement('afterend', p);
+      }
       if(ok) bien++;
     });
     var m = document.querySelector('.marcador[data-ej="'+ej+'"]');
@@ -1768,6 +1823,47 @@ DICCIONARIO_JS = r"""(function(){
     // Esperar un poco: con 3.001 filas, filtrar en cada tecla se nota.
     clearTimeout(espera);espera=setTimeout(filtrar,120);
   });
+})();"""
+
+
+TARJETAS_JS = r"""(function(){
+  var D=window.CURSO_TARJETAS; if(!D||!D.fichas||!D.fichas.length)return;
+  var caja=document.getElementById('tarjetas'); if(!caja)return;
+  var T=D.t, F=D.fichas, i=0, vuelta=false;
+
+  function esc(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML}
+
+  function pintar(){
+    var f=F[i];
+    // El ▶ va en la cara ESPAÑOLA: se oye la palabra, se dice la traducción
+    // en voz alta y se da la vuelta, que es lo que pide el texto de la
+    // lección tres renglones más arriba.
+    var oir=f.mp3?'<button type="button" class="suena" aria-pressed="false"'
+      +' data-audio="'+esc(D.raiz)+'/audio/'+esc(f.mp3)+'.mp3"'
+      +' aria-label="'+esc(f.es)+'">▶</button>':'';
+    caja.innerHTML='<div class="ficha-caja">'
+      +'<div class="test-cuenta">'+(i+1)+' '+esc(T.de)+' '+F.length+'</div>'
+      +'<button type="button" class="ficha-cara" id="ficha-cara"'
+      +' aria-live="polite">'
+      +(vuelta?'<span class="ficha-ru">'+esc(f.ru)+'</span>'
+              :'<span class="ficha-es">'+esc(f.es)+'</span>')
+      +'</button>'
+      +'<div class="ficha-mandos">'+oir
+      +'<button type="button" class="boton secundario" id="ficha-girar">'+esc(T.girar)+'</button>'
+      +'<button type="button" class="boton" id="ficha-sig">'+esc(i+1<F.length?T.siguiente:T.otra)+'</button>'
+      +'</div></div>';
+    // El ▶ NO va dentro del botón de la cara: un botón dentro de otro no es
+    // HTML válido y el navegador lo saca fuera, con lo que la tarjeta se
+    // parte en dos.
+    var cara=document.getElementById('ficha-cara');
+    cara.addEventListener('click',girar);
+    document.getElementById('ficha-girar').addEventListener('click',girar);
+    document.getElementById('ficha-sig').addEventListener('click',siguiente);
+  }
+  function girar(){vuelta=!vuelta;pintar()}
+  function siguiente(){i=(i+1)%F.length;vuelta=false;pintar()}
+  pintar();
+  caja.hidden=false;
 })();"""
 
 
@@ -2251,6 +2347,7 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
            niveles="[]",
            quiz=None,
            grabar=None,
+           fichas=None,
            diccionario=None,
            prueba=None) -> str:
     """El armazón de toda página: cabecera con menú y cambio de idioma, cuerpo, pie."""
@@ -2381,6 +2478,7 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
 {f'<script>window.CURSO_TEST={json.dumps(test, ensure_ascii=False)};{TEST_JS}</script>' if test else ""}
 {f'<script>window.CURSO_PRUEBA={json.dumps(prueba, ensure_ascii=False)};{PRUEBA_JS}</script>' if prueba else ""}
 {f'<script>window.CURSO_DICC={json.dumps(diccionario, ensure_ascii=False)};{DICCIONARIO_JS}</script>' if diccionario else ""}
+{f'<script>window.CURSO_TARJETAS={json.dumps(fichas, ensure_ascii=False)};{TARJETAS_JS}</script>' if fichas else ""}
 {f'<script>window.CURSO_GRABAR={json.dumps(grabar, ensure_ascii=False)};{GRABAR_JS}</script>' if grabar else ""}
 {f'<script>window.CURSO_QUIZ={json.dumps(quiz, ensure_ascii=False)};{QUIZ_JS}</script>' if quiz else ""}
 {f'<script>window.CURSO_HUECOS={json.dumps({"ejercicios": huecos, "t": t["huecos"]}, ensure_ascii=False)};{HUECOS_JS}</script>' if huecos else ""}
@@ -2730,7 +2828,67 @@ def construir_diccionario(cfg, t, idiomas, idioma, destino, cal, raiz,
         encoding="utf-8")
 
 
-def _bloque_de_grabar(t: dict, con_audio: bool) -> str:
+
+
+def frase_para_grabar(d, audio: dict) -> dict | None:
+    """Una frase concreta de ESTA lección para decirla en voz alta.
+
+    Se prefiere una frase de EJEMPLO del vocabulario —la tercera columna de
+    `Словарь дня`— porque una palabra suelta no entrena la pronunciación: lo
+    que cuesta es la cadena, el enlace entre palabras y la vocal átona que el
+    ruso reduce. Si la lección no tiene ejemplos locutados, vale cualquier
+    frase suya de dos palabras o más, que son las mismas que ya llevan ▶ en
+    la página.
+
+    Determinista: la primera que sirva. Al recargar la lección el alumno
+    encuentra la misma frase, que es lo que permite volver a intentarla.
+    """
+    _, filas = exportar_anki.filas_de(d.ruta)
+    for fila in filas or []:
+        if len(fila) >= 3:
+            ej = quiz_lexico.limpiar(fila[2])
+            if ej and len(ej.split()) >= 2 and ej in audio:
+                return {"texto": ej, "mp3": audio[ej].removesuffix(".mp3")}
+    for texto in generar_audio.frases_de(d.ruta):
+        if len(texto.split()) >= 2 and texto in audio:
+            return {"texto": texto, "mp3": audio[texto].removesuffix(".mp3")}
+    return None
+
+
+def _bloque_de_tarjetas(t: dict, fichas: list) -> str:
+    """Las tarjetas que la lección pide, para girarlas en la propia página.
+
+    Nace OCULTO y lo enciende el guion, como el resto del sitio: sin
+    JavaScript una tarjeta no se puede dar la vuelta, y el vocabulario de
+    esos días ya está en sus lecciones con su traducción al lado.
+    """
+    if not fichas:
+        return ""
+    c = t["tarjetas"]
+    return (f'<div class="tarjetas-bloque" id="tarjetas" hidden>'
+            f'<h3>{html.escape(c["titulo"])}</h3>'
+            f'<p>{html.escape(c["entrada"])}</p></div>')
+
+
+def _donde_van_las_tarjetas(html_: str, bloque: str) -> str:
+    """Al final del apartado que PIDE las tarjetas.
+
+    Se busca por el contenido y no por el nombre del apartado —«Разминка»—,
+    que es la lección del enlace a la clave: los días de repaso y de cultura
+    llaman a su primer apartado de otra manera, y un bloque de tarjetas
+    colocado por el título acabaría en el sitio equivocado o en ninguno.
+    """
+    if not bloque:
+        return html_
+    cabeceras = [m.start() for m in re.finditer(r"<h2[^>]*>", html_)]
+    for i, inicio in enumerate(cabeceras):
+        fin = cabeceras[i + 1] if i + 1 < len(cabeceras) else len(html_)
+        if "Карточки" in html_[inicio:fin]:
+            return html_[:fin] + bloque + html_[fin:]
+    return html_
+
+
+def _bloque_de_grabar(t: dict, con_audio: bool, frase: dict | None = None) -> str:
     """El botón de grabarse, al cerrar la lección.
 
     El curso pide grabarse en 77 lecciones —«запишите себя»— y el sitio no
@@ -2744,9 +2902,22 @@ def _bloque_de_grabar(t: dict, con_audio: bool) -> str:
     if not con_audio:
         return ""
     g = t["grabar"]
+    # La frase va NOMBRADA, con su ▶ al lado. Hasta el 2026-10-30 el bloque
+    # decía «escuche la frase y dígala en voz alta» sin decir cuál, así que el
+    # alumno tenía que elegirla él: lo echó en falta el profesor usando el
+    # sitio. Las 355 lecciones que llevan grabador tienen una frase locutada
+    # de dos o más palabras, así que no se queda ninguna sin ella.
+    cual = ""
+    if frase:
+        oir = (f'<button type="button" class="suena" aria-pressed="false" '
+               f'data-audio="../audio/{html.escape(frase["mp3"])}.mp3" '
+               f'aria-label="{html.escape(frase["texto"])}">▶</button>'
+               if frase.get("mp3") else "")
+        cual = (f'<p class="grabar-frase">{html.escape(g["frase"])} '
+                f'{oir}<b>{html.escape(frase["texto"])}</b></p>')
     return (f'<div class="grabar-bloque" id="grabar" hidden>'
             f'<h2>{html.escape(g["titulo"])}</h2>'
-            f'<p>{html.escape(g["entrada"])}</p></div>')
+            f'<p>{html.escape(g["entrada"])}</p>{cual}</div>')
 
 
 def _bloque_del_quiz(t: dict, preguntas: list) -> str:
@@ -3503,13 +3674,17 @@ def _envolver_huecos(html_: str, ejercicios, t) -> tuple[str, list | None]:
             "<blockquote>", '<blockquote class="banco-escrito">', 1)
         fichas = "".join(f'<button type="button" class="ficha" data-ej="{i}">'
                          f'{html.escape(w)}</button>' for w in e.banco)
-        barra = (f'<div class="fichas" data-ej="{i}">{fichas}</div>'
-                 f'<div class="huecos-pie">'
-                 f'<button type="button" class="boton secundario comprobar" data-ej="{i}">'
-                 f'{html.escape(t["huecos"]["comprobar"])}</button>'
-                 f'<span class="marcador" data-ej="{i}"></span></div>')
+        barra = f'<div class="fichas" data-ej="{i}">{fichas}</div>'
+        # El banco va ARRIBA, donde está la cita del Markdown y donde se
+        # empieza: primero eliges la palabra. El botón de comprobar va ABAJO,
+        # al terminar las frases. Juntos arriba, el resultado salía a una
+        # pantalla de distancia de lo que acababas de rellenar.
+        pie = (f'<div class="huecos-pie">'
+               f'<button type="button" class="boton secundario comprobar" data-ej="{i}">'
+               f'{html.escape(t["huecos"]["comprobar"])}</button>'
+               f'<span class="marcador" data-ej="{i}"></span></div>')
 
-        html_ = (html_[: cabeza.end()] + barra + nuevo_cuerpo
+        html_ = (html_[: cabeza.end()] + barra + nuevo_cuerpo + pie
                  + (resto[corte.start():] if corte else ""))
         datos.append({"respuestas": e.respuestas})
 
@@ -4073,7 +4248,7 @@ def _envolver_prueba(html_: str, t: dict, es_minitest: bool = False) -> str:
 
 
 def construir_leccion(d, cfg, t, idiomas, destino, cal, todos, audio=None,
-                      dibujos=None) -> None:
+                      dibujos=None, vocabulario=None) -> None:
     """Las lecciones solo existen en ruso: son el curso."""
     datos, cuerpo = validar.frontmatter(d.ruta.read_text(encoding="utf-8"))
     i = todos.index(d)
@@ -4163,12 +4338,20 @@ def construir_leccion(d, cfg, t, idiomas, destino, cal, todos, audio=None,
             q["mp3"] = f"../audio/{archivo}"
     datos_quiz = ({"preguntas": preguntas_quiz, "t": t["quiz"]}
                   if preguntas_quiz else None)
-    # Grabarse solo donde hay un ▶ con el que compararse.
+    # Grabarse solo donde hay un ▶ con el que compararse, y con una frase
+    # concreta: «escuche la frase» sin decir cuál no dice nada.
     hay_audio = 'class="suena"' in html_cuerpo
     datos_grabar = {"t": t["grabar"]} if hay_audio else None
+    frase = frase_para_grabar(d, audio or {}) if hay_audio else None
+    # Y las tarjetas que la propia lección pide, de los días anteriores.
+    fichas = tarjetas_mod.de_la_leccion(d, vocabulario or {}, audio or {})
+    datos_fichas = ({"fichas": fichas, "t": t["tarjetas"], "raiz": ".."}
+                    if fichas else None)
+    html_cuerpo = _donde_van_las_tarjetas(html_cuerpo,
+                                          _bloque_de_tarjetas(t, fichas))
     cuerpo_final = (f'<article data-leccion="{d.numero}">' + cab + guia + aviso
                     + html_cuerpo + anuncio(cfg, "pie")
-                    + _bloque_de_grabar(t, hay_audio)
+                    + _bloque_de_grabar(t, hay_audio, frase)
                     + _bloque_del_quiz(t, preguntas_quiz) + '<div id="marcar-caja"></div>'
                     + _compartir(t, cfg, canonica)
                     + f'<nav class="pasos">{"".join(pasos)}</nav></article>')
@@ -4180,9 +4363,11 @@ def construir_leccion(d, cfg, t, idiomas, destino, cal, todos, audio=None,
                pagina_id=f"semana-{d.semana:02d}/dia-{d.dia}.html", raiz="..",
                publicadas=len(escritas(cal)), mapa_dias=mapa_de_dias(cal), traducida=False,
                con_audio=('class="suena"' in cuerpo_final
-                          or any(q.get("mp3") for q in preguntas_quiz)),
+                          or any(q.get("mp3") for q in preguntas_quiz)
+                          or any(f.get("mp3") for f in fichas)),
                prueba=datos_prueba,
-               huecos=datos_huecos, quiz=datos_quiz, grabar=datos_grabar),
+               huecos=datos_huecos, quiz=datos_quiz, grabar=datos_grabar,
+               fichas=datos_fichas),
         encoding="utf-8")
 
 
@@ -4416,6 +4601,10 @@ def construir(destino: pathlib.Path = DOCS, cfg: dict | None = None, textos: dic
     # Una vez para los tres idiomas: recorrer las 365 lecciones por idioma
     # sería tres veces el mismo trabajo para el mismo resultado.
     palabras = palabras_del_curso(cal, audio)
+    # El vocabulario de cada lección, leído UNA vez: las tarjetas de un día
+    # salen de los anteriores, y releer las 365 por lección serían 133.225
+    # lecturas para el mismo resultado.
+    vocabulario = tarjetas_mod.vocabulario_del_curso(plan.dias(cal))
     construir_voces(destino, palabras)
 
     for i in idiomas:
@@ -4436,7 +4625,7 @@ def construir(destino: pathlib.Path = DOCS, cfg: dict | None = None, textos: dic
     hechas = escritas(cal)
     for d in hechas:
         construir_leccion(d, cfg, textos["ru"], idiomas, destino, cal, todos, audio,
-                          dibujos)
+                          dibujos, vocabulario)
     construir_programa(cfg, textos["es"], idiomas, destino)
     construir_sitemap(cfg, idiomas, destino, cal)
     construir_ads_txt(cfg, destino)

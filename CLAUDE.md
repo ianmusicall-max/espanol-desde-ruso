@@ -5593,6 +5593,145 @@ la causa era mía: **el generador no copia `docs/fonts/` a un destino nuevo**
 —las fuentes están versionadas en `docs/` y nada más— así que la construcción
 de prueba no tenía ninguna. En el sitio publicado nunca faltaron.
 
+## Las tarjetas en la página, y cuatro cosas rotas que salieron con ellas (2026-10-30)
+
+El profesor mandó una foto de la lección 1-2 en el móvil: el calentamiento
+dice «Карточки: 8 слов» y **no había ninguna tarjeta a la vista**. Preguntó
+después si no se podían enseñar en la página, y de ahí salió todo lo demás.
+
+**Es la sexta vez que el contenido ya existía.** Las palabras son las de los
+días anteriores —escritas, traducidas, revisadas y locutadas desde octubre—,
+así que `scripts/tarjetas.py` no inventa nada: lee cuántas pide la lección
+(`Карточки: N слов`) y las saca hacia atrás del vocabulario del curso.
+**285 lecciones las piden y las 285 pueden darlas**, con cero contenido nuevo
+y cero céntimos.
+
+- **Las palabras son de los días ANTERIORES, nunca del suyo.** El
+  calentamiento repasa lo de ayer; enseñar hoy las que la lección va a dar
+  dentro de veinte minutos sería regalar el vocabulario del día.
+- **Las últimas N, seguidas.** Cuando hace falta tirar de un día más viejo se
+  cogen sus ÚLTIMAS palabras y no las primeras: así la baraja es exactamente
+  «lo último que aprendiste» y no una lista con un hueco en medio.
+- **El día 1 no lleva ninguna**, y su propio texto lo dice: «карточек ещё
+  нет». Un bloque ahí contradiría la lección.
+- **Nace oculto y lo enciende el navegador**, como el resto del sitio: sin
+  JavaScript una tarjeta no se puede dar la vuelta, y ese vocabulario está en
+  sus lecciones con la traducción al lado.
+- **El ▶ va en la cara española**, que es lo que la lección pide: se oye, se
+  dice la traducción en voz alta y se da la vuelta.
+- **Dónde va el bloque se decide por el CONTENIDO**, buscando el apartado que
+  habla de «Карточки», y no por el nombre del apartado: los días de repaso y
+  de cultura llaman al primero de otra manera.
+
+### Y el bloque de grabarse no decía QUÉ grabar
+
+De la misma foto: «no sale la frase que va a grabar». El bloque decía
+«escuche la frase (▶), dígala y compárese» **sin ninguna frase delante**, así
+que el ejercicio no se podía hacer. Ahora `frase_para_grabar` nombra una,
+con su ▶, y **prefiere una frase de EJEMPLO del vocabulario** —la tercera
+columna de `Словарь дня`—: una palabra suelta no entrena la pronunciación,
+porque lo que cuesta es la cadena y la vocal átona que el ruso reduce. Es
+determinista, así que al recargar la lección está la misma y se puede volver
+a intentar.
+
+### Los huecos: las fichas no se apagaban y la corrección estaba arriba
+
+También del profesor, usando el sitio: «cuando marcas las palabras no todas
+se desactivan», y «las respuestas correctas se van hasta abajo y no se ponen
+debajo del ejercicio mismo».
+
+- **Solo se apagaba la ÚLTIMA ficha del banco.** `repintarFichas` exigía
+  además que el total de fichas fuera igual a `Object.keys(vistas).length`, y
+  esa cuenta se va llenando DENTRO del propio bucle: hasta la última vuelta
+  nunca cuadra. Ahora se apagan tantas copias de una palabra como huecos la
+  lleven, que es lo que la condición quería decir.
+- **El botón de comprobar estaba ARRIBA**, pegado al banco, porque la barra
+  entera se insertaba detrás del `<h3>`. El banco sigue arriba —primero
+  eliges la palabra— y el botón baja al final de las frases: juntos arriba, el
+  resultado salía a una pantalla de distancia de lo que acababas de rellenar.
+- **Al fallar sale la respuesta correcta PEGADA al hueco**, en vez de mandar
+  a la clave del final de la página. Solo donde se puso algo: regalarle las
+  respuestas a quien pulse comprobar con todo en blanco deshace el ejercicio.
+  Vaciar el hueco se la lleva, así que se puede volver a intentar.
+
+**Y al comprobarlo en navegador salió lo gordo, que él no había visto: 32
+ejercicios no se podían acertar.** `huecos.leer` guardaba como respuesta el
+texto de la CLAVE —«**el cartel**» en negrita, «Aquí» con mayúscula— mientras
+que la ficha lleva el texto del BANCO —«el cartel»—. El validador ya
+comparaba sin marcado (`_plano`), así que el ejercicio pasaba; lo que se
+guardaba era el texto crudo y el navegador comparaba eso. **En 30 de los 32
+el lector sacaba 0 aciertos con todo bien puesto.** Ahora la respuesta que se
+guarda ES la entrada del banco, con lo que negrita, mayúsculas, acentos y
+puntuación dejan de importar de una vez.
+
+La guarda que lo encontró no es una prueba de Python: es
+`scripts/probar_navegador.js`, que ahora rellena el ejercicio entero
+eligiendo la ficha **por su texto** y exige que el marcador diga que están
+todas bien. Leyendo el código no se veía.
+
+### 14 audios eran silencio
+
+El profesor pulsó el ▶ de la «y» en la tabla de fonética: «esta letra no
+suena». El archivo existía y pesaba 3.501 bytes, así que pasaba las dos
+guardas de siempre —no está vacío, no es un `.parcial`— y el sitio le ponía
+su botón. **Un ▶ que no suena no se distingue de uno roto**, que es el peor
+fallo que puede tener esta página.
+
+Medido con ffmpeg sobre los 11.378: **14 son silencio** (pico por debajo de
+−60 dB contra los −3 a −10 de una frase normal). Dos se explican solas —la
+«h» española no se pronuncia y la «y» a secas no le dio nada al locutor— y
+las otras doce son frases normales que volvieron mudas, entre ellas «Ana:
+¿Conoces a García Márquez?».
+
+- **`generar_audio.mudo()`** lo contesta con ffmpeg y no con una cuenta sobre
+  el tamaño: un archivo corto puede ser una palabra corta. Si ffmpeg no está,
+  devuelve `False` —no se inventa un silencio—, porque quitarle el ▶ a una
+  frase que sí suena sería peor.
+- **`docs/audio/mudos.json`** guarda el TEXTO y no el hash: se lee qué frase
+  es sin descifrar nada, `escribir_indice` la deja fuera —así el sitio no le
+  pone ▶— y `faltan()` no la vuelve a pagar en cada corrida.
+- **`--mudos`** es el barrido de una vez, para lo que ya estaba locutado;
+  tarda tres minutos y no gasta un céntimo. **Una tanda nueva se mide sola**
+  al terminar, que es el momento de enterarse.
+- **`--reintentar`** borra los apartados y la lista para volver a pedirlos:
+  un silencio puede ser la letra o un fallo suelto de la API, y desde fuera
+  se ven igual. Lo que vuelva mudo otra vez se aparta solo, así que
+  reintentar no puede dejar un ▶ que no suena. **Las doce frases normales
+  valen el reintento: cuestan menos de un céntimo.**
+
+El índice pasa de 11.378 a **11.364** frases, y la «y» y la «h» se quedan sin
+botón, que es lo honrado: ahí no hay nada que oír.
+
+**Y una guarda se puso en rojo por esto, con razón.**
+`test_la_palabra_fallada_se_puede_OIR` exigía que las palabras del quiz
+estuvieran TODAS locutadas, y dos de ellas —«toma» y «la vela · soplar las
+velas»— son de las catorce mudas. No se aflojó a un «casi todas»: ahora admite
+sin audio **solo** lo que esté en `mudos.json` y revienta con cualquier otra,
+porque eso sería audio perdido y no silencio. Y las nombra, que es lo que
+convierte una excepción en una decisión.
+
+### El ▶ se pulsa con el dedo, y medía 17x13 px
+
+«Los botones de play pueden ser un poquito más grandes para poder apretar».
+Lo que crece es la **zona** y no el dibujo: agrandar el triángulo dentro de
+una tabla de vocabulario lo convertiría en el protagonista de la celda,
+cuando lo que enseña es la palabra de al lado.
+
+La zona pasa a unos **34x34** con un `::after` colocado, que no ocupa sitio y
+no mueve un píxel de la maqueta —`padding` no servía: un `<button>` es
+`inline-block`, así que el relleno vertical SÍ empuja, y son 13.575 ▶ metidos
+en frases y celdas—. Los 9 px de arriba y abajo salen **medidos**: dos ▶ de
+la misma columna están a 39,6 px, así que dos zonas de 34 no llegan a
+tocarse. Si crecieran más, al pulsar una fila se dispararía la de al lado.
+
+### Y por quinta vez, `\00a0` dentro de `CSS = """..."""`
+
+Al escribir el estilo de la respuesta correcta puse `content:"\00a0→\00a0"`,
+que Python lee como escape octal: **un byte NUL en las 394 páginas**. Está
+documentado desde el 2026-10-27 y lo volví a hacer igual. La única señal es
+que `grep` empiece a decir «binary file matches», y
+`test_ninguna_pagina_trae_un_byte_nulo` lo caza. El espacio duro va literal.
+
 ## Estado (2026-10-29)
 
 **Lo que el alumno puede hacer en el sitio, después de la tanda del 29:**
