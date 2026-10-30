@@ -5134,6 +5134,116 @@ Dos cosas menores que importan en el móvil: **Enter guarda** —ahí el teclado
 tapa el botón— y quien ya dio su nombre ve un saludo con un botón «Изменить»,
 no un campo abierto ocupando sitio para siempre.
 
+## El canal de Telegram, alimentado de lo que ya hay (2026-10-30)
+
+«Ok vamos con telegram». El 2026-10-27 se decidió que **Telegram es el canal**
+—es donde vive el público rusohablante fuera de Rusia y su umbral de
+monetización es alcanzable— y se anotó entonces que el curso ya tiene con qué
+alimentarlo sin escribir nada nuevo. Esto lo hace.
+
+    palabras del curso ......... 2 985
+    menos la que no es pareja ..     1
+    publicaciones .............. 2 984   → 8 años y 64 días
+      con voz .................. 2 882
+      con frase de ejemplo ..... 2 094
+      con dibujo ...............   263
+
+**Cero contenido nuevo y cero céntimos**: la palabra, su traducción, su frase,
+su voz y el enlace a la lección que la enseña salen de lo que el profesor ya
+escribió y revisó.
+
+### Las cuatro decisiones
+
+- **Van en el ORDEN DEL CURSO y no al azar.** Quien siga el canal está
+  haciendo una versión lenta del curso, y el enlace de cada día apunta a la
+  lección que toca. Alfabéticas —que es como las quiere el diccionario— el
+  primer día sería «los / las», de la lección 87. `palabras_del_curso` toma un
+  `orden=` y sigue siendo UNA función: un segundo recorrido de las 365
+  lecciones para lo mismo es como se descubre tarde que uno de los dos se
+  quedó viejo.
+- **Qué día sale cuál se calcula de la FECHA, no de un contador en disco.**
+  Correrlo dos veces el mismo día publica lo mismo —un cron que se dispara dos
+  veces no adelanta el canal— y no hay ningún estado que se pueda perder.
+- **Al acabarse NO vuelve a empezar.** Volver al principio en silencio haría
+  que el canal dijera «la palabra de hoy» de algo que ya salió hace ocho años.
+- **El canal se escribe en UN solo sitio**: el pie de las 394 páginas enlaza
+  `redes.telegram` y el publicador necesita `@handle`, así que se deriva del
+  enlace. `telegram.canal` queda para lo que el enlace no cubre —un canal
+  privado es un id numérico— y para poder publicar antes de enseñarlo.
+
+### La fila que se descarta, y por qué la regla no es una lista
+
+De las 2.985 hay **una** que no es una pareja de palabra y traducción:
+
+    tomar = и пить, и есть   →   tomar = прежде всего пить
+
+Escrita así sale un «tomar = … — tomar = …» que se lee como una publicación
+rota. La regla es «la columna rusa no puede repetir la palabra española», y se
+escribe así y no como una lista con esa fila dentro porque **una lista no
+vuelve a mirar nada** el día que el profesor escriba otra igual. Y por la forma
+del defecto y no por lo que descarta hoy: las **otras doce** filas con letras
+latinas en la columna rusa son glosas legítimas —`la palta (Арг., Чили, Перу)`,
+`(🌎 la alberca, la pileta)`, `(≠ dormir — спать)`— y descartarlas sería perder
+material bueno por una de mentira.
+
+**Y se compara la PALABRA, no la celda**: `tomar = и пить, и есть` no aparece
+tal cual dentro de la columna rusa, así que la primera versión no cazaba nada.
+La palabra la saca `generar_audio.parte_espanola`, que es el único sitio que
+sabe separar la glosa rusa de la española —se escribió el 2026-10-28 para
+rescatar estas mismas filas del locutor—. Con frontera de palabra: sin ella una
+entrada corta casaría dentro de cualquier paréntesis, «(ser)» incluido.
+
+### Dos cosas que habrían roto el canal y no se ven probándolo aquí
+
+1. **La carátula tiene que ser JPEG de 320 px y menos de 200 kB**, y los
+   dibujos son `.webp` de 512. Mandados tal cual, Telegram **rechaza el envío
+   entero**: las 263 publicaciones con dibujo se habrían quedado mudas sin
+   decir por qué. Se convierten a un temporal que se tira después.
+2. **Pillow no estaba en `requirements.txt`**, y GitHub Actions instala SOLO lo
+   que ese fichero diga. Estaba aquí por casualidad —lo usan `icono.py` y otros
+   tres— y allí no habría existido. Hay una guarda que lo fija.
+
+Las dos salieron de leer la documentación de la API y de mirar qué instala el
+trabajo, no de probar: **`api.telegram.org` da `000` desde este contenedor**,
+como Google, Drive y el Cervantes. Lo que SÍ está probado es todo lo demás:
+qué palabra toca, qué texto sale, qué se adjunta, qué forma tiene el pedido
+—con un enviador de mentira— y que la carátula cumple los límites.
+
+### El automatismo
+
+`.github/workflows/palabra-del-dia.yml`, todos los días a las **06:17 UTC**
+—media mañana en Alemania y en España, y el minuto no es redondo a propósito:
+a las en punto se juntan los crones de medio GitHub—. Corre en GitHub y no en
+el ordenador del profesor por una razón simple: **un canal diario que depende
+de que alguien encienda el portátil no es diario**.
+
+- **Enseña lo que va a salir SIEMPRE, en su propio paso**, aunque no publique:
+  así el registro de la corrida dice qué tocaba aunque el envío falle o aunque
+  el canal no exista todavía.
+- **Sin `TELEGRAM_TOKEN` no publica y no falla**: mientras el canal no exista,
+  una X roja cada mañana sería ruido.
+- **Lleva botón manual** (`workflow_dispatch`), y eso no es comodidad: es la
+  única forma de probar el envío, porque desde aquí no se puede.
+- **El token va de secreto del repositorio**, nunca en el repositorio. Hay una
+  guarda que busca por la FORMA de un token —«dígitos:35 caracteres»— en los
+  cuatro ficheros que podrían llevarlo. La primera versión buscaba la palabra
+  «bot» y la encontró dentro de «botón», que es prosa de un comentario; la
+  segunda pedía 35 caracteres exactos y el token de prueba tenía 34, así que
+  **dijo que todo estaba bien con un token pegado en el fichero**. Ahora admite
+  de 30 a 45: una guarda de seguridad que falla por un carácter no sirve.
+
+### Lo que falta, y es del profesor
+
+1. **Crear el canal** y meter al bot como ADMINISTRADOR (si no, Telegram
+   contesta «chat not found» aunque el token sea bueno).
+2. Hablar con **@BotFather** para crear el bot y guardar su token en
+   **Settings → Secrets and variables → Actions** como `TELEGRAM_TOKEN`.
+3. Escribir el enlace en `redes.telegram` y la fecha de arranque en
+   `telegram.desde`, en `web/sitio.yaml`.
+
+Mientras falte cualquiera de las tres, el canal no publica, el pie no enseña
+el enlace y el trabajo diario no se pone en rojo.
+
 ## Los cinco destinos en la barra, y la eñe como marca (2026-10-30)
 
 Lo pidió el profesor: *«Словарь курса · Тест на уровень, deberían estar en la

@@ -1,0 +1,67 @@
+# La palabra del día en el canal de Telegram.
+#
+# Corre AQUÍ y no en el ordenador del profesor por una razón concreta: un
+# canal diario que depende de que alguien encienda el portátil no es diario.
+# Y corre en GitHub y no en el contenedor donde se escribió el guion porque
+# `api.telegram.org` no se alcanza desde allí.
+#
+# Lo que hace falta para que publique, y mientras no esté no publica nada:
+#   1. el canal creado y el bot dentro, como ADMINISTRADOR (si no, Telegram
+#      contesta «chat not found» aunque el token sea bueno);
+#   2. `TELEGRAM_TOKEN` en Settings → Secrets and variables → Actions. El
+#      token NO va en el repositorio: es la llave del bot;
+#   3. `redes.telegram` y `telegram.desde` en `web/sitio.yaml`.
+name: palabra del día
+
+on:
+  schedule:
+    # 06:17 UTC: media mañana en Alemania y en España, que es donde está el
+    # público. El minuto no es redondo a propósito: a las en punto se juntan
+    # los crones de medio GitHub y la cita se retrasa.
+    - cron: "17 6 * * *"
+  # Para probarlo de un botón sin esperar a mañana. Hace falta: el envío no
+  # se puede comprobar desde el contenedor donde se escribió esto.
+  workflow_dispatch:
+    inputs:
+      numero:
+        description: "publicación concreta (vacío = la que toca por la fecha)"
+        required: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        # Sin historial: el repositorio lleva 290 MB de audio y traerse sus
+        # versiones anteriores todos los días no aporta nada.
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r requirements.txt
+
+      - name: ¿hay canal?
+        id: hay
+        run: |
+          if [ -z "${{ secrets.TELEGRAM_TOKEN }}" ]; then
+            echo "Sin TELEGRAM_TOKEN: no hay nada que publicar todavía."
+            echo "listo=no" >> "$GITHUB_OUTPUT"
+          else
+            echo "listo=si" >> "$GITHUB_OUTPUT"
+          fi
+
+      # Primero se enseña lo que va a salir, SIEMPRE, y en su propio paso: así
+      # el registro de la corrida dice qué se publicó aunque el envío falle, y
+      # un día sin canal deja igualmente escrito qué tocaba.
+      - name: qué toca hoy
+        run: python scripts/palabra_del_dia.py ${{ github.event.inputs.numero && format('--numero {0}', github.event.inputs.numero) || '' }}
+
+      - name: publicar
+        if: steps.hay.outputs.listo == 'si'
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CANAL: ${{ secrets.TELEGRAM_CANAL }}
+        run: python scripts/palabra_del_dia.py --telegram ${{ github.event.inputs.numero && format('--numero {0}', github.event.inputs.numero) || '' }}

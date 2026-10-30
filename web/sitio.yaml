@@ -84,3 +84,13 @@ redes:
   instagram: ""     # https://instagram.com/…
   youtube: ""       # https://youtube.com/@…
   facebook: ""      # https://facebook.com/…
+
+# El canal de Telegram (scripts/palabra_del_dia.py). Vacío = no se publica
+# nada y el enlace del pie no sale.
+#   canal:  @loquesea, o el id numérico si el canal es privado
+#   desde:  el día en que arranca, AAAA-MM-DD. Qué palabra toca se cuenta de
+#           la fecha y no de un contador, así que correrlo dos veces el mismo
+#           día publica lo mismo en vez de adelantar el canal.
+telegram:
+  canal: ""
+  desde: ""

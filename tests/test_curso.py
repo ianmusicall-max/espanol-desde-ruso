@@ -5,6 +5,7 @@
 from __future__ import annotations
 
 import copy
+import datetime as dt
 import dataclasses
 import html
 import json
@@ -37,6 +38,7 @@ import tarjeta_social  # noqa: E402
 import exportar_wordpress  # noqa: E402
 import escribir_leccion  # noqa: E402
 import exportar_anki  # noqa: E402
+import palabra_del_dia  # noqa: E402
 import plan  # noqa: E402
 import pruebas  # noqa: E402
 import quiz_lexico  # noqa: E402
@@ -4131,6 +4133,285 @@ class TestElSaludoYLaRacha(unittest.TestCase):
         # La rotación, en cambio, solo puede colgar del número de LECCIÓN.
         self.assertIn("variante(n,quien?T.bravo_con:T.bravo)", self.js)
         self.assertNotIn("variante(hechasAhora", self.js)
+
+
+class TestLaPalabraDelDia(unittest.TestCase):
+    """El canal de Telegram, alimentado de lo que ya hay (2026-10-30).
+
+    El 2026-10-27 se decidió que Telegram es el canal y se anotó que el curso
+    ya tiene con qué alimentarlo sin escribir nada. Esto lo hace: 2.984
+    publicaciones —ocho años y 64 días— con la palabra, su traducción, su
+    frase, su voz y el enlace a la lección que la enseña.
+
+    **El envío no se puede probar desde aquí**: `api.telegram.org` da `000`,
+    como Google y el Cervantes. Lo que estas guardas fijan es todo lo demás,
+    que es lo comprobable: qué palabra toca, qué texto sale, qué se adjunta y
+    qué forma tiene el pedido."""
+
+    DOCS = RAIZ / "docs"
+
+    @classmethod
+    def setUpClass(cls):
+        cls.lista = palabra_del_dia.palabras()
+        cls.t = construir_sitio.cargar_textos()["canal"]
+        cls.cfg = construir_sitio.cargar_config()
+
+    # --- qué palabra toca ---
+
+    def test_van_en_el_orden_del_curso(self):
+        """Quien siga el canal está haciendo una versión lenta del curso, y el
+        enlace de cada día apunta a la lección que toca. Alfabéticas —que es
+        como las quiere el diccionario— el primer día sería «los / las», de la
+        lección 87."""
+        numeros = [p["dia"].numero for p in self.lista]
+        self.assertEqual(numeros, sorted(numeros), "las palabras no van en orden de lección")
+        self.assertEqual(1, self.lista[0]["dia"].numero)
+        self.assertEqual("hola", self.lista[0]["es"])
+
+    def test_son_las_del_diccionario_menos_las_que_no_son_pareja(self):
+        """La MISMA lista que la página del vocabulario, en otro orden: un
+        segundo recorrido de las 365 lecciones para lo mismo es como se
+        descubre tarde que uno de los dos se quedó viejo."""
+        audio = construir_sitio.indice_de_audio(self.DOCS)
+        dicc = construir_sitio.palabras_del_curso(CAL, audio)
+        fuera = {p["es"] for p in dicc} - {p["es"] for p in self.lista}
+        self.assertEqual(1, len(fuera), f"se descartan {len(fuera)}: {sorted(fuera)[:5]}")
+
+    def test_una_fila_que_no_es_una_pareja_se_descarta(self):
+        """Una publicación promete «palabra — traducción». Si la columna rusa
+        repite la palabra española, es una aclaración y no una traducción."""
+        mala = {"es": "tomar = и пить, и есть", "ru": "tomar = прежде всего пить"}
+        self.assertFalse(palabra_del_dia.es_una_pareja(mala))
+        # Y las glosas legítimas se quedan: llevan latino en la columna rusa
+        # —la variante americana, una aclaración— y son material bueno.
+        for buena in ({"es": "el aguacate", "ru": "la palta (Арг., Чили, Перу)"},
+                      {"es": "la piscina", "ru": "бассейн (🌎 la alberca, la pileta)"},
+                      {"es": "dormirse", "ru": "заснуть (≠ dormir — спать)"},
+                      {"es": "sería · estaría", "ru": "был бы (ser) · был бы (estar)"}):
+            self.assertTrue(palabra_del_dia.es_una_pareja(buena), buena["es"])
+
+    def test_la_frontera_de_palabra_hace_falta(self):
+        """Sin ella una entrada corta casaría dentro de cualquier paréntesis
+        y se perdería material bueno por una coincidencia."""
+        self.assertTrue(palabra_del_dia.es_una_pareja(
+            {"es": "ser", "ru": "быть (не путать с serio)"}))
+        self.assertFalse(palabra_del_dia.es_una_pareja(
+            {"es": "ser", "ru": "ser — это быть"}))
+
+    # --- qué día sale cuál ---
+
+    def test_el_numero_sale_de_la_fecha_y_no_de_un_contador(self):
+        """Correrlo dos veces el mismo día publica lo mismo: un cron que se
+        dispara dos veces no puede adelantar el canal. Y no hay ningún estado
+        en disco que se pueda perder."""
+        desde = dt.date(2026, 11, 1)
+        self.assertEqual(1, palabra_del_dia.numero_del_dia(desde, desde))
+        self.assertEqual(1, palabra_del_dia.numero_del_dia(desde, desde))
+        self.assertEqual(2, palabra_del_dia.numero_del_dia(dt.date(2026, 11, 2), desde))
+        self.assertEqual(366, palabra_del_dia.numero_del_dia(dt.date(2027, 11, 1), desde))
+
+    def test_al_acabarse_no_vuelve_a_empezar_en_silencio(self):
+        """Volver al principio haría que el canal dijera «la palabra de hoy»
+        de algo que ya salió hace ocho años. Si algún día llega, es una
+        decisión y no un efecto."""
+        self.assertIsNotNone(palabra_del_dia.del_dia(self.lista, len(self.lista)))
+        self.assertIsNone(palabra_del_dia.del_dia(self.lista, len(self.lista) + 1))
+        self.assertIsNone(palabra_del_dia.del_dia(self.lista, 0))
+
+    # --- qué sale publicado ---
+
+    def test_el_texto_trae_la_palabra_su_traduccion_y_su_leccion(self):
+        p = self.lista[0]
+        cuerpo = palabra_del_dia.texto(p, self.t, "https://ejemplo.com")
+        self.assertIn(f"<b>{p['es']}</b>", cuerpo)
+        self.assertIn(p["ru"], cuerpo)
+        self.assertIn(f"semana-{p['dia'].semana:02d}/dia-{p['dia'].dia}.html", cuerpo)
+        self.assertIn(str(p["dia"].numero), cuerpo)
+
+    def test_el_enlace_de_cada_publicacion_existe(self):
+        """Un canal que manda a un 404 es peor que uno que no enlaza."""
+        if not (self.DOCS / "index.html").exists():
+            self.skipTest("el sitio todavía no está construido")
+        for p in self.lista[::97]:
+            d = p["dia"]
+            self.assertTrue((self.DOCS / f"semana-{d.semana:02d}" / f"dia-{d.dia}.html").exists(),
+                            f"{p['es']} manda a una lección que no está")
+
+    def test_el_texto_escapa_el_html(self):
+        """Va con `parse_mode=HTML`, así que un `<` sin escapar rompe el
+        mensaje entero y Telegram lo rechaza."""
+        p = dict(self.lista[0])
+        p["es"], p["ru"], p["ejemplo"] = "a < b", "a & b", "<i>x</i>"
+        cuerpo = palabra_del_dia.texto(p, self.t, "")
+        self.assertIn("a &lt; b", cuerpo)
+        self.assertIn("a &amp; b", cuerpo)
+        self.assertIn("&lt;i&gt;x&lt;/i&gt;", cuerpo)
+
+    def test_sin_dominio_no_se_inventa_un_enlace(self):
+        cuerpo = palabra_del_dia.texto(self.lista[0], self.t, "")
+        self.assertNotIn("http", cuerpo)
+
+    # --- qué se adjunta ---
+
+    def test_la_voz_manda_sobre_el_dibujo(self):
+        """El 96 % de las palabras tiene voz y oírla es para lo que existe un
+        canal de idiomas; el dibujo, que tienen 263, va de carátula."""
+        con_ambos = next(p for p in self.lista if p["mp3"] and p["dibujo"])
+        metodo, campos, archivos = palabra_del_dia._pedido(con_ambos, "x", "@c")
+        self.assertEqual("sendAudio", metodo)
+        self.assertEqual({"audio", "thumbnail"}, set(archivos))
+        self.assertEqual("x", campos["caption"])
+
+        solo_dibujo = dict(con_ambos, mp3="")
+        metodo, campos, archivos = palabra_del_dia._pedido(solo_dibujo, "x", "@c")
+        self.assertEqual("sendPhoto", metodo)
+        self.assertEqual({"photo"}, set(archivos))
+
+        pelada = dict(con_ambos, mp3="", dibujo="")
+        metodo, campos, archivos = palabra_del_dia._pedido(pelada, "x", "@c")
+        self.assertEqual("sendMessage", metodo)
+        self.assertEqual({}, archivos)
+        self.assertEqual("x", campos["text"])
+
+    def test_la_caratula_es_lo_que_telegram_admite(self):
+        """JPEG, 320 px de lado como mucho y menos de 200 kB: está en su
+        documentación. Los dibujos son `.webp` de 512, así que hay que
+        convertirlos — mandados tal cual, Telegram rechaza el envío ENTERO y
+        las 263 publicaciones con dibujo se quedarían mudas sin decir por
+        qué. No se puede comprobar contra Telegram desde aquí; lo que se
+        comprueba es que el archivo que se le entrega cumpla sus límites."""
+        try:
+            from PIL import Image
+        except ImportError:
+            self.skipTest("sin Pillow")
+        con_dibujo = [p for p in self.lista if p["dibujo"]][:6]
+        self.assertTrue(con_dibujo, "ninguna palabra trae dibujo")
+        with tempfile.TemporaryDirectory() as tmp:
+            for i, p in enumerate(con_dibujo):
+                origen = self.DOCS / "img" / p["dibujo"]
+                if not origen.exists():
+                    continue
+                salida = palabra_del_dia.miniatura(origen, pathlib.Path(tmp) / f"{i}.jpg")
+                with Image.open(salida) as im:
+                    self.assertEqual("JPEG", im.format, p["es"])
+                    self.assertLessEqual(max(im.size), palabra_del_dia.MINIATURA, p["es"])
+                self.assertLess(salida.stat().st_size, 200 * 1024, p["es"])
+
+    def test_la_caratula_no_se_queda_en_disco(self):
+        """Es un archivo temporal del envío: dejarlo sería media copia más de
+        263 dibujos cada vez que publica."""
+        fuente = (RAIZ / "scripts" / "palabra_del_dia.py").read_text(encoding="utf-8")
+        self.assertIn("tempfile.TemporaryDirectory()", fuente)
+
+    def test_los_archivos_que_se_adjuntan_existen(self):
+        """Un adjunto que falta hace que Telegram rechace la publicación
+        entera, y el canal se queda mudo ese día sin decir por qué."""
+        if not (self.DOCS / "audio").exists():
+            self.skipTest("el audio todavía no está generado")
+        faltan = []
+        for p in self.lista[::53]:
+            _, _, archivos = palabra_del_dia._pedido(p, "x", "@c")
+            faltan += [str(r) for r in archivos.values() if not r.exists()]
+        self.assertEqual([], faltan[:5])
+
+    def test_un_adjunto_que_falta_se_dice_antes_de_pedir_nada(self):
+        p = dict(self.lista[0], mp3="no-existe-0000")
+        with self.assertRaises(FileNotFoundError):
+            palabra_del_dia.enviar(p, "x", "token", "@c", pedir=lambda *a: {"ok": True})
+
+    def test_el_multipart_lleva_los_campos_y_los_bytes(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            f = pathlib.Path(tmp) / "x.mp3"
+            f.write_bytes(b"ID3datos")
+            datos, tipo = palabra_del_dia._multipart({"chat_id": "@c", "caption": "hola"},
+                                                     {"audio": f})
+        self.assertTrue(tipo.startswith("multipart/form-data; boundary="))
+        self.assertIn(b'name="chat_id"', datos)
+        self.assertIn(b"hola", datos)
+        self.assertIn(b"ID3datos", datos)
+        self.assertIn(b'filename="x.mp3"', datos)
+
+    # --- a dónde se publica ---
+
+    def test_el_canal_se_escribe_en_un_solo_sitio(self):
+        """El pie de las 394 páginas enlaza `redes.telegram` y el publicador
+        necesita `@handle`: son el mismo canal."""
+        self.assertEqual("@curso", palabra_del_dia.canal_de(
+            {"redes": {"telegram": "https://t.me/curso"}}))
+        self.assertEqual("@curso", palabra_del_dia.canal_de(
+            {"redes": {"telegram": "t.me/curso"}}))
+        # Un canal privado es un id numérico, que ningún enlace da.
+        self.assertEqual("-100123", palabra_del_dia.canal_de(
+            {"telegram": {"canal": "-100123"}, "redes": {"telegram": "https://t.me/otro"}}))
+        self.assertEqual("", palabra_del_dia.canal_de({"redes": {"telegram": ""}}))
+        self.assertEqual("", palabra_del_dia.canal_de({"redes": {"telegram": "https://x.com/a"}}))
+
+    def test_el_token_no_vive_en_el_repositorio(self):
+        """Es la llave del bot: quien la tenga publica en el canal. Sale del
+        entorno, que en GitHub Actions es un secreto del repositorio."""
+        fuente = (RAIZ / "scripts" / "palabra_del_dia.py").read_text(encoding="utf-8")
+        self.assertIn('os.environ.get(VAR_TOKEN)', fuente)
+        self.assertRegex(fuente, r'VAR_TOKEN\s*=\s*"TELEGRAM_TOKEN"')
+        # Y la URL lleva el token dentro, así que no puede imprimirse nunca.
+        for linea in fuente.split("\n"):
+            if "print(" in linea and "bot" in linea:
+                self.fail(f"una línea imprime la URL con el token: {linea.strip()}")
+        # Y no hay ninguno escrito en el repositorio. Se busca por la FORMA
+        # de un token de Telegram —«1234567890:AA…», 35 caracteres detrás de
+        # los dos puntos— y no por la palabra «bot»: la primera versión de
+        # esta guarda buscaba «bot» en `sitio.yaml` y lo encontró dentro de
+        # «botón», que es prosa de un comentario.
+        # El tramo de detrás de los dos puntos son 35 caracteres en los
+        # tokens de hoy, pero aquí se admiten de 30 a 45 A PROPÓSITO: una
+        # guarda de seguridad que falla por un carácter no sirve de nada, y
+        # un «dígitos:letras» de esa longitud no existe en prosa. La primera
+        # versión pedía 35 exactos y el token de prueba tenía 34: dijo que
+        # todo estaba bien con un token pegado en el fichero.
+        TOKEN = re.compile(r"\b\d{6,12}:[A-Za-z0-9_-]{30,45}\b")
+        for ruta in (RAIZ / "web" / "sitio.yaml", RAIZ / "web" / "textos.yaml",
+                     RAIZ / "scripts" / "palabra_del_dia.py",
+                     RAIZ / ".github" / "workflows" / "palabra-del-dia.yml"):
+            self.assertIsNone(TOKEN.search(ruta.read_text(encoding="utf-8")),
+                              f"hay algo con forma de token en {ruta.name}")
+
+    # --- el automatismo ---
+
+    def test_lo_que_el_guion_necesita_esta_en_requirements(self):
+        """GitHub Actions instala SOLO lo que diga `requirements.txt`, así que
+        un paquete que aquí está por casualidad allí no existe. Pillow entró
+        por esto: la carátula lo necesita y faltaba, o sea que las 263
+        publicaciones con dibujo habrían reventado el día que salieran."""
+        req = (RAIZ / "requirements.txt").read_text(encoding="utf-8").lower()
+        for paquete in ("pyyaml", "markdown", "pillow"):
+            self.assertIn(paquete, req, f"falta {paquete} en requirements.txt")
+
+    def test_el_trabajo_diario_existe_y_apunta_al_guion(self):
+        """Un canal diario que depende de que alguien encienda el portátil no
+        es diario."""
+        ruta = RAIZ / ".github" / "workflows" / "palabra-del-dia.yml"
+        self.assertTrue(ruta.exists(), "falta el trabajo de GitHub Actions")
+        w = yaml.safe_load(ruta.read_text(encoding="utf-8"))
+        # `on:` lo lee PyYAML como el booleano True, que es la trampa vieja
+        # del YAML 1.1 y no un fallo del fichero.
+        disparos = w.get("on") or w.get(True)
+        self.assertIn("schedule", disparos)
+        self.assertIn("workflow_dispatch", disparos,
+                      "sin botón manual no hay forma de probarlo: el envío no "
+                      "se puede comprobar desde este contenedor")
+        pasos = w["jobs"]["publicar"]["steps"]
+        corridas = " ".join(p.get("run", "") for p in pasos)
+        self.assertIn("scripts/palabra_del_dia.py", corridas)
+        self.assertIn("--telegram", corridas)
+        # El token viaja como secreto y nunca como texto.
+        self.assertIn("secrets.TELEGRAM_TOKEN", ruta.read_text(encoding="utf-8"))
+
+    def test_los_textos_del_canal_estan_y_son_rusos(self):
+        """En ruso y solo en ruso, como el test de nivel: es el idioma del que
+        lee el canal."""
+        for clave in ("urok", "abrir", "etiquetas"):
+            self.assertIn(clave, self.t)
+        self.assertTrue(re.search(r"[А-Яа-яЁё]", self.t["urok"]))
+        self.assertTrue(all(e.startswith("#") for e in self.t["etiquetas"]))
 
 
 class TestLaBarraDeArriba(unittest.TestCase):

@@ -22,6 +22,14 @@ idiomas:
     carpeta: "en"
     html: "en"
 
+
+# El canal de Telegram. En ruso y solo en ruso: es el idioma del que lo
+# lee, igual que el test de nivel.
+canal:
+  urok: "Урок"
+  abrir: "открыть урок"
+  etiquetas: ["#испанский", "#словодня", "#испанскийснуля"]
+
 ru:
   menu: {inicio: "Главная", curso: "Все уроки", sobre: "О курсе", contacto: "Контакты"}
   titulo_sitio: "Испанский с нуля для русскоговорящих"

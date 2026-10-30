@@ -2600,8 +2600,15 @@ EFECTOS_JS = r"""(function(){
 
 
 
-def palabras_del_curso(cal, audio: dict | None = None) -> list[dict]:
+def palabras_del_curso(cal, audio: dict | None = None,
+                       orden: str = "alfabetico") -> list[dict]:
     """Todas las entradas de vocabulario del curso, una por palabra.
+
+    `orden="curso"` las devuelve por la lección que las introduce y, dentro de
+    una lección, por su sitio en la tabla. Lo pide el canal de Telegram, que
+    sigue el curso; el diccionario las quiere alfabéticas. Es la MISMA lista
+    en los dos casos: un segundo recorrido de las 365 lecciones para lo mismo
+    es como se descubre tarde que uno de los dos se quedó viejo.
 
     De las 3.155 filas de las dos tablas salen 3.001 palabras: una que se
     glosa en un domingo y se enseña el lunes es la misma palabra, y se
@@ -2649,8 +2656,13 @@ def palabras_del_curso(cal, audio: dict | None = None) -> list[dict]:
             if not quiz_lexico.CIRILICA.search(ru):
                 continue
             vistas.add(es.lower())
-            salida.append({"es": es, "ru": ru, "dia": d,
+            # El ejemplo es la TERCERA columna de `Словарь дня` y no siempre
+            # está: los domingos usan otra tabla, de dos pares, que no tiene.
+            ejemplo = quiz_lexico.limpiar(fila[2]) if len(fila) >= 3 else ""
+            salida.append({"es": es, "ru": ru, "dia": d, "ejemplo": ejemplo,
                            "mp3": (audio.get(es) or "").removesuffix(".mp3")})
+    if orden == "curso":
+        return salida                      # ya viene en el orden del curso
     salida.sort(key=lambda p: (clave(p["es"]), p["es"]))
     return salida
 

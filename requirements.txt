@@ -1,3 +1,7 @@
 markdown>=3.6
 pyyaml>=6.0
 anthropic>=1.0
+# La usan icono.py, tarjeta_social.py, igualar_dibujos.py y la carátula de
+# la palabra del día, que es la que corre en GitHub Actions: allí se instala
+# SOLO lo que diga este fichero.
+Pillow>=10.0
