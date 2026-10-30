@@ -1,0 +1,89 @@
+# La baraja de Anki, fuera de git.
+#
+# POR QUÉ. El `.apkg` pesa 64 MB y git no puede comprimirlo ni deltarlo —son
+# 2.982 MP3 y 300 webp ya comprimidos—, así que CADA regeneración mete un blob
+# nuevo entero. Medido el 2026-10-30: cinco versiones en la historia, 235 MB de
+# los 442 que ocupa `.git`. Más de la mitad del repositorio son copias viejas
+# de este archivo, y encima sus medios duplican `docs/audio`, que ya está
+# versionado al lado.
+#
+# Una *release* no vive en git. El tag es FIJO (`baraja`), así que la URL de
+# descarga no cambia nunca y el sitio puede escribirla sin tener que
+# sincronizar nada — que es el precio que tenía este camino cuando se anotó
+# por primera vez, y el que hace que un botón de descarga acabe en 404.
+#
+# El manifiesto (`docs/vocabulario/baraja.json`, cinco números) SÍ se queda en
+# git y lo actualiza este trabajo: es lo que el sitio lee para pintar el bloque
+# de descarga sin abrir 64 MB en cada construcción.
+name: la baraja
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      # Lo que de verdad cambia la baraja. `docs/vocabulario/baraja.json` NO
+      # está aquí a propósito: lo escribe este mismo trabajo, y si disparara
+      # otra corrida se perseguiría la cola.
+      - "curso/**"
+      - "scripts/exportar_apkg.py"
+      - "scripts/exportar_anki.py"
+      - "scripts/generar_audio.py"
+      - ".github/workflows/baraja.yml"
+
+# Para crear la release y subirle el archivo.
+permissions:
+  contents: write
+
+concurrency:
+  # Dos corridas subiendo 64 MB al mismo tag se pisan.
+  group: baraja
+  cancel-in-progress: true
+
+jobs:
+  armar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        # Sin historial: el repositorio lleva 290 MB de audio y las versiones
+        # anteriores no las necesita nadie para armar la baraja.
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r requirements.txt
+
+      - name: armar la baraja
+        run: python scripts/exportar_apkg.py
+
+      # `--clobber` reemplaza el archivo del mismo tag. Así la URL de descarga
+      # es siempre la misma y no hay nada que sincronizar en el sitio.
+      - name: subirla a la release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          gh release view baraja >/dev/null 2>&1 || gh release create baraja \
+            --title "La baraja de vocabulario" \
+            --notes "Se rehace sola cuando cambia el curso. El enlace de descarga no cambia nunca."
+          gh release upload baraja docs/vocabulario/espanol-desde-ruso.apkg --clobber
+          gh release view baraja --json assets \
+            --jq '.assets[] | "\(.name)  \(.size) bytes  \(.url)"'
+
+      # El manifiesto son cinco números y el sitio los lee para decir cuántas
+      # tarjetas hay. Si la baraja cambió y esto no se guarda, la página
+      # anuncia una cuenta que ya no es.
+      - name: guardar el manifiesto si cambió
+        run: |
+          if git diff --quiet -- docs/vocabulario/baraja.json; then
+            echo "El manifiesto no cambió."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add docs/vocabulario/baraja.json
+            git commit -m "La baraja: $(python -c "import json;m=json.load(open('docs/vocabulario/baraja.json'));print(m['palabras'],'palabras,',m['con_voz'],'con voz')")"
+            git push
+          fi

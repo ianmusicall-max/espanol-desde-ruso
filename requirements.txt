@@ -5,3 +5,8 @@ anthropic>=1.0
 # la palabra del día, que es la que corre en GitHub Actions: allí se instala
 # SOLO lo que diga este fichero.
 Pillow>=10.0
+# La usa scripts/exportar_apkg.py, que desde el 2026-10-30 corre en GitHub
+# Actions para dejar la baraja en una release en vez de en git. Allí se
+# instala SOLO lo que diga este fichero: es el mismo descuido que ya tuvo
+# Pillow con la palabra del día.
+genanki>=0.13
