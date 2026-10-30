@@ -85,6 +85,9 @@ const POR_DEFECTO = [
   'docs/semana-30/dia-3.html',
   'docs/semana-45/dia-1.html',
   'docs/semana-52/dia-7.html',
+  // La tabla de fonética donde el profesor pulsó la «y» y no sonó nada: sus
+  // dos letras estaban entre los 14 mudos, y las dos volvieron con voz.
+  'docs/semana-01/dia-3.html',
 ];
 
 async function unaPagina(b, rel, base) {

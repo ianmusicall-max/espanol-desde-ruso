@@ -5678,10 +5678,8 @@ su botón. **Un ▶ que no suena no se distingue de uno roto**, que es el peor
 fallo que puede tener esta página.
 
 Medido con ffmpeg sobre los 11.378: **14 son silencio** (pico por debajo de
-−60 dB contra los −3 a −10 de una frase normal). Dos se explican solas —la
-«h» española no se pronuncia y la «y» a secas no le dio nada al locutor— y
-las otras doce son frases normales que volvieron mudas, entre ellas «Ana:
-¿Conoces a García Márquez?».
+−60 dB contra los −3 a −10 de una frase normal), entre ellas «Ana: ¿Conoces a
+García Márquez?».
 
 - **`generar_audio.mudo()`** lo contesta con ffmpeg y no con una cuenta sobre
   el tamaño: un archivo corto puede ser una palabra corta. Si ffmpeg no está,
@@ -5696,11 +5694,11 @@ las otras doce son frases normales que volvieron mudas, entre ellas «Ana:
 - **`--reintentar`** borra los apartados y la lista para volver a pedirlos:
   un silencio puede ser la letra o un fallo suelto de la API, y desde fuera
   se ven igual. Lo que vuelva mudo otra vez se aparta solo, así que
-  reintentar no puede dejar un ▶ que no suena. **Las doce frases normales
-  valen el reintento: cuestan menos de un céntimo.**
+  reintentar no puede dejar un ▶ que no suena.
 
-El índice pasa de 11.378 a **11.364** frases, y la «y» y la «h» se quedan sin
-botón, que es lo honrado: ahí no hay nada que oír.
+El índice pasa de 11.378 a **11.364** frases mientras las catorce están
+apartadas, y la «y» y la «h» se quedan sin botón. **Al reintentarlas el mismo
+día se arreglaron las catorce: ver la nota de abajo.**
 
 **Y una guarda se puso en rojo por esto, con razón.**
 `test_la_palabra_fallada_se_puede_OIR` exigía que las palabras del quiz
@@ -5732,13 +5730,86 @@ documentado desde el 2026-10-27 y lo volví a hacer igual. La única señal es
 que `grep` empiece a decir «binary file matches», y
 `test_ninguna_pagina_trae_un_byte_nulo` lo caza. El espacio duro va literal.
 
+## Las catorce mudas se arreglaron, y el recodificado dejó de vivir en mi memoria (2026-10-30)
+
+«Corregir los audios que faltan», el mismo día. `--reintentar` borró los
+catorce y la corrida siguiente los volvió a pedir por **0,0036 USD**.
+
+**Volvieron con voz las CATORCE, la «h» y la «y» incluidas** —picos de −3,4 a
+−10,6 dB, o sea habla normal—, así que la nota de arriba estaba equivocada en
+lo que más importaba: no eran dos letras sin nada que decir y doce fallos
+sueltos de la API, eran **catorce fallos sueltos**. Corregido también el
+comentario de `MUDOS` en el guion, que afirmaba lo mismo. `mudos.json` ya no
+existe: lo sano es que esa lista esté **vacía**, y eso es lo que la convierte
+en una red y no en una lista de excepciones del idioma.
+
+El índice vuelve a **11.378** frases y el sitio pasa de 13.575 ▶ a **14.080**
+en 355 lecciones. Comprobado en Chromium pulsando los dos botones exactos de
+la foto del profesor —las filas «y [й] перед гласной» y «h — не читается
+никогда» de `semana-01/dia-3`—: MP3 con 200 y bytes, `aria-pressed` en true
+mientras suena y cero errores de JS. Esa página entra en la lista de
+`probar_navegador.js`.
+
+**Y `aria-pressed` vuelve a false al acabarse el clip**, que es lo correcto
+—el reproductor lo apaga en el evento `ended`— pero hace que una
+comprobación escrita a ojo mienta: mi primera medida esperaba 1,8 s y los dos
+clips duran 1,06 y 1,56, así que los dos dieron «false» con el audio
+funcionando. La señal hay que leerla **mientras suena**.
+
+### El recodificado a 64 kbps estaba en mi memoria y ahora está en el guion
+
+Al ir a subir los catorce aparecieron a **128 kbps**: el recodificado que la
+nota del 2026-10-28 describe como obligatorio antes del primer commit **no
+existía en ningún archivo del repositorio**. Era una orden de ffmpeg en mi
+historial de shell, y por eso se olvidó una vez con una tanda entera ya
+generada.
+
+Es el agujero que este proyecto documenta una y otra vez —`repartir_temas.py`
+sin nadie que lo llamara, `vigilar_disco.py` sin unidad de systemd—: un paso
+que hace falta y no vive en ningún sitio.
+
+- **`generar_audio.recodificar(ruta)`** lo hace, y **la tanda nueva pasa por
+  él sola**, entre `generar` y el índice. Lo que se indexa es lo que se
+  publica, así que ese orden es la invariante y hay una prueba que lo lee del
+  propio guion en vez de confiar en que alguien se acuerde.
+- **`--recodificar`** es el barrido de una vez, para lo que ya estaba en
+  disco. Corrido hoy sobre los 11.378 tocó **exactamente 14**: es idempotente,
+  y eso no es un detalle —recodificar dos veces pierde calidad—.
+- **El umbral es `BITS_TOPE` y no una igualdad.** Un archivo ya recodificado
+  mide unos 64.500 bps y no 64.000 exactos, así que con `== BITS` se
+  recodificaría en cada corrida. Lo delató mirar un archivo viejo con
+  `ffprobe`, no razonarlo.
+- **El `-f mp3` no es de adorno**, y esto ya costó una tanda el 28: el
+  temporal se llama `.parcial` y de esa extensión ffmpeg no deduce el
+  formato. Hay una prueba que exige que esa bandera siga en la orden.
+- **Escribe aparte y renombra encima**, como el `.parcial` del generador: un
+  ffmpeg cortado deja el original intacto y no un MP3 truncado que el sitio
+  serviría como bueno. Comprobado con un archivo que no es un MP3.
+
+La carpeta queda en **292 MB**, dentro del límite de 1.024 MB de GitHub
+Pages.
+
+### Y la guarda del quiz se arregló sola, que era el objetivo
+
+`test_la_palabra_fallada_se_puede_OIR` admite sin audio **solo** lo que esté
+en `mudos.json`. Con la lista vacía vuelve a exigir las 1.198 palabras
+locutadas, sin que nadie haya tocado la prueba: eso es lo que se buscaba al
+no aflojarla a un «casi todas» el día anterior.
+
+Lo que **sí** hubo que reescribir es `test_ningun_mudo_esta_en_el_indice`,
+que exigía «al menos uno» en la lista para no quedarse vacío de sentido. Eso
+fija el CONTENIDO de un fichero de datos —el defecto que esta suite ya se
+corrigió dos veces en las claves de los tests— y se puso en rojo el día que
+se arreglaron los catorce. Ahora mira la RELACIÓN, y un segundo test aparta
+uno a mano para que la relación no se compruebe sobre un conjunto vacío.
+
 ## Estado (2026-10-29)
 
 **Lo que el alumno puede hacer en el sitio, después de la tanda del 29:**
 
 | | |
 |---|---|
-| leer las lecciones | 365 días, con 13 440 botones ▶ |
+| leer las lecciones | 365 días, con 14 080 botones ▶ |
 | escribir en los ejercicios | 3 933 casillas, y 730 huecos que se rellenan pulsando en 101 lecciones |
 | contestarse | 68 días con test de opción múltiple **+ 244 con el de las palabras del día** |
 | **comprobar las palabras del día** | 1 198 preguntas en 244 lecciones, con el ▶ de la que se falla |
@@ -5799,8 +5870,10 @@ grabación muere con la pestaña.
   `docs/img/`): hasta ese día la pestaña del navegador enseñaba el globo gris.
 - **El audio está COMPLETO** (2026-10-28): las **11 378 frases** del curso
   locutadas con la voz `shimmer` —1,30 USD el 26 de octubre y **2,85 hoy**,
-  4,15 en total—, 291 MB a 64 kbps, y **13 575 botones ▶ en las 365
-  lecciones**, que eran 4.225 en 94. Verificado sobre los archivos de disco:
+  4,15 en total—, 292 MB a 64 kbps, y **14 080 botones ▶ en las 365
+  lecciones**, que eran 4.225 en 94. Las **14 que volvieron mudas** se
+  repidieron el 2026-10-30 y volvieron las catorce con voz: `mudos.json` ya
+  no existe y el índice está completo. Verificado sobre los archivos de disco:
   todos a 64 000 bps, ninguno vacío y ninguno ilegible. Y comprobado **en
   navegador**: el ▶ pide su MP3 y suena, con una guarda en
   `probar_navegador.js` que lo exige en 25 páginas.

@@ -5968,9 +5968,11 @@ class TestElAudioQueNoSuena(unittest.TestCase):
     Lo encontró el profesor pulsando la «y» de la tabla de fonética: «esta
     letra no suena». El archivo existía y pesaba 3.501 bytes, así que pasaba
     las dos guardas de siempre —no está vacío, no es un `.parcial`— y el sitio
-    le ponía su botón. Medido sobre el curso entero son **14**: la «h»
-    española, que no se pronuncia, la «y» suelta, y doce frases normales que
-    volvieron mudas del locutor."""
+    le ponía su botón. Medido sobre el curso entero eran **14**, y al volver a
+    pedirlas las 14 volvieron con voz —la «h» y la «y» incluidas—, o sea que
+    eran fallos sueltos de la API y no letras sin nada que decir. Por eso esto
+    no es una lista de excepciones del idioma: es una red, y lo normal es que
+    esté VACÍA."""
 
     def test_mudo_distingue_el_silencio_de_una_frase(self):
         if not shutil.which("ffmpeg"):
@@ -5991,11 +5993,30 @@ class TestElAudioQueNoSuena(unittest.TestCase):
         self.assertFalse(generar_audio.mudo(RAIZ / "no" / "existe.mp3"))
 
     def test_ningun_mudo_esta_en_el_indice(self):
+        """Mira la RELACIÓN y no el número.
+
+        La primera versión exigía que la lista tuviera al menos uno, y se puso
+        en rojo el día que se arreglaron los catorce: fijaba el CONTENIDO de
+        un fichero de datos, que es el defecto que esta suite ya se corrigió
+        dos veces en las claves de los tests. Hoy lo sano es cero."""
         carpeta = RAIZ / "docs" / "audio"
         mudos = generar_audio.leer_mudos(carpeta)
-        self.assertGreaterEqual(len(mudos), 1, "el barrido no dejó su lista")
         indice = json.loads((carpeta / generar_audio.INDICE).read_text(encoding="utf-8"))
         self.assertEqual(set(), mudos & set(indice))
+
+    def test_un_mudo_se_queda_fuera_del_indice(self):
+        """Y lo de arriba no puede quedarse vacío de sentido: con la lista a
+        cero esa comprobación pasa sola, así que aquí se aparta uno a mano."""
+        carpeta = pathlib.Path(tempfile.mkdtemp())
+        for f in ("suena", "no suena"):
+            (carpeta / generar_audio.nombre_de(f)).write_bytes(b"xx")
+        self.assertEqual(2, generar_audio.escribir_indice(["suena", "no suena"], carpeta))
+        generar_audio.anotar_mudos(carpeta, ["no suena"])
+        self.assertEqual(1, generar_audio.escribir_indice(["suena", "no suena"], carpeta))
+        indice = json.loads((carpeta / generar_audio.INDICE).read_text(encoding="utf-8"))
+        self.assertIn("suena", indice)
+        self.assertNotIn("no suena", indice)
+        shutil.rmtree(carpeta, ignore_errors=True)
 
     def test_ninguna_pagina_pone_un_boton_a_un_audio_mudo(self):
         """La comprobación que de verdad importa: el índice puede estar bien y
@@ -6016,6 +6037,80 @@ class TestElAudioQueNoSuena(unittest.TestCase):
         self.assertEqual([], generar_audio.faltan(["la h muda"], carpeta))
         self.assertEqual(["otra"], generar_audio.faltan(["la h muda", "otra"], carpeta))
         shutil.rmtree(carpeta, ignore_errors=True)
+
+
+class TestLaRecodificacionDelAudio(unittest.TestCase):
+    """Los MP3 se publican a 64 kbps, y eso tiene que pasar ANTES del commit.
+
+    git guarda el historial para siempre, así que subir los de 128 y
+    encogerlos después deja el repositorio cargando con los dos juegos. El
+    paso existía desde el 2026-10-28 y vivía en la memoria de quien corriera
+    el guion: se olvidó una vez, con catorce audios ya generados."""
+
+    def _mp3(self, carpeta, nombre, bits):
+        ruta = carpeta / nombre
+        subprocess.run(["ffmpeg", "-y", "-hide_banner", "-loglevel", "error", "-f", "lavfi",
+                        "-i", "sine=frequency=440:r=24000:d=2", "-b:a", str(bits),
+                        "-ac", "1", str(ruta)], check=True)
+        return ruta
+
+    def test_baja_los_de_128_y_no_toca_los_de_64(self):
+        """Idempotente: una corrida cortada a mitad se reanuda sin
+        recodificar dos veces y perder calidad."""
+        if not shutil.which("ffmpeg") or not shutil.which("ffprobe"):
+            self.skipTest("sin ffmpeg")
+        carpeta = pathlib.Path(tempfile.mkdtemp())
+        gordo = self._mp3(carpeta, "gordo.mp3", 128_000)
+        fino = self._mp3(carpeta, "fino.mp3", generar_audio.BITS)
+        antes = fino.read_bytes()
+
+        self.assertTrue(generar_audio.recodificar(gordo))
+        self.assertLessEqual(generar_audio.bits_de(gordo), generar_audio.BITS_TOPE)
+        self.assertFalse(generar_audio.recodificar(gordo), "lo recodificó dos veces")
+
+        self.assertFalse(generar_audio.recodificar(fino))
+        self.assertEqual(antes, fino.read_bytes(), "tocó uno que ya estaba bien")
+        shutil.rmtree(carpeta, ignore_errors=True)
+
+    def test_el_umbral_no_es_una_igualdad(self):
+        """Un archivo ya recodificado mide unos 64 500 bps y no 64 000
+        exactos: con `== BITS` se recodificaría en cada corrida."""
+        self.assertGreater(generar_audio.BITS_TOPE, generar_audio.BITS)
+
+    def test_un_fallo_deja_el_original_intacto(self):
+        """Escribe aparte y renombra encima, como el `.parcial` del generador:
+        un ffmpeg cortado no puede dejar un MP3 truncado que el sitio sirva
+        como bueno."""
+        if not shutil.which("ffmpeg") or not shutil.which("ffprobe"):
+            self.skipTest("sin ffmpeg")
+        carpeta = pathlib.Path(tempfile.mkdtemp())
+        roto = carpeta / "roto.mp3"
+        roto.write_bytes(b"esto no es un mp3")
+        self.assertFalse(generar_audio.recodificar(roto))
+        self.assertEqual(b"esto no es un mp3", roto.read_bytes())
+        self.assertEqual([], list(carpeta.glob("*.parcial")))
+        shutil.rmtree(carpeta, ignore_errors=True)
+
+    def test_el_temporal_lleva_el_formato_escrito(self):
+        """El `-f mp3` NO es de adorno: el temporal se llama `.parcial` y de
+        esa extensión ffmpeg no deduce el formato. Sin él falla con «Unable to
+        choose an output format», que es lo que dejó una tanda entera sin
+        recodificar."""
+        fuente = (pathlib.Path("scripts/generar_audio.py")).read_text(encoding="utf-8")
+        cuerpo = fuente.split("def recodificar(")[1].split("\ndef ")[0]
+        self.assertIn('"-f", "mp3"', cuerpo)
+        self.assertIn('.parcial', cuerpo)
+
+    def test_la_tanda_nueva_se_recodifica_sola(self):
+        """Mira por dónde CORRE y no que la función exista: entre `generar` y
+        el índice tiene que pasar por `recodificar`, porque lo que se indexa
+        es lo que se publica."""
+        fuente = (pathlib.Path("scripts/generar_audio.py")).read_text(encoding="utf-8")
+        tras_generar = fuente.split("hechas = generar(")[1]
+        recod = tras_generar.find("recodificar(")
+        indice = tras_generar.find("escribir_indice(")
+        self.assertNotEqual(-1, recod, "la tanda nueva no se recodifica")
+        self.assertLess(recod, indice, "se indexa antes de recodificar")
 
 
 class TestElBotonDeOir(unittest.TestCase):

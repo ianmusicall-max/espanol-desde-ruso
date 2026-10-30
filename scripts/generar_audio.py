@@ -43,9 +43,10 @@ INDICE = "indice.json"
 # Lo que volvió MUDO. Un MP3 de silencio pesa y existe, así que pasaba las dos
 # guardas de siempre —no está vacío, no es un `.parcial`— y el sitio le ponía
 # su ▶: el lector lo pulsa y no suena nada, que es el peor fallo posible
-# porque no se distingue de un botón roto. Pasó con dos letras sueltas de la
-# tabla de fonética: la «h» española no se pronuncia y la «y» a secas tampoco
-# le dio nada al locutor.
+# porque no se distingue de un botón roto. Pasó con 14 de las 11 378, y al
+# volver a pedirlas las 14 volvieron con voz —la «h» y la «y» incluidas—, o
+# sea que eran fallos sueltos de la API y no letras sin nada que decir. Por
+# eso esto no es una lista de excepciones del idioma: es una red.
 #
 # Se guarda el TEXTO y no el hash: así se lee qué frase es sin descifrar nada,
 # y `faltan()` no vuelve a pagarla en cada corrida.
@@ -54,6 +55,19 @@ MUDOS = "mudos.json"
 # las dos mudas estaban en -61 y -84. Cualquier corte entre medias vale; -50
 # deja fuera el silencio sin tocar una grabación floja.
 SILENCIO_DB = -50.0
+
+# Lo que se PUBLICA. OpenAI entrega 128 kbps mono 24 kHz, que para voz es
+# tirar bits que el oído no recoge: a 64 el curso entero pasa de 463 MB a 290
+# y cabe de sobra en el límite de 1024 MB de GitHub Pages.
+#
+# Se recodifica ANTES del primer commit, y eso no es manía: git guarda el
+# historial para siempre, así que subir los de 128 y encogerlos después deja
+# el repositorio cargando con los dos juegos.
+BITS = 64_000
+# Un archivo ya recodificado mide unos 64 500 bps y no 64 000 exactos, así
+# que la comprobación es un umbral y no una igualdad: con `== BITS` se
+# recodificaría cada vez, y recodificar dos veces pierde calidad.
+BITS_TOPE = 80_000
 
 MODELO = "gpt-4o-mini-tts"
 # La eligió el profesor el 2026-10-26 oyendo las tres con la misma frase
@@ -223,6 +237,61 @@ def mudo(ruta: pathlib.Path) -> bool:
     return bool(pico) and float(pico.group(1)) < SILENCIO_DB
 
 
+def bits_de(ruta: pathlib.Path) -> int | None:
+    """Los bits por segundo de un MP3, o None si no se pueden leer."""
+    try:
+        salida = subprocess.run(
+            ["ffprobe", "-v", "error", "-show_entries", "format=bit_rate",
+             "-of", "csv=p=0", str(ruta)],
+            capture_output=True, text=True, timeout=60).stdout.strip()
+    except (OSError, subprocess.SubprocessError):
+        return None
+    return int(salida) if salida.isdigit() else None
+
+
+def recodificar(ruta: pathlib.Path) -> bool:
+    """Deja el MP3 a BITS. Devuelve si hizo falta tocarlo.
+
+    Es IDEMPOTENTE: lo que ya está a 64 no se vuelve a tocar, así que una
+    corrida cortada a mitad se reanuda sin recodificar dos veces y perder
+    calidad.
+
+    Escribe aparte y renombra encima, por lo mismo que el `.parcial` del
+    generador: si ffmpeg se corta, lo que queda es el original intacto y no un
+    MP3 truncado que el sitio serviría como bueno.
+
+    Y el `-f mp3` NO es de adorno: el temporal se llama `.parcial`, y de esa
+    extensión ffmpeg no deduce el formato. Sin él falla con «Unable to choose
+    an output format», que es lo que dejó una tanda entera sin recodificar.
+    """
+    bits = bits_de(ruta)
+    if bits is None or bits <= BITS_TOPE:
+        return False
+    tmp = ruta.with_suffix(ruta.suffix + ".parcial")
+    try:
+        hecho = subprocess.run(
+            ["ffmpeg", "-nostdin", "-hide_banner", "-loglevel", "error", "-y",
+             "-i", str(ruta), "-b:a", str(BITS), "-ac", "1", "-f", "mp3", str(tmp)],
+            capture_output=True, text=True, timeout=300)
+    except (OSError, subprocess.SubprocessError):
+        tmp.unlink(missing_ok=True)
+        return False
+    if hecho.returncode != 0 or not tmp.exists() or tmp.stat().st_size == 0:
+        tmp.unlink(missing_ok=True)
+        return False
+    tmp.replace(ruta)
+    return True
+
+
+def recodificar_todo(frases: list[str], carpeta: pathlib.Path, voz: str = VOZ,
+                     hilos: int = 4) -> list[str]:
+    """Las que hacía falta recodificar, de las que están en disco."""
+    hay = [f for f in frases if (carpeta / nombre_de(f, voz)).exists()]
+    with cf.ThreadPoolExecutor(max_workers=hilos) as pool:
+        hechas = list(pool.map(lambda f: recodificar(carpeta / nombre_de(f, voz)), hay))
+    return [f for f, h in zip(hay, hechas) if h]
+
+
 def leer_mudos(carpeta: pathlib.Path) -> set[str]:
     try:
         return set(json.loads((carpeta / MUDOS).read_text(encoding="utf-8")))
@@ -342,6 +411,8 @@ def main(argv=None) -> int:
                    help="mide los audios que ya están en disco y aparta los que son silencio")
     p.add_argument("--reintentar", action="store_true",
                    help="borra los audios apartados por mudos para volver a pedirlos")
+    p.add_argument("--recodificar", action="store_true",
+                   help=f"baja a {BITS // 1000} kbps lo que esté en disco por encima")
     a = p.parse_args(argv)
 
     frases = todas_las_frases(plan.cargar())
@@ -359,6 +430,14 @@ def main(argv=None) -> int:
         print(f"{len(mudas)} audios mudos borrados · cuestan "
               f"{coste(mudas):.4f} USD volver a pedirlos")
         print("Ahora: .venv/bin/python scripts/generar_audio.py")
+        return 0
+
+    if a.recodificar:
+        # El barrido de una vez, para lo que ya estaba en disco antes de que
+        # esto fuera automático. No gasta un céntimo y es idempotente.
+        tocadas = recodificar_todo(frases, a.carpeta, a.voz)
+        print(f"{len(tocadas)} recodificadas a {BITS // 1000} kbps")
+        print("Ahora: .venv/bin/python scripts/construir_sitio.py")
         return 0
 
     if a.mudos:
@@ -404,6 +483,12 @@ def main(argv=None) -> int:
         return 1
 
     hechas = generar(pendientes, a.carpeta, OpenAI(), a.voz)
+    # Se recodifica AQUÍ y no a mano: es el paso que el repositorio exige
+    # antes del primer commit, y mientras vivió en la memoria de quien
+    # corriera el guion se olvidó una vez.
+    bajadas = [f for f in hechas if recodificar(a.carpeta / nombre_de(f, a.voz))]
+    if bajadas:
+        print(f"\n{len(bajadas)} recodificadas a {BITS // 1000} kbps")
     # Se miden SOLO las de esta tanda: son pocas y es el momento de enterarse.
     # El barrido de todo el disco es `--mudos`.
     callados = [f for f in hechas if mudo(a.carpeta / nombre_de(f, a.voz))]
