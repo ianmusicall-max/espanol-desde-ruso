@@ -71,7 +71,8 @@ def _id(texto: str) -> int:
     return int(hashlib.sha256(texto.encode("utf-8")).hexdigest()[:12], 16)
 
 
-CAMPOS = ["Espanol", "Ruso", "Ejemplo", "Imagen", "Audio", "Leccion"]
+CAMPOS = ["Espanol", "Ruso", "Ejemplo", "Imagen", "Audio", "Leccion",
+          "Todos"]
 
 # El estilo: la paleta del sitio, para que la baraja no parezca de otra casa.
 ESTILO = """
@@ -107,7 +108,35 @@ PLANTILLAS = [
                 '<div class="ru">{{Ruso}}</div>'
                 '{{#Leccion}}<div class="de">{{Leccion}}</div>{{/Leccion}}',
     },
+    # El sentido de vuelta. Va envuelta en {{#Todos}} por el mismo motivo que
+    # la de arriba en {{#Imagen}}, y además resuelve lo único que este sentido
+    # tiene de difícil: 171 palabras rusas tienen varios españoles, y si cada
+    # nota sacara su tarjeta habría 171 anversos repetidos con respuestas
+    # distintas, que en repaso espaciado es ruido puro. Solo UNA nota de cada
+    # grupo lleva `Todos` —y lleva todas las respuestas—, así que sale una
+    # tarjeta por palabra rusa y enseña las cinco formas de decir «автобус».
+    {
+        "name": "русский → español",
+        "qfmt": '{{#Todos}}<div class="ru">{{Ruso}}</div>{{/Todos}}',
+        "afmt": '{{FrontSide}}<hr id="answer">'
+                '<div class="es">{{Todos}}</div>{{Audio}}'
+                '{{#Ejemplo}}<div class="ej">{{Ejemplo}}</div>{{/Ejemplo}}'
+                '{{#Leccion}}<div class="de">{{Leccion}}</div>{{/Leccion}}',
+    },
 ]
+
+
+def reversos(tarjetas: list[tuple]) -> dict[int, str]:
+    """Qué nota de cada entrada rusa saca la tarjeta de vuelta, y con qué.
+
+    Devuelve {posición de la nota: todos sus españoles}. Las demás notas del
+    grupo se quedan con `Todos` vacío y por tanto sin esa tarjeta. La elegida
+    es la primera del curso, que es la que lo enseña antes."""
+    salida = {}
+    for grupo in exportar_anki.agrupar_por_ruso([t[1] for t in tarjetas]):
+        dichos = list(dict.fromkeys(tarjetas[i][0] for i in grupo))
+        salida[grupo[0]] = " · ".join(dichos)
+    return salida
 
 
 def tarjetas_del_curso(cal) -> list[tuple]:
@@ -157,7 +186,9 @@ def armar(tarjetas: list[tuple], audio: dict, imagenes: dict):
     barajas: dict[str, object] = {}
     medios: set[pathlib.Path] = set()
 
-    for español, ruso, ejemplo, etiquetas in tarjetas:
+    vuelta = reversos(tarjetas)
+
+    for puesto, (español, ruso, ejemplo, etiquetas) in enumerate(tarjetas):
         limpio_audio = _clave_de_audio(español, audio)
         limpio_img = generar_imagenes.limpiar(español)
 
@@ -179,7 +210,8 @@ def armar(tarjetas: list[tuple], audio: dict, imagenes: dict):
             # ACTUALIZA la nota en vez de duplicarla, y cambiar el reparto de
             # unidades no le borra los repasos al alumno.
             guid=genanki.guid_for(f"esru::{español}"),
-            fields=[español, ruso, ejemplo, campo_img, campo_audio, etiquetas],
+            fields=[español, ruso, ejemplo, campo_img, campo_audio, etiquetas,
+                    vuelta.get(puesto, "")],
             tags=etiquetas.split(),
         ))
 
@@ -206,7 +238,9 @@ def main(argv=None) -> int:
 
     con_a = sum(1 for t in tarjetas if _clave_de_audio(t[0], audio) in audio)
     con_i = sum(1 for t in tarjetas if generar_imagenes.limpiar(t[0]) in imagenes)
-    print(f"{len(tarjetas)} tarjetas · {con_a} con voz · {con_i} con dibujo")
+    vuelta = len(reversos(tarjetas))
+    print(f"{len(tarjetas)} notas · {con_a} con voz · {con_i} con dibujo · "
+          f"{vuelta} entradas rusas")
 
     if a.ver:
         print(f"escribiría {a.destino / ARCHIVO}")
@@ -235,6 +269,7 @@ def main(argv=None) -> int:
         "con_voz": con_a,
         "con_dibujo": con_i,
         "subbarajas": len(barajas),
+        "entradas_rusas": vuelta,
     }, ensure_ascii=False, indent=0), encoding="utf-8")
 
     print(f"{len(barajas)} subbarajas · {len(medios)} medios")

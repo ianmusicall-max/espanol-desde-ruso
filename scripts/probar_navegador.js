@@ -91,6 +91,10 @@ const POR_DEFECTO = [
   // El indice, que es donde vive el calendario del ano. Se siembra progreso
   // antes de mirarlo: sin lecciones marcadas no se dibuja, que es su regla.
   'docs/kurs.html',
+  // El diccionario, que desde el 2026-10-30 tiene los dos sentidos. El ruso
+  // NO viene servido: lo arma el guion con las filas de la pagina, asi que
+  // leyendo el HTML no se ve ni una entrada rusa.
+  'docs/slovar.html',
 ];
 
 async function unaPagina(b, rel, base) {
@@ -356,6 +360,83 @@ async function unaPagina(b, rel, base) {
     r.calendario_movil = movil;
     if (!movil || !movil.aqui_visible)
       r.errores.push('en el movil la casilla de «aqui lo dejo» se queda fuera de la vista');
+  }
+
+  // El diccionario en los dos sentidos. Lo que se comprueba es lo que el HTML
+  // no puede enseñar: que el boton aparezca —solo si `ruso.json` llego—, que
+  // al pulsarlo salgan las entradas RUSAS con todos sus españoles juntos, y
+  // que el ▶ de una entrada rusa siga diciendo la palabra ESPAÑOLA, que es la
+  // que suena.
+  if (/slovar\.html$/.test(rel)) {
+    await p.waitForTimeout(800);
+    const mando = p.locator('#dicc-sentido');
+    if (!(await mando.isVisible())) {
+      r.errores.push('el boton de los dos sentidos no aparecio');
+    } else {
+      const antes = await p.evaluate(() =>
+        document.querySelectorAll('#dicc-lista li').length);
+      await p.locator('#dicc-sentido button[data-dir="ru"]').click();
+      await p.waitForTimeout(400);
+      const d = await p.evaluate(() => {
+        const ru = document.getElementById('dicc-ruso');
+        const es = document.getElementById('dicc-lista');
+        const fila = [...ru.querySelectorAll('li')]
+          .find(li => li.querySelector('b').textContent.trim() === 'автобус');
+        return {
+          entradas: ru.querySelectorAll('li').length,
+          es_oculta: es.hidden, ru_visible: !ru.hidden,
+          cuenta: (document.getElementById('dicc-cuenta') || {}).textContent || '',
+          autobus: fila ? fila.querySelector('i').textContent : null,
+          cirilico: /^[\u0400-\u04FF]/.test(
+            (ru.querySelector('li b') || {}).textContent || ''),
+        };
+      });
+      r.diccionario = { es: antes, ru: d.entradas, autobus: d.autobus };
+      if (!d.ru_visible || !d.es_oculta)
+        r.errores.push('al cambiar de sentido las dos listas quedaron mal');
+      if (d.entradas < 2000)
+        r.errores.push('el sentido ruso trae ' + d.entradas + ' entradas');
+      if (!d.cirilico)
+        r.errores.push('la primera entrada del sentido ruso no empieza por una letra rusa');
+      // «автобус» es la entrada que justifica este sentido: cinco formas de
+      // decirlo que el sentido español no puede juntar.
+      if (!d.autobus || d.autobus.split('·').length < 4)
+        r.errores.push('«автобус» no trae sus cinco españoles: ' + d.autobus);
+      // El ▶ de una entrada rusa suena en español: su rotulo tiene que ser la
+      // palabra española y no la rusa del <b>, o el lector de pantalla miente.
+      const voz = await p.evaluate(() => {
+        const b = document.querySelector('#dicc-ruso li .suena');
+        if (!b) return null;
+        return { rotulo: b.getAttribute('aria-label') || '',
+                 mp3: b.getAttribute('data-audio') || '',
+                 urok: document.querySelectorAll('#dicc-ruso li:first-child .dicc-urok').length };
+      });
+      r.diccionario.voz = voz;
+      if (!voz) r.errores.push('ninguna entrada rusa saco su ▶');
+      else {
+        if (/[\u0400-\u04FF]/.test(voz.rotulo))
+          r.errores.push('el ▶ de una entrada rusa se anuncia en ruso: ' + voz.rotulo);
+        if (voz.urok > 1)
+          r.errores.push('la entrada rusa repitio el enlace a la leccion');
+      }
+      // Buscar en ruso filtra el sentido ruso.
+      await p.fill('#dicc-buscar', 'автобус');
+      await p.waitForTimeout(400);
+      const filtradas = await p.evaluate(() =>
+        [...document.querySelectorAll('#dicc-ruso li')].filter(li => !li.hidden).length);
+      if (filtradas < 1 || filtradas > 30)
+        r.errores.push('buscar «автобус» en el sentido ruso dejo ' + filtradas + ' entradas');
+      await p.fill('#dicc-buscar', '');
+      await p.waitForTimeout(300);
+      // Y se vuelve: el sentido de siempre tiene que quedar como estaba.
+      await p.locator('#dicc-sentido button[data-dir="es"]').click();
+      await p.waitForTimeout(300);
+      const vuelta = await p.evaluate(() => ({
+        es: !document.getElementById('dicc-lista').hidden,
+        ru: !document.getElementById('dicc-ruso').hidden,
+      }));
+      if (!vuelta.es || vuelta.ru) r.errores.push('no se vuelve al sentido español');
+    }
   }
 
   r.errores = r.errores.concat(errores);

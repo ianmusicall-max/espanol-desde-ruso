@@ -3811,7 +3811,17 @@ class TestLaFirmaDelProfesor(unittest.TestCase):
 
 
 
-class TestElMapaDeUnidades(unittest.TestCase):
+class TestElDibujoYElProgresoDelMapa(unittest.TestCase):
+    """Lo que el mapa de unidades ganó el 2026-10-29: un dibujo por tarjeta,
+    la barra midiendo lo del LECTOR y el efecto al aparecer.
+
+    Se llamaba `TestElMapaDeUnidades`, igual que la clase de más arriba, y en
+    Python la segunda definición gana: las SIETE pruebas de aquella —una
+    tarjeta por unidad, su episodio, el enlace a la primera lección, las
+    apagadas, el mapa saliéndose de la columna de prosa, el pie alineado y los
+    tres idiomas— llevaban desde entonces sin ejecutarse, con la suite en
+    verde. Es el mismo accidente que el formato `receta` en el proyecto
+    hermano, y el síntoma es el peor que hay: nada se pone en rojo."""
     """Las 24 tarjetas: su dibujo, y qué va antes y qué después.
 
     El profesor miró `kurs.html` en el móvil y dijo dos cosas: que la parte de
@@ -4753,13 +4763,192 @@ class TestElDiccionario(unittest.TestCase):
     def test_los_tres_idiomas_traen_los_textos(self):
         t = construir_sitio.cargar_textos()
         claves = ("titulo", "subtitulo", "entrada", "buscar", "nada", "cuantas",
-                  "encontradas", "urok", "enlace", "meta")
+                  "encontradas", "urok", "enlace", "meta",
+                  "sentido_es", "sentido_ru", "cuantas_ru")
         for idioma in ("ru", "es", "en"):
             for c in claves:
                 self.assertTrue(str(t[idioma]["diccionario"].get(c, "")).strip(),
                                 f"falta diccionario.{c} en {idioma}")
-            for clave in ("cuantas", "encontradas", "meta"):
+            for clave in ("cuantas", "cuantas_ru", "encontradas", "meta"):
                 self.assertIn("{n}", t[idioma]["diccionario"][clave], f"{idioma}.{clave}")
+
+
+class TestElSentidoRuso(unittest.TestCase):
+    """El diccionario y la baraja al revés: ruso → español (2026-10-30).
+
+    No escribe una palabra nueva ni cuesta un céntimo: son las mismas 2.985
+    entradas agrupadas por su columna rusa. Lo que este sentido puede enseñar
+    y el otro no es que «автобус» tiene cinco formas en español.
+
+    La muestra con los datos de verdad encontró lo que decide si funciona:
+    1.080 celdas rusas traen una glosa y en 7 va DELANTE —«(космический)
+    корабль»—, así que sin quitarla esas siete se van al principio de la lista
+    bajo el paréntesis y no las encuentra nadie."""
+
+    DOCS = RAIZ / "docs"
+
+    @classmethod
+    def setUpClass(cls):
+        audio = (construir_sitio.indice_de_audio(cls.DOCS)
+                 if (cls.DOCS / "audio" / construir_sitio.INDICE_AUDIO).exists() else {})
+        cls.palabras = construir_sitio.palabras_del_curso(CAL, audio)
+        cls.grupos = exportar_anki.agrupar_por_ruso([p["ru"] for p in cls.palabras])
+
+    # --- la clave: bajo qué palabra se ordena una entrada rusa ---
+
+    def test_la_glosa_no_cuenta_vaya_delante_o_detras(self):
+        """Las siete con la glosa delante son las que lo destaparon."""
+        for ru, clave in (("(космический) корабль", "корабль"),
+                          ("«хорошо» (7–8,9)", "хорошо"),
+                          ("(следующие) выходные", "выходные"),
+                          ("их (о вещах)", "их"),
+                          ("мо́та", "мота")):
+            self.assertEqual(exportar_anki.clave_rusa(ru), clave, ru)
+
+    def test_la_barra_corta_y_la_coma_no(self):
+        """Medido sobre las 3.001 entradas, no elegido a ojo: la barra separa
+        FORMAS de una entrada («его / её») y la coma y el punto volado separan
+        VARIAS entradas en una celda («идти, ходить, ехать»). Cortando por la
+        coma salía una tarjeta que preguntaba «идти, ходить, ехать» y
+        respondía «ir · quedar bien / mal · tardar · nevar»."""
+        self.assertEqual(exportar_anki.clave_rusa("его / её (уточнение)"), "его")
+        self.assertEqual(exportar_anki.clave_rusa("идти, ходить, ехать"),
+                         "идти, ходить, ехать")
+        self.assertEqual(exportar_anki.clave_rusa("аккаунт · пароль"),
+                         "аккаунт · пароль")
+
+    def test_una_entrada_que_no_empieza_en_ruso_se_queda_fuera(self):
+        """Una entrada de un diccionario ruso empieza por una palabra rusa.
+        Hoy es una sola fila, la misma que descarta el canal de Telegram."""
+        g = exportar_anki.agrupar_por_ruso(
+            ["tomar = прежде всего пить", "стул", "", "кот"])
+        self.assertEqual([len(x) for x in g], [1, 1])
+        self.assertEqual(sorted(i for x in g for i in x), [1, 3])
+
+    # --- el reparto ---
+
+    def test_cada_palabra_cae_en_una_entrada_y_solo_en_una(self):
+        puestos = [i for g in self.grupos for i in g]
+        self.assertEqual(len(puestos), len(set(puestos)))
+        # Lo que se queda fuera es lo que no empieza por una letra rusa, y hoy
+        # son cuatro de 2.985: si eso crece, algo se está perdiendo en
+        # silencio.
+        self.assertLessEqual(len(self.palabras) - len(puestos), 10)
+
+    def test_las_entradas_van_en_orden_ruso(self):
+        claves = [exportar_anki.clave_rusa(self.palabras[g[0]]["ru"])
+                  for g in self.grupos]
+        self.assertEqual(claves, sorted(claves))
+
+    def test_autobus_junta_sus_cinco_formas(self):
+        """La entrada que justifica este sentido entero."""
+        for g in self.grupos:
+            if exportar_anki.clave_rusa(self.palabras[g[0]]["ru"]) == "автобус":
+                dichos = [self.palabras[i]["es"] for i in g]
+                self.assertGreaterEqual(len(dichos), 4, dichos)
+                self.assertTrue(any("guagua" in d for d in dichos), dichos)
+                return
+        self.fail("«автобус» no está en el diccionario")
+
+    def test_hay_menos_entradas_que_palabras_y_no_muchas_menos(self):
+        """2.985 palabras dan unas 2.800 entradas. Si dieran 2.985 es que no
+        se agrupa nada; si dieran 2.000, que se está juntando lo que no va
+        junto."""
+        self.assertLess(len(self.grupos), len(self.palabras))
+        self.assertGreater(len(self.grupos), len(self.palabras) * 0.85)
+
+    # --- la página ---
+
+    def test_la_pagina_NO_escribe_las_palabras_dos_veces(self):
+        """El sentido ruso se arma en el navegador con las filas que ya están.
+        Servirlo doblaría el peso de la página, que es lo que se evitó sacando
+        los nombres de los MP3 a su propio fichero."""
+        js = construir_sitio.DICCIONARIO_JS
+        self.assertIn("montarRuso", js)
+        self.assertIn("dicc-ruso", js)
+        pagina = self.DOCS / "slovar.html"
+        if not pagina.exists():
+            self.skipTest("el sitio todavía no está construido")
+        texto = pagina.read_text(encoding="utf-8")
+        hueco = re.search(r'<ul class="dicc-lista" id="dicc-ruso"[^>]*>(.*?)</ul>',
+                          texto, re.S)
+        self.assertTrue(hueco, "falta la lista del sentido ruso")
+        self.assertEqual(hueco.group(1).strip(), "",
+                         "el sentido ruso viene servido y debería armarlo el guion")
+
+    def test_el_fichero_del_sentido_ruso_son_solo_numeros(self):
+        ruta = self.DOCS / construir_sitio.RUSO
+        if not ruta.exists():
+            self.skipTest("el sitio todavía no está construido")
+        grupos = json.loads(ruta.read_text(encoding="utf-8"))
+        self.assertEqual(grupos, self.grupos)
+        for g in grupos:
+            for i in g:
+                self.assertIsInstance(i, int)
+        # Y pesa lo que pesan unos números: con los textos dentro serían las
+        # 2.985 palabras escritas por segunda vez.
+        self.assertLess(ruta.stat().st_size, 60_000)
+
+    def test_sin_el_fichero_no_sale_el_boton(self):
+        """Un botón que abre una lista vacía es peor que no tener el botón:
+        `mando.hidden=false` solo puede vivir dentro del `then` del fetch, y
+        detrás de la guarda que descarta una respuesta vacía."""
+        js = construir_sitio.DICCIONARIO_JS
+        i_guarda = js.find("if(!g||!g.length)return;")
+        i_boton = js.find("mando.hidden=false")
+        self.assertGreater(i_guarda, 0, "falta la guarda de la respuesta vacía")
+        self.assertGreater(i_boton, i_guarda,
+                           "el botón se enseña antes de saber si hay entradas")
+
+    def test_el_play_de_una_entrada_rusa_se_anuncia_en_espanol(self):
+        """Lo que suena es la palabra española, así que leerle al lector de
+        pantalla el <b> —que ahí es el ruso— sería mentirle."""
+        js = construir_sitio.DICCIONARIO_JS
+        self.assertIn("data-voz", js)
+        self.assertIn("li.getAttribute('data-voz')", js)
+
+    # --- la baraja ---
+
+    def test_solo_una_nota_de_cada_entrada_saca_la_tarjeta_de_vuelta(self):
+        """171 palabras rusas tienen varios españoles. Si cada nota sacara su
+        tarjeta habría anversos repetidos con respuestas distintas, que en
+        repaso espaciado es ruido puro."""
+        tarjetas = exportar_apkg.tarjetas_del_curso(CAL)
+        vuelta = exportar_apkg.reversos(tarjetas)
+        grupos = exportar_anki.agrupar_por_ruso([t[1] for t in tarjetas])
+        self.assertEqual(len(vuelta), len(grupos))
+        for g in grupos:
+            self.assertIn(g[0], vuelta)
+            for otro in g[1:]:
+                self.assertNotIn(otro, vuelta)
+            # Y la que la saca las lleva TODAS.
+            for i in g:
+                self.assertIn(tarjetas[i][0], vuelta[g[0]])
+
+    def test_la_tarjeta_de_vuelta_cuelga_de_un_campo_condicional(self):
+        """Es la misma forma que `{{#Imagen}}`: Anki no crea la tarjeta cuando
+        el campo está vacío, y es lo que deja una por palabra rusa."""
+        plantillas = {p["name"]: p for p in exportar_apkg.PLANTILLAS}
+        self.assertIn("русский → español", plantillas)
+        p = plantillas["русский → español"]
+        self.assertIn("{{#Todos}}", p["qfmt"])
+        self.assertIn("{{/Todos}}", p["qfmt"])
+        self.assertIn("{{Todos}}", p["afmt"])
+
+    def test_el_campo_nuevo_va_al_FINAL(self):
+        """El modelo tiene un id fijo para que volver a importar actualice la
+        baraja del alumno en vez de crearle otra al lado. Moviendo los campos
+        que ya existen, sus notas se reordenarían solas."""
+        self.assertEqual(exportar_apkg.CAMPOS[:6],
+                         ["Espanol", "Ruso", "Ejemplo", "Imagen", "Audio", "Leccion"])
+        self.assertEqual(exportar_apkg.CAMPOS[-1], "Todos")
+
+    def test_el_manifiesto_dice_cuantas_entradas_rusas_hay(self):
+        ruta = self.DOCS / "vocabulario" / exportar_apkg.MANIFIESTO
+        if not ruta.exists():
+            self.skipTest("la baraja todavía no está generada")
+        m = json.loads(ruta.read_text(encoding="utf-8"))
+        self.assertEqual(m["entradas_rusas"], len(self.grupos))
 
 
 class TestGrabarseYOirse(unittest.TestCase):

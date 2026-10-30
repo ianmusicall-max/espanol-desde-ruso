@@ -27,6 +27,72 @@ import validar  # noqa: E402
 CARPETA = RAIZ / "vocabulario"
 CABECERA = "espanol\truso\tejemplo\tetiquetas\n"
 
+# El sentido RUSO → ESPAÑOL. Vive aquí, y no en el diccionario ni en la
+# baraja, porque lo necesitan los dos: con una copia en cada sitio, el día que
+# alguien afine la clave se arregla uno y el otro agrupa de otra manera, que es
+# como el informe de léxico se quedó sin ver los 50 domingos.
+_GLOSA = re.compile(r"\([^)]*\)")
+# Lo que corta y lo que no, medido sobre las 3.001 entradas y no elegido a
+# ojo. Cortan la barra y las flechas, que separan FORMAS de una misma entrada:
+# «его / её (уточнение)» se ordena por «его» y se junta con «его / её зовут» y
+# «его / её (о вещи)», que es justo lo que este sentido tiene que enseñar.
+#
+# NO cortan la coma ni el punto volado, aunque lo parezca: ahí la celda trae
+# VARIAS entradas —«идти, ходить, ехать», «аккаунт · пароль»— y cortando se
+# quedaban en «идти» y «аккаунт», que arrastraban a cualquier otra fila con esa
+# palabra. Con la coma salían 2.720 entradas y una tarjeta que preguntaba
+# «идти, ходить, ехать» y respondía «ir · quedar bien / mal · tardar · nevar»;
+# sin ella son 2.800 y ningún grupo junta cosas distintas.
+_ALTERNATIVA = re.compile(r"\s*[/↔=≠]\s*.*$")
+CIRILICA_INICIAL = re.compile(r"^[а-яё]", re.I)
+
+
+def clave_rusa(ru: str) -> str:
+    """Bajo qué palabra se ordena y se busca una entrada rusa.
+
+    La columna rusa no está tan limpia como la española: 1.080 de las 2.985
+    entradas traen una glosa, y en 7 la glosa va DELANTE —«(космический)
+    корабль», «хорошо» (7–8,9)—. Sin quitarla, esas siete se van al principio
+    de la lista bajo el paréntesis y nadie las encuentra buscando su palabra.
+    Lo encontró una muestra con los datos de verdad, no leyendo el código.
+
+    Se quita la glosa esté donde esté, y se corta en lo que introduce una
+    segunda forma («затем, далее» se ordena por «затем»). El acento de la
+    tónica —que el curso marca con un combinante— no cuenta, igual que las
+    tildes no cuentan del lado español."""
+    import unicodedata
+
+    s = unicodedata.normalize("NFD", ru.lower().replace("ё", "е"))
+    s = "".join(c for c in s if unicodedata.category(c) != "Mn")
+    s = _GLOSA.sub(" ", s).replace("«", "").replace("»", "")
+    s = _ALTERNATIVA.sub("", s)
+    s = re.sub(r"[!?.;:…]", " ", s)
+    return " ".join(s.split())
+
+
+def agrupar_por_ruso(rusos: list[str]) -> list[list[int]]:
+    """Las posiciones de `rusos` agrupadas por entrada y en orden ruso.
+
+    Devuelve posiciones y no textos a propósito: quien llama ya tiene la lista
+    entera —la página la lleva escrita en su HTML y la baraja en sus notas— y
+    repetir aquí las 2.985 palabras sería pagarlas dos veces.
+
+    171 palabras rusas tienen varios españoles, y eso no es un defecto que
+    haya que deshacer: «автобус» devuelve las cinco formas de decirlo, que es
+    lo que este sentido puede enseñar y el otro no.
+
+    Lo que SÍ se queda fuera es una entrada cuya clave no empiece por una
+    letra rusa: una entrada de un diccionario ruso tiene que empezar por una
+    palabra rusa. Hoy es una sola, la fila «tomar = и пить, и есть», que ya
+    descarta por su cuenta el canal de Telegram."""
+    grupos: dict[str, list[int]] = {}
+    for i, ru in enumerate(rusos):
+        k = clave_rusa(ru)
+        if k and CIRILICA_INICIAL.match(k):
+            grupos.setdefault(k, []).append(i)
+    return [grupos[k] for k in sorted(grupos)]
+
+
 
 def limpiar(celda: str) -> str:
     celda = celda.replace("**", "").replace("<u>", "").replace("</u>", "")

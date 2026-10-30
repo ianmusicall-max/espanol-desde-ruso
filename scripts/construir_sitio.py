@@ -330,7 +330,15 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 .pide-nombre .aviso-chico{flex:1 0 100%;margin:0}
 /* El diccionario: 3.001 palabras en una lista. Dos columnas en escritorio
    porque una sola deja media pantalla vacía y obliga a el doble de scroll. */
-.dicc-caja{margin:1.2rem 0;display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
+/* Los dos sentidos. Una pastilla con dos mitades y no dos botones sueltos:
+   son excluyentes, y el que manda se ve de un vistazo sin leer. */
+.dicc-sentido{display:inline-flex;margin:1.2rem 0 0;border:1px solid var(--linea);
+  border-radius:999px;overflow:hidden;
+  font-family:Onest,ui-sans-serif,system-ui,sans-serif;font-size:.88rem}
+.dicc-sentido button{border:0;background:var(--papel);color:var(--tenue);
+  padding:.45rem .95rem;font:inherit;cursor:pointer}
+.dicc-sentido button[aria-pressed="true"]{background:var(--acento);color:#fff}
+.dicc-caja{margin:.8rem 0 1.2rem;display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
 .dicc-caja input{flex:1 1 16rem;padding:.5rem .7rem;border:1px solid var(--linea);
   border-radius:8px;background:var(--papel);color:var(--tinta);font:inherit}
 .dicc-caja input:focus{outline:none;border-color:var(--acento)}
@@ -1804,7 +1812,8 @@ DICCIONARIO_JS = r"""(function(){
       var b=document.createElement('button');
       b.type='button';b.className='suena';b.setAttribute('aria-pressed','false');
       b.setAttribute('data-audio',D.raiz+'/audio/'+a+'.mp3');
-      b.setAttribute('aria-label',(li.querySelector('b')||{}).textContent||'');
+      b.setAttribute('aria-label',li.getAttribute('data-voz')||
+        (li.querySelector('b')||{}).textContent||'');
       b.textContent='▶';
       li.insertBefore(b,li.firstChild);
     }
@@ -1855,22 +1864,86 @@ DICCIONARIO_JS = r"""(function(){
     claves.push(pelar(filas[k].textContent));
   }
 
+  // ---- Los dos sentidos ---------------------------------------------------
+  // El ruso NO viene servido: se arma con las mismas filas de arriba, así que
+  // no cuesta un byte de página. `ruso.json` dice solo qué filas forman cada
+  // entrada rusa y en qué orden van; el texto sale de la fila.
+  var otra=document.getElementById('dicc-ruso');
+  var mando=document.getElementById('dicc-sentido');
+  var dir='es', grupos=null, rusas=null, clavesRu=[];
+
+  function montarRuso(){
+    var trozo=document.createDocumentFragment();
+    for(var g=0;g<grupos.length;g++){
+      var cual=grupos[g], cabeza=filas[cual[0]];
+      var li=document.createElement('li'), b=document.createElement('b'),
+          t=document.createElement('i'), dichos=[];
+      b.textContent=(cabeza.querySelector('i')||{}).textContent||'';
+      for(var h=0;h<cual.length;h++){
+        var e=(filas[cual[h]].querySelector('b')||{}).textContent||'';
+        if(e&&dichos.indexOf(e)<0)dichos.push(e);
+      }
+      t.textContent=dichos.join(' · ');
+      // La voz y la lección son las de la PRIMERA, que es la que el curso
+      // enseña antes. Y el rótulo del ▶ va aparte: suena el español, así que
+      // leerle al lector de pantalla la palabra rusa del <b> sería mentirle.
+      li.dataset.i=cual[0];
+      li.setAttribute('data-l',cabeza.getAttribute('data-l')||'');
+      li.setAttribute('data-voz',dichos[0]||'');
+      li.appendChild(b);li.appendChild(t);
+      trozo.appendChild(li);
+    }
+    otra.appendChild(trozo);
+    rusas=otra.querySelectorAll('li');
+    for(var k2=0;k2<rusas.length;k2++){
+      clavesRu.push(pelar(rusas[k2].textContent));
+      if(mirón)mirón.observe(rusas[k2]);else vestir(rusas[k2]);
+    }
+  }
+
+  function cambiar(a){
+    if(a===dir||!grupos)return;
+    if(a==='ru'&&!rusas)montarRuso();
+    dir=a;
+    lista.hidden=(a==='ru');otra.hidden=(a!=='ru');
+    var bs=mando.querySelectorAll('button');
+    for(var n2=0;n2<bs.length;n2++)
+      bs[n2].setAttribute('aria-pressed',String(bs[n2].dataset.dir===a));
+    filtrar();
+  }
+
   var espera=null;
   function filtrar(){
     var q=pelar(caja.value.trim());
+    var hay=(dir==='ru')?rusas:filas, llaves=(dir==='ru')?clavesRu:claves;
     var vistas=0;
-    for(var m=0;m<filas.length;m++){
-      var sale=!q||claves[m].indexOf(q)>=0;
-      filas[m].hidden=!sale;
-      if(sale){vistas++;if(!mirón)vestir(filas[m])}   // sin vigilante, a mano
+    for(var m=0;m<hay.length;m++){
+      var sale=!q||llaves[m].indexOf(q)>=0;
+      hay[m].hidden=!sale;
+      if(sale){vistas++;if(!mirón)vestir(hay[m])}   // sin vigilante, a mano
     }
-    if(cuenta)cuenta.textContent=(q?T.encontradas:T.cuantas).replace('{n}',vistas);
+    var cuantas=(dir==='ru'&&T.cuantas_ru)?T.cuantas_ru:T.cuantas;
+    if(cuenta)cuenta.textContent=(q?T.encontradas:cuantas).replace('{n}',vistas);
     if(vacio)vacio.hidden=vistas>0;
   }
   caja.addEventListener('input',function(){
     // Esperar un poco: con 3.001 filas, filtrar en cada tecla se nota.
     clearTimeout(espera);espera=setTimeout(filtrar,120);
   });
+
+  // El botón aparece cuando el fichero ha llegado, y no antes: si la petición
+  // falla, el lector se queda con el sentido de siempre en vez de con un
+  // botón que abre una lista vacía.
+  if(mando&&otra&&window.fetch&&D.ruso){
+    fetch(D.ruso).then(function(r){return r.ok?r.json():null}).then(function(g){
+      if(!g||!g.length)return;
+      grupos=g;mando.hidden=false;
+      mando.addEventListener('click',function(ev){
+        var b=ev.target.closest('button[data-dir]');
+        if(b)cambiar(b.dataset.dir);
+      });
+    }).catch(function(){});
+  }
 })();"""
 
 
@@ -2832,6 +2905,30 @@ def construir_voces(destino: pathlib.Path, palabras: list[dict]) -> int:
     return sum(1 for v in voces if v)
 
 
+RUSO = "vocabulario/ruso.json"
+
+
+def construir_ruso(destino: pathlib.Path, palabras: list[dict]) -> int:
+    """El sentido ruso → español: qué filas forman cada entrada rusa y en qué
+    orden van.
+
+    Son arrays de números y nada más —`[[1204],[88,342],…]`— porque las
+    palabras ya están escritas en la página: el ruso de la primera fila de
+    cada grupo es el título de la entrada y los españoles son los `<b>` de
+    sus filas. Guardar aquí los textos sería servir las 2.985 palabras dos
+    veces, y la página se quedó en 83 KB justamente por no hacer eso con los
+    nombres de los MP3.
+
+    Y en un fichero aparte, como `voces.json`, porque este sentido solo
+    existe para quien tiene JavaScript: sin él la página sirve la lista
+    española, que es la que se lee y la que Google indexa."""
+    grupos = exportar_anki.agrupar_por_ruso([p["ru"] for p in palabras])
+    destino.joinpath("vocabulario").mkdir(parents=True, exist_ok=True)
+    destino.joinpath(RUSO).write_text(
+        json.dumps(grupos, separators=(",", ":")), encoding="utf-8")
+    return len(grupos)
+
+
 def construir_diccionario(cfg, t, idiomas, idioma, destino, cal, raiz,
                           palabras) -> None:
     """La página del vocabulario entero, buscable.
@@ -2852,6 +2949,14 @@ def construir_diccionario(cfg, t, idiomas, idioma, destino, cal, raiz,
         f'<h1>{html.escape(c["titulo"])}<span class="segunda">{html.escape(c["subtitulo"])}</span></h1>'
         f'<p>{html.escape(c["entrada"])}</p>'
         f'{anuncio(cfg, "cabecera")}'
+        # Los dos sentidos. Nace oculto por lo mismo que la caja de buscar:
+        # el sentido ruso lo arma el navegador con las filas que ya están en
+        # la página, así que sin JavaScript sería un botón que no hace nada.
+        f'<div class="dicc-sentido" id="dicc-sentido" hidden>'
+        f'<button type="button" data-dir="es" aria-pressed="true">'
+        f'{html.escape(c["sentido_es"])}</button>'
+        f'<button type="button" data-dir="ru" aria-pressed="false">'
+        f'{html.escape(c["sentido_ru"])}</button></div>'
         # La caja nace oculta: sin JavaScript no filtraría nada y sería una
         # casilla que no hace caso.
         f'<div class="dicc-caja" hidden>'
@@ -2861,6 +2966,10 @@ def construir_diccionario(cfg, t, idiomas, idioma, destino, cal, raiz,
         f'{html.escape(c["cuantas"].format(n=len(palabras)))}</span></div>'
         f'<p id="dicc-vacio" hidden>{html.escape(c["nada"])}</p>'
         f'<ul class="dicc-lista" id="dicc-lista">{"".join(filas)}</ul>'
+        # Vacía: la llena el navegador con las MISMAS filas de arriba. Servir
+        # aquí las 2.703 entradas rusas sería escribir las palabras dos veces
+        # y doblar el peso de la página.
+        f'<ul class="dicc-lista" id="dicc-ruso" hidden></ul>'
         f'{anuncio(cfg, "pie")}')
     destino.joinpath("slovar.html").write_text(
         pagina(cfg, t, idiomas, idioma, f'{c["titulo"]} — {t["titulo_sitio"]}', cuerpo,
@@ -2872,7 +2981,8 @@ def construir_diccionario(cfg, t, idiomas, idioma, destino, cal, raiz,
                # y sin esto eran botones que no sonaban. `pagina()` lo deduce
                # mirando el cuerpo, y aquí ese cuerpo todavía no los tiene.
                con_audio=any(p["mp3"] for p in palabras),
-               diccionario={"t": c, "raiz": raiz, "voces": f"{raiz}/{VOCES}"}),
+               diccionario={"t": c, "raiz": raiz, "voces": f"{raiz}/{VOCES}",
+                            "ruso": f"{raiz}/{RUSO}"}),
         encoding="utf-8")
 
 
@@ -4654,6 +4764,7 @@ def construir(destino: pathlib.Path = DOCS, cfg: dict | None = None, textos: dic
     # lecturas para el mismo resultado.
     vocabulario = tarjetas_mod.vocabulario_del_curso(plan.dias(cal))
     construir_voces(destino, palabras)
+    entradas_rusas = construir_ruso(destino, palabras)
 
     for i in idiomas:
         t = textos[i["codigo"]]

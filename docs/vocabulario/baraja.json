@@ -1,8 +1,9 @@
 {
 "archivo": "espanol-desde-ruso.apkg",
-"bytes": 63691564,
+"bytes": 64009258,
 "palabras": 3001,
 "con_voz": 3001,
 "con_dibujo": 311,
-"subbarajas": 25
+"subbarajas": 25,
+"entradas_rusas": 2800
 }

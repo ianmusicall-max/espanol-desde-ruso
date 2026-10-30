@@ -207,7 +207,15 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
 .pide-nombre .aviso-chico{flex:1 0 100%;margin:0}
 /* El diccionario: 3.001 palabras en una lista. Dos columnas en escritorio
    porque una sola deja media pantalla vacía y obliga a el doble de scroll. */
-.dicc-caja{margin:1.2rem 0;display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
+/* Los dos sentidos. Una pastilla con dos mitades y no dos botones sueltos:
+   son excluyentes, y el que manda se ve de un vistazo sin leer. */
+.dicc-sentido{display:inline-flex;margin:1.2rem 0 0;border:1px solid var(--linea);
+  border-radius:999px;overflow:hidden;
+  font-family:Onest,ui-sans-serif,system-ui,sans-serif;font-size:.88rem}
+.dicc-sentido button{border:0;background:var(--papel);color:var(--tenue);
+  padding:.45rem .95rem;font:inherit;cursor:pointer}
+.dicc-sentido button[aria-pressed="true"]{background:var(--acento);color:#fff}
+.dicc-caja{margin:.8rem 0 1.2rem;display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
 .dicc-caja input{flex:1 1 16rem;padding:.5rem .7rem;border:1px solid var(--linea);
   border-radius:8px;background:var(--papel);color:var(--tinta);font:inherit}
 .dicc-caja input:focus{outline:none;border-color:var(--acento)}

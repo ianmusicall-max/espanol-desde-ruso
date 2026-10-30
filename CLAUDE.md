@@ -5929,6 +5929,142 @@ marcarla también, e irse al índice. Salen **dos casillas**, cada una con su
 fecha en el rótulo, y el recuadro en la lección 3. Con la rejilla de ayer eso
 era **una**.
 
+## El sentido de vuelta: ruso → español (2026-10-30)
+
+El profesor preguntó si se puede hacer el curso al revés, para aprender ruso.
+**El código sirve casi entero y las 365 lecciones no**, y lo que decide no es
+el trabajo: ese curso lo firmaría alguien que no es nativo de ruso —sería el
+alumno y no el profesor—, la lista de errores inversa es más dura (seis casos,
+aspecto, verbos de movimiento), y la demanda es asimétrica: muchos
+rusohablantes se mudan a España y a América, muy pocos hispanohablantes
+necesitan ruso. Con 365 lecciones escritas y cero visitas, el cuello de
+botella es que nadie sabe que el sitio existe, no que falte un segundo curso.
+**No se hizo.**
+
+Lo que sí se hizo es lo que ya estaba pagado: **el mismo vocabulario al
+revés**, en el diccionario y en la baraja. Cero contenido nuevo, cero
+céntimos. Lo eligió el profesor sobre una muestra con los datos de verdad, que
+es como se eligieron la voz, el estilo de los dibujos, la tipografía, el logo
+y la paleta.
+
+**La muestra es la que decidió el diseño**, y encontró tres cosas:
+
+- Las 2.985 palabras dan **2.800 entradas rusas**, no 2.985: **171** palabras
+  rusas tienen varios españoles. Y eso no es un defecto que haya que deshacer:
+  *автобус* devuelve las cinco formas de decirlo y *играть* devuelve *jugar ·
+  tocar · interpretar*, que es lo que este sentido puede enseñar y el otro no.
+- **1.080** celdas rusas traen una glosa, y en **7** la glosa va DELANTE
+  —«(космический) корабль», «хорошо» (7–8,9)—. Sin quitarla, esas siete se van
+  al principio de la lista bajo el paréntesis y no las encuentra nadie
+  buscando su palabra. El lado español nunca lo tiene, porque esa columna está
+  limpia.
+- Una fila no es una entrada rusa: «tomar = и пить, и есть», la misma que ya
+  descarta por su cuenta el canal de Telegram. La clave tiene que **empezar**
+  por una letra rusa.
+
+### Qué corta la clave y qué no, medido y no elegido a ojo
+
+`exportar_anki.clave_rusa` vive ahí y no en el diccionario ni en la baraja
+**porque la usan los dos**: con una copia en cada sitio, el día que alguien la
+afine se arregla uno y el otro agrupa de otra manera. Es la lección de
+`exportar_anki.filas_de`, que se escribió por lo mismo.
+
+- **Cortan la barra y las flechas**: separan FORMAS de una misma entrada, así
+  que «его / её (уточнение)» se junta con «его / её зовут» y «его / её (о
+  вещи)», que es justo lo que hay que enseñar.
+- **NO cortan la coma ni el punto volado**, aunque lo parezca: ahí la celda
+  trae VARIAS entradas —«идти, ходить, ехать», «аккаунт · пароль»—. Con la
+  coma salían 2.720 entradas y una tarjeta que preguntaba «идти, ходить,
+  ехать» y respondía *ir · quedar bien / mal · tardar · nevar*. Sin ella son
+  2.800 y ningún grupo junta cosas distintas. Se vio mirando los grupos más
+  grandes, no razonándolo.
+
+### El diccionario: el sentido ruso no cuesta un byte de página
+
+La página se quedó en 83 KB sacando los nombres de los MP3 a su propio
+fichero, así que servir las 2.800 entradas rusas —las mismas palabras por
+segunda vez— habría deshecho eso. **No se sirven**: `vocabulario/ruso.json`
+son 19 KB de **números y nada más** —qué filas forman cada entrada y en qué
+orden van— y el navegador arma la lista con el texto que ya está en la página.
+La página sube 1,2 KB comprimida, que es el CSS del botón.
+
+- **El botón aparece cuando el fichero ha llegado, y no antes.** Si la
+  petición falla, el lector se queda con el sentido de siempre en vez de con
+  un botón que abre una lista vacía. Comprobado escondiendo el fichero: sin
+  botón, la búsqueda sigue, 2.985 filas y cero errores de JS.
+- **La lista rusa se arma al pulsar, no al cargar.** El fichero se pide
+  siempre (19 KB) porque es lo que decide si el botón existe; los 2.800 nodos
+  se crean una sola vez y cuando hacen falta.
+- **El ▶ de una entrada rusa se anuncia en español.** Lo que suena es la
+  palabra española, así que leerle al lector de pantalla el `<b>` —que ahí es
+  el ruso— sería mentirle. Va en un `data-voz` propio.
+- **La voz y la lección son las de la PRIMERA** del grupo, que es la que el
+  curso enseña antes.
+
+### La baraja: 3.001 notas, 6.112 tarjetas
+
+Ni un archivo nuevo. La tercera plantilla va envuelta en `{{#Todos}}`, igual
+que la del dibujo en `{{#Imagen}}`, y eso resuelve lo único difícil de este
+sentido: **si cada nota sacara su tarjeta de vuelta habría 171 anversos
+repetidos con respuestas distintas**, que en repaso espaciado es ruido puro.
+Solo una nota de cada grupo lleva `Todos` —y lleva todas las respuestas—, así
+que sale **una tarjeta por palabra rusa** y enseña las cinco formas de decir
+«автобус». Lo eligió el profesor: juntarlas o dejar esas 171 sin tarjeta.
+
+- **El campo nuevo va al FINAL de `CAMPOS`.** El modelo tiene un id fijo para
+  que volver a importar actualice la baraja del alumno en vez de crearle otra
+  al lado; moviendo los campos que ya existen, sus notas se reordenarían
+  solas.
+- **Lo que no se puede comprobar desde aquí**: Anki tiene que aceptar un
+  modelo con el mismo id y un campo más. Las versiones modernas actualizan el
+  tipo de nota al importar; una vieja puede quejarse. Hoy el riesgo es cero
+  porque la baraja no la ha descargado nadie —el sitio no tiene visitas— pero
+  conviene saberlo antes de volver a tocar `CAMPOS`.
+- Pesa **64,0 MB** (eran 60,7). Sigue por debajo de los 100 MB que GitHub
+  rechaza y por encima de los 50 en que avisa. El camino el día que crezca
+  sigue siendo un *release*, con su precio ya escrito.
+
+### Comprobado en navegador, que es donde esto se ve
+
+`probar_navegador.js` añade `slovar.html` y usa el diccionario: pulsa el
+botón, exige que las dos listas se intercambien, que «автобус» traiga sus
+cinco españoles, que el ▶ de una entrada rusa se anuncie en español, que el
+enlace a la lección no salga repetido —«урок 87 урок 87», que ya pasó—, que
+buscar en ruso filtre y que al volver el sentido de siempre quede como estaba.
+Leyendo el HTML no se ve ni una entrada rusa, así que o se comprueba ahí o no
+lo comprueba nadie.
+
+## Siete pruebas llevaban semanas sin ejecutarse (2026-10-30)
+
+Salió al contar las clases para repartir la suite: `TestElMapaDeUnidades`
+estaba definida **dos veces** en `tests/test_curso.py`, en la línea 1430 y en
+la 3814. **En Python la segunda definición gana**, así que las SIETE de la
+primera —una tarjeta por unidad, su episodio, el enlace a su primera lección,
+las unidades apagadas, el mapa saliéndose de la columna de prosa, el pie
+alineado abajo y los tres idiomas— no corrían desde que se escribió la
+segunda, y la suite seguía en verde.
+
+Es exactamente el accidente del formato `receta` en el proyecto hermano
+(2026-10-13), y el síntoma es el peor que hay: **nada se pone en rojo**. Allí
+lo delató `git status`; aquí, contar las clases con el cargador de unittest y
+ver un nombre repetido.
+
+La segunda pasa a llamarse `TestElDibujoYElProgresoDelMapa`, que es lo que de
+verdad comprueba (el dibujo por tarjeta, la barra midiendo lo del lector y el
+efecto al aparecer, del 2026-10-29). **Las siete resucitadas pasan todas**, o
+sea que no tapaban ningún defecto: lo que se había perdido era la guarda.
+
+Y de paso quedan dos cosas de método que ya estaban escritas y volví a
+tropezar con las dos el mismo día:
+
+- **`| tail -8` sobre un comando largo deja el log VACÍO hasta que termina**,
+  así que una suite que se murió por `timeout` no dice ni por dónde iba. Es lo
+  que pasó con los 7.779 FALLO del audio el 2026-10-28. Se escribe a un
+  fichero y se mira el fichero.
+- **`pkill -f "unittest tests.test_curso"` mata su propia shell**, porque la
+  línea de órdenes del comando que hace el `pkill` contiene el patrón que
+  busca. Es el mismo caso que `pkill -f 'ffmpeg -nostdin'`, también anotado.
+
 ## Estado (2026-10-29)
 
 **Lo que el alumno puede hacer en el sitio, después de la tanda del 29:**
@@ -5940,10 +6076,10 @@ era **una**.
 | contestarse | 68 días con test de opción múltiple **+ 244 con el de las palabras del día** |
 | **comprobar las palabras del día** | 1 198 preguntas en 244 lecciones, con el ▶ de la que se falla |
 | **grabarse y compararse** | en las 355 lecciones que tienen audio |
-| **buscar una palabra** | las 2 985 del curso, en `slovar.html` |
+| **buscar una palabra** | las 2 985 del curso en `slovar.html`, **en los dos sentidos** (2 800 entradas rusas) |
 | llevar la cuenta | el contador, la racha, **el año en 364 casillas** y el mapa de las 24 unidades |
 | **llevarse un certificado** | al cerrar A1 (154) y A2 (365) |
-| llevarse el vocabulario | la baraja de Anki: 3 001 tarjetas, 60,7 MB |
+| llevarse el vocabulario | la baraja de Anki: 3 001 notas y **6 112 tarjetas**, 64,0 MB |
 | no perderlo | el código de respaldo, 68 caracteres |
 
 Nada de eso sale del navegador: no hay registro, no hay servidor y la
@@ -5965,7 +6101,7 @@ grabación muere con la pestaña.
   **`docs/` está al día**: las 365 lecciones construidas y publicadas, con la
   tira de dibujos del héroe —la misma fila en el móvil y en el escritorio—,
   la guía de los seis pasos dentro de cada lección y la tipografía propia
-  (Literata + Onest, autoalojada). La suite entera pasa: **422 pruebas** en 58
+  (Literata + Onest, autoalojada). La suite entera pasa: **451 pruebas** en 60
   clases (2026-10-30), una de ellas en navegador de verdad.
 - **68 días son contestables o legibles con su clave**: 23 tests de unidad, 43
   mini-tests de repaso (de 47 — los otros cuatro piden escribir la forma, no
