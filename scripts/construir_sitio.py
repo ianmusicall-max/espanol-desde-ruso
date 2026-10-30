@@ -379,19 +379,26 @@ header.sitio nav.paginas::-webkit-scrollbar{display:none}
    La racha ya se contaba desde el 2026-10-29 pero era un número («7 дней»);
    la rejilla dice lo mismo y además enseña los huecos, que es lo que hace
    volver al día siguiente. No mide nada nuevo: hace visible `curso.fechas`.
-   En el móvil 52 columnas no caben, así que desborda y se desplaza sola
-   hasta hoy, que es el extremo derecho. */
+   La casilla mide 10 px y el hueco 2 para que las 52 columnas QUEPAN en la
+   columna de prosa: con 11 y 3 medía 731 px contra 664, así que se salía en
+   TODA pantalla y dependía siempre de un desplazamiento puesto desde el
+   guion. El día que ese desplazamiento no llegó, el profesor vio la rejilla
+   anclada en enero —362 casillas vacías— y dio por hecho que no se marcaba
+   nada. Hay una prueba que fija la cuenta. En el móvil sigue desbordando, y
+   para eso está el desplazamiento. */
 .calendario{margin:.9rem 0 0;font-family:Onest,ui-sans-serif,system-ui,sans-serif}
 .cal-cab{display:flex;flex-wrap:wrap;gap:.5rem;align-items:baseline;margin:0 0 .45rem;
   font-size:.88rem}
 .cal-cab strong{font-weight:650}
 .cal-cab span{color:var(--tenue)}
-.cal-rejilla{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,11px);
-  gap:3px;overflow-x:auto;padding:2px 3px 4px}
-.cal-dia{width:11px;height:11px;border-radius:3px;background:var(--linea)}
+.cal-rejilla{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,10px);
+  gap:2px;overflow-x:auto;padding:2px 3px 4px}
+.cal-dia{width:10px;height:10px;border-radius:3px;background:var(--linea)}
 .cal-dia.hecho{background:var(--acento)}
 .cal-dia.futuro{background:transparent}
-.cal-dia.es-hoy{outline:2px solid var(--tinta);outline-offset:1px}
+/* El recuadro de HOY se dibuja FUERA de la casilla, así que sin `offset:0`
+   se metería en la casilla de al lado: el hueco son 2 px y el trazo, 2. */
+.cal-dia.es-hoy{outline:2px solid var(--tinta);outline-offset:0}
 /* El certificado. Sale solo cuando un nivel está cerrado, así que la mayoría
    no lo verá nunca y por eso no puede ocupar sitio de más. */
 .diploma-caja{margin:.9rem 0 0;font-family:Onest,ui-sans-serif,system-ui,sans-serif;
@@ -1222,9 +1229,18 @@ PROGRESO_JS = r"""(function(){
     cabc.appendChild(fuerte);cabc.appendChild(suave);
     cal.appendChild(cabc);cal.appendChild(rejilla);
     cal.hidden=false;
-    // Desplazada hasta hoy. En el móvil la rejilla desborda y lo que importa
-    // es el extremo derecho, no enero.
-    rejilla.scrollLeft=rejilla.scrollWidth;
+    // Desplazada hasta hoy, para cuando desborda —hoy solo en el móvil—.
+    //
+    // Se repite en el siguiente fotograma y al acabar de cargar porque un
+    // desplazamiento puesto antes de que la página termine de componerse se
+    // pierde sin avisar, y lo que queda entonces es la rejilla anclada en
+    // enero: 362 casillas vacías y los días del lector fuera de la pantalla,
+    // que se lee como que esto no marca nada. Solo se repite si sigue en
+    // cero, o sea mientras nadie la haya movido a mano.
+    var alFinal=function(){if(!rejilla.scrollLeft)rejilla.scrollLeft=rejilla.scrollWidth};
+    alFinal();
+    if(window.requestAnimationFrame)requestAnimationFrame(alFinal);
+    window.addEventListener('load',alFinal);
   }
 
   // --- el certificado, al cerrar un nivel ---

@@ -421,9 +421,18 @@
     cabc.appendChild(fuerte);cabc.appendChild(suave);
     cal.appendChild(cabc);cal.appendChild(rejilla);
     cal.hidden=false;
-    // Desplazada hasta hoy. En el móvil la rejilla desborda y lo que importa
-    // es el extremo derecho, no enero.
-    rejilla.scrollLeft=rejilla.scrollWidth;
+    // Desplazada hasta hoy, para cuando desborda —hoy solo en el móvil—.
+    //
+    // Se repite en el siguiente fotograma y al acabar de cargar porque un
+    // desplazamiento puesto antes de que la página termine de componerse se
+    // pierde sin avisar, y lo que queda entonces es la rejilla anclada en
+    // enero: 362 casillas vacías y los días del lector fuera de la pantalla,
+    // que se lee como que esto no marca nada. Solo se repite si sigue en
+    // cero, o sea mientras nadie la haya movido a mano.
+    var alFinal=function(){if(!rejilla.scrollLeft)rejilla.scrollLeft=rejilla.scrollWidth};
+    alFinal();
+    if(window.requestAnimationFrame)requestAnimationFrame(alFinal);
+    window.addEventListener('load',alFinal);
   }
 
   // --- el certificado, al cerrar un nivel ---

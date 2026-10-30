@@ -5803,6 +5803,61 @@ corrigió dos veces en las claves de los tests— y se puso en rojo el día que
 se arreglaron los catorce. Ahora mira la RELACIÓN, y un segundo test aparta
 uno a mano para que la relación no se compruebe sobre un conjunto vacío.
 
+## «Estos cuadrados se actualizan?»: la rejilla del año nunca cupo (2026-10-30)
+
+El profesor mandó su `kurs.html`: **«marqué la primera clase terminada y no
+se marcó»**. Y la página se contradecía sola — el contador decía «3 / 365», la
+racha «2 días seguidos» y la cabecera del calendario «2 días de estudio en el
+último año», con las 364 casillas grises.
+
+**Medido sobre su propia captura y no mirándola**: cero píxeles del color del
+acento en la banda de la rejilla, con el resto en (47,51,54), que es el gris
+de una casilla vacía. O sea que las dos casillas marcadas existían —la
+cabecera las cuenta del mismo bucle que las pinta— y estaban **fuera de la
+parte visible**.
+
+**La causa es una cuenta, y llevaba ahí desde que se escribió la rejilla**:
+
+    52 columnas x 11 px + 51 huecos x 3 px + 6 de relleno = 731 px
+    columna de prosa (44rem - 40 de margen)               = 664 px
+
+**Se salía por 67 px en TODA pantalla**, no solo en el móvil como decía su
+propio comentario. O sea que la rejilla dependía SIEMPRE del
+`scrollLeft=scrollWidth` que el guion le pone al nacer, también en un
+escritorio de 1800 px. El día que ese desplazamiento no llegó —una página que
+aún se está componiendo, una posición restaurada al volver atrás—, lo que
+queda es la rejilla anclada en enero: 362 casillas vacías y los días del
+lector a cinco columnas de distancia, fuera de la vista.
+
+**Y no se reproduce pidiéndoselo al navegador.** Medido a 390, 700, 1000,
+1280, 1400 y 1800 px, el desplazamiento se pone bien en los seis y las dos
+casillas se ven. Por eso la comprobación que de verdad valía no era abrir la
+página: era **la aritmética**.
+
+Cómo quedó:
+
+- **La casilla pasa a 10 px y el hueco a 2**: 628 px, que caben en los 664 con
+  36 de margen. En el escritorio la rejilla **ya no se desplaza**, así que no
+  puede quedarse anclada en ninguna parte.
+- **`outline-offset` a 0.** El recuadro de HOY se dibuja FUERA de la casilla,
+  así que con el hueco en 2 px un trazo de 2 con desplazamiento de 1 se metía
+  en la casilla de al lado. Antes sumaba justo 3 y el hueco era 3: estaba en
+  el límite sin que nadie lo hubiera escrito.
+- **El desplazamiento se vuelve a poner** en el siguiente fotograma y al
+  acabar de cargar, para el móvil, que es donde sigue desbordando. Y **solo si
+  sigue en cero**: si no, le quitaría la rejilla de las manos a quien la esté
+  moviendo con el dedo.
+
+**Las guardas, y cuál de las dos sirve.** La de la aritmética lee las medidas
+del CSS —no las escribe— y exige que las 52 columnas quepan; falla con el
+código de antes. La del navegador siembra progreso en `kurs.html`, recarga y
+exige que las casillas marcadas y la de hoy estén DENTRO de la caja, en
+escritorio y a 390 px. **Esa segunda pasaba con el código viejo**, porque aquí
+el desplazamiento sí llega: sirve de red para el móvil y para que una casilla
+marcada no acabe del color de una vacía, no para lo que se rompió hoy. La
+tercera fija que la casilla sea cuadrada, que su alto y su ancho se escriben
+en dos reglas distintas.
+
 ## Estado (2026-10-29)
 
 **Lo que el alumno puede hacer en el sitio, después de la tanda del 29:**

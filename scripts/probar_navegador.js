@@ -88,6 +88,9 @@ const POR_DEFECTO = [
   // La tabla de fonética donde el profesor pulsó la «y» y no sonó nada: sus
   // dos letras estaban entre los 14 mudos, y las dos volvieron con voz.
   'docs/semana-01/dia-3.html',
+  // El indice, que es donde vive el calendario del ano. Se siembra progreso
+  // antes de mirarlo: sin lecciones marcadas no se dibuja, que es su regla.
+  'docs/kurs.html',
 ];
 
 async function unaPagina(b, rel, base) {
@@ -275,6 +278,70 @@ async function unaPagina(b, rel, base) {
     }
     if (!r.audio_suena) r.errores.push('el ▶ no suena: ' + JSON.stringify(mp3));
   }
+  // El calendario del ano: no que ESTE, sino que las casillas del lector se
+  // VEAN. El profesor lo denuncio con la cabecera diciendo «2 dias» y la
+  // rejilla entera gris: las dos casillas existian y estaban fuera de la
+  // parte visible, ancladas en enero. Leyendo el codigo no se ve.
+  if (/kurs\.html$/.test(rel)) {
+    await p.evaluate(() => {
+      const h = new Date(), ayer = new Date(Date.now() - 86400000);
+      const k = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0')
+                     + '-' + String(d.getDate()).padStart(2, '0');
+      localStorage.setItem('curso.hechas', JSON.stringify([1, 2, 3]));
+      localStorage.setItem('curso.fechas', JSON.stringify([k(ayer), k(h)]));
+    });
+    await p.reload({ waitUntil: 'load' });
+    await p.waitForTimeout(600);
+    const cal = await p.evaluate(() => {
+      const rj = document.querySelector('.cal-rejilla');
+      if (!rj) return null;
+      const caja = rj.getBoundingClientRect();
+      const dentro = c => {
+        const b = c.getBoundingClientRect();
+        return b.x >= caja.x - 1 && b.right <= caja.right + 1;
+      };
+      const hechas = [...rj.children].filter(c => c.classList.contains('hecho'));
+      const hoy = [...rj.children].find(c => c.classList.contains('es-hoy'));
+      return {
+        casillas: rj.children.length,
+        hechas: hechas.length,
+        hechas_visibles: hechas.filter(dentro).length,
+        hoy_visible: !!hoy && dentro(hoy),
+        desborda: rj.scrollWidth > rj.clientWidth,
+        color: hechas.length ? getComputedStyle(hechas[0]).backgroundColor : null,
+        vacio: getComputedStyle(rj.children[0]).backgroundColor,
+      };
+    });
+    if (!cal) r.errores.push('el calendario no se dibujo con progreso');
+    else {
+      r.calendario = cal;
+      if (cal.hechas !== 2) r.errores.push('el calendario marco ' + cal.hechas + ' dias y no 2');
+      if (cal.hechas_visibles !== cal.hechas)
+        r.errores.push('hay casillas marcadas fuera de la vista: '
+                       + cal.hechas_visibles + ' de ' + cal.hechas);
+      if (!cal.hoy_visible) r.errores.push('la casilla de HOY no se ve');
+      if (cal.color === cal.vacio) r.errores.push('una casilla marcada es del color de una vacia');
+      if (cal.desborda) r.errores.push('las 52 columnas no caben en el escritorio');
+    }
+    // Y en el movil, que es donde la rejilla SI desborda y lo unico que pone
+    // hoy a la vista es el desplazamiento del guion.
+    await p.setViewportSize({ width: 390, height: 780 });
+    await p.reload({ waitUntil: 'load' });
+    await p.waitForTimeout(600);
+    const movil = await p.evaluate(() => {
+      const rj = document.querySelector('.cal-rejilla');
+      if (!rj) return null;
+      const caja = rj.getBoundingClientRect();
+      const hoy = [...rj.children].find(c => c.classList.contains('es-hoy'));
+      const b = hoy && hoy.getBoundingClientRect();
+      return { desborda: rj.scrollWidth > rj.clientWidth,
+               hoy_visible: !!b && b.x >= caja.x - 1 && b.right <= caja.right + 1 };
+    });
+    r.calendario_movil = movil;
+    if (!movil || !movil.hoy_visible)
+      r.errores.push('en el movil la casilla de HOY se queda fuera de la vista');
+  }
+
   r.errores = r.errores.concat(errores);
   await p.close();
   return r;

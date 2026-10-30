@@ -5197,6 +5197,67 @@ class TestElCalendarioYElCertificado(unittest.TestCase):
         final de todo. Es el titular del recuadro."""
         self.assertIn("contador.insertBefore(linea,antesDe)", self.js)
 
+    # --- que las casillas se VEAN ---
+
+    def _medidas(self):
+        """Las medidas de la rejilla, leídas del CSS y no escritas aquí."""
+        css = construir_sitio.CSS
+        filas = re.search(r"\.cal-rejilla\{[^}]*grid-template-rows:repeat\(7,(\d+)px\)", css)
+        hueco = re.search(r"\.cal-rejilla\{[^}]*gap:(\d+)px", css)
+        celda = re.search(r"\.cal-dia\{[^}]*width:(\d+)px", css)
+        relleno = re.search(r"\.cal-rejilla\{[^}]*padding:\d+px (\d+)px", css)
+        ancho = re.search(r"--ancho:([\d.]+)rem", css)
+        gutter = re.search(r"\.envoltorio\{[^}]*padding:0 (\d+)px", css)
+        for nombre, m in (("filas", filas), ("gap", hueco), ("celda", celda),
+                          ("padding", relleno), ("--ancho", ancho), ("envoltorio", gutter)):
+            self.assertIsNotNone(m, f"no se pudo leer {nombre} del CSS")
+        return {"celda": int(celda.group(1)), "fila": int(filas.group(1)),
+                "hueco": int(hueco.group(1)), "relleno": int(relleno.group(1)),
+                "prosa": float(ancho.group(1)) * 16 - 2 * int(gutter.group(1))}
+
+    def test_las_52_columnas_caben_en_la_columna_de_prosa(self):
+        """La rejilla medía 731 px contra los 664 de la columna de texto, así
+        que se salía en TODA pantalla y dependía siempre del desplazamiento
+        que el guion le pone. El día que ese desplazamiento no llegó, lo que
+        se vio fue enero: 362 casillas vacías y los días del lector fuera de
+        la pantalla. Ahora cabe, y el desplazamiento se queda solo para el
+        móvil."""
+        m = self._medidas()
+        ancho = 52 * m["celda"] + 51 * m["hueco"] + 2 * m["relleno"]
+        self.assertLessEqual(
+            ancho, m["prosa"],
+            f"las 52 columnas miden {ancho} px y la columna de prosa {m['prosa']:.0f}")
+
+    def test_la_casilla_es_cuadrada(self):
+        """El alto sale de `grid-template-rows` y el ancho de `.cal-dia`: dos
+        sitios para un cuadrado, así que uno puede quedarse viejo."""
+        m = self._medidas()
+        self.assertEqual(m["celda"], m["fila"])
+
+    def test_el_recuadro_de_hoy_no_invade_la_casilla_de_al_lado(self):
+        """Un `outline` se dibuja FUERA de la casilla: con el hueco en 2 px,
+        un trazo de 2 con desplazamiento de 1 se metería en la vecina."""
+        css = construir_sitio.CSS
+        m = re.search(r"\.cal-dia\.es-hoy\{outline:(\d+)px[^}]*outline-offset:(\d+)", css)
+        self.assertIsNotNone(m, "no se pudo leer el recuadro de hoy")
+        trazo, fuera = int(m.group(1)), int(m.group(2))
+        medidas = self._medidas()
+        self.assertLessEqual(trazo + fuera, medidas["hueco"] + medidas["relleno"],
+                             "el recuadro de hoy se sale por el borde de la rejilla")
+        self.assertLessEqual(trazo + fuera, medidas["hueco"] + medidas["celda"])
+
+    def test_el_desplazamiento_hasta_hoy_se_vuelve_a_poner(self):
+        """Puesto una sola vez se pierde si la página aún se está componiendo,
+        y lo que queda es la rejilla anclada en enero. Se repite en el
+        siguiente fotograma y al acabar de cargar, y SOLO si sigue en cero:
+        si no, le quitaría la rejilla de las manos a quien la esté moviendo."""
+        js = self.js
+        self.assertIn("requestAnimationFrame(alFinal)", js)
+        self.assertIn("window.addEventListener('load',alFinal)", js)
+        cuerpo = js.split("var alFinal=")[1].split(";")[0]
+        self.assertIn("if(!rejilla.scrollLeft)", cuerpo,
+                      "se repone el desplazamiento aunque el lector lo haya movido")
+
     # --- los textos ---
 
     def test_los_tres_idiomas_traen_los_textos_nuevos(self):
