@@ -1140,12 +1140,19 @@ signo— y hay una prueba que pone el botón, que es el camino real.
 26: si no, `test_docs_esta_al_dia` compara un sitio con dibujos contra uno sin
 ellos y acusa a `docs/` de estar desactualizado.
 
-**Lo que esto NO hace**: las 300 están sin revisar. Por la regla 6 el profesor
-tiene que verlas una a una, y no es trámite —si «el sobrino» sale dibujado como
-una niña, el alumno aprende lo contrario y nada falla—. Las que más conviene
-mirar son las ambiguas que sí se dejaron: `el banco` (asiento o entidad), `la
-planta` (vegetal o piso), `el partido` (deporte o político), `la entrada`
-(billete o puerta) y `la carta` (misiva o menú).
+**Las 300 están APROBADAS desde el 2026-10-30**: el profesor las vio y las dio
+por buenas («los dibujos son aprobados ya los vi»). Eso cierra la regla 6 para
+ellas, y con ellas las cinco ambiguas que se dejaron a propósito —`el banco`
+(asiento o entidad), `la planta` (vegetal o piso), `el partido` (deporte o
+político), `la entrada` (billete o puerta) y `la carta` (misiva o menú)—.
+
+**Y conviene saber que esa aprobación NO deja rastro en ningún archivo.** Una
+lección lleva su `revisado: true` en el frontmatter, y el sitio enseña
+«Черновик» mientras no lo tenga; **un dibujo no tiene dónde llevarlo**: no hay
+bandera, no hay aviso en la página y `generar_imagenes.py` no sabe nada de
+revisiones. O sea que esta línea ES el registro. Si algún día se regeneran los
+dibujos —otro estilo, otro modelo— vuelven a estar sin revisar y esta nota se
+queda mintiendo: hay que borrarla a la vez.
 
 ## La baraja de tarjetas (2026-10-27)
 
@@ -1493,10 +1500,10 @@ a 1200x630, que es lo que piden las tres plataformas. 120 KB.
   qué hay versionado. Sin dominio o sin imagen no se declara nada: un
   `og:image` que da 404 es peor que ninguno.
 
-**Lo que queda pendiente del profesor**: las doce de la portada y las ocho de
-la tarjeta son dibujos sin revisar (regla 6) y ahora son lo más visible del
-sitio. Son `la manzana, la casa, el perro, el libro, el café, el reloj, la
-camisa, el coche, las flores, el pescado, la guitarra, la silla`.
+**Las doce de la portada y las ocho de la tarjeta están aprobadas** con las
+otras 280, el 2026-10-30. Son `la manzana, la casa, el perro, el libro, el
+café, el reloj, la camisa, el coche, las flores, el pescado, la guitarra, la
+silla`.
 
 ## La semana 15, el test que varía y la clave plegada (2026-10-27)
 
@@ -5561,9 +5568,10 @@ grabación muere con la pestaña.
   3 282 medios, **60,7 MB** como los cuenta GitHub. Ninguna tarjeta queda
   muda.
 - Pendiente, y ya no hay nada de contenido en la lista:
-  - **las 14 preguntas del test de nivel y los 300 dibujos**, que siguen sin
-    revisar (regla 6). Las lecciones ya no: el profesor firmó las 365 el
-    2026-10-29. Para volver a mirarlas, `scripts/revisado.py` lleva la cuenta
-    y `--quitar` devuelve a borrador lo que haga falta;
+  - **las 14 preguntas del test de nivel**, que siguen sin revisar (regla 6).
+    Las lecciones ya no —el profesor firmó las 365 el 2026-10-29— y **los 300
+    dibujos tampoco: los aprobó el 2026-10-30**. Para volver a mirar una
+    lección, `scripts/revisado.py` lleva la cuenta y `--quitar` devuelve a
+    borrador lo que haga falta;
   - los **libros de referencia** que quedaron sin analizar y lo de «Pendiente
     de revision del profesor» de arriba.
