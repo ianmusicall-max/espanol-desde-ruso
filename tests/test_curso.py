@@ -2793,12 +2793,84 @@ class TestCompartir(unittest.TestCase):
         self.assertIn("https://t.me/x", pie)
         self.assertNotIn("Instagram", pie)
 
-    def test_las_redes_del_repo_estan_vacias(self):
-        """Hasta que el profesor dé sus URLs, ninguna sale. Si un día esto se
-        pone en rojo es que alguien escribió un perfil a mano: comprobar que
-        existe antes de aflojar la prueba."""
+    def test_el_canal_del_pie_y_el_del_publicador_son_EL_MISMO(self):
+        """El 2026-10-31 el profesor creó el canal y `redes.telegram` dejó de
+        estar vacío, así que la guarda de «ninguna red rellena» se puso en rojo
+        e hizo su trabajo: se comprobó que el canal existe —el bot publicó en
+        él— y se reescribe en vez de aflojarse.
+
+        Lo que protege es la invariante de verdad: el pie enlaza
+        `redes.telegram` y el bot publica donde diga `canal_de`. Hoy ése lo
+        DERIVA del mismo enlace, así que no pueden separarse — pero
+        `telegram.canal` lo pisa, y está ahí para el canal privado. El día que
+        alguien lo rellene mal, el sitio invitaría a un canal y el bot
+        escribiría en otro sin que nada fallara.
+
+        La primera versión de esta prueba comparaba el enlace con lo que
+        devuelve `canal_de` y **no podía fallar nunca**, porque lo uno sale de
+        lo otro. Por eso el caso divergente se construye a mano: una guarda que
+        solo mira el estado de hoy no es una guarda."""
+        import palabra_del_dia
+        url = ((self.cfg.get("redes") or {}).get("telegram") or "").strip()
+        self.assertTrue(url, "redes.telegram vacío: el canal no se enlaza en ninguna parte")
+
+        def coinciden(cfg):
+            h = palabra_del_dia.canal_de(cfg)
+            e = ((cfg.get("redes") or {}).get("telegram") or "").strip()
+            return bool(h) and e.endswith("/" + h.lstrip("@"))
+
+        self.assertTrue(coinciden(self.cfg),
+                        f"el pie enlaza {url} y el bot publica en "
+                        f"{palabra_del_dia.canal_de(self.cfg)}")
+        # y la comprobación de arriba sabe decir que no, que es lo que la
+        # primera versión no hacía
+        partido = dict(self.cfg, telegram=dict(self.cfg.get("telegram") or {},
+                                               canal="@otro_canal"))
+        self.assertFalse(coinciden(partido), "la guarda no caza una divergencia")
+
+    def test_las_demas_redes_del_repo_estan_vacias(self):
+        """Las otras tres siguen sin cuenta. Si una se pone en rojo es que
+        alguien escribió un perfil a mano: comprobar que existe antes de
+        aflojar la prueba."""
         for clave, url in (self.cfg.get("redes") or {}).items():
+            if clave == "telegram":
+                continue
             self.assertEqual("", (url or "").strip(), f"redes.{clave}")
+
+    def test_la_invitacion_al_canal_sale_donde_SE_VE(self):
+        """El enlace vivía solo en el pie y el profesor lo denunció el mismo
+        día que se encendió el canal: quien no baja hasta abajo del todo no se
+        entera de que existe. Es el mismo defecto que tenían el diccionario y
+        el test de nivel antes de subirlos a la barra.
+
+        Las tres portadas y las lecciones, cada una en SU idioma: una
+        invitación en ruso en la portada inglesa no la lee nadie."""
+        destino = pathlib.Path(tempfile.mkdtemp())
+        construir_sitio.construir(destino, self.cfg, self.textos)
+        for idioma, pagina in (("ru", "index.html"), ("es", "es/index.html"),
+                               ("en", "en/index.html"), ("ru", "semana-01/dia-1.html")):
+            texto = (destino / pagina).read_text(encoding="utf-8")
+            c = self.textos[idioma]["compartir"]
+            self.assertIn('class="puerta canal"', texto, pagina)
+            self.assertIn(c["canal_enlace"], texto, f"{pagina}: no está en {idioma}")
+            self.assertIn(self.cfg["redes"]["telegram"], texto, pagina)
+
+    def test_la_invitacion_NO_entra_en_la_barra_de_arriba(self):
+        """La barra cabe en una fila desde 700 px con CINCO enlaces, medido en
+        Chromium el 2026-10-30. Un sexto la vuelve a partir en dos, que es el
+        fallo de octubre que costó una sesión."""
+        destino = pathlib.Path(tempfile.mkdtemp())
+        construir_sitio.construir(destino, self.cfg, self.textos)
+        texto = (destino / "index.html").read_text(encoding="utf-8")
+        cabecera = texto[:texto.index("</header>")]
+        self.assertNotIn(self.cfg["redes"]["telegram"], cabecera,
+                         "el canal se ha colado en la cabecera")
+
+    def test_sin_canal_no_se_invita_a_nada(self):
+        """Una invitación a un canal que no existe es peor que ninguna, igual
+        que el bloque de compartir sin dominio."""
+        sin = dict(self.cfg, redes={"telegram": "", "instagram": ""})
+        self.assertEqual("", construir_sitio._canal(self.textos["ru"], sin))
 
 
 class TestLasCasillasParaEscribir(unittest.TestCase):

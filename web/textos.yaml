@@ -206,6 +206,8 @@ ru:
     copiar: "Скопировать ссылку"
     copiado: "Ссылка скопирована"
     seguir: "Курс в соцсетях"
+    canal_invita: "Каждый день — новое слово с озвучкой:"
+    canal_enlace: "канал в Telegram"
   grabar:
     titulo: "Запишите себя"
     entrada: "Послушайте фразу (▶), скажите её вслух и сравните. Запись остаётся в браузере: она никуда не отправляется и нигде не сохраняется."
@@ -515,6 +517,8 @@ es:
     copiar: "Copiar el enlace"
     copiado: "Enlace copiado"
     seguir: "El curso en redes"
+    canal_invita: "Cada día una palabra nueva con su audio:"
+    canal_enlace: "canal de Telegram"
   grabar:
     titulo: "Grábese"
     entrada: "Escuche la frase (▶), dígala en voz alta y compare. La grabación se queda en el navegador: no se envía a ninguna parte y no se guarda en ningún sitio."
@@ -812,6 +816,8 @@ en:
     copiar: "Copy the link"
     copiado: "Link copied"
     seguir: "The course on social media"
+    canal_invita: "A new word with audio every day:"
+    canal_enlace: "Telegram channel"
   grabar:
     titulo: "Record yourself"
     entrada: "Listen to the phrase (▶), say it out loud and compare. The recording stays in your browser: it is not sent anywhere and not saved anywhere."

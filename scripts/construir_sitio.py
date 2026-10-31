@@ -556,6 +556,7 @@ ul.dias li.hecha a{color:var(--tenue)}
 .puerta{font-size:.9rem;color:var(--tenue);margin:1.2rem 0 0}
 .botones+.puerta{margin-top:-.6rem}
 .puerta a{color:var(--acento);font-weight:600}
+.puerta+.puerta{margin-top:.4rem}
 .progreso-nota{font-size:.84rem;color:var(--tenue);font-family:Onest,ui-sans-serif,system-ui,sans-serif;margin-top:.5rem}
 #borrar-progreso{background:none;border:0;padding:0;color:var(--tenue);text-decoration:underline;
   cursor:pointer;font:inherit;font-size:.84rem}
@@ -3434,6 +3435,7 @@ def construir_portada(cfg, t, idiomas, idioma, destino, cal, raiz,
 <a class="boton secundario" href="{raiz}/kurs.html">{html.escape(p['boton2'])}</a>
 </div>
 <p class="puerta">{html.escape(p['ya_sabe'])} <a href="{raiz}/test.html">{html.escape(p.get('ya_sabe_enlace') or t['test']['titulo'])}\u00a0→</a></p>
+{_canal(t, cfg)}
 <div class="progreso">
 <div class="cifras"><span class="n">{len(hechas)}</span><span>/ {total} {html.escape(p['progreso'])}</span></div>
 <div class="barra"><i style="width:{max(pct, 1)}%"></i></div>
@@ -3750,6 +3752,31 @@ def _bloque_de_la_baraja(t, destino: pathlib.Path, raiz: str, cfg=None) -> str:
 # peor que no tener botón.
 REDES = (("telegram", "Telegram"), ("instagram", "Instagram"),
          ("youtube", "YouTube"), ("facebook", "Facebook"))
+
+
+def _canal(t, cfg) -> str:
+    """La invitación al canal de Telegram, donde SÍ se ve.
+
+    El enlace vivía solo en el pie («Курс в соцсетях»), o sea abajo del todo
+    de las 394 páginas, y el profesor lo denunció el mismo día que se encendió
+    el canal: quien no baja no se entera de que existe. Es el mismo defecto que
+    tenían el diccionario y el test de nivel antes de subirlos a la barra.
+
+    Va en DOS sitios y no en el menú de arriba: en la portada debajo de los
+    botones, y al pie de cada lección junto a los de compartir —quien acaba una
+    lección es justo el que se suscribe—. **En la barra no**, y es una decisión
+    medida: con cinco enlaces cabe en una fila desde 700 px y un sexto la
+    vuelve a partir, que es el fallo de octubre.
+
+    Sin `redes.telegram` no sale nada, como el bloque de compartir sin dominio:
+    una invitación a un canal que no existe es peor que ninguna."""
+    url = ((cfg.get("redes") or {}).get("telegram") or "").strip()
+    if not url:
+        return ""
+    c = t["compartir"]
+    return (f'<p class="puerta canal">{html.escape(c["canal_invita"])} '
+            f'<a href="{html.escape(url)}" target="_blank" rel="noopener">'
+            f'{html.escape(c["canal_enlace"])}\u00a0→</a></p>')
 
 
 def _compartir(t, cfg, canonica: str, de_que: str = "") -> str:
@@ -4525,7 +4552,7 @@ def construir_leccion(d, cfg, t, idiomas, destino, cal, todos, audio=None,
                     + html_cuerpo + anuncio(cfg, "pie")
                     + _bloque_de_grabar(t, hay_audio, frase)
                     + _bloque_del_quiz(t, preguntas_quiz) + '<div id="marcar-caja"></div>'
-                    + _compartir(t, cfg, canonica)
+                    + _compartir(t, cfg, canonica) + _canal(t, cfg)
                     + f'<nav class="pasos">{"".join(pasos)}</nav></article>')
 
     salida = destino / f"semana-{d.semana:02d}" / f"dia-{d.dia}.html"

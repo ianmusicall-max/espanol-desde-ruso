@@ -6279,3 +6279,73 @@ grabación muere con la pestaña.
     borrador lo que haga falta;
   - los **libros de referencia** que quedaron sin analizar y lo de «Pendiente
     de revision del profesor» de arriba.
+
+## El canal encendido, y el enlace que no se veía (2026-10-31)
+
+El profesor creó el bot y el canal, metió el bot como administrador, guardó el
+token en GitHub y le dio a *Run workflow*: **la primera publicación salió** —
+«hola — привет, здравствуйте», con su audio y el enlace a la lección 1—. Aquí
+quedaron `redes.telegram` y `telegram.desde` (hoy), así que hoy es la
+publicación 1 de **2 984**.
+
+**Lo que costó el camino, por si hay que repetirlo con otro bot:**
+
+- **El usuario del bot no admite la ñ** ni acentos: solo letras inglesas,
+  números y `_`. El NOMBRE sí los admite, así que BotFather acepta
+  «Españoldesderuso_bot» como nombre y rechaza el mismo texto como usuario, y
+  el mensaje que da —«Sorry, this username is invalid»— no dice por qué.
+- **El token se pegó en el chat** y hubo que quemarlo: `/revoke` en BotFather
+  lo invalida al instante y da otro. Es la razón por la que el token va de
+  secreto del repositorio y nunca de este lado.
+- **El bot tiene que ser ADMINISTRADOR del canal** con permiso de publicar. De
+  miembro no basta y Telegram contesta «chat not found», que manda a buscar el
+  fallo en el enlace y no en el permiso.
+
+### El enlace vivía solo en el pie
+
+El profesor lo dijo en cuanto publicó: *«y en la pagina no estar el canal de
+telegram?»*. Estaba —«Курс в соцсетях: Telegram», con el despliegue de Pages ya
+terminado— pero **abajo del todo de las 394 páginas**. Es el mismo defecto que
+tenían el diccionario y el test de nivel el día anterior, cuando él mismo pidió
+subirlos a la barra: quien no baja no se entera de que existe.
+
+`_canal()` lo pone en **dos sitios** y en el idioma de la página:
+
+- **la portada**, debajo de los dos botones y pegado a la línea del test;
+- **el pie de cada lección**, junto a los botones de compartir — quien acaba
+  una lección es justo el que se suscribe.
+
+**En la barra de arriba NO, y es una decisión medida**: con cinco enlaces cabe
+en una fila desde 700 px (Chromium, 2026-10-30) y un sexto la vuelve a partir,
+que es el fallo de octubre que costó una sesión. Hay una prueba que exige que
+el enlace no aparezca en la cabecera.
+
+**Sin `redes.telegram` no sale nada**, como el bloque de compartir sin dominio:
+una invitación a un canal que no existe es peor que ninguna.
+
+Comprobado en Chromium a 390 px, no razonado: sale en la portada y en la
+lección, 350 px de ancho, cero errores de JS.
+
+### Y una guarda mía que no podía fallar
+
+`test_las_redes_del_repo_estan_vacias` se puso en rojo al rellenar
+`redes.telegram`, que es exactamente para lo que estaba («si un día esto se
+pone en rojo es que alguien escribió un perfil a mano: comprobar que existe
+antes de aflojar la prueba»). El canal existe —el bot publicó en él— así que se
+reescribió en vez de aflojarse, y ahora protege la invariante de verdad: **el
+pie y el publicador tienen que apuntar al MISMO canal**.
+
+**La primera versión de esa guarda era tautológica.** Comparaba
+`redes.telegram` con lo que devuelve `palabra_del_dia.canal_de`, y ése lo
+DERIVA de aquél: no podía fallar nunca. Lo delató probarla a mano con un canal
+distinto y ver que seguía diciendo que sí. Lo que sí puede divergir es
+`telegram.canal`, que pisa al enlace y existe para el canal privado, así que
+ahora el caso divergente se **construye dentro de la prueba**. Es lo mismo que
+pasó con `test_ningun_mudo_esta_en_el_indice`: una guarda que solo mira el
+estado de hoy no es una guarda.
+
+**Y por tercera vez, `pkill -f` se mató a sí mismo**: la línea de órdenes del
+comando que hace el `pkill` contiene el patrón que busca, así que
+`pkill -f 'http.server 8899'` se lleva por delante la shell y el heredoc que
+venía detrás no llega a correr. El truco es un corchete —`http[.]server`— que
+hace que el patrón no case consigo mismo.
