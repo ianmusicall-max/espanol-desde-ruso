@@ -172,15 +172,59 @@ def texto(p: dict, t: dict, dominio: str) -> str:
     return "\n".join(lineas)
 
 
-def _pedido(p: dict, cuerpo: str, canal: str) -> tuple[str, dict, dict]:
+# Día por medio: las publicaciones PARES llevan vídeo —la tarjeta con la voz
+# encima— y las impares, la tarjeta como foto. Lo eligió el usuario sobre las
+# dos opciones, y la razón de que haya que elegir es de Telegram: un mensaje
+# no puede tener imagen grande y sonido a la vez. `sendPhoto` no admite audio
+# y `sendAudio` reduce la imagen a una carátula de 320 px.
+#
+# Por el NÚMERO de publicación y no por el día de la semana: así reparte
+# mitad y mitad exactas, y se sabe de antemano cuál toca.
+def toca_video(n: int) -> bool:
+    return n % 2 == 0
+
+
+def _tarjeta(p: dict, taller: pathlib.Path):
+    """La tarjeta del día, o None si no se pudo dibujar."""
+    import tarjeta_palabra
+
+    cfg = construir_sitio.cargar_config()
+    t = construir_sitio.cargar_textos()["canal"]
+    return tarjeta_palabra.dibujar(p, taller / "tarjeta.png",
+                                   (cfg.get("dominio") or "").rstrip("/"),
+                                   t["urok"])
+
+
+def _pedido(p: dict, cuerpo: str, canal: str, n: int = 1,
+            taller: pathlib.Path | None = None) -> tuple[str, dict, dict]:
     """Qué método de la API toca y con qué.
 
-    Devuelve `(metodo, campos, archivos)`. La voz manda sobre el dibujo: el
-    96 % de las palabras la tiene y oírla es para lo que existe un canal de
-    idiomas; el dibujo, que solo tienen 263, va de carátula cuando hay las
-    dos cosas. Sin ninguna de las dos es un mensaje de texto y ya."""
+    Devuelve `(metodo, campos, archivos)`.
+
+    Con `taller` —una carpeta donde escribir— la publicación lleva la
+    TARJETA (`tarjeta_palabra.py`): vídeo los días pares, foto los impares.
+    Sin él, o si la tarjeta no se pudo dibujar, sale como antes: la voz
+    manda sobre el dibujo y éste va de carátula. Eso último es la red, y no
+    un camino muerto: un canal mudo es peor que un canal sin tarjeta.
+    """
     campos = {"chat_id": canal, "parse_mode": "HTML"}
     archivos: dict[str, pathlib.Path] = {}
+
+    tarjeta = _tarjeta(p, taller) if taller is not None else None
+    if tarjeta is not None:
+        import tarjeta_palabra
+
+        campos["caption"] = cuerpo
+        if p.get("mp3") and toca_video(n):
+            voz = construir_sitio.DOCS / "audio" / f"{p['mp3']}.mp3"
+            clip = tarjeta_palabra.video(tarjeta, voz, taller / "palabra.mp4")
+            if clip is not None:
+                campos["supports_streaming"] = "true"
+                archivos["video"] = clip
+                return "sendVideo", campos, archivos
+        archivos["photo"] = tarjeta
+        return "sendPhoto", campos, archivos
+
     if p.get("mp3"):
         campos["caption"] = cuerpo
         campos["title"] = p["es"]
@@ -217,23 +261,25 @@ def _multipart(campos: dict, archivos: dict) -> tuple[bytes, str]:
     return b"".join(trozos), f"multipart/form-data; boundary={borde}"
 
 
-def enviar(p: dict, cuerpo: str, token: str, canal: str, pedir=None) -> dict:
+def enviar(p: dict, cuerpo: str, token: str, canal: str, n: int = 1,
+           pedir=None) -> dict:
     """Publica, y devuelve lo que contestó Telegram.
 
     `pedir` existe para poder probar la FORMA del pedido sin red, que es lo
     único comprobable desde aquí: `api.telegram.org` no se alcanza."""
-    metodo, campos, archivos = _pedido(p, cuerpo, canal)
-    for nombre, ruta in archivos.items():
-        if not ruta.exists():
-            raise FileNotFoundError(f"falta {ruta} ({nombre})")
-    if pedir is not None:
-        return pedir(metodo, campos, archivos)
     import tempfile
     with tempfile.TemporaryDirectory() as tmp:
+        taller = pathlib.Path(tmp)
+        metodo, campos, archivos = _pedido(p, cuerpo, canal, n, taller)
+        for nombre, ruta in archivos.items():
+            if not ruta.exists():
+                raise FileNotFoundError(f"falta {ruta} ({nombre})")
+        if pedir is not None:
+            return pedir(metodo, campos, archivos)
         if "thumbnail" in archivos:
             archivos = dict(archivos,
                             thumbnail=miniatura(archivos["thumbnail"],
-                                                pathlib.Path(tmp) / "caratula.jpg"))
+                                                taller / "caratula.jpg"))
         return _enviar_ya(metodo, campos, archivos, token)
 
 
@@ -284,17 +330,27 @@ def main(argv=None) -> int:
         return 1
 
     cuerpo = texto(p, t, (cfg.get("dominio") or "").rstrip("/"))
-    metodo, campos, archivos = _pedido(p, cuerpo, canal_de(cfg) or "@…")
+    # Con su propio taller, para que `--ver` enseñe el método DE VERDAD: sin
+    # él diría `sendAudio` y lo que sale es la tarjeta.
+    import tempfile
+    with tempfile.TemporaryDirectory() as tmp:
+        taller = pathlib.Path(tmp)
+        metodo, campos, archivos = _pedido(
+            p, cuerpo, canal_de(cfg) or "@…", n, taller)
 
-    print(f"publicación {n} de {len(lista)} · {metodo}")
-    print("-" * 60)
-    print(cuerpo)
-    print("-" * 60)
-    for k, ruta in archivos.items():
-        marca = "✓" if ruta.exists() else "FALTA"
-        print(f"  {k:<10} {marca} {ruta.relative_to(RAIZ)}")
-    if not archivos:
-        print("  (sin voz ni dibujo: sale como mensaje de texto)")
+        print(f"publicación {n} de {len(lista)} · {metodo}")
+        print("-" * 60)
+        print(cuerpo)
+        print("-" * 60)
+        for k, ruta in archivos.items():
+            marca = "✓" if ruta.exists() else "FALTA"
+            try:
+                donde = ruta.relative_to(RAIZ)
+            except ValueError:
+                donde = f"{ruta.name} ({ruta.stat().st_size // 1024} KB)"
+            print(f"  {k:<10} {marca} {donde}")
+        if not archivos:
+            print("  (sin voz ni dibujo: sale como mensaje de texto)")
 
     if not a.telegram:
         return 0
@@ -303,7 +359,7 @@ def main(argv=None) -> int:
     if not token or not canal:
         print(f"\nfaltan {VAR_TOKEN} y/o el canal: no se publica nada.")
         return 1
-    r = enviar(p, cuerpo, token, canal)
+    r = enviar(p, cuerpo, token, canal, n)
     if not r.get("ok"):
         print(f"\nTelegram dijo que no: {str(r)[:300]}")
         return 1

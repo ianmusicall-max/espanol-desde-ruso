@@ -4621,9 +4621,14 @@ class TestLaPalabraDelDia(unittest.TestCase):
 
     # --- qué se adjunta ---
 
-    def test_la_voz_manda_sobre_el_dibujo(self):
-        """El 96 % de las palabras tiene voz y oírla es para lo que existe un
-        canal de idiomas; el dibujo, que tienen 263, va de carátula."""
+    def test_sin_taller_sale_como_antes_de_la_tarjeta(self):
+        """La red, y no un camino muerto: si la tarjeta no se puede dibujar
+        —sin fuentes con cirílico, sin PIL— la publicación sale igual. Un
+        canal mudo es peor que un canal sin tarjeta.
+
+        Ésta era la guarda de cuando la voz mandaba sobre el dibujo. No se
+        aflojó: describe el mismo reparto, que ahora es el de reserva.
+        """
         con_ambos = next(p for p in self.lista if p["mp3"] and p["dibujo"])
         metodo, campos, archivos = palabra_del_dia._pedido(con_ambos, "x", "@c")
         self.assertEqual("sendAudio", metodo)
@@ -4640,6 +4645,44 @@ class TestLaPalabraDelDia(unittest.TestCase):
         self.assertEqual("sendMessage", metodo)
         self.assertEqual({}, archivos)
         self.assertEqual("x", campos["text"])
+
+    def test_la_tarjeta_sale_dia_por_medio_en_video_y_en_foto(self):
+        """Lo eligió el usuario: las dos cosas, intercaladas.
+
+        Y hay que elegir porque Telegram no deja imagen grande y sonido en
+        el mismo mensaje: `sendPhoto` no admite audio y `sendAudio` reduce
+        la imagen a una carátula de 320 px.
+        """
+        import tempfile
+
+        con_voz = next(p for p in self.lista if p["mp3"])
+        with tempfile.TemporaryDirectory() as tmp:
+            taller = pathlib.Path(tmp)
+            par = palabra_del_dia._pedido(con_voz, "x", "@c", 2, taller)
+            impar = palabra_del_dia._pedido(con_voz, "x", "@c", 3, taller)
+        self.assertEqual("sendVideo", par[0])
+        self.assertEqual({"video"}, set(par[2]))
+        self.assertEqual("sendPhoto", impar[0])
+        self.assertEqual({"photo"}, set(impar[2]))
+        self.assertEqual("x", par[1]["caption"])
+
+    def test_una_palabra_sin_voz_nunca_sale_en_video(self):
+        """Son 101 de 2.984. Un vídeo mudo es una foto que pesa diez veces
+        más y que Telegram reproduce sin que suene nada."""
+        import tempfile
+
+        sin_voz = dict(next(p for p in self.lista if p["dibujo"]), mp3="")
+        with tempfile.TemporaryDirectory() as tmp:
+            metodo, _, archivos = palabra_del_dia._pedido(
+                sin_voz, "x", "@c", 2, pathlib.Path(tmp))
+        self.assertEqual("sendPhoto", metodo)
+        self.assertEqual({"photo"}, set(archivos))
+
+    def test_el_reparto_es_mitad_y_mitad(self):
+        """Por el NÚMERO de publicación y no por el día de la semana: así
+        son mitades exactas y se sabe de antemano cuál toca."""
+        videos = sum(1 for n in range(1, 101) if palabra_del_dia.toca_video(n))
+        self.assertEqual(50, videos)
 
     def test_la_caratula_es_lo_que_telegram_admite(self):
         """JPEG, 320 px de lado como mucho y menos de 200 kB: está en su
@@ -4683,9 +4726,28 @@ class TestLaPalabraDelDia(unittest.TestCase):
         self.assertEqual([], faltan[:5])
 
     def test_un_adjunto_que_falta_se_dice_antes_de_pedir_nada(self):
-        p = dict(self.lista[0], mp3="no-existe-0000")
-        with self.assertRaises(FileNotFoundError):
-            palabra_del_dia.enviar(p, "x", "token", "@c", pedir=lambda *a: {"ok": True})
+        """Un adjunto que no existe tiene que cortar ANTES de hablar con
+        Telegram: mandado a medias, el canal se queda mudo ese día y el
+        motivo sale en la respuesta de Telegram, que nadie lee.
+
+        Se finge el reparto en vez de romper el mp3, que es lo que hacía
+        antes: desde que la publicación lleva tarjeta, una voz que falta ya
+        no deja ningún adjunto roto —se dibuja la foto igual—, así que
+        aquella versión pasaba sin ejercitar nada.
+        """
+        antes = palabra_del_dia._pedido
+        fantasma = pathlib.Path("/no/existe/jamas.mp3")
+
+        def roto(*a, **k):
+            return "sendAudio", {"chat_id": "@c"}, {"audio": fantasma}
+
+        palabra_del_dia._pedido = roto
+        try:
+            with self.assertRaises(FileNotFoundError):
+                palabra_del_dia.enviar(self.lista[0], "x", "token", "@c",
+                                       pedir=lambda *a: {"ok": True})
+        finally:
+            palabra_del_dia._pedido = antes
 
     def test_el_multipart_lleva_los_campos_y_los_bytes(self):
         with tempfile.TemporaryDirectory() as tmp:

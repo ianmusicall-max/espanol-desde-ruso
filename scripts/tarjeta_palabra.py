@@ -163,6 +163,10 @@ def componer(p: dict, dominio: str, urok: str):
 
     alto = MARGEN + cuerpo + AIRE_DEL_PIE + PIE + MARGEN
     alto = max(ALTO_MINIMO, min(ALTO_MAXIMO, alto))
+    # PAR, y no es cosmetico: la tarjeta es el fotograma del vídeo de los
+    # días que llevan voz, y H.264 no acepta un lado impar. Con un alto
+    # impar ffmpeg falla y ese día el canal se queda sin publicar.
+    alto += alto % 2
 
     lienzo = Image.new("RGB", (ANCHO, alto), BLANCO)
     d = ImageDraw.Draw(lienzo)
@@ -258,3 +262,57 @@ def main(argv=None) -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
+
+
+# Los días que llevan vídeo la tarjeta es un fotograma quieto con la voz
+# encima. Tres segundos es el suelo: con el medio segundo que dura «hola»
+# Telegram enseña un parpadeo que no se alcanza a leer.
+SEGUNDOS_MINIMOS = 3
+
+
+def video(tarjeta: pathlib.Path, voz: pathlib.Path,
+          destino: pathlib.Path) -> pathlib.Path | None:
+    """La tarjeta con la voz encima, en un mp4 corto. None si no se pudo.
+
+    Es la única forma de que un mensaje de Telegram tenga imagen grande Y
+    sonido: `sendPhoto` no admite audio y `sendAudio` reduce la imagen a una
+    carátula de 320 px. Un álbum tampoco los mezcla —su documentación dice
+    que el audio solo se agrupa con audio—.
+
+    **Falla seguro**: sin ffmpeg, o si la conversión se corta, devuelve None
+    y ese día se publica como foto. Un canal mudo es peor que uno sin vídeo.
+    """
+    import shutil
+    import subprocess
+
+    if shutil.which("ffmpeg") is None:
+        return None
+    parcial = destino.with_suffix(destino.suffix + ".parcial")
+    orden = [
+        "ffmpeg", "-nostdin", "-y", "-loglevel", "error",
+        "-loop", "1", "-i", str(tarjeta),
+        "-i", str(voz),
+        # `apad` alarga el audio con silencio hasta el suelo y `-shortest`
+        # corta ahí, así que la duración es max(suelo, voz) sin preguntarle
+        # a ffprobe cuánto dura.
+        "-af", "apad=whole_dur=%d" % SEGUNDOS_MINIMOS,
+        "-c:v", "libx264", "-tune", "stillimage", "-pix_fmt", "yuv420p",
+        "-r", "10", "-c:a", "aac", "-b:a", "96k",
+        # `-f mp4` NO es de adorno: se escribe en un `.parcial` y de esa
+        # extensión ffmpeg no deduce el formato. Sin esto falla con «Unable
+        # to choose an output format», que es la misma piedra con la que
+        # tropezó el audio del curso el 2026-10-28.
+        "-shortest", "-movflags", "+faststart", "-f", "mp4", str(parcial),
+    ]
+    try:
+        subprocess.run(orden, check=True, capture_output=True, timeout=120)
+    except (OSError, subprocess.SubprocessError):
+        parcial.unlink(missing_ok=True)
+        return None
+    if not parcial.exists() or parcial.stat().st_size == 0:
+        parcial.unlink(missing_ok=True)
+        return None
+    # Se escribe aparte y se renombra, como el `.parcial` de los audios: un
+    # ffmpeg cortado a la mitad deja un mp4 truncado que Telegram rechaza.
+    parcial.replace(destino)
+    return destino
