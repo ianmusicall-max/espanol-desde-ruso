@@ -780,6 +780,8 @@ input[type=checkbox]{margin-inline-end:.45rem}
 footer.sitio{border-top:1px solid var(--linea);padding:1.6rem 0 3rem;
   font-family:Onest,ui-sans-serif,system-ui,sans-serif;font-size:.83rem;color:var(--tenue)}
 footer.sitio a{color:var(--tenue)}
+footer.sitio .visitas{color:var(--tenue)}
+.visitas b{font-weight:600;font-variant-numeric:tabular-nums}
 footer.sitio p{margin:.35rem 0}
 #cookies{position:fixed;inset-inline:0;bottom:0;background:var(--tarjeta);border-top:1px solid var(--linea);
   padding:.85rem 20px;font-family:Onest,ui-sans-serif,system-ui,sans-serif;font-size:.85rem;display:flex;
@@ -2243,6 +2245,7 @@ def cargar_config(ruta: pathlib.Path = CONFIG) -> dict:
     cfg["dominio"] = (cfg.get("dominio") or "").rstrip("/")
     cfg.setdefault("adsense", {}).setdefault("bloques", {})
     cfg.setdefault("analitica", {})
+    cfg.setdefault("contador", {})
     cfg.setdefault("autor", {})
     return cfg
 
@@ -2266,6 +2269,42 @@ def cargar_test(ruta: pathlib.Path = TEST) -> dict:
 
 def hay_anuncios(cfg): return bool((cfg.get("adsense") or {}).get("cliente"))
 def hay_analitica(cfg): return bool((cfg.get("analitica") or {}).get("google"))
+
+
+# Un endpoint que de verdad se pueda escribir dentro de un <script>. Sale de
+# un YAML que edita una persona a mano, y `json.dumps` **no** escapa la barra,
+# así que un `</script>` ahí dentro cerraría la etiqueta y lo que viniera
+# detrás sería marcado. Es la misma razón por la que el identificador de
+# Yandex se limpia carácter a carácter: `html.escape` no protege de nada
+# dentro de un guion.
+CONTADOR_URL = re.compile(r"^https://[A-Za-z0-9.-]+(?::[0-9]+)?(?:/[A-Za-z0-9._~/-]*)?$")
+
+
+def endpoint_del_contador(cfg) -> str:
+    """La URL del contador, o cadena vacía si no sirve.
+
+    Falla de forma segura, como el resto del sitio: ante cualquier duda el
+    contador se queda apagado y el pie sale como hoy. Un endpoint raro no
+    puede escribir marcado en las 394 páginas."""
+    bruto = ((cfg.get("contador") or {}).get("endpoint") or "").strip()
+    return bruto if CONTADOR_URL.match(bruto) else ""
+
+
+def hay_contador(cfg):
+    """El contador de visitas del pie. Vacío = no se cuenta nada.
+
+    No es un servicio de fuera, y eso es la decisión: los contadores gratuitos
+    son proyectos de aficionado que se caen —hits.sh tuvo que mudarse de
+    dominio porque no podía pagar la renovación— y un dominio caducado
+    cargándose en las 394 páginas de este sitio es una petición a quien lo
+    haya registrado después. El endpoint es un Worker en la cuenta de
+    Cloudflare del profesor, la misma donde ya vive el dominio; el código y
+    los pasos están en `web/contador-worker.js`.
+
+    Por eso tampoco entra en `necesita_cookies`: no pone una cookie, no es de
+    un tercero y no sirve para perfilar a nadie. Lo que sí hace es que
+    Cloudflare vea la IP del lector, y eso está escrito en la política."""
+    return bool(endpoint_del_contador(cfg))
 
 
 def hay_yandex(cfg):
@@ -2590,12 +2629,14 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
 <p><a href="{raiz}/slovar.html">{html.escape(t['diccionario']['enlace'])}</a> · <a href="{raiz}/test.html">{html.escape(t['test']['titulo'])}</a> · <a href="{raiz}/o-kurse.html">{html.escape(t['menu']['sobre'])}</a> · <a href="{raiz}/kontakt.html">{html.escape(t['menu']['contacto'])}</a> · <a href="{raiz}/privacy.html">{html.escape(t['privacidad']['titulo'])}</a></p>
 <p>{html.escape(t['pie'])}</p>
 {_seguir(t, cfg, raiz)}
+{_visitas(t, cfg)}
 </div></footer>
 {banda_cookies(cfg, t, raiz)}
 {TEMA_SCRIPT}
 {IDIOMA_SCRIPT if not traducida else ""}
 <script>window.CURSO_TEXTOS={json.dumps(t['progreso'], ensure_ascii=False)};window.CURSO_RAIZ="{raiz}";window.CURSO_PUBLICADAS={publicadas};window.CURSO_DIAS={mapa_dias};window.CURSO_NIVELES={niveles};window.CURSO_SITIO={json.dumps(t["titulo_sitio"], ensure_ascii=False)};window.CURSO_DOMINIO={json.dumps((cfg.get("dominio") or "").replace("https://", "").replace("http://", ""), ensure_ascii=False)};</script>
 <script src="{raiz}/progreso.js" defer></script>
+{f'<script>window.CURSO_CONTADOR={json.dumps({"endpoint": endpoint_del_contador(cfg), "locale": idioma}, ensure_ascii=False)};{CONTADOR_JS}</script>' if hay_contador(cfg) else ""}
 {f'<script>{AUDIO_JS}</script>' if con_audio else ""}
 {f'<script>window.CURSO_TEST={json.dumps(test, ensure_ascii=False)};{TEST_JS}</script>' if test else ""}
 {f'<script>window.CURSO_PRUEBA={json.dumps(prueba, ensure_ascii=False)};{PRUEBA_JS}</script>' if prueba else ""}
@@ -3816,6 +3857,23 @@ def _compartir(t, cfg, canonica: str, de_que: str = "") -> str:
             f'{"".join(enlaces)}</div>')
 
 
+def _visitas(t, cfg) -> str:
+    """El número de visitas, al pie. Nace OCULTO y lo enciende el navegador.
+
+    Eso no es manía de este sitio: el número no está en el HTML, llega de un
+    fetch. Si el endpoint se cae, una extensión lo bloquea o el lector está
+    sin red, lo que queda es nada —y no un rótulo con el hueco en blanco, que
+    se lee como una página rota—. Por lo mismo un total de cero no se enseña.
+
+    Cuenta VISITAS y no páginas vistas: la marca la pone el guion en la
+    pestaña, así que leer diez lecciones cuenta una vez. Así el rótulo dice la
+    verdad y se gastan diez veces menos escrituras del plan gratuito."""
+    if not hay_contador(cfg):
+        return ""
+    return (f'<p class="visitas" id="visitas" hidden>{html.escape(t["visitas"])}: '
+            f'<b id="visitas-n"></b></p>')
+
+
 def _seguir(t, cfg, raiz: str) -> str:
     """Los perfiles del curso, en el pie. Solo los que estén rellenos."""
     redes = cfg.get("redes") or {}
@@ -3825,6 +3883,33 @@ def _seguir(t, cfg, raiz: str) -> str:
         return ""
     return (f'<p class="seguir">{html.escape(t["compartir"]["seguir"])}: '
             + " · ".join(enlaces) + "</p>")
+
+
+CONTADOR_JS = """
+(function(){
+  var d=window.CURSO_CONTADOR;
+  if(!d||!d.endpoint)return;
+  var caja=document.getElementById("visitas"),hueco=document.getElementById("visitas-n");
+  if(!caja||!hueco)return;
+  /* Una VISITA y no una página vista: la marca va en la pestaña, así que
+     recargar no infla nada y diez lecciones cuentan una vez. Si el navegador
+     no deja escribirla (ventana privada), se cuenta como visita nueva: pasarse
+     por arriba de vez en cuando es mejor que no contar. */
+  var nueva=true;
+  try{
+    if(sessionStorage.getItem("curso.visitado"))nueva=false;
+    else sessionStorage.setItem("curso.visitado","1");
+  }catch(e){}
+  fetch(d.endpoint,{method:nueva?"POST":"GET",mode:"cors",cache:"no-store"})
+    .then(function(r){return r.ok?r.json():null;})
+    .then(function(j){
+      if(!j||typeof j.total!=="number"||j.total<1)return;
+      hueco.textContent=j.total.toLocaleString(d.locale);
+      caja.hidden=false;
+    })
+    .catch(function(){});
+})();
+"""
 
 
 def _envolver_huecos(html_: str, ejercicios, t) -> tuple[str, list | None]:
@@ -4244,6 +4329,12 @@ def construir_estaticas(cfg, t, idiomas, idioma, destino, cal, raiz) -> None:
                     f'<a href="https://policies.google.com/technologies/partner-sites" rel="nofollow noopener">policies.google.com</a></p>']
     if hay_analitica(cfg):
         bloques += [f"<h2>{html.escape(pr['estadistica'])}</h2><p>{html.escape(pr['estadistica_texto'])}</p>"]
+    if hay_contador(cfg):
+        # Si el pie enseña un número, hay que decir de dónde sale. No es un
+        # tercero —es un Worker de la cuenta del profesor— pero Cloudflare ve
+        # la IP del lector igual, y lo único que una política no puede hacer
+        # es describir mal lo que el sitio carga.
+        bloques += [f"<h2>{html.escape(pr['contador'])}</h2><p>{html.escape(pr['contador_texto'])}</p>"]
     if not necesita_cookies(cfg):
         bloques += [f"<h2>{html.escape(pr['sin_cookies'])}</h2><p>{html.escape(pr['sin_cookies_texto'])}</p>"]
     bloques += [f"<h2>{html.escape(pr['derechos'])}</h2><p>{html.escape(pr['derechos_texto'])}</p>",

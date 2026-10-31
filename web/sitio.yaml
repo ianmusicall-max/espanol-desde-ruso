@@ -84,6 +84,25 @@ yandex:
 analitica:
   google: ""           # G-XXXXXXXXXX
 
+# El contador de visitas del pie. Vacío = no se cuenta nada y no sale el
+# número, que es lo correcto mientras no haya endpoint: un contador en blanco
+# o en cero es peor que ninguno.
+#
+# NO es un servicio ajeno, y eso es la decisión. Los contadores gratuitos son
+# proyectos de aficionado que se caen: hits.sh tuvo que mudarse de dominio
+# porque no podía pagar la renovación, y un dominio caducado cargándose en las
+# 394 páginas de este sitio es una petición a un desconocido. Aquí el endpoint
+# es un Worker en la cuenta de Cloudflare del profesor, que es la misma cuenta
+# donde ya vive el dominio: no hay nadie más en el camino y no puede
+# desaparecer. El código y los pasos para desplegarlo están en
+# `web/contador-worker.js`.
+#
+# Cuenta VISITAS y no páginas vistas: el guion marca la pestaña, así que leer
+# diez lecciones cuenta una vez. Así el rótulo dice la verdad y se gastan diez
+# veces menos escrituras del plan gratuito (1.000 al día).
+contador:
+  endpoint: ""         # https://….workers.dev
+
 # Los perfiles del curso en redes. Vacío = no sale el enlace, en vez de un
 # botón que lleva a una cuenta que no existe.
 #

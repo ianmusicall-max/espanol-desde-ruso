@@ -683,6 +683,7 @@ class TestLaPublicidad(unittest.TestCase):
         # identificador en `web/sitio.yaml`, estas pruebas no pueden cambiar de
         # significado sin que nadie haya tocado el generador.
         cfg["yandex"] = {"bloques": {}}
+        cfg["contador"] = {"endpoint": ""}
         cfg.update(cambios)
         destino = pathlib.Path(tempfile.mkdtemp())
         construir_sitio.construir(destino, cfg, self.textos)
@@ -727,6 +728,144 @@ class TestLaPublicidad(unittest.TestCase):
         propio = self._con(adsense=anuncios, dominio="https://espanoldesderuso.com")
         self.assertEqual((propio / "CNAME").read_text(encoding="utf-8").strip(), "espanoldesderuso.com")
         self.assertTrue((propio / "ads.txt").exists())
+
+
+class TestElContadorDeVisitas(unittest.TestCase):
+    """El número del pie. Lo pidió el profesor habiéndosele dicho el precio.
+
+    Lo que estas pruebas vigilan no es el número —que vive en Cloudflare y no
+    se puede comprobar desde aquí— sino las cuatro cosas que lo romperían en
+    silencio: que apagado no se cargue nada, que encendido nazca OCULTO, que
+    la política lo diga, y que un endpoint raro no escriba marcado."""
+
+    def setUp(self):
+        self.textos = construir_sitio.cargar_textos()
+        self.cfg = construir_sitio.cargar_config()
+
+    def _con(self, endpoint):
+        cfg = copy.deepcopy(self.cfg)
+        cfg["adsense"] = {"cliente": "", "bloques": {}}
+        cfg["analitica"] = {"google": ""}
+        cfg["yandex"] = {"bloques": {}}
+        cfg["contador"] = {"endpoint": endpoint}
+        destino = pathlib.Path(tempfile.mkdtemp())
+        construir_sitio.construir(destino, cfg, self.textos)
+        return destino
+
+    def test_el_repo_lo_tiene_APAGADO(self):
+        """Mientras no haya Worker desplegado, un contador en blanco es peor que
+        ninguno. Si esto se pone en rojo es que alguien pegó un endpoint: hay
+        que comprobar que responda antes de aflojar la prueba."""
+        self.assertFalse(construir_sitio.hay_contador(self.cfg))
+
+    def test_sin_endpoint_no_se_cuenta_ni_se_carga_nada(self):
+        destino = self._con("")
+        for pagina in ("index.html", "kurs.html", "semana-01/dia-1.html"):
+            html_ = (destino / pagina).read_text(encoding="utf-8")
+            self.assertNotIn('id="visitas"', html_, pagina)
+            self.assertNotIn("CURSO_CONTADOR", html_, pagina)
+            self.assertNotIn("curso.visitado", html_, pagina)
+
+    def test_el_numero_NO_viaja_en_el_html_y_el_bloque_nace_oculto(self):
+        """El total llega de un fetch, así que el rótulo tiene que nacer
+        escondido: si el endpoint se cae, una extensión lo bloquea o no hay
+        red, lo que queda es nada y no un rótulo con el hueco en blanco."""
+        destino = self._con("https://contador.ejemplo.workers.dev")
+        html_ = (destino / "index.html").read_text(encoding="utf-8")
+        self.assertIn('id="visitas" hidden', html_)
+        self.assertRegex(html_, r'<b id="visitas-n"></b>')
+
+    def test_sale_en_el_pie_de_todas_las_paginas_y_en_los_tres_idiomas(self):
+        destino = self._con("https://contador.ejemplo.workers.dev")
+        for pagina in ("index.html", "kurs.html", "slovar.html",
+                       "semana-01/dia-1.html", "semana-53/dia-1.html",
+                       "es/index.html", "en/index.html"):
+            html_ = (destino / pagina).read_text(encoding="utf-8")
+            self.assertIn('id="visitas"', html_, pagina)
+            self.assertIn("CURSO_CONTADOR", html_, pagina)
+
+    def test_cada_idioma_formatea_el_numero_con_SU_separador(self):
+        """1 234 en ruso, 1.234 en español, 1,234 en inglés: lo hace
+        `toLocaleString`, así que al guion hay que pasarle el idioma de la
+        PÁGINA y no uno fijo."""
+        destino = self._con("https://contador.ejemplo.workers.dev")
+        for pagina, codigo in (("index.html", "ru"), ("es/index.html", "es"),
+                               ("en/index.html", "en")):
+            html_ = (destino / pagina).read_text(encoding="utf-8")
+            self.assertIn(f'"locale": "{codigo}"', html_, pagina)
+
+    def test_cuenta_una_VISITA_y_no_una_pagina_vista(self):
+        """La marca va en la pestaña: recargar no infla nada y leer diez
+        lecciones cuenta una vez. De eso dependen el rótulo —que dice
+        «visitas»— y las 1.000 escrituras diarias del plan gratuito."""
+        js = construir_sitio.CONTADOR_JS
+        self.assertIn("sessionStorage", js)
+        self.assertIn("curso.visitado", js)
+        self.assertNotIn("localStorage", js)
+        # POST solo la primera vez; las demás leen.
+        self.assertIn('method:nueva?"POST":"GET"', js.replace(" ", ""))
+
+    def test_un_cero_no_se_ensena_y_un_fallo_no_rompe_la_pagina(self):
+        js = construir_sitio.CONTADOR_JS
+        self.assertIn("j.total<1", js.replace(" ", ""))
+        self.assertIn(".catch(", js)
+        # La lectura de la pestaña también va en try/catch: en ventana privada
+        # `sessionStorage` puede reventar al leerlo.
+        self.assertIn("try{", js.replace(" ", ""))
+
+    def test_la_politica_de_privacidad_lo_dice_y_nombra_cloudflare(self):
+        """Si el pie enseña un número, hay que decir de dónde sale. Lo único
+        que una política no puede hacer es describir mal lo que el sitio
+        carga."""
+        apagado = self._con("")
+        encendido = self._con("https://contador.ejemplo.workers.dev")
+        for idioma, ruta in (("ru", "privacy.html"), ("es", "es/privacy.html"),
+                             ("en", "en/privacy.html")):
+            with self.subTest(idioma=idioma):
+                titulo = self.textos[idioma]["privacidad"]["contador"]
+                self.assertNotIn(titulo, (apagado / ruta).read_text(encoding="utf-8"),
+                                 "apagado no carga nada, así que no hay nada que declarar")
+                con = (encendido / ruta).read_text(encoding="utf-8")
+                self.assertIn(titulo, con)
+                self.assertIn("Cloudflare", con)
+
+    def test_NO_enciende_el_aviso_de_cookies(self):
+        """No pone cookie, no es de un tercero y no sirve para perfilar: el
+        aviso es de la publicidad y de la analítica, no de esto."""
+        cfg = copy.deepcopy(self.cfg)
+        cfg["adsense"] = {"cliente": "", "bloques": {}}
+        cfg["analitica"] = {"google": ""}
+        cfg["yandex"] = {"bloques": {}}
+        cfg["contador"] = {"endpoint": "https://contador.ejemplo.workers.dev"}
+        self.assertFalse(construir_sitio.necesita_cookies(cfg))
+
+    def test_un_endpoint_raro_deja_el_contador_apagado(self):
+        """Va DENTRO de un <script>, donde `html.escape` no protege de nada y
+        `json.dumps` no escapa la barra: un `</script>` cerraría la etiqueta.
+        Sale de un YAML que edita una persona a mano."""
+        malos = ['https://x.dev"</script><script>alert(1)</script>',
+                 "http://inseguro.dev", "javascript:alert(1)",
+                 "//x.dev", "x.dev", " ", "https://x.dev' onload='x"]
+        for malo in malos:
+            with self.subTest(malo=malo):
+                self.assertEqual(
+                    construir_sitio.endpoint_del_contador({"contador": {"endpoint": malo}}), "")
+        bueno = "https://contador.algo.workers.dev"
+        self.assertEqual(
+            construir_sitio.endpoint_del_contador({"contador": {"endpoint": bueno}}), bueno)
+
+    def test_el_worker_existe_y_no_guarda_nada_del_lector(self):
+        """El contador es propio y no un servicio de fuera: los gratuitos se
+        caen —hits.sh tuvo que mudarse de dominio porque no podía pagar la
+        renovación— y un dominio caducado cargándose en 394 páginas es una
+        petición a quien lo registre después."""
+        worker = pathlib.Path("web/contador-worker.js").read_text(encoding="utf-8")
+        self.assertIn("espanoldesderuso.com", worker, "el origen tiene que estar fijado")
+        self.assertIn("access-control-allow-origin", worker)
+        # Guarda un entero y nada más.
+        for prohibido in ("CF-Connecting-IP", "cf-connecting-ip", "user-agent",
+                          "Set-Cookie", "set-cookie", "referer"):
+            self.assertNotIn(prohibido, worker, f"el Worker no puede tocar {prohibido}")
 
 
 class TestLaExportacionAWordPress(unittest.TestCase):

@@ -6185,6 +6185,86 @@ Australia, que es donde el anuncio se paga mejor.
 otro**: traducir la portada, el índice y las diez primeras lecciones, publicarlas
 en `/en/` y ver si Google las indexa. Son días y no meses.
 
+## El contador de visitas, y por qué es nuestro y no de nadie (2026-10-31)
+
+Lo pidió el profesor: «pon las visitas». Se le había dicho antes que con cero
+visitas un contador resta —es el mismo error que ya se quitó de la portada con
+«100/365»— y lo pidió igual, así que está hecho y se enciende cuando quiera.
+
+**Lo que NO se puede hacer y se le dijo**: «alumnos estudiando». No hay
+registro, el progreso vive en el navegador de cada uno y no llega a ningún
+servidor. Sería un número inventado.
+
+### El contador es un Worker de SU cuenta, no un servicio gratuito
+
+Esta es la decisión del día y no es prudencia de más. Los contadores gratuitos
+son proyectos de aficionado que se caen: **hits.sh tuvo que mudarse de dominio
+porque no podía pagar la renovación**, countapi lleva años sin dar señales y
+GoatCounter es gratis solo para uso no comercial —y este sitio lleva anuncios—.
+Un dominio caducado cargándose en las **394 páginas** de este sitio deja de ser
+un contador y pasa a ser una petición a quien lo registre después.
+
+`web/contador-worker.js` es un Worker de treinta líneas para la cuenta de
+Cloudflare del profesor, que es la misma donde ya vive el dominio. No puede
+desaparecer, no mete a nadie en el medio y por eso **la política de privacidad
+puede decir que el contador es nuestro** en vez de declarar un tercero más.
+Guarda un entero en KV y nada más: ni IP, ni cabeceras, ni cookie.
+
+**Sigue APAGADO** (`contador.endpoint` vacío en `web/sitio.yaml`) porque el
+Worker lo despliega él: son cuatro pasos de panel, escritos en la cabecera de
+ese archivo. Con el endpoint vacío el sitio se construye igual y no se pide
+nada a nadie; lo único que cambia hoy en `docs/` son dos reglas de CSS inertes.
+
+### Cuenta VISITAS y no páginas vistas
+
+La marca va en `sessionStorage`, así que leer diez lecciones cuenta una vez y
+recargar no infla nada. Dos razones y las dos importan: el rótulo dice
+«visitas» y tiene que ser verdad, y el plan gratuito da **1.000 escrituras al
+día** —contando páginas vistas, diez lecciones de un lector serían diez—.
+Pasadas esas mil, el `put` falla, el número deja de subir hasta mañana y el
+contador se sigue leyendo; la página nunca revienta por eso.
+
+### Las cuatro cosas que lo romperían en silencio
+
+- **Nace OCULTO y lo enciende el navegador**, como el resto del sitio, pero
+  aquí hace más falta que en ningún otro sitio: el número no está en el HTML,
+  llega de un `fetch`. Si el endpoint se cae, una extensión lo bloquea o no hay
+  red, lo que queda es **nada** y no un rótulo con el hueco en blanco, que se
+  lee como una página rota. Un total de cero tampoco se enseña.
+- **El endpoint se SANEA** (`CONTADOR_URL`), y esto es lo que casi se me pasa:
+  se escribe DENTRO de un `<script>`, donde `html.escape` no protege de nada y
+  **`json.dumps` no escapa la barra**, así que un `</script>` en esa línea del
+  YAML cerraría la etiqueta y lo de detrás sería marcado. Sale de un fichero
+  que edita una persona a mano. Es la misma lección que el identificador de
+  Yandex del 2026-10-27. Ante cualquier duda, contador apagado.
+- **No enciende el aviso de cookies.** No pone cookie, no es de un tercero y no
+  sirve para perfilar a nadie. El aviso es de la publicidad y de la analítica.
+- **La política lo declara igual**, en los tres idiomas: Cloudflare ve la IP
+  del lector como en cualquier petición al sitio. Lo único que una política no
+  puede hacer es describir mal lo que el sitio carga, que es la regla que ya
+  decidió el micrófono y el vídeo de YouTube que no se aplicó.
+
+Y `TestLaPublicidad._con()` **apaga también el contador**, por el motivo que ya
+está escrito ahí para AdSense y para Yandex: el día que el profesor pegue un
+endpoint, esas pruebas no pueden cambiar de significado sin que nadie haya
+tocado el generador.
+
+### Comprobado en navegador, que es donde esto se ve
+
+Contra un Worker de mentira que cuenta los POST: la primera página de la
+pestaña manda **POST** y enseña «Посещений сайта: 1 241»; la segunda y la
+recarga mandan **GET** y no suben nada; una pestaña nueva vuelve a sumar; con
+el endpoint abortado **no hay contador a la vista, la página entera sigue y
+cero errores de JS**. El separador de miles lo pone `toLocaleString` con el
+idioma de la PÁGINA: `1 241` en ruso y `1,241` en inglés. En español sale
+`1241` sin punto y **no es un fallo**: el español no agrupa los números de
+cuatro cifras; a diez mil sí pone el punto.
+
+**Y un tropiezo de método que ya está anotado dos veces y volvió a morder**:
+`cd … && export TMPDIR=… && nohup … &` pone **toda la cadena** en segundo
+plano, así que el `export` se queda en el subshell y la orden siguiente ve la
+variable vacía. Con rutas absolutas y punto.
+
 ## Estado (2026-10-29)
 
 **Lo que el alumno puede hacer en el sitio, después de la tanda del 29:**
