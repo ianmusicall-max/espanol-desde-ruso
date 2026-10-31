@@ -92,7 +92,7 @@ analitica:
 # privacidad de este sitio dice que sin AdSense no se carga nada de terceros, y
 # un widget la volvería mentira. Un enlace hace lo mismo y no carga nada.
 redes:
-  telegram: ""      # https://t.me/…
+  telegram: "https://t.me/espanoldesderuso"
   instagram: ""     # https://instagram.com/…
   youtube: ""       # https://youtube.com/@…
   facebook: ""      # https://facebook.com/…
@@ -105,4 +105,4 @@ redes:
 #           día publica lo mismo en vez de adelantar el canal.
 telegram:
   canal: ""
-  desde: ""
+  desde: "2026-10-31"
