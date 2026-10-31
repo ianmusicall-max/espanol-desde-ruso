@@ -4452,6 +4452,45 @@ es donde el anuncio se paga mejor.
 sitio, para que la pestaña del navegador y la caja de consentimiento no
 enseñen cosas distintas.
 
+## «No se aprobó su cuenta»: faltaba una casilla (2026-10-31)
+
+El profesor mandó la pantalla de AdSense con **«No se aprobó su cuenta — Debe
+corregir algunos problemas»** y preguntó qué hacer. **No era un rechazo del
+sitio**, y la prueba estaba en su correo, no en la pantalla: el aviso de Google
+de ese día dice «necesita unos cuantos cambios para que la aprobemos.
+**Después**, uno de nuestros especialistas revisará tu sitio». O sea que a esa
+altura **nadie había mirado el curso todavía**.
+
+Lo que frenaba la solicitud era una **casilla sin marcar** —«Confirmo que leí
+las Políticas del Programa de AdSense y cumplo con ellas»— y su botón
+*Reenviar*. Marcarla cambió la página entera: desapareció el aviso rojo y
+salieron los tres bloques en verde (Pagos, Anuncios, y Sitios con «Gracias por
+conectar el sitio»). El sitio pasó a la cola de revisión.
+
+**Y es el TERCER rodeo con la misma pantalla**, así que conviene fijar cómo se
+lee:
+
+- **La señal del 2026-10-27 ya no sirve.** Aquella nota decía que la cuenta
+  está sana si la barra lateral enseña *Sitios*, *Anuncios* y *Pagos*. Esas
+  tres secciones **no existen mientras la cuenta está en onboarding**: ir a
+  `/sites` a mano rebota a `/onboarding`. O sea que su ausencia no dice nada
+  malo, y su presencia tampoco decía nada bueno.
+- **Lo que sí distingue** es el título y la URL: `/youtube` y «AdSense para
+  YouTube» es la sección de vídeo quejándose por su cuenta; `/onboarding` y
+  «Página principal» es la solicitud de la cuenta.
+- **El motivo real vive en el correo**, no en el panel. El panel enseña un
+  texto genérico; el correo de `adsense-noreply@google.com` dice en qué fase
+  está. Ahí se ve la diferencia entre «falta completar la solicitud» y «un
+  especialista revisó tu sitio y lo rechazó por X».
+- **El «Consejo avanzado» sobre contenido insuficiente es plantilla** y va en
+  todos esos correos. Con 365 lecciones y 582.512 palabras no es lo que frena
+  esta cuenta, y leerlo como un diagnóstico habría mandado a reescribir el
+  curso.
+
+**Desde este contenedor nada de esto se puede ver**: `adsense.google.com` da
+`000`. Lo que sí se pudo leer fue el correo, con el conector de Gmail, y es lo
+que resolvió el día: la pantalla no decía qué fase era y el correo sí.
+
 ## El icono: la eñe, y el sitio dejó de ser anónimo (2026-10-29)
 
 Salió del CMP: su editor pide un logotipo y **el sitio no tenía ninguna marca**.
