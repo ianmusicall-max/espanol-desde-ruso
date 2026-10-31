@@ -894,6 +894,26 @@ class TestElContadorDeVisitas(unittest.TestCase):
                           "Set-Cookie", "set-cookie", "referer"):
             self.assertNotIn(prohibido, worker, f"el Worker no puede tocar {prohibido}")
 
+    def test_el_worker_cuenta_tambien_por_www(self):
+        """El sitio se abre por el dominio pelado y por `www`, y
+        `access-control-allow-origin` no admite una lista: hay que devolver el
+        origen de quien pregunta. Con uno solo fijado, al lector que entra por
+        `www` el navegador le descarta la respuesta y el contador se calla sin
+        error y sin aviso, que es el peor fallo que puede tener esto."""
+        worker = pathlib.Path("web/contador-worker.js").read_text(encoding="utf-8")
+        # Los dos salen del dominio del repo y no de una copia a mano: el día
+        # que el curso cambie de dominio, esto se pone en rojo aquí.
+        apex = (self.cfg.get("dominio") or "").rstrip("/")
+        self.assertTrue(apex.startswith("https://"), "el dominio tiene que ser https")
+        www = "https://www." + apex[len("https://"):]
+        for origen in (apex, www):
+            self.assertIn(f'"{origen}"', worker,
+                          f"el Worker no acepta {origen}: ese lector no cuenta")
+        # Y la cabecera no puede llevar los dos juntos: una lista ahí no es
+        # válida y los navegadores la rechazan entera.
+        self.assertNotIn(f"{apex} {www}", worker)
+        self.assertNotIn(f"{apex},{www}", worker)
+
 
 class TestLaExportacionAWordPress(unittest.TestCase):
     """El XML que importa WordPress de un clic."""

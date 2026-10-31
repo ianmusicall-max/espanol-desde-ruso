@@ -17,7 +17,10 @@
  *  1. dash.cloudflare.com → Storage & Databases → KV → Create a namespace,
  *     de nombre `visitas`.
  *  2. Compute (Workers) → Create → Start from Hello World → nombre
- *     `contador`. Pegar este archivo en el editor y Deploy.
+ *     `contador`. En el editor, BORRAR el ejemplo entero y pegar este archivo
+ *     → Deploy. Dejado el «Hello World», el Worker contesta texto en vez de
+ *     JSON: el contador se calla y la página no avisa de nada, porque es de
+ *     fallo seguro. Pasó el 2026-10-31 y costó una tarde de diagnóstico.
  *  3. En el Worker → Settings → Bindings → Add → KV namespace:
  *     Variable name `VISITAS`, namespace `visitas`.
  *  4. Copiar la URL que da (`https://contador.<algo>.workers.dev`) y pegarla
@@ -30,15 +33,32 @@
  * esto se cambia por Durable Objects.
  */
 
-// Solo este origen puede sumar. Sin esto, cualquiera infla el número desde su
-// propia página y el contador deja de medir este sitio.
-const ORIGEN = "https://espanoldesderuso.com";
+// Solo estos orígenes pueden sumar. Sin esto, cualquiera infla el número desde
+// su propia página y el contador deja de medir este sitio.
+//
+// Son DOS y no uno porque el sitio se abre por el dominio pelado y por `www`, y
+// `access-control-allow-origin` no admite una lista: hay que devolver el origen
+// de quien pregunta. Con uno solo, al lector que entra por `www` el navegador
+// le descarta la respuesta y el contador se calla —sin error y sin aviso—, que
+// es el peor fallo que puede tener esto.
+const ORIGENES = [
+  "https://espanoldesderuso.com",
+  "https://www.espanoldesderuso.com",
+];
 const CLAVE = "total";
 
 export default {
   async fetch(request, env) {
+    const origen = request.headers.get("origin");
+    const nuestro = ORIGENES.includes(origen);
+
     const cabeceras = {
-      "access-control-allow-origin": ORIGEN,
+      // El origen de quien pregunta si es de los nuestros. A un tercero se le
+      // contesta con el del sitio, así que su navegador descarta la respuesta.
+      "access-control-allow-origin": nuestro ? origen : ORIGENES[0],
+      // La cabecera de arriba depende del origen, así que ningún caché de en
+      // medio puede servirle a uno la respuesta del otro.
+      "vary": "origin",
       "access-control-allow-methods": "GET, POST, OPTIONS",
       "cache-control": "no-store",
       "content-type": "application/json; charset=utf-8",
@@ -52,7 +72,7 @@ export default {
 
     // GET lee y POST suma. Quién de los dos se manda lo decide el navegador
     // mirando su propia pestaña, así que recargar no infla nada.
-    if (request.method === "POST" && request.headers.get("origin") === ORIGEN) {
+    if (request.method === "POST" && nuestro) {
       total += 1;
       // KV es de consistencia eventual y esto es leer-sumar-guardar, así que
       // dos visitas en el mismo segundo pueden contarse como una. Con el
