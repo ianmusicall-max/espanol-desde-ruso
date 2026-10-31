@@ -6349,3 +6349,32 @@ comando que hace el `pkill` contiene el patrón que busca, así que
 `pkill -f 'http.server 8899'` se lleva por delante la shell y el heredoc que
 venía detrás no llega a correr. El truco es un corchete —`http[.]server`— que
 hace que el patrón no case consigo mismo.
+
+## Search Console, dado de alta (2026-10-31)
+
+El profesor lo hizo en su panel, con los pasos de aquí. **La propiedad es de
+DOMINIO** (`sc-domain:espanoldesderuso.com`), verificada con un TXT en
+Cloudflare: cubre el dominio entero y no solo un prefijo, y los TXT no tienen
+nube naranja, así que ahí no hay nada que apagar —al contrario que los A y los
+AAAA del 2026-10-27—.
+
+**El sitemap quedó en «Correcto» con 384 páginas descubiertas**, que son
+exactamente las que escribe el generador. En una propiedad de dominio el campo
+no enseña ningún prefijo, así que la URL va entera
+(`https://espanoldesderuso.com/sitemap.xml`); en una de «Prefijo de URL»
+bastaría con `sitemap.xml`, y ésa fue la única duda del camino.
+
+**Lo que esto NO es**: «descubiertas» no es «indexadas». Google tarda de días a
+dos o tres semanas en empezar con un sitio nuevo, los informes van con dos o
+tres días de retraso, y nunca indexa el 100 %. La pantalla que dice la verdad
+es **Indexación → Páginas**, no la de Sitemaps.
+
+**Nada de esto se puede comprobar desde este contenedor**: `google.com` ni
+siquiera resuelve, así que lo que pase en Search Console solo lo contesta
+alguien abriéndola. Lo que sí está verificado aquí es lo que el sitio sirve:
+384 `<loc>` en `docs/sitemap.xml` y el `robots.txt` anunciándolo.
+
+**Con esto se cierra lo que el profesor eligió hacer antes del curso de
+inglés** (ver la nota del 2026-10-30): el canal de Telegram publica desde hoy y
+el sitio está dado de alta en Google. Lo que queda es esperar dos semanas y ver
+si trae gente, que es la pregunta que decide si el segundo curso vale la pena.
