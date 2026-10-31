@@ -6779,3 +6779,98 @@ class TestElBotonDeOir(unittest.TestCase):
         ancho = 21 + abs(self._px("after", "left")) + abs(self._px("after", "right"))
         self.assertGreaterEqual(alto, 30)
         self.assertGreaterEqual(ancho, 30)
+
+
+class TestLaTarjetaDeLaPalabra(unittest.TestCase):
+    """La tarjeta que el canal de Telegram publica cada día.
+
+    Existe porque el canal se leía como texto: de las 2.984 palabras, 2.883
+    salen como reproductor de audio y el dibujo —que solo tienen 263— iba de
+    carátula de 320 px, o sea invisible. La rama que manda una foto no corría
+    nunca.
+    """
+
+    def _palabra(self, **extra):
+        import datetime as dt
+        import types
+        p = {"es": "la manzana", "ru": "яблоко",
+             "ejemplo": "Me gusta la manzana verde.", "mp3": "x", "dibujo": "",
+             "dia": types.SimpleNamespace(numero=42, semana=7, dia=1)}
+        p.update(extra)
+        del dt
+        return p
+
+    def _tarjeta(self, **extra):
+        import tarjeta_palabra
+        return tarjeta_palabra.componer(
+            self._palabra(**extra), "https://espanoldesderuso.com", "Урок")
+
+    def test_el_alto_es_una_cuenta_y_no_un_numero(self):
+        """Solo 263 de 2.984 palabras tienen dibujo. Con un lienzo cuadrado
+        fijo, el 88 % del canal saldría con medio lienzo en blanco —peor que
+        el mensaje de texto que esto viene a reemplazar—."""
+        import tarjeta_palabra
+
+        corta = self._tarjeta(es="hola", ru="привет", ejemplo="")
+        larga = self._tarjeta()
+        self.assertEqual(corta.width, tarjeta_palabra.ANCHO)
+        self.assertLess(corta.height, larga.height)
+        self.assertGreaterEqual(corta.height, tarjeta_palabra.ALTO_MINIMO)
+        self.assertLessEqual(larga.height, tarjeta_palabra.ALTO_MAXIMO)
+
+    def test_el_peor_texto_del_canal_entra_entero(self):
+        """Con los textos más largos de las 2.984, nada toca el borde.
+
+        Se mide sobre el lienzo y no sobre la cuenta del propio renderizador:
+        repetir su aritmética no probaría nada. Lo que se mira es que quede
+        margen limpio abajo y a la derecha.
+        """
+        import tarjeta_palabra
+
+        t = self._tarjeta(es="sustituir a alguien · desaparecer",
+                          ru="заменить кого-то · исчезнуть",
+                          ejemplo="No sustituirá a los humanos; "
+                                  "el plástico no desaparecerá.")
+        blanco = tarjeta_palabra.BLANCO
+        borde = tarjeta_palabra.MARGEN // 3
+        for x in range(t.width - borde, t.width):
+            for y in range(0, t.height, 7):
+                self.assertEqual(t.getpixel((x, y)), blanco,
+                                 "algo toca el borde derecho")
+        for y in range(t.height - borde, t.height):
+            for x in range(0, t.width, 7):
+                self.assertEqual(t.getpixel((x, y)), blanco,
+                                 "algo toca el borde de abajo")
+
+    def test_sin_fuentes_la_publicacion_sale_igual(self):
+        """Falla seguro: si no se puede dibujar, `dibujar` devuelve None y
+        quien llama publica como antes. Un canal mudo es mucho peor que un
+        canal sin tarjeta."""
+        import pathlib
+        import tempfile
+        import tarjeta_palabra
+        import tarjeta_social
+
+        antes = tarjeta_social._fuente
+
+        def sin_fuentes(*a, **k):
+            raise SystemExit("no hay ninguna fuente con cirílico")
+
+        tarjeta_social._fuente = sin_fuentes
+        try:
+            destino = pathlib.Path(tempfile.mkdtemp()) / "t.png"
+            self.assertIsNone(tarjeta_palabra.dibujar(
+                self._palabra(), destino, "", "Урок"))
+            self.assertFalse(destino.exists())
+        finally:
+            tarjeta_social._fuente = antes
+
+    def test_la_paleta_es_la_del_sitio_y_no_una_copia(self):
+        """Una copia de los colores se queda vieja el día que el CSS cambie.
+        `tarjeta_social.py` ya los tiene; aquí se toman de ahí."""
+        import tarjeta_palabra
+        import tarjeta_social
+
+        self.assertIs(tarjeta_palabra.ACENTO, tarjeta_social.ACENTO)
+        self.assertIs(tarjeta_palabra.TINTA, tarjeta_social.TINTA)
+        self.assertIs(tarjeta_palabra.BLANCO, tarjeta_social.CREMA)
