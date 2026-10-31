@@ -43,6 +43,23 @@ jobs:
 
       - run: pip install -r requirements.txt
 
+      # La tarjeta necesita una fuente con cirílico y el vídeo necesita
+      # ffmpeg. Los dos fallan SEGURO —sin ellos la publicación sale como
+      # antes, con la voz y el dibujo de carátula— y por eso hay que
+      # instalarlos a mano: si faltaran, la tarjeta no saldría NUNCA y nada
+      # avisaría, que es el defecto que este proyecto documenta una y otra
+      # vez. El paso siguiente imprime el método, así que el registro de la
+      # corrida dice si de verdad salió `sendVideo` o `sendPhoto`.
+      - name: la fuente de la tarjeta y ffmpeg
+        run: |
+          falta=""
+          [ -f /usr/share/fonts/truetype/dejavu/DejaVuSans.ttf ] || falta="$falta fonts-dejavu-core"
+          command -v ffmpeg >/dev/null || falta="$falta ffmpeg"
+          if [ -n "$falta" ]; then
+            sudo apt-get update -qq && sudo apt-get install -y -qq $falta
+          fi
+          ls /usr/share/fonts/truetype/dejavu/DejaVuSans.ttf && ffmpeg -version | head -1
+
       - name: ¿hay canal?
         id: hay
         run: |

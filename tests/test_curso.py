@@ -6936,3 +6936,19 @@ class TestLaTarjetaDeLaPalabra(unittest.TestCase):
         self.assertIs(tarjeta_palabra.ACENTO, tarjeta_social.ACENTO)
         self.assertIs(tarjeta_palabra.TINTA, tarjeta_social.TINTA)
         self.assertIs(tarjeta_palabra.BLANCO, tarjeta_social.CREMA)
+
+    def test_el_trabajo_diario_instala_lo_que_la_tarjeta_necesita(self):
+        """Sin fuente con cirílico ni ffmpeg la tarjeta no sale, y no sale
+        EN SILENCIO: la publicación cae a la de antes y nadie se entera. Es
+        el defecto que este proyecto documenta una y otra vez, así que el
+        trabajo diario los instala si faltan.
+
+        El camino de la fuente se deriva de `tarjeta_social.DEJAVU` y no se
+        copia: el día que el código mire otro sitio, esto se pone en rojo.
+        """
+        import tarjeta_social
+
+        yml = (pathlib.Path(__file__).resolve().parent.parent
+               / ".github" / "workflows" / "palabra-del-dia.yml").read_text()
+        self.assertIn(tarjeta_social.DEJAVU.format(""), yml)
+        self.assertIn("ffmpeg", yml)
