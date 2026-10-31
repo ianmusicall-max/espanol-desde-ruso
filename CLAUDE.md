@@ -6219,6 +6219,49 @@ ni a `espanoldesderuso.com` —`api.github.com` sí—, así que la verificació
 que el Worker contesta es del profesor, abriendo la URL. Da igual que falle:
 el contador es de fallo seguro y lo peor que pasa es que no salga el número.
 
+### Y falló: el Worker se quedó con el «Hello World» del panel
+
+El profesor volvió el mismo día: «todavía no veo el contador». Lo primero fue
+descartar lo mío, que se puede medir desde aquí: el despliegue de Pages del
+commit del contador está en **success**, el pie publicado trae
+`<p id="visitas" hidden>` y el `<script>` con el endpoint. O sea que la página
+estaba bien y el silencio venía del otro lado.
+
+**Y el silencio es el diseño.** El contador se calla ante cualquier fallo —sin
+error, sin hueco y sin aviso— porque un rótulo vacío se lee como una página
+rota. El precio de esa decisión es que **desde fuera las cuatro causas se ven
+igual**, así que no se adivinan: se abre la URL del Worker y se lee lo que
+contesta.
+
+    {"total":0}          el Worker está bien → es la caché del navegador
+    Hello World!         quedó el ejemplo de Cloudflare
+    error con VISITAS    falta el binding del KV
+    Error 1101 / 404     el Worker no está desplegado ahí
+
+Era la segunda: **el panel crea el Worker con un «Hello World» y hay que
+BORRARLO antes de pegar el nuestro**. Así el endpoint respondía 200 con texto
+plano, `r.ok` era cierto, `r.json()` reventaba y el `.catch` se lo comía. Un
+fallo que no se distingue de «no hay red». Queda escrito en el paso 2 de la
+cabecera del Worker, que es donde se vuelve a leer.
+
+### El www, cerrado antes de que pegara nada
+
+Aprovechando que iba a pegar el Worker una vez, se arregló un fallo silencioso
+que no era la causa de hoy pero habría aparecido solo: `ORIGEN` era **uno**, y
+`access-control-allow-origin` **no admite una lista**. Al lector que entrara por
+`www.espanoldesderuso.com` el navegador le habría descartado la respuesta y el
+contador se habría callado —igual que hoy, y sin nada que mirar—.
+
+Ahora son dos orígenes y se devuelve el de quien pregunta, con `vary: origin`
+para que ningún caché de en medio le sirva a uno la cabecera del otro. La
+prueba **deriva los dos del dominio del repo** en vez de copiarlos a mano, así
+que el día que el curso cambie de dominio se pone en rojo aquí, y exige además
+que la cabecera no los lleve juntos.
+
+Es la misma forma de error que este proyecto lleva cazada seis veces con las
+rutas relativas: una regla correcta para el caso que la motivó, aplicada a un
+caso que nadie miró.
+
 La guarda que exigía «el repo lo tiene apagado» se puso en rojo al encenderlo,
 y tenía razón: se **reescribió** en vez de aflojarse. Ahora vigila lo único
 que puede romperse al escribir esa línea a mano —que el saneador acepte el
