@@ -6210,10 +6210,19 @@ desaparecer, no mete a nadie en el medio y por eso **la política de privacidad
 puede decir que el contador es nuestro** en vez de declarar un tercero más.
 Guarda un entero en KV y nada más: ni IP, ni cabeceras, ni cookie.
 
-**Sigue APAGADO** (`contador.endpoint` vacío en `web/sitio.yaml`) porque el
-Worker lo despliega él: son cuatro pasos de panel, escritos en la cabecera de
-ese archivo. Con el endpoint vacío el sitio se construye igual y no se pide
-nada a nadie; lo único que cambia hoy en `docs/` son dos reglas de CSS inertes.
+**ENCENDIDO el mismo día**: el profesor desplegó el Worker y el endpoint es
+`https://contador.ianmusicall.workers.dev`. Los cuatro pasos de panel están en
+la cabecera de `web/contador-worker.js`, por si hay que repetirlos.
+
+**Desde este contenedor no se puede comprobar que responda**: el proxy no sale
+ni a `espanoldesderuso.com` —`api.github.com` sí—, así que la verificación de
+que el Worker contesta es del profesor, abriendo la URL. Da igual que falle:
+el contador es de fallo seguro y lo peor que pasa es que no salga el número.
+
+La guarda que exigía «el repo lo tiene apagado» se puso en rojo al encenderlo,
+y tenía razón: se **reescribió** en vez de aflojarse. Ahora vigila lo único
+que puede romperse al escribir esa línea a mano —que el saneador acepte el
+endpoint—, porque uno rechazado deja el contador mudo sin error ni aviso.
 
 ### Cuenta VISITAS y no páginas vistas
 

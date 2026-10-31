@@ -752,11 +752,23 @@ class TestElContadorDeVisitas(unittest.TestCase):
         construir_sitio.construir(destino, cfg, self.textos)
         return destino
 
-    def test_el_repo_lo_tiene_APAGADO(self):
-        """Mientras no haya Worker desplegado, un contador en blanco es peor que
-        ninguno. Si esto se pone en rojo es que alguien pegó un endpoint: hay
-        que comprobar que responda antes de aflojar la prueba."""
-        self.assertFalse(construir_sitio.hay_contador(self.cfg))
+    def test_el_endpoint_del_repo_pasa_el_saneador(self):
+        """Encendido el 2026-10-31, con el Worker ya desplegado.
+
+        Lo que esto vigila es lo único que puede romperse al escribir esa
+        línea a mano: un endpoint que el saneador rechace deja el contador
+        apagado **en silencio** —ni error, ni aviso, ni número— y nadie se
+        entera hasta mirar el pie. Un `http://`, un espacio o una barra de
+        más bastan.
+
+        Si algún día se quiere apagar, se vacía la línea y esta prueba lo
+        admite: lo que no admite es una a medio escribir."""
+        bruto = (self.cfg.get("contador") or {}).get("endpoint") or ""
+        if not bruto.strip():
+            self.skipTest("el contador está apagado a propósito")
+        self.assertEqual(construir_sitio.endpoint_del_contador(self.cfg), bruto.strip(),
+                         f"el saneador rechaza {bruto!r}: el contador quedaría mudo")
+        self.assertTrue(construir_sitio.hay_contador(self.cfg))
 
     def test_sin_endpoint_no_se_cuenta_ni_se_carga_nada(self):
         destino = self._con("")

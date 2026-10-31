@@ -101,7 +101,7 @@ analitica:
 # diez lecciones cuenta una vez. Así el rótulo dice la verdad y se gastan diez
 # veces menos escrituras del plan gratuito (1.000 al día).
 contador:
-  endpoint: ""         # https://….workers.dev
+  endpoint: "https://contador.ianmusicall.workers.dev"
 
 # Los perfiles del curso en redes. Vacío = no sale el enlace, en vez de un
 # botón que lleva a una cuenta que no existe.

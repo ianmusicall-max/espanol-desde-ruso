@@ -690,6 +690,7 @@ body:has(#cookies) footer.sitio{padding-bottom:10rem}
 <h2>Что собирает сам сайт</h2><p>Ничего. На сайте нет регистрации, форм, комментариев и личных кабинетов. Мы не просим и не храним ваше имя, адрес или электронную почту.</p>
 <h2>Реклама</h2><p>Сайт показывает рекламу через Google AdSense. Google и его партнёры используют файлы cookie, чтобы показывать объявления с учётом ваших прежних посещений этого и других сайтов.</p>
 <p>Персонализированную рекламу можно отключить в настройках рекламы Google, а сторонние поставщики — на aboutads.info. <a href="https://www.google.com/settings/ads" rel="nofollow noopener">google.com/settings/ads</a> · <a href="https://www.aboutads.info/choices/" rel="nofollow noopener">aboutads.info</a> · <a href="https://policies.google.com/technologies/partner-sites" rel="nofollow noopener">policies.google.com</a></p>
+<h2>Счётчик посещений</h2><p>Внизу каждой страницы показано число посещений. Его считает наш собственный сервис на Cloudflare, а не сторонний счётчик. Cloudflare при этом видит ваш IP-адрес, как и при любом обращении к сайту; мы его не сохраняем и ни с чем не связываем. В браузере остаётся только пометка о том, что это посещение уже засчитано, и она исчезает, когда вы закрываете вкладку.</p>
 <h2>Ваши права</h2><p>Если вы в Европейском союзе, у вас есть право на доступ к своим данным, их исправление и удаление. Поскольку сайт сам никаких данных о вас не хранит, обращаться с такими запросами нужно напрямую к Google.</p>
 <h2>Дети</h2><p>Сайт не предназначен для детей младше 13 лет и не собирает их данные сознательно.</p>
 <h2>Микрофон</h2><p>В уроках есть кнопка «Записать себя». Она просит доступ к микрофону только когда вы её нажимаете. Запись остаётся в памяти браузера, не отправляется на сервер и не сохраняется на устройстве: она исчезает, когда вы закрываете страницу.</p>
@@ -698,14 +699,38 @@ body:has(#cookies) footer.sitio{padding-bottom:10rem}
 <p><a href="./slovar.html">Словарь курса</a> · <a href="./test.html">Тест на уровень</a> · <a href="./o-kurse.html">О курсе</a> · <a href="./kontakt.html">Контакты</a> · <a href="./privacy.html">Политика конфиденциальности</a></p>
 <p>Материалы курса можно свободно использовать для учёбы.</p>
 <p class="seguir">Курс в соцсетях: <a href="https://t.me/espanoldesderuso" target="_blank" rel="noopener">Telegram</a></p>
-
+<p class="visitas" id="visitas" hidden>Посещений сайта: <b id="visitas-n"></b></p>
 </div></footer>
 <div id="cookies"><span>Мы используем файлы cookie для показа рекламы и статистики посещений. <a href="./privacy.html">Подробнее</a>.</span><button class="boton" style="padding:.4rem 1rem;font-size:.85rem" onclick="try{localStorage.setItem('cookies','1')}catch(e){};this.parentNode.remove()">Понятно</button></div><script>try{if(localStorage.getItem('cookies')){var b=document.getElementById('cookies');b&&b.remove()}}catch(e){}</script>
 <script>(function(){var b=document.getElementById('tema');if(!b)return;function actual(){var r=document.documentElement;return r.dataset.tema||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}b.addEventListener('click',function(){var n=actual()==='dark'?'light':'dark';document.documentElement.dataset.tema=n;try{localStorage.setItem('tema',n)}catch(e){}});})();</script>
 
 <script>window.CURSO_TEXTOS={"continuar": "Продолжить: урок", "guia_paso": "Шаг {n} из {total}", "guia_siguiente": "Дальше", "guia_final": "Отметить и дальше", "guia_empezar": "Начать с первого шага", "empezar": "Начать сначала", "marcar": "Отметить урок пройденным", "hecho": "Урок пройден", "siguiente": "Следующий урок", "tuyo": "пройдено вами", "titulo": "Ваш прогресс", "aviso": "Прогресс хранится только в этом браузере, на этом устройстве. Регистрации нет, и никуда он не отправляется. Если вы очистите данные браузера или откроете курс на другом телефоне, отметки не перенесутся.", "borrar": "Сбросить прогресс", "confirmar": "Сбросить все отметки?", "copiar": "Сохранить мой прогресс", "copiado": "Код скопирован — вставьте его себе в заметки или в «Избранное» в Telegram", "restaurar": "Восстановить мой прогресс", "pegar": "Вставьте сюда ваш код", "aplicar": "Восстановить", "cancelar": "Отмена", "malo": "Это не похоже на код прогресса. Ничего не изменено.", "menos": "В этом коде меньше уроков, чем отмечено сейчас (%a% вместо %b%). Всё равно восстановить?", "hecho_restaurar": "Готово: восстановлено уроков — %n%", "nombre_label": "Как вас зовут?", "nombre_boton": "Сохранить", "nombre_cambiar": "Изменить", "nombre_nota": "Только чтобы обращаться к вам по имени. Имя остаётся в этом браузере и никуда не отправляется.", "bravo": ["Отлично!", "Так держать!", "Хорошая работа!", "Ещё один урок позади!", "Вы молодец!", "Готово!", "Вот это темп!", "Продолжайте так же!", "Шаг за шагом — и получается!"], "bravo_con": ["Отлично, {nombre}!", "Так держать, {nombre}!", "Хорошая работа, {nombre}!", "{nombre}, ещё один урок позади!", "Вы молодец, {nombre}!", "Готово, {nombre}!", "Вот это темп, {nombre}!", "Продолжайте так же, {nombre}!", "Шаг за шагом, {nombre}, — и получается!"], "vuelta": "С возвращением, {nombre}!", "primera": "Первый урок пройден — самое трудное уже позади.", "primera_con": "{nombre}, первый урок пройден — самое трудное уже позади.", "cuantas": "{n} из {total}", "faltan": "осталось {n}", "racha": "{n} {dias} подряд", "racha_dias": ["день", "дня", "дней"], "racha_hoy": "Сегодня вы занимались", "racha_mejor": "Лучшая серия: {n} {dias}", "antes": "Перед тем как очистить браузер или сменить телефон, сохраните код.", "calendario": "Ваш курс", "calendario_nota": "{n} {lecciones} из {total}", "calendario_rotulo": "Урок {n} · нед. {semana}, день {dia}", "calendario_aqui": "здесь вы остановились", "calendario_lecciones": ["урок", "урока", "уроков"], "diploma_boton": "Скачать сертификат ({nivel})", "diploma_pide_nombre": "Укажите имя выше — и сертификат будет на ваше имя.", "diploma_titulo": "СЕРТИФИКАТ", "diploma_sub": "о прохождении курса", "diploma_quien": "Выдан", "diploma_que": "Уровень {nivel} · пройдено уроков: {n}", "diploma_fecha": "Дата", "diploma_aviso": "Личный сертификат о самостоятельном прохождении курса. Это не официальный документ об уровне языка."};window.CURSO_RAIZ=".";window.CURSO_PUBLICADAS=0;window.CURSO_DIAS={};window.CURSO_NIVELES=[];window.CURSO_SITIO="Испанский с нуля для русскоговорящих";window.CURSO_DOMINIO="espanoldesderuso.com";</script>
 <script src="./progreso.js" defer></script>
-
+<script>window.CURSO_CONTADOR={"endpoint": "https://contador.ianmusicall.workers.dev", "locale": "ru"};
+(function(){
+  var d=window.CURSO_CONTADOR;
+  if(!d||!d.endpoint)return;
+  var caja=document.getElementById("visitas"),hueco=document.getElementById("visitas-n");
+  if(!caja||!hueco)return;
+  /* Una VISITA y no una página vista: la marca va en la pestaña, así que
+     recargar no infla nada y diez lecciones cuentan una vez. Si el navegador
+     no deja escribirla (ventana privada), se cuenta como visita nueva: pasarse
+     por arriba de vez en cuando es mejor que no contar. */
+  var nueva=true;
+  try{
+    if(sessionStorage.getItem("curso.visitado"))nueva=false;
+    else sessionStorage.setItem("curso.visitado","1");
+  }catch(e){}
+  fetch(d.endpoint,{method:nueva?"POST":"GET",mode:"cors",cache:"no-store"})
+    .then(function(r){return r.ok?r.json():null;})
+    .then(function(j){
+      if(!j||typeof j.total!=="number"||j.total<1)return;
+      hueco.textContent=j.total.toLocaleString(d.locale);
+      caja.hidden=false;
+    })
+    .catch(function(){});
+})();
+</script>
 
 
 
