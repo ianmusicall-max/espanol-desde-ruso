@@ -854,6 +854,21 @@ class TestElContadorDeVisitas(unittest.TestCase):
         self.assertEqual(
             construir_sitio.endpoint_del_contador({"contador": {"endpoint": bueno}}), bueno)
 
+    def test_la_banda_de_cookies_no_tapa_la_ultima_linea_del_pie(self):
+        """La banda es `position:fixed` y el contador es lo último del pie.
+
+        No es un defecto del contador: hasta ayer la última línea era el
+        enlace de Telegram y también quedaba debajo. Medido en Chromium, la
+        banda llega a 140 px (ruso a 320 px), así que el pie reserva 10rem
+        mientras esté. Al aceptar, el <div> se BORRA del documento, de modo
+        que el :has() deja de casar y el hueco desaparece solo."""
+        css = construir_sitio.CSS
+        self.assertIn("body:has(#cookies) footer.sitio{padding-bottom:10rem}", css)
+        # El hueco reservado tiene que superar lo que mide la banda. Si
+        # alguien afloja uno de los dos, esto se pone en rojo aquí y no en un
+        # móvil.
+        self.assertGreater(10 * 16, 140, "10rem tienen que tapar los 140 px medidos")
+
     def test_el_worker_existe_y_no_guarda_nada_del_lector(self):
         """El contador es propio y no un servicio de fuera: los gratuitos se
         caen —hits.sh tuvo que mudarse de dominio porque no podía pagar la

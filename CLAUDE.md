@@ -6260,6 +6260,24 @@ idioma de la PÁGINA: `1 241` en ruso y `1,241` en inglés. En español sale
 `1241` sin punto y **no es un fallo**: el español no agrupa los números de
 cuatro cifras; a diez mil sí pone el punto.
 
+### Y de paso: la banda de cookies tapaba la última línea del pie
+
+Lo encontró la captura, no el código. La banda es `position:fixed` y el pie
+solo reservaba 3rem, así que en el móvil su última línea quedaba **detrás**
+de ella. **No es un defecto del contador**: hasta ayer esa línea era el
+enlace de Telegram, que se subió al pie el 2026-10-31 y nació tapado.
+
+`body:has(#cookies) footer.sitio{padding-bottom:10rem}` lo resuelve sin una
+línea de JS, y el `:has()` es la pieza: al aceptar, la banda se **borra** del
+documento (`.remove()`), así que el selector deja de casar y el hueco
+desaparece solo. Los 10rem salen de medir en Chromium —140 px en el peor caso,
+el ruso a 320 px, y 61 en escritorio—, no de un número a ojo. Un navegador sin
+`:has()` se queda como estaba, que es el comportamiento de siempre.
+
+Comprobado en los nueve casos (tres idiomas × 320, 390 y 1280 px): holgura de
+26 a 48 px. Antes, a 390 px el contador quedaba 103 px por debajo del borde de
+la banda.
+
 **Y un tropiezo de método que ya está anotado dos veces y volvió a morder**:
 `cd … && export TMPDIR=… && nohup … &` pone **toda la cadena** en segundo
 plano, así que el `export` se queda en el subshell y la orden siguiente ve la

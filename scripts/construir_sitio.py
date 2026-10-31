@@ -783,6 +783,15 @@ footer.sitio a{color:var(--tenue)}
 footer.sitio .visitas{color:var(--tenue)}
 .visitas b{font-weight:600;font-variant-numeric:tabular-nums}
 footer.sitio p{margin:.35rem 0}
+/* La banda de cookies es FIJA y tapaba la última línea del pie: hasta ayer el
+   enlace de Telegram y desde hoy el contador de visitas. Mientras la banda
+   está, el pie reserva sitio; al aceptar, el <div> se BORRA del documento, así
+   que el :has() deja de casar y el hueco desaparece solo —sin una línea de JS—.
+   Medido en Chromium: 140 px en el peor caso (ruso a 320 px) y 61 en
+   escritorio. Un navegador sin :has() se queda como estaba, que es el
+   comportamiento de siempre y no una página rota. */
+body:has(#cookies) footer.sitio{padding-bottom:10rem}
+@media (min-width:64rem){body:has(#cookies) footer.sitio{padding-bottom:6rem}}
 #cookies{position:fixed;inset-inline:0;bottom:0;background:var(--tarjeta);border-top:1px solid var(--linea);
   padding:.85rem 20px;font-family:Onest,ui-sans-serif,system-ui,sans-serif;font-size:.85rem;display:flex;
   flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:center;z-index:30}
