@@ -65,17 +65,32 @@ jobs:
       # propio `if`, así que `env.FB_TOKEN != ''` da vacío SIEMPRE y el paso
       # se salta en verde sin decir nada. Pasó el 2026-11-01: el canal
       # publicó, Facebook ni se intentó, y el trabajo quedó en verde.
+      # Los secretos llegan por `env:` y NUNCA interpolados con `${{ }}`
+      # dentro del `run`. Ahí GitHub pega su contenido tal cual en el
+      # script, así que un secreto con comillas o paréntesis dentro lo
+      # rompe —o peor, se ejecuta—. Pasó el 2026-11-01: en `FB_TOKEN` se
+      # pegó por error el comando que imprimía el token y el trabajo murió
+      # con «syntax error near unexpected token `json.load'». Por `env` el
+      # valor es un dato y no código, pase lo que pase.
       - name: ¿a dónde se puede publicar?
         id: hay
+        env:
+          TG: ${{ secrets.TELEGRAM_TOKEN }}
+          FBT: ${{ secrets.FB_TOKEN }}
+          FBP: ${{ secrets.FB_PAGE_ID }}
         run: |
-          if [ -z "${{ secrets.TELEGRAM_TOKEN }}" ]; then
+          if [ -z "$TG" ]; then
             echo "Sin TELEGRAM_TOKEN: el canal no recibe nada todavía."
             echo "listo=no" >> "$GITHUB_OUTPUT"
           else
             echo "listo=si" >> "$GITHUB_OUTPUT"
           fi
-          if [ -z "${{ secrets.FB_TOKEN }}" ] || [ -z "${{ secrets.FB_PAGE_ID }}" ]; then
+          if [ -z "$FBT" ] || [ -z "$FBP" ]; then
             echo "Sin FB_TOKEN y/o FB_PAGE_ID: la página de Facebook no recibe nada."
+            echo "fb=no" >> "$GITHUB_OUTPUT"
+          elif [ "${FBT#EAA}" = "$FBT" ] || [ "${FBT%\"}" != "$FBT" ]; then
+            # Un token de Meta empieza por EAA y no lleva comillas dentro.
+            echo "FB_TOKEN no parece un token: ¿se pegó otra cosa?"
             echo "fb=no" >> "$GITHUB_OUTPUT"
           else
             echo "fb=si" >> "$GITHUB_OUTPUT"

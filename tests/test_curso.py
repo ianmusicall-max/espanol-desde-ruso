@@ -7186,6 +7186,23 @@ class TestElTokenDeFacebook(unittest.TestCase):
         self.assertIn("secrets.FB_TOKEN", texto)
         self.assertNotIn("EAAV", texto)
 
+    def test_ningun_secreto_se_interpola_dentro_de_un_run(self):
+        """`${{ secrets.X }}` dentro de un `run` pega el CONTENIDO del
+        secreto en el script, así que uno con comillas o paréntesis lo
+        rompe —o peor, se ejecuta—. Por `env:` el valor es un dato.
+
+        Pasó el 2026-11-01: en `FB_TOKEN` se pegó por error el comando que
+        imprimía el token, y el trabajo murió con «syntax error near
+        unexpected token `json.load'». Con el secreto bueno habría pasado
+        igual el día que Meta devuelva uno con un carácter raro dentro.
+        """
+        _, pasos = self._pasos()
+        for s in pasos:
+            self.assertNotIn(
+                "secrets.", str(s.get("run", "")),
+                "«%s» interpola un secreto dentro del `run`: pásalo por "
+                "`env:`" % s.get("name"))
+
     def test_ningun_paso_decide_su_if_mirando_su_propio_env(self):
         """El `env:` de un paso NO existe todavía cuando se evalúa su propio
         `if`, así que `env.FB_TOKEN != ''` da vacío SIEMPRE y el paso se
