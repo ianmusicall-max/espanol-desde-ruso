@@ -6952,3 +6952,164 @@ class TestLaTarjetaDeLaPalabra(unittest.TestCase):
                / ".github" / "workflows" / "palabra-del-dia.yml").read_text()
         self.assertIn(tarjeta_social.DEJAVU.format(""), yml)
         self.assertIn("ffmpeg", yml)
+
+
+class TestFacebookPalabra(unittest.TestCase):
+    """La palabra del día en la página de Facebook del curso.
+
+    Es el mismo contenido que el canal de Telegram publicado en otro sitio.
+    Lo que se cuida aquí es que no se convierta en una copia que se separe:
+    el reparto vídeo/foto y el texto salen de una sola decisión.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        import facebook_palabra
+        import palabra_del_dia
+        cls.fb = facebook_palabra
+        cls.tg = palabra_del_dia
+        cls.lista = palabra_del_dia.palabras()
+        cls.t = construir_sitio.cargar_textos()["canal"]
+
+    def _p(self, **extra):
+        p = dict(next(x for x in self.lista if x["mp3"] and x["dibujo"]))
+        p.update(extra)
+        return p
+
+    def test_el_texto_no_lleva_html(self):
+        """Facebook no entiende HTML: un `<b>` saldría literal en el post.
+        El de Telegram sí lo lleva, así que son dos textos y no uno con las
+        etiquetas quitadas."""
+        cuerpo = self.fb.texto(self._p(), self.t, "https://ejemplo.com")
+        for etiqueta in ("<b>", "</b>", "<i>", "<a ", "href="):
+            self.assertNotIn(etiqueta, cuerpo)
+        self.assertIn("https://ejemplo.com/semana-", cuerpo,
+                      "el enlace tiene que ir desnudo para que sea pulsable")
+
+    def test_el_reparto_es_el_MISMO_que_el_de_telegram(self):
+        """Si cada red eligiera por su cuenta, un día Telegram enseñaría el
+        vídeo y Facebook la foto y nadie sabría por qué. La decisión vive en
+        `palabra_del_dia.toca_video`, una sola función."""
+        import tempfile
+
+        p = self._p()
+        for n in (2, 3, 10, 11):
+            with tempfile.TemporaryDirectory() as tmp:
+                camino, _, _ = self.fb._pedido(
+                    p, "x", "123", n, pathlib.Path(tmp))
+            espera = "videos" if self.tg.toca_video(n) else "photos"
+            self.assertTrue(camino.endswith(espera),
+                            "n=%d dio %s" % (n, camino))
+
+    def test_el_video_manda_description_y_no_caption(self):
+        """En `/videos` el texto del post se llama `description`. Con el
+        nombre de `/photos`, Meta lo acepta y lo TIRA: el vídeo sale sin una
+        palabra y nada falla."""
+        import tempfile
+
+        with tempfile.TemporaryDirectory() as tmp:
+            camino, campos, archivos = self.fb._pedido(
+                self._p(), "el cuerpo", "123", 2, pathlib.Path(tmp))
+        self.assertTrue(camino.endswith("/videos"), camino)
+        self.assertEqual("el cuerpo", campos["description"])
+        self.assertNotIn("caption", campos)
+        self.assertEqual({"source"}, set(archivos))
+
+    def test_sin_tarjeta_el_post_sale_igual_con_el_texto(self):
+        """La misma red que el canal: una página muda ese día es peor que
+        una sin foto."""
+        import tempfile
+
+        antes = self.tg._tarjeta
+        self.tg._tarjeta = lambda *a, **k: None
+        try:
+            with tempfile.TemporaryDirectory() as tmp:
+                camino, campos, archivos = self.fb._pedido(
+                    self._p(), "x", "123", 2, pathlib.Path(tmp))
+        finally:
+            self.tg._tarjeta = antes
+        self.assertTrue(camino.endswith("/feed"), camino)
+        self.assertEqual("x", campos["message"])
+        self.assertEqual({}, archivos)
+
+    def test_el_token_no_viaja_en_los_campos_del_pedido(self):
+        """Se suma en `_enviar` y en ningún sitio más. Así nada de lo que se
+        imprime —el `--ver`, un error, una prueba— puede llevarlo dentro."""
+        visto = {}
+
+        def espia(camino, campos, archivos):
+            visto.update(campos=campos, archivos=archivos)
+            return {"id": "1_2"}
+
+        self.fb.publicar(self._p(), "x", "EL-TOKEN", "123", 1, enviar=espia)
+        self.assertNotIn("access_token", visto["campos"])
+        self.assertNotIn("EL-TOKEN", str(visto["campos"]))
+
+    def test_un_adjunto_que_falta_corta_antes_de_hablar_con_meta(self):
+        """Mandado a medias, el post sale roto y el motivo queda en la
+        respuesta de Meta, que nadie lee."""
+        antes = self.fb._pedido
+        self.fb._pedido = lambda *a, **k: (
+            "1/photos", {"caption": "x"},
+            {"source": pathlib.Path("/no/existe/jamas.png")})
+        try:
+            with self.assertRaises(FileNotFoundError):
+                self.fb.publicar(self._p(), "x", "t", "123", 1,
+                                 enviar=lambda *a: {"id": "x"})
+        finally:
+            self.fb._pedido = antes
+
+
+class TestElTokenDeFacebook(unittest.TestCase):
+    """`scripts/fb_token.py`: el token de página que no caduca.
+
+    Lo que se cuida es lo único que puede salir caro: que un secreto acabe
+    en una pantalla, en el historial de la shell o en un registro.
+    """
+
+    def test_un_error_de_meta_no_arrastra_la_url(self):
+        """La url lleva el token y la clave de la app dentro. Un error que
+        la imprima los deja en el registro de la corrida para siempre."""
+        import io
+        import urllib.error
+        import fb_token
+
+        antes = fb_token.urllib.request.urlopen
+        cuerpo = io.BytesIO(json.dumps(
+            {"error": {"message": "Invalid OAuth access token."}}
+        ).encode())
+
+        def revienta(url, timeout=0):
+            raise urllib.error.HTTPError(url, 400, "Bad Request", {}, cuerpo)
+
+        fb_token.urllib.request.urlopen = revienta
+        try:
+            with self.assertRaises(SystemExit) as caja:
+                fb_token.graph("me", access_token="EL-TOKEN-SECRETO",
+                               client_secret="LA-CLAVE")
+        finally:
+            fb_token.urllib.request.urlopen = antes
+        dicho = str(caja.exception)
+        self.assertIn("Invalid OAuth", dicho)
+        self.assertNotIn("EL-TOKEN-SECRETO", dicho)
+        self.assertNotIn("LA-CLAVE", dicho)
+        self.assertNotIn("graph.facebook.com", dicho)
+
+    def test_pide_los_permisos_que_de_verdad_hacen_falta(self):
+        """`pages_show_list` no es de adorno: sin él el paso 2 vuelve vacío
+        y parece que no administras ninguna página."""
+        import fb_token
+        self.assertIn("pages_show_list", fb_token.PERMISOS)
+        self.assertIn("pages_manage_posts", fb_token.PERMISOS)
+
+    def test_el_trabajo_diario_publica_tambien_en_facebook(self):
+        """En su propio paso, y que no tumbe al canal: si fueran uno solo un
+        fallo de Meta se llevaría por delante la publicación de Telegram,
+        que ya salió."""
+        yml = (pathlib.Path(__file__).resolve().parent.parent
+               / ".github" / "workflows" / "palabra-del-dia.yml").read_text()
+        self.assertIn("facebook_palabra.py", yml)
+        self.assertIn("continue-on-error: true", yml)
+        # El token va de secreto y nunca en el repositorio.
+        self.assertIn("secrets.FB_TOKEN", yml)
+        self.assertNotIn("EAAV", yml)
