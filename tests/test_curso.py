@@ -7045,6 +7045,66 @@ class TestFacebookPalabra(unittest.TestCase):
         self.assertNotIn("access_token", visto["campos"])
         self.assertNotIn("EL-TOKEN", str(visto["campos"]))
 
+    def test_el_video_va_al_host_de_video_de_meta(self):
+        """Las subidas de vídeo tienen su propio host. Con el de siempre,
+        Meta contesta «(#100) No permission to publish the video» —un
+        mensaje de permisos para algo que no lo es— y el post no sale.
+        Pasó el 2026-11-01, el día que se encendió la página."""
+        vistas = []
+        antes = self.fb.urllib.request.Request
+
+        def falso(url, data=None, headers=None):
+            vistas.append(url)
+            raise RuntimeError("hasta aquí")
+
+        self.fb.urllib.request.Request = falso
+        try:
+            for camino, host in (("9/videos", self.fb.GRAPH_VIDEO),
+                                 ("9/photos", self.fb.GRAPH),
+                                 ("9/feed", self.fb.GRAPH)):
+                vistas.clear()
+                with self.assertRaises(RuntimeError):
+                    self.fb._enviar(camino, {"a": "b"}, {}, "t")
+                self.assertEqual(vistas[0], "%s/%s" % (host, camino))
+        finally:
+            self.fb.urllib.request.Request = antes
+
+    def test_un_video_que_meta_rechaza_sale_como_foto(self):
+        """El vídeo es el adorno; la palabra del día es el post. Un día sin
+        publicar no se recupera y uno sin voz sí, así que si Meta no quiere
+        el mp4 sale la MISMA tarjeta como foto."""
+        vistos = []
+
+        def espia(camino, campos, archivos):
+            # El tamaño se mira AQUÍ y no al volver: la carpeta de trabajo
+            # es temporal y ya no existe fuera de `publicar`.
+            vistos.append((camino, campos,
+                           {k: v.stat().st_size for k, v in archivos.items()}))
+            if camino.endswith("/videos"):
+                raise self.fb.FacebookDijoQueNo("(#100) No permission")
+            return {"id": "1_2"}
+
+        p = self._p()
+        n = next(i for i in range(1, 9) if self.tg.toca_video(i))
+        r = self.fb.publicar(p, "cuerpo", "t", "123", n, enviar=espia)
+        self.assertEqual(r, {"id": "1_2"})
+        self.assertEqual([c for c, _, _ in vistos],
+                         ["123/videos", "123/photos"])
+        # La foto lleva el MISMO texto, no uno de reserva.
+        self.assertEqual(vistos[1][1]["caption"], "cuerpo")
+        self.assertGreater(vistos[1][2]["source"], 0)
+
+    def test_un_fallo_que_no_es_del_video_no_se_tapa(self):
+        """La reserva es para el mp4 y nada más: si Meta rechaza la foto, el
+        post no salió y hay que enterarse."""
+
+        def espia(camino, campos, archivos):
+            raise self.fb.FacebookDijoQueNo("(#200) nope")
+
+        n = next(i for i in range(1, 9) if not self.tg.toca_video(i))
+        with self.assertRaises(self.fb.FacebookDijoQueNo):
+            self.fb.publicar(self._p(), "x", "t", "123", n, enviar=espia)
+
     def test_un_adjunto_que_falta_corta_antes_de_hablar_con_meta(self):
         """Mandado a medias, el post sale roto y el motivo queda en la
         respuesta de Meta, que nadie lee."""

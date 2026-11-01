@@ -40,6 +40,12 @@ import construir_sitio  # noqa: E402
 import palabra_del_dia  # noqa: E402
 
 GRAPH = "https://graph.facebook.com/v21.0"
+# Las subidas de vídeo van a OTRO host, que es el que Meta documenta para
+# esto. Con el de siempre contesta «(#100) No permission to publish the
+# video», que es un mensaje de permisos para algo que no lo es: el token
+# tenía `publish_video` y `pages_manage_posts`, comprobados con
+# `debug_token`. Pasó el 2026-11-01, el día que se encendió la página.
+GRAPH_VIDEO = "https://graph-video.facebook.com/v21.0"
 VAR_TOKEN = "FB_TOKEN"
 VAR_PAGINA = "FB_PAGE_ID"
 
@@ -103,7 +109,8 @@ def _pedido(p: dict, cuerpo: str, pagina: str, n: int,
 def _enviar(camino: str, campos: dict, archivos: dict, token: str) -> dict:
     datos, tipo = palabra_del_dia._multipart(
         dict(campos, access_token=token), archivos)
-    pet = urllib.request.Request("%s/%s" % (GRAPH, camino), data=datos,
+    base = GRAPH_VIDEO if camino.endswith("/videos") else GRAPH
+    pet = urllib.request.Request("%s/%s" % (base, camino), data=datos,
                                  headers={"Content-Type": tipo})
     try:
         with urllib.request.urlopen(pet, timeout=180) as r:
@@ -132,15 +139,33 @@ def publicar(p: dict, cuerpo: str, token: str, pagina: str, n: int = 1,
     """
     import tempfile
 
-    with tempfile.TemporaryDirectory() as tmp:
-        camino, campos, archivos = _pedido(
-            p, cuerpo, pagina, n, pathlib.Path(tmp))
+    def manda(camino, campos, archivos):
         for nombre, ruta in archivos.items():
             if not ruta.exists():
                 raise FileNotFoundError("falta %s (%s)" % (ruta, nombre))
         if enviar is not None:
             return enviar(camino, campos, archivos)
         return _enviar(camino, campos, archivos, token)
+
+    with tempfile.TemporaryDirectory() as tmp:
+        taller = pathlib.Path(tmp)
+        camino, campos, archivos = _pedido(p, cuerpo, pagina, n, taller)
+        try:
+            return manda(camino, campos, archivos)
+        except FacebookDijoQueNo as e:
+            if not camino.endswith("/videos"):
+                raise
+            # El vídeo es el adorno; la palabra del día es el post. Si Meta
+            # no lo quiere, sale la MISMA tarjeta como foto antes que no
+            # salir nada, y el motivo queda escrito en el registro. Un día
+            # sin publicar no se recupera; uno sin voz, sí.
+            tarjeta = palabra_del_dia._tarjeta(p, taller)
+            if tarjeta is None:
+                raise
+            print("el vídeo no se pudo (%s)\n  -> va la tarjeta como foto"
+                  % e)
+            return manda("%s/photos" % pagina, {"caption": cuerpo},
+                         {"source": tarjeta})
 
 
 def main(argv=None) -> int:
