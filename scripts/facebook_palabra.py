@@ -30,6 +30,7 @@ import os
 import pathlib
 import sys
 import urllib.error
+import urllib.parse
 import urllib.request
 
 RAIZ = pathlib.Path(__file__).resolve().parent.parent
@@ -126,6 +127,31 @@ def _enviar(camino: str, campos: dict, archivos: dict, token: str) -> dict:
             motivo = cuerpo
         raise FacebookDijoQueNo("Meta respondió %s: %s"
                                 % (e.code, motivo[:300])) from None
+
+
+def de_quien_es(token: str) -> str:
+    """A quién pertenece el token, preguntado a Meta: `id (nombre)`.
+
+    Solo se pregunta cuando algo YA falló, y existe por un motivo concreto:
+    un token de USUARIO y un token de página al que le falta un permiso
+    contestan errores que se parecen —«No permission to publish the video»,
+    «publish_actions has been deprecated»— y desde fuera se ven iguales.
+    Con `/me`, un token de página ES la página y devuelve su id; uno de
+    usuario devuelve a la persona. Eso lo separa de una vez.
+
+    Pasó el 2026-11-01: los dos tokens empiezan por las mismas quince
+    letras y el guardado en los secretos era el de usuario.
+    """
+    try:
+        url = ("%s/me?fields=id,name&access_token=%s"
+               % (GRAPH, urllib.parse.quote(token)))
+        with urllib.request.urlopen(url, timeout=30) as r:
+            d = json.loads(r.read().decode("utf-8"))
+        return "%s (%s)" % (d.get("id", "?"), d.get("name", "?"))
+    except Exception:
+        # Es un diagnóstico, no un paso del trabajo: si tampoco se puede
+        # preguntar esto, lo que importa sigue siendo el error de arriba.
+        return ""
 
 
 def publicar(p: dict, cuerpo: str, token: str, pagina: str, n: int = 1,
@@ -231,6 +257,13 @@ def main(argv=None) -> int:
         r = publicar(p, cuerpo, token, pagina, n)
     except (FacebookDijoQueNo, FileNotFoundError) as e:
         print("\n%s" % e)
+        if isinstance(e, FacebookDijoQueNo):
+            quien = de_quien_es(token)
+            if quien:
+                print("  el token guardado es de %s" % quien)
+                if not quien.startswith(pagina + " "):
+                    print("  ...y la página es %s: eso es un token de "
+                          "USUARIO, no el de la página." % pagina)
         return 1
     ident = r.get("post_id") or r.get("id") or str(r)[:120]
     print("\npublicado en la página: %s" % ident)

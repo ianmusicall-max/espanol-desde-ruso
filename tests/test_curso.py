@@ -7105,6 +7105,12 @@ class TestFacebookPalabra(unittest.TestCase):
         with self.assertRaises(self.fb.FacebookDijoQueNo):
             self.fb.publicar(self._p(), "x", "t", "123", n, enviar=espia)
 
+    def test_preguntar_de_quien_es_el_token_nunca_tumba_nada(self):
+        """Es un diagnóstico y corre cuando algo YA falló: si tampoco se
+        puede preguntar, lo que importa sigue siendo el error de arriba, no
+        una excepción nueva encima."""
+        self.assertEqual(self.fb.de_quien_es("no-existe-este-token"), "")
+
     def test_un_adjunto_que_falta_corta_antes_de_hablar_con_meta(self):
         """Mandado a medias, el post sale roto y el motivo queda en la
         respuesta de Meta, que nadie lee."""
