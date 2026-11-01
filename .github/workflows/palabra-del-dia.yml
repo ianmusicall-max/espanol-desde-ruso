@@ -60,14 +60,25 @@ jobs:
           fi
           ls /usr/share/fonts/truetype/dejavu/DejaVuSans.ttf && ffmpeg -version | head -1
 
-      - name: ¿hay canal?
+      # Las dos preguntas en un paso que deja SALIDAS, y no un `if` que mire
+      # `env`: el `env:` de un paso todavía no existe cuando se evalúa su
+      # propio `if`, así que `env.FB_TOKEN != ''` da vacío SIEMPRE y el paso
+      # se salta en verde sin decir nada. Pasó el 2026-11-01: el canal
+      # publicó, Facebook ni se intentó, y el trabajo quedó en verde.
+      - name: ¿a dónde se puede publicar?
         id: hay
         run: |
           if [ -z "${{ secrets.TELEGRAM_TOKEN }}" ]; then
-            echo "Sin TELEGRAM_TOKEN: no hay nada que publicar todavía."
+            echo "Sin TELEGRAM_TOKEN: el canal no recibe nada todavía."
             echo "listo=no" >> "$GITHUB_OUTPUT"
           else
             echo "listo=si" >> "$GITHUB_OUTPUT"
+          fi
+          if [ -z "${{ secrets.FB_TOKEN }}" ] || [ -z "${{ secrets.FB_PAGE_ID }}" ]; then
+            echo "Sin FB_TOKEN y/o FB_PAGE_ID: la página de Facebook no recibe nada."
+            echo "fb=no" >> "$GITHUB_OUTPUT"
+          else
+            echo "fb=si" >> "$GITHUB_OUTPUT"
           fi
 
       # Primero se enseña lo que va a salir, SIEMPRE, y en su propio paso: así
@@ -92,7 +103,7 @@ jobs:
       # trabajo queda en amarillo y no en rojo —el canal sí publicó— pero el
       # motivo queda escrito en el registro.
       - name: y en Facebook
-        if: env.FB_TOKEN != '' && env.FB_PAGE_ID != ''
+        if: steps.hay.outputs.fb == 'si'
         continue-on-error: true
         env:
           FB_TOKEN: ${{ secrets.FB_TOKEN }}

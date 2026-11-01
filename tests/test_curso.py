@@ -7102,14 +7102,43 @@ class TestElTokenDeFacebook(unittest.TestCase):
         self.assertIn("pages_show_list", fb_token.PERMISOS)
         self.assertIn("pages_manage_posts", fb_token.PERMISOS)
 
+    def _pasos(self):
+        import yaml
+        yml = (pathlib.Path(__file__).resolve().parent.parent
+               / ".github" / "workflows" / "palabra-del-dia.yml")
+        d = yaml.safe_load(yml.read_text(encoding="utf-8"))
+        return yml.read_text(encoding="utf-8"), d["jobs"]["publicar"]["steps"]
+
     def test_el_trabajo_diario_publica_tambien_en_facebook(self):
         """En su propio paso, y que no tumbe al canal: si fueran uno solo un
         fallo de Meta se llevaría por delante la publicación de Telegram,
         que ya salió."""
-        yml = (pathlib.Path(__file__).resolve().parent.parent
-               / ".github" / "workflows" / "palabra-del-dia.yml").read_text()
-        self.assertIn("facebook_palabra.py", yml)
-        self.assertIn("continue-on-error: true", yml)
+        texto, pasos = self._pasos()
+        fb = next(s for s in pasos if "facebook_palabra.py" in str(s.get("run", "")))
+        self.assertTrue(fb.get("continue-on-error"))
         # El token va de secreto y nunca en el repositorio.
-        self.assertIn("secrets.FB_TOKEN", yml)
-        self.assertNotIn("EAAV", yml)
+        self.assertIn("secrets.FB_TOKEN", texto)
+        self.assertNotIn("EAAV", texto)
+
+    def test_ningun_paso_decide_su_if_mirando_su_propio_env(self):
+        """El `env:` de un paso NO existe todavía cuando se evalúa su propio
+        `if`, así que `env.FB_TOKEN != ''` da vacío SIEMPRE y el paso se
+        salta **en verde y sin decir nada**.
+
+        Pasó el 2026-11-01, el día que se encendió Facebook: el canal
+        publicó, la página ni se intentó, y el trabajo quedó en verde. El
+        `continue-on-error` no ayudó, porque el paso nunca llegó a correr.
+        La forma que sí funciona es una salida de un paso anterior.
+        """
+        _, pasos = self._pasos()
+        for s in pasos:
+            condicion = str(s.get("if", ""))
+            if "env." not in condicion:
+                continue
+            suyas = set(s.get("env") or {})
+            usadas = {x.split(".", 1)[1].split()[0].strip("'\"")
+                      for x in condicion.split("env.")[1:]}
+            self.assertFalse(
+                suyas & usadas,
+                "«%s» mira en su `if` una variable de su propio `env`: %s"
+                % (s.get("name"), sorted(suyas & usadas)))
