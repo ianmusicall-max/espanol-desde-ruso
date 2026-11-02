@@ -7126,6 +7126,54 @@ class TestFacebookPalabra(unittest.TestCase):
             self.fb._pedido = antes
 
 
+class TestElEstadoDeInstagram(unittest.TestCase):
+    """`scripts/instagram_estado.py`: solo lee, nunca publica.
+
+    La conexión página->Instagram se hace en Meta Business Suite y no por
+    API, así que lo único que este script puede hacer es decir si YA está
+    hecha. Las dos pruebas comprueban eso con un `graph` de mentira: no hay
+    manera de probarlo contra Meta de verdad desde aquí.
+    """
+
+    def setUp(self):
+        import instagram_estado
+        self.ig = instagram_estado
+
+    def test_sin_cuenta_conectada_devuelve_none(self):
+        def falso(camino, **p):
+            return {"name": "Mi página"}  # sin instagram_business_account
+
+        self.assertIsNone(self.ig.cuenta_instagram("123", "t", graph=falso))
+
+    def test_con_cuenta_conectada_devuelve_el_usuario(self):
+        def falso(camino, **p):
+            if camino == "123":
+                return {"name": "Mi página",
+                        "instagram_business_account": {"id": "999"}}
+            if camino == "999":
+                return {"username": "espanoldesderuso"}
+            raise AssertionError("camino inesperado: %s" % camino)
+
+        c = self.ig.cuenta_instagram("123", "t", graph=falso)
+        self.assertEqual(c, {"id": "999", "usuario": "espanoldesderuso",
+                             "pagina": "Mi página"})
+
+    def test_no_imprime_el_token(self):
+        """El token va en `access_token=` de cada llamada a `graph`, así
+        que si algo lo imprimiera por error esta prueba lo vería."""
+        import io
+        import contextlib
+
+        def falso(camino, **p):
+            self.assertEqual(p.get("access_token"), "EL-TOKEN-SECRETO")
+            return {"name": "x"}
+
+        salida = io.StringIO()
+        with contextlib.redirect_stdout(salida):
+            self.ig.cuenta_instagram("123", "EL-TOKEN-SECRETO", graph=falso)
+        self.assertNotIn("EL-TOKEN-SECRETO", salida.getvalue())
+
+
 class TestElTokenDeFacebook(unittest.TestCase):
     """`scripts/fb_token.py`: el token de página que no caduca.
 

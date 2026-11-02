@@ -1,0 +1,34 @@
+# ¿Esta página ya tiene una cuenta de Instagram conectada?
+#
+# Solo lee. No publica nada, no toca la palabra del día de Facebook ni de
+# Telegram. Corre aquí y no en el contenedor donde se escribió, por la
+# misma razón que el resto: `graph.facebook.com` no se alcanza desde allí.
+#
+# Botón manual, "Run workflow" en la pestaña Actions.
+name: estado de instagram
+
+on:
+  workflow_dispatch:
+
+jobs:
+  comprobar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: ¿hay FB_TOKEN y FB_PAGE_ID?
+        env:
+          FBT: ${{ secrets.FB_TOKEN }}
+          FBP: ${{ secrets.FB_PAGE_ID }}
+        run: |
+          if [ -z "$FBT" ] || [ -z "$FBP" ]; then
+            echo "Faltan FB_TOKEN y/o FB_PAGE_ID: eso va primero."
+            exit 1
+          fi
+      - name: preguntar a Meta
+        env:
+          FB_TOKEN: ${{ secrets.FB_TOKEN }}
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+        run: python scripts/instagram_estado.py
