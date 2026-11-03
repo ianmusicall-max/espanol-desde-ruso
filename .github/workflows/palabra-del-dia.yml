@@ -11,6 +11,11 @@
 #   2. `TELEGRAM_TOKEN` en Settings → Secrets and variables → Actions. El
 #      token NO va en el repositorio: es la llave del bot;
 #   3. `redes.telegram` y `telegram.desde` en `web/sitio.yaml`.
+#   4. para Instagram, lo mismo que Facebook —ya usa la misma página y el
+#      mismo token— MÁS que esa página tenga una cuenta de Instagram
+#      CONECTADA (Meta Business Suite -> Configuración -> Cuentas
+#      conectadas). Eso no se hace desde aquí: `instagram-estado.yml` dice
+#      si ya está.
 name: palabra del día
 
 on:
@@ -26,6 +31,13 @@ on:
       numero:
         description: "publicación concreta (vacío = la que toca por la fecha)"
         required: false
+
+# Para que Instagram pueda subir la tarjeta a una *release* del propio
+# repositorio: es la única forma de darle una URL pública, que es lo único
+# que su API admite (nunca un archivo subido). `gh` ya viene autenticado
+# con esto en el runner.
+permissions:
+  contents: write
 
 jobs:
   publicar:
@@ -124,3 +136,41 @@ jobs:
           FB_TOKEN: ${{ secrets.FB_TOKEN }}
           FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
         run: python scripts/facebook_palabra.py --publicar ${{ github.event.inputs.numero && format('--numero {0}', github.event.inputs.numero) || '' }}
+
+      # La tarjeta para Instagram, alojada aparte. Instagram no admite un
+      # archivo subido —solo una URL pública que pueda ir a buscar—, así
+      # que se sube a una *release* del propio repositorio con `gh`: la
+      # misma receta que ya usa la baraja de Anki (`baraja.yml`), y el
+      # nombre del archivo local ES el nombre del recurso descargado, no
+      # una etiqueta aparte.
+      #
+      # `$n` se resuelve UNA vez, con el mismo guion que después publica:
+      # pasarlo explícito a los dos pasos evita que uno calcule la fecha un
+      # segundo después del otro y terminen hablando de publicaciones
+      # distintas, aunque en la práctica los separen solo unos segundos.
+      - name: la tarjeta para Instagram
+        if: steps.hay.outputs.fb == 'si'
+        id: ig
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NUM: ${{ github.event.inputs.numero }}
+        run: |
+          n=$(python scripts/instagram_palabra.py --numero-de-hoy ${NUM:+--numero "$NUM"})
+          mkdir -p ig
+          python scripts/instagram_palabra.py --dibujar "ig/$n.jpg" --numero "$n"
+          gh release view ig-media >/dev/null 2>&1 || gh release create ig-media \
+            --title "Tarjetas de Instagram" \
+            --notes "Alojamiento de las tarjetas que Instagram va a buscar. No son para mirar."
+          gh release upload ig-media "ig/$n.jpg" --clobber
+          echo "url=https://github.com/${{ github.repository }}/releases/download/ig-media/$n.jpg" >> "$GITHUB_OUTPUT"
+          echo "numero=$n" >> "$GITHUB_OUTPUT"
+
+      # En su propio paso y con `continue-on-error`, por la misma razón que
+      # Facebook: un fallo aquí no se lleva por delante lo que ya salió.
+      - name: y en Instagram
+        if: steps.ig.outputs.url != ''
+        continue-on-error: true
+        env:
+          FB_TOKEN: ${{ secrets.FB_TOKEN }}
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+        run: python scripts/instagram_palabra.py --publicar "${{ steps.ig.outputs.url }}" --numero "${{ steps.ig.outputs.numero }}"

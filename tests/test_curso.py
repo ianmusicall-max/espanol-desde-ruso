@@ -7174,6 +7174,116 @@ class TestElEstadoDeInstagram(unittest.TestCase):
         self.assertNotIn("EL-TOKEN-SECRETO", salida.getvalue())
 
 
+class TestInstagramPalabra(unittest.TestCase):
+    """La palabra del día en Instagram: la misma tarjeta, con la
+    proporción que Instagram exige y publicada en dos pasos porque Meta
+    solo admite una URL, nunca un archivo subido."""
+
+    @classmethod
+    def setUpClass(cls):
+        import instagram_palabra
+        import palabra_del_dia
+        cls.ig = instagram_palabra
+        cls.tg = palabra_del_dia
+        cls.lista = palabra_del_dia.palabras()
+        cls.t = construir_sitio.cargar_textos()["canal"]
+
+    def _p(self, con_dibujo=False):
+        quiere = (lambda x: x["mp3"] and x["dibujo"]) if con_dibujo \
+            else (lambda x: x["mp3"] and not x.get("dibujo"))
+        return dict(next(x for x in self.lista if quiere(x)))
+
+    def test_una_tarjeta_sin_dibujo_entra_en_la_proporcion_de_instagram(self):
+        """Es el caso que falla sin este arreglo: sin dibujo la tarjeta del
+        canal es 480 px de alto sobre 1080, 2,25:1, por encima del 1,91:1
+        que Instagram acepta."""
+        p = self._p(con_dibujo=False)
+        original = self.ig.tarjeta_palabra.componer(p, "", self.t["urok"])
+        apta = self.ig.tarjeta_apta(p, "", self.t["urok"])
+        self.assertEqual(apta.size[0], original.size[0])
+        self.assertGreaterEqual(apta.size[1], original.size[1])
+        self.assertLessEqual(apta.size[0] / apta.size[1], self.ig.RATIO_MAXIMA)
+
+    def test_una_tarjeta_que_ya_entra_no_se_toca(self):
+        """Con dibujo la tarjeta ya es casi cuadrada: añadirle aire sería
+        agrandar un lienzo que ya cabe."""
+        p = self._p(con_dibujo=True)
+        original = self.ig.tarjeta_palabra.componer(p, "", self.t["urok"])
+        self.assertLessEqual(original.size[0] / original.size[1],
+                             self.ig.RATIO_MAXIMA)
+        apta = self.ig.tarjeta_apta(p, "", self.t["urok"])
+        self.assertEqual(apta.size, original.size)
+
+    def test_publicar_crea_el_contenedor_y_lo_publica(self):
+        """Los dos pasos, en orden, y el segundo con el id que devolvió el
+        primero: publicar con un id de otro contenedor publicaría la
+        tarjeta equivocada."""
+        vistos = []
+
+        def falso(camino, **p):
+            vistos.append((camino, p))
+            if camino.endswith("/media"):
+                return {"id": "CREACION-1"}
+            return {"id": "POST-1"}
+
+        r = self.ig.publicar("999", "cuerpo", "https://x/1.jpg", "t",
+                             post=falso)
+        self.assertEqual(r, {"id": "POST-1"})
+        self.assertEqual(vistos[0][0], "999/media")
+        self.assertEqual(vistos[0][1]["image_url"], "https://x/1.jpg")
+        self.assertEqual(vistos[0][1]["caption"], "cuerpo")
+        self.assertEqual(vistos[1], ("999/media_publish",
+                                     {"creation_id": "CREACION-1"}))
+
+    def test_un_contenedor_sin_id_no_intenta_publicar(self):
+        """Publicar con un `creation_id` vacío no tira un error de Meta
+        más claro: tira uno de Meta sobre la nada."""
+        llamadas = []
+
+        def falso(camino, **p):
+            llamadas.append(camino)
+            return {}
+
+        with self.assertRaises(self.ig.InstagramDijoQueNo):
+            self.ig.publicar("999", "x", "https://x/1.jpg", "t", post=falso)
+        self.assertEqual(llamadas, ["999/media"])
+
+    def test_un_error_de_meta_no_arrastra_el_token(self):
+        """`_post` nunca imprime la URL ni los parámetros: los dos llevan
+        el token dentro."""
+        import io
+        import urllib.error
+
+        antes = self.ig.urllib.request.urlopen
+        cuerpo = io.BytesIO(json.dumps(
+            {"error": {"message": "Invalid parameter"}}).encode())
+
+        def revienta(req, timeout=0):
+            raise urllib.error.HTTPError(req.full_url, 400, "Bad Request",
+                                         {}, cuerpo)
+
+        self.ig.urllib.request.urlopen = revienta
+        try:
+            with self.assertRaises(self.ig.InstagramDijoQueNo) as caja:
+                self.ig._post("999/media", "EL-TOKEN-SECRETO",
+                              image_url="https://x/1.jpg")
+        finally:
+            self.ig.urllib.request.urlopen = antes
+        self.assertNotIn("EL-TOKEN-SECRETO", str(caja.exception))
+
+    def test_numero_de_hoy_imprime_solo_el_numero(self):
+        """Es lo que la rama del workflow captura con `$(...)`: una línea
+        de más y el número que pasa a `--dibujar` y a `--publicar` ya no es
+        un número."""
+        import subprocess
+
+        r = subprocess.run(
+            [sys.executable, "scripts/instagram_palabra.py",
+             "--numero-de-hoy", "--numero", "1"],
+            cwd=str(RAIZ), capture_output=True, text=True, timeout=30)
+        self.assertEqual(r.stdout.strip(), "1")
+
+
 class TestElTokenDeFacebook(unittest.TestCase):
     """`scripts/fb_token.py`: el token de página que no caduca.
 
