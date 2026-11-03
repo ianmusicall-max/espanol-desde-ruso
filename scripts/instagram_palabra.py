@@ -147,21 +147,69 @@ def _post(camino: str, token: str, **params) -> dict:
                                  % (e.code, motivo[:300])) from None
 
 
-def publicar(ig_id: str, cuerpo: str, imagen_url: str, token: str,
-             post=None) -> dict:
-    """Los dos pasos que Meta exige: crear el contenedor y publicarlo.
+def _get(camino: str, token: str, **params) -> dict:
+    """GET a la Graph API. El mismo cuidado que `_post`: nunca se imprime
+    la URL, que lleva el token dentro."""
+    url = "%s/%s?%s" % (GRAPH, camino,
+                        urllib.parse.urlencode(dict(params,
+                                                     access_token=token)))
+    try:
+        with urllib.request.urlopen(url, timeout=30) as r:
+            return json.loads(r.read().decode("utf-8"))
+    except urllib.error.HTTPError as e:
+        cuerpo = e.read().decode("utf-8", "replace")
+        try:
+            motivo = json.loads(cuerpo)["error"].get("message", cuerpo)
+        except (ValueError, KeyError):
+            motivo = cuerpo
+        raise InstagramDijoQueNo("Meta respondió %s: %s"
+                                 % (e.code, motivo[:300])) from None
 
-    `post` existe para probar la FORMA del pedido sin red —lo único
-    comprobable desde el contenedor donde se escribió esto—, igual que el
-    `enviar=` de `facebook_palabra.publicar`.
+
+# Instagram procesa la imagen EN SEGUNDO PLANO incluso para una foto sola:
+# publicar antes de que termine da «Media ID is not available», que no dice
+# nada de lo que de verdad pasó. Son segundos, no minutos —medido el
+# 2026-11-03, un contenedor normal termina en el primer o segundo intento—
+# así que la espera crece poco: 2, 3, 5, 8, 13, 21 segundos, unos 52 en
+# total si hiciera falta agotarlos todos.
+ESPERAS_DEL_CONTENEDOR = (2, 3, 5, 8, 13, 21)
+
+
+def publicar(ig_id: str, cuerpo: str, imagen_url: str, token: str,
+             post=None, get=None, dormir=None) -> dict:
+    """Los tres pasos que Meta exige: crear el contenedor, ESPERAR a que
+    termine de procesar la imagen, y publicarlo.
+
+    `post`, `get` y `dormir` existen para probar la FORMA del pedido sin
+    red ni tiempo real —lo único comprobable desde el contenedor donde se
+    escribió esto—, igual que el `enviar=` de `facebook_palabra.publicar`.
     """
+    import time
+
     post = post or (lambda camino, **p: _post(camino, token, **p))
+    get = get or (lambda camino, **p: _get(camino, token, **p))
+    dormir = dormir or time.sleep
+
     contenedor = post("%s/media" % ig_id, image_url=imagen_url,
                       caption=cuerpo)
     creation_id = contenedor.get("id")
     if not creation_id:
         raise InstagramDijoQueNo("Meta no devolvió un id de contenedor: %s"
                                  % contenedor)
+
+    for espera in ESPERAS_DEL_CONTENEDOR:
+        dormir(espera)
+        estado = get(creation_id, fields="status_code").get("status_code")
+        if estado == "FINISHED":
+            break
+        if estado == "ERROR":
+            raise InstagramDijoQueNo(
+                "Instagram no pudo procesar la imagen (status_code=ERROR)")
+        # Sigue IN_PROGRESS (o no contestó el campo): se reintenta. Al
+        # agotar la lista se intenta publicar igual, y si de verdad no
+        # estaba lista el error de Meta en `media_publish` es más preciso
+        # que uno inventado aquí.
+
     return post("%s/media_publish" % ig_id, creation_id=creation_id)
 
 
