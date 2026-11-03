@@ -7217,7 +7217,8 @@ class TestInstagramPalabra(unittest.TestCase):
     def test_publicar_crea_el_contenedor_y_lo_publica(self):
         """Los dos pasos, en orden, y el segundo con el id que devolvió el
         primero: publicar con un id de otro contenedor publicaría la
-        tarjeta equivocada."""
+        tarjeta equivocada. `get` y `dormir` van de mentira: sin ellos
+        esto dormiría de verdad y hablaría con Meta."""
         vistos = []
 
         def falso(camino, **p):
@@ -7226,8 +7227,10 @@ class TestInstagramPalabra(unittest.TestCase):
                 return {"id": "CREACION-1"}
             return {"id": "POST-1"}
 
-        r = self.ig.publicar("999", "cuerpo", "https://x/1.jpg", "t",
-                             post=falso)
+        r = self.ig.publicar(
+            "999", "cuerpo", "https://x/1.jpg", "t", post=falso,
+            get=lambda *a, **k: {"status_code": "FINISHED"},
+            dormir=lambda s: None)
         self.assertEqual(r, {"id": "POST-1"})
         self.assertEqual(vistos[0][0], "999/media")
         self.assertEqual(vistos[0][1]["image_url"], "https://x/1.jpg")
@@ -7237,16 +7240,81 @@ class TestInstagramPalabra(unittest.TestCase):
 
     def test_un_contenedor_sin_id_no_intenta_publicar(self):
         """Publicar con un `creation_id` vacío no tira un error de Meta
-        más claro: tira uno de Meta sobre la nada."""
+        más claro: tira uno de Meta sobre la nada. Y no debería ni
+        sondear: sin id no hay nada que preguntarle a Meta, así que
+        `get`/`dormir` fallan si alguien los llama."""
         llamadas = []
 
         def falso(camino, **p):
             llamadas.append(camino)
             return {}
 
+        def no_debe_llamarse(*a, **k):
+            raise AssertionError("sin creation_id no hay nada que sondear")
+
         with self.assertRaises(self.ig.InstagramDijoQueNo):
-            self.ig.publicar("999", "x", "https://x/1.jpg", "t", post=falso)
+            self.ig.publicar("999", "x", "https://x/1.jpg", "t", post=falso,
+                             get=no_debe_llamarse, dormir=no_debe_llamarse)
         self.assertEqual(llamadas, ["999/media"])
+
+    def test_publicar_sondea_hasta_que_termina_de_procesar(self):
+        """Instagram procesa la imagen en segundo plano: dos vueltas en
+        IN_PROGRESS antes de la que por fin dice FINISHED, y lo que
+        duerme entre una y otra sigue `ESPERAS_DEL_CONTENEDOR`, no un
+        número fijo."""
+        dormidas = []
+        estados = iter(["IN_PROGRESS", "IN_PROGRESS", "FINISHED"])
+
+        def post(camino, **p):
+            if camino.endswith("/media"):
+                return {"id": "CREACION-1"}
+            return {"id": "POST-1"}
+
+        def get(creation_id, **p):
+            self.assertEqual(creation_id, "CREACION-1")
+            self.assertEqual(p.get("fields"), "status_code")
+            return {"status_code": next(estados)}
+
+        r = self.ig.publicar("999", "x", "https://x/1.jpg", "t", post=post,
+                             get=get, dormir=dormidas.append)
+        self.assertEqual(r, {"id": "POST-1"})
+        self.assertEqual(dormidas, list(self.ig.ESPERAS_DEL_CONTENEDOR[:3]))
+
+    def test_un_error_al_procesar_no_llega_a_publicar(self):
+        """`status_code=ERROR` es Meta diciendo que la imagen no sirve:
+        seguir esperando no la va a arreglar, así que no debe intentar
+        `media_publish`."""
+        vistos = []
+
+        def post(camino, **p):
+            vistos.append(camino)
+            return {"id": "CREACION-1"}
+
+        with self.assertRaises(self.ig.InstagramDijoQueNo):
+            self.ig.publicar(
+                "999", "x", "https://x/1.jpg", "t", post=post,
+                get=lambda *a, **k: {"status_code": "ERROR"},
+                dormir=lambda s: None)
+        self.assertEqual(vistos, ["999/media"])
+
+    def test_si_nunca_termina_se_intenta_publicar_igual(self):
+        """Agotadas las esperas sin que Meta diga FINISHED, el código
+        publica de todos modos —el error de `media_publish` es más
+        preciso que uno inventado aquí— y duerme las seis esperas
+        enteras, ni una más ni una menos."""
+        dormidas = []
+
+        def post(camino, **p):
+            if camino.endswith("/media"):
+                return {"id": "CREACION-1"}
+            return {"id": "POST-1"}
+
+        r = self.ig.publicar(
+            "999", "x", "https://x/1.jpg", "t", post=post,
+            get=lambda *a, **k: {"status_code": "IN_PROGRESS"},
+            dormir=dormidas.append)
+        self.assertEqual(r, {"id": "POST-1"})
+        self.assertEqual(dormidas, list(self.ig.ESPERAS_DEL_CONTENEDOR))
 
     def test_un_error_de_meta_no_arrastra_el_token(self):
         """`_post` nunca imprime la URL ni los parámetros: los dos llevan
