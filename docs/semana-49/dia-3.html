@@ -672,6 +672,170 @@ body:has(#cookies) footer.sitio{padding-bottom:10rem}
 #cookies{position:fixed;inset-inline:0;bottom:0;background:var(--tarjeta);border-top:1px solid var(--linea);
   padding:.85rem 20px;font-family:Onest,ui-sans-serif,system-ui,sans-serif;font-size:.85rem;display:flex;
   flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:center;z-index:30}
+/* Renovación visual: el mismo blanco y terracota, con más jerarquía y aire. */
+:root{--fondo:var(--papel)}
+:focus-visible{outline:3px solid var(--acento);outline-offset:4px}
+button,a,input{touch-action:manipulation}
+header.sitio{box-shadow:0 2px 16px rgb(0 0 0 / .025)}
+.portada{padding-top:1rem}
+main:has(.portada)>.envoltorio{max-width:68rem}
+.portada .heroe{padding:1.8rem 0 2.5rem}
+.portada .heroe-arte{gap:clamp(.35rem,1.8vw,1rem);margin:0 0 1.9rem}
+.portada .heroe-arte img{border:0;box-shadow:none;background:transparent;max-width:78px}
+.portada .heroe-texto{max-width:56rem;margin:0 auto;width:100%;text-align:center}
+.portada .antetitulo{font:700 .72rem/1.5 Onest,system-ui,sans-serif;letter-spacing:.13em;text-transform:uppercase;color:var(--acento);margin:0 0 .8rem}
+.portada h1{font-size:clamp(2.25rem,5.4vw,4.1rem);line-height:1.06;letter-spacing:-.045em;margin:.5rem 0 1rem}
+.portada h1 .segunda{font-size:.69em;line-height:1.25;margin-top:.2rem;font-weight:400}
+.portada .heroe .lema{font:400 clamp(1rem,2vw,1.2rem)/1.5 Onest,system-ui,sans-serif;max-width:35rem;margin:.8rem auto}
+.portada .entrada{max-width:40rem;margin:.8rem auto;font-size:1rem;color:var(--tenue)}
+.sellos{display:flex;justify-content:center;flex-wrap:wrap;gap:.5rem;list-style:none;padding:0;margin:1.3rem 0}
+.sellos li{font:600 .75rem/1.4 Onest,system-ui,sans-serif;border:1px solid var(--linea);border-radius:999px;padding:.42rem .7rem;background:var(--papel)}
+.sellos li:first-child{color:var(--acento);background:var(--acento-suave);border-color:transparent}
+.sellos li::before{content:'✓';margin-right:.35rem;color:var(--acento)}
+.portada .heroe .botones{justify-content:center;margin:1.4rem 0 1rem}
+.boton{min-height:44px;display:inline-flex;align-items:center;justify-content:center;border:1px solid transparent;font-weight:700;line-height:1.4;gap:.45rem}
+.portada .heroe .boton{padding:.85rem 1.5rem;border-radius:12px}
+.portada .heroe .boton:not(.secundario)::after{content:'→';font-size:1.2em;margin-left:.2rem}
+.portada .heroe .puerta{font-family:Onest,system-ui,sans-serif;font-size:.83rem;margin:.8rem auto 0;max-width:40rem}
+.portada .heroe .canal{margin-top:.8rem}
+.inicio-paneles{display:grid;grid-template-columns:1.1fr 1fr;gap:1.2rem;text-align:left;margin:2.2rem auto 0;align-items:stretch}
+.demo-palabra{position:relative;display:flex;flex-direction:column;justify-content:center;padding:1.5rem;background:var(--acento-suave);border:1px solid color-mix(in srgb,var(--acento) 16%,transparent);border-radius:22px;overflow:hidden}
+.demo-etiqueta{font:600 .7rem/1.4 Onest,system-ui,sans-serif;color:var(--acento);letter-spacing:.04em;margin:0 0 1rem}
+.demo-centro{display:flex;align-items:center;gap:1rem}
+.demo-centro img{width:112px;height:112px;object-fit:contain;border-radius:16px;flex-shrink:0;background:var(--tarjeta)}
+.demo-palabra .palabra{display:block;font:700 clamp(1.4rem,2.7vw,2.1rem)/1.15 Onest,system-ui,sans-serif;letter-spacing:-.03em}
+.demo-palabra .traduccion{display:block;color:var(--tenue);font:400 1rem/1.5 Literata,serif;margin-top:.35rem}
+.demo-audio{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;border:1px solid var(--linea);border-radius:999px;min-height:44px;padding:.5rem .85rem;margin-top:.8rem;font:600 .75rem/1.3 Onest,system-ui,sans-serif;background:var(--papel);color:var(--acento);opacity:1}
+.demo-audio::after{display:none}
+.demo-audio[aria-pressed="true"]{background:var(--acento);border-color:var(--acento);color:var(--papel)}
+.demo-audio svg{width:17px;height:17px;flex-shrink:0}
+.demo-pie{margin:1rem 0 0;font:400 .74rem/1.4 Onest,system-ui,sans-serif;color:var(--tenue)}
+.inicio-paneles>.progreso{margin:0;padding:1.5rem;border:1px solid var(--linea);border-radius:22px;background:var(--tarjeta);display:flex;flex-direction:column;justify-content:center}
+.inicio-paneles .progreso .n{font-size:2.6rem;letter-spacing:-.05em;line-height:1.1}
+.inicio-paneles .progreso .cifras{flex-wrap:wrap}
+.inicio-paneles .progreso-nota{font-size:.78rem;line-height:1.55}
+.portada .marco{max-width:39rem;margin:1.1rem auto 0;text-align:center;border:0;padding:0;font-size:.76rem}
+.portada-seccion,.portada .muestra{margin:0;padding:3.3rem clamp(1rem,4vw,3rem);border-top:1px solid var(--linea)}
+.portada-seccion>h2,.portada .muestra>h2{border:0;padding:0;margin:0 0 .8rem;font-size:clamp(1.4rem,3vw,2rem);letter-spacing:-.03em}
+.portada-seccion>p,.portada .muestra>p{max-width:43rem}
+.portada .muestra{background:var(--tarjeta);border-radius:24px;border:0;margin:0 0 1.5rem}
+.portada .vitrina{gap:.8rem}
+.portada .vitrina li{padding:.9rem .4rem;background:var(--papel);border-color:transparent;border-radius:16px;box-shadow:none}
+.portada .vitrina img{width:80px;height:80px}
+.portada .vitrina b{font-size:.86rem}
+.portada .vitrina .ru{font-size:.75rem}
+.portada .vitrina .suena::after{display:none}
+.portada .vitrina .suena{opacity:1}
+.portada .vitrina .suena:focus-visible{outline-offset:6px}
+.portada-seccion.metodo{background:var(--tarjeta);border:0;border-radius:24px}
+.portada-seccion .tabla-env{box-shadow:none}
+.portada-seccion .contraste{background:var(--acento-suave);border:0;border-left:4px solid var(--acento);padding:1.25rem 1.5rem;border-radius:0 16px 16px 0}
+.portada-seccion .test-caja{background:var(--papel);border-radius:18px;padding:1.5rem}
+.portada-seccion .rejilla{gap:1rem;margin:1.6rem 0 0}
+.portada-seccion .tarjeta{background:var(--papel);box-shadow:none;padding:1.3rem;border-radius:18px}
+.portada-seccion .tarjeta h3{font-size:.76rem;letter-spacing:.02em}
+.portada-seccion.cierre{background:var(--acento-suave);border:0;border-radius:24px;text-align:center}
+.portada-seccion.cierre p{margin-inline:auto}
+.portada-seccion.cierre .botones{justify-content:center}
+.portada>.compartir{justify-content:center;margin-bottom:1rem}
+/* El mapa distingue estados con texto además del color. */
+.u-tarjeta{padding:1.15rem;border-radius:18px;box-shadow:0 2px 6px rgb(0 0 0 / .025);min-height:205px}
+.u-tarjeta .alto{gap:.65rem;margin-bottom:.85rem}
+.u-tarjeta .u-dibujo{width:60px;height:60px;border-radius:14px}
+.u-tarjeta .num{font-size:1.25rem;color:var(--tenue)}
+.u-tarjeta .tit{font-size:1.03rem;line-height:1.35}
+.u-tarjeta .serie{line-height:1.5;margin-top:.2rem}
+.u-tarjeta .nivel{padding:.15rem .5rem;border-color:var(--linea);color:var(--tenue)}
+.u-tarjeta .pie{padding-top:.8rem}
+.u-tarjeta .estado-unidad{font:600 .68rem/1.4 Onest,system-ui,sans-serif;color:var(--acento);order:-1}
+.u-tarjeta[data-estado] .estado-unidad{margin-bottom:.6rem}
+.u-tarjeta.actual{background:var(--acento-suave);border:2px solid var(--acento);padding:calc(1.15rem - 1px)}
+.u-tarjeta.completa{border-color:var(--acento);background:var(--papel)}
+.u-tarjeta.completa .num::after{content:' ✓';font-size:.8em;color:var(--acento)}
+/* Lecciones: señalética de los pasos y bloques reconocibles. */
+article[data-leccion]{padding-top:.7rem}
+.leccion-cab{margin-top:1.3rem;gap:.6rem}
+.leccion-cab .n{padding:.35rem .8rem;font-size:.8rem}
+article[data-leccion] h1{font-size:clamp(1.8rem,4.8vw,2.8rem);margin:1.2rem 0 1.5rem;line-height:1.18}
+article[data-leccion]>h2[data-paso]{border:1px solid var(--linea);border-left:4px solid var(--acento);border-radius:0 14px 14px 0;background:var(--tarjeta);padding:1rem 1.2rem;margin:3.1rem 0 1.1rem;font-size:1.12rem;line-height:1.4;scroll-margin-top:10rem}
+article[data-leccion]>h2[data-paso="4"]{background:var(--acento-suave);border-color:transparent;border-left-color:var(--acento)}
+article[data-leccion]>h2[data-paso="5"],article[data-leccion]>h2[data-paso="6"]{border-left-style:double;border-left-width:6px}
+article[data-leccion]>h3{margin-top:1.8rem;color:var(--acento);font-size:.88rem;letter-spacing:.015em}
+article[data-leccion] p{line-height:1.8}
+article[data-leccion] .contraste{padding:1.35rem;border-radius:16px;border-left:4px solid var(--acento)}
+.tabla-dialogo{border:0;border-left:3px solid var(--acento);border-radius:0 14px 14px 0;background:var(--acento-suave)}
+.tabla-dialogo th{background:transparent;color:var(--acento);font-size:.74rem;letter-spacing:.03em}
+.tabla-dialogo td{padding:.8rem;border-bottom:1px solid color-mix(in srgb,var(--acento) 12%,transparent);line-height:1.7}
+.tabla-dialogo td:first-child{font-weight:500}
+.tabla-dialogo td:last-child{color:var(--tenue)}
+.guia{border-radius:14px;padding:.7rem .8rem;box-shadow:0 4px 20px rgb(0 0 0 / .05)}
+.guia-punto{width:30px;height:30px;font-size:.78rem;font-weight:600}
+.guia-ir{min-height:40px}
+.grabar-bloque,.quiz-bloque{padding:1.4rem;border-radius:18px;background:var(--tarjeta)}
+.grabar-bloque h2::before{content:'◉';color:var(--acento);margin-right:.5rem}
+.quiz-bloque h2::before{content:'✓';color:var(--acento);margin-right:.5rem}
+.suena:not(.ficha):not(.demo-audio){color:var(--acento);opacity:1;background:var(--acento-suave);border-radius:999px;min-width:27px;min-height:27px;margin-right:4px;padding:3px;font-size:.75em;vertical-align:middle}
+.suena:not(.ficha):not(.demo-audio)[aria-pressed="true"]{background:var(--acento);color:var(--papel)}
+.suena:not(.ficha):not(.demo-audio):hover{box-shadow:0 0 0 2px var(--linea)}
+.pasos{padding:1.1rem 0;gap:1rem}
+.pasos a{font-weight:600;line-height:1.5}
+footer.sitio{margin-top:2rem;padding-top:2rem}
+@media(max-width:40rem){
+ .portada{padding-top:0}
+ .portada .heroe{padding-top:1.4rem;padding-bottom:2rem}
+ .portada .heroe-arte{margin-bottom:1.2rem}
+ .portada .antetitulo{font-size:.62rem;letter-spacing:.08em}
+ .portada h1{font-size:2.45rem}
+ .portada .entrada{font-size:.92rem;line-height:1.65}
+ .portada .heroe .botones{gap:.6rem}
+ .portada .heroe .boton{width:100%;font-size:.92rem;padding:.8rem 1rem}
+ .inicio-paneles{grid-template-columns:1fr;gap:.8rem;margin-top:1.7rem}
+ .demo-palabra{padding:1.15rem}
+ .demo-centro img{width:100px;height:100px}
+ .inicio-paneles>.progreso{padding:1.15rem}
+ .inicio-paneles .progreso .n{font-size:2rem}
+ .portada-seccion,.portada .muestra{padding:2rem 1rem}
+ .portada .vitrina{gap:.5rem}
+ .portada .vitrina img{width:64px;height:64px;max-width:100%}
+ .portada .vitrina b{font-size:.74rem}
+ .portada .vitrina .ru{font-size:.68rem}
+ .portada-seccion .contraste{padding:1rem}
+ .mapa{grid-template-columns:repeat(2,minmax(0,1fr));gap:.65rem}
+ .u-tarjeta{min-height:220px;padding:.8rem}
+ .u-tarjeta.actual{padding:calc(.8rem - 1px)}
+ .u-tarjeta .u-dibujo{width:44px;height:44px;border-radius:10px}
+ .u-tarjeta .alto{gap:.35rem;flex-wrap:wrap}
+ .u-tarjeta .tit{font-size:.88rem}
+ .u-tarjeta .serie{font-size:.7rem}
+ .u-tarjeta .num{font-size:1rem}
+ .u-tarjeta .nivel{font-size:.6rem}
+ .u-tarjeta .pie{font-size:.68rem;flex-wrap:wrap}
+ .u-tarjeta .mini{flex-basis:100%}
+ .guia{gap:.5rem;padding:.6rem}
+ article[data-leccion]>h2[data-paso]{padding:.85rem .9rem;font-size:1rem}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
+
+/* El idioma que lee el alumno encabeza la lección; el original queda debajo. */
+.leccion-origen{font:400 .78rem/1.5 Onest,system-ui,sans-serif;color:var(--tenue);margin:-.7rem 0 1.6rem}
+.otras-entradas{margin-top:1.2rem}
+@media(max-width:40rem){
+ .portada .antetitulo{display:none}
+ .portada .heroe-arte{margin-bottom:.9rem}
+ .portada .sellos{margin:1rem 0}
+ .portada .heroe .lema{font-size:.95rem}
+ .inicio-paneles{margin-top:1.1rem}
+ .guia{display:grid;grid-template-columns:1fr auto;gap:.5rem}
+ .guia-barra{grid-column:1/-1;justify-content:space-between}
+ .guia-ahora{min-width:0}
+ .guia-ir{margin-left:0}
+}
+
+/* El texto de los botones mantiene contraste también con el terracota claro de noche. */
+.boton:not(.secundario),.leccion-cab .n,.guia-punto.aqui,.ficha[aria-pressed="true"]{color:var(--papel)}
+.inicio-paneles>*{min-width:0}
+@media(prefers-color-scheme:dark){:root:not([data-tema="light"]) .demo-centro img{filter:brightness(.8) saturate(.95)}}
+:root[data-tema="dark"] .demo-centro img{filter:brightness(.8) saturate(.95)}
 </style>
 <script>try{var t=localStorage.getItem('tema');if(t)document.documentElement.dataset.tema=t}catch(e){}</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6339208855562328" crossorigin="anonymous"></script>
@@ -685,8 +849,8 @@ body:has(#cookies) footer.sitio{padding-bottom:10rem}
 <p class="sin-idioma" id="sin-idioma" hidden>Эта страница есть только на русском. <a href="" data-ir="Открыть главную страницу"></a></p>
 </div></header>
 <main><div class="envoltorio">
-<article data-leccion="339"><div class="leccion-cab"><span class="n">Урок 339</span><span>из 365</span><span class="tipo">пробный экзамен</span><span>неделя 49 · уровень A2</span></div><div id="guia" class="guia" hidden></div><h1 id="semana-49-dia-3-simulacro-1-audio-tareas-1-y-2">Semana 49 · Día 3 — Simulacro 1 · Audio, tareas 1 y 2</h1>
-<h1 id="49-3-1-1-2">Неделя 49 · День 3 — Пробный экзамен 1 · Аудирование, задания 1 и 2</h1>
+<article data-leccion="339"><div class="leccion-cab"><span class="n">Урок 339</span><span>из 365</span><span class="tipo">пробный экзамен</span><span>неделя 49 · уровень A2</span></div><div id="guia" class="guia" hidden></div>
+<h1 id="49-3-1-1-2">Неделя 49 · День 3 — Пробный экзамен 1 · Аудирование, задания 1 и 2</h1><p class="leccion-origen" lang="es">Semana 49 · Día 3 — Simulacro 1 · Audio, tareas 1 y 2</p>
 <blockquote>
 <p><strong>Сегодня вы</strong></p>
 <ul>
@@ -696,7 +860,7 @@ body:has(#cookies) footer.sitio{padding-bottom:10rem}
 <li>посчитаете двенадцать баллов из двадцати пяти.</li>
 </ul>
 </blockquote>
-<h2 id="1-03">1. Инструкция (0–3 мин)</h2>
+<h2 id="1-03" data-paso="1">1. Инструкция (0–3 мин)</h2>
 <p><strong>Два задания, двенадцать вопросов, двадцать минут.</strong></p>
 <div class="tabla-env"><table>
 <thead>
@@ -734,7 +898,7 @@ body:has(#cookies) footer.sitio{padding-bottom:10rem}
 <p>⚠️ <strong>А если кнопок ▶ ещё нет</strong> (аудио курса генерируется партиями):
 прочитайте фразу <strong>вслух один раз</strong>, закройте её и отвечайте по памяти. Это
 труднее, чем слушать, а не легче.</p>
-</section><h2 id="2-323">2. Задания (3–23 мин)</h2>
+</section><h2 id="2-323" data-paso="2">2. Задания (3–23 мин)</h2>
 <h3 id="tarea-1-seis-dialogos-6-items">Tarea 1 · Seis diálogos (6 ítems)</h3>
 <div class="tabla-env"><table>
 <thead>
@@ -821,7 +985,7 @@ body:has(#cookies) footer.sitio{padding-bottom:10rem}
 <li>Pablo pide <input type="text" class="hueco-escribir" autocomplete="off" autocapitalize="off" spellcheck="false" size="8" aria-label="2">. → а) un cerrajero · б) una llamada al portero · в) dejar unas llaves en el bar</li>
 <li>El mercadillo se cambia <input type="text" class="hueco-escribir" autocomplete="off" autocapitalize="off" spellcheck="false" size="8" aria-label="3">. → а) por la lluvia · б) por las obras · в) por una fiesta</li>
 </ol>
-<p class="a-la-clave"><a href="#clave">Проверить себя по ключу ↓</a></p><h2 id="3-2327">3. Ключи и подсчёт (23–27 мин)</h2>
+<p class="a-la-clave"><a href="#clave">Проверить себя по ключу ↓</a></p><h2 id="3-2327" data-paso="3">3. Ключи и подсчёт (23–27 мин)</h2>
 <p><strong>Audio, tareas 1 y 2: <input type="text" class="hueco-escribir" autocomplete="off" autocapitalize="off" spellcheck="false" size="8" aria-label="4"> / 12</strong></p>
 <div class="tabla-env"><table>
 <thead>
@@ -850,7 +1014,7 @@ body:has(#cookies) footer.sitio{padding-bottom:10rem}
 фразах курса с цифрами и записывать их <strong>цифрами с первого раза</strong>. Если
 потеряли там, где правильный ответ <strong>пересказывает</strong> (1, 5, 8, 11) — это не
 слух, это день 2 недели 45, и тренируется на бумаге.</p>
-<h2 id="4-2730">4. Разбор ошибок (27–30 мин)</h2>
+<h2 id="4-2730" data-paso="4">4. Разбор ошибок (27–30 мин)</h2>
 <p><strong>Четыре ловушки:</strong></p>
 <ol>
 <li><strong>Номер 2 — два числа, и оба звучат.</strong> <em>El doce no, el veintiuno.</em>
@@ -913,7 +1077,7 @@ leyendo.</p></div><script>(function(){
     });
   });
 })();</script>
-<script>window.CURSO_TEXTOS={"continuar": "Продолжить: урок", "guia_paso": "Шаг {n} из {total}", "guia_siguiente": "Дальше", "guia_final": "Отметить и дальше", "guia_empezar": "Начать с первого шага", "empezar": "Начать сначала", "marcar": "Отметить урок пройденным", "hecho": "Урок пройден", "siguiente": "Следующий урок", "tuyo": "пройдено вами", "titulo": "Ваш прогресс", "aviso": "Прогресс хранится только в этом браузере, на этом устройстве. Регистрации нет, и никуда он не отправляется. Если вы очистите данные браузера или откроете курс на другом телефоне, отметки не перенесутся.", "borrar": "Сбросить прогресс", "confirmar": "Сбросить все отметки?", "copiar": "Сохранить мой прогресс", "copiado": "Код скопирован — вставьте его себе в заметки или в «Избранное» в Telegram", "restaurar": "Восстановить мой прогресс", "pegar": "Вставьте сюда ваш код", "aplicar": "Восстановить", "cancelar": "Отмена", "malo": "Это не похоже на код прогресса. Ничего не изменено.", "menos": "В этом коде меньше уроков, чем отмечено сейчас (%a% вместо %b%). Всё равно восстановить?", "hecho_restaurar": "Готово: восстановлено уроков — %n%", "nombre_label": "Как вас зовут?", "nombre_boton": "Сохранить", "nombre_cambiar": "Изменить", "nombre_nota": "Только чтобы обращаться к вам по имени. Имя остаётся в этом браузере и никуда не отправляется.", "bravo": ["Отлично!", "Так держать!", "Хорошая работа!", "Ещё один урок позади!", "Вы молодец!", "Готово!", "Вот это темп!", "Продолжайте так же!", "Шаг за шагом — и получается!"], "bravo_con": ["Отлично, {nombre}!", "Так держать, {nombre}!", "Хорошая работа, {nombre}!", "{nombre}, ещё один урок позади!", "Вы молодец, {nombre}!", "Готово, {nombre}!", "Вот это темп, {nombre}!", "Продолжайте так же, {nombre}!", "Шаг за шагом, {nombre}, — и получается!"], "vuelta": "С возвращением, {nombre}!", "primera": "Первый урок пройден — самое трудное уже позади.", "primera_con": "{nombre}, первый урок пройден — самое трудное уже позади.", "cuantas": "{n} из {total}", "faltan": "осталось {n}", "racha": "{n} {dias} подряд", "racha_dias": ["день", "дня", "дней"], "racha_hoy": "Сегодня вы занимались", "racha_mejor": "Лучшая серия: {n} {dias}", "antes": "Перед тем как очистить браузер или сменить телефон, сохраните код.", "calendario": "Ваш курс", "calendario_nota": "{n} {lecciones} из {total}", "calendario_rotulo": "Урок {n} · нед. {semana}, день {dia}", "calendario_aqui": "здесь вы остановились", "calendario_lecciones": ["урок", "урока", "уроков"], "diploma_boton": "Скачать сертификат ({nivel})", "diploma_pide_nombre": "Укажите имя выше — и сертификат будет на ваше имя.", "diploma_titulo": "СЕРТИФИКАТ", "diploma_sub": "о прохождении курса", "diploma_quien": "Выдан", "diploma_que": "Уровень {nivel} · пройдено уроков: {n}", "diploma_fecha": "Дата", "diploma_aviso": "Личный сертификат о самостоятельном прохождении курса. Это не официальный документ об уровне языка."};window.CURSO_RAIZ="..";window.CURSO_PUBLICADAS=365;window.CURSO_DIAS={"1":"semana-01/dia-1.html","2":"semana-01/dia-2.html","3":"semana-01/dia-3.html","4":"semana-01/dia-4.html","5":"semana-01/dia-5.html","6":"semana-01/dia-6.html","7":"semana-01/dia-7.html","8":"semana-02/dia-1.html","9":"semana-02/dia-2.html","10":"semana-02/dia-3.html","11":"semana-02/dia-4.html","12":"semana-02/dia-5.html","13":"semana-02/dia-6.html","14":"semana-02/dia-7.html","15":"semana-03/dia-1.html","16":"semana-03/dia-2.html","17":"semana-03/dia-3.html","18":"semana-03/dia-4.html","19":"semana-03/dia-5.html","20":"semana-03/dia-6.html","21":"semana-03/dia-7.html","22":"semana-04/dia-1.html","23":"semana-04/dia-2.html","24":"semana-04/dia-3.html","25":"semana-04/dia-4.html","26":"semana-04/dia-5.html","27":"semana-04/dia-6.html","28":"semana-04/dia-7.html","29":"semana-05/dia-1.html","30":"semana-05/dia-2.html","31":"semana-05/dia-3.html","32":"semana-05/dia-4.html","33":"semana-05/dia-5.html","34":"semana-05/dia-6.html","35":"semana-05/dia-7.html","36":"semana-06/dia-1.html","37":"semana-06/dia-2.html","38":"semana-06/dia-3.html","39":"semana-06/dia-4.html","40":"semana-06/dia-5.html","41":"semana-06/dia-6.html","42":"semana-06/dia-7.html","43":"semana-07/dia-1.html","44":"semana-07/dia-2.html","45":"semana-07/dia-3.html","46":"semana-07/dia-4.html","47":"semana-07/dia-5.html","48":"semana-07/dia-6.html","49":"semana-07/dia-7.html","50":"semana-08/dia-1.html","51":"semana-08/dia-2.html","52":"semana-08/dia-3.html","53":"semana-08/dia-4.html","54":"semana-08/dia-5.html","55":"semana-08/dia-6.html","56":"semana-08/dia-7.html","57":"semana-09/dia-1.html","58":"semana-09/dia-2.html","59":"semana-09/dia-3.html","60":"semana-09/dia-4.html","61":"semana-09/dia-5.html","62":"semana-09/dia-6.html","63":"semana-09/dia-7.html","64":"semana-10/dia-1.html","65":"semana-10/dia-2.html","66":"semana-10/dia-3.html","67":"semana-10/dia-4.html","68":"semana-10/dia-5.html","69":"semana-10/dia-6.html","70":"semana-10/dia-7.html","71":"semana-11/dia-1.html","72":"semana-11/dia-2.html","73":"semana-11/dia-3.html","74":"semana-11/dia-4.html","75":"semana-11/dia-5.html","76":"semana-11/dia-6.html","77":"semana-11/dia-7.html","78":"semana-12/dia-1.html","79":"semana-12/dia-2.html","80":"semana-12/dia-3.html","81":"semana-12/dia-4.html","82":"semana-12/dia-5.html","83":"semana-12/dia-6.html","84":"semana-12/dia-7.html","85":"semana-13/dia-1.html","86":"semana-13/dia-2.html","87":"semana-13/dia-3.html","88":"semana-13/dia-4.html","89":"semana-13/dia-5.html","90":"semana-13/dia-6.html","91":"semana-13/dia-7.html","92":"semana-14/dia-1.html","93":"semana-14/dia-2.html","94":"semana-14/dia-3.html","95":"semana-14/dia-4.html","96":"semana-14/dia-5.html","97":"semana-14/dia-6.html","98":"semana-14/dia-7.html","99":"semana-15/dia-1.html","100":"semana-15/dia-2.html","101":"semana-15/dia-3.html","102":"semana-15/dia-4.html","103":"semana-15/dia-5.html","104":"semana-15/dia-6.html","105":"semana-15/dia-7.html","106":"semana-16/dia-1.html","107":"semana-16/dia-2.html","108":"semana-16/dia-3.html","109":"semana-16/dia-4.html","110":"semana-16/dia-5.html","111":"semana-16/dia-6.html","112":"semana-16/dia-7.html","113":"semana-17/dia-1.html","114":"semana-17/dia-2.html","115":"semana-17/dia-3.html","116":"semana-17/dia-4.html","117":"semana-17/dia-5.html","118":"semana-17/dia-6.html","119":"semana-17/dia-7.html","120":"semana-18/dia-1.html","121":"semana-18/dia-2.html","122":"semana-18/dia-3.html","123":"semana-18/dia-4.html","124":"semana-18/dia-5.html","125":"semana-18/dia-6.html","126":"semana-18/dia-7.html","127":"semana-19/dia-1.html","128":"semana-19/dia-2.html","129":"semana-19/dia-3.html","130":"semana-19/dia-4.html","131":"semana-19/dia-5.html","132":"semana-19/dia-6.html","133":"semana-19/dia-7.html","134":"semana-20/dia-1.html","135":"semana-20/dia-2.html","136":"semana-20/dia-3.html","137":"semana-20/dia-4.html","138":"semana-20/dia-5.html","139":"semana-20/dia-6.html","140":"semana-20/dia-7.html","141":"semana-21/dia-1.html","142":"semana-21/dia-2.html","143":"semana-21/dia-3.html","144":"semana-21/dia-4.html","145":"semana-21/dia-5.html","146":"semana-21/dia-6.html","147":"semana-21/dia-7.html","148":"semana-22/dia-1.html","149":"semana-22/dia-2.html","150":"semana-22/dia-3.html","151":"semana-22/dia-4.html","152":"semana-22/dia-5.html","153":"semana-22/dia-6.html","154":"semana-22/dia-7.html","155":"semana-23/dia-1.html","156":"semana-23/dia-2.html","157":"semana-23/dia-3.html","158":"semana-23/dia-4.html","159":"semana-23/dia-5.html","160":"semana-23/dia-6.html","161":"semana-23/dia-7.html","162":"semana-24/dia-1.html","163":"semana-24/dia-2.html","164":"semana-24/dia-3.html","165":"semana-24/dia-4.html","166":"semana-24/dia-5.html","167":"semana-24/dia-6.html","168":"semana-24/dia-7.html","169":"semana-25/dia-1.html","170":"semana-25/dia-2.html","171":"semana-25/dia-3.html","172":"semana-25/dia-4.html","173":"semana-25/dia-5.html","174":"semana-25/dia-6.html","175":"semana-25/dia-7.html","176":"semana-26/dia-1.html","177":"semana-26/dia-2.html","178":"semana-26/dia-3.html","179":"semana-26/dia-4.html","180":"semana-26/dia-5.html","181":"semana-26/dia-6.html","182":"semana-26/dia-7.html","183":"semana-27/dia-1.html","184":"semana-27/dia-2.html","185":"semana-27/dia-3.html","186":"semana-27/dia-4.html","187":"semana-27/dia-5.html","188":"semana-27/dia-6.html","189":"semana-27/dia-7.html","190":"semana-28/dia-1.html","191":"semana-28/dia-2.html","192":"semana-28/dia-3.html","193":"semana-28/dia-4.html","194":"semana-28/dia-5.html","195":"semana-28/dia-6.html","196":"semana-28/dia-7.html","197":"semana-29/dia-1.html","198":"semana-29/dia-2.html","199":"semana-29/dia-3.html","200":"semana-29/dia-4.html","201":"semana-29/dia-5.html","202":"semana-29/dia-6.html","203":"semana-29/dia-7.html","204":"semana-30/dia-1.html","205":"semana-30/dia-2.html","206":"semana-30/dia-3.html","207":"semana-30/dia-4.html","208":"semana-30/dia-5.html","209":"semana-30/dia-6.html","210":"semana-30/dia-7.html","211":"semana-31/dia-1.html","212":"semana-31/dia-2.html","213":"semana-31/dia-3.html","214":"semana-31/dia-4.html","215":"semana-31/dia-5.html","216":"semana-31/dia-6.html","217":"semana-31/dia-7.html","218":"semana-32/dia-1.html","219":"semana-32/dia-2.html","220":"semana-32/dia-3.html","221":"semana-32/dia-4.html","222":"semana-32/dia-5.html","223":"semana-32/dia-6.html","224":"semana-32/dia-7.html","225":"semana-33/dia-1.html","226":"semana-33/dia-2.html","227":"semana-33/dia-3.html","228":"semana-33/dia-4.html","229":"semana-33/dia-5.html","230":"semana-33/dia-6.html","231":"semana-33/dia-7.html","232":"semana-34/dia-1.html","233":"semana-34/dia-2.html","234":"semana-34/dia-3.html","235":"semana-34/dia-4.html","236":"semana-34/dia-5.html","237":"semana-34/dia-6.html","238":"semana-34/dia-7.html","239":"semana-35/dia-1.html","240":"semana-35/dia-2.html","241":"semana-35/dia-3.html","242":"semana-35/dia-4.html","243":"semana-35/dia-5.html","244":"semana-35/dia-6.html","245":"semana-35/dia-7.html","246":"semana-36/dia-1.html","247":"semana-36/dia-2.html","248":"semana-36/dia-3.html","249":"semana-36/dia-4.html","250":"semana-36/dia-5.html","251":"semana-36/dia-6.html","252":"semana-36/dia-7.html","253":"semana-37/dia-1.html","254":"semana-37/dia-2.html","255":"semana-37/dia-3.html","256":"semana-37/dia-4.html","257":"semana-37/dia-5.html","258":"semana-37/dia-6.html","259":"semana-37/dia-7.html","260":"semana-38/dia-1.html","261":"semana-38/dia-2.html","262":"semana-38/dia-3.html","263":"semana-38/dia-4.html","264":"semana-38/dia-5.html","265":"semana-38/dia-6.html","266":"semana-38/dia-7.html","267":"semana-39/dia-1.html","268":"semana-39/dia-2.html","269":"semana-39/dia-3.html","270":"semana-39/dia-4.html","271":"semana-39/dia-5.html","272":"semana-39/dia-6.html","273":"semana-39/dia-7.html","274":"semana-40/dia-1.html","275":"semana-40/dia-2.html","276":"semana-40/dia-3.html","277":"semana-40/dia-4.html","278":"semana-40/dia-5.html","279":"semana-40/dia-6.html","280":"semana-40/dia-7.html","281":"semana-41/dia-1.html","282":"semana-41/dia-2.html","283":"semana-41/dia-3.html","284":"semana-41/dia-4.html","285":"semana-41/dia-5.html","286":"semana-41/dia-6.html","287":"semana-41/dia-7.html","288":"semana-42/dia-1.html","289":"semana-42/dia-2.html","290":"semana-42/dia-3.html","291":"semana-42/dia-4.html","292":"semana-42/dia-5.html","293":"semana-42/dia-6.html","294":"semana-42/dia-7.html","295":"semana-43/dia-1.html","296":"semana-43/dia-2.html","297":"semana-43/dia-3.html","298":"semana-43/dia-4.html","299":"semana-43/dia-5.html","300":"semana-43/dia-6.html","301":"semana-43/dia-7.html","302":"semana-44/dia-1.html","303":"semana-44/dia-2.html","304":"semana-44/dia-3.html","305":"semana-44/dia-4.html","306":"semana-44/dia-5.html","307":"semana-44/dia-6.html","308":"semana-44/dia-7.html","309":"semana-45/dia-1.html","310":"semana-45/dia-2.html","311":"semana-45/dia-3.html","312":"semana-45/dia-4.html","313":"semana-45/dia-5.html","314":"semana-45/dia-6.html","315":"semana-45/dia-7.html","316":"semana-46/dia-1.html","317":"semana-46/dia-2.html","318":"semana-46/dia-3.html","319":"semana-46/dia-4.html","320":"semana-46/dia-5.html","321":"semana-46/dia-6.html","322":"semana-46/dia-7.html","323":"semana-47/dia-1.html","324":"semana-47/dia-2.html","325":"semana-47/dia-3.html","326":"semana-47/dia-4.html","327":"semana-47/dia-5.html","328":"semana-47/dia-6.html","329":"semana-47/dia-7.html","330":"semana-48/dia-1.html","331":"semana-48/dia-2.html","332":"semana-48/dia-3.html","333":"semana-48/dia-4.html","334":"semana-48/dia-5.html","335":"semana-48/dia-6.html","336":"semana-48/dia-7.html","337":"semana-49/dia-1.html","338":"semana-49/dia-2.html","339":"semana-49/dia-3.html","340":"semana-49/dia-4.html","341":"semana-49/dia-5.html","342":"semana-49/dia-6.html","343":"semana-49/dia-7.html","344":"semana-50/dia-1.html","345":"semana-50/dia-2.html","346":"semana-50/dia-3.html","347":"semana-50/dia-4.html","348":"semana-50/dia-5.html","349":"semana-50/dia-6.html","350":"semana-50/dia-7.html","351":"semana-51/dia-1.html","352":"semana-51/dia-2.html","353":"semana-51/dia-3.html","354":"semana-51/dia-4.html","355":"semana-51/dia-5.html","356":"semana-51/dia-6.html","357":"semana-51/dia-7.html","358":"semana-52/dia-1.html","359":"semana-52/dia-2.html","360":"semana-52/dia-3.html","361":"semana-52/dia-4.html","362":"semana-52/dia-5.html","363":"semana-52/dia-6.html","364":"semana-52/dia-7.html","365":"semana-53/dia-1.html"};window.CURSO_NIVELES=[];window.CURSO_SITIO="Испанский с нуля для русскоговорящих";window.CURSO_DOMINIO="espanoldesderuso.com";</script>
+<script>window.CURSO_TEXTOS={"unidad_actual": "Вы здесь", "unidad_completa": "Пройдено", "unidad_siguiente": "Следующая", "continuar": "Продолжить: урок", "guia_paso": "Шаг {n} из {total}", "guia_siguiente": "Дальше", "guia_final": "Отметить и дальше", "guia_empezar": "Начать с первого шага", "empezar": "Начать сначала", "marcar": "Отметить урок пройденным", "hecho": "Урок пройден", "siguiente": "Следующий урок", "tuyo": "пройдено вами", "titulo": "Ваш прогресс", "aviso": "Прогресс хранится только в этом браузере, на этом устройстве. Регистрации нет, и никуда он не отправляется. Если вы очистите данные браузера или откроете курс на другом телефоне, отметки не перенесутся.", "borrar": "Сбросить прогресс", "confirmar": "Сбросить все отметки?", "copiar": "Сохранить мой прогресс", "copiado": "Код скопирован — вставьте его себе в заметки или в «Избранное» в Telegram", "restaurar": "Восстановить мой прогресс", "pegar": "Вставьте сюда ваш код", "aplicar": "Восстановить", "cancelar": "Отмена", "malo": "Это не похоже на код прогресса. Ничего не изменено.", "menos": "В этом коде меньше уроков, чем отмечено сейчас (%a% вместо %b%). Всё равно восстановить?", "hecho_restaurar": "Готово: восстановлено уроков — %n%", "nombre_label": "Как вас зовут?", "nombre_boton": "Сохранить", "nombre_cambiar": "Изменить", "nombre_nota": "Только чтобы обращаться к вам по имени. Имя остаётся в этом браузере и никуда не отправляется.", "bravo": ["Отлично!", "Так держать!", "Хорошая работа!", "Ещё один урок позади!", "Вы молодец!", "Готово!", "Вот это темп!", "Продолжайте так же!", "Шаг за шагом — и получается!"], "bravo_con": ["Отлично, {nombre}!", "Так держать, {nombre}!", "Хорошая работа, {nombre}!", "{nombre}, ещё один урок позади!", "Вы молодец, {nombre}!", "Готово, {nombre}!", "Вот это темп, {nombre}!", "Продолжайте так же, {nombre}!", "Шаг за шагом, {nombre}, — и получается!"], "vuelta": "С возвращением, {nombre}!", "primera": "Первый урок пройден — самое трудное уже позади.", "primera_con": "{nombre}, первый урок пройден — самое трудное уже позади.", "cuantas": "{n} из {total}", "faltan": "осталось {n}", "racha": "{n} {dias} подряд", "racha_dias": ["день", "дня", "дней"], "racha_hoy": "Сегодня вы занимались", "racha_mejor": "Лучшая серия: {n} {dias}", "antes": "Перед тем как очистить браузер или сменить телефон, сохраните код.", "calendario": "Ваш курс", "calendario_nota": "{n} {lecciones} из {total}", "calendario_rotulo": "Урок {n} · нед. {semana}, день {dia}", "calendario_aqui": "здесь вы остановились", "calendario_lecciones": ["урок", "урока", "уроков"], "diploma_boton": "Скачать сертификат ({nivel})", "diploma_pide_nombre": "Укажите имя выше — и сертификат будет на ваше имя.", "diploma_titulo": "СЕРТИФИКАТ", "diploma_sub": "о прохождении курса", "diploma_quien": "Выдан", "diploma_que": "Уровень {nivel} · пройдено уроков: {n}", "diploma_fecha": "Дата", "diploma_aviso": "Личный сертификат о самостоятельном прохождении курса. Это не официальный документ об уровне языка."};window.CURSO_RAIZ="..";window.CURSO_PUBLICADAS=365;window.CURSO_DIAS={"1":"semana-01/dia-1.html","2":"semana-01/dia-2.html","3":"semana-01/dia-3.html","4":"semana-01/dia-4.html","5":"semana-01/dia-5.html","6":"semana-01/dia-6.html","7":"semana-01/dia-7.html","8":"semana-02/dia-1.html","9":"semana-02/dia-2.html","10":"semana-02/dia-3.html","11":"semana-02/dia-4.html","12":"semana-02/dia-5.html","13":"semana-02/dia-6.html","14":"semana-02/dia-7.html","15":"semana-03/dia-1.html","16":"semana-03/dia-2.html","17":"semana-03/dia-3.html","18":"semana-03/dia-4.html","19":"semana-03/dia-5.html","20":"semana-03/dia-6.html","21":"semana-03/dia-7.html","22":"semana-04/dia-1.html","23":"semana-04/dia-2.html","24":"semana-04/dia-3.html","25":"semana-04/dia-4.html","26":"semana-04/dia-5.html","27":"semana-04/dia-6.html","28":"semana-04/dia-7.html","29":"semana-05/dia-1.html","30":"semana-05/dia-2.html","31":"semana-05/dia-3.html","32":"semana-05/dia-4.html","33":"semana-05/dia-5.html","34":"semana-05/dia-6.html","35":"semana-05/dia-7.html","36":"semana-06/dia-1.html","37":"semana-06/dia-2.html","38":"semana-06/dia-3.html","39":"semana-06/dia-4.html","40":"semana-06/dia-5.html","41":"semana-06/dia-6.html","42":"semana-06/dia-7.html","43":"semana-07/dia-1.html","44":"semana-07/dia-2.html","45":"semana-07/dia-3.html","46":"semana-07/dia-4.html","47":"semana-07/dia-5.html","48":"semana-07/dia-6.html","49":"semana-07/dia-7.html","50":"semana-08/dia-1.html","51":"semana-08/dia-2.html","52":"semana-08/dia-3.html","53":"semana-08/dia-4.html","54":"semana-08/dia-5.html","55":"semana-08/dia-6.html","56":"semana-08/dia-7.html","57":"semana-09/dia-1.html","58":"semana-09/dia-2.html","59":"semana-09/dia-3.html","60":"semana-09/dia-4.html","61":"semana-09/dia-5.html","62":"semana-09/dia-6.html","63":"semana-09/dia-7.html","64":"semana-10/dia-1.html","65":"semana-10/dia-2.html","66":"semana-10/dia-3.html","67":"semana-10/dia-4.html","68":"semana-10/dia-5.html","69":"semana-10/dia-6.html","70":"semana-10/dia-7.html","71":"semana-11/dia-1.html","72":"semana-11/dia-2.html","73":"semana-11/dia-3.html","74":"semana-11/dia-4.html","75":"semana-11/dia-5.html","76":"semana-11/dia-6.html","77":"semana-11/dia-7.html","78":"semana-12/dia-1.html","79":"semana-12/dia-2.html","80":"semana-12/dia-3.html","81":"semana-12/dia-4.html","82":"semana-12/dia-5.html","83":"semana-12/dia-6.html","84":"semana-12/dia-7.html","85":"semana-13/dia-1.html","86":"semana-13/dia-2.html","87":"semana-13/dia-3.html","88":"semana-13/dia-4.html","89":"semana-13/dia-5.html","90":"semana-13/dia-6.html","91":"semana-13/dia-7.html","92":"semana-14/dia-1.html","93":"semana-14/dia-2.html","94":"semana-14/dia-3.html","95":"semana-14/dia-4.html","96":"semana-14/dia-5.html","97":"semana-14/dia-6.html","98":"semana-14/dia-7.html","99":"semana-15/dia-1.html","100":"semana-15/dia-2.html","101":"semana-15/dia-3.html","102":"semana-15/dia-4.html","103":"semana-15/dia-5.html","104":"semana-15/dia-6.html","105":"semana-15/dia-7.html","106":"semana-16/dia-1.html","107":"semana-16/dia-2.html","108":"semana-16/dia-3.html","109":"semana-16/dia-4.html","110":"semana-16/dia-5.html","111":"semana-16/dia-6.html","112":"semana-16/dia-7.html","113":"semana-17/dia-1.html","114":"semana-17/dia-2.html","115":"semana-17/dia-3.html","116":"semana-17/dia-4.html","117":"semana-17/dia-5.html","118":"semana-17/dia-6.html","119":"semana-17/dia-7.html","120":"semana-18/dia-1.html","121":"semana-18/dia-2.html","122":"semana-18/dia-3.html","123":"semana-18/dia-4.html","124":"semana-18/dia-5.html","125":"semana-18/dia-6.html","126":"semana-18/dia-7.html","127":"semana-19/dia-1.html","128":"semana-19/dia-2.html","129":"semana-19/dia-3.html","130":"semana-19/dia-4.html","131":"semana-19/dia-5.html","132":"semana-19/dia-6.html","133":"semana-19/dia-7.html","134":"semana-20/dia-1.html","135":"semana-20/dia-2.html","136":"semana-20/dia-3.html","137":"semana-20/dia-4.html","138":"semana-20/dia-5.html","139":"semana-20/dia-6.html","140":"semana-20/dia-7.html","141":"semana-21/dia-1.html","142":"semana-21/dia-2.html","143":"semana-21/dia-3.html","144":"semana-21/dia-4.html","145":"semana-21/dia-5.html","146":"semana-21/dia-6.html","147":"semana-21/dia-7.html","148":"semana-22/dia-1.html","149":"semana-22/dia-2.html","150":"semana-22/dia-3.html","151":"semana-22/dia-4.html","152":"semana-22/dia-5.html","153":"semana-22/dia-6.html","154":"semana-22/dia-7.html","155":"semana-23/dia-1.html","156":"semana-23/dia-2.html","157":"semana-23/dia-3.html","158":"semana-23/dia-4.html","159":"semana-23/dia-5.html","160":"semana-23/dia-6.html","161":"semana-23/dia-7.html","162":"semana-24/dia-1.html","163":"semana-24/dia-2.html","164":"semana-24/dia-3.html","165":"semana-24/dia-4.html","166":"semana-24/dia-5.html","167":"semana-24/dia-6.html","168":"semana-24/dia-7.html","169":"semana-25/dia-1.html","170":"semana-25/dia-2.html","171":"semana-25/dia-3.html","172":"semana-25/dia-4.html","173":"semana-25/dia-5.html","174":"semana-25/dia-6.html","175":"semana-25/dia-7.html","176":"semana-26/dia-1.html","177":"semana-26/dia-2.html","178":"semana-26/dia-3.html","179":"semana-26/dia-4.html","180":"semana-26/dia-5.html","181":"semana-26/dia-6.html","182":"semana-26/dia-7.html","183":"semana-27/dia-1.html","184":"semana-27/dia-2.html","185":"semana-27/dia-3.html","186":"semana-27/dia-4.html","187":"semana-27/dia-5.html","188":"semana-27/dia-6.html","189":"semana-27/dia-7.html","190":"semana-28/dia-1.html","191":"semana-28/dia-2.html","192":"semana-28/dia-3.html","193":"semana-28/dia-4.html","194":"semana-28/dia-5.html","195":"semana-28/dia-6.html","196":"semana-28/dia-7.html","197":"semana-29/dia-1.html","198":"semana-29/dia-2.html","199":"semana-29/dia-3.html","200":"semana-29/dia-4.html","201":"semana-29/dia-5.html","202":"semana-29/dia-6.html","203":"semana-29/dia-7.html","204":"semana-30/dia-1.html","205":"semana-30/dia-2.html","206":"semana-30/dia-3.html","207":"semana-30/dia-4.html","208":"semana-30/dia-5.html","209":"semana-30/dia-6.html","210":"semana-30/dia-7.html","211":"semana-31/dia-1.html","212":"semana-31/dia-2.html","213":"semana-31/dia-3.html","214":"semana-31/dia-4.html","215":"semana-31/dia-5.html","216":"semana-31/dia-6.html","217":"semana-31/dia-7.html","218":"semana-32/dia-1.html","219":"semana-32/dia-2.html","220":"semana-32/dia-3.html","221":"semana-32/dia-4.html","222":"semana-32/dia-5.html","223":"semana-32/dia-6.html","224":"semana-32/dia-7.html","225":"semana-33/dia-1.html","226":"semana-33/dia-2.html","227":"semana-33/dia-3.html","228":"semana-33/dia-4.html","229":"semana-33/dia-5.html","230":"semana-33/dia-6.html","231":"semana-33/dia-7.html","232":"semana-34/dia-1.html","233":"semana-34/dia-2.html","234":"semana-34/dia-3.html","235":"semana-34/dia-4.html","236":"semana-34/dia-5.html","237":"semana-34/dia-6.html","238":"semana-34/dia-7.html","239":"semana-35/dia-1.html","240":"semana-35/dia-2.html","241":"semana-35/dia-3.html","242":"semana-35/dia-4.html","243":"semana-35/dia-5.html","244":"semana-35/dia-6.html","245":"semana-35/dia-7.html","246":"semana-36/dia-1.html","247":"semana-36/dia-2.html","248":"semana-36/dia-3.html","249":"semana-36/dia-4.html","250":"semana-36/dia-5.html","251":"semana-36/dia-6.html","252":"semana-36/dia-7.html","253":"semana-37/dia-1.html","254":"semana-37/dia-2.html","255":"semana-37/dia-3.html","256":"semana-37/dia-4.html","257":"semana-37/dia-5.html","258":"semana-37/dia-6.html","259":"semana-37/dia-7.html","260":"semana-38/dia-1.html","261":"semana-38/dia-2.html","262":"semana-38/dia-3.html","263":"semana-38/dia-4.html","264":"semana-38/dia-5.html","265":"semana-38/dia-6.html","266":"semana-38/dia-7.html","267":"semana-39/dia-1.html","268":"semana-39/dia-2.html","269":"semana-39/dia-3.html","270":"semana-39/dia-4.html","271":"semana-39/dia-5.html","272":"semana-39/dia-6.html","273":"semana-39/dia-7.html","274":"semana-40/dia-1.html","275":"semana-40/dia-2.html","276":"semana-40/dia-3.html","277":"semana-40/dia-4.html","278":"semana-40/dia-5.html","279":"semana-40/dia-6.html","280":"semana-40/dia-7.html","281":"semana-41/dia-1.html","282":"semana-41/dia-2.html","283":"semana-41/dia-3.html","284":"semana-41/dia-4.html","285":"semana-41/dia-5.html","286":"semana-41/dia-6.html","287":"semana-41/dia-7.html","288":"semana-42/dia-1.html","289":"semana-42/dia-2.html","290":"semana-42/dia-3.html","291":"semana-42/dia-4.html","292":"semana-42/dia-5.html","293":"semana-42/dia-6.html","294":"semana-42/dia-7.html","295":"semana-43/dia-1.html","296":"semana-43/dia-2.html","297":"semana-43/dia-3.html","298":"semana-43/dia-4.html","299":"semana-43/dia-5.html","300":"semana-43/dia-6.html","301":"semana-43/dia-7.html","302":"semana-44/dia-1.html","303":"semana-44/dia-2.html","304":"semana-44/dia-3.html","305":"semana-44/dia-4.html","306":"semana-44/dia-5.html","307":"semana-44/dia-6.html","308":"semana-44/dia-7.html","309":"semana-45/dia-1.html","310":"semana-45/dia-2.html","311":"semana-45/dia-3.html","312":"semana-45/dia-4.html","313":"semana-45/dia-5.html","314":"semana-45/dia-6.html","315":"semana-45/dia-7.html","316":"semana-46/dia-1.html","317":"semana-46/dia-2.html","318":"semana-46/dia-3.html","319":"semana-46/dia-4.html","320":"semana-46/dia-5.html","321":"semana-46/dia-6.html","322":"semana-46/dia-7.html","323":"semana-47/dia-1.html","324":"semana-47/dia-2.html","325":"semana-47/dia-3.html","326":"semana-47/dia-4.html","327":"semana-47/dia-5.html","328":"semana-47/dia-6.html","329":"semana-47/dia-7.html","330":"semana-48/dia-1.html","331":"semana-48/dia-2.html","332":"semana-48/dia-3.html","333":"semana-48/dia-4.html","334":"semana-48/dia-5.html","335":"semana-48/dia-6.html","336":"semana-48/dia-7.html","337":"semana-49/dia-1.html","338":"semana-49/dia-2.html","339":"semana-49/dia-3.html","340":"semana-49/dia-4.html","341":"semana-49/dia-5.html","342":"semana-49/dia-6.html","343":"semana-49/dia-7.html","344":"semana-50/dia-1.html","345":"semana-50/dia-2.html","346":"semana-50/dia-3.html","347":"semana-50/dia-4.html","348":"semana-50/dia-5.html","349":"semana-50/dia-6.html","350":"semana-50/dia-7.html","351":"semana-51/dia-1.html","352":"semana-51/dia-2.html","353":"semana-51/dia-3.html","354":"semana-51/dia-4.html","355":"semana-51/dia-5.html","356":"semana-51/dia-6.html","357":"semana-51/dia-7.html","358":"semana-52/dia-1.html","359":"semana-52/dia-2.html","360":"semana-52/dia-3.html","361":"semana-52/dia-4.html","362":"semana-52/dia-5.html","363":"semana-52/dia-6.html","364":"semana-52/dia-7.html","365":"semana-53/dia-1.html"};window.CURSO_NIVELES=[];window.CURSO_SITIO="Испанский с нуля для русскоговорящих";window.CURSO_DOMINIO="espanoldesderuso.com";</script>
 <script src="../progreso.js" defer></script>
 <script>window.CURSO_CONTADOR={"endpoint": "https://contador.ianmusicall.workers.dev", "locale": "ru"};
 (function(){

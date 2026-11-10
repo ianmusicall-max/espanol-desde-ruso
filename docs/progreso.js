@@ -570,6 +570,28 @@
     }
   }
 
+  var pendiente=0;
+  for(var estadoI=0;estadoI<tarjetas.length;estadoI++){
+    var tarjetaEstado=tarjetas[estadoI];
+    if(tarjetaEstado.classList.contains('completa')){
+      tarjetaEstado.setAttribute('data-estado',T.unidad_completa||'✓');
+    }else{
+      if(pendiente===0){
+        tarjetaEstado.classList.add('actual');
+        tarjetaEstado.setAttribute('data-estado',T.unidad_actual||'→');
+      }else if(pendiente===1){
+        tarjetaEstado.setAttribute('data-estado',T.unidad_siguiente||'→');
+      }
+      pendiente++;
+    }
+    var rotuloEstado=tarjetaEstado.getAttribute('data-estado');
+    if(rotuloEstado){
+      var etiquetaEstado=document.createElement('span');
+      etiquetaEstado.className='estado-unidad';etiquetaEstado.textContent=rotuloEstado;
+      tarjetaEstado.insertBefore(etiquetaEstado,tarjetaEstado.firstChild);
+    }
+  }
+
   // --- el código de respaldo ---
   //
   // El progreso vive en localStorage, que se va con «limpiar datos del

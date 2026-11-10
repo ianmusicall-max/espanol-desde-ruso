@@ -811,6 +811,9 @@ body:has(#cookies) footer.sitio{padding-bottom:10rem}
   flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:center;z-index:30}
 """
 
+CSS += (RAIZ / "web" / "visual.css").read_text(encoding="utf-8")
+
+
 
 # El tema se aplica ANTES de pintar: si esto fuera al final de la página, el
 # lector que eligió noche vería un fogonazo blanco en cada carga.
@@ -1411,6 +1414,28 @@ PROGRESO_JS = r"""(function(){
         if(raya)raya.style.width=(mias?Math.max(mias*100/total,3):0)+'%';
       }
       if(mias===total)tj.classList.add('completa');
+    }
+  }
+
+  var pendiente=0;
+  for(var estadoI=0;estadoI<tarjetas.length;estadoI++){
+    var tarjetaEstado=tarjetas[estadoI];
+    if(tarjetaEstado.classList.contains('completa')){
+      tarjetaEstado.setAttribute('data-estado',T.unidad_completa||'✓');
+    }else{
+      if(pendiente===0){
+        tarjetaEstado.classList.add('actual');
+        tarjetaEstado.setAttribute('data-estado',T.unidad_actual||'→');
+      }else if(pendiente===1){
+        tarjetaEstado.setAttribute('data-estado',T.unidad_siguiente||'→');
+      }
+      pendiente++;
+    }
+    var rotuloEstado=tarjetaEstado.getAttribute('data-estado');
+    if(rotuloEstado){
+      var etiquetaEstado=document.createElement('span');
+      etiquetaEstado.className='estado-unidad';etiquetaEstado.textContent=rotuloEstado;
+      tarjetaEstado.insertBefore(etiquetaEstado,tarjetaEstado.firstChild);
     }
   }
 
@@ -3456,6 +3481,33 @@ def _probador(t, preguntas: dict, raiz: str, enlace: str) -> str:
 
 
 # ----------------------------------------------------------------------- páginas
+
+def _palabra_de_muestra(t, dibujos, lexico, audio, raiz):
+    """Una palabra auténtica, traducida y locutada, sin assets nuevos."""
+    v = t["portada"]["visual"]
+    for palabra in ("la casa", "la manzana", "el perro"):
+        imagen = dibujos.get(generar_imagenes.limpiar(palabra))
+        traduccion = lexico.get(palabra)
+        mp3 = audio.get(palabra)
+        if not (imagen and traduccion and mp3):
+            continue
+        return (f'<aside class="demo-palabra" aria-label="{html.escape(v["demo"])}">'
+                f'<p class="demo-etiqueta">{html.escape(v["demo"])}</p>'
+                f'<div class="demo-centro"><img src="{raiz}/img/{html.escape(imagen)}" '
+                f'alt="" width="112" height="112" decoding="async">'
+                f'<div><b class="palabra" lang="es">{html.escape(palabra)}</b>'
+                f'<span class="traduccion" lang="ru">{html.escape(traduccion)}</span>'
+                f'<button type="button" class="suena demo-audio" aria-pressed="false" '
+                f'data-audio="{raiz}/audio/{html.escape(mp3)}" '
+                f'aria-label="{html.escape(v["oir"])}: {html.escape(palabra)}">'
+                f'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" '
+                f'aria-hidden="true"><path d="M11 4 5 9H2v6h3l6 5V4Z"/>'
+                f'<path d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></svg>'
+                f'{html.escape(v["oir"])}</button></div></div>'
+                f'<p class="demo-pie">{html.escape(v["nota"])}</p></aside>')
+    return ""
+
+
 def construir_portada(cfg, t, idiomas, idioma, destino, cal, raiz,
                       dibujos=None, lexico=None, audio=None, preguntas=None) -> None:
     hechas = escritas(cal)
@@ -3487,21 +3539,26 @@ def construir_portada(cfg, t, idiomas, idioma, destino, cal, raiz,
     filas = "".join(f"<tr><td>{html.escape(a)}</td><td>{html.escape(b)}</td></tr>" for a, b in p["dia_filas"])
     tarjetas = "".join(f'<div class="tarjeta"><h3>{html.escape(a)}</h3><p>{b}</p></div>' for a, b in p["ano_tarjetas"])
 
+    visual = p["visual"]
+    muestra = _palabra_de_muestra(t, dibujos or {}, lexico or {}, audio or {}, raiz)
     cuerpo = f"""
+<div class="portada">
 <div class="heroe">
 {_arte_del_heroe(dibujos or {}, raiz)}
 <div class="heroe-texto">
+<p class="antetitulo">{html.escape(visual["eyebrow"])}</p>
 <h1>{html.escape(p['titulo'])}<span class="segunda">{html.escape(p['titulo2'])}</span></h1>
 <p class="lema">{html.escape(p['lema'])}</p>
-<p>{html.escape(p['entrada'])}</p>
-<p class="marco">{html.escape(p['marco'])}</p>
+<p class="entrada">{html.escape(p['entrada'])}</p>
+<ul class="sellos" aria-label="{html.escape(visual['eyebrow'])}">
+<li>{html.escape(visual['gratis'])}</li><li>{html.escape(visual['tiempo'])}</li><li>{html.escape(visual['nivel'])}</li></ul>
 <div class="botones">
 <a class="boton" id="continuar" href="{enlace}" hidden></a>
 <a class="boton" id="empezar" href="{enlace}">{html.escape(p['boton'])}</a>
 <a class="boton secundario" href="{raiz}/kurs.html">{html.escape(p['boton2'])}</a>
 </div>
-<p class="puerta">{html.escape(p['ya_sabe'])} <a href="{raiz}/test.html">{html.escape(p.get('ya_sabe_enlace') or t['test']['titulo'])}\u00a0→</a></p>
-{_canal(t, cfg)}
+<div class="inicio-paneles">
+{muestra}
 <div class="progreso">
 <div class="cifras"><span class="n">{len(hechas)}</span><span>/ {total} {html.escape(p['progreso'])}</span></div>
 <div class="barra"><i style="width:{max(pct, 1)}%"></i></div>
@@ -3515,10 +3572,16 @@ def construir_portada(cfg, t, idiomas, idioma, destino, cal, raiz,
 </div>
 </div>
 </div>
+<div class="otras-entradas"><p class="puerta">{html.escape(p['ya_sabe'])} <a href="{raiz}/test.html">{html.escape(p.get('ya_sabe_enlace') or t['test']['titulo'])}\u00a0→</a></p>
+{_canal(t, cfg)}
+</div>
+<p class="marco">{html.escape(p['marco'])}</p>
+</div>
 </div>
 {_muestra_de_dibujos(t, dibujos or {}, lexico or {}, raiz, audio or {})}
 {anuncio(cfg, "cabecera")}
 
+<section class="portada-seccion diferencia">
 <h2>{html.escape(p['dif_titulo'])}</h2>
 <p>{p['dif_texto']}</p>
 <section class="contraste">
@@ -3529,6 +3592,8 @@ def construir_portada(cfg, t, idiomas, idioma, destino, cal, raiz,
 <p>{p['dif_ayuda']}</p>
 {_probador(t, preguntas or {}, raiz, enlace)}
 
+</section>
+<section class="portada-seccion metodo">
 <h2>{html.escape(p['dia_titulo'])}</h2>
 <div class="tabla-env"><table>
 <tr><th>{html.escape(p['dia_min'])}</th><th>{html.escape(p['dia_que'])}</th></tr>
@@ -3536,23 +3601,29 @@ def construir_portada(cfg, t, idiomas, idioma, destino, cal, raiz,
 </table></div>
 <p>{html.escape(p['dia_nota'])}</p>
 
+</section>
 {anuncio(cfg, "dentro")}
 
+<section class="portada-seccion objetivos">
 <h2>{html.escape(p['ano_titulo'])}</h2>
 <div class="rejilla">{tarjetas}</div>
 
+</section>
+<section class="portada-seccion cierre">
 <h2>{html.escape(p['final_titulo'])}</h2>
 <p>{html.escape(p['final_texto'])}</p>
 <div class="botones"><a class="boton" href="{enlace}">{html.escape(p['final_boton'])}</a></div>
+</section>
 {_compartir(t, cfg, canonica_de(cfg, idiomas, idioma, "index.html"), t['compartir']['titulo_curso'])}
 {anuncio(cfg, "pie")}
+</div>
 """
     destino.joinpath("index.html").write_text(
         pagina(cfg, t, idiomas, idioma, f"{p['titulo']} {p['titulo2']} — {p['lema']}", cuerpo,
                descripcion=p["entrada"], pagina_id="index.html", raiz=raiz, jsonld=jsonld,
                publicadas=len(hechas), mapa_dias=mapa_de_dias(cal),
                niveles=json.dumps(niveles_del_curso(cal), ensure_ascii=False),
-               con_audio='class="suena ficha"' in cuerpo),
+               con_audio='data-audio="' in cuerpo),
         encoding="utf-8")
 
 
@@ -4562,6 +4633,25 @@ def _envolver_prueba(html_: str, t: dict, es_minitest: bool = False) -> str:
     return "".join(trozos)
 
 
+
+def _jerarquia_de_leccion(cuerpo):
+    titulos = list(re.finditer(r"<h1[^>]*>(.*?)</h1>", cuerpo, re.S))
+    if len(titulos) == 2 and titulos[0][1].startswith("Semana "):
+        primero, segundo = titulos
+        cuerpo = (cuerpo[:primero.start()] + cuerpo[primero.end():segundo.end()]
+                  + f'<p class="leccion-origen" lang="es">{primero[1]}</p>'
+                  + cuerpo[segundo.end():])
+    def paso(m):
+        return f'<h2{m[1]} data-paso="{m[2]}">{m[2]}.'
+    cuerpo = re.sub(r"<h2([^>]*)>([1-9])\.", paso, cuerpo)
+    def dialogo(m):
+        titulos = re.findall(r"<th[^>]*>(.*?)</th>", m[2], re.S)
+        if [re.sub(r"<[^>]+>", "", t).strip() for t in titulos] == ["Español", "Русский"]:
+            return '<div class="tabla-env tabla-dialogo">' + m[2]
+        return m[0]
+    return re.sub(r'(<div class="tabla-env">)(<table.*?</thead>)', dialogo, cuerpo, flags=re.S)
+
+
 def construir_leccion(d, cfg, t, idiomas, destino, cal, todos, audio=None,
                       dibujos=None, vocabulario=None) -> None:
     """Las lecciones solo existen en ruso: son el curso."""
@@ -4666,6 +4756,7 @@ def construir_leccion(d, cfg, t, idiomas, destino, cal, todos, audio=None,
                     if fichas else None)
     html_cuerpo = _donde_van_las_tarjetas(html_cuerpo,
                                           _bloque_de_tarjetas(t, fichas))
+    html_cuerpo = _jerarquia_de_leccion(html_cuerpo)
     cuerpo_final = (f'<article data-leccion="{d.numero}">' + cab + guia + aviso
                     + html_cuerpo + anuncio(cfg, "pie")
                     + _bloque_de_grabar(t, hay_audio, frase)

@@ -672,6 +672,170 @@ body:has(#cookies) footer.sitio{padding-bottom:10rem}
 #cookies{position:fixed;inset-inline:0;bottom:0;background:var(--tarjeta);border-top:1px solid var(--linea);
   padding:.85rem 20px;font-family:Onest,ui-sans-serif,system-ui,sans-serif;font-size:.85rem;display:flex;
   flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:center;z-index:30}
+/* Renovación visual: el mismo blanco y terracota, con más jerarquía y aire. */
+:root{--fondo:var(--papel)}
+:focus-visible{outline:3px solid var(--acento);outline-offset:4px}
+button,a,input{touch-action:manipulation}
+header.sitio{box-shadow:0 2px 16px rgb(0 0 0 / .025)}
+.portada{padding-top:1rem}
+main:has(.portada)>.envoltorio{max-width:68rem}
+.portada .heroe{padding:1.8rem 0 2.5rem}
+.portada .heroe-arte{gap:clamp(.35rem,1.8vw,1rem);margin:0 0 1.9rem}
+.portada .heroe-arte img{border:0;box-shadow:none;background:transparent;max-width:78px}
+.portada .heroe-texto{max-width:56rem;margin:0 auto;width:100%;text-align:center}
+.portada .antetitulo{font:700 .72rem/1.5 Onest,system-ui,sans-serif;letter-spacing:.13em;text-transform:uppercase;color:var(--acento);margin:0 0 .8rem}
+.portada h1{font-size:clamp(2.25rem,5.4vw,4.1rem);line-height:1.06;letter-spacing:-.045em;margin:.5rem 0 1rem}
+.portada h1 .segunda{font-size:.69em;line-height:1.25;margin-top:.2rem;font-weight:400}
+.portada .heroe .lema{font:400 clamp(1rem,2vw,1.2rem)/1.5 Onest,system-ui,sans-serif;max-width:35rem;margin:.8rem auto}
+.portada .entrada{max-width:40rem;margin:.8rem auto;font-size:1rem;color:var(--tenue)}
+.sellos{display:flex;justify-content:center;flex-wrap:wrap;gap:.5rem;list-style:none;padding:0;margin:1.3rem 0}
+.sellos li{font:600 .75rem/1.4 Onest,system-ui,sans-serif;border:1px solid var(--linea);border-radius:999px;padding:.42rem .7rem;background:var(--papel)}
+.sellos li:first-child{color:var(--acento);background:var(--acento-suave);border-color:transparent}
+.sellos li::before{content:'✓';margin-right:.35rem;color:var(--acento)}
+.portada .heroe .botones{justify-content:center;margin:1.4rem 0 1rem}
+.boton{min-height:44px;display:inline-flex;align-items:center;justify-content:center;border:1px solid transparent;font-weight:700;line-height:1.4;gap:.45rem}
+.portada .heroe .boton{padding:.85rem 1.5rem;border-radius:12px}
+.portada .heroe .boton:not(.secundario)::after{content:'→';font-size:1.2em;margin-left:.2rem}
+.portada .heroe .puerta{font-family:Onest,system-ui,sans-serif;font-size:.83rem;margin:.8rem auto 0;max-width:40rem}
+.portada .heroe .canal{margin-top:.8rem}
+.inicio-paneles{display:grid;grid-template-columns:1.1fr 1fr;gap:1.2rem;text-align:left;margin:2.2rem auto 0;align-items:stretch}
+.demo-palabra{position:relative;display:flex;flex-direction:column;justify-content:center;padding:1.5rem;background:var(--acento-suave);border:1px solid color-mix(in srgb,var(--acento) 16%,transparent);border-radius:22px;overflow:hidden}
+.demo-etiqueta{font:600 .7rem/1.4 Onest,system-ui,sans-serif;color:var(--acento);letter-spacing:.04em;margin:0 0 1rem}
+.demo-centro{display:flex;align-items:center;gap:1rem}
+.demo-centro img{width:112px;height:112px;object-fit:contain;border-radius:16px;flex-shrink:0;background:var(--tarjeta)}
+.demo-palabra .palabra{display:block;font:700 clamp(1.4rem,2.7vw,2.1rem)/1.15 Onest,system-ui,sans-serif;letter-spacing:-.03em}
+.demo-palabra .traduccion{display:block;color:var(--tenue);font:400 1rem/1.5 Literata,serif;margin-top:.35rem}
+.demo-audio{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;border:1px solid var(--linea);border-radius:999px;min-height:44px;padding:.5rem .85rem;margin-top:.8rem;font:600 .75rem/1.3 Onest,system-ui,sans-serif;background:var(--papel);color:var(--acento);opacity:1}
+.demo-audio::after{display:none}
+.demo-audio[aria-pressed="true"]{background:var(--acento);border-color:var(--acento);color:var(--papel)}
+.demo-audio svg{width:17px;height:17px;flex-shrink:0}
+.demo-pie{margin:1rem 0 0;font:400 .74rem/1.4 Onest,system-ui,sans-serif;color:var(--tenue)}
+.inicio-paneles>.progreso{margin:0;padding:1.5rem;border:1px solid var(--linea);border-radius:22px;background:var(--tarjeta);display:flex;flex-direction:column;justify-content:center}
+.inicio-paneles .progreso .n{font-size:2.6rem;letter-spacing:-.05em;line-height:1.1}
+.inicio-paneles .progreso .cifras{flex-wrap:wrap}
+.inicio-paneles .progreso-nota{font-size:.78rem;line-height:1.55}
+.portada .marco{max-width:39rem;margin:1.1rem auto 0;text-align:center;border:0;padding:0;font-size:.76rem}
+.portada-seccion,.portada .muestra{margin:0;padding:3.3rem clamp(1rem,4vw,3rem);border-top:1px solid var(--linea)}
+.portada-seccion>h2,.portada .muestra>h2{border:0;padding:0;margin:0 0 .8rem;font-size:clamp(1.4rem,3vw,2rem);letter-spacing:-.03em}
+.portada-seccion>p,.portada .muestra>p{max-width:43rem}
+.portada .muestra{background:var(--tarjeta);border-radius:24px;border:0;margin:0 0 1.5rem}
+.portada .vitrina{gap:.8rem}
+.portada .vitrina li{padding:.9rem .4rem;background:var(--papel);border-color:transparent;border-radius:16px;box-shadow:none}
+.portada .vitrina img{width:80px;height:80px}
+.portada .vitrina b{font-size:.86rem}
+.portada .vitrina .ru{font-size:.75rem}
+.portada .vitrina .suena::after{display:none}
+.portada .vitrina .suena{opacity:1}
+.portada .vitrina .suena:focus-visible{outline-offset:6px}
+.portada-seccion.metodo{background:var(--tarjeta);border:0;border-radius:24px}
+.portada-seccion .tabla-env{box-shadow:none}
+.portada-seccion .contraste{background:var(--acento-suave);border:0;border-left:4px solid var(--acento);padding:1.25rem 1.5rem;border-radius:0 16px 16px 0}
+.portada-seccion .test-caja{background:var(--papel);border-radius:18px;padding:1.5rem}
+.portada-seccion .rejilla{gap:1rem;margin:1.6rem 0 0}
+.portada-seccion .tarjeta{background:var(--papel);box-shadow:none;padding:1.3rem;border-radius:18px}
+.portada-seccion .tarjeta h3{font-size:.76rem;letter-spacing:.02em}
+.portada-seccion.cierre{background:var(--acento-suave);border:0;border-radius:24px;text-align:center}
+.portada-seccion.cierre p{margin-inline:auto}
+.portada-seccion.cierre .botones{justify-content:center}
+.portada>.compartir{justify-content:center;margin-bottom:1rem}
+/* El mapa distingue estados con texto además del color. */
+.u-tarjeta{padding:1.15rem;border-radius:18px;box-shadow:0 2px 6px rgb(0 0 0 / .025);min-height:205px}
+.u-tarjeta .alto{gap:.65rem;margin-bottom:.85rem}
+.u-tarjeta .u-dibujo{width:60px;height:60px;border-radius:14px}
+.u-tarjeta .num{font-size:1.25rem;color:var(--tenue)}
+.u-tarjeta .tit{font-size:1.03rem;line-height:1.35}
+.u-tarjeta .serie{line-height:1.5;margin-top:.2rem}
+.u-tarjeta .nivel{padding:.15rem .5rem;border-color:var(--linea);color:var(--tenue)}
+.u-tarjeta .pie{padding-top:.8rem}
+.u-tarjeta .estado-unidad{font:600 .68rem/1.4 Onest,system-ui,sans-serif;color:var(--acento);order:-1}
+.u-tarjeta[data-estado] .estado-unidad{margin-bottom:.6rem}
+.u-tarjeta.actual{background:var(--acento-suave);border:2px solid var(--acento);padding:calc(1.15rem - 1px)}
+.u-tarjeta.completa{border-color:var(--acento);background:var(--papel)}
+.u-tarjeta.completa .num::after{content:' ✓';font-size:.8em;color:var(--acento)}
+/* Lecciones: señalética de los pasos y bloques reconocibles. */
+article[data-leccion]{padding-top:.7rem}
+.leccion-cab{margin-top:1.3rem;gap:.6rem}
+.leccion-cab .n{padding:.35rem .8rem;font-size:.8rem}
+article[data-leccion] h1{font-size:clamp(1.8rem,4.8vw,2.8rem);margin:1.2rem 0 1.5rem;line-height:1.18}
+article[data-leccion]>h2[data-paso]{border:1px solid var(--linea);border-left:4px solid var(--acento);border-radius:0 14px 14px 0;background:var(--tarjeta);padding:1rem 1.2rem;margin:3.1rem 0 1.1rem;font-size:1.12rem;line-height:1.4;scroll-margin-top:10rem}
+article[data-leccion]>h2[data-paso="4"]{background:var(--acento-suave);border-color:transparent;border-left-color:var(--acento)}
+article[data-leccion]>h2[data-paso="5"],article[data-leccion]>h2[data-paso="6"]{border-left-style:double;border-left-width:6px}
+article[data-leccion]>h3{margin-top:1.8rem;color:var(--acento);font-size:.88rem;letter-spacing:.015em}
+article[data-leccion] p{line-height:1.8}
+article[data-leccion] .contraste{padding:1.35rem;border-radius:16px;border-left:4px solid var(--acento)}
+.tabla-dialogo{border:0;border-left:3px solid var(--acento);border-radius:0 14px 14px 0;background:var(--acento-suave)}
+.tabla-dialogo th{background:transparent;color:var(--acento);font-size:.74rem;letter-spacing:.03em}
+.tabla-dialogo td{padding:.8rem;border-bottom:1px solid color-mix(in srgb,var(--acento) 12%,transparent);line-height:1.7}
+.tabla-dialogo td:first-child{font-weight:500}
+.tabla-dialogo td:last-child{color:var(--tenue)}
+.guia{border-radius:14px;padding:.7rem .8rem;box-shadow:0 4px 20px rgb(0 0 0 / .05)}
+.guia-punto{width:30px;height:30px;font-size:.78rem;font-weight:600}
+.guia-ir{min-height:40px}
+.grabar-bloque,.quiz-bloque{padding:1.4rem;border-radius:18px;background:var(--tarjeta)}
+.grabar-bloque h2::before{content:'◉';color:var(--acento);margin-right:.5rem}
+.quiz-bloque h2::before{content:'✓';color:var(--acento);margin-right:.5rem}
+.suena:not(.ficha):not(.demo-audio){color:var(--acento);opacity:1;background:var(--acento-suave);border-radius:999px;min-width:27px;min-height:27px;margin-right:4px;padding:3px;font-size:.75em;vertical-align:middle}
+.suena:not(.ficha):not(.demo-audio)[aria-pressed="true"]{background:var(--acento);color:var(--papel)}
+.suena:not(.ficha):not(.demo-audio):hover{box-shadow:0 0 0 2px var(--linea)}
+.pasos{padding:1.1rem 0;gap:1rem}
+.pasos a{font-weight:600;line-height:1.5}
+footer.sitio{margin-top:2rem;padding-top:2rem}
+@media(max-width:40rem){
+ .portada{padding-top:0}
+ .portada .heroe{padding-top:1.4rem;padding-bottom:2rem}
+ .portada .heroe-arte{margin-bottom:1.2rem}
+ .portada .antetitulo{font-size:.62rem;letter-spacing:.08em}
+ .portada h1{font-size:2.45rem}
+ .portada .entrada{font-size:.92rem;line-height:1.65}
+ .portada .heroe .botones{gap:.6rem}
+ .portada .heroe .boton{width:100%;font-size:.92rem;padding:.8rem 1rem}
+ .inicio-paneles{grid-template-columns:1fr;gap:.8rem;margin-top:1.7rem}
+ .demo-palabra{padding:1.15rem}
+ .demo-centro img{width:100px;height:100px}
+ .inicio-paneles>.progreso{padding:1.15rem}
+ .inicio-paneles .progreso .n{font-size:2rem}
+ .portada-seccion,.portada .muestra{padding:2rem 1rem}
+ .portada .vitrina{gap:.5rem}
+ .portada .vitrina img{width:64px;height:64px;max-width:100%}
+ .portada .vitrina b{font-size:.74rem}
+ .portada .vitrina .ru{font-size:.68rem}
+ .portada-seccion .contraste{padding:1rem}
+ .mapa{grid-template-columns:repeat(2,minmax(0,1fr));gap:.65rem}
+ .u-tarjeta{min-height:220px;padding:.8rem}
+ .u-tarjeta.actual{padding:calc(.8rem - 1px)}
+ .u-tarjeta .u-dibujo{width:44px;height:44px;border-radius:10px}
+ .u-tarjeta .alto{gap:.35rem;flex-wrap:wrap}
+ .u-tarjeta .tit{font-size:.88rem}
+ .u-tarjeta .serie{font-size:.7rem}
+ .u-tarjeta .num{font-size:1rem}
+ .u-tarjeta .nivel{font-size:.6rem}
+ .u-tarjeta .pie{font-size:.68rem;flex-wrap:wrap}
+ .u-tarjeta .mini{flex-basis:100%}
+ .guia{gap:.5rem;padding:.6rem}
+ article[data-leccion]>h2[data-paso]{padding:.85rem .9rem;font-size:1rem}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
+
+/* El idioma que lee el alumno encabeza la lección; el original queda debajo. */
+.leccion-origen{font:400 .78rem/1.5 Onest,system-ui,sans-serif;color:var(--tenue);margin:-.7rem 0 1.6rem}
+.otras-entradas{margin-top:1.2rem}
+@media(max-width:40rem){
+ .portada .antetitulo{display:none}
+ .portada .heroe-arte{margin-bottom:.9rem}
+ .portada .sellos{margin:1rem 0}
+ .portada .heroe .lema{font-size:.95rem}
+ .inicio-paneles{margin-top:1.1rem}
+ .guia{display:grid;grid-template-columns:1fr auto;gap:.5rem}
+ .guia-barra{grid-column:1/-1;justify-content:space-between}
+ .guia-ahora{min-width:0}
+ .guia-ir{margin-left:0}
+}
+
+/* El texto de los botones mantiene contraste también con el terracota claro de noche. */
+.boton:not(.secundario),.leccion-cab .n,.guia-punto.aqui,.ficha[aria-pressed="true"]{color:var(--papel)}
+.inicio-paneles>*{min-width:0}
+@media(prefers-color-scheme:dark){:root:not([data-tema="light"]) .demo-centro img{filter:brightness(.8) saturate(.95)}}
+:root[data-tema="dark"] .demo-centro img{filter:brightness(.8) saturate(.95)}
 </style>
 <script>try{var t=localStorage.getItem('tema');if(t)document.documentElement.dataset.tema=t}catch(e){}</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6339208855562328" crossorigin="anonymous"></script>
@@ -991,7 +1155,7 @@ en 30 minutos, se parte en dos días; nunca se alarga la sesión.</p>
     });
   });
 })();</script>
-<script>window.CURSO_TEXTOS={"continuar": "Continuar: lección", "guia_paso": "Paso {n} de {total}", "guia_siguiente": "Siguiente", "guia_final": "Marcar y seguir", "guia_empezar": "Empezar por el primer paso", "empezar": "Empezar de cero", "marcar": "Marcar la lección como hecha", "hecho": "Lección hecha", "siguiente": "Siguiente lección", "tuyo": "hechas por usted", "titulo": "Su progreso", "aviso": "El progreso se guarda solo en este navegador y en este aparato. No hay registro y no se envía a ninguna parte. Si borra los datos del navegador o abre el curso en otro teléfono, las marcas no viajan con usted.", "borrar": "Borrar el progreso", "confirmar": "¿Borrar todas las marcas?", "copiar": "Guardar mi progreso", "copiado": "Código copiado — péguelo en sus notas o en un mensaje a sí mismo", "restaurar": "Recuperar mi progreso", "pegar": "Pegue aquí su código", "aplicar": "Restaurar", "cancelar": "Cancelar", "malo": "Esto no parece un código de progreso. No se ha cambiado nada.", "menos": "Ese código trae menos lecciones de las que tiene marcadas (%a% en vez de %b%). ¿Restaurar igualmente?", "hecho_restaurar": "Listo: %n% lecciones restauradas", "nombre_label": "¿Cómo se llama?", "nombre_boton": "Guardar", "nombre_cambiar": "Cambiar", "nombre_nota": "Solo para saludarle por su nombre. Se queda en este navegador y no se envía a ninguna parte.", "bravo": ["¡Muy bien!", "¡Así se hace!", "¡Buen trabajo!", "¡Una lección más!", "¡Va por buen camino!", "¡Hecho!", "¡Qué ritmo!", "¡Siga así!", "Paso a paso se llega."], "bravo_con": ["¡Muy bien, {nombre}!", "¡Así se hace, {nombre}!", "¡Buen trabajo, {nombre}!", "¡{nombre}, una lección más!", "¡Va por buen camino, {nombre}!", "¡Hecho, {nombre}!", "¡Qué ritmo, {nombre}!", "¡Siga así, {nombre}!", "{nombre}, paso a paso se llega."], "vuelta": "Hola de nuevo, {nombre}.", "primera": "Primera lección hecha: lo más difícil ya pasó.", "primera_con": "{nombre}, primera lección hecha: lo más difícil ya pasó.", "cuantas": "{n} de {total}", "faltan": "quedan {n}", "racha": "{n} {dias} seguidos", "racha_dias": ["día", "días", "días"], "racha_hoy": "Hoy ha estudiado", "racha_mejor": "Su mejor racha: {n} {dias}", "antes": "Antes de limpiar el navegador o cambiar de móvil, guarde su código.", "calendario": "Su curso", "calendario_nota": "{n} {lecciones} de {total}", "calendario_rotulo": "Lección {n} · sem. {semana}, día {dia}", "calendario_aqui": "aquí lo dejó", "calendario_lecciones": ["lección", "lecciones", "lecciones"], "diploma_boton": "Descargar el certificado ({nivel})", "diploma_pide_nombre": "Escriba su nombre arriba y el certificado saldrá a su nombre.", "diploma_titulo": "CERTIFICADO", "diploma_sub": "de finalización del curso", "diploma_quien": "Otorgado a", "diploma_que": "Nivel {nivel} · lecciones completadas: {n}", "diploma_fecha": "Fecha", "diploma_aviso": "Certificado personal de estudio autodidacta. No es un documento oficial de nivel de idioma."};window.CURSO_RAIZ="..";window.CURSO_PUBLICADAS=0;window.CURSO_DIAS={};window.CURSO_NIVELES=[];window.CURSO_SITIO="Español desde el ruso";window.CURSO_DOMINIO="espanoldesderuso.com";</script>
+<script>window.CURSO_TEXTOS={"unidad_actual": "Está aquí", "unidad_completa": "Completada", "unidad_siguiente": "Siguiente", "continuar": "Continuar: lección", "guia_paso": "Paso {n} de {total}", "guia_siguiente": "Siguiente", "guia_final": "Marcar y seguir", "guia_empezar": "Empezar por el primer paso", "empezar": "Empezar de cero", "marcar": "Marcar la lección como hecha", "hecho": "Lección hecha", "siguiente": "Siguiente lección", "tuyo": "hechas por usted", "titulo": "Su progreso", "aviso": "El progreso se guarda solo en este navegador y en este aparato. No hay registro y no se envía a ninguna parte. Si borra los datos del navegador o abre el curso en otro teléfono, las marcas no viajan con usted.", "borrar": "Borrar el progreso", "confirmar": "¿Borrar todas las marcas?", "copiar": "Guardar mi progreso", "copiado": "Código copiado — péguelo en sus notas o en un mensaje a sí mismo", "restaurar": "Recuperar mi progreso", "pegar": "Pegue aquí su código", "aplicar": "Restaurar", "cancelar": "Cancelar", "malo": "Esto no parece un código de progreso. No se ha cambiado nada.", "menos": "Ese código trae menos lecciones de las que tiene marcadas (%a% en vez de %b%). ¿Restaurar igualmente?", "hecho_restaurar": "Listo: %n% lecciones restauradas", "nombre_label": "¿Cómo se llama?", "nombre_boton": "Guardar", "nombre_cambiar": "Cambiar", "nombre_nota": "Solo para saludarle por su nombre. Se queda en este navegador y no se envía a ninguna parte.", "bravo": ["¡Muy bien!", "¡Así se hace!", "¡Buen trabajo!", "¡Una lección más!", "¡Va por buen camino!", "¡Hecho!", "¡Qué ritmo!", "¡Siga así!", "Paso a paso se llega."], "bravo_con": ["¡Muy bien, {nombre}!", "¡Así se hace, {nombre}!", "¡Buen trabajo, {nombre}!", "¡{nombre}, una lección más!", "¡Va por buen camino, {nombre}!", "¡Hecho, {nombre}!", "¡Qué ritmo, {nombre}!", "¡Siga así, {nombre}!", "{nombre}, paso a paso se llega."], "vuelta": "Hola de nuevo, {nombre}.", "primera": "Primera lección hecha: lo más difícil ya pasó.", "primera_con": "{nombre}, primera lección hecha: lo más difícil ya pasó.", "cuantas": "{n} de {total}", "faltan": "quedan {n}", "racha": "{n} {dias} seguidos", "racha_dias": ["día", "días", "días"], "racha_hoy": "Hoy ha estudiado", "racha_mejor": "Su mejor racha: {n} {dias}", "antes": "Antes de limpiar el navegador o cambiar de móvil, guarde su código.", "calendario": "Su curso", "calendario_nota": "{n} {lecciones} de {total}", "calendario_rotulo": "Lección {n} · sem. {semana}, día {dia}", "calendario_aqui": "aquí lo dejó", "calendario_lecciones": ["lección", "lecciones", "lecciones"], "diploma_boton": "Descargar el certificado ({nivel})", "diploma_pide_nombre": "Escriba su nombre arriba y el certificado saldrá a su nombre.", "diploma_titulo": "CERTIFICADO", "diploma_sub": "de finalización del curso", "diploma_quien": "Otorgado a", "diploma_que": "Nivel {nivel} · lecciones completadas: {n}", "diploma_fecha": "Fecha", "diploma_aviso": "Certificado personal de estudio autodidacta. No es un documento oficial de nivel de idioma."};window.CURSO_RAIZ="..";window.CURSO_PUBLICADAS=0;window.CURSO_DIAS={};window.CURSO_NIVELES=[];window.CURSO_SITIO="Español desde el ruso";window.CURSO_DOMINIO="espanoldesderuso.com";</script>
 <script src="../progreso.js" defer></script>
 <script>window.CURSO_CONTADOR={"endpoint": "https://contador.ianmusicall.workers.dev", "locale": "es"};
 (function(){

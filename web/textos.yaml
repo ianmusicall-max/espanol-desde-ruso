@@ -34,10 +34,18 @@ ru:
   menu: {inicio: "Главная", curso: "Все уроки", sobre: "О курсе", contacto: "Контакты"}
   titulo_sitio: "Испанский с нуля для русскоговорящих"
   portada:
+    visual:
+      eyebrow: "Испанский для русскоговорящих"
+      gratis: "Бесплатно"
+      tiempo: "30 минут в день"
+      nivel: "С нуля до A2"
+      demo: "Попробуйте испанский"
+      oir: "Послушать"
+      nota: "Настоящее слово из курса. Нажмите и послушайте."
     titulo: "Испанский с нуля"
     titulo2: "для русскоговорящих"
     lema: "30 минут в день — за год от нуля до A2"
-    entrada: "Бесплатный курс из 365 уроков по 30 минут: от алфавита до уровня A2 и экзамена DELE. Без регистрации, без оплаты, прямо в браузере."
+    entrada: "365 уроков с озвучкой и упражнениями. Объяснения на русском, без регистрации."
     marco: "Программа построена по уровням A1–A2 и готовит к DELE A2 — официальному экзамену Института Сервантеса."
     boton: "Начать с первого урока"
     boton2: "Посмотреть программу"
@@ -261,6 +269,9 @@ ru:
     resultado: "Верно: %a% из %b%"
     otra: "Ещё раз"
   progreso:
+    unidad_actual: "Вы здесь"
+    unidad_completa: "Пройдено"
+    unidad_siguiente: "Следующая"
     continuar: "Продолжить: урок"
     guia_paso: "Шаг {n} из {total}"
     guia_siguiente: "Дальше"
@@ -348,10 +359,18 @@ es:
   menu: {inicio: "Inicio", curso: "Las lecciones", sobre: "El curso", contacto: "Contacto"}
   titulo_sitio: "Español desde el ruso"
   portada:
+    visual:
+      eyebrow: "Español para rusohablantes"
+      gratis: "Gratis"
+      tiempo: "30 minutos al día"
+      nivel: "De cero a A2"
+      demo: "Pruebe el español"
+      oir: "Escuchar"
+      nota: "Una palabra real del curso. Pulse para escucharla."
     titulo: "Español desde cero"
     titulo2: "para rusohablantes"
     lema: "30 minutos al día: en un año, de cero a A2"
-    entrada: "Curso gratuito de 365 lecciones de 30 minutos, del alfabeto al nivel A2 y al examen DELE. Sin registro, sin pago, en el navegador. Las lecciones están escritas en ruso, que es la lengua del alumno."
+    entrada: "365 lecciones con audio y ejercicios. Explicaciones en ruso, sin registro."
     marco: "El programa sigue los niveles A1–A2 y prepara para el DELE A2, el examen oficial del Instituto Cervantes."
     boton: "Ver la primera lección"
     boton2: "Ver el programa"
@@ -575,6 +594,9 @@ es:
     resultado: "Aciertos: %a% de %b%"
     otra: "Otra vez"
   progreso:
+    unidad_actual: "Está aquí"
+    unidad_completa: "Completada"
+    unidad_siguiente: "Siguiente"
     continuar: "Continuar: lección"
     guia_paso: "Paso {n} de {total}"
     guia_siguiente: "Siguiente"
@@ -650,10 +672,18 @@ en:
   menu: {inicio: "Home", curso: "Lessons", sobre: "About", contacto: "Contact"}
   titulo_sitio: "Spanish from Russian"
   portada:
+    visual:
+      eyebrow: "Spanish for Russian speakers"
+      gratis: "Free"
+      tiempo: "30 minutes a day"
+      nivel: "From zero to A2"
+      demo: "Try some Spanish"
+      oir: "Listen"
+      nota: "A real word from the course. Tap to hear it."
     titulo: "Spanish from scratch"
     titulo2: "for Russian speakers"
     lema: "30 minutes a day: zero to A2 in a year"
-    entrada: "A free course of 365 thirty-minute lessons, from the alphabet to level A2 and the DELE exam. No sign-up, no payment, in the browser. The lessons are written in Russian, the learner's language."
+    entrada: "365 lessons with audio and exercises. Explanations in Russian, no sign-up."
     marco: "The programme follows CEFR levels A1–A2 and prepares for the DELE A2, the official exam of the Instituto Cervantes."
     boton: "See the first lesson"
     boton2: "See the syllabus"
@@ -877,6 +907,9 @@ en:
     resultado: "Correct: %a% of %b%"
     otra: "Try again"
   progreso:
+    unidad_actual: "You are here"
+    unidad_completa: "Completed"
+    unidad_siguiente: "Up next"
     continuar: "Continue: lesson"
     guia_paso: "Step {n} of {total}"
     guia_siguiente: "Next"
