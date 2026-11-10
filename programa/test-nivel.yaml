@@ -69,25 +69,25 @@ preguntas:
 
   - unidad: 1
     pregunta: "Она учительница."
-    opciones: ["Ella es una profesora.", "Ella es profesora.", "Ella profesora."]
+    opciones: ["Ella está profesora.", "Ella es profesora.", "Ella profesora."]
     correcta: 1
-    error_ru: "Профессия после ser идёт БЕЗ артикля: es profesora, а не «es una profesora»."
-    error_es: "La profesión va sin artículo tras ser: «es profesora», no «es una profesora»."
+    error_ru: "Чтобы назвать профессию, используем ser: es profesora. В этом нейтральном ответе артикль не нужен."
+    error_es: "Para indicar la profesión usamos ser: «es profesora». En esta respuesta neutra no hace falta artículo."
 
   # ---- Unidad 2 · género, artículo, concordancia del adjetivo ----
   - unidad: 2
     pregunta: "На столе книга."
     opciones: ["Hay el libro en la mesa.", "Hay un libro en la mesa.", "Está un libro en la mesa."]
     correcta: 1
-    error_ru: "После «hay» никогда не ставится el / la: что-то существует, но ещё не известно какое именно."
-    error_es: "«Hay» nunca va con el / la: existe algo, todavía no se sabe cuál."
+    error_ru: "Здесь мы впервые говорим о книге: Hay un libro en la mesa. Чтобы сказать, где находится уже известная книга, используем El libro está en la mesa."
+    error_es: "Aquí presentamos un libro por primera vez: «Hay un libro en la mesa». Para localizar el libro ya conocido: «El libro está en la mesa»."
 
   - unidad: 2
     pregunta: "Красная машина."
-    opciones: ["Un coche rojo.", "Un rojo coche.", "Una coche roja."]
+    opciones: ["Un coche rojo.", "Un coche rojos.", "Una coche roja."]
     correcta: 0
-    error_ru: "Прилагательное стоит ПОСЛЕ существительного, и el coche — мужского рода, хотя «машина» женского."
-    error_es: "El adjetivo va detrás del sustantivo, y «el coche» es masculino aunque «машина» sea femenino."
+    error_ru: "В нейтральном описании цвета говорим un coche rojo. Coche — мужского рода, единственного числа, поэтому rojo, а не roja или rojos."
+    error_es: "En una descripción neutra del color decimos «un coche rojo». Coche es masculino singular: rojo, no roja ni rojos."
 
   # ---- Unidad 3 · tener, posesivos, ser / estar + adjetivo ----
   - unidad: 3
@@ -99,10 +99,10 @@ preguntas:
 
   - unidad: 3
     pregunta: "У меня есть брат."
-    opciones: ["Tengo un hermano.", "Tengo hermano.", "Yo tengo el hermano."]
+    opciones: ["Tengo un hermano.", "Soy un hermano.", "Yo tengo el hermano."]
     correcta: 0
-    error_ru: "В русском артикля нет, поэтому его забывают: после tener нужен un / una."
-    error_es: "En ruso no hay artículo y por eso se olvida: tras «tener» hace falta un / una."
+    error_ru: "Чтобы сказать, что у вас есть брат, используем tener: Tengo un hermano. Soy un hermano значит «Я брат»."
+    error_es: "Para expresar que tienes un hermano usamos tener: «Tengo un hermano». «Soy un hermano» significa que tú eres el hermano."
 
   # ---- Unidad 4 · hay frente a estar, preposiciones de lugar ----
   - unidad: 4

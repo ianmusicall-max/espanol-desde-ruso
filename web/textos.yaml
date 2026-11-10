@@ -50,8 +50,8 @@ ru:
     dif_texto: "Обычный учебник объясняет испанское правило. Этот объясняет ещё и то, <strong>где вас подводит родной язык</strong>. В каждом уроке есть раздел «Контраст с русским», который называет ошибку до того, как вы её сделаете:"
     dif_error: "Вы захотите сказать:"
     dif_bien: "Правильно:"
-    dif_nota: "В русском артикля нет совсем, поэтому вы не «забываете» его — вы не слышите, что чего-то не хватает. Первые три месяца курса артикль разбирается в каждом ключе к каждому упражнению."
-    dif_ayuda: "И наоборот: там, где русский <em>помогает</em>, курс говорит об этом прямо. <em>Me gusta el café</em> — это буквально «мне нравится кофе», та же конструкция. Возвратные глаголы — это <em>-ся</em>. Прошедшее время строится на том же виде, который у вас уже есть."
+    dif_nota: "В русском артикля нет совсем, поэтому вы не «забываете» его — вы не слышите, что чего-то не хватает. Здесь речь о кофе вообще, поэтому нужен определённый артикль: el café."
+    dif_ayuda: "И наоборот: там, где русский <em>помогает</em>, курс говорит об этом прямо. <em>Me gusta el café</em> — это буквально «мне нравится кофе», та же конструкция. Некоторые глаголы с <em>se</em> похожи на русские глаголы с <em>-ся</em>, но не все. Русский вид помогает понять некоторые различия испанских прошедших времён, однако прямого соответствия нет."
     dia_titulo: "Как устроен день"
     dia_min: "Минуты"
     dia_que: "Что происходит"
@@ -70,7 +70,7 @@ ru:
       - ["Через полгода · A1", "Путешествуете, идёте к врачу, даёте советы. Сдали бы экзамен уровня A1."]
       - ["Через год · A2", "Говорите о прошлом и будущем, спорите, пишете письма. Готовы к <strong>DELE A2</strong>."]
     final_titulo: "Сколько готово сейчас"
-    final_texto: "Программа всех 365 дней составлена целиком. Уроки выходят по мере готовности."
+    final_texto: "Все 365 уроков уже доступны бесплатно. Начните с первого или пройдите тест на уровень."
     final_boton: "Начать сейчас"
     probador_titulo: "Попробуйте прямо здесь"
     probador_entrada: "Три фразы. Выберите испанский вариант — и посмотрите, где русский вас подводит."
@@ -364,8 +364,8 @@ es:
     dif_texto: "Un manual corriente explica la regla española. Este explica además <strong>dónde le traiciona su propia lengua</strong> al alumno. Cada lección lleva un apartado, «Contraste con el ruso», que nombra el error antes de que ocurra:"
     dif_error: "Vas a querer decir:"
     dif_bien: "Correcto:"
-    dif_nota: "El ruso no tiene artículo. Por eso el alumno no lo «olvida»: no percibe que falte algo. Los tres primeros meses del curso el artículo vuelve en la clave de cada ejercicio."
-    dif_ayuda: "Y al revés: donde el ruso <em>ayuda</em>, el curso lo dice con todas las letras. <em>Me gusta el café</em> es literalmente «мне нравится кофе», la misma estructura. Los reflexivos son el <em>-ся</em> ruso. Los pasados se enseñan sobre el aspecto que el alumno ya tiene."
+    dif_nota: "El ruso no tiene artículo. Por eso el alumno no lo «olvida»: no percibe que falte algo. Aquí hablamos del café en general, por eso usamos el artículo definido: el café."
+    dif_ayuda: "Y al revés: donde el ruso <em>ayuda</em>, el curso lo dice con todas las letras. <em>Me gusta el café</em> es literalmente «мне нравится кофе», la misma estructura. Algunos verbos con <em>se</em> se parecen a los verbos rusos con <em>-ся</em>, pero no todos. El aspecto ruso ayuda a entender algunas diferencias entre los pasados españoles, aunque no hay una equivalencia directa."
     dia_titulo: "Cómo es una sesión"
     dia_min: "Minutos"
     dia_que: "Qué pasa"
@@ -384,7 +384,7 @@ es:
       - ["A los 6 meses · A1", "Viaja, va al médico, da consejos. Aprobaría un examen de nivel A1."]
       - ["Al año · A2", "Habla del pasado y del futuro, opina, escribe correos. Listo para el <strong>DELE A2</strong>."]
     final_titulo: "Cuánto hay publicado"
-    final_texto: "El programa de los 365 días está completo. Las lecciones se publican a medida que se escriben y se revisan."
+    final_texto: "Las 365 lecciones ya están disponibles gratis. Empiece por la primera o haga el test de nivel."
     final_boton: "Empezar"
     probador_titulo: "Pruébalo aquí mismo"
     probador_entrada: "Tres frases. Elija la versión española y mire dónde le traiciona el ruso."
@@ -666,8 +666,8 @@ en:
     dif_texto: "An ordinary textbook explains the Spanish rule. This one also explains <strong>where the learner's own language betrays them</strong>. Every lesson has a section, «Contrast with Russian», that names the mistake before it happens:"
     dif_error: "You will want to say:"
     dif_bien: "Correct:"
-    dif_nota: "Russian has no article at all. So the learner does not «forget» it: they cannot hear that anything is missing. For the first three months the article comes back in the answer key of every exercise."
-    dif_ayuda: "And the other way round: where Russian <em>helps</em>, the course says so plainly. <em>Me gusta el café</em> is literally «мне нравится кофе», the same structure. Reflexives are the Russian <em>-ся</em>. The past tenses are taught on the aspect the learner already has."
+    dif_nota: "Russian has no article at all. So the learner does not «forget» it: they cannot hear that anything is missing. Here we mean coffee in general, so Spanish uses the definite article: el café."
+    dif_ayuda: "And the other way round: where Russian <em>helps</em>, the course says so plainly. <em>Me gusta el café</em> is literally «мне нравится кофе», the same structure. Some verbs with <em>se</em> resemble Russian verbs with <em>-ся</em>, but not all. Russian aspect helps explain some differences between Spanish past tenses, although there is no direct equivalence."
     dia_titulo: "What a session looks like"
     dia_min: "Minutes"
     dia_que: "What happens"
@@ -686,7 +686,7 @@ en:
       - ["After 6 months · A1", "Travels, goes to the doctor, gives advice. Would pass an A1 exam."]
       - ["After a year · A2", "Talks about past and future, gives opinions, writes emails. Ready for the <strong>DELE A2</strong>."]
     final_titulo: "How much is published"
-    final_texto: "The syllabus for all 365 days is complete. Lessons go up as they are written and reviewed."
+    final_texto: "All 365 lessons are available for free. Start with the first or take the placement test."
     final_boton: "Start"
     probador_titulo: "Try it right here"
     probador_entrada: "Three sentences. Pick the Spanish version and see where Russian trips you up."

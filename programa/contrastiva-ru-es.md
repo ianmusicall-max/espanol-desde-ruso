@@ -54,9 +54,11 @@ no percibe que falte algo. Hay que construir la categoría desde cero.
   un, mi, este, dos…). Lo raro es el sustantivo desnudo.
 - Dos heurísticas rusas que funcionan: «un/una = один / какой-то»; «el/la =
   этот / тот самый, el que ya conocemos».
-- Errores predecibles: ✗ *Tengo hermano* (tengo un hermano); ✗ *Me gusta
-  café* (me gusta el café: lo genérico lleva artículo); ✗ *Es el médico* por
-  *Es médico* (profesión sin artículo: la excepción que el ruso sí acepta).
+- Error predecible: ✗ *Me gusta café* por *Me gusta el café*: con gustar,
+  el sustantivo que designa una clase en general lleva artículo.
+- No se debe marcar *Tengo hermano* como incorrecto: puede ser válido.
+  Para nombrar una profesión de forma neutra se dice *Es médico*;
+  *Es el médico* identifica a un médico concreto y también puede ser válido.
 - Unidades: 2 (introducción), 6 (lo genérico con gustar), 10 (artículo con
   partes del cuerpo: *me duele la cabeza*, no *mi cabeza*), 11 y 24 (repaso).
 

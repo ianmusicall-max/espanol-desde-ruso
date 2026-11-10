@@ -639,6 +639,31 @@ class TestElProgresoDelLector(unittest.TestCase):
                               f"{i['codigo']}/{pagina}")
 
 
+class TestElFormatoAnidado(unittest.TestCase):
+    def test_la_negrita_dentro_de_cursiva_conserva_el_enfasis(self):
+        self.assertEqual(construir_sitio.md("*el **doce** de marzo*"),
+                         "<p><em>el <strong>doce</strong> de marzo</em></p>")
+
+    def test_los_delimitadores_juntos_no_absorben_la_frase_siguiente(self):
+        self.assertEqual(construir_sitio.md("***El** banco está cerrado.*\n**Artículo**"),
+                         "<p><em><strong>El</strong> banco está cerrado.</em>\n<strong>Artículo</strong></p>")
+        self.assertEqual(construir_sitio.md("*es **suyo***"),
+                         "<p><em>es <strong>suyo</strong></em></p>")
+
+    def test_la_cursiva_dentro_de_negrita_no_pierde_el_audio_por_formato(self):
+        self.assertEqual(construir_sitio.md("**Coma antes de *que***"),
+                         "<p><strong>Coma antes de <em>que</em></strong></p>")
+
+    def test_la_tabla_de_contrastes_conserva_ambas_cursivas(self):
+        self.assertEqual(construir_sitio.md("***Ser* / *estar***"),
+                         "<p><strong><em>Ser</em> / <em>estar</em></strong></p>")
+
+    def test_el_codigo_y_los_asteriscos_escapados_se_conservan(self):
+        self.assertEqual(construir_sitio.md("`**doce**`"),
+                         "<p><code>**doce**</code></p>")
+        self.assertNotIn("<strong>", construir_sitio.md(r"\*\*doce\*\*"))
+
+
 class TestElTachado(unittest.TestCase):
     """~~h~~otel y ~~Yo gusto~~: sin tachado, la forma mala parece la buena."""
 

@@ -73,7 +73,7 @@ MANIFIESTO_BARAJA = "baraja.json"
 # scripts/tarjeta_social.py con los dibujos del curso; aquí solo se declara si
 # está, porque un `og:image` que da 404 es peor que ninguno.
 TARJETA_SOCIAL = "img/tarjeta.png"
-EXTENSIONES = ["tables", "fenced_code", "sane_lists", "toc", "attr_list"]
+EXTENSIONES = [ "tables", "fenced_code", "sane_lists", "toc", "attr_list"]
 
 
 class Tachado(markdown.extensions.Extension):
@@ -88,6 +88,20 @@ class Tachado(markdown.extensions.Extension):
         md.inlinePatterns.register(
             markdown.inlinepatterns.SimpleTagInlineProcessor(r"(~~)(.+?)~~", "del"),
             "tachado", 65)
+
+class EnfasisAnidado(markdown.extensions.Extension):
+    """Conserva los contrastes destacados dentro de las frases en cursiva."""
+
+    def extendMarkdown(self, md):
+        md.inlinePatterns.register(
+            markdown.inlinepatterns.SimpleTagInlineProcessor(
+                r"(\*\*)(\*[^*\n]+\* / \*[^*\n]+\*)\*\*", "strong"),
+            "contraste_en_negrita", 80)
+        md.inlinePatterns.register(
+            markdown.inlinepatterns.SimpleTagInlineProcessor(
+                r"(?<!\*)(\*)((?:[^*]|\*\*[^*]+?\*\*)*?\*\*[^*]+?\*\*(?:[^*]|\*\*[^*]+?\*\*)*)\*(?!\*)", "em"),
+            "cursiva_con_negrita", 75)
+
 
 # Las diez caras de Literata (cuerpo) y Onest (títulos y botones), servidas
 # desde ESTE dominio y no desde Google.
@@ -2540,7 +2554,9 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
                 ("o-kurse.html", t["menu"]["sobre"]),
                 ("kontakt.html", t["menu"]["contacto"]))
     menu = "".join(
-        f'<a href="{raiz}/{destino}"{" aria-current=\"page\"" if destino == pagina_id else ""}>{html.escape(rotulo)}</a>'
+        f'<a href="{raiz}/{destino}"'
+        + (' aria-current="page"' if destino == pagina_id else '')
+        + f'>{html.escape(rotulo)}</a>'
         for destino, rotulo in destinos
     )
     # La eñe, si está. Sin el archivo no se escribe nada y el título se queda
@@ -2660,7 +2676,7 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
 
 
 def md(texto: str) -> str:
-    return markdown.markdown(texto, extensions=EXTENSIONES + [Tachado()])
+    return markdown.markdown(texto, extensions=EXTENSIONES + [Tachado(), EnfasisAnidado()])
 
 
 def escritas(cal: dict) -> list[plan.Dia]:
@@ -3506,8 +3522,8 @@ def construir_portada(cfg, t, idiomas, idioma, destino, cal, raiz,
 <h2>{html.escape(p['dif_titulo'])}</h2>
 <p>{p['dif_texto']}</p>
 <section class="contraste">
-<p><strong>{html.escape(p['dif_error'])}</strong> <span class="mal">✗ <em>Tengo hermano.</em></span><br>
-<strong>{html.escape(p['dif_bien'])}</strong> <span class="bien">✅ <em>Tengo <strong>un</strong> hermano.</em></span></p>
+<p><strong>{html.escape(p['dif_error'])}</strong> <span class="mal">✗ <em>Me gusta café.</em></span><br>
+<strong>{html.escape(p['dif_bien'])}</strong> <span class="bien">✅ <em>Me gusta <strong>el</strong> café.</em></span></p>
 <p>{html.escape(p['dif_nota'])}</p>
 </section>
 <p>{p['dif_ayuda']}</p>
@@ -4550,6 +4566,8 @@ def construir_leccion(d, cfg, t, idiomas, destino, cal, todos, audio=None,
                       dibujos=None, vocabulario=None) -> None:
     """Las lecciones solo existen en ruso: son el curso."""
     datos, cuerpo = validar.frontmatter(d.ruta.read_text(encoding="utf-8"))
+    # Marcador editorial: la locución real se inserta con los botones ▶.
+    cuerpo = re.sub(r"`?\[AUDIO\]`?", "", cuerpo)
     i = todos.index(d)
     anterior = next((x for x in reversed(todos[:i]) if x.ruta.exists()), None)
     siguiente = next((x for x in todos[i + 1:] if x.ruta.exists()), None)
