@@ -1,0 +1,62 @@
+/* Los cambios se mantienen dentro de la columna central del curso. */
+.menu-movil{display:none;order:2;align-items:center;justify-content:center;gap:.4rem;padding:.4rem .65rem;min-height:40px;border:1px solid var(--linea);border-radius:10px;background:var(--papel);color:var(--tinta);font:600 .78rem/1.4 Onest,system-ui,sans-serif;cursor:pointer}
+.menu-movil svg{width:18px;height:18px}
+@media(max-width:39.99rem){
+ header.sitio .envoltorio{gap:.5rem}
+ header.menu-interactivo nav.paginas{display:none}
+ header.menu-interactivo.menu-abierto nav.paginas{display:flex;flex-direction:column;gap:0;padding:.4rem 0;border-top:1px solid var(--linea)}
+ header.menu-interactivo nav.paginas a{padding:.7rem .5rem;border-radius:8px}
+ header.menu-interactivo nav.paginas a[aria-current]{background:var(--acento-suave)}
+ .menu-movil:not([hidden]){display:inline-flex}
+}
+/* El orden de lectura sigue siendo palabra, traducción y ejemplo. */
+.tabla-vocabulario{border:0;background:transparent;position:relative;overflow:visible}
+.tabla-vocabulario table{display:block;width:100%}
+.tabla-vocabulario thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.tabla-vocabulario tbody{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.tabla-vocabulario tbody tr{display:flex;flex-direction:column;min-width:0;padding:1.1rem;border:1px solid var(--linea);border-radius:16px;background:var(--papel)}
+.tabla-vocabulario tbody td{display:block;padding:0;border:0;line-height:1.65;overflow-wrap:anywhere}
+.tabla-vocabulario tbody td:first-child{position:relative;font-size:1.12rem;color:var(--tinta)}
+.tabla-vocabulario tbody td:first-child:has(img){padding-right:4.1rem;min-height:64px}
+.tabla-vocabulario .dibujo{position:absolute;right:0;top:0;width:58px;height:58px;margin:0;border-radius:12px}
+.tabla-vocabulario tbody td:nth-child(2){font:400 .96rem/1.6 Literata,serif;color:var(--tenue);margin-top:.4rem}
+.tabla-vocabulario tbody td:nth-child(3){margin-top:auto;padding-top:.8rem;border-top:1px dashed var(--linea);font-size:.88rem}
+.tabla-vocabulario tbody td:nth-child(2)+td{margin-top:.85rem}
+.tabla-vocabulario .suena{margin-right:.35rem}
+.ejercicio-bloque{margin:1.2rem 0;padding:1.3rem;border:1px solid var(--linea);border-radius:18px;background:var(--papel)}
+.ejercicio-bloque>h3:first-child{margin:0 0 .9rem;color:var(--tinta);font-size:1rem;line-height:1.5}
+.ejercicio-bloque>p{font-size:.97rem}
+.ejercicio-bloque>blockquote{margin-inline:0}
+.ejercicio-bloque .fichas{gap:.5rem;margin:1rem 0}
+.ejercicio-bloque .ficha{padding:.45rem .7rem;min-height:40px}
+.ejercicio-bloque .huecos-pie{padding-top:.8rem;border-top:1px solid var(--linea);flex-wrap:wrap}
+.ejercicio-bloque .hueco-escribir{background:var(--tarjeta);border-radius:5px 5px 0 0;padding:.1rem .3rem}
+.ejercicio-bloque .hueco-escribir:focus{background:var(--acento-suave)}
+.ejercicio-bloque .a-la-clave{font-size:.85rem}
+.dialogo-traduccion{margin:.7rem .8rem;min-height:40px;font-size:.78rem;padding:.45rem .8rem}
+.tabla-dialogo{background:var(--papel)}
+.tabla-dialogo td{color:var(--tinta)}
+.tabla-dialogo tr[data-voz="0"] td:first-child{background:var(--acento-suave);border-left:3px solid var(--acento)}
+.tabla-dialogo tr[data-voz="1"] td:first-child{background:var(--tarjeta);border-left:3px solid var(--celeste)}
+.tabla-dialogo th{background:var(--papel)}
+.tabla-dialogo.traduccion-oculta th:nth-child(2),.tabla-dialogo.traduccion-oculta td:nth-child(2){display:none}
+.tabla-dialogo.traduccion-oculta td:first-child{width:100%}
+.profesor-perfil{display:flex;align-items:flex-start;gap:1.2rem;border:1px solid var(--linea);border-radius:20px;padding:1.6rem;background:var(--tarjeta);margin:2rem 0}
+.profesor-marca{display:flex;align-items:center;justify-content:center;width:62px;height:62px;flex-shrink:0;border-radius:16px;background:var(--acento);color:var(--papel);font:700 2.3rem/1 Onest,system-ui,sans-serif}
+.profesor-perfil h2{margin:0 0 .5rem;padding:0;border:0;font-size:1.25rem}
+.profesor-perfil p{margin:.5rem 0;font-size:.95rem}
+.profesor-perfil a{font:600 .85rem/1.5 Onest,system-ui,sans-serif}
+.portada>.profesor-perfil{max-width:46rem;margin:2rem auto}
+@media(max-width:40rem){
+ .tabla-vocabulario tbody{grid-template-columns:1fr;gap:.8rem}
+ .tabla-vocabulario tbody tr{padding:1rem}
+ .tabla-glosario thead tr,.tabla-glosario tbody tr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+ .tabla-glosario thead th:nth-child(n+3){display:none}
+ .tabla-glosario td{min-width:0;overflow-wrap:anywhere}
+ .tabla-glosario tbody td:nth-child(2){border-bottom:1px solid var(--linea)}
+ .tabla-glosario tbody td:first-child{border-bottom:1px solid var(--linea)}
+ .ejercicio-bloque{padding:1rem}
+ .profesor-perfil{padding:1.2rem;gap:.8rem;flex-direction:column}
+ .profesor-marca{width:48px;height:48px;font-size:1.8rem;border-radius:12px}
+}
+@media print{.menu-movil,.dialogo-traduccion{display:none!important}.tabla-dialogo.traduccion-oculta th:nth-child(2),.tabla-dialogo.traduccion-oculta td:nth-child(2){display:table-cell!important}.tabla-vocabulario tbody{display:block}.tabla-vocabulario tbody tr{break-inside:avoid;margin-bottom:1rem}}

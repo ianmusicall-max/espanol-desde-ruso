@@ -882,6 +882,68 @@ body:has(#cookies) .respuesta-aviso{bottom:10rem}
 .entrada-visible .vitrina li,.entrada-visible .tarjeta{animation:entrada-respuesta .35s ease var(--entrada-retraso,0ms) both}
 @media(prefers-reduced-motion:reduce){.entrada-pendiente{opacity:1;transform:none}}
 @media print{.entrada-pendiente{opacity:1!important;transform:none!important}.unidad-confeti,.respuesta-aviso,.audio-ondas{display:none!important}}
+/* Los cambios se mantienen dentro de la columna central del curso. */
+.menu-movil{display:none;order:2;align-items:center;justify-content:center;gap:.4rem;padding:.4rem .65rem;min-height:40px;border:1px solid var(--linea);border-radius:10px;background:var(--papel);color:var(--tinta);font:600 .78rem/1.4 Onest,system-ui,sans-serif;cursor:pointer}
+.menu-movil svg{width:18px;height:18px}
+@media(max-width:39.99rem){
+ header.sitio .envoltorio{gap:.5rem}
+ header.menu-interactivo nav.paginas{display:none}
+ header.menu-interactivo.menu-abierto nav.paginas{display:flex;flex-direction:column;gap:0;padding:.4rem 0;border-top:1px solid var(--linea)}
+ header.menu-interactivo nav.paginas a{padding:.7rem .5rem;border-radius:8px}
+ header.menu-interactivo nav.paginas a[aria-current]{background:var(--acento-suave)}
+ .menu-movil:not([hidden]){display:inline-flex}
+}
+/* El orden de lectura sigue siendo palabra, traducción y ejemplo. */
+.tabla-vocabulario{border:0;background:transparent;position:relative;overflow:visible}
+.tabla-vocabulario table{display:block;width:100%}
+.tabla-vocabulario thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.tabla-vocabulario tbody{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.tabla-vocabulario tbody tr{display:flex;flex-direction:column;min-width:0;padding:1.1rem;border:1px solid var(--linea);border-radius:16px;background:var(--papel)}
+.tabla-vocabulario tbody td{display:block;padding:0;border:0;line-height:1.65;overflow-wrap:anywhere}
+.tabla-vocabulario tbody td:first-child{position:relative;font-size:1.12rem;color:var(--tinta)}
+.tabla-vocabulario tbody td:first-child:has(img){padding-right:4.1rem;min-height:64px}
+.tabla-vocabulario .dibujo{position:absolute;right:0;top:0;width:58px;height:58px;margin:0;border-radius:12px}
+.tabla-vocabulario tbody td:nth-child(2){font:400 .96rem/1.6 Literata,serif;color:var(--tenue);margin-top:.4rem}
+.tabla-vocabulario tbody td:nth-child(3){margin-top:auto;padding-top:.8rem;border-top:1px dashed var(--linea);font-size:.88rem}
+.tabla-vocabulario tbody td:nth-child(2)+td{margin-top:.85rem}
+.tabla-vocabulario .suena{margin-right:.35rem}
+.ejercicio-bloque{margin:1.2rem 0;padding:1.3rem;border:1px solid var(--linea);border-radius:18px;background:var(--papel)}
+.ejercicio-bloque>h3:first-child{margin:0 0 .9rem;color:var(--tinta);font-size:1rem;line-height:1.5}
+.ejercicio-bloque>p{font-size:.97rem}
+.ejercicio-bloque>blockquote{margin-inline:0}
+.ejercicio-bloque .fichas{gap:.5rem;margin:1rem 0}
+.ejercicio-bloque .ficha{padding:.45rem .7rem;min-height:40px}
+.ejercicio-bloque .huecos-pie{padding-top:.8rem;border-top:1px solid var(--linea);flex-wrap:wrap}
+.ejercicio-bloque .hueco-escribir{background:var(--tarjeta);border-radius:5px 5px 0 0;padding:.1rem .3rem}
+.ejercicio-bloque .hueco-escribir:focus{background:var(--acento-suave)}
+.ejercicio-bloque .a-la-clave{font-size:.85rem}
+.dialogo-traduccion{margin:.7rem .8rem;min-height:40px;font-size:.78rem;padding:.45rem .8rem}
+.tabla-dialogo{background:var(--papel)}
+.tabla-dialogo td{color:var(--tinta)}
+.tabla-dialogo tr[data-voz="0"] td:first-child{background:var(--acento-suave);border-left:3px solid var(--acento)}
+.tabla-dialogo tr[data-voz="1"] td:first-child{background:var(--tarjeta);border-left:3px solid var(--celeste)}
+.tabla-dialogo th{background:var(--papel)}
+.tabla-dialogo.traduccion-oculta th:nth-child(2),.tabla-dialogo.traduccion-oculta td:nth-child(2){display:none}
+.tabla-dialogo.traduccion-oculta td:first-child{width:100%}
+.profesor-perfil{display:flex;align-items:flex-start;gap:1.2rem;border:1px solid var(--linea);border-radius:20px;padding:1.6rem;background:var(--tarjeta);margin:2rem 0}
+.profesor-marca{display:flex;align-items:center;justify-content:center;width:62px;height:62px;flex-shrink:0;border-radius:16px;background:var(--acento);color:var(--papel);font:700 2.3rem/1 Onest,system-ui,sans-serif}
+.profesor-perfil h2{margin:0 0 .5rem;padding:0;border:0;font-size:1.25rem}
+.profesor-perfil p{margin:.5rem 0;font-size:.95rem}
+.profesor-perfil a{font:600 .85rem/1.5 Onest,system-ui,sans-serif}
+.portada>.profesor-perfil{max-width:46rem;margin:2rem auto}
+@media(max-width:40rem){
+ .tabla-vocabulario tbody{grid-template-columns:1fr;gap:.8rem}
+ .tabla-vocabulario tbody tr{padding:1rem}
+ .tabla-glosario thead tr,.tabla-glosario tbody tr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+ .tabla-glosario thead th:nth-child(n+3){display:none}
+ .tabla-glosario td{min-width:0;overflow-wrap:anywhere}
+ .tabla-glosario tbody td:nth-child(2){border-bottom:1px solid var(--linea)}
+ .tabla-glosario tbody td:first-child{border-bottom:1px solid var(--linea)}
+ .ejercicio-bloque{padding:1rem}
+ .profesor-perfil{padding:1.2rem;gap:.8rem;flex-direction:column}
+ .profesor-marca{width:48px;height:48px;font-size:1.8rem;border-radius:12px}
+}
+@media print{.menu-movil,.dialogo-traduccion{display:none!important}.tabla-dialogo.traduccion-oculta th:nth-child(2),.tabla-dialogo.traduccion-oculta td:nth-child(2){display:table-cell!important}.tabla-vocabulario tbody{display:block}.tabla-vocabulario tbody tr{break-inside:avoid;margin-bottom:1rem}}
 </style>
 <script>try{var t=localStorage.getItem('tema');if(t)document.documentElement.dataset.tema=t}catch(e){}</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6339208855562328" crossorigin="anonymous"></script>
@@ -889,6 +951,9 @@ body:has(#cookies) .respuesta-aviso{bottom:10rem}
 <body>
 <header class="sitio"><div class="envoltorio">
 <a class="marca con-icono" href="./index.html" aria-label="Испанский с нуля для русскоговорящих"><img class="marca-icono" src="./img/icono-32.png" width="26" height="26" alt="" decoding="async"><span class="marca-texto">Испанский с нуля для русскоговорящих</span></a>
+<button type="button" class="menu-movil" id="menu-movil" aria-expanded="false" hidden>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+<span>Меню</span></button>
 <nav class="paginas"><a href="./kurs.html">Все уроки</a><a href="./slovar.html">Словарь курса</a><a href="./test.html">Тест на уровень</a><a href="./o-kurse.html" aria-current="page">О курсе</a><a href="./kontakt.html">Контакты</a></nav>
 <div class="idiomas" title="Язык"><a href="./o-kurse.html" hreflang="ru" lang="ru" aria-current="true">ru</a><a href="./es/o-kurse.html" hreflang="es" lang="es">es</a><a href="./en/o-kurse.html" hreflang="en" lang="en">en</a></div>
 <button class="tema" id="tema" type="button" title="Светлая или тёмная тема" aria-label="Светлая или тёмная тема"><svg class="luna" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sol" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.5 1.5M17.9 17.9l1.5 1.5M2.5 12h2M19.5 12h2M4.6 19.4l1.5-1.5M17.9 6.1l1.5-1.5"/></svg></button>
@@ -898,8 +963,7 @@ body:has(#cookies) .respuesta-aviso{bottom:10rem}
 
 <h1>О курсе</h1>
 
-<h2>Кто это написал</h2>
-<p>Преподаватель с магистратурой по языкам. Испанский — родной, владеет тремя языками. Курс написан специально для русскоговорящих.</p>
+<section class="profesor-perfil"><div class="profesor-marca" aria-hidden="true">ñ</div><div><h2>Кто это написал</h2><p>Преподаватель с магистратурой по языкам. Испанский — родной, владеет тремя языками. Курс написан специально для русскоговорящих.</p><a href="./kontakt.html">Контакты</a></div></section>
 <h2>Почему «с русского», а не просто «испанский»</h2>
 <p>Курсы испанского пишут для всех сразу. Но ошибки у всех разные. Русскоговорящий пропускает артикль не потому, что невнимателен, а потому что в его языке этой категории нет вообще. Он ставит прилагательное перед существительным, потому что так устроен русский. Он говорит «мне тридцать» вместо <em>tengo treinta años</em>, потому что в русском возраст — в дательном падеже.</p>
 <p>Курс построен вокруг этих двадцати типичных ошибок. Они перечислены заранее, разбираются по одной и возвращаются в ключах к упражнениям и в вариантах ответов тестов: неправильный вариант — это всегда то, что сказал бы русскоговорящий.</p>
@@ -929,7 +993,7 @@ body:has(#cookies) .respuesta-aviso{bottom:10rem}
 <div id="cookies"><span>Мы используем файлы cookie для показа рекламы и статистики посещений. <a href="./privacy.html">Подробнее</a>.</span><button class="boton" style="padding:.4rem 1rem;font-size:.85rem" onclick="try{localStorage.setItem('cookies','1')}catch(e){};this.parentNode.remove()">Понятно</button></div><script>try{if(localStorage.getItem('cookies')){var b=document.getElementById('cookies');b&&b.remove()}}catch(e){}</script>
 <script>(function(){var b=document.getElementById('tema');if(!b)return;function actual(){var r=document.documentElement;return r.dataset.tema||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}b.addEventListener('click',function(){var n=actual()==='dark'?'light':'dark';document.documentElement.dataset.tema=n;try{localStorage.setItem('tema',n)}catch(e){}});})();</script>
 
-<script>window.CURSO_TEXTOS={"unidad_logro": "Тема пройдена!", "respuesta_bien": "Верно", "respuesta_correcta": "Правильный ответ", "unidad_actual": "Вы здесь", "unidad_completa": "Пройдено", "unidad_siguiente": "Следующая", "continuar": "Продолжить: урок", "guia_paso": "Шаг {n} из {total}", "guia_siguiente": "Дальше", "guia_final": "Отметить и дальше", "guia_empezar": "Начать с первого шага", "empezar": "Начать сначала", "marcar": "Отметить урок пройденным", "hecho": "Урок пройден", "siguiente": "Следующий урок", "tuyo": "пройдено вами", "titulo": "Ваш прогресс", "aviso": "Прогресс хранится только в этом браузере, на этом устройстве. Регистрации нет, и никуда он не отправляется. Если вы очистите данные браузера или откроете курс на другом телефоне, отметки не перенесутся.", "borrar": "Сбросить прогресс", "confirmar": "Сбросить все отметки?", "copiar": "Сохранить мой прогресс", "copiado": "Код скопирован — вставьте его себе в заметки или в «Избранное» в Telegram", "restaurar": "Восстановить мой прогресс", "pegar": "Вставьте сюда ваш код", "aplicar": "Восстановить", "cancelar": "Отмена", "malo": "Это не похоже на код прогресса. Ничего не изменено.", "menos": "В этом коде меньше уроков, чем отмечено сейчас (%a% вместо %b%). Всё равно восстановить?", "hecho_restaurar": "Готово: восстановлено уроков — %n%", "nombre_label": "Как вас зовут?", "nombre_boton": "Сохранить", "nombre_cambiar": "Изменить", "nombre_nota": "Только чтобы обращаться к вам по имени. Имя остаётся в этом браузере и никуда не отправляется.", "bravo": ["Отлично!", "Так держать!", "Хорошая работа!", "Ещё один урок позади!", "Вы молодец!", "Готово!", "Вот это темп!", "Продолжайте так же!", "Шаг за шагом — и получается!"], "bravo_con": ["Отлично, {nombre}!", "Так держать, {nombre}!", "Хорошая работа, {nombre}!", "{nombre}, ещё один урок позади!", "Вы молодец, {nombre}!", "Готово, {nombre}!", "Вот это темп, {nombre}!", "Продолжайте так же, {nombre}!", "Шаг за шагом, {nombre}, — и получается!"], "vuelta": "С возвращением, {nombre}!", "primera": "Первый урок пройден — самое трудное уже позади.", "primera_con": "{nombre}, первый урок пройден — самое трудное уже позади.", "cuantas": "{n} из {total}", "faltan": "осталось {n}", "racha": "{n} {dias} подряд", "racha_dias": ["день", "дня", "дней"], "racha_hoy": "Сегодня вы занимались", "racha_mejor": "Лучшая серия: {n} {dias}", "antes": "Перед тем как очистить браузер или сменить телефон, сохраните код.", "calendario": "Ваш курс", "calendario_nota": "{n} {lecciones} из {total}", "calendario_rotulo": "Урок {n} · нед. {semana}, день {dia}", "calendario_aqui": "здесь вы остановились", "calendario_lecciones": ["урок", "урока", "уроков"], "diploma_boton": "Скачать сертификат ({nivel})", "diploma_pide_nombre": "Укажите имя выше — и сертификат будет на ваше имя.", "diploma_titulo": "СЕРТИФИКАТ", "diploma_sub": "о прохождении курса", "diploma_quien": "Выдан", "diploma_que": "Уровень {nivel} · пройдено уроков: {n}", "diploma_fecha": "Дата", "diploma_aviso": "Личный сертификат о самостоятельном прохождении курса. Это не официальный документ об уровне языка."};window.CURSO_RAIZ=".";window.CURSO_PUBLICADAS=0;window.CURSO_DIAS={};window.CURSO_NIVELES=[];window.CURSO_SITIO="Испанский с нуля для русскоговорящих";window.CURSO_DOMINIO="espanoldesderuso.com";</script>
+<script>window.CURSO_LECTURA={"menu": "Меню", "menu_cerrar": "Закрыть меню", "traduccion_ocultar": "Скрыть перевод", "traduccion_mostrar": "Показать перевод"};window.CURSO_TEXTOS={"unidad_logro": "Тема пройдена!", "respuesta_bien": "Верно", "respuesta_correcta": "Правильный ответ", "unidad_actual": "Вы здесь", "unidad_completa": "Пройдено", "unidad_siguiente": "Следующая", "continuar": "Продолжить: урок", "guia_paso": "Шаг {n} из {total}", "guia_siguiente": "Дальше", "guia_final": "Отметить и дальше", "guia_empezar": "Начать с первого шага", "empezar": "Начать сначала", "marcar": "Отметить урок пройденным", "hecho": "Урок пройден", "siguiente": "Следующий урок", "tuyo": "пройдено вами", "titulo": "Ваш прогресс", "aviso": "Прогресс хранится только в этом браузере, на этом устройстве. Регистрации нет, и никуда он не отправляется. Если вы очистите данные браузера или откроете курс на другом телефоне, отметки не перенесутся.", "borrar": "Сбросить прогресс", "confirmar": "Сбросить все отметки?", "copiar": "Сохранить мой прогресс", "copiado": "Код скопирован — вставьте его себе в заметки или в «Избранное» в Telegram", "restaurar": "Восстановить мой прогресс", "pegar": "Вставьте сюда ваш код", "aplicar": "Восстановить", "cancelar": "Отмена", "malo": "Это не похоже на код прогресса. Ничего не изменено.", "menos": "В этом коде меньше уроков, чем отмечено сейчас (%a% вместо %b%). Всё равно восстановить?", "hecho_restaurar": "Готово: восстановлено уроков — %n%", "nombre_label": "Как вас зовут?", "nombre_boton": "Сохранить", "nombre_cambiar": "Изменить", "nombre_nota": "Только чтобы обращаться к вам по имени. Имя остаётся в этом браузере и никуда не отправляется.", "bravo": ["Отлично!", "Так держать!", "Хорошая работа!", "Ещё один урок позади!", "Вы молодец!", "Готово!", "Вот это темп!", "Продолжайте так же!", "Шаг за шагом — и получается!"], "bravo_con": ["Отлично, {nombre}!", "Так держать, {nombre}!", "Хорошая работа, {nombre}!", "{nombre}, ещё один урок позади!", "Вы молодец, {nombre}!", "Готово, {nombre}!", "Вот это темп, {nombre}!", "Продолжайте так же, {nombre}!", "Шаг за шагом, {nombre}, — и получается!"], "vuelta": "С возвращением, {nombre}!", "primera": "Первый урок пройден — самое трудное уже позади.", "primera_con": "{nombre}, первый урок пройден — самое трудное уже позади.", "cuantas": "{n} из {total}", "faltan": "осталось {n}", "racha": "{n} {dias} подряд", "racha_dias": ["день", "дня", "дней"], "racha_hoy": "Сегодня вы занимались", "racha_mejor": "Лучшая серия: {n} {dias}", "antes": "Перед тем как очистить браузер или сменить телефон, сохраните код.", "calendario": "Ваш курс", "calendario_nota": "{n} {lecciones} из {total}", "calendario_rotulo": "Урок {n} · нед. {semana}, день {dia}", "calendario_aqui": "здесь вы остановились", "calendario_lecciones": ["урок", "урока", "уроков"], "diploma_boton": "Скачать сертификат ({nivel})", "diploma_pide_nombre": "Укажите имя выше — и сертификат будет на ваше имя.", "diploma_titulo": "СЕРТИФИКАТ", "diploma_sub": "о прохождении курса", "diploma_quien": "Выдан", "diploma_que": "Уровень {nivel} · пройдено уроков: {n}", "diploma_fecha": "Дата", "diploma_aviso": "Личный сертификат о самостоятельном прохождении курса. Это не официальный документ об уровне языка."};window.CURSO_RAIZ=".";window.CURSO_PUBLICADAS=0;window.CURSO_DIAS={};window.CURSO_NIVELES=[];window.CURSO_SITIO="Испанский с нуля для русскоговорящих";window.CURSO_DOMINIO="espanoldesderuso.com";</script>
 <script src="./progreso.js" defer></script>
 <script>window.CURSO_CONTADOR={"endpoint": "https://contador.ianmusicall.workers.dev", "locale": "ru"};
 (function(){

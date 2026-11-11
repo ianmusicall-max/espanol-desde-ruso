@@ -882,6 +882,68 @@ body:has(#cookies) .respuesta-aviso{bottom:10rem}
 .entrada-visible .vitrina li,.entrada-visible .tarjeta{animation:entrada-respuesta .35s ease var(--entrada-retraso,0ms) both}
 @media(prefers-reduced-motion:reduce){.entrada-pendiente{opacity:1;transform:none}}
 @media print{.entrada-pendiente{opacity:1!important;transform:none!important}.unidad-confeti,.respuesta-aviso,.audio-ondas{display:none!important}}
+/* Los cambios se mantienen dentro de la columna central del curso. */
+.menu-movil{display:none;order:2;align-items:center;justify-content:center;gap:.4rem;padding:.4rem .65rem;min-height:40px;border:1px solid var(--linea);border-radius:10px;background:var(--papel);color:var(--tinta);font:600 .78rem/1.4 Onest,system-ui,sans-serif;cursor:pointer}
+.menu-movil svg{width:18px;height:18px}
+@media(max-width:39.99rem){
+ header.sitio .envoltorio{gap:.5rem}
+ header.menu-interactivo nav.paginas{display:none}
+ header.menu-interactivo.menu-abierto nav.paginas{display:flex;flex-direction:column;gap:0;padding:.4rem 0;border-top:1px solid var(--linea)}
+ header.menu-interactivo nav.paginas a{padding:.7rem .5rem;border-radius:8px}
+ header.menu-interactivo nav.paginas a[aria-current]{background:var(--acento-suave)}
+ .menu-movil:not([hidden]){display:inline-flex}
+}
+/* El orden de lectura sigue siendo palabra, traducción y ejemplo. */
+.tabla-vocabulario{border:0;background:transparent;position:relative;overflow:visible}
+.tabla-vocabulario table{display:block;width:100%}
+.tabla-vocabulario thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.tabla-vocabulario tbody{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.tabla-vocabulario tbody tr{display:flex;flex-direction:column;min-width:0;padding:1.1rem;border:1px solid var(--linea);border-radius:16px;background:var(--papel)}
+.tabla-vocabulario tbody td{display:block;padding:0;border:0;line-height:1.65;overflow-wrap:anywhere}
+.tabla-vocabulario tbody td:first-child{position:relative;font-size:1.12rem;color:var(--tinta)}
+.tabla-vocabulario tbody td:first-child:has(img){padding-right:4.1rem;min-height:64px}
+.tabla-vocabulario .dibujo{position:absolute;right:0;top:0;width:58px;height:58px;margin:0;border-radius:12px}
+.tabla-vocabulario tbody td:nth-child(2){font:400 .96rem/1.6 Literata,serif;color:var(--tenue);margin-top:.4rem}
+.tabla-vocabulario tbody td:nth-child(3){margin-top:auto;padding-top:.8rem;border-top:1px dashed var(--linea);font-size:.88rem}
+.tabla-vocabulario tbody td:nth-child(2)+td{margin-top:.85rem}
+.tabla-vocabulario .suena{margin-right:.35rem}
+.ejercicio-bloque{margin:1.2rem 0;padding:1.3rem;border:1px solid var(--linea);border-radius:18px;background:var(--papel)}
+.ejercicio-bloque>h3:first-child{margin:0 0 .9rem;color:var(--tinta);font-size:1rem;line-height:1.5}
+.ejercicio-bloque>p{font-size:.97rem}
+.ejercicio-bloque>blockquote{margin-inline:0}
+.ejercicio-bloque .fichas{gap:.5rem;margin:1rem 0}
+.ejercicio-bloque .ficha{padding:.45rem .7rem;min-height:40px}
+.ejercicio-bloque .huecos-pie{padding-top:.8rem;border-top:1px solid var(--linea);flex-wrap:wrap}
+.ejercicio-bloque .hueco-escribir{background:var(--tarjeta);border-radius:5px 5px 0 0;padding:.1rem .3rem}
+.ejercicio-bloque .hueco-escribir:focus{background:var(--acento-suave)}
+.ejercicio-bloque .a-la-clave{font-size:.85rem}
+.dialogo-traduccion{margin:.7rem .8rem;min-height:40px;font-size:.78rem;padding:.45rem .8rem}
+.tabla-dialogo{background:var(--papel)}
+.tabla-dialogo td{color:var(--tinta)}
+.tabla-dialogo tr[data-voz="0"] td:first-child{background:var(--acento-suave);border-left:3px solid var(--acento)}
+.tabla-dialogo tr[data-voz="1"] td:first-child{background:var(--tarjeta);border-left:3px solid var(--celeste)}
+.tabla-dialogo th{background:var(--papel)}
+.tabla-dialogo.traduccion-oculta th:nth-child(2),.tabla-dialogo.traduccion-oculta td:nth-child(2){display:none}
+.tabla-dialogo.traduccion-oculta td:first-child{width:100%}
+.profesor-perfil{display:flex;align-items:flex-start;gap:1.2rem;border:1px solid var(--linea);border-radius:20px;padding:1.6rem;background:var(--tarjeta);margin:2rem 0}
+.profesor-marca{display:flex;align-items:center;justify-content:center;width:62px;height:62px;flex-shrink:0;border-radius:16px;background:var(--acento);color:var(--papel);font:700 2.3rem/1 Onest,system-ui,sans-serif}
+.profesor-perfil h2{margin:0 0 .5rem;padding:0;border:0;font-size:1.25rem}
+.profesor-perfil p{margin:.5rem 0;font-size:.95rem}
+.profesor-perfil a{font:600 .85rem/1.5 Onest,system-ui,sans-serif}
+.portada>.profesor-perfil{max-width:46rem;margin:2rem auto}
+@media(max-width:40rem){
+ .tabla-vocabulario tbody{grid-template-columns:1fr;gap:.8rem}
+ .tabla-vocabulario tbody tr{padding:1rem}
+ .tabla-glosario thead tr,.tabla-glosario tbody tr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+ .tabla-glosario thead th:nth-child(n+3){display:none}
+ .tabla-glosario td{min-width:0;overflow-wrap:anywhere}
+ .tabla-glosario tbody td:nth-child(2){border-bottom:1px solid var(--linea)}
+ .tabla-glosario tbody td:first-child{border-bottom:1px solid var(--linea)}
+ .ejercicio-bloque{padding:1rem}
+ .profesor-perfil{padding:1.2rem;gap:.8rem;flex-direction:column}
+ .profesor-marca{width:48px;height:48px;font-size:1.8rem;border-radius:12px}
+}
+@media print{.menu-movil,.dialogo-traduccion{display:none!important}.tabla-dialogo.traduccion-oculta th:nth-child(2),.tabla-dialogo.traduccion-oculta td:nth-child(2){display:table-cell!important}.tabla-vocabulario tbody{display:block}.tabla-vocabulario tbody tr{break-inside:avoid;margin-bottom:1rem}}
 </style>
 <script>try{var t=localStorage.getItem('tema');if(t)document.documentElement.dataset.tema=t}catch(e){}</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6339208855562328" crossorigin="anonymous"></script>
@@ -889,6 +951,9 @@ body:has(#cookies) .respuesta-aviso{bottom:10rem}
 <body>
 <header class="sitio"><div class="envoltorio">
 <a class="marca con-icono" href="../index.html" aria-label="Spanish from Russian"><img class="marca-icono" src="../img/icono-32.png" width="26" height="26" alt="" decoding="async"><span class="marca-texto">Spanish from Russian</span></a>
+<button type="button" class="menu-movil" id="menu-movil" aria-expanded="false" hidden>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+<span>Menu</span></button>
 <nav class="paginas"><a href="../kurs.html">Lessons</a><a href="../slovar.html">The vocabulary</a><a href="../test.html">Level test</a><a href="../o-kurse.html">About</a><a href="../kontakt.html" aria-current="page">Contact</a></nav>
 <div class="idiomas" title="Language"><a href="../kontakt.html" hreflang="ru" lang="ru">ru</a><a href="../es/kontakt.html" hreflang="es" lang="es">es</a><a href="../en/kontakt.html" hreflang="en" lang="en" aria-current="true">en</a></div>
 <button class="tema" id="tema" type="button" title="Light or dark theme" aria-label="Light or dark theme"><svg class="luna" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sol" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.5 1.5M17.9 17.9l1.5 1.5M2.5 12h2M19.5 12h2M4.6 19.4l1.5-1.5M17.9 6.1l1.5-1.5"/></svg></button>
@@ -912,7 +977,7 @@ body:has(#cookies) .respuesta-aviso{bottom:10rem}
 <div id="cookies"><span>We use cookies for advertising and visit statistics. <a href="../privacy.html">More information</a>.</span><button class="boton" style="padding:.4rem 1rem;font-size:.85rem" onclick="try{localStorage.setItem('cookies','1')}catch(e){};this.parentNode.remove()">Got it</button></div><script>try{if(localStorage.getItem('cookies')){var b=document.getElementById('cookies');b&&b.remove()}}catch(e){}</script>
 <script>(function(){var b=document.getElementById('tema');if(!b)return;function actual(){var r=document.documentElement;return r.dataset.tema||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}b.addEventListener('click',function(){var n=actual()==='dark'?'light':'dark';document.documentElement.dataset.tema=n;try{localStorage.setItem('tema',n)}catch(e){}});})();</script>
 
-<script>window.CURSO_TEXTOS={"unidad_logro": "Unit completed!", "respuesta_bien": "Correct", "respuesta_correcta": "Correct answer", "unidad_actual": "You are here", "unidad_completa": "Completed", "unidad_siguiente": "Up next", "continuar": "Continue: lesson", "guia_paso": "Step {n} of {total}", "guia_siguiente": "Next", "guia_final": "Mark and continue", "guia_empezar": "Start with step one", "empezar": "Start from the beginning", "marcar": "Mark this lesson as done", "hecho": "Lesson done", "siguiente": "Next lesson", "tuyo": "done by you", "titulo": "Your progress", "aviso": "Progress is stored in this browser on this device only. There is no sign-up and nothing is sent anywhere. If you clear your browser data or open the course on another phone, your marks do not come with you.", "borrar": "Reset progress", "confirmar": "Clear all marks?", "copiar": "Save my progress", "copiado": "Code copied — paste it into your notes or a message to yourself", "restaurar": "Restore my progress", "pegar": "Paste your code here", "aplicar": "Restore", "cancelar": "Cancel", "malo": "That does not look like a progress code. Nothing was changed.", "menos": "That code has fewer lessons than you have marked (%a% instead of %b%). Restore anyway?", "hecho_restaurar": "Done: %n% lessons restored", "nombre_label": "What is your name?", "nombre_boton": "Save", "nombre_cambiar": "Change", "nombre_nota": "Only to greet you by name. It stays in this browser and is never sent anywhere.", "bravo": ["Well done!", "That's the way!", "Nice work!", "One more lesson done!", "You're on track!", "Done!", "Great pace!", "Keep it up!", "Step by step it adds up."], "bravo_con": ["Well done, {nombre}!", "That's the way, {nombre}!", "Nice work, {nombre}!", "{nombre}, one more lesson done!", "You're on track, {nombre}!", "Done, {nombre}!", "Great pace, {nombre}!", "Keep it up, {nombre}!", "{nombre}, step by step it adds up."], "vuelta": "Welcome back, {nombre}!", "primera": "First lesson done — the hardest part is behind you.", "primera_con": "{nombre}, first lesson done — the hardest part is behind you.", "cuantas": "{n} of {total}", "faltan": "{n} to go", "racha": "{n} {dias} in a row", "racha_dias": ["day", "days", "days"], "racha_hoy": "You studied today", "racha_mejor": "Your best streak: {n} {dias}", "antes": "Before clearing your browser or switching phones, save your code.", "calendario": "Your course", "calendario_nota": "{n} {lecciones} of {total}", "calendario_rotulo": "Lesson {n} · week {semana}, day {dia}", "calendario_aqui": "where you left off", "calendario_lecciones": ["lesson", "lessons", "lessons"], "diploma_boton": "Download your certificate ({nivel})", "diploma_pide_nombre": "Enter your name above and the certificate will carry it.", "diploma_titulo": "CERTIFICATE", "diploma_sub": "of course completion", "diploma_quien": "Awarded to", "diploma_que": "Level {nivel} · lessons completed: {n}", "diploma_fecha": "Date", "diploma_aviso": "A personal record of self-study. This is not an official language certificate."};window.CURSO_RAIZ="..";window.CURSO_PUBLICADAS=0;window.CURSO_DIAS={};window.CURSO_NIVELES=[];window.CURSO_SITIO="Spanish from Russian";window.CURSO_DOMINIO="espanoldesderuso.com";</script>
+<script>window.CURSO_LECTURA={"menu": "Menu", "menu_cerrar": "Close menu", "traduccion_ocultar": "Hide translation", "traduccion_mostrar": "Show translation"};window.CURSO_TEXTOS={"unidad_logro": "Unit completed!", "respuesta_bien": "Correct", "respuesta_correcta": "Correct answer", "unidad_actual": "You are here", "unidad_completa": "Completed", "unidad_siguiente": "Up next", "continuar": "Continue: lesson", "guia_paso": "Step {n} of {total}", "guia_siguiente": "Next", "guia_final": "Mark and continue", "guia_empezar": "Start with step one", "empezar": "Start from the beginning", "marcar": "Mark this lesson as done", "hecho": "Lesson done", "siguiente": "Next lesson", "tuyo": "done by you", "titulo": "Your progress", "aviso": "Progress is stored in this browser on this device only. There is no sign-up and nothing is sent anywhere. If you clear your browser data or open the course on another phone, your marks do not come with you.", "borrar": "Reset progress", "confirmar": "Clear all marks?", "copiar": "Save my progress", "copiado": "Code copied — paste it into your notes or a message to yourself", "restaurar": "Restore my progress", "pegar": "Paste your code here", "aplicar": "Restore", "cancelar": "Cancel", "malo": "That does not look like a progress code. Nothing was changed.", "menos": "That code has fewer lessons than you have marked (%a% instead of %b%). Restore anyway?", "hecho_restaurar": "Done: %n% lessons restored", "nombre_label": "What is your name?", "nombre_boton": "Save", "nombre_cambiar": "Change", "nombre_nota": "Only to greet you by name. It stays in this browser and is never sent anywhere.", "bravo": ["Well done!", "That's the way!", "Nice work!", "One more lesson done!", "You're on track!", "Done!", "Great pace!", "Keep it up!", "Step by step it adds up."], "bravo_con": ["Well done, {nombre}!", "That's the way, {nombre}!", "Nice work, {nombre}!", "{nombre}, one more lesson done!", "You're on track, {nombre}!", "Done, {nombre}!", "Great pace, {nombre}!", "Keep it up, {nombre}!", "{nombre}, step by step it adds up."], "vuelta": "Welcome back, {nombre}!", "primera": "First lesson done — the hardest part is behind you.", "primera_con": "{nombre}, first lesson done — the hardest part is behind you.", "cuantas": "{n} of {total}", "faltan": "{n} to go", "racha": "{n} {dias} in a row", "racha_dias": ["day", "days", "days"], "racha_hoy": "You studied today", "racha_mejor": "Your best streak: {n} {dias}", "antes": "Before clearing your browser or switching phones, save your code.", "calendario": "Your course", "calendario_nota": "{n} {lecciones} of {total}", "calendario_rotulo": "Lesson {n} · week {semana}, day {dia}", "calendario_aqui": "where you left off", "calendario_lecciones": ["lesson", "lessons", "lessons"], "diploma_boton": "Download your certificate ({nivel})", "diploma_pide_nombre": "Enter your name above and the certificate will carry it.", "diploma_titulo": "CERTIFICATE", "diploma_sub": "of course completion", "diploma_quien": "Awarded to", "diploma_que": "Level {nivel} · lessons completed: {n}", "diploma_fecha": "Date", "diploma_aviso": "A personal record of self-study. This is not an official language certificate."};window.CURSO_RAIZ="..";window.CURSO_PUBLICADAS=0;window.CURSO_DIAS={};window.CURSO_NIVELES=[];window.CURSO_SITIO="Spanish from Russian";window.CURSO_DOMINIO="espanoldesderuso.com";</script>
 <script src="../progreso.js" defer></script>
 <script>window.CURSO_CONTADOR={"endpoint": "https://contador.ianmusicall.workers.dev", "locale": "en"};
 (function(){

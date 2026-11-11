@@ -781,17 +781,17 @@
   caja.appendChild(barra);caja.appendChild(ahora);caja.appendChild(ir);
   caja.hidden=false;
 
-  var actual=-1, hasta=0;
+  var actual=-1, destinoScroll=null;
   function irA(i){
+    pintar(i);
     var tope=caja.getBoundingClientRect().height+altoCabecera()+10;
     var y=pasos[i].el.getBoundingClientRect().top+window.pageYOffset-tope;
-    // Se pinta el paso YA y se bloquea al vigilante un momento. Sin esto, el
-    // desplazamiento suave todavia no ha terminado cuando `mirar()` vuelve a
-    // calcular, el titulo aun cae un pixel por debajo del corte y el paso se
-    // queda en el anterior: el siguiente clic repetia el mismo apartado. Se
-    // vio recorriendo la leccion en el navegador, no leyendo el codigo.
-    pintar(i); hasta=Date.now()+700;
-    window.scrollTo({top:Math.max(y,0),behavior:'smooth'});
+    // Mantener el paso elegido hasta llegar al destino. Un plazo fijo se
+    // quedaba corto al recorrer los bloques de ejercicios más largos.
+    var maximo=Math.max(0,document.documentElement.scrollHeight-window.innerHeight);
+    destinoScroll=Math.min(Math.max(y,0),maximo);
+    var reducir=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({top:destinoScroll,behavior:reducir?'auto':'smooth'});
   }
   function pintar(i){
     if(i===actual)return;
@@ -808,7 +808,10 @@
       .replace('{n}',i+1).replace('{total}',pasos.length));
   }
   function mirar(){
-    if(Date.now()<hasta)return;
+    if(destinoScroll!==null){
+      if(Math.abs(window.pageYOffset-destinoScroll)>2)return;
+      destinoScroll=null;
+    }
     var corte=altoCabecera()+caja.getBoundingClientRect().height+16;
     var i=0;
     for(var k=0;k<pasos.length;k++){
@@ -816,6 +819,15 @@
     }
     pintar(i);
   }
+  // El desplazamiento manual vuelve a activar la detección del apartado.
+  ['wheel','touchstart','pointerdown','keydown'].forEach(function(tipo){
+    window.addEventListener(tipo,function(evento){
+      var activar=tipo==='pointerdown'||tipo==='touchstart'
+        ||(tipo==='keydown'&&(evento.key==='Enter'||evento.key===' '));
+      if(activar&&caja.contains(evento.target))return;
+      destinoScroll=null;
+    },{passive:true});
+  });
   var esperando=false;
   window.addEventListener('scroll',function(){
     if(esperando)return;esperando=true;
@@ -1088,4 +1100,84 @@
     if (avance) actualizarAvance(Number(avance.getAttribute('aria-valuenow')), false);
   }
   if (preferencia.addEventListener) preferencia.addEventListener('change', cambiarPreferencia);
+})();
+
+(function () {
+  'use strict';
+  var textos = window.CURSO_LECTURA || {};
+  var cabecera = document.querySelector('header.sitio');
+  var botonMenu = document.getElementById('menu-movil');
+  var menu = document.querySelector('header.sitio nav.paginas');
+  var movil = window.matchMedia('(max-width: 39.99rem)');
+
+  function abrirMenu(abierto) {
+    cabecera.classList.toggle('menu-abierto', abierto);
+    botonMenu.setAttribute('aria-expanded', String(abierto));
+    botonMenu.setAttribute('aria-label', abierto ? textos.menu_cerrar : textos.menu);
+  }
+
+  if (cabecera && botonMenu && menu) {
+    menu.id = 'menu-principal';
+    botonMenu.setAttribute('aria-controls', menu.id);
+    cabecera.classList.add('menu-interactivo');
+    function ajustarMenu() {
+      botonMenu.hidden = !movil.matches;
+      abrirMenu(false);
+    }
+    botonMenu.addEventListener('click', function () {
+      abrirMenu(botonMenu.getAttribute('aria-expanded') !== 'true');
+    });
+    menu.addEventListener('click', function (evento) {
+      if (evento.target.closest('a')) abrirMenu(false);
+    });
+    document.addEventListener('keydown', function (evento) {
+      if (evento.key === 'Escape' && botonMenu.getAttribute('aria-expanded') === 'true') {
+        abrirMenu(false);
+        botonMenu.focus();
+      }
+    });
+    document.addEventListener('click', function (evento) {
+      if (!cabecera.contains(evento.target)) abrirMenu(false);
+    });
+    if (movil.addEventListener) movil.addEventListener('change', ajustarMenu);
+    ajustarMenu();
+  }
+
+  document.querySelectorAll('.tabla-dialogo').forEach(function (bloque, indice) {
+    var tabla = bloque.querySelector('table');
+    if (!tabla) return;
+    tabla.id = tabla.id || 'dialogo-tabla-' + (indice + 1);
+    var boton = document.createElement('button');
+    boton.type = 'button';
+    boton.className = 'dialogo-traduccion boton secundario';
+    boton.textContent = textos.traduccion_ocultar;
+    boton.setAttribute('aria-controls', tabla.id);
+    boton.setAttribute('aria-expanded', 'true');
+    boton.addEventListener('click', function () {
+      var ocultar = !bloque.classList.contains('traduccion-oculta');
+      bloque.classList.toggle('traduccion-oculta', ocultar);
+      boton.textContent = ocultar ? textos.traduccion_mostrar : textos.traduccion_ocultar;
+      boton.setAttribute('aria-expanded', String(!ocultar));
+    });
+    bloque.insertBefore(boton, tabla);
+
+    var hablantes = Object.create(null);
+    var siguienteHablante = 0;
+    var turnoAnonimo = 0;
+    tabla.querySelectorAll('tbody tr').forEach(function (fila) {
+      var celdas = fila.querySelectorAll('td');
+      if (celdas.length !== 2 || !celdas[1].textContent.trim()) return;
+      var texto = celdas[0].textContent.replace(/▶/g, '').trim();
+      var destacado = celdas[0].querySelector('strong');
+      var nombre = destacado ? destacado.textContent.trim() : '';
+      if (nombre && /^[A-ZÁÉÍÓÚÜÑ][^:]{0,24}:$/.test(nombre) && texto.indexOf(nombre) === 0) {
+        if (!(nombre in hablantes)) hablantes[nombre] = siguienteHablante++;
+        fila.setAttribute('data-voz', String(hablantes[nombre] % 2));
+      } else if (/^[—–]\s/.test(texto)) {
+        fila.setAttribute('data-voz', String(turnoAnonimo++ % 2));
+      } else { return; }
+      celdas[0].setAttribute('lang', 'es');
+      celdas[1].setAttribute('lang', 'ru');
+    });
+  });
 })();

@@ -31,6 +31,11 @@ canal:
   etiquetas: ["#испанский", "#словодня", "#испанскийснуля"]
 
 ru:
+  lectura:
+    menu: "Меню"
+    menu_cerrar: "Закрыть меню"
+    traduccion_ocultar: "Скрыть перевод"
+    traduccion_mostrar: "Показать перевод"
   menu: {inicio: "Главная", curso: "Все уроки", sobre: "О курсе", contacto: "Контакты"}
   titulo_sitio: "Испанский с нуля для русскоговорящих"
   portada:
@@ -359,6 +364,11 @@ ru:
     diploma_aviso: "Личный сертификат о самостоятельном прохождении курса. Это не официальный документ об уровне языка."
 
 es:
+  lectura:
+    menu: "Menú"
+    menu_cerrar: "Cerrar menú"
+    traduccion_ocultar: "Ocultar traducción"
+    traduccion_mostrar: "Mostrar traducción"
   menu: {inicio: "Inicio", curso: "Las lecciones", sobre: "El curso", contacto: "Contacto"}
   titulo_sitio: "Español desde el ruso"
   portada:
@@ -675,6 +685,11 @@ es:
     diploma_aviso: "Certificado personal de estudio autodidacta. No es un documento oficial de nivel de idioma."
 
 en:
+  lectura:
+    menu: "Menu"
+    menu_cerrar: "Close menu"
+    traduccion_ocultar: "Hide translation"
+    traduccion_mostrar: "Show translation"
   menu: {inicio: "Home", curso: "Lessons", sobre: "About", contacto: "Contact"}
   titulo_sitio: "Spanish from Russian"
   portada:

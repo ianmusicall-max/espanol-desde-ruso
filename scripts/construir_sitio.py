@@ -39,6 +39,7 @@ import plan  # noqa: E402
 import pruebas  # noqa: E402
 import huecos  # noqa: E402
 import quiz_lexico  # noqa: E402
+import lectura  # noqa: E402
 import tarjetas as tarjetas_mod  # noqa: E402
 import validar  # noqa: E402
 # Se importa por `limpiar`: la palabra del índice de imágenes está limpia de
@@ -812,6 +813,7 @@ body:has(#cookies) footer.sitio{padding-bottom:10rem}
 """
 
 CSS += (RAIZ / "web" / "visual.css").read_text(encoding="utf-8")
+CSS += (RAIZ / "web" / "lectura.css").read_text(encoding="utf-8")
 
 
 
@@ -2696,6 +2698,9 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
 <body>
 <header class="sitio"><div class="envoltorio">
 <a class="marca{marca_icono and " con-icono"}" href="{raiz}/index.html" aria-label="{html.escape(t['titulo_sitio'])}">{marca_icono}<span class="marca-texto">{html.escape(t['titulo_sitio'])}</span></a>
+<button type="button" class="menu-movil" id="menu-movil" aria-expanded="false" hidden>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+<span>{html.escape(t['lectura']['menu'])}</span></button>
 <nav class="paginas">{menu}</nav>
 <div class="idiomas" title="{html.escape(t['idioma'])}">{"".join(conmutador)}</div>
 <button class="tema" id="tema" type="button" title="{html.escape(t['tema'])}" aria-label="{html.escape(t['tema'])}">{LUNA}{SOL}</button>
@@ -2713,7 +2718,7 @@ def pagina(cfg, t, idiomas, idioma, titulo, cuerpo, *, descripcion="", pagina_id
 {banda_cookies(cfg, t, raiz)}
 {TEMA_SCRIPT}
 {IDIOMA_SCRIPT if not traducida else ""}
-<script>window.CURSO_TEXTOS={json.dumps(t['progreso'], ensure_ascii=False)};window.CURSO_RAIZ="{raiz}";window.CURSO_PUBLICADAS={publicadas};window.CURSO_DIAS={mapa_dias};window.CURSO_NIVELES={niveles};window.CURSO_SITIO={json.dumps(t["titulo_sitio"], ensure_ascii=False)};window.CURSO_DOMINIO={json.dumps((cfg.get("dominio") or "").replace("https://", "").replace("http://", ""), ensure_ascii=False)};</script>
+<script>window.CURSO_LECTURA={json.dumps(t['lectura'], ensure_ascii=False)};window.CURSO_TEXTOS={json.dumps(t['progreso'], ensure_ascii=False)};window.CURSO_RAIZ="{raiz}";window.CURSO_PUBLICADAS={publicadas};window.CURSO_DIAS={mapa_dias};window.CURSO_NIVELES={niveles};window.CURSO_SITIO={json.dumps(t["titulo_sitio"], ensure_ascii=False)};window.CURSO_DOMINIO={json.dumps((cfg.get("dominio") or "").replace("https://", "").replace("http://", ""), ensure_ascii=False)};</script>
 <script src="{raiz}/progreso.js" defer></script>
 {f'<script>window.CURSO_CONTADOR={json.dumps({"endpoint": endpoint_del_contador(cfg), "locale": idioma}, ensure_ascii=False)};{CONTADOR_JS}</script>' if hay_contador(cfg) else ""}
 {f'<script>{AUDIO_JS}</script>' if con_audio else ""}
@@ -2857,17 +2862,17 @@ GUIA_JS = r"""(function(){
   caja.appendChild(barra);caja.appendChild(ahora);caja.appendChild(ir);
   caja.hidden=false;
 
-  var actual=-1, hasta=0;
+  var actual=-1, destinoScroll=null;
   function irA(i){
+    pintar(i);
     var tope=caja.getBoundingClientRect().height+altoCabecera()+10;
     var y=pasos[i].el.getBoundingClientRect().top+window.pageYOffset-tope;
-    // Se pinta el paso YA y se bloquea al vigilante un momento. Sin esto, el
-    // desplazamiento suave todavia no ha terminado cuando `mirar()` vuelve a
-    // calcular, el titulo aun cae un pixel por debajo del corte y el paso se
-    // queda en el anterior: el siguiente clic repetia el mismo apartado. Se
-    // vio recorriendo la leccion en el navegador, no leyendo el codigo.
-    pintar(i); hasta=Date.now()+700;
-    window.scrollTo({top:Math.max(y,0),behavior:'smooth'});
+    // Mantener el paso elegido hasta llegar al destino. Un plazo fijo se
+    // quedaba corto al recorrer los bloques de ejercicios más largos.
+    var maximo=Math.max(0,document.documentElement.scrollHeight-window.innerHeight);
+    destinoScroll=Math.min(Math.max(y,0),maximo);
+    var reducir=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({top:destinoScroll,behavior:reducir?'auto':'smooth'});
   }
   function pintar(i){
     if(i===actual)return;
@@ -2884,7 +2889,10 @@ GUIA_JS = r"""(function(){
       .replace('{n}',i+1).replace('{total}',pasos.length));
   }
   function mirar(){
-    if(Date.now()<hasta)return;
+    if(destinoScroll!==null){
+      if(Math.abs(window.pageYOffset-destinoScroll)>2)return;
+      destinoScroll=null;
+    }
     var corte=altoCabecera()+caja.getBoundingClientRect().height+16;
     var i=0;
     for(var k=0;k<pasos.length;k++){
@@ -2892,6 +2900,15 @@ GUIA_JS = r"""(function(){
     }
     pintar(i);
   }
+  // El desplazamiento manual vuelve a activar la detección del apartado.
+  ['wheel','touchstart','pointerdown','keydown'].forEach(function(tipo){
+    window.addEventListener(tipo,function(evento){
+      var activar=tipo==='pointerdown'||tipo==='touchstart'
+        ||(tipo==='keydown'&&(evento.key==='Enter'||evento.key===' '));
+      if(activar&&caja.contains(evento.target))return;
+      destinoScroll=null;
+    },{passive:true});
+  });
   var esperando=false;
   window.addEventListener('scroll',function(){
     if(esperando)return;esperando=true;
@@ -3253,8 +3270,10 @@ def niveles_del_curso(cal: dict) -> list[dict]:
 
 def escribir_progreso_js(destino: pathlib.Path) -> None:
     efectos = (RAIZ / "web" / "efectos.js").read_text(encoding="utf-8")
+    controles_lectura = (RAIZ / "web" / "lectura.js").read_text(encoding="utf-8")
     destino.joinpath("progreso.js").write_text(
-        PROGRESO_JS + "\n" + GUIA_JS + "\n" + EFECTOS_JS + "\n" + efectos, encoding="utf-8")
+        PROGRESO_JS + "\n" + GUIA_JS + "\n" + EFECTOS_JS + "\n" + efectos
+        + "\n" + controles_lectura, encoding="utf-8")
 
 
 # Las doce palabras que se enseñan en la portada, elegidas A MANO y en este
@@ -3639,6 +3658,7 @@ def construir_portada(cfg, t, idiomas, idioma, destino, cal, raiz,
 <div class="rejilla">{tarjetas}</div>
 
 </section>
+{_perfil_del_profesor(cfg, t, raiz)}
 <section class="portada-seccion cierre">
 <h2>{html.escape(p['final_titulo'])}</h2>
 <p>{html.escape(p['final_texto'])}</p>
@@ -4185,6 +4205,17 @@ def _firma(autor: dict) -> str:
     return f"<strong>{nombre}</strong>. {descripcion}".strip()
 
 
+def _perfil_del_profesor(cfg, t, raiz):
+    autor = cfg.get("autor", {})
+    if not (autor.get("descripcion") or autor.get("nombre")):
+        return ""
+    return (f'<section class="profesor-perfil">'
+            f'<div class="profesor-marca" aria-hidden="true">ñ</div><div>'
+            f'<h2>{html.escape(t["sobre"]["quien"])}</h2><p>{_firma(autor)}</p>'
+            f'<a href="{raiz}/kontakt.html">{html.escape(t["menu"]["contacto"])}</a>'
+            f'</div></section>')
+
+
 def construir_indice_curso(cfg, t, idiomas, idioma, destino, cal, raiz,
                            sitio=None, dibujos_unidad=None) -> None:
     """`destino` es la carpeta del idioma y `sitio` la raíz del sitio.
@@ -4394,8 +4425,7 @@ def construir_estaticas(cfg, t, idiomas, idioma, destino, cal, raiz) -> None:
     cuerpo = f"""
 <h1>{html.escape(s['titulo'])}</h1>
 {anuncio(cfg, "cabecera")}
-<h2>{html.escape(s['quien'])}</h2>
-<p>{_firma(autor)}</p>
+{_perfil_del_profesor(cfg, t, raiz)}
 <h2>{html.escape(s['porque'])}</h2>
 <p>{s['porque_texto']}</p>
 <p>{html.escape(s['porque_texto2'])}</p>
@@ -4674,12 +4704,7 @@ def _jerarquia_de_leccion(cuerpo):
     def paso(m):
         return f'<h2{m[1]} data-paso="{m[2]}">{m[2]}.'
     cuerpo = re.sub(r"<h2([^>]*)>([1-9])\.", paso, cuerpo)
-    def dialogo(m):
-        titulos = re.findall(r"<th[^>]*>(.*?)</th>", m[2], re.S)
-        if [re.sub(r"<[^>]+>", "", t).strip() for t in titulos] == ["Español", "Русский"]:
-            return '<div class="tabla-env tabla-dialogo">' + m[2]
-        return m[0]
-    return re.sub(r'(<div class="tabla-env">)(<table.*?</thead>)', dialogo, cuerpo, flags=re.S)
+    return lectura.presentar(cuerpo)
 
 
 def construir_leccion(d, cfg, t, idiomas, destino, cal, todos, audio=None,

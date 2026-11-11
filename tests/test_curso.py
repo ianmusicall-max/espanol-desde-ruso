@@ -7408,3 +7408,50 @@ class TestElTokenDeFacebook(unittest.TestCase):
                 suyas & usadas,
                 "«%s» mira en su `if` una variable de su propio `env`: %s"
                 % (s.get("name"), sorted(suyas & usadas)))
+
+
+class TestLaPresentacionDeLectura(unittest.TestCase):
+    def test_la_ficha_de_ejercicio_no_captura_explicaciones_ni_claves(self):
+        fuente = ('<h3 id="tarea">Tarea 3: aquí se mide la INTERACCIÓN</h3>'
+                  '<p>Responda a su compañero.</p>'
+                  '<h3 id="explicacion">Lo que más baja la nota: el silencio</h3>'
+                  '<p>Continúe la conversación.</p>'
+                  '<div id="clave-boton"><button>Ответы</button></div>'
+                  '<div id="clave"><h2>Ответы</h2><p>Modelo.</p></div>')
+        resultado = construir_sitio.lectura.presentar(fuente)
+        self.assertIn('</section><h3 id="explicacion">', resultado)
+        self.assertEqual(resultado.count('class="ejercicio-bloque"'), 1)
+        ficha = resultado.split('class="ejercicio-bloque"', 1)[1].split('</section>', 1)[0]
+        self.assertNotIn('clave', ficha)
+
+    def test_las_tablas_gramaticales_no_se_confunden_con_dialogos(self):
+        def tabla(filas):
+            return ('<div class="tabla-env"><table><thead><tr><th>Español</th>'
+                    '<th>Русский</th></tr></thead><tbody>' + filas + '</tbody></table></div>')
+        charla = tabla('<tr><td><strong>Ana:</strong> Hola.</td><td>Привет.</td></tr>'
+                       '<tr><td><strong>Iván:</strong> Buenos días.</td><td>Добрый день.</td></tr>')
+        gramatica = tabla('<tr><td>me puse nervioso</td><td>я занервничал</td></tr>'
+                          '<tr><td>me quedé callado</td><td>я замолчал</td></tr>')
+        self.assertIn('tabla-dialogo', construir_sitio.lectura.presentar(charla))
+        self.assertNotIn('tabla-dialogo', construir_sitio.lectura.presentar(gramatica))
+
+    def test_el_vocabulario_conserva_el_enfasis_y_los_dos_audios(self):
+        fuente = ('<div class="tabla-env"><table><thead><tr><th>Español</th>'
+                  '<th>Русский</th><th>Пример</th></tr></thead><tbody><tr>'
+                  '<td><button data-audio="palabra.mp3">▶</button>la <strong>ca</strong>sa</td>'
+                  '<td>дом</td><td><button data-audio="ejemplo.mp3">▶</button>'
+                  'Mi casa es pequeña.</td></tr></tbody></table></div>')
+        resultado = construir_sitio.lectura.presentar(fuente)
+        self.assertIn('tabla-vocabulario', resultado)
+        self.assertIn('la <strong>ca</strong>sa', resultado)
+        self.assertEqual(re.findall(r'data-audio="([^"]+)"', resultado), ['palabra.mp3', 'ejemplo.mp3'])
+        self.assertIn('role="columnheader"', resultado)
+
+    def test_los_separadores_de_contexto_del_dialogo_se_conservan(self):
+        fuente = ('<div class="tabla-env"><table><thead><tr><th>Español</th><th>Русский</th>'
+                  '</tr></thead><tbody><tr><td><strong>Утром, 9:00</strong></td><td></td></tr>'
+                  '<tr><td>— Buenos días.</td><td>Доброе утро.</td></tr>'
+                  '<tr><td>— Hola.</td><td>Привет.</td></tr></tbody></table></div>')
+        resultado = construir_sitio.lectura.presentar(fuente)
+        self.assertIn('tabla-dialogo', resultado)
+        self.assertIn('<strong>Утром, 9:00</strong></td><td></td>', resultado)
