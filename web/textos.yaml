@@ -32,10 +32,10 @@ canal:
 
 ru:
   lectura:
-    especialista_titulo: "Виртуальный специалист курса"
-    especialista_descripcion: "Матео Солер — виртуальный персонаж курса испанского для русскоговорящих."
-    especialista_aviso: "Вымышленный персонаж. Имя и изображение созданы с помощью ИИ."
-    especialista_retrato: "Портрет виртуального специалиста"
+    especialista_titulo: "Специалист по испанскому языку"
+    especialista_descripcion: "Матео Солер — специалист по испанскому языку для русскоговорящих."
+    especialista_aviso: ""
+    especialista_retrato: "Портрет специалиста по испанскому языку"
     menu: "Меню"
     menu_cerrar: "Закрыть меню"
     traduccion_ocultar: "Скрыть перевод"
@@ -369,10 +369,10 @@ ru:
 
 es:
   lectura:
-    especialista_titulo: "Especialista virtual del curso"
-    especialista_descripcion: "Mateo Soler es un personaje virtual del curso de español para rusohablantes."
-    especialista_aviso: "Personaje ficticio. Identidad e imagen generadas con IA."
-    especialista_retrato: "Retrato del especialista virtual"
+    especialista_titulo: "Especialista en el idioma español"
+    especialista_descripcion: "Mateo Soler es especialista en el idioma español para hablantes de ruso."
+    especialista_aviso: ""
+    especialista_retrato: "Retrato del especialista en español"
     menu: "Menú"
     menu_cerrar: "Cerrar menú"
     traduccion_ocultar: "Ocultar traducción"
@@ -694,10 +694,10 @@ es:
 
 en:
   lectura:
-    especialista_titulo: "Virtual course specialist"
-    especialista_descripcion: "Mateo Soler is a virtual character for the Spanish course for Russian speakers."
-    especialista_aviso: "Fictional character. Identity and image generated with AI."
-    especialista_retrato: "Portrait of the virtual specialist"
+    especialista_titulo: "Spanish language specialist"
+    especialista_descripcion: "Mateo Soler is a Spanish language specialist for Russian speakers."
+    especialista_aviso: ""
+    especialista_retrato: "Portrait of the Spanish language specialist"
     menu: "Menu"
     menu_cerrar: "Close menu"
     traduccion_ocultar: "Hide translation"
