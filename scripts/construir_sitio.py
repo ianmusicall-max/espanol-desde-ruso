@@ -1091,6 +1091,10 @@ PROGRESO_JS = r"""(function(){
           anotarHoy();felicitar();
           if(siguiente){siguiente.classList.add('destacado')}
         }else{saludo.hidden=true;pedirNombre.hidden=true}
+        var registradas=hechas();
+        document.dispatchEvent(new CustomEvent('curso:leccion-marcada',{
+          detail:{numero:n,hechas:registradas,marcada:i<0&&registradas.indexOf(n)>=0}
+        }));
       });
       pintar();caja.appendChild(boton);caja.appendChild(saludo);
 
@@ -1560,23 +1564,30 @@ PROGRESO_JS = r"""(function(){
 # 2.600 conexiones y en móvil se nota. Y al empezar una se para la anterior,
 # que es lo que se quiere al ir comparando frases.
 AUDIO_JS = r"""(function(){
-  var sonando=null, reproductor=new Audio();
-  reproductor.addEventListener('ended',function(){if(sonando){sonando.setAttribute('aria-pressed','false');sonando=null}});
+  var sonando=null, reproductor=new Audio(), solicitud=0;
+  function terminar(){
+    solicitud++;
+    if(sonando)sonando.setAttribute('aria-pressed','false');
+    sonando=null;
+  }
+  reproductor.addEventListener('ended',terminar);
+  reproductor.addEventListener('error',terminar);
   document.addEventListener('click',function(e){
     var b=e.target.closest('.suena');
     if(!b)return;
     e.preventDefault();
-    if(sonando===b){reproductor.pause();b.setAttribute('aria-pressed','false');sonando=null;return}
+    if(sonando===b){reproductor.pause();terminar();return}
     if(sonando)sonando.setAttribute('aria-pressed','false');
+    var actual=++solicitud;
     reproductor.src=b.getAttribute('data-audio');
     reproductor.currentTime=0;
-    // Si el archivo no está, no se avisa con una alerta: el botón vuelve a su
-    // sitio y la lección se sigue leyendo igual.
-    reproductor.play().then(function(){b.setAttribute('aria-pressed','true');sonando=b})
-                      .catch(function(){b.setAttribute('aria-pressed','false');sonando=null});
+    sonando=b;
+    // Una promesa de la palabra anterior no debe encender dos botones.
+    reproductor.play().then(function(){
+      if(actual===solicitud)b.setAttribute('aria-pressed','true');
+    }).catch(function(){if(actual===solicitud)terminar()});
   });
 })();"""
-
 
 TEST_JS = r"""(function(){
   var D=window.CURSO_TEST; if(!D)return;
@@ -2032,7 +2043,19 @@ TARJETAS_JS = r"""(function(){
     document.getElementById('ficha-girar').addEventListener('click',girar);
     document.getElementById('ficha-sig').addEventListener('click',siguiente);
   }
-  function girar(){vuelta=!vuelta;pintar()}
+  function girar(){
+    vuelta=!vuelta;
+    var cara=document.getElementById('ficha-cara'), f=F[i];
+    cara.innerHTML=vuelta?'<span class="ficha-ru">'+esc(f.ru)+'</span>'
+                         :'<span class="ficha-es">'+esc(f.es)+'</span>';
+    if(cara.animate&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      cara.getAnimations().forEach(function(animacion){animacion.cancel()});
+      cara.animate([
+        {transform:'perspective(700px) rotateY(-80deg)',opacity:0.35},
+        {transform:'perspective(700px) rotateY(0deg)',opacity:1}
+      ],{duration:260,easing:'cubic-bezier(.2,.7,.3,1)'});
+    }
+  }
   function siguiente(){i=(i+1)%F.length;vuelta=false;pintar()}
   pintar();
   caja.hidden=false;
@@ -2160,6 +2183,9 @@ QUIZ_JS = r"""(function(){
     if(n===q.correcta){aciertos++}else{fallos.push(q)}
     i++;
     if(i<P.length){pregunta()}else{resultado()}
+    document.dispatchEvent(new CustomEvent('curso:respuesta',{
+      detail:{bien:n===q.correcta,correcta:q.opciones[q.correcta]}
+    }));
   }
 
   function resultado(){
@@ -2237,6 +2263,9 @@ PRUEBA_JS = r"""(function(){
     if(n===q.correcta){aciertos++}else{fallos.push(q)}
     i++;
     if(i<preguntas.length){pregunta()}else{resultado()}
+    document.dispatchEvent(new CustomEvent('curso:respuesta',{
+      detail:{bien:n===q.correcta,correcta:q.opciones[q.correcta]}
+    }));
   }
 
   function resultado(){
@@ -3223,8 +3252,9 @@ def niveles_del_curso(cal: dict) -> list[dict]:
 
 
 def escribir_progreso_js(destino: pathlib.Path) -> None:
+    efectos = (RAIZ / "web" / "efectos.js").read_text(encoding="utf-8")
     destino.joinpath("progreso.js").write_text(
-        PROGRESO_JS + "\n" + GUIA_JS + "\n" + EFECTOS_JS, encoding="utf-8")
+        PROGRESO_JS + "\n" + GUIA_JS + "\n" + EFECTOS_JS + "\n" + efectos, encoding="utf-8")
 
 
 # Las doce palabras que se enseñan en la portada, elegidas A MANO y en este
@@ -4757,7 +4787,17 @@ def construir_leccion(d, cfg, t, idiomas, destino, cal, todos, audio=None,
     html_cuerpo = _donde_van_las_tarjetas(html_cuerpo,
                                           _bloque_de_tarjetas(t, fichas))
     html_cuerpo = _jerarquia_de_leccion(html_cuerpo)
-    cuerpo_final = (f'<article data-leccion="{d.numero}">' + cab + guia + aviso
+    unidad_actual = next((u for u in cal["unidades"] if u["numero"] == d.unidad), None)
+    unidad_json = ""
+    if unidad_actual:
+        datos_unidad = {
+            "numero": d.unidad,
+            "nombre": unidad_actual["titulo_ru"],
+            "dias": [dia.numero for dia in todos if dia.unidad == d.unidad],
+        }
+        datos_json = json.dumps(datos_unidad, ensure_ascii=False).replace("<", "\\u003c")
+        unidad_json = f'<script type="application/json" id="unidad-actual">{datos_json}</script>'
+    cuerpo_final = (f'<article data-leccion="{d.numero}">' + unidad_json + cab + guia + aviso
                     + html_cuerpo + anuncio(cfg, "pie")
                     + _bloque_de_grabar(t, hay_audio, frase)
                     + _bloque_del_quiz(t, preguntas_quiz) + '<div id="marcar-caja"></div>'

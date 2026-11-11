@@ -269,6 +269,9 @@ ru:
     resultado: "Верно: %a% из %b%"
     otra: "Ещё раз"
   progreso:
+    unidad_logro: "Тема пройдена!"
+    respuesta_bien: "Верно"
+    respuesta_correcta: "Правильный ответ"
     unidad_actual: "Вы здесь"
     unidad_completa: "Пройдено"
     unidad_siguiente: "Следующая"
@@ -594,6 +597,9 @@ es:
     resultado: "Aciertos: %a% de %b%"
     otra: "Otra vez"
   progreso:
+    unidad_logro: "¡Unidad completada!"
+    respuesta_bien: "Correcto"
+    respuesta_correcta: "Respuesta correcta"
     unidad_actual: "Está aquí"
     unidad_completa: "Completada"
     unidad_siguiente: "Siguiente"
@@ -907,6 +913,9 @@ en:
     resultado: "Correct: %a% of %b%"
     otra: "Try again"
   progreso:
+    unidad_logro: "Unit completed!"
+    respuesta_bien: "Correct"
+    respuesta_correcta: "Correct answer"
     unidad_actual: "You are here"
     unidad_completa: "Completed"
     unidad_siguiente: "Up next"
