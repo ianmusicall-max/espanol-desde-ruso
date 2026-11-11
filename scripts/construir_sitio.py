@@ -4206,6 +4206,19 @@ def _firma(autor: dict) -> str:
 
 
 def _perfil_del_profesor(cfg, t, raiz):
+    especialista = cfg.get("especialista") or {}
+    if especialista.get("nombre") and especialista.get("imagen"):
+        texto = t["lectura"]
+        nombre = html.escape(especialista["nombre"])
+        imagen = html.escape(especialista["imagen"])
+        return (f'<section class="profesor-perfil especialista-virtual">'
+                f'<img class="especialista-retrato" src="{raiz}/img/{imagen}" '
+                f'alt="{html.escape(texto["especialista_retrato"])}: {nombre}" '
+                f'width="160" height="160" loading="lazy" decoding="async">'
+                f'<div><p class="especialista-papel">{html.escape(texto["especialista_titulo"])}</p>'
+                f'<h2>{nombre}</h2><p>{html.escape(texto["especialista_descripcion"])}</p>'
+                f'<p class="especialista-aviso">{html.escape(texto["especialista_aviso"])}</p>'
+                f'</div></section>')
     autor = cfg.get("autor", {})
     if not (autor.get("descripcion") or autor.get("nombre")):
         return ""
@@ -4426,6 +4439,7 @@ def construir_estaticas(cfg, t, idiomas, idioma, destino, cal, raiz) -> None:
 <h1>{html.escape(s['titulo'])}</h1>
 {anuncio(cfg, "cabecera")}
 {_perfil_del_profesor(cfg, t, raiz)}
+{f'<h2>{html.escape(s["quien"])}</h2><p>{_firma(autor)}</p>' if cfg.get('especialista') else ''}
 <h2>{html.escape(s['porque'])}</h2>
 <p>{s['porque_texto']}</p>
 <p>{html.escape(s['porque_texto2'])}</p>
@@ -5063,6 +5077,12 @@ def construir(destino: pathlib.Path = DOCS, cfg: dict | None = None, textos: dic
     # si está: copiarlos después dejaría el bloque fuera en la primera corrida.
     construir_vocabulario(destino)
     construir_iconos(destino)
+    retrato = (cfg.get("especialista") or {}).get("imagen")
+    if retrato and destino.resolve() != DOCS.resolve():
+        origen_retrato = DOCS / "img" / retrato
+        if origen_retrato.is_file():
+            (destino / "img").mkdir(parents=True, exist_ok=True)
+            shutil.copy2(origen_retrato, destino / "img" / retrato)
 
     # Antes del bucle y no dentro: la portada de los tres idiomas enseña los
     # mismos doce dibujos, así que leer el índice y recorrer las lecciones una

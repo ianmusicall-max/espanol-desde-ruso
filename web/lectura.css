@@ -60,3 +60,8 @@
  .profesor-marca{width:48px;height:48px;font-size:1.8rem;border-radius:12px}
 }
 @media print{.menu-movil,.dialogo-traduccion{display:none!important}.tabla-dialogo.traduccion-oculta th:nth-child(2),.tabla-dialogo.traduccion-oculta td:nth-child(2){display:table-cell!important}.tabla-vocabulario tbody{display:block}.tabla-vocabulario tbody tr{break-inside:avoid;margin-bottom:1rem}}
+
+.especialista-retrato{width:160px;height:160px;object-fit:cover;border-radius:18px;flex-shrink:0}
+.profesor-perfil .especialista-papel{font:600 .72rem/1.5 Onest,system-ui,sans-serif;color:var(--acento);margin:0 0 .5rem}
+.profesor-perfil .especialista-aviso{font:400 .75rem/1.5 Onest,system-ui,sans-serif;color:var(--tenue);margin:.8rem 0 0}
+@media(max-width:40rem){.especialista-retrato{width:112px;height:112px;border-radius:16px}}

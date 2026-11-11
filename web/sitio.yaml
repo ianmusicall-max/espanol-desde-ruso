@@ -125,3 +125,8 @@ redes:
 telegram:
   canal: ""
   desde: "2026-10-31"
+
+# Personaje virtual del curso. Su identidad no corresponde al autor humano.
+especialista:
+  nombre: "Mateo Soler"
+  imagen: "mateo-soler.webp"
